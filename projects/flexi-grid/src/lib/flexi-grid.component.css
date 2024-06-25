@@ -50,7 +50,7 @@ a {
 }
 
 .svg {
-    width: 12px;
+    width: 30px;
     margin-left: 10px;
     padding: 5px;
 }
@@ -65,9 +65,9 @@ a {
 }
 
 .table-container {
-    border: 1px solid #dee2e6;    
+    border: 1px solid #dee2e6;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: auto;
     min-width: 1220px;
     margin: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -76,7 +76,20 @@ a {
     height: 100%;
 }
 
-.bg-color-gray{
+.table-container table {
+    caption-side: top;
+}
+
+.table-container caption {
+    caption-side: top;
+    padding: 10px;
+    background-color: #f8f9fa;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.bg-color-gray {
     background-color: #f8f9fa !important;
 }
 
@@ -93,25 +106,25 @@ a {
     border-bottom: 1px solid #dee2e6;
 }
 
-.border {
-    position: relative; /* Pseudo-element'in doğru konumlanması için */
-    padding-right: 10px; /* Çizginin metne yapışmaması için sağa padding ekleyin */
-  }
-  
-  .border:after {
+.my-border {
+    position: relative;
+    padding-right: 10px;
+}
+
+.my-border:after {
     content: "";
     position: absolute;
     top: 50%;
     right: 0;
-    height: 40%; /* Çizginin yüksekliği */
+    height: 40%;
     width: 1px;
     background-color: #777e85;
     transform: translateY(-50%);
-  }
-  
-  .border:last-child:after {
-    display: none; /* Son sütundaki çizgiyi kaldırmak için */
-  }
+}
+
+.my-border:last-child:after {
+    display: none;
+}
 
 .table-container tfoot td {
     border-right: 0px;
@@ -178,7 +191,10 @@ a {
 }
 
 .active {
-    background-color: #ccc !important;
+    z-index: 3;
+    color: #ffffff;
+    background-color: #206bc4;
+    border-color: #206bc4;
 }
 
 .pagination .page-item.disabled {
@@ -260,9 +276,11 @@ a {
 
 .dropdown-title {
     text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ced4da;
 }
 
-.btn{
+.btn {
     padding: 5px;
     cursor: pointer;
 }

@@ -8,6 +8,11 @@
       "root": "projects/my-lib",
       "sourceRoot": "projects/my-lib/src",
       "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "skipTests": true
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

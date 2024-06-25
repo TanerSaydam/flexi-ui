@@ -1,13 +1,35 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>DemoApp</title>
+  <meta charset="utf-8">  
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
 </head>
-<body>
+<body class=" layout-fluid">
+  <script src="/js/demo-theme.min.js?1684106062"></script>
   <app-root></app-root>
+  <!-- Libs JS -->
+  <script src="https://kit.fontawesome.com/dc59d75dac.js" crossorigin="anonymous"></script>
+  <script src="/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062" defer></script>
+  <script src="/libs/jsvectormap/dist/maps/world.js?1684106062" defer></script>
+  <script src="/libs/jsvectormap/dist/maps/world-merc.js?1684106062" defer></script>
+  <!-- Tabler Core -->
+  <script src="/js/tabler.min.js?1684106062" defer></script>
+  <script src="/js/demo.min.js?1684106062" defer></script>  
 </body>
 </html>

@@ -21,7 +21,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() loading: boolean = false;
   @Input() orderable: boolean = true;
   @Input() themeClass: string = "light";
-  @Input() height: number = 400;
+  @Input() height: number = 450;
   @Input() filterable: boolean = false;
   @Input() tableTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
@@ -29,7 +29,8 @@ export class FlexiGridComponent implements OnChanges {
   @Input() showColumnVisibility: boolean = true;
   @Input() showRefreshData: boolean = true;
   @Input() dataBinding: boolean = false;
-
+  @Input() showCaption: boolean = true;
+  
   pageNumbers: number[] = [];
   totalPageCount = 0;
   state: StateModel = new StateModel();
