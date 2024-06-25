@@ -5,11 +5,12 @@ import { UserModel } from './models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { FlexGridColumnComponent } from '../../../flexi-grid/src/lib/flex-grid-column/flex-grid-column.component';
 import { StateFilterModel, StateModel } from '../../../flexi-grid/src/lib/state.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FlexiGridComponent, FlexGridColumnComponent],
+  imports: [RouterOutlet, FlexiGridComponent, FlexGridColumnComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -23,6 +24,7 @@ export class AppComponent {
     private http: HttpClient
   ){
     this.getAll();
+    //this.getAllWithNoOData();
   }
 
   getAll(){
@@ -92,6 +94,18 @@ export class AppComponent {
     this.http.get(endpoint).subscribe((res:any)=> {
       this.users.set(res.data);
       this.total.set(res.total);      
+      this.loading.set(false);
+    });
+  }
+
+  getAllWithNoOData(){
+    this.loading.set(true);
+
+    let endpoint = `https://localhost:7032/api/Users/GetAll`;
+    
+    this.http.get(endpoint).subscribe((res:any)=> {
+      this.users.set(res.data);
+      this.total.set(res.data.length);      
       this.loading.set(false);
     });
   }

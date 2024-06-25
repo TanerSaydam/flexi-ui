@@ -261,3 +261,8 @@ a {
 .dropdown-title {
     text-align: center;
 }
+
+.btn{
+    padding: 5px;
+    cursor: pointer;
+}

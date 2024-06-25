@@ -27,6 +27,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() captionTemplate: TemplateRef<any> | any;
   @Input() footerTemplate: TemplateRef<any> | any;
   @Input() showColumnVisibility: boolean = true;
+  @Input() showRefreshData: boolean = true;
   @Input() dataBinding: boolean = false;
 
   pageNumbers: number[] = [];
@@ -54,6 +55,7 @@ export class FlexiGridComponent implements OnChanges {
   ];
 
   @Output() dataStateChange = new EventEmitter<any>();
+  @Output() refreshData = new EventEmitter();
 
   @ContentChildren(FlexGridColumnComponent) columns: QueryList<FlexGridColumnComponent> | undefined;
 
@@ -98,11 +100,8 @@ export class FlexiGridComponent implements OnChanges {
     this.updatePagedData();
   }
 
-  setPageNumbers() {
-    if (!this.total || this.total < this.data.length) {
-      this.total = this.data.length;
-    }
-    const pageCount = Math.ceil(this.total / this.state.pageSize);
+  setPageNumbers() {    
+    const pageCount = Math.ceil(this.total! / this.state.pageSize);
     const numbers = [];
 
     // Calculate the current range of page numbers
@@ -152,7 +151,7 @@ export class FlexiGridComponent implements OnChanges {
     }
   }
 
-  updatePagedData() {    
+  updatePagedData() {
     let filteredData = this.data;
     
     if (this.filterable && this.state.filter.length > 0 && !this.dataBinding) {
@@ -162,7 +161,7 @@ export class FlexiGridComponent implements OnChanges {
           const value = filter.value;
           return item[field].toString().toLowerCase().includes(value);
         });
-      });
+      });      
     }
   
     // Order data if orderable is true
@@ -174,6 +173,11 @@ export class FlexiGridComponent implements OnChanges {
         if (a[field] > b[field]) return 1 * dir;
         return 0;
       });
+    }
+
+    if(!this.dataBinding){
+      this.total = filteredData.length;
+      this.setPageNumbers();
     }
   
     // Pagination logic
@@ -257,7 +261,7 @@ export class FlexiGridComponent implements OnChanges {
 
       this.dataStateChange.emit(this.state);
       this.updatePagedData();
-    }, 500);
+    }, this.dataBinding ? 500 : 0);
   }
 
   showClearFilter(value: any) {
@@ -275,5 +279,9 @@ export class FlexiGridComponent implements OnChanges {
 
   toggleColumnVisibilityDropdown() {
     this.columnVisibilityDropdownVisible.set(!this.columnVisibilityDropdownVisible())
+  }
+
+  refreshDataMethod(){
+    this.refreshData.emit();
   }
 }
