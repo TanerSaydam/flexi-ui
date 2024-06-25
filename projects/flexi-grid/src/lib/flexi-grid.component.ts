@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
+import { Component, ContentChildren, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +21,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() loading: boolean = false;
   @Input() orderable: boolean = true;
   @Input() themeClass: string = "light";
-  @Input() height: number = 450;
+  @Input() height: number = 420;
   @Input() filterable: boolean = false;
   @Input() tableTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
@@ -145,6 +145,7 @@ export class FlexiGridComponent implements OnChanges {
 
   changePageSize() {
     this.state.pageNumber = 1;
+    this.state.skip = 0;
     if (this.pagable) {
       this.dataStateChange.emit(this.state);
     } else {
@@ -228,7 +229,7 @@ export class FlexiGridComponent implements OnChanges {
 
   applyFilter(column: FlexiGridColumnComponent, operator: string){    
     this.filterDropdownVisible()[column.field] = false;    
-    column.fitlerOperator = operator;
+    column.filterOperator = operator;
     if(column.value !== ""){
       this.filter(column.field, operator, column.value, column.filterType);
     }
@@ -241,6 +242,8 @@ export class FlexiGridComponent implements OnChanges {
 
     this.timeoutId = setTimeout(() => {
       if (value !== "") {
+        this.state.pageNumber = 1;
+        this.state.skip = 0;
         let filterField = this.state.filter.find(p => p.field === field);
         if (filterField) {
           filterField.value = value;
@@ -286,4 +289,19 @@ export class FlexiGridComponent implements OnChanges {
   refreshDataMethod(){
     this.refreshData.emit();
   }
+
+  closeAllDropdowns(){
+    for(let i in this.filterDropdownVisible()){
+      this.filterDropdownVisible()[i] = false;      
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.dropdown-menu') && !target.closest('.svg')) {
+      this.closeAllDropdowns();
+    }
+  }
+
 }

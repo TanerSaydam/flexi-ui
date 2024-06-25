@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-a{
+a {
     cursor: pointer;
+}
+
+.my-code {
+    min-height: 150px;
+    display: block;
+    white-space: pre-wrap;
+    margin-top: -60px;
+    padding-top: -80px;
+    margin-bottom: -60px;
+    padding-bottom: -60px;
 }

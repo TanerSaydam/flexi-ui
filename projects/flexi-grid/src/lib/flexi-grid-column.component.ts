@@ -17,7 +17,7 @@ export class FlexiGridColumnComponent {
   @Input() format: DateFormatType | CurrencyFormatType | null = null;
 
   value: string = "";
-  fitlerOperator: string  ="contains";  
+  filterOperator: string = "contains";  
 }
 
 export type FilterType = "text" | "date" | "date-time" | "number"

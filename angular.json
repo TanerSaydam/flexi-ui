@@ -60,9 +60,13 @@
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.css"
+              "projects/demo-app/src/styles.css",
+              "node_modules/prismjs/themes/prism.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-typescript.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -115,9 +119,13 @@
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.css"
+              "projects/demo-app/src/styles.css",
+              "node_modules/prismjs/themes/prism.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-typescript.min.js"
+            ]
           }
         }
       }

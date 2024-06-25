@@ -50,7 +50,7 @@ a {
 }
 
 .svg {
-    width: 30px;
+    width: 27px;
     margin-left: 10px;
     padding: 5px;
 }
@@ -191,10 +191,10 @@ a {
 }
 
 .active {
-    z-index: 3;
-    color: #ffffff;
-    background-color: #206bc4;
-    border-color: #206bc4;
+    z-index: 3 !important;
+    color: #ffffff !important;
+    background-color: #206bc4 !important;
+    border-color: #206bc4 !important;
 }
 
 .pagination .page-item.disabled {

@@ -40,8 +40,8 @@
         }
         @for(column of columns; track column.field){          
           @if(orderable && column.orderable){
-            <th class="cursor my-border" [hidden]="!column.visible">
-              <div (click)="order(column.field)">
+            <th (click)="order(column.field)" class="cursor my-border" [hidden]="!column.visible">
+              <div>
                 <span>{{ column.title ? column.title : column.field }}</span>
                 <span class="ms-2">
                   @if(this.state.order.field === column.field){
@@ -69,25 +69,25 @@
               @if(filterable && column.filterable){
                 <div class="d-flex filter-container">
                   @if(column.filterType === "text"){
-                    <input class="filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.fitlerOperator, column.value, column.filterType)">
-                    <svg class="svg" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                    <input class="filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                    <svg class="svg cursor" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
                     <div class="dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
                       @for(filterType of textFilterTypes; track filterType.operator){
-                        <a class="dropdown-item" [ngClass]="column.fitlerOperator === filterType.operator ? 'active' : ''" (click)="applyFilter(column, filterType.operator)">
+                        <a class="dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'active' : ''" (click)="applyFilter(column, filterType.operator)">
                           {{ filterType.value }}
                         </a>
                       }                    
                     </div>
                   }@else if(column.filterType === "date"){
-                    <input class="filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.fitlerOperator, column.value, column.filterType)">
+                    <input class="filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                   }@else if(column.filterType === "date-time"){
-                    <input class="filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.fitlerOperator, column.value, column.filterType)">
+                    <input class="filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                   }@else if(column.filterType === "number"){
-                    <input class="filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.fitlerOperator, column.value, column.filterType)">
-                    <svg class="svg" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                    <input class="filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                    <svg class="svg cursor" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
                     <div class="dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
                       @for(filterType of numberFilterTypes; track filterType.operator){
-                        <a class="dropdown-item" [ngClass]="column.fitlerOperator === filterType.operator ? 'active' : ''" (click)="applyFilter(column, filterType.operator)">
+                        <a class="dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'active' : ''" (click)="applyFilter(column, filterType.operator)">
                           {{ filterType.value }}
                         </a>
                       }                    
@@ -144,14 +144,15 @@
         }
 
     </tbody>
-    @if(pagable && pageNumbers.length > 0){
+    @if(pagable){
     <tfoot>
       <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
       <tr>
         <td [colSpan]="columns!.length">
-          @if(this.totalPageCount > 1){
-            <div class="pagination-container">
-              <ul class="pagination">
+          <div class="pagination-container">
+            <ul class="pagination">
+              @if(this.pageNumbers.length > 1){
+                
                 <li class="page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
                   <a class="page-link" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
@@ -192,17 +193,17 @@
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>
-                <div class="page-size-select">
-                  <select [(ngModel)]="state.pageSize" (change)="changePageSize()">
-                    @for(size of pageSizeList; track size){
-                    <option>{{size}}</option>
-                    }
-                  </select>
-                  <span class="ms-1">items per page</span>
-                </div>
-              </ul>
-            </div>
-          }
+              }
+              <div class="page-size-select">
+                <select [(ngModel)]="state.pageSize" (change)="changePageSize()">
+                  @for(size of pageSizeList; track size){
+                  <option>{{size}}</option>
+                  }
+                </select>
+                <span class="ms-1">items per page</span>
+              </div>
+            </ul>
+          </div>
         </td>
         <td>
           <span> {{state.pageNumber}} - {{totalPageCount}} of {{(total | currency: '': '': '1.0')!.replace(',','.')}}

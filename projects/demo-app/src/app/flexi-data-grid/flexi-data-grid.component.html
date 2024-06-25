@@ -1,48 +1,92 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
-    <app-card cardTitle="Örnek Çıktısı">
-        <p>Angular uygulamalarınızda kullanabileceğiniz şık ve kullanışlı bir Data Grid. OData yapısıyla uyumlu, isterseniz Data binding ile kullanabileceğiniz, ister tüm datanızı alıp burada işleyebileceğiniz oldukça kullanışlı bir Data grid.</p>
-        <p>Örnek çıktısı aşağıdadır. Kodlarına <a href="https://github.com/TanerSaydam/flexi-ui/blob/main/projects/demo-app/src/app/flexi-data-grid/flexi-data-grid.component.html" target="_blank">buraya tıklayarak</a> ulaşabilirsiniz.</p>
-        <ng-template #captionTemplate>
-            <!-- <button>Kullanıcı ekle</button> -->
-          </ng-template>
-        
-          <ng-template #footerTemplate>
-            <!-- <tr>
-              <td colspan="5">Total</td>
-              <td>46546</td>
-            </tr> -->
-          </ng-template>
-        
-          <flexi-grid
-          [data]="users()"
-          [total]="total()"
-          [dataBinding]="true"
-          [pagable]="true"
-          [pageSize]="state().pageSize"
-          [pageSizeList]="[10,20,30,50,100,1000]"
-          [showIndex]="true"
-          [loading]="loading()"
-          themeClass="light"
-          [height]="420"
-          [filterable]="true"
-          tableTitle="Example User Table"
-          [captionTemplate]="captionTemplate"
-          [footerTemplate]="footerTemplate"
-          [showCaption]="true"
-          (refreshData)="getAll()"
-          (dataStateChange)="dataStateChange($event)"
-          >  
-          <flexi-grid-column [visible]="false" field="id" title="Id" [orderable]="false"></flexi-grid-column>
-          <!-- <flex-grid-column field="avatarUrl" title="Avatar"></flex-grid-column> -->
-          <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-          <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-          <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
-          <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
-          <!-- <flex-grid-column field="salary" [columnTempalte]="salaryTemplate" filterType="number" title="Salary"></flex-grid-column> -->
-          <!-- <ng-template #salaryTemplate let-value="value">
-            <span>{{value | currency}}</span>
-          </ng-template> -->
-        </flexi-grid>
+    <app-card cardTitle="Flexi grid nedir?">
+        <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek kullanabileceğiniz esnek bir yapıya sahiptir.</p>
+        <p>Flexi Grid, açık kaynak kodludur. Kaynak kodlarına <a href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-grid/src/lib" target="_blank">buraya tıklayarak</a> ulaşabilirsiniz.</p>      
+        <hr>      
+        <p>Flexi Grid ile hem client-side hem de server-side pagination, filtreleme ve sıralama işlemlerini kolayca gerçekleştirebilirsiniz. Kullanım kolaylığı sağlamak için çok fazla emek verdim 😊. Bu component, Angular v18+ projelerinizde mükemmel bir uyum sağlar.</p>      
+        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için tıklayın</a>.</p>      
+        <p>Dökümantasyonu adım adım inceleyerek Flexi Grid'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda, Flexi Grid'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.</p>            
+        <p><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>      
+        <br>      
+        <p>Full özelliklerin açık olduğu örnek aşağıdadır.</p>
+           
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+            <li class="nav-item">
+              <a href="#tabs-example-1" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-1" class="nav-link" data-bs-toggle="tab">component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-html-1" class="nav-link" data-bs-toggle="tab">component.html</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active show" id="tabs-example-1">
+              <h4>Full halinin örnek görüntüsü</h4>
+              <flexi-grid
+              [data]="users()"
+              [total]="total()"
+              [dataBinding]="true"
+              [pagable]="true"
+              [pageSize]="state().pageSize"
+              [pageSizeList]="[10,20,30,50,100,1000]"
+              [showIndex]="true"
+              [loading]="loading()"
+              themeClass="light"
+              [height]="420"
+              [filterable]="true"
+              tableTitle="Example User Table"
+              [captionTemplate]="captionTemplate"
+              [footerTemplate]="footerTemplate"
+              [showCaption]="true"
+              (refreshData)="getAll()"
+              (dataStateChange)="dataStateChange($event)"
+              >            
+                <flexi-grid-column [visible]="false" field="id" title="Id" [orderable]="false"></flexi-grid-column>
+                <!-- <flex-grid-column field="avatarUrl" title="Avatar"></flex-grid-column> -->
+                <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+                <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+                <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+                <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
+                <!-- <flex-grid-column field="salary" [columnTempalte]="salaryTemplate" filterType="number" title="Salary"></flex-grid-column> -->
+                <!-- <ng-template #salaryTemplate let-value="value">
+                  <span>{{value | currency}}</span>
+                </ng-template> -->
+    
+                <ng-template #footerTemplate>
+                  <!-- <tr>
+                    <td colspan="5">Total</td>
+                    <td>46546</td>
+                  </tr> -->
+                </ng-template>
+    
+                <ng-template #captionTemplate>
+                  <!-- <button>Kullanıcı ekle</button> -->
+                </ng-template>
+             
+                
+              </flexi-grid>
+            </div>
+            <div class="tab-pane" id="tabs-ts-1">
+              <h4>Typescript kodları</h4>
+              <my-code [code]="tsCode()" language="typescript"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-html-1">
+              <h4>HTML kodları</h4>
+              <my-code [code]="htmlCode()" language="html"></my-code>
+            </div>
+          </div>
+        </div>   
+    </app-card>
+
+    <app-card cardTitle="Kurulum">
+      <div class="card-body">
+        <p>Flexi Grid'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
+        <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-grid</code></pre>
+      </div>
     </app-card>
 </app-blank>
-  
