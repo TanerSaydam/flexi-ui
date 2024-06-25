@@ -30,7 +30,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() showRefreshData: boolean = true;
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = true;
-  
+
   pageNumbers: number[] = [];
   totalPageCount = 0;
   state: StateModel = new StateModel();
@@ -205,6 +205,7 @@ export class FlexiGridComponent implements OnChanges {
 
   order(field: string) {
     this.state.order.field = field;
+    this.state.pageNumber = 1;
     if (this.state.order.dir === "asc") {
       this.state.order.dir = "desc";
     } else if (this.state.order.dir === 'desc') {
