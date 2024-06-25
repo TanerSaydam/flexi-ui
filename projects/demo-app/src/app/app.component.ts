@@ -3,14 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { FlexiGridComponent } from '../../../flexi-grid/src/public-api';
 import { UserModel } from './models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { FlexGridColumnComponent } from '../../../flexi-grid/src/lib/flex-grid-column/flex-grid-column.component';
+import { FlexiGridColumnComponent } from '../../../flexi-grid/src/lib/flexi-grid-column.component';
 import { StateFilterModel, StateModel } from '../../../flexi-grid/src/lib/state.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FlexiGridComponent, FlexGridColumnComponent, CommonModule],
+  imports: [RouterOutlet, FlexiGridComponent, FlexiGridColumnComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

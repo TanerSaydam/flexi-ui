@@ -1,12 +1,12 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'flex-grid-column',
+  selector: 'flexi-grid-column',
   standalone: true,
   imports: [],
   template:''
 })
-export class FlexGridColumnComponent {
+export class FlexiGridColumnComponent {
   @Input() field: string = '';
   @Input() title: string = '';
   @Input() orderable: boolean = true;

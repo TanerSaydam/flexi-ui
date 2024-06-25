@@ -29,12 +29,12 @@
   (refreshData)="getAll()"
   (dataStateChange)="dataStateChange($event)"
   >  
-  <flex-grid-column [visible]="false" field="id" title="Id" [orderable]="false"></flex-grid-column>
+  <flexi-grid-column [visible]="false" field="id" title="Id" [orderable]="false"></flexi-grid-column>
   <!-- <flex-grid-column field="avatarUrl" title="Avatar"></flex-grid-column> -->
-  <flex-grid-column field="firstName" title="First Name"></flex-grid-column>
-  <flex-grid-column field="lastName" title="Last Name"></flex-grid-column>
-  <flex-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flex-grid-column>
-  <flex-grid-column field="salary" format="n2" filterType="number" title="Salary"></flex-grid-column>
+  <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+  <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+  <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
   <!-- <flex-grid-column field="salary" [columnTempalte]="salaryTemplate" filterType="number" title="Salary"></flex-grid-column> -->
   <!-- <ng-template #salaryTemplate let-value="value">
     <span>{{value | currency}}</span>

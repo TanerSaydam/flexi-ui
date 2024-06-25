@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
-import { FilterType, FlexGridColumnComponent } from './flex-grid-column/flex-grid-column.component';
+import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 import { FormsModule } from '@angular/forms';
 
@@ -57,7 +57,7 @@ export class FlexiGridComponent implements OnChanges {
   @Output() dataStateChange = new EventEmitter<any>();
   @Output() refreshData = new EventEmitter();
 
-  @ContentChildren(FlexGridColumnComponent) columns: QueryList<FlexGridColumnComponent> | undefined;
+  @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.pageSize !== this.state.pageSize) {
@@ -224,7 +224,7 @@ export class FlexiGridComponent implements OnChanges {
     this.filterDropdownVisible()[field] = !this.filterDropdownVisible()[field];
   }
 
-  applyFilter(column: FlexGridColumnComponent, operator: string){    
+  applyFilter(column: FlexiGridColumnComponent, operator: string){    
     this.filterDropdownVisible()[column.field] = false;    
     column.fitlerOperator = operator;
     if(column.value !== ""){

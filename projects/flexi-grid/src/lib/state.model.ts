@@ -1,4 +1,4 @@
-import { FilterType } from "./flex-grid-column/flex-grid-column.component";
+import { FilterType } from "./flexi-grid-column.component";
 
 export class StateModel{
     pageNumber: number = 1;
