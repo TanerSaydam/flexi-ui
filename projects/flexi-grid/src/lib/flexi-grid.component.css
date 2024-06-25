@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* *{
+    font-family: "Poppins", sans-serif;
+}  */
+
+a {
+    cursor: pointer;
+    user-select: none;
+}
+
+.page-size-select {
+    margin-left: 20px;
+    /* Adjust the value as needed */
+}
+
+.relative {
+    position: relative;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.spinner {
+    height: 30px;
+    width: 30px;
+    border: 5px solid;
+    border-radius: 30px;
+    border-left-color: transparent;
+    animation: spin 1s linear infinite;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+}
+
+.svg {
+    width: 12px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.svg:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.table-container {
+    border: 1px solid #dee2e6;    
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 1220px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.bg-color-gray{
+    background-color: #f8f9fa !important;
+}
+
+.table-container table {
+    width: 99.99%;
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+.table-container th,
+.table-container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.border {
+    position: relative; /* Pseudo-element'in doğru konumlanması için */
+    padding-right: 10px; /* Çizginin metne yapışmaması için sağa padding ekleyin */
+  }
+  
+  .border:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 40%; /* Çizginin yüksekliği */
+    width: 1px;
+    background-color: #777e85;
+    transform: translateY(-50%);
+  }
+  
+  .border:last-child:after {
+    display: none; /* Son sütundaki çizgiyi kaldırmak için */
+  }
+
+.table-container tfoot td {
+    border-right: 0px;
+}
+
+.table-container th {
+    background-color: #f8f9fa;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-container tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-container tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table-container tbody {
+    flex: 1;
+    /* Flex-grow özelliğini kullanarak tbody'nin alanı kaplamasını sağlayın */
+    overflow: auto;
+    /* Tbody kısmına overflow özelliği ekleyin */
+    display: block;
+    /* Display özelliğini block olarak ayarlayın */
+}
+
+.table-container tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-container thead,
+.table-container tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.filter-input {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+}
+
+.select-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.select-container select {
+    margin-right: 10px;
+}
+
+.page-item {
+    padding: 5px 9px;
+}
+
+.active {
+    background-color: #ccc !important;
+}
+
+.pagination .page-item.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.page-size-select {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-size-select select {
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.filter-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 0;
+    font-size: 14px;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 3px 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #007bff;
+}
+
+.dropdown-checkbox-item {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.dropdown-checkbox-item:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #007bff;
+}
+
+.dropdown-title {
+    text-align: center;
+}
