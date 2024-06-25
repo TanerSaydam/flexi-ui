@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FlexiGridComponent } from '../../../my-lib/src/public-api';
+import { FlexiGridComponent } from '../../../flexi-grid/src/public-api';
 import { UserModel } from './models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { FlexGridColumnComponent } from '../../../my-lib/src/lib/flex-grid-column/flex-grid-column.component';
-import { StateFilterModel, StateModel } from '../../../my-lib/src/lib/state.model';
+import { FlexGridColumnComponent } from '../../../flexi-grid/src/lib/flex-grid-column/flex-grid-column.component';
+import { StateFilterModel, StateModel } from '../../../flexi-grid/src/lib/state.model';
 
 @Component({
   selector: 'app-root',
