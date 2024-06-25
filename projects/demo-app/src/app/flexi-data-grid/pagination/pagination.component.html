@@ -1,0 +1,12 @@
+<flexi-grid 
+[data]="users()" 
+[pageable]="true"
+[pageSize]="15" 
+[pageSizeList]="[3,5,10,15,20,50]" 
+>
+    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+</flexi-grid>

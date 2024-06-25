@@ -112,10 +112,10 @@
           </div>
         </div>
       }
-      @for(item of pagedData; track item.id){
+      @for(item of pagedData; track $index){
         <tr>
           @if(showIndex){
-            @if(!pagable){
+            @if(!pageable){
               <td style="width: 50px;">{{($index + 1)}}</td>
             }
             @else{
@@ -144,7 +144,7 @@
         }
 
     </tbody>
-    @if(pagable){
+    @if(pageable){
     <tfoot>
       <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
       <tr>

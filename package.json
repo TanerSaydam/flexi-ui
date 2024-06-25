@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@sweetalert2/ngx-sweetalert2": "^12.3.0",
-    "flexi-grid": "^18.0.6",
+    "flexi-grid": "^18.0.8",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

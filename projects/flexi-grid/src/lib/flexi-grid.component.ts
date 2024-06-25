@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class FlexiGridComponent implements OnChanges {
   @Input() data: any[] = [];
   @Input() total: number | null | undefined = 0;
-  @Input() pagable: boolean = false;
+  @Input() pageable: boolean = false;
   @Input() pageSize: number = 10;
   @Input() showIndex: boolean = false;
   @Input() pageSizeList: number[] = [5, 10, 20, 30, 50, 100, 500, 1000];
@@ -29,7 +29,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() showColumnVisibility: boolean = true;
   @Input() showRefreshData: boolean = true;
   @Input() dataBinding: boolean = false;
-  @Input() showCaption: boolean = true;
+  @Input() showCaption: boolean = false;
 
   pageNumbers: number[] = [];
   totalPageCount = 0;
@@ -65,7 +65,7 @@ export class FlexiGridComponent implements OnChanges {
       this.state.pageSize = this.pageSize;
     }
 
-    if (this.pagable) {
+    if (this.pageable) {
       this.setPageNumbers();
       this.updatePagedData();
     } else {
@@ -146,7 +146,7 @@ export class FlexiGridComponent implements OnChanges {
   changePageSize() {
     this.state.pageNumber = 1;
     this.state.skip = 0;
-    if (this.pagable) {
+    if (this.pageable && this.dataBinding) {
       this.dataStateChange.emit(this.state);
     } else {
       this.updatePagedData();

@@ -3,8 +3,12 @@ a {
     cursor: pointer;
 }
 
+.my-pre{
+    min-height: 400px;
+}
+
 .my-code {
-    min-height: 150px;
+    min-height: 200px;
     display: block;
     white-space: pre-wrap;
     margin-top: -60px;

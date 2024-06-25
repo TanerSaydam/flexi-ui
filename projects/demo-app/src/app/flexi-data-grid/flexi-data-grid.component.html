@@ -13,25 +13,25 @@
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-1" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
             </li>
             <li class="nav-item">
-              <a href="#tabs-ts-1" class="nav-link" data-bs-toggle="tab">component.ts</a>
+              <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
             </li>
             <li class="nav-item">
-              <a href="#tabs-html-1" class="nav-link" data-bs-toggle="tab">component.html</a>
+              <a href="#tabs-ts-full" class="nav-link" data-bs-toggle="tab">component.ts</a>
             </li>
           </ul>
         </div>
         <div class="card-body">
           <div class="tab-content">
-            <div class="tab-pane active show" id="tabs-example-1">
+            <div class="tab-pane active show" id="tabs-example-full">
               <h4>Full halinin örnek görüntüsü</h4>
               <flexi-grid
               [data]="users()"
               [total]="total()"
               [dataBinding]="true"
-              [pagable]="true"
+              [pageable]="true"
               [pageSize]="state().pageSize"
               [pageSizeList]="[10,20,30,50,100,1000]"
               [showIndex]="true"
@@ -71,22 +71,198 @@
                 
               </flexi-grid>
             </div>
-            <div class="tab-pane" id="tabs-ts-1">
-              <h4>Typescript kodları</h4>
-              <my-code [code]="tsCode()" language="typescript"></my-code>
-            </div>
-            <div class="tab-pane" id="tabs-html-1">
+            <div class="tab-pane" id="tabs-html-full">
               <h4>HTML kodları</h4>
-              <my-code [code]="htmlCode()" language="html"></my-code>
+              <my-code [code]="fullExampleHTMLCode()" language="html"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-full">
+              <h4>Typescript kodları</h4>
+              <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
             </div>
           </div>
         </div>   
     </app-card>
 
+    <!-- Kurulum -->
     <app-card cardTitle="Kurulum">
       <div class="card-body">
         <p>Flexi Grid'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
         <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-grid</code></pre>
+      </div>
+    </app-card>
+
+    <!-- İlk kullanım -->
+    <app-card cardTitle="İlk Kullanım">
+      <div class="card-body">
+        <ol>
+          <li>
+            <p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
+            <pre><code class="language-typescript">imports: [FlexiGridComponent, FlexiGridColumnComponent],</code></pre>
+          </li>
+          <li>
+            HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek istediğiniz verileri yerleştirmelisiniz
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                <li class="nav-item">
+                  <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active show" id="tabs-example-first-use">
+                  <h4>İlk kullanım</h4>
+                  <app-first-use></app-first-use>
+                </div>
+                <div class="tab-pane" id="tabs-html-first-use">
+                  <h4>HTML kodları</h4>
+                  <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-first-use">
+                  <h4>Typescript kodları</h4>
+                  <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-first-use-data">
+                  <h4>Data</h4>
+                  <my-code [code]="dataCode()" language="typescript"></my-code>
+                </div>
+              </div>
+            </div> 
+            <hr>
+            <h3>Kodların açıklaması</h3>
+            <ul>
+              <li><b>flexi-grid :</b> Flexi grid elementi. Bununla gridi sayfamıza ekliyoruz</li>
+              <li><b>[data] :</b> Data attributene listemizi veriyoruz. 
+                <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir. İsterseniz siz normal değişken kullanabilirsiniz</p> 
+              </li>
+              <li><b>flexi-grid-column :</b> Grid içerisinde kolonlarımızı göstermek için hangi alanları göstermek istiyorsak her bir alan için bu elementten eklemeliyiz</li>
+              <li><b>field :</b> Grid columnun listedeki hangi fielde karşılık geldiğiniz buradan belirliyoruz</li>
+              <li><b>title :</b> Grid columnun başlığını özelleştirebiliyoruz. 
+                <p class="alert alert-info">Not: Eğer bu attribute atamazsak otomatik field'in adını alır</p>
+              </li>
+            </ul>
+
+            <p>İlk örneğimizle beraber listemizi grid içerisinde göstermeyi başardık.</p>
+          </li>
+        </ol>
+      </div>
+    </app-card>
+
+    <!-- Index Sıras -->
+    <app-card cardTitle="Index Sırası">
+      <div class="card-body">
+        <ol>
+          <li>
+            <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
+          </li>
+          <li>            
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                <li class="nav-item">
+                  <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-html-index" class="nav-link" data-bs-toggle="tab">component.html</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-index" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-index-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active show" id="tabs-example-index">
+                  <h4>Index sırası örneği</h4>
+                  <app-index></app-index>
+                </div>
+                <div class="tab-pane" id="tabs-html-index">
+                  <h4>HTML kodları</h4>
+                  <my-code [code]="indexHTMLCode()" language="html"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-index">
+                  <h4>Typescript kodları</h4>
+                  <my-code [code]="indexTSCode()" language="typescript"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-index-data">
+                  <h4>Data</h4>
+                  <my-code [code]="dataCode()" language="typescript"></my-code>
+                </div>
+              </div>
+            </div> 
+            <hr>
+            <h3>Kodların açıklaması</h3>
+            <ul>
+              <li><b>[showIndex] : Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</b></li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </app-card>
+
+    <app-card cardTitle="Pagination">
+      <div class="card-body">
+        <ol>
+          <li>
+            <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
+          </li>
+          <li>            
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                <li class="nav-item">
+                  <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-html-pagination" class="nav-link" data-bs-toggle="tab">component.html</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-pagination" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-pagination-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active show" id="tabs-example-pagination">
+                  <h4>Pagination örneği</h4>
+                  <app-pagination></app-pagination>
+                </div>
+                <div class="tab-pane" id="tabs-html-pagination">
+                  <h4>HTML kodları</h4>
+                  <my-code [code]="paginationHTMLCode()" language="html"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-pagination">
+                  <h4>Typescript kodları</h4>
+                  <my-code [code]="paginationTSCode()" language="typescript"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-pagination-data">
+                  <h4>Data</h4>
+                  <my-code [code]="dataCode()" language="typescript"></my-code>
+                </div>
+              </div>
+            </div> 
+            <hr>
+            <h3>Kodların açıklaması</h3>
+            <ul>
+              <li><b>[pagination] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false vermeliyiz</li>
+              <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
+              <li><b>[pageSizeList] (optional) : Page size listesini özelleştirmek isterseniz bu attribute değer olarak number bir liste vermelisiniz</b></li>
+            </ul>
+          </li>
+        </ol>
       </div>
     </app-card>
 </app-blank>
