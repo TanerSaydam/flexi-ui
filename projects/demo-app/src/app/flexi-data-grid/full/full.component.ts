@@ -1,13 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
-import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+//import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 
 @Component({
   selector: 'app-full',
   standalone: true,
-  imports: [FlexiGridColumnComponent,FlexiGridComponent],
+  imports: [FlexiGridColumnComponent,FlexiGridComponent, MyCodeComponent],
   templateUrl: './full.component.html',
   styleUrl: './full.component.css'
 })
@@ -16,6 +18,8 @@ export class FullComponent {
   total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
   loading = signal<boolean>(false);  
+  fullExampleTSCode = signal<string>(fullExampleTSCode);
+  fullExampleHTMLCode =signal<string>(fullExampleHTMLCode);  
 
   constructor(
     private http: HttpClient,

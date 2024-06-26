@@ -1,17 +1,52 @@
-<flexi-grid 
-    [data]="users()"
-    [footerTemplate]="footerTemplate"
-    >   
-    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
-
-    <ng-template #footerTemplate>
-        <tr style="height: 50px;">
-            <th style="padding-left: 50px;" colspan="4">Total Count</th>
-            <th>{{users().length}}</th>
-        </tr>
-    </ng-template>
-</flexi-grid>
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+      <li class="nav-item">
+        <a href="#tabs-example-footer" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-html-footer" class="nav-link" data-bs-toggle="tab">component.html</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-footer" class="nav-link" data-bs-toggle="tab">component.ts</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-footer-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tabs-example-footer">
+        <h4>Footer örneği</h4>
+        <flexi-grid 
+        [data]="users()"
+        [footerTemplate]="footerTemplate"
+        >   
+        <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+        <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+        <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+        <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+        <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+    
+        <ng-template #footerTemplate>
+            <tr style="height: 50px;">
+                <th style="padding-left: 50px;" colspan="4">Total Count</th>
+                <th>{{users().length}}</th>
+            </tr>
+        </ng-template>
+    </flexi-grid>
+      </div>
+      <div class="tab-pane" id="tabs-html-footer">
+        <h4>HTML kodları</h4>
+        <my-code [code]="footerHTMLCode()" language="html"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-footer">
+        <h4>Typescript kodları</h4>
+        <my-code [code]="footerTSCode()" language="typescript"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-footer-data">
+        <h4>Data</h4>
+        <my-code [code]="dataCode" language="typescript"></my-code>
+      </div>
+    </div>
+  </div>

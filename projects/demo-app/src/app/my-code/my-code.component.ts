@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { SwalService } from '../swal.service';
 
 declare var Prism: any;
@@ -20,7 +20,7 @@ import 'prismjs/components/prism-powershell';
   templateUrl: './my-code.component.html',
   styleUrl: './my-code.component.css'
 })
-export class MyCodeComponent {
+export class MyCodeComponent implements AfterViewInit {
   @Input() language: string = "";
   @Input() code: string = ""
 
@@ -28,8 +28,7 @@ export class MyCodeComponent {
     private swal: SwalService
   ){}
 
-  
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     Prism.highlightAll();
   }
 

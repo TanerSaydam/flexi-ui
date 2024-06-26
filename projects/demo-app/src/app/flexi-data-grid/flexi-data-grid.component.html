@@ -1,5 +1,4 @@
-<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">  
-  @defer {
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">    
     <!-- Full hali-->
     <div id="what-is-flexi-grid" style="padding-top: 5px;">
       <app-card cardTitle="Flexi Grid nedir?">
@@ -22,43 +21,15 @@
         <br>
         <p>Full özelliklerin açık olduğu örnek aşağıdadır.</p>
     
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-            <li class="nav-item">
-              <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-            </li>
-            <li class="nav-item">
-              <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
-            </li>
-            <li class="nav-item">
-              <a href="#tabs-ts-full" class="nav-link" data-bs-toggle="tab">component.ts</a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane active show" id="tabs-example-full">
-              <h4>Full halinin örnek görüntüsü</h4>
-              <app-full></app-full>
-            </div>
-            <div class="tab-pane" id="tabs-html-full">
-              <h4>HTML kodları</h4>
-              <my-code [code]="fullExampleHTMLCode()" language="html"></my-code>
-            </div>
-            <div class="tab-pane" id="tabs-ts-full">
-              <h4>Typescript kodları</h4>
-              <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
-            </div>
-          </div>
-        </div>
+        @defer {
+          <app-full></app-full>
+        }@placeholder {
+          <app-loading></app-loading>
+        }
       </app-card>
     </div>
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
-     <!-- Kurulum -->
+  
+    <!-- Kurulum -->
     <div id="installation" style="padding-top: 5px;">
       <app-card id="installation" cardTitle="Kurulum">
         <div class="card-body">
@@ -66,12 +37,8 @@
           <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-grid</code></pre>
         </div>
       </app-card>
-    </div>    
-  }@placeholder {
-    <app-loading></app-loading>
-  }
+    </div> 
 
-  @defer {
     <!-- İlk kullanım -->
     <div id="first-use" style="padding-top: 5px;">
       <app-card id="first-use" cardTitle="İlk Kullanım">
@@ -84,42 +51,11 @@
             <li>
               HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
               istediğiniz verileri yerleştirmelisiniz
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-first-use">
-                    <h4>İlk kullanım</h4>
-                    <app-first-use></app-first-use>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-first-use">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-first-use">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-first-use-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-first-use [dataCode]="dataCode()"></app-first-use>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -165,12 +101,8 @@
           </ol>
         </div>
       </app-card>
-    </div>    
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    </div>
+ 
     <!-- Index Sıras -->
     <div id="index" style="padding-top: 5px;">
       <app-card cardTitle="Index">
@@ -180,42 +112,11 @@
               <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-index" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-index" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-index-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-index">
-                    <h4>Index sırası örneği</h4>
-                    <app-index></app-index>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-index">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="indexHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-index">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="indexTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-index-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-index [dataCode]="dataCode()"></app-index>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -243,12 +144,8 @@
           </ol>
         </div>
       </app-card>
-    </div>    
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    </div>
+  
     <!-- Pagination -->
     <div id="pagination" style="padding-top: 5px;">
       <app-card cardTitle="Pagination">
@@ -258,42 +155,11 @@
               <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-pagination" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-pagination" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-pagination-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-pagination">
-                    <h4>Pagination örneği</h4>
-                    <app-pagination></app-pagination>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-pagination">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="paginationHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-pagination">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="paginationTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-pagination-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-pagination [dataCode]="dataCode()"></app-pagination>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -334,12 +200,8 @@
           </ol>
         </div>
       </app-card>
-    </div>    
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    </div>
+  
     <!-- Sort -->
     <div id="sort" style="padding-top: 5px;">
       <app-card cardTitle="Sort">
@@ -350,42 +212,11 @@
                 vermelisiniz. İsterseniz column bazlı sıralama işlemini kapatabiliyorsunuz.</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-sort" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-sort" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-sort" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-sort-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-sort">
-                    <h4>Sort örneği</h4>
-                    <app-sort></app-sort>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-sort">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="sortHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-sort">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="sortTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-sort-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-sort [dataCode]="dataCode()"></app-sort>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -415,12 +246,8 @@
           </ol>
         </div>
       </app-card>
-    </div>    
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    </div>
+  
     <!-- Filter -->
     <div id="filter" style="padding-top: 5px;">
       <app-card id="filter" cardTitle="Filter">
@@ -432,42 +259,11 @@
                 filter özelliğine ayrı type verebiliyorsunuz</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-filter" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-filter" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-filter" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-filter-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-filter">
-                    <h4>Filter örneği</h4>
-                    <app-filter></app-filter>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-filter">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="filterHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-filter">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="filterTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-filter-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-filter [dataCode]="dataCode()"></app-filter>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -508,12 +304,8 @@
           </ol>
         </div>
       </app-card>
-    </div>    
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    </div>     
+  
     <!-- Caption -->
     <div id="caption" style="padding-top: 5px;">
       <app-card id="caption" cardTitle="Caption">
@@ -524,42 +316,11 @@
                 kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-caption" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-caption" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-caption" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-caption-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-caption">
-                    <h4>Caption örneği</h4>
-                    <app-caption></app-caption>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-caption">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="captionHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-caption">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="captionTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-caption-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-caption [dataCode]="dataCode()"></app-caption>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -577,8 +338,7 @@
                     ekleyeceklerinizi captionda göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
                     referansı [captionTemplate] attribute değer olarak vermelisiniz!</p>
                 </li>
-              </ul>
-    
+              </ul>    
               <hr>
               <div class="overflow-x">
                 <table class="table">
@@ -617,11 +377,7 @@
         </div>
       </app-card>
     </div>
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    
     <!-- Footer -->
     <div id="footer" style="padding-top: 5px;">
       <app-card id="footer" cardTitle="Footer">
@@ -631,42 +387,11 @@
               <p>Table footer alanına isterseniz müdahale edebilir ve oraya istediğiniz yapıyı ekleyebilirsiniz.</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-footer" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-footer" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-footer" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-footer-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-footer">
-                    <h4>Footer örneği</h4>
-                    <app-footer></app-footer>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-footer">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="footerHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-footer">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="footerTSCode()" language="typescript"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-footer-data">
-                    <h4>Data</h4>
-                    <my-code [code]="dataCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-footer [dataCode]="dataCode()"></app-footer>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -703,12 +428,8 @@
           </ol>
         </div>
       </app-card>
-    </div>
-  }@placeholder {
-    <app-loading></app-loading>
-  }
-
-  @defer {
+    </div>  
+  
     <!-- Data Binding -->
     <div id="data-binding" style="padding-top: 5px;">
       <app-card id="data-binding" cardTitle="Data Binding">
@@ -727,35 +448,11 @@
                 objesinde size iletir ama arama yapmaz.</p>
             </li>
             <li>
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                  <li class="nav-item">
-                    <a href="#tabs-example-data-binding" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-html-data-binding" class="nav-link" data-bs-toggle="tab">component.html</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#tabs-ts-data-binding" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active show" id="tabs-example-data-binding">
-                    <h4>Data Binding örneği</h4>
-                    <app-data-binding></app-data-binding>
-                  </div>
-                  <div class="tab-pane" id="tabs-html-data-binding">
-                    <h4>HTML kodları</h4>
-                    <my-code [code]="dataBindingHTMLCode()" language="html"></my-code>
-                  </div>
-                  <div class="tab-pane" id="tabs-ts-data-binding">
-                    <h4>Typescript kodları</h4>
-                    <my-code [code]="dataBindingTSCode()" language="typescript"></my-code>
-                  </div>
-                </div>
-              </div>
+              @defer {
+                <app-data-binding></app-data-binding>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
@@ -799,47 +496,18 @@
           </ol>
         </div>
       </app-card>
-    </div>
-  }@placeholder {
-    <app-loading></app-loading>
-  }
+    </div>    
 
-  @defer {   
     <!-- Ek Özellikler -->
     <div id="options" style="padding-top: 5px;">
       <app-card id="options" cardTitle="Ek Ayarlar">
         <div class="card-body">
           <p>Ek olarak verebileceğiniz ayarları aşağıda bulabilirsiniz</p>
-    
-          <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-              <li class="nav-item">
-                <a href="#tabs-example-options" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-              </li>
-              <li class="nav-item">
-                <a href="#tabs-html-options" class="nav-link" data-bs-toggle="tab">component.html</a>
-              </li>
-              <li class="nav-item">
-                <a href="#tabs-ts-options" class="nav-link" data-bs-toggle="tab">component.ts</a>
-              </li>
-            </ul>
-          </div>
-          <div class="card-body">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tabs-example-options">
-                <h4>Ek ayarlar örneği</h4>
-                <app-options></app-options>
-              </div>
-              <div class="tab-pane" id="tabs-html-options">
-                <h4>HTML kodları</h4>
-                <my-code [code]="optionsHTMLCode()" language="html"></my-code>
-              </div>
-              <div class="tab-pane" id="tabs-ts-options">
-                <h4>Typescript kodları</h4>
-                <my-code [code]="optionsTSCode()" language="typescript"></my-code>
-              </div>
-            </div>
-          </div>
+          @defer { 
+            <app-options></app-options>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
           <hr>
     
           <ul>
@@ -876,7 +544,4 @@
         </div>
       </app-card>
     </div>
-  }@placeholder {
-    <app-loading></app-loading>
-  }
 </app-blank>

@@ -22,26 +22,52 @@ a {
     cursor: pointer;
 }
 
-.spinner {
-    height: 30px;
-    width: 30px;
-    border: 5px solid;
-    border-radius: 30px;
-    border-left-color: transparent;
-    animation: spin 1s linear infinite;
-    background-color: transparent;
-    margin-left: auto;
-    margin-right: auto;
+.spinner-container {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: rgba(85, 83, 109, 0.1);
+    height: 100%;
+    padding-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+.spinner-1 {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border: 3px solid;
+    top: 41.5%;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    animation: spin-1 0.8s linear infinite;
+    background-color: transparent;
+}
 
-    100% {
-        transform: rotate(360deg);
-    }
+.spinner-2 {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 45%;
+    border: 3px solid;
+    border-radius: 50%;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    animation: spin-2 1.3s linear infinite;
+    background-color: transparent;
+}
+
+@keyframes spin-1 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-2 {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
 }
 
 .pagination {

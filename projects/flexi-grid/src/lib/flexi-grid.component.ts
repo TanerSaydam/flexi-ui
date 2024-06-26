@@ -30,6 +30,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() showRefreshData: boolean = true;
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
+  @Input() showExportExcel: boolean = false;
 
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
@@ -349,4 +350,7 @@ export class FlexiGridComponent implements OnChanges {
     }
   }
 
+  exportExcel(){
+    
+  }
 }

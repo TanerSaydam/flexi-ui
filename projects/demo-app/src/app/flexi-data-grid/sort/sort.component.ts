@@ -1,15 +1,17 @@
-import { Component, signal } from '@angular/core';
-import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { Component, Input, signal } from '@angular/core';
+//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { sortHTMLCode, sortTSCode } from '../code';
 
 
 @Component({
   selector: 'app-sort',
   standalone: true,
-  imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule],
+  imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule, MyCodeComponent],
   templateUrl: './sort.component.html',
   styleUrl: './sort.component.css'
 })
@@ -21,4 +23,7 @@ export class SortComponent {
   lastNameSortable = signal<boolean>(true);
   dateOfBirthSortable = signal<boolean>(true);
   salarySortable = signal<boolean>(true);
+  sortTSCode = signal<string>(sortTSCode);
+  sortHTMLCode = signal<string>(sortHTMLCode);
+  @Input() dataCode = "";
 }

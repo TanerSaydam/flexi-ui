@@ -1,7 +1,42 @@
-<flexi-grid [data]="users()">
-    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
-</flexi-grid>
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+      <li class="nav-item">
+        <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+      </li>
+    </ul>
+</div>
+<div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tabs-example-first-use">
+        <h4>İlk kullanım</h4>
+        <flexi-grid [data]="users()">
+            <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+            <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+            <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+            <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+            <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+        </flexi-grid>
+      </div>
+      <div class="tab-pane" id="tabs-html-first-use">
+        <h4>HTML kodları</h4>
+        <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-first-use">
+        <h4>Typescript kodları</h4>
+        <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-first-use-data">
+        <h4>Data</h4>
+        <my-code [code]="dataCode" language="typescript"></my-code>
+      </div>
+    </div>
+</div>

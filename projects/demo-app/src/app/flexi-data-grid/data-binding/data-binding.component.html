@@ -1,24 +1,52 @@
-<flexi-grid 
-    [data]="users()"
-    [total]="total()"
-    [dataBinding]="dataBinding()"
-    [loading]="loading()"
-    [pageable]="pageable()"
-    [pageSize]="pageSize()"
-    [pageSizeList]="pageSizeList()"
-    [showIndex]="showIndex()"
-    [sortable]="sortable()"
-    [showCaption]="showCaption()"
-    [captionTitle]="captionTitle()"
-    [showColumnVisibility]="showColumnVisibility()" 
-    [showRefreshData]="showRefreshData()"
-    [filterable]="filterable()"
-    (dataStateChange)="dataStateChange($event)"
-    (refreshData)="getAll()"
-    >
-    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" filterType="date" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" filterType="number" title="Salary"></flexi-grid-column>
-</flexi-grid>
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+      <li class="nav-item">
+        <a href="#tabs-example-data-binding" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-html-data-binding" class="nav-link" data-bs-toggle="tab">component.html</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-data-binding" class="nav-link" data-bs-toggle="tab">component.ts</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tabs-example-data-binding">
+        <h4>Data Binding örneği</h4>
+        <flexi-grid 
+            [data]="users()"
+            [total]="total()"
+            [dataBinding]="dataBinding()"
+            [loading]="loading()"
+            [pageable]="pageable()"
+            [pageSize]="pageSize()"
+            [pageSizeList]="pageSizeList()"
+            [showIndex]="showIndex()"
+            [sortable]="sortable()"
+            [showCaption]="showCaption()"
+            [captionTitle]="captionTitle()"
+            [showColumnVisibility]="showColumnVisibility()" 
+            [showRefreshData]="showRefreshData()"
+            [filterable]="filterable()"
+            (dataStateChange)="dataStateChange($event)"
+            (refreshData)="getAll()"
+            >
+            <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+            <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+            <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+            <flexi-grid-column field="dateOfBirth" filterType="date" title="Date Of Birth"></flexi-grid-column>
+            <flexi-grid-column field="salary" filterType="number" title="Salary"></flexi-grid-column>
+        </flexi-grid>
+      </div>
+      <div class="tab-pane" id="tabs-html-data-binding">
+        <h4>HTML kodları</h4>
+        <my-code [code]="dataBindingHTMLCode()" language="html"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-data-binding">
+        <h4>Typescript kodları</h4>
+        <my-code [code]="dataBindingTSCode()" language="typescript"></my-code>
+      </div>
+    </div>
+  </div>

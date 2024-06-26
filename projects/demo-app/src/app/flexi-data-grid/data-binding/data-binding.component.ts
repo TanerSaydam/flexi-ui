@@ -2,13 +2,15 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserModel } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { FlexiGridColumnComponent, FlexiGridComponent, StateModel, FlexiGridService} from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+//import { FlexiGridColumnComponent, FlexiGridComponent, StateModel, FlexiGridService} from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { dataBindingHTMLCode, dataBindingTSCode } from '../code';
 
 @Component({
   selector: 'app-data-binding',
   standalone: true,
-  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule],
+  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
   templateUrl: './data-binding.component.html',
   styleUrl: './data-binding.component.css'
 })
@@ -29,6 +31,8 @@ export class DataBindingComponent {
   showColumnVisibility = signal<boolean>(true);
   showRefreshData = signal<boolean>(true);
   filterable = signal<boolean>(true);
+  dataBindingTSCode = signal<string>(dataBindingTSCode);
+  dataBindingHTMLCode = signal<string>(dataBindingHTMLCode);
 
   constructor(
     private http: HttpClient,

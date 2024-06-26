@@ -1,16 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { firstUseHTMLCode, firstUseTSCode } from '../code';
 
 @Component({
   selector: 'app-first-use',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent],
+  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
   templateUrl: './first-use.component.html',
   styleUrl: './first-use.component.css'
 })
 export class FirstUseComponent {
   users = signal<UserModel[]>(UsersData);
+  firstUseTSCode = signal<string>(firstUseTSCode);
+  firstUseHTMLCode = signal<string>(firstUseHTMLCode);
+  @Input() dataCode = "";
 }
