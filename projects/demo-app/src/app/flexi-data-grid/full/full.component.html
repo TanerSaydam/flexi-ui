@@ -1,0 +1,38 @@
+<flexi-grid
+  [data]="users()"
+  [total]="total()"
+  [dataBinding]="true"
+  [pageable]="true"
+  [pageSize]="state().pageSize"
+  [pageSizeList]="[10,20,30,50,100,1000]"
+  [showIndex]="true"
+  [loading]="loading()"
+  themeClass="light"
+  [height]="420"
+  [filterable]="true"
+  captionTitle="Example User Table"
+  [captionTemplate]="captionTemplate"
+  [footerTemplate]="footerTemplate"
+  [showCaption]="true"
+  (refreshData)="getAll()"
+  (dataStateChange)="dataStateChange($event)"
+  [sortable]="true">
+    <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
+
+    <ng-template #footerTemplate>
+    <!-- <tr>
+           <td colspan="5">Total</td>
+           <td>46546</td>
+        </tr> -->
+    </ng-template>
+
+    <ng-template #captionTemplate>
+        <!-- <button>Kullanıcı ekle</button> -->
+    </ng-template>
+
+
+</flexi-grid>

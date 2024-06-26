@@ -23,8 +23,8 @@
                             </span>
                         </a>
                     </li>    
-                    <li class="nav-item" routerLink="/flexi-grid" routerLinkActive="active">
-                        <a class="nav-link">
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <a routerLink="/flexi-grid" class="nav-link dropdown-toggle">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <i class="fa-solid fa-table me-2"></i>
                             </span>
@@ -32,6 +32,45 @@
                                 Flexi Grid
                             </span>
                         </a>
+                        <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiGridDropDown() ? 'show' : ''">
+                            <div class="dropdown-menu-columns">
+                              <div class="dropdown-menu-column">
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="what-is-flexi-grid">
+                                  Flexi Grid nedir?
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="installation">
+                                  Kurulum                                  
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="first-use">
+                                  İlk Kullanım
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="index">
+                                  Index
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="pagination">
+                                  Pagination
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="sort">
+                                  Sort
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="filter">
+                                  Filter
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="caption">
+                                  Caption
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="footer">
+                                  Footer
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="data-binding">
+                                  Data Binding
+                                </a>
+                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="options">
+                                  Ek Ayarlar
+                                </a>
+                              </div>                             
+                            </div>
+                          </div>
                     </li>                   
                 </ul>
             </div>

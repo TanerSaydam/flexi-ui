@@ -19,11 +19,11 @@ export class FlexiGridComponent implements OnChanges {
   @Input() showIndex: boolean = false;
   @Input() pageSizeList: number[] = [5, 10, 20, 30, 50, 100, 500, 1000];
   @Input() loading: boolean = false;
-  @Input() orderable: boolean = true;
+  @Input() sortable: boolean = false;
   @Input() themeClass: string = "light";
   @Input() height: number = 420;
   @Input() filterable: boolean = false;
-  @Input() tableTitle: string = "";
+  @Input() captionTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
   @Input() footerTemplate: TemplateRef<any> | any;
   @Input() showColumnVisibility: boolean = true;
@@ -31,58 +31,58 @@ export class FlexiGridComponent implements OnChanges {
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
 
-  pageNumbers: number[] = [];
-  totalPageCount = 0;
+  pageNumbers = signal<number[]>([]);
+  totalPageCount = signal<number>(0);
   state: StateModel = new StateModel();
-  pagedData: any[] = [];
+  pagedData = signal<any[]>([]);
   timeoutId: any;
   filterDropdownVisible = signal<{ [key: string]: boolean }>({});
   columnVisibilityDropdownVisible = signal(false);
-  textFilterTypes: { operator: string, value: string }[] = [
+  textFilterTypes = signal<{ operator: string, value: string }[]>([
     { operator: "eq", value: 'Is equal to' },
     { operator: "ne", value: 'Is not equal to' },
     { operator: "contains", value: 'Contains' },
     { operator: "not contains", value: 'Does not contain' },
     { operator: "startswith", value: 'Starts with' },
     { operator: "endswith", value: 'Ends with' }
-  ];
-  numberFilterTypes: { operator: string, value: string }[] = [
+  ]);
+  numberFilterTypes = signal<{ operator: string, value: string }[]>([
     { operator: "eq", value: 'Is equal to' },
     { operator: "ne", value: 'Is not equal to' },
     { operator: "gt", value: 'Is greater than' },
     { operator: "ge", value: 'Is greater than or equal to' },
     { operator: "lt", value: 'Is less than' },
     { operator: "le", value: 'Is less than or equal to' }
-  ];
+  ]);
 
   @Output() dataStateChange = new EventEmitter<any>();
   @Output() refreshData = new EventEmitter();
 
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.pageSize !== this.state.pageSize) {
-      this.state.pageSize = this.pageSize;
+  ngOnChanges(changes: SimpleChanges): void {   
+    if (this.pageSize !== this.state.pageSize) {     
+      this.state.pageSize = +this.pageSize;
     }
 
     if (this.pageable) {
       this.setPageNumbers();
       this.updatePagedData();
     } else {
-      this.pagedData = this.data;
+      this.pagedData.set(this.data);
     }
   }
 
   changePage(pageNumber: number) {
-    if (pageNumber > this.totalPageCount) {
-      pageNumber = this.totalPageCount;
+    if (pageNumber > this.totalPageCount()) {
+      pageNumber = this.totalPageCount();
     } else if (pageNumber < 1) {
       pageNumber = 1;
     }
 
     const previousPageNumber = this.state.pageNumber;
-    this.state.pageNumber = pageNumber;
-    this.state.skip = (pageNumber - 1) * this.state.pageSize;
+    this.state.pageNumber = +pageNumber;
+    this.state.skip = (pageNumber - 1) * +this.state.pageSize;
     this.dataStateChange.emit(this.state);
 
     // Check if the page number crossed a 10-page boundary
@@ -102,7 +102,7 @@ export class FlexiGridComponent implements OnChanges {
   }
 
   setPageNumbers() {    
-    const pageCount = Math.ceil(this.total! / this.state.pageSize);
+    const pageCount = Math.ceil(this.total! / +this.state.pageSize);
     const numbers = [];
 
     // Calculate the current range of page numbers
@@ -113,13 +113,13 @@ export class FlexiGridComponent implements OnChanges {
     for (let i = startPage; i <= endPage; i++) {
       numbers.push(i);
     }
-
-    this.pageNumbers = numbers;
-    this.totalPageCount = pageCount;
+    
+    this.pageNumbers.set(numbers);
+    this.totalPageCount.set(pageCount);
   }
 
   nextPageGroup() {
-    const pageCount = Math.ceil(this.total! / this.state.pageSize);
+    const pageCount = Math.ceil(this.total! / +this.state.pageSize);
     const currentGroup = Math.floor((this.state.pageNumber - 1) / 10);
     const nextGroupStartPage = (currentGroup + 1) * 10 + 1;
 
@@ -143,7 +143,9 @@ export class FlexiGridComponent implements OnChanges {
     this.updatePagedData();
   }
 
-  changePageSize() {
+  changePageSize(event:any) {
+    const value = +event.target.value;
+    this.state.pageSize = value;
     this.state.pageNumber = 1;
     this.state.skip = 0;
     if (this.pageable && this.dataBinding) {
@@ -161,16 +163,42 @@ export class FlexiGridComponent implements OnChanges {
         filteredData = filteredData.filter(item => {
           const field = filter.field;
           const value = filter.value;
-          return item[field].toString().toLowerCase().includes(value);
+          const itemValue = item[field].toString().toLowerCase();
+          const filterValue = value.toString().toLowerCase();
+    
+          switch (filter.operator) {
+            case 'eq':
+              return itemValue === filterValue;
+            case 'ne':
+              return itemValue !== filterValue;
+            case 'contains':
+              return itemValue.includes(filterValue);
+            case 'not contains':
+              return !itemValue.includes(filterValue);
+            case 'startswith':
+              return itemValue.startsWith(filterValue);
+            case 'endswith':
+              return itemValue.endsWith(filterValue);
+            case 'gt':
+              return parseFloat(itemValue) > parseFloat(filterValue);
+            case 'ge':
+              return parseFloat(itemValue) >= parseFloat(filterValue);
+            case 'lt':
+              return parseFloat(itemValue) < parseFloat(filterValue);
+            case 'le':
+              return parseFloat(itemValue) <= parseFloat(filterValue);
+            default:
+              return true;
+          }
         });
-      });      
+      });
     }
   
-    // Order data if orderable is true
-    if (this.orderable && this.state.order.field && !this.dataBinding) {
+    // Order data if sortable is true
+    if (this.sortable && this.state.sort.field && !this.dataBinding) {
       filteredData = filteredData.sort((a, b) => {
-        const field = this.state.order.field;
-        const dir = this.state.order.dir === 'asc' ? 1 : -1;
+        const field = this.state.sort.field;
+        const dir = this.state.sort.dir === 'asc' ? 1 : -1;
         if (a[field] < b[field]) return -1 * dir;
         if (a[field] > b[field]) return 1 * dir;
         return 0;
@@ -183,40 +211,44 @@ export class FlexiGridComponent implements OnChanges {
     }
   
     // Pagination logic
-    if (filteredData.length > this.state.pageSize && !this.dataBinding) {
+    if (filteredData.length > +this.state.pageSize && !this.dataBinding && this.pageable) {
       const start = this.state.skip;
-      const end = start + this.state.pageSize;
-      this.pagedData = filteredData.slice(start, end);
+      const end = start + +this.state.pageSize;
+      this.pagedData.set(filteredData.slice(start, end));
     } else {
-      this.pagedData = filteredData;
+      this.pagedData.set(filteredData);
     }
   }
 
-  orderData() {
+  sortData() {
     this.data = this.data.sort((a, b) => {
-      const field = this.state.order.field;
-      const dir = this.state.order.dir === 'asc' ? 1 : -1;
+      const field = this.state.sort.field;
+      const dir = this.state.sort.dir === 'asc' ? 1 : -1;
       if (a[field] < b[field]) return -1 * dir;
       if (a[field] > b[field]) return 1 * dir;
       return 0;
     });
 
-    this.dataStateChange.emit(this.state);
+    if(this.dataBinding){
+      this.dataStateChange.emit(this.state);
+    }else{
+      this.updatePagedData();
+    }
   }
 
-  order(field: string) {
-    this.state.order.field = field;
+  sort(field: string) {
+    this.state.sort.field = field;
     this.state.pageNumber = 1;
-    if (this.state.order.dir === "asc") {
-      this.state.order.dir = "desc";
-    } else if (this.state.order.dir === 'desc') {
-      this.state.order.dir = "";
-      this.state.order.field = '';
+    if (this.state.sort.dir === "asc") {
+      this.state.sort.dir = "desc";
+    } else if (this.state.sort.dir === 'desc') {
+      this.state.sort.dir = "";
+      this.state.sort.field = '';
     } else {
-      this.state.order.dir = 'asc'
+      this.state.sort.dir = 'asc'
     }
 
-    this.orderData();
+    this.sortData();
   }
 
   toggleTheme() {
@@ -240,7 +272,7 @@ export class FlexiGridComponent implements OnChanges {
       clearTimeout(this.timeoutId);
     }
 
-    this.timeoutId = setTimeout(() => {
+    this.timeoutId = setTimeout(() => {      
       if (value !== "") {
         this.state.pageNumber = 1;
         this.state.skip = 0;
@@ -264,9 +296,12 @@ export class FlexiGridComponent implements OnChanges {
         }
       }
 
-      this.dataStateChange.emit(this.state);
-      this.updatePagedData();
-    }, this.dataBinding ? 500 : 0);
+      if(this.dataBinding){
+        this.dataStateChange.emit(this.state);
+      }else{
+        this.updatePagedData();
+      }
+    }, this.dataBinding ? 500 : 1);
   }
 
   showClearFilter(value: any) {
@@ -279,6 +314,12 @@ export class FlexiGridComponent implements OnChanges {
     const column = this.columns?.find(p => p.field === field);
     if (column) {
       column.value = "";
+    }
+
+    if(this.dataBinding){
+
+    }else{
+      this.updatePagedData();
     }
   }
 

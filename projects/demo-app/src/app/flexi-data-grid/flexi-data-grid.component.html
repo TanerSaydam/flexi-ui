@@ -1,15 +1,27 @@
-<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
-    <app-card cardTitle="Flexi grid nedir?">
-        <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek kullanabileceğiniz esnek bir yapıya sahiptir.</p>
-        <p>Flexi Grid, açık kaynak kodludur. Kaynak kodlarına <a href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-grid/src/lib" target="_blank">buraya tıklayarak</a> ulaşabilirsiniz.</p>      
-        <hr>      
-        <p>Flexi Grid ile hem client-side hem de server-side pagination, filtreleme ve sıralama işlemlerini kolayca gerçekleştirebilirsiniz. Kullanım kolaylığı sağlamak için çok fazla emek verdim 😊. Bu component, Angular v18+ projelerinizde mükemmel bir uyum sağlar.</p>      
-        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için tıklayın</a>.</p>      
-        <p>Dökümantasyonu adım adım inceleyerek Flexi Grid'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda, Flexi Grid'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.</p>            
-        <p><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>      
-        <br>      
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">  
+  @defer {
+    <!-- Full hali-->
+    <div id="what-is-flexi-grid" style="padding-top: 5px;">
+      <app-card cardTitle="Flexi Grid nedir?">
+        <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu
+          component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek
+          kullanabileceğiniz esnek bir yapıya sahiptir.</p>
+        <p>Flexi Grid, açık kaynak kodludur. Kaynak kodlarına <a
+            href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-grid/src/lib" target="_blank">buraya
+            tıklayarak</a> ulaşabilirsiniz.</p>
+        <hr>
+        <p>Flexi Grid ile hem client-side hem de server-side pagination, filtreleme ve sıralama işlemlerini kolayca
+          gerçekleştirebilirsiniz. Kullanım kolaylığı sağlamak için çok fazla emek verdim 😊. Bu component, Angular v18+
+          projelerinizde mükemmel bir uyum sağlar.</p>
+        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a
+            href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için tıklayın</a>.</p>
+        <p>Dökümantasyonu adım adım inceleyerek Flexi Grid'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz.
+          Aşağıda, Flexi Grid'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup
+          yapılandıracağınızı adım adım öğreneceksiniz.</p>
+        <p><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>
+        <br>
         <p>Full özelliklerin açık olduğu örnek aşağıdadır.</p>
-           
+    
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
@@ -27,49 +39,7 @@
           <div class="tab-content">
             <div class="tab-pane active show" id="tabs-example-full">
               <h4>Full halinin örnek görüntüsü</h4>
-              <flexi-grid
-              [data]="users()"
-              [total]="total()"
-              [dataBinding]="true"
-              [pageable]="true"
-              [pageSize]="state().pageSize"
-              [pageSizeList]="[10,20,30,50,100,1000]"
-              [showIndex]="true"
-              [loading]="loading()"
-              themeClass="light"
-              [height]="420"
-              [filterable]="true"
-              tableTitle="Example User Table"
-              [captionTemplate]="captionTemplate"
-              [footerTemplate]="footerTemplate"
-              [showCaption]="true"
-              (refreshData)="getAll()"
-              (dataStateChange)="dataStateChange($event)"
-              >            
-                <flexi-grid-column [visible]="false" field="id" title="Id" [orderable]="false"></flexi-grid-column>
-                <!-- <flex-grid-column field="avatarUrl" title="Avatar"></flex-grid-column> -->
-                <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-                <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-                <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
-                <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
-                <!-- <flex-grid-column field="salary" [columnTempalte]="salaryTemplate" filterType="number" title="Salary"></flex-grid-column> -->
-                <!-- <ng-template #salaryTemplate let-value="value">
-                  <span>{{value | currency}}</span>
-                </ng-template> -->
-    
-                <ng-template #footerTemplate>
-                  <!-- <tr>
-                    <td colspan="5">Total</td>
-                    <td>46546</td>
-                  </tr> -->
-                </ng-template>
-    
-                <ng-template #captionTemplate>
-                  <!-- <button>Kullanıcı ekle</button> -->
-                </ng-template>
-             
-                
-              </flexi-grid>
+              <app-full></app-full>
             </div>
             <div class="tab-pane" id="tabs-html-full">
               <h4>HTML kodları</h4>
@@ -80,189 +50,817 @@
               <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
             </div>
           </div>
-        </div>   
-    </app-card>
+        </div>
+      </app-card>
+    </div>
+  }@placeholder {
+    <app-loading></app-loading>
+  }
 
-    <!-- Kurulum -->
-    <app-card cardTitle="Kurulum">
-      <div class="card-body">
-        <p>Flexi Grid'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
-        <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-grid</code></pre>
-      </div>
-    </app-card>
+  @defer {
+     <!-- Kurulum -->
+    <div id="installation" style="padding-top: 5px;">
+      <app-card id="installation" cardTitle="Kurulum">
+        <div class="card-body">
+          <p>Flexi Grid'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
+          <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-grid</code></pre>
+        </div>
+      </app-card>
+    </div>    
+  }@placeholder {
+    <app-loading></app-loading>
+  }
 
+  @defer {
     <!-- İlk kullanım -->
-    <app-card cardTitle="İlk Kullanım">
-      <div class="card-body">
-        <ol>
-          <li>
-            <p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
-            <pre><code class="language-typescript">imports: [FlexiGridComponent, FlexiGridColumnComponent],</code></pre>
-          </li>
-          <li>
-            HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek istediğiniz verileri yerleştirmelisiniz
-            <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                <li class="nav-item">
-                  <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane active show" id="tabs-example-first-use">
-                  <h4>İlk kullanım</h4>
-                  <app-first-use></app-first-use>
-                </div>
-                <div class="tab-pane" id="tabs-html-first-use">
-                  <h4>HTML kodları</h4>
-                  <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
-                </div>
-                <div class="tab-pane" id="tabs-ts-first-use">
-                  <h4>Typescript kodları</h4>
-                  <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
-                </div>
-                <div class="tab-pane" id="tabs-ts-first-use-data">
-                  <h4>Data</h4>
-                  <my-code [code]="dataCode()" language="typescript"></my-code>
+    <div id="first-use" style="padding-top: 5px;">
+      <app-card id="first-use" cardTitle="İlk Kullanım">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
+              <pre><code class="language-typescript">imports: [FlexiGridComponent, FlexiGridColumnComponent],</code></pre>
+            </li>
+            <li>
+              HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
+              istediğiniz verileri yerleştirmelisiniz
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-first-use">
+                    <h4>İlk kullanım</h4>
+                    <app-first-use></app-first-use>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-first-use">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-first-use">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-first-use-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
                 </div>
               </div>
-            </div> 
-            <hr>
-            <h3>Kodların açıklaması</h3>
-            <ul>
-              <li><b>flexi-grid :</b> Flexi grid elementi. Bununla gridi sayfamıza ekliyoruz</li>
-              <li><b>[data] :</b> Data attributene listemizi veriyoruz. 
-                <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir. İsterseniz siz normal değişken kullanabilirsiniz</p> 
-              </li>
-              <li><b>flexi-grid-column :</b> Grid içerisinde kolonlarımızı göstermek için hangi alanları göstermek istiyorsak her bir alan için bu elementten eklemeliyiz</li>
-              <li><b>field :</b> Grid columnun listedeki hangi fielde karşılık geldiğiniz buradan belirliyoruz</li>
-              <li><b>title :</b> Grid columnun başlığını özelleştirebiliyoruz. 
-                <p class="alert alert-info">Not: Eğer bu attribute atamazsak otomatik field'in adını alır</p>
-              </li>
-            </ul>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>flexi-grid :</b> Flexi grid elementi. Bununla gridi sayfamıza ekliyoruz</li>
+                <li><b>[data] :</b> Data attributene listemizi veriyoruz.
+                  <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.
+                    İsterseniz siz normal değişken kullanabilirsiniz</p>
+                </li>
+                <li><b>flexi-grid-column :</b> Grid içerisinde kolonlarımızı göstermek için hangi alanları göstermek
+                  istiyorsak her bir alan için bu elementten eklemeliyiz</li>
+                <li><b>field :</b> Grid columnun listedeki hangi fielde karşılık geldiğiniz buradan belirliyoruz</li>
+                <li><b>title :</b> Grid columnun başlığını özelleştirebiliyoruz.
+                  <p class="alert alert-info">Not: Eğer bu attribute atamazsak otomatik field'in adını alır</p>
+                </li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>data</th>
+                    <td>object[] | number[] | string[] | boolean[] vs.</td>
+                  </tr>
+                  <tr>
+                    <th>field</th>
+                    <td>text</td>
+                  </tr>
+                  <tr>
+                    <th>title</th>
+                    <td>text</td>
+                  </tr>
+                </tbody>
+              </table>
+    
+              <p class="alert alert-success">İlk örneğimizle beraber listemizi grid içerisinde göstermeyi başardık.</p>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>    
+  }@placeholder {
+    <app-loading></app-loading>
+  }
 
-            <p>İlk örneğimizle beraber listemizi grid içerisinde göstermeyi başardık.</p>
-          </li>
-        </ol>
-      </div>
-    </app-card>
-
+  @defer {
     <!-- Index Sıras -->
-    <app-card cardTitle="Index Sırası">
-      <div class="card-body">
-        <ol>
-          <li>
-            <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
-          </li>
-          <li>            
-            <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                <li class="nav-item">
-                  <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-html-index" class="nav-link" data-bs-toggle="tab">component.html</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-ts-index" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-ts-index-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane active show" id="tabs-example-index">
-                  <h4>Index sırası örneği</h4>
-                  <app-index></app-index>
-                </div>
-                <div class="tab-pane" id="tabs-html-index">
-                  <h4>HTML kodları</h4>
-                  <my-code [code]="indexHTMLCode()" language="html"></my-code>
-                </div>
-                <div class="tab-pane" id="tabs-ts-index">
-                  <h4>Typescript kodları</h4>
-                  <my-code [code]="indexTSCode()" language="typescript"></my-code>
-                </div>
-                <div class="tab-pane" id="tabs-ts-index-data">
-                  <h4>Data</h4>
-                  <my-code [code]="dataCode()" language="typescript"></my-code>
+    <div id="index" style="padding-top: 5px;">
+      <app-card cardTitle="Index">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-index" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-index" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-index-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-index">
+                    <h4>Index sırası örneği</h4>
+                    <app-index></app-index>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-index">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="indexHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-index">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="indexTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-index-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
                 </div>
               </div>
-            </div> 
-            <hr>
-            <h3>Kodların açıklaması</h3>
-            <ul>
-              <li><b>[showIndex] : Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</b></li>
-            </ul>
-          </li>
-        </ol>
-      </div>
-    </app-card>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[showIndex] : Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</b></li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>showIndex</th>
+                    <td>true | false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>    
+  }@placeholder {
+    <app-loading></app-loading>
+  }
 
-    <app-card cardTitle="Pagination">
-      <div class="card-body">
-        <ol>
-          <li>
-            <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
-          </li>
-          <li>            
-            <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                <li class="nav-item">
-                  <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-html-pagination" class="nav-link" data-bs-toggle="tab">component.html</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-ts-pagination" class="nav-link" data-bs-toggle="tab">component.ts</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#tabs-ts-pagination-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane active show" id="tabs-example-pagination">
-                  <h4>Pagination örneği</h4>
-                  <app-pagination></app-pagination>
-                </div>
-                <div class="tab-pane" id="tabs-html-pagination">
-                  <h4>HTML kodları</h4>
-                  <my-code [code]="paginationHTMLCode()" language="html"></my-code>
-                </div>
-                <div class="tab-pane" id="tabs-ts-pagination">
-                  <h4>Typescript kodları</h4>
-                  <my-code [code]="paginationTSCode()" language="typescript"></my-code>
-                </div>
-                <div class="tab-pane" id="tabs-ts-pagination-data">
-                  <h4>Data</h4>
-                  <my-code [code]="dataCode()" language="typescript"></my-code>
+  @defer {
+    <!-- Pagination -->
+    <div id="pagination" style="padding-top: 5px;">
+      <app-card cardTitle="Pagination">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-pagination" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-pagination" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-pagination-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-pagination">
+                    <h4>Pagination örneği</h4>
+                    <app-pagination></app-pagination>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-pagination">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="paginationHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-pagination">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="paginationTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-pagination-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
                 </div>
               </div>
-            </div> 
-            <hr>
-            <h3>Kodların açıklaması</h3>
-            <ul>
-              <li><b>[pagination] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false vermeliyiz</li>
-              <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
-              <li><b>[pageSizeList] (optional) : Page size listesini özelleştirmek isterseniz bu attribute değer olarak number bir liste vermelisiniz</b></li>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[pagination] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false
+                  vermeliyiz</li>
+                <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri
+                  verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
+                <li><b>[pageSizeList] (optional) </b>: Page size listesini özelleştirmek isterseniz bu attribute değer
+                  olarak number bir liste vermelisiniz</li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>pagination</th>
+                    <td>true | false</td>
+                  </tr>
+                  <tr>
+                    <th>pageSize</th>
+                    <td>number</td>
+                  </tr>
+                  <tr>
+                    <th>pageSizeList</th>
+                    <td>number[]</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>    
+  }@placeholder {
+    <app-loading></app-loading>
+  }
+
+  @defer {
+    <!-- Sort -->
+    <div id="sort" style="padding-top: 5px;">
+      <app-card cardTitle="Sort">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Sıralama yapısını aktif etmek için grid elementinde <b>[sortable]</b> attribute'üne true değeri
+                vermelisiniz. İsterseniz column bazlı sıralama işlemini kapatabiliyorsunuz.</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-sort" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-sort" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-sort" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-sort-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-sort">
+                    <h4>Sort örneği</h4>
+                    <app-sort></app-sort>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-sort">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="sortHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-sort">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="sortTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-sort-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[sortable] :</b> Sort yapısını aktif etmek istiyorsak true, pasife çekmek istiyorsak false vermeliyiz
+                </li>
+                <li><b>[sortable] (column optional) :</b> Column bazlı sort yapısını kapatıp açabiliriz</li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>sortable</th>
+                    <td>true | false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>    
+  }@placeholder {
+    <app-loading></app-loading>
+  }
+
+  @defer {
+    <!-- Filter -->
+    <div id="filter" style="padding-top: 5px;">
+      <app-card id="filter" cardTitle="Filter">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Filtreleme yapısını aktif etmek için grid elementinde <b>[filterable]</b> attribute'üne true değeri
+                vermelisiniz. İsterseniz column bazlı filtreleme işlemini kapatabiliyorsunuz. Farklı türde veriler için
+                filter özelliğine ayrı type verebiliyorsunuz</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-filter" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-filter" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-filter" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-filter-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-filter">
+                    <h4>Filter örneği</h4>
+                    <app-filter></app-filter>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-filter">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="filterHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-filter">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="filterTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-filter-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[filterable] :</b> Filter yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+                  <b>false</b> vermeliyiz</li>
+                <li><b>[filterable] (column optional) :</b> Column bazlı filter yapısını kapatıp açabiliriz</li>
+                <li><b>[filterType] (column optional) :</b> Column bazlı filter tipini değiştirebiliriz. Default tip text
+                  ama tarih, tarih ve saat ve number değerler için özel filter tipi verebiliriz. Verebileceğimiz tipler:
+                  text | date | date-time | number.
+                  <p class="alert alert-info">Not: Filter tipini değiştirdiğimizde filitreleme yaptığımız seçenekte
+                    değişiyor. Text filtrelerken benziyor | benzemiyor iken, number filtresinde eşit | büyük | küçük gibi
+                    seçenekler geliyor. Date seçeneğinde filtre seçeneği sadece bir tane, o da eşit ise.</p>
+                </li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>filterable</th>
+                    <td>true | false</td>
+                  </tr>
+                  <tr>
+                    <th>filterType</th>
+                    <td>text | date | date-time | number</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>    
+  }@placeholder {
+    <app-loading></app-loading>
+  }
+
+  @defer {
+    <!-- Caption -->
+    <div id="caption" style="padding-top: 5px;">
+      <app-card id="caption" cardTitle="Caption">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Table üst başlığı ekleyebilir, üst başlıkta bulunan Column Visibility ve Refresh Data buttonlarını
+                kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-caption" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-caption" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-caption" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-caption-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-caption">
+                    <h4>Caption örneği</h4>
+                    <app-caption></app-caption>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-caption">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="captionHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-caption">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="captionTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-caption-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[showCaption] :</b> Caption bölümünü göstermek için bu attribute true değer vermelisiniz</li>
+                <li><b>captionTitle (optional):</b> Caption'a title vermek için bu attribute değer atayabilirsiniz</li>
+                <li><b>[showColumnVisibility] (optional) :</b> Caption bölümü gözüküyorken columnların visibilitysini
+                  yöneten bu dropdownu gösterip gizleyebilirsiniz</li>
+                <li><b>[showRefreshData] (optional) :</b> Caption bölümü gözüküyorken datanın refresh olmasını sağlayan bu
+                  butonu gösterip gizleyebilirsiniz</li>
+                <li><b>ng-template #captionTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey caption sağ
+                  taraftaki button kısmında gözükür</li>
+                <li><b>[captionTemplate] :</b> Eklediğiniz buttonların gözükmesi için bu elementin referansını attirbute
+                  vermeniz gerekmektedir
+                  <p class="alert alert-info">Not: ng-template #captionTemplate ile element oluşturmanız içerisine
+                    ekleyeceklerinizi captionda göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
+                    referansı [captionTemplate] attribute değer olarak vermelisiniz!</p>
+                </li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>showCaption</th>
+                    <td>true | false</td>
+                  </tr>
+                  <tr>
+                    <th>captionTitle</th>
+                    <td>text</td>
+                  </tr>
+                  <tr>
+                    <th>showColumnVisibility</th>
+                    <td>true | false</td>
+                  </tr>
+                  <tr>
+                    <th>showRefreshData</th>
+                    <td>true | false</td>
+                  </tr>
+                  <tr>
+                    <th>captionTemplate</th>
+                    <td>element ref</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>
+  }@placeholder {
+    <app-loading></app-loading>
+  }
+
+  @defer {
+    <!-- Footer -->
+    <div id="footer" style="padding-top: 5px;">
+      <app-card id="footer" cardTitle="Footer">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Table footer alanına isterseniz müdahale edebilir ve oraya istediğiniz yapıyı ekleyebilirsiniz.</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-footer" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-footer" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-footer" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-footer-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-footer">
+                    <h4>Footer örneği</h4>
+                    <app-footer></app-footer>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-footer">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="footerHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-footer">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="footerTSCode()" language="typescript"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-footer-data">
+                    <h4>Data</h4>
+                    <my-code [code]="dataCode()" language="typescript"></my-code>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>ng-template #footerTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey table da footer
+                  alanında gözükür</li>
+                <li><b>[footerTemplate] :</b> Eklediğiniz yapının gözükmesi için bu elementin referansını attirbute'e
+                  vermeniz gerekmektedir
+                  <p class="alert alert-info">Not: ng-template #footerTemplate ile element oluşturmanız içerisine
+                    ekleyeceklerinizi footer da göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
+                    referansı [footerTemplate] attribute değer olarak vermelisiniz! Değer verirken oranın table footer alanı
+                    oluduğunu unutmayın. Yani tr elementi ile satır ekleyip td ya da th ile column ekleyerek original
+                    tasarımı korumazsanız responsive yapıyı bozma ihtimaliniz var.</p>
+                </li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>footerTemplate</th>
+                    <td>element ref</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>
+  }@placeholder {
+    <app-loading></app-loading>
+  }
+
+  @defer {
+    <!-- Data Binding -->
+    <div id="data-binding" style="padding-top: 5px;">
+      <app-card id="data-binding" cardTitle="Data Binding">
+        <div class="card-body">
+          <ol>
+            <li>
+              <p>Data Binding özelliği ile table da yapılan her bir işlemin değerini alıp OData ile birlikte
+                kullanabilirsiniz. Ya da istediğiniz gibi işleyebilirsiniz. Data Binding attribute true değeri verdiğinizde
+                artık bir event ile yapılan işlemlerin çıktıları (örn pagination da sayfa değiştirme, order, filter vs)
+                state nesnesinde alabiliyorsunuz. İsterseniz bu nesnede aldığınız değeri yine bu kütüphanede bulunan service
+                ile otomatik OData destekli bir endpointe çevirip kullanabilirsiniz isterseniz de kendi istediğiniz gibi
+                işleyebilirsiniz.</p>
+              <p class="alert alert-warning">Önemli not: Data Binding true yaptığınız da artık table otomatik hareket etmeyi
+                bırakıp her şeyi sizin halletmenizi ister. Sayfa değiştirmek için sayfa numarasına bastığınızda size yeni
+                sayfanın bilgilerini gönderir ama o sayfaya geçmez, ya da filter a değer yazdığınızda yazdığınızı state
+                objesinde size iletir ama arama yapmaz.</p>
+            </li>
+            <li>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                  <li class="nav-item">
+                    <a href="#tabs-example-data-binding" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-html-data-binding" class="nav-link" data-bs-toggle="tab">component.html</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tabs-ts-data-binding" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tabs-example-data-binding">
+                    <h4>Data Binding örneği</h4>
+                    <app-data-binding></app-data-binding>
+                  </div>
+                  <div class="tab-pane" id="tabs-html-data-binding">
+                    <h4>HTML kodları</h4>
+                    <my-code [code]="dataBindingHTMLCode()" language="html"></my-code>
+                  </div>
+                  <div class="tab-pane" id="tabs-ts-data-binding">
+                    <h4>Typescript kodları</h4>
+                    <my-code [code]="dataBindingTSCode()" language="typescript"></my-code>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[dataBinding] :</b> Data Binding yapısının aktif olmasını sağlar. Buna true değer vermezseniz Data
+                  Binding'i kullanamazsınız</li>
+                <li><b>[total] :</b> Pagination hesaplamasında kullanılan değer. Data binding açık değilse otomatik kendi
+                  hesaplanıyor.</li>
+                <li><b>[loading] :</b> Data grid verileri yüklerken loader görünmesini istiyorsanız bir değişken oluşturup
+                  veri almadan önce ve sonra o değişken durumuna göre loader göndermesini sağlayabilirsiniz</li>
+                <li><b>(dataStateChange) :</b> Yapılan her işlemden sonra bu evente State objesi gelir. Bu objede tüm
+                  yapılan işlemlerin bilgileri yer alır, pageNumber, filter, order gibi. Bunu kullanarak verileri
+                  istediğiniz gibi yönetebilirsiniz</li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>dataBinding</th>
+                    <td>true | false</td>
+                  </tr>
+                  <tr>
+                    <th>total</th>
+                    <td>number</td>
+                  </tr>
+                  <tr>
+                    <th>loading</th>
+                    <td>true | false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          </ol>
+        </div>
+      </app-card>
+    </div>
+  }@placeholder {
+    <app-loading></app-loading>
+  }
+
+  @defer {   
+    <!-- Ek Özellikler -->
+    <div id="options" style="padding-top: 5px;">
+      <app-card id="options" cardTitle="Ek Ayarlar">
+        <div class="card-body">
+          <p>Ek olarak verebileceğiniz ayarları aşağıda bulabilirsiniz</p>
+    
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+              <li class="nav-item">
+                <a href="#tabs-example-options" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              </li>
+              <li class="nav-item">
+                <a href="#tabs-html-options" class="nav-link" data-bs-toggle="tab">component.html</a>
+              </li>
+              <li class="nav-item">
+                <a href="#tabs-ts-options" class="nav-link" data-bs-toggle="tab">component.ts</a>
+              </li>
             </ul>
-          </li>
-        </ol>
-      </div>
-    </app-card>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tabs-example-options">
+                <h4>Ek ayarlar örneği</h4>
+                <app-options></app-options>
+              </div>
+              <div class="tab-pane" id="tabs-html-options">
+                <h4>HTML kodları</h4>
+                <my-code [code]="optionsHTMLCode()" language="html"></my-code>
+              </div>
+              <div class="tab-pane" id="tabs-ts-options">
+                <h4>Typescript kodları</h4>
+                <my-code [code]="optionsTSCode()" language="typescript"></my-code>
+              </div>
+            </div>
+          </div>
+          <hr>
+    
+          <ul>
+            <li><b>[height] :</b> Data griding boyutunu px olarak ayarlıyabiliyorsunuz. Default 420px</li>
+            <li><b>[width] (column) :</b> Columnların uzunluklarını ayarlayabiliyorsunuz. Örneğin: 100px, 20% gibi</li>
+            <li><b>[visible] (column) :</b> Eklediğiniz columnların gizli kalmasını, istediğiniz zaman görünmesini istiyorsanız bu ayar ile yapabilirsiniz</li>
+          </ul>
+    
+          <hr>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Alabileceği Değer Türleri</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>height</th>
+                <td>number</td>
+              </tr>
+              <tr>
+                <th>width</th>
+                <td>text</td>
+              </tr>
+              <tr>
+                <th>visible</th>
+                <td>true | false</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+  }@placeholder {
+    <app-loading></app-loading>
+  }
 </app-blank>

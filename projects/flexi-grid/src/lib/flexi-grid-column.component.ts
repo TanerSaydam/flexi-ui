@@ -9,13 +9,13 @@ import { Component, Input, TemplateRef } from '@angular/core';
 export class FlexiGridColumnComponent {
   @Input() field: string = '';
   @Input() title: string = '';
-  @Input() orderable: boolean = true;
+  @Input() sortable: boolean = true;
   @Input() filterable: boolean = true;
   @Input() visible: boolean = true;
   @Input() filterType: FilterType = "text";
-  @Input() columnTempalte: TemplateRef<any> | any;
+  @Input() columnTemplate: TemplateRef<any> | any;
   @Input() format: DateFormatType | CurrencyFormatType | null = null;
-
+  @Input() width: string = "100%";
   value: string = "";
   filterOperator: string = "contains";  
 }

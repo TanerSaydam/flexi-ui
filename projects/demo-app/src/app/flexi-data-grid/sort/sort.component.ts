@@ -5,17 +5,20 @@ import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
-  selector: 'app-pagination',
+  selector: 'app-sort',
   standalone: true,
   imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.css'
+  templateUrl: './sort.component.html',
+  styleUrl: './sort.component.css'
 })
-export class PaginationComponent {
+export class SortComponent {
   users = signal<UserModel[]>(UsersData);
-  pageable = signal<boolean>(true);
-  pageSize = signal<number>(15);
-  pageSizeList = signal<number[]>([3,5,10,15,20,50]);
-  numbers = signal<number[]>([1,2,3,4,5,10,15,20,25,30,35,40,45,50,100,150,200]);  
+  sortable = signal<boolean>(true);
+  idSortable = signal<boolean>(true);
+  firstNameSortable = signal<boolean>(true);
+  lastNameSortable = signal<boolean>(true);
+  dateOfBirthSortable = signal<boolean>(true);
+  salarySortable = signal<boolean>(true);
 }

@@ -8,9 +8,9 @@ export class FlexiGridService {
     getODataEndpoint(state: StateModel) {
         let endpoint = `$top=${state.pageSize}&$skip=${state.skip}`;
 
-        if (state.order.field !== '') {
-            endpoint += `&$orderby=${this.toTitleCase(state.order.field)}`;
-            if (state.order.dir === 'desc') {
+        if (state.sort.field !== '') {
+            endpoint += `&$orderby=${this.toTitleCase(state.sort.field)}`;
+            if (state.sort.dir === 'desc') {
                 endpoint += ` desc`;
             }
         }

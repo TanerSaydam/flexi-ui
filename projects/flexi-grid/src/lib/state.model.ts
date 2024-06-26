@@ -4,7 +4,7 @@ export class StateModel{
     pageNumber: number = 1;
     pageSize: number = 10;
     skip: number = 0;
-    order: StateOrderModel = new StateOrderModel();
+    sort: StateOrderModel = new StateOrderModel();
     filter: StateFilterModel[] = [];
   }
 

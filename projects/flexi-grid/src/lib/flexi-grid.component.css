@@ -284,3 +284,7 @@ a {
     padding: 5px;
     cursor: pointer;
 }
+
+th, td{
+    user-select: none;
+}

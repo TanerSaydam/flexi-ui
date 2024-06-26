@@ -1,9 +1,28 @@
+<div style="margin-left: 30px;">
+    <div class="form-group">
+        <label class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="pageable">
+            <span class="form-check-label">Use or not Pagination</span>
+        </label>
+    </div>
+    <div class="form-group mt-1">
+        <label>Page Size</label>
+        <input class="form-control" style="width: 70px;" type="text" [(ngModel)]="pageSize">
+    </div>
+    <div class="form-group mt-1">
+        <div class="form-label">Page Size List</div>
+        <select type="text" class="form-select" [(ngModel)]="pageSizeList" multiple>
+            @for(number of numbers(); track number){
+            <option [value]="number">{{number}}</option>
+            }
+        </select>
+    </div>
+</div>
 <flexi-grid 
-[data]="users()" 
-[pageable]="true"
-[pageSize]="15" 
-[pageSizeList]="[3,5,10,15,20,50]" 
->
+    [data]="users()" 
+    [pageable]="pageable()" 
+    [pageSize]="pageSize()" 
+    [pageSizeList]="pageSizeList()">
     <flexi-grid-column field="id" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>

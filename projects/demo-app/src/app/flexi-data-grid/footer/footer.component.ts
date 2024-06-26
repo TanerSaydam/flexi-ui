@@ -1,18 +1,17 @@
 import { Component, signal } from '@angular/core';
-import { UserModel } from '../../models/user.model';
-import { UsersData } from '../data';
 //import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
 import { FormsModule } from '@angular/forms';
+import { UsersData } from '../data';
+import { UserModel } from '../../models/user.model';
 import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-footer',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent,FormsModule],
-  templateUrl: './index.component.html',
-  styleUrl: './index.component.css'
+  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule],
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.css'
 })
-export class IndexComponent {
+export class FooterComponent {
   users = signal<UserModel[]>(UsersData);
-  showIndex = signal<boolean>(true);
 }

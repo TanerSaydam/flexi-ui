@@ -1,13 +1,17 @@
-<div style="margin-left: 30px;">
-    <label class="form-check">
-        <input class="form-check-input" type="checkbox" [(ngModel)]="showIndex">
-        <span class="form-check-label">Show or hide Index</span>
-      </label>
-</div>
-<flexi-grid [data]="users()" [showIndex]="showIndex()">
+<flexi-grid 
+    [data]="users()"
+    [footerTemplate]="footerTemplate"
+    >   
     <flexi-grid-column field="id" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+
+    <ng-template #footerTemplate>
+        <tr style="height: 50px;">
+            <th style="padding-left: 50px;" colspan="4">Total Count</th>
+            <th>{{users().length}}</th>
+        </tr>
+    </ng-template>
 </flexi-grid>

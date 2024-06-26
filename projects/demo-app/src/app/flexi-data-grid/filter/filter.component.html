@@ -1,0 +1,114 @@
+<div style="margin-left: 30px;">
+    <div class="form-group">
+        <label class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="filterable">
+            <span class="form-check-label">Use or not Filter for all table</span>
+        </label>
+    </div>
+    <div class="form-group row mt-1">
+        <div class="col-3">
+            <label class="form-check">
+                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="idFilterable">
+                <span class="form-check-label">Use or not Filter for Id</span>
+            </label>
+        </div>
+        @if(idFilterable()){
+            <div class="col-3">
+                <label>Change Id Filter Type</label>
+                <select class="form-control" [disabled]="true" [(ngModel)]="idFilterType" style="width: 150px;">
+                    <option>text</option>
+                    <option>number</option>
+                    <option>date</option>
+                    <option>date-time</option>
+                </select>
+            </div>   
+        }
+    </div>
+    <div class="form-group row mt-1">
+        <div class="col-3">
+            <label class="form-check">
+                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="firstNameFilterable">
+                <span class="form-check-label">Use or not Filter for First Name</span>
+            </label>
+        </div>
+        @if(firstNameFilterable()){
+            <div class="col-3">
+                <label>Change First Name Filter Type</label>
+                <select class="form-control" [disabled]="true" [(ngModel)]="firstNameFilterType" style="width: 150px;">
+                    <option>text</option>
+                    <option>number</option>
+                    <option>date</option>
+                    <option>date-time</option>
+                </select>
+            </div>     
+        }
+           
+    </div>
+    <div class="form-group row mt-1">
+        <div class="col-3">
+            <label class="form-check">
+                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="lastNameFilterable">
+                <span class="form-check-label">Use or not Filter for Last Name</span>
+            </label>
+        </div>
+        @if(lastNameFilterable()){
+            <div class="col-3">
+                <label>Change Last Name Filter Type</label>
+                <select class="form-control" [disabled]="true" [(ngModel)]="lastNameFilterType" style="width: 150px;">
+                    <option>text</option>
+                    <option>number</option>
+                    <option>date</option>
+                    <option>date-time</option>
+                </select>
+            </div>  
+        }   
+    </div>
+    <div class="form-group row mt-1">
+        <div class="col-3">
+            <label class="form-check">
+                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="dateOfBirthFilterable">
+                <span class="form-check-label">Use or not Filter for Date of birth</span>
+            </label>
+        </div>
+        @if(dateOfBirthFilterable()){
+            <div class="col-3">
+                <label>Change Date of Birth Filter Type</label>
+                <select class="form-control" [disabled]="true" [(ngModel)]="dateOfBirthFilterType" style="width: 150px;">
+                    <option>text</option>
+                    <option>number</option>
+                    <option>date</option>
+                    <option>date-time</option>
+                </select>
+            </div>
+        }                
+    </div>
+    <div class="form-group row mt-1">
+        <div class="col-3">
+            <label class="form-check">
+                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="salaryFilterable">
+                <span class="form-check-label">Use or not Filter for Salary</span>
+            </label>
+        </div>
+        @if(salaryFilterable()){
+            <div class="col-3">
+                <label>Change Salary Filter Type</label>
+                <select class="form-control" [disabled]="true" [(ngModel)]="salaryFilterType" style="width: 150px;">
+                    <option>text</option>
+                    <option>number</option>
+                    <option>date</option>
+                    <option>date-time</option>
+                </select>
+            </div>  
+        }
+    </div>
+</div>
+<flexi-grid 
+[data]="users()"
+[filterable]="filterable()"
+>
+    <flexi-grid-column field="id" [filterable]="idFilterable()" [filterType]="idFilterType()" title="Id"></flexi-grid-column>
+    <flexi-grid-column field="firstName" [filterable]="firstNameFilterable()" [filterType]="firstNameFilterType()" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" [filterable]="lastNameFilterable()" [filterType]="lastNameFilterType()" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" [filterable]="dateOfBirthFilterable()" [filterType]="dateOfBirthFilterType()" filterType="date" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" title="Salary"></flexi-grid-column>
+</flexi-grid>

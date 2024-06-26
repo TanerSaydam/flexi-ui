@@ -4,7 +4,7 @@
     @if(showCaption){
       <caption class="bg-color-gray" style="padding: 10px;">
         <div style="position: relative; display: flex; justify-content: space-between;">
-          <h3>{{tableTitle}}</h3>
+          <h3>{{captionTitle}}</h3>
           <div class="d-flex" style="gap: 10px;">      
             <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
             @if(showColumnVisibility){
@@ -36,24 +36,24 @@
     <thead>
       <tr>
         @if(showIndex){
-          <th style="width: 50px;">#</th>
+          <th style="width: 70px;">#</th>
         }
         @for(column of columns; track column.field){          
-          @if(orderable && column.orderable){
-            <th (click)="order(column.field)" class="cursor my-border" [hidden]="!column.visible">
+          @if(sortable && column.sortable){
+            <th [ngStyle]="{'width': column.width}" (click)="sort(column.field)" class="cursor my-border" [hidden]="!column.visible">
               <div>
                 <span>{{ column.title ? column.title : column.field }}</span>
                 <span class="ms-2">
-                  @if(this.state.order.field === column.field){
-                    <span *ngIf="state.order.field === column.field">
-                      {{ state.order.dir === 'asc' ? '↑' : '↓' }}
+                  @if(this.state.sort.field === column.field){
+                    <span *ngIf="state.sort.field === column.field">
+                      {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
                     </span>
                   }
                 </span>
               </div>              
             </th>
           }@else {
-            <th class="my-border" [hidden]="!column.visible">
+            <th [ngStyle]="{'width': column.width}" class="my-border" [hidden]="!column.visible">
               <div>
                 <span>{{ column.title ? column.title : column.field }}</span>
               </div>
@@ -63,7 +63,9 @@
       </tr>
       @if(filterable){
         <tr>
-          <th></th>
+          @if(showIndex){
+            <th></th>
+          }
           @for(column of columns; track column.field){
             <th [hidden]="!column.visible">
               @if(filterable && column.filterable){
@@ -72,7 +74,7 @@
                     <input class="filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                     <svg class="svg cursor" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
                     <div class="dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
-                      @for(filterType of textFilterTypes; track filterType.operator){
+                      @for(filterType of textFilterTypes(); track filterType.operator){
                         <a class="dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'active' : ''" (click)="applyFilter(column, filterType.operator)">
                           {{ filterType.value }}
                         </a>
@@ -86,7 +88,7 @@
                     <input class="filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                     <svg class="svg cursor" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
                     <div class="dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
-                      @for(filterType of numberFilterTypes; track filterType.operator){
+                      @for(filterType of numberFilterTypes(); track filterType.operator){
                         <a class="dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'active' : ''" (click)="applyFilter(column, filterType.operator)">
                           {{ filterType.value }}
                         </a>
@@ -112,23 +114,23 @@
           </div>
         </div>
       }
-      @for(item of pagedData; track $index){
+      @for(item of pagedData(); track $index){
         <tr>
           @if(showIndex){
             @if(!pageable){
-              <td style="width: 50px;">{{($index + 1)}}</td>
+              <td style="width: 70px;">{{($index + 1)}}</td>
             }
             @else{
-              <td style="width: 50px;">{{($index + ((state.pageNumber -1) * state.pageSize)) + 1}}</td>
+              <td style="width: 70px;">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
             }
           }
           @for(column of columns; track column){
-            @if(column.columnTempalte){
-              <td>
-                <ng-container *ngTemplateOutlet="column.columnTempalte; context: {value: item[column.field], item: item}"></ng-container>
+            @if(column.columnTemplate){
+              <td [ngStyle]="{'width': column.width}">
+                <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item}"></ng-container>
               </td>
             }@else {
-              <td [hidden]="!column.visible">                
+              <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible">                
                 @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                   {{ item[column.field] | date: column.format! }}
                 }@else if(column.filterType === "number" && column.filterType){
@@ -144,14 +146,14 @@
         }
 
     </tbody>
-    @if(pageable){
     <tfoot>
       <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
-      <tr>
+      @if(pageable){
+        <tr>
         <td [colSpan]="columns!.length">
           <div class="pagination-container">
             <ul class="pagination">
-              @if(this.pageNumbers.length > 1){
+              @if(this.pageNumbers().length > 1){
                 
                 <li class="page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
                   <a class="page-link" aria-label="Previous">
@@ -164,38 +166,38 @@
                     <span aria-hidden="true">&#8249;</span>
                   </a>
                 </li>
-                @if(pageNumbers[0] !== 1){
+                @if(pageNumbers()[0] !== 1){
                 <li class="page-item" (click)="previousPageGroup()">
                   <a class="page-link">...</a>
                 </li>
                 }
-                @for(pageNumber of pageNumbers; track pageNumber){
+                @for(pageNumber of pageNumbers(); track pageNumber){
                 <li class="page-item" [ngClass]="state.pageNumber === pageNumber ? 'active': ''">
                   <a (click)="changePage(pageNumber)" class="page-link">
                     {{pageNumber}}
                   </a>
                 </li>
                 }
-                @if(pageNumbers[pageNumbers.length - 1] !== totalPageCount){
+                @if(pageNumbers()[pageNumbers().length - 1] !== totalPageCount()){
                 <li class="page-item" (click)="nextPageGroup()">
                   <a class="page-link">...</a>
                 </li>
                 }
-                <li class="page-item" [ngClass]="state.pageNumber === totalPageCount ? 'disabled': ''"
+                <li class="page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
                   (click)="changePage(state.pageNumber + 1)">
                   <a class="page-link" aria-label="Next">
                     <span aria-hidden="true">&#8250;</span>
                   </a>
                 </li>
-                <li class="page-item" [ngClass]="state.pageNumber === totalPageCount ? 'disabled': ''"
-                  (click)="changePage(totalPageCount)">
+                <li class="page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
+                  (click)="changePage(totalPageCount())">
                   <a class="page-link" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>
               }
               <div class="page-size-select">
-                <select [(ngModel)]="state.pageSize" (change)="changePageSize()">
+                <select [ngModel]="state.pageSize" (change)="changePageSize($event)">
                   @for(size of pageSizeList; track size){
                   <option>{{size}}</option>
                   }
@@ -206,12 +208,12 @@
           </div>
         </td>
         <td>
-          <span> {{state.pageNumber}} - {{totalPageCount}} of {{(total | currency: '': '': '1.0')!.replace(',','.')}}
+          <span> {{state.pageNumber}} - {{totalPageCount()}} of {{(total | currency: '': '': '1.0')!.replace(',','.')}}
             items </span>
         </td>
-      </tr>
+        </tr>
+      }
     </tfoot>
-    }
 
   </table>
 </div>
