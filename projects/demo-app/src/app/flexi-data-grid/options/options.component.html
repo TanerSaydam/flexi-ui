@@ -17,9 +17,37 @@
         <h4>Ek ayarlar örneği</h4>
         <div style="margin-left: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
             <div class="form-group">
-                <label>Table Height</label>
-                <input type="text" [(ngModel)]="height" class="form-control" style="width: 150px;">
+                <label class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="autoHeight">
+                    <span class="form-check-label">Auto Height</span>
+                </label>
             </div>
+            <div class="form-group">
+                <label>Table Height</label>
+                <input [disabled]="autoHeight()" type="text" [(ngModel)]="height" class="form-control" style="width: 150px;">
+            </div>
+            <div class="form-group">
+                <label class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="useMinWidth">
+                    <span class="form-check-label">Use Min Width</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Min Width</label>
+                <input [disabled]="!useMinWidth()" type="text" [(ngModel)]="minWidth" class="form-control" style="width: 150px;">
+            </div>  
+            <div class="form-group">
+                <label class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="autoWidth">
+                    <span class="form-check-label">Auto Width For Table</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Width For Table</label>
+                <input [disabled]="autoWidth()" type="text" [(ngModel)]="width" class="form-control" style="width: 150px;">
+            </div>                        
+        </div>
+        <div class="mt-2" style="margin-left: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
             <div class="form-group">
                 <label>Id Column Width</label>
                 <input type="text" [(ngModel)]="idWidth" class="form-control" style="width: 150px;">
@@ -75,7 +103,13 @@
         </div>
         <flexi-grid 
         [data]="users()" 
-        [height]="height()">
+        [height]="height()"
+        [autoHeight]="autoHeight()"
+        [useMinWidth]="useMinWidth()"
+        [minWidth]="minWidth()"
+        [width]="width()"
+        [autoWidth]="autoWidth()"        
+        >
             <flexi-grid-column field="id" [visible]="visibleIdColumn()" [width]="idWidth()" title="Id"></flexi-grid-column>
             <flexi-grid-column field="firstName" [visible]="visibleFirstNameColumn()" [width]="firstNameWidth()" title="First Name"></flexi-grid-column>
             <flexi-grid-column field="lastName" [visible]="visibleLastNameColumn()" [width]="lastNameWidth()" title="Last Name"></flexi-grid-column>

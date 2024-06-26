@@ -120,7 +120,10 @@
               <hr>
               <h3>Kodların açıklaması</h3>
               <ul>
-                <li><b>[showIndex] : Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</b></li>
+                <li><b>[showIndex] :</b> Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</li>
+                <li><b>indexWidth :</b> Index uzunluğu default 70px. Eğer değiştirmek isterseniz bu attribute kullanabilirsiniz
+                  <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
+                </li>
               </ul>
     
               <hr>
@@ -130,12 +133,19 @@
                     <tr>
                       <th>Attribute</th>
                       <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th>showIndex</th>
                       <td>true | false</td>
+                      <th>false</th>
+                    </tr>
+                    <tr>
+                      <th>indexWidth</th>
+                      <td>text</td>
+                      <th>70px</th>
                     </tr>
                   </tbody>
                 </table>
@@ -178,20 +188,24 @@
                     <tr>
                       <th>Attribute</th>
                       <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th>pagination</th>
                       <td>true | false</td>
+                      <th>false</th>
                     </tr>
                     <tr>
                       <th>pageSize</th>
                       <td>number</td>
+                      <th>10</th>
                     </tr>
                     <tr>
                       <th>pageSizeList</th>
                       <td>number[]</td>
+                      <th>[5, 10, 20, 30, 50, 100, 500, 1000]</th>
                     </tr>
                   </tbody>
                 </table>
@@ -232,12 +246,14 @@
                     <tr>
                       <th>Attribute</th>
                       <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th>sortable</th>
                       <td>true | false</td>
+                      <th>false</th>
                     </tr>
                   </tbody>
                 </table>                
@@ -286,16 +302,19 @@
                     <tr>
                       <th>Attribute</th>
                       <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th>filterable</th>
                       <td>true | false</td>
+                      <th>false</th>
                     </tr>
                     <tr>
                       <th>filterType</th>
                       <td>text | date | date-time | number</td>
+                      <th>text</th>
                     </tr>
                   </tbody>
                 </table>                
@@ -328,8 +347,10 @@
                 <li><b>captionTitle (optional):</b> Caption'a title vermek için bu attribute değer atayabilirsiniz</li>
                 <li><b>[showColumnVisibility] (optional) :</b> Caption bölümü gözüküyorken columnların visibilitysini
                   yöneten bu dropdownu gösterip gizleyebilirsiniz</li>
+                <li><b>columnVisibilityBtnClass :</b> Column Visibility butonu için özel class vermek isterseniz bu attribute kullanabilirsiniz</li>
                 <li><b>[showRefreshData] (optional) :</b> Caption bölümü gözüküyorken datanın refresh olmasını sağlayan bu
-                  butonu gösterip gizleyebilirsiniz</li>
+                  butonu gösterip gizleyebilirsiniz. Bu butona tıkladığınızda tüm parametreleri sıfırlar. Order, filter vs gibi.</li>
+                <li><b>refreshDataBtnClass :</b> Refresh Data butonu için özel class vermek isterseniz bu attribute kullanabilirsiniz</li>
                 <li><b>ng-template #captionTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey caption sağ
                   taraftaki button kısmında gözükür</li>
                 <li><b>[captionTemplate] :</b> Eklediğiniz buttonların gözükmesi için bu elementin referansını attirbute
@@ -346,28 +367,44 @@
                     <tr>
                       <th>Attribute</th>
                       <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th>showCaption</th>
                       <td>true | false</td>
+                      <th>false</th>
                     </tr>
                     <tr>
                       <th>captionTitle</th>
                       <td>text</td>
+                      <th></th>
                     </tr>
                     <tr>
                       <th>showColumnVisibility</th>
                       <td>true | false</td>
+                      <th>true</th>
+                    </tr>
+                    <tr>
+                      <th>columnVisibilityBtnClass</th>
+                      <td>text</td>
+                      <th>my-btn</th>
                     </tr>
                     <tr>
                       <th>showRefreshData</th>
                       <td>true | false</td>
+                      <th>true</th>
+                    </tr>
+                    <tr>
+                      <th>refreshDataBtnClass</th>
+                      <td>text</td>
+                      <th>my-btn</th>
                     </tr>
                     <tr>
                       <th>captionTemplate</th>
                       <td>element ref</td>
+                      <th></th>
                     </tr>
                   </tbody>
                 </table>                
@@ -474,20 +511,24 @@
                     <tr>
                       <th>Attribute</th>
                       <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th>dataBinding</th>
                       <td>true | false</td>
+                      <th>false</th>
                     </tr>
                     <tr>
                       <th>total</th>
                       <td>number</td>
+                      <th>0</th>
                     </tr>
                     <tr>
                       <th>loading</th>
                       <td>true | false</td>
+                      <th>false</th>
                     </tr>
                   </tbody>
                 </table>                
@@ -511,8 +552,17 @@
           <hr>
     
           <ul>
-            <li><b>[height] :</b> Data griding boyutunu px olarak ayarlıyabiliyorsunuz. Default 420px</li>
-            <li><b>[width] (column) :</b> Columnların uzunluklarını ayarlayabiliyorsunuz. Örneğin: 100px, 20% gibi</li>
+            <li><b>height :</b> Data grid boyutunu px olarak ayarlıyabiliyorsunuz. Default 420px</li>
+            <li><b>[autoHeight] :</b> Data grid boyutunu otomatik ayarlasın sabit boyut kullanmasın derseniz buna true verebilirsiniz 
+              <p class="alert alert-warning">Not: Bu ayar true iken height verdiğiniz değer çalışmaz!</p>
+            </li>
+            <li><b>min-width (column) :</b> Table'ın min-width ayarını buraya number değer vererek yapabilirsiniz. Bu ayar sayesinde o uzunluktan daha kısa sayfalarda overflow özelliği aktif olur. Yani uzunluk sabit kalır ama sayfadan taşmamak için scrolbar ile kaydırarak yan kısmı görürsünüz</li>
+            <li><b>[useMinWidth] :</b> Min width ayarının çalışmasını istemiyorsanız bu ayarı false yapabilirsiniz. O zaman boyutunu sayfanın genişliğine göre otomatik ayarlar
+              <p class="alert alert-warning">Not: Bu ayar false iken min-width için verdiğiniz değer çalışmaz!</p></li>
+            <li><b>[autoWidth] :</b> Table'ın width ayarı %100 olmasın diyorsanız bu ayarı false yapıp width attributüne değer vermelisiniz
+                <p class="alert alert-warning">Not: Bu ayar true iken width için verdiğiniz değer çalışmaz!</p></li>
+            <li><b>width (table) :</b> Table'ın uzunluğunu bununla değiştirebilirsiniz. Default %100 dür</li>
+            <li><b>width (column) :</b> Columnların uzunluklarını ayarlayabiliyorsunuz. Örneğin: 100px, 20% gibi</li>
             <li><b>[visible] (column) :</b> Eklediğiniz columnların gizli kalmasını, istediğiniz zaman görünmesini istiyorsanız bu ayar ile yapabilirsiniz</li>
           </ul>
     
@@ -523,20 +573,52 @@
                 <tr>
                   <th>Attribute</th>
                   <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th>height</th>
-                  <td>number</td>
+                  <td>text</td>
+                  <th>420px</th>
                 </tr>
                 <tr>
-                  <th>width</th>
+                  <th>autoHeight</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>min-width</th>
                   <td>text</td>
+                  <th>1050px</th>
+                </tr>
+                <tr>
+                  <th>useMinWidth</th>
+                  <td>true | false</td>
+                  <th>true</th>
+                </tr>
+                <tr>
+                  <th>autoWidth</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>width (table)</th>
+                  <td>text</td>
+                  <th>100%</th>
+                </tr>
+                <tr>
+                  <th>width (column)</th>
+                  <td>text</td>
+                  <th>100%</th>
                 </tr>
                 <tr>
                   <th>visible</th>
                   <td>true | false</td>
+                  <th>true</th>
+                </tr>
+                <tr>
+                  <th></th>
                 </tr>
               </tbody>
             </table>                

@@ -21,7 +21,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() loading: boolean = false;
   @Input() sortable: boolean = false;
   @Input() themeClass: string = "light";
-  @Input() height: number = 420;
+  @Input() height: string = "420px";
   @Input() filterable: boolean = false;
   @Input() captionTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
@@ -36,6 +36,10 @@ export class FlexiGridComponent implements OnChanges {
   @Input() useMinWidth: boolean = true;
   @Input() autoWidth: boolean = false;
   @Input() width: string = "100%";
+  @Input() indexWidth: string = "70px";
+  @Input() columnVisibilityBtnClass: string = "my-btn";
+  @Input() refreshDataBtnClass: string = "my-btn";
+  @Input() exportExcelBtnClass: string = "my-btn";
 
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
@@ -334,6 +338,10 @@ export class FlexiGridComponent implements OnChanges {
 
   refreshDataMethod(){
     this.state = new StateModel();
+    this.state.pageSize = this.pageSize;
+    this.columns?.forEach(val => {
+      val.value = "";
+    });
     this.dataStateChange.emit(this.state);
   }
 

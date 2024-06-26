@@ -55,7 +55,7 @@ export const fullExampleHTMLCode: string = `
   [showIndex]="true"
   [loading]="loading()"
   themeClass="light"
-  [height]="420"
+  height="420px"
   [filterable]="true"
   captionTitle="Example User Table"
   [captionTemplate]="captionTemplate"
@@ -110,7 +110,8 @@ export const firstUseHTMLCode: string = `
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
-</flexi-grid>`;
+</flexi-grid>
+`;
 
 export const dataTSCode:string = `
 import { UserModel } from "../models/user.model";
@@ -356,7 +357,8 @@ export const UsersData: UserModel[] = [
         "salary": 63123.02,
         "avatarUrl": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/666.jpg"
     }
-];`;
+];
+`;
 
 export const indexTSCode: string = `
 import { Component, signal } from '@angular/core';
@@ -375,22 +377,19 @@ import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 export class IndexComponent {
   users = signal<UserModel[]>(UsersData);
   showIndex = signal<boolean>(true);
-}`;
+  indexWidth = signal<string>("70px");
+}
+`;
 
 export const indexHTMLCode: string = `
-<div style="margin-left: 30px;">
-    <label class="form-check">
-        <input class="form-check-input" type="checkbox" [(ngModel)]="showIndex">
-        <span class="form-check-label">Show or hide Index</span>
-      </label>
-</div>
-<flexi-grid [data]="users()" [showIndex]="showIndex()">
+<flexi-grid [data]="users()" [showIndex]="showIndex()" [indexWidth]="indexWidth()">
     <flexi-grid-column field="id" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
-</flexi-grid>`;
+</flexi-grid>
+`;
 
 export const paginationTSCode: string = `
 import { Component, signal } from '@angular/core';
@@ -412,29 +411,10 @@ export class PaginationComponent {
   pageSize = signal<number>(15);
   pageSizeList = signal<number[]>([3,5,10,15,20,50]);
   numbers = signal<number[]>([1,2,3,4,5,10,15,20,25,30,35,40,45,50,100,150,200]);  
-}`;
+}
+`;
 
 export const paginationHTMLCode: string = `
-<div style="margin-left: 30px;">
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="pageable">
-            <span class="form-check-label">Use or not Pagination</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label>Page Size</label>
-        <input class="form-control" style="width: 70px;" type="text" [(ngModel)]="pageSize">
-    </div>
-    <div class="form-group mt-1">
-        <div class="form-label">Page Size List</div>
-        <select type="text" class="form-select" [(ngModel)]="pageSizeList" multiple>
-            @for(number of numbers(); track number){
-            <option [value]="number">{{number}}</option>
-            }
-        </select>
-    </div>
-</div>
 <flexi-grid 
     [data]="users()" 
     [pageable]="pageable()" 
@@ -445,7 +425,8 @@ export const paginationHTMLCode: string = `
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
-</flexi-grid>`;
+</flexi-grid>
+`;
 
 export const sortTSCode: string = `
 import { Component, signal } from '@angular/core';
@@ -471,47 +452,10 @@ export class SortComponent {
   lastNameSortable = signal<boolean>(true);
   dateOfBirthSortable = signal<boolean>(true);
   salarySortable = signal<boolean>(true);
-}`;
+}
+`;
 
 export const sortHTMLCode: string = `
-<div style="margin-left: 30px;">
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="sortable">
-            <span class="form-check-label">Use or not sort for all table</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!sortable()" type="checkbox" [(ngModel)]="idSortable">
-            <span class="form-check-label">Use or not sort for for Id</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!sortable()" type="checkbox" [(ngModel)]="firstNameSortable">
-            <span class="form-check-label">Use or not sort for First Name</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!sortable()" type="checkbox" [(ngModel)]="lastNameSortable">
-            <span class="form-check-label">Use or not sort for Last Name</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!sortable()" type="checkbox" [(ngModel)]="dateOfBirthSortable">
-            <span class="form-check-label">Use or not sort for Date of birth</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!sortable()" type="checkbox" [(ngModel)]="salarySortable">
-            <span class="form-check-label">Use or not sort for Salary</span>
-        </label>
-    </div>
-</div>
 <flexi-grid 
 [data]="users()"
 [sortable]="sortable()"
@@ -551,113 +495,10 @@ export class FilterComponent {
   dateOfBirthFilterType = signal<FilterType>("date");
   salaryFilterable = signal<boolean>(true);
   salaryFilterType = signal<FilterType>("number");
-}`;
+}
+`;
 
 export const filterHTMLCode: string = `
-<div style="margin-left: 30px;">
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="filterable">
-            <span class="form-check-label">Use or not Filter for all table</span>
-        </label>
-    </div>
-    <div class="form-group row mt-1">
-        <div class="col-3">
-            <label class="form-check">
-                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="idFilterable">
-                <span class="form-check-label">Use or not Filter for Id</span>
-            </label>
-        </div>
-        @if(idFilterable()){
-            <div class="col-3">
-                <label>Change Id Filter Type</label>
-                <select class="form-control" [disabled]="true" [(ngModel)]="idFilterType" style="width: 150px;">
-                    <option>text</option>
-                    <option>number</option>
-                    <option>date</option>
-                    <option>date-time</option>
-                </select>
-            </div>   
-        }
-    </div>
-    <div class="form-group row mt-1">
-        <div class="col-3">
-            <label class="form-check">
-                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="firstNameFilterable">
-                <span class="form-check-label">Use or not Filter for First Name</span>
-            </label>
-        </div>
-        @if(firstNameFilterable()){
-            <div class="col-3">
-                <label>Change First Name Filter Type</label>
-                <select class="form-control" [disabled]="true" [(ngModel)]="firstNameFilterType" style="width: 150px;">
-                    <option>text</option>
-                    <option>number</option>
-                    <option>date</option>
-                    <option>date-time</option>
-                </select>
-            </div>     
-        }
-           
-    </div>
-    <div class="form-group row mt-1">
-        <div class="col-3">
-            <label class="form-check">
-                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="lastNameFilterable">
-                <span class="form-check-label">Use or not Filter for Last Name</span>
-            </label>
-        </div>
-        @if(lastNameFilterable()){
-            <div class="col-3">
-                <label>Change Last Name Filter Type</label>
-                <select class="form-control" [disabled]="true" [(ngModel)]="lastNameFilterType" style="width: 150px;">
-                    <option>text</option>
-                    <option>number</option>
-                    <option>date</option>
-                    <option>date-time</option>
-                </select>
-            </div>  
-        }   
-    </div>
-    <div class="form-group row mt-1">
-        <div class="col-3">
-            <label class="form-check">
-                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="dateOfBirthFilterable">
-                <span class="form-check-label">Use or not Filter for Date of birth</span>
-            </label>
-        </div>
-        @if(dateOfBirthFilterable()){
-            <div class="col-3">
-                <label>Change Date of Birth Filter Type</label>
-                <select class="form-control" [disabled]="true" [(ngModel)]="dateOfBirthFilterType" style="width: 150px;">
-                    <option>text</option>
-                    <option>number</option>
-                    <option>date</option>
-                    <option>date-time</option>
-                </select>
-            </div>
-        }                
-    </div>
-    <div class="form-group row mt-1">
-        <div class="col-3">
-            <label class="form-check">
-                <input class="form-check-input" [disabled]="!filterable()" type="checkbox" [(ngModel)]="salaryFilterable">
-                <span class="form-check-label">Use or not Filter for Salary</span>
-            </label>
-        </div>
-        @if(salaryFilterable()){
-            <div class="col-3">
-                <label>Change Salary Filter Type</label>
-                <select class="form-control" [disabled]="true" [(ngModel)]="salaryFilterType" style="width: 150px;">
-                    <option>text</option>
-                    <option>number</option>
-                    <option>date</option>
-                    <option>date-time</option>
-                </select>
-            </div>  
-        }
-    </div>
-</div>
 <flexi-grid 
 [data]="users()"
 [filterable]="filterable()"
@@ -667,7 +508,8 @@ export const filterHTMLCode: string = `
     <flexi-grid-column field="lastName" [filterable]="lastNameFilterable()" [filterType]="lastNameFilterType()" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" [filterable]="dateOfBirthFilterable()" [filterType]="dateOfBirthFilterType()" filterType="date" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" title="Salary"></flexi-grid-column>
-</flexi-grid>`;
+</flexi-grid>
+`;
 
 export const captionTSCode: string = `
 import { Component, signal } from '@angular/core';
@@ -688,47 +530,22 @@ export class CaptionComponent {
   showCaption = signal<boolean>(true);
   captionTitle = signal<string>("User list");
   showColumnVisibility = signal<boolean>(true);
+  columnVisibilityBtnClass = signal<string>("btn");
   showRefreshData = signal<boolean>(true);
-
-  refreshData(){
-    //Do something...
-  }
-}`;
+  refreshDataBtnClass = signal<string>("btn");
+}
+`;
 
 export const captionHTMLCode: string = `
-<div style="margin-left: 30px;">
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="showCaption">
-            <span class="form-check-label">Show or hide Caption</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label>Caption Title</label>
-        <input class="form-control" [(ngModel)]="captionTitle" style="width: 150px;">
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!showCaption()" type="checkbox" [(ngModel)]="showColumnVisibility">
-            <span class="form-check-label">Show or hide Column Visibility</span>
-        </label>
-    </div>
-    <div class="form-group mt-1">
-        <label class="form-check">
-            <input class="form-check-input" [disabled]="!showRefreshData()" type="checkbox" [(ngModel)]="showRefreshData">
-            <span class="form-check-label">Show or hide Refresh Data</span>
-        </label>
-    </div>
-</div>
-
 <flexi-grid 
     [data]="users()" 
     [showCaption]="showCaption()"
     [captionTitle]="captionTitle()"
     [showColumnVisibility]="showColumnVisibility()" 
+    [columnVisibilityBtnClass]="columnVisibilityBtnClass()"
     [showRefreshData]="showRefreshData()"
+    [refreshDataBtnClass]="refreshDataBtnClass()"
     [captionTemplate]="captionTemplate"
-    (refreshData)="refreshData()"
     >
 
     <ng-template #captionTemplate>
@@ -743,7 +560,8 @@ export const captionHTMLCode: string = `
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
-</flexi-grid>`;
+</flexi-grid>
+`;
 
 export const footerTSCode: string = `
 import { Component, signal } from '@angular/core';
@@ -761,7 +579,8 @@ import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 })
 export class FooterComponent {
   users = signal<UserModel[]>(UsersData);
-}`;
+}
+`;
 
 export const footerHTMLCode: string = `
 <flexi-grid 
@@ -780,7 +599,8 @@ export const footerHTMLCode: string = `
             <th>{{users().length}}</th>
         </tr>
     </ng-template>
-</flexi-grid>`;
+</flexi-grid>
+`;
 
 export const dataBindingTSCode: string = `
 import { Component, signal } from '@angular/core';
@@ -885,7 +705,7 @@ import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 })
 export class OptionsComponent {
   users = signal<UserModel[]>(UsersData);
-  height = signal<number>(420);
+  height = signal<string>("420px");
   idWidth = signal<string>("100%");
   firstNameWidth = signal<string>("100%");
   lastNameWidth = signal<string>("100%");
@@ -896,70 +716,24 @@ export class OptionsComponent {
   visibleLastNameColumn = signal<boolean>(true);
   visibleDateOfBirthColumn = signal<boolean>(true);
   visibleSalaryColumn = signal<boolean>(true);
-}`;
+  autoHeight = signal<boolean>(false);
+  useMinWidth = signal<boolean>(true);
+  minWidth = signal<string>("1050px");
+  autoWidth = signal<boolean>(true);
+  width = signal<string>("100%");
+}
+`;
 
 export const optionsHTMLCode: string = `
-<div style="margin-left: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
-    <div class="form-group">
-        <label>Table Height</label>
-        <input type="text" [(ngModel)]="height" class="form-control" style="width: 150px;">
-    </div>
-    <div class="form-group">
-        <label>Id Column Width</label>
-        <input type="text" [(ngModel)]="idWidth" class="form-control" style="width: 150px;">
-    </div>
-    <div class="form-group">
-        <label>First Name Column Width</label>
-        <input type="text" [(ngModel)]="firstNameWidth" class="form-control" style="width: 150px;">
-    </div>
-    <div class="form-group">
-        <label>Last Name Column Width</label>
-        <input type="text" [(ngModel)]="lastNameWidth" class="form-control" style="width: 150px;">
-    </div>
-    <div class="form-group">
-        <label>Date of Birth Column Width</label>
-        <input type="text" [(ngModel)]="dateOfBirthWidth" class="form-control" style="width: 150px;">
-    </div>
-    <div class="form-group">
-        <label>Salary Column Width</label>
-        <input type="text" [(ngModel)]="salaryWidth" class="form-control" style="width: 150px;">
-    </div>
-</div>
-<div class="mt-2" style="margin-left: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="visibleIdColumn">
-            <span class="form-check-label">Visible Id</span>
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="visibleFirstNameColumn">
-            <span class="form-check-label">Visible Fist Name</span>
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="visibleLastNameColumn">
-            <span class="form-check-label">Visible Last Name</span>
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="visibleDateOfBirthColumn">
-            <span class="form-check-label">Visible Date of Birth</span>
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="visibleSalaryColumn">
-            <span class="form-check-label">Visible Salary</span>
-        </label>
-    </div>
-</div>
 <flexi-grid 
 [data]="users()" 
-[height]="height()">
+[height]="height()"
+[autoHeight]="autoHeight()"
+[useMinWidth]="useMinWidth()"
+[minWidth]="minWidth()"
+[width]="width()"
+[autoWidth]="autoWidth()"        
+>
     <flexi-grid-column field="id" [visible]="visibleIdColumn()" [width]="idWidth()" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" [visible]="visibleFirstNameColumn()" [width]="firstNameWidth()" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" [visible]="visibleLastNameColumn()" [width]="lastNameWidth()" title="Last Name"></flexi-grid-column>

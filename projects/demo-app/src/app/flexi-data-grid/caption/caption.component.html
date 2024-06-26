@@ -36,10 +36,18 @@
                 </label>
             </div>
             <div class="form-group mt-1">
+              <label>Column Visibility Button Class</label>
+              <input class="form-control" [(ngModel)]="columnVisibilityBtnClass" style="width: 150px;">
+            </div>
+            <div class="form-group mt-1">
                 <label class="form-check">
                     <input class="form-check-input" [disabled]="!showRefreshData()" type="checkbox" [(ngModel)]="showRefreshData">
                     <span class="form-check-label">Show or hide Refresh Data</span>
                 </label>
+            </div>
+            <div class="form-group mt-1">
+              <label>Refresh Data Button Class</label>
+              <input class="form-control" [(ngModel)]="refreshDataBtnClass" style="width: 150px;">
             </div>
         </div>
         
@@ -48,13 +56,14 @@
             [showCaption]="showCaption()"
             [captionTitle]="captionTitle()"
             [showColumnVisibility]="showColumnVisibility()" 
+            [columnVisibilityBtnClass]="columnVisibilityBtnClass()"
             [showRefreshData]="showRefreshData()"
+            [refreshDataBtnClass]="refreshDataBtnClass()"
             [captionTemplate]="captionTemplate"
-            (refreshData)="refreshData()"
             >
         
             <ng-template #captionTemplate>
-                <button class="btn btn-sm btn-primary">
+                <button class="btn">
                     <i class="fa-solid fa-plus me-1"></i>
                     Kullanıcı ekle
                 </button>

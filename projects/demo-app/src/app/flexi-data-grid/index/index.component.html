@@ -24,7 +24,11 @@
                     <span class="form-check-label">Show or hide Index</span>
                 </label>
             </div>
-            <flexi-grid [data]="users()" [showIndex]="showIndex()">
+            <div class="form-group">
+              <label>Index width</label>
+              <input [disabled]="!showIndex()" type="text" [(ngModel)]="indexWidth" class="form-control" style="width: 150px;">
+          </div>   
+            <flexi-grid [data]="users()" [showIndex]="showIndex()" [indexWidth]="indexWidth()">
                 <flexi-grid-column field="id" title="Id"></flexi-grid-column>
                 <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
                 <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
