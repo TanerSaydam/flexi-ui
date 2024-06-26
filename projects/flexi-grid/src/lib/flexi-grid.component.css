@@ -107,10 +107,6 @@ a {
     caption-side: top;    
 }
 
-.table-container table{
-    min-width: 1200px;
-}
-
 .table-container caption {
     caption-side: top;
     padding: 10px;
@@ -217,9 +213,9 @@ a {
     margin-right: 10px;
 }
 
-.page-item {
-    padding: 5px 9px;
-}
+/* .page-item {
+    padding: 1px 3px;
+} */
 
 .active {
     z-index: 3 !important;
@@ -236,7 +232,7 @@ a {
 .page-size-select {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 .page-size-select select {

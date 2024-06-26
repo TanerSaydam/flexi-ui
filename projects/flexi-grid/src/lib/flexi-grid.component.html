@@ -1,6 +1,6 @@
  <title>Angular Flexi Grid</title>
- <div [attr.data-bs-theme]="themeClass" class="table-container overflow-x">
-  <table>
+ <div [attr.data-bs-theme]="themeClass" class="table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width}">
+  <table [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
     @if(showCaption){
       <caption class="bg-color-gray" style="padding: 10px;">
         <div style="position: relative; display: flex; justify-content: space-between;">
@@ -110,7 +110,7 @@
         </tr>
       }
     </thead>
-    <tbody class="relative" [ngStyle]="{'height': height + 'px'}">
+    <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height + 'px'}">
       @if(loading){        
         <div class="spinner-container">
           <div class="spinner-1"></div>

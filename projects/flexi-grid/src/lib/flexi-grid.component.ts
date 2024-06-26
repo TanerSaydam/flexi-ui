@@ -31,6 +31,11 @@ export class FlexiGridComponent implements OnChanges {
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
   @Input() showExportExcel: boolean = false;
+  @Input() autoHeight: boolean = false;
+  @Input() minWidth: string = "1050px";
+  @Input() useMinWidth: boolean = true;
+  @Input() autoWidth: boolean = false;
+  @Input() width: string = "100%";
 
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
@@ -56,8 +61,7 @@ export class FlexiGridComponent implements OnChanges {
     { operator: "le", value: 'Is less than or equal to' }
   ]);
 
-  @Output() dataStateChange = new EventEmitter<any>();
-  @Output() refreshData = new EventEmitter();
+  @Output() dataStateChange = new EventEmitter<any>();  
 
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
@@ -329,7 +333,8 @@ export class FlexiGridComponent implements OnChanges {
   }
 
   refreshDataMethod(){
-    this.refreshData.emit();
+    this.state = new StateModel();
+    this.dataStateChange.emit(this.state);
   }
 
   closeAllDropdowns(){
