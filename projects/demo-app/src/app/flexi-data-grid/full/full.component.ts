@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
-//import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
+//import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
 
 @Component({
   selector: 'app-full',

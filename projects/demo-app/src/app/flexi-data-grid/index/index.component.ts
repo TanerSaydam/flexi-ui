@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
+//import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { FormsModule } from '@angular/forms';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 
 @Component({
   selector: 'app-index',

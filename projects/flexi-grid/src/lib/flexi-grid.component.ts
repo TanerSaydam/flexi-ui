@@ -343,6 +343,10 @@ export class FlexiGridComponent implements OnChanges {
     if (!target.closest('.dropdown-menu') && !target.closest('.svg')) {
       this.closeAllDropdowns();
     }
+
+    if(!target.closest('.dropdown-menu') && !target.closest('button')){
+      this.columnVisibilityDropdownVisible.set(false);
+    }
   }
 
 }

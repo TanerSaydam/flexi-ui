@@ -47,7 +47,10 @@ a {
 .pagination {
     display: flex;
     list-style: none;
+    overflow-x: auto;
 }
+
+
 
 .svg {
     width: 27px;
@@ -67,17 +70,19 @@ a {
 .table-container {
     border: 1px solid #dee2e6;
     border-radius: 12px;
-    overflow: auto;
-    min-width: 1220px;
+    overflow-x: auto;    
     margin: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column;
-    height: 100%;
+    flex-direction: column;    
 }
 
 .table-container table {
-    caption-side: top;
+    caption-side: top;    
+}
+
+.table-container table{
+    min-width: 1200px;
 }
 
 .table-container caption {
@@ -96,7 +101,7 @@ a {
 .table-container table {
     width: 99.99%;
     border-collapse: collapse;
-    overflow: auto;
+    overflow-x: auto;
 }
 
 .table-container th,
@@ -150,7 +155,7 @@ a {
 .table-container tbody {
     flex: 1;
     /* Flex-grow özelliğini kullanarak tbody'nin alanı kaplamasını sağlayın */
-    overflow: auto;
+    overflow-x: auto;
     /* Tbody kısmına overflow özelliği ekleyin */
     display: block;
     /* Display özelliğini block olarak ayarlayın */
@@ -287,4 +292,8 @@ a {
 
 th, td{
     user-select: none;
+}
+
+.overflow-x {
+    overflow-x: auto;
 }
