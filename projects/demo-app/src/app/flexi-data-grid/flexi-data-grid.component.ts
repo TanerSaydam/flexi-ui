@@ -19,6 +19,7 @@ import { SharedService } from '../shared.service';
 import { LoadingComponent } from '../loading/loading.component';
 import { ExportExcelComponent } from './export-excel/export-excel.component';
 import { CustomColumnComponent } from './custom-column/custom-column.component';
+import { ResizableComponent } from './resizable/resizable.component';
 
 @Component({
   selector: 'app-flexi-data-grid',
@@ -40,7 +41,8 @@ import { CustomColumnComponent } from './custom-column/custom-column.component';
     OptionsComponent,
     LoadingComponent,
     ExportExcelComponent,
-    CustomColumnComponent
+    CustomColumnComponent,
+    ResizableComponent
   ],
   templateUrl: './flexi-data-grid.component.html',
   styleUrl: './flexi-data-grid.component.css'
@@ -81,14 +83,17 @@ export class FlexiDataGridComponent implements OnDestroy {
   filterCodeExample= signal<string>(`<flexi-grid
     .
     .
-    [showCaption]="true"
+    [filterable]="true"
     captionTitle="User List"
     >
+
+    <!-- İsterseniz column bazlı filter özelliğini kapatabilirsiniz -->
+    <flexi-grid-column field="id" [filterable]="false" title="Id"></flexi-grid-column>
   `);
   captionCodeExample= signal<string>(`<flexi-grid
     .
     .
-    [filterable]="true"
+    [showCaption]="true"
     [showColumnVisibility]="true" <!-- Columnlarınızı gizleyip açabilmeniz için kullanabileceğiniz button -->
     [showRefreshData]="true" <!-- Verilerinizi yenilemek için kullanabileceğiniz button -->
     [captionTemplate]="captionTemplate"  <!-- Yukarıdaki butonların yanına yeni elementler ekleyebilirsiniz -->
@@ -164,6 +169,15 @@ export class FlexiDataGridComponent implements OnDestroy {
         </tr>
     </ng-template>
   </flexi-grid>
+  `);
+  resizableCodeExample= signal<string>(`<flexi-grid
+    .
+    .
+    [resizable]="true"
+    >
+
+    <!-- İsterseniz column bazlı resizable özelliğini kapatabilirsiniz -->
+    <flexi-grid-column field="id" [resizable]="false" title="Id"></flexi-grid-column>    
   `);
     
   constructor(

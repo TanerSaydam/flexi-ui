@@ -300,7 +300,7 @@
   
     <!-- Filter -->
     <div id="filter" style="padding-top: 5px;">
-      <app-card id="filter" cardTitle="Filter">
+      <app-card cardTitle="Filter">
         <div class="card-body">
           <ul>
             <li>
@@ -640,7 +640,61 @@
           </ul>
         </div>
       </app-card>
-    </div>    
+    </div>   
+    
+    <!-- Resizable -->
+    <div id="resizable" style="padding-top: 5px;">
+      <app-card cardTitle="Resizable">
+        <div class="card-body">
+          <ul>
+            <li>
+              <p>Columnları tekrar boyutlandırmak için [resizable] attribute'üne true değeri verebilirsiniz. Her column başlığından sonraki çizgiyi mouse ile resize yapabilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="resizableCodeExample()"></my-code>
+            </li>
+            <li>
+              @defer {
+                <app-resizable [dataCode]="dataCode()"></app-resizable>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[resizable] :</b> Resize yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+                  <b>false</b> vermeliyiz</li>
+                <li><b>[resizable] (column optional) :</b> Column bazlı resize yapısını kapatıp açabiliriz</li>
+              </ul>
+    
+              <hr>
+              <div class="overflow-x">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Attribute</th>
+                      <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>resizable</th>
+                      <td>true | false</td>
+                      <th>false</th>
+                    </tr>
+                    <tr>
+                      <th>resizable (column)</th>
+                      <td>true | false</td>
+                      <th>true</th>
+                    </tr>
+                  </tbody>
+                </table>                
+              </div>
+            </li>
+          </ul>
+        </div>
+      </app-card>
+    </div>
 
     <!-- Ek Özellikler -->
     <div id="options" style="padding-top: 5px;">

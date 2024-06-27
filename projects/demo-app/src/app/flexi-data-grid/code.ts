@@ -892,3 +892,31 @@ export const customColumnHTMLCode: string = `
     </ng-template>
 </flexi-grid>
 `;
+
+export const resizableTSCode: string = `
+import { Component, signal } from '@angular/core';
+import { UserModel } from '../../models/user.model';
+import { UsersData } from '../data';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+
+@Component({
+  selector: 'app-first-use',
+  standalone: true,
+  imports: [FlexiGridComponent, FlexiGridColumnComponent],
+  templateUrl: './first-use.component.html',
+  styleUrl: './first-use.component.css'
+})
+export class FirstUseComponent {
+  users = signal<UserModel[]>(UsersData);
+}
+`;
+
+export const resizableHTMLCode: string = `
+<flexi-grid [data]="users()" [resizable]="true">
+    <flexi-grid-column [resizable]="true" field="id" title="Id"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+</flexi-grid>
+`;

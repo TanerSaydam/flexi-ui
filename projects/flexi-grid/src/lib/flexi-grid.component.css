@@ -342,3 +342,13 @@ th{
 .overflow-x {
     overflow-x: auto;
 }
+
+.resize-handle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    cursor: col-resize;
+    z-index: 1;
+  }

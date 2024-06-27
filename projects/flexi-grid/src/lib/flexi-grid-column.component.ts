@@ -16,6 +16,7 @@ export class FlexiGridColumnComponent {
   @Input() columnTemplate: TemplateRef<any> | any;
   @Input() format: DateFormatType | CurrencyFormatType | null = null;
   @Input() width: string = "100%";
+  @Input() resizable: boolean = true;
   value: string = "";
   filterOperator: string = "contains";  
 }

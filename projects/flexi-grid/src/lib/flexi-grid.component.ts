@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChildren, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
+import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 import { FormsModule } from '@angular/forms';
@@ -43,6 +43,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() exportExcelFileName: string = "excel-export";
   @Input() exportExcelButtonClick: (() => void) | undefined;
   @Input() footerPerPageText: string = "items per page";
+  @Input() resizable: boolean = false;
 
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
@@ -71,6 +72,11 @@ export class FlexiGridComponent implements OnChanges {
   @Output() dataStateChange = new EventEmitter<any>();
 
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
+
+  @ViewChild('table') table: ElementRef | undefined;
+  resizingColumn: any;
+  startX: number | undefined;
+  startWidth: number | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {   
     if (this.pageSize !== this.state.pageSize) {     
@@ -401,5 +407,28 @@ export class FlexiGridComponent implements OnChanges {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  }
+
+  onMouseDown(event: MouseEvent | any, column: any) {
+    this.resizingColumn = column;
+    this.startX = event.pageX;
+    this.startWidth = event.target!.parentElement.offsetWidth;
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onMouseUp);
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove = (event: MouseEvent) => {
+    if (this.resizingColumn) {
+      const offset = event.pageX - this.startX!;
+      this.resizingColumn.width = this.startWidth! + offset + 'px';
+    }
+  }
+
+  @HostListener('document:mouseup')
+  onMouseUp = () => {
+    this.resizingColumn = undefined;
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
   }
 }
