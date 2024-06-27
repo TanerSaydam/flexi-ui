@@ -40,6 +40,9 @@ export class FlexiGridComponent implements OnChanges {
   @Input() columnVisibilityBtnClass: string = "my-btn";
   @Input() refreshDataBtnClass: string = "my-btn";
   @Input() exportExcelBtnClass: string = "my-btn";
+  @Input() exportExcelFileName: string = "excel-export";
+  @Input() exportExcelButtonClick: (() => void) | undefined;
+  @Input() footerPerPageText: string = "items per page";
 
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
@@ -65,7 +68,7 @@ export class FlexiGridComponent implements OnChanges {
     { operator: "le", value: 'Is less than or equal to' }
   ]);
 
-  @Output() dataStateChange = new EventEmitter<any>();  
+  @Output() dataStateChange = new EventEmitter<any>();
 
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
@@ -361,9 +364,42 @@ export class FlexiGridComponent implements OnChanges {
     if(!target.closest('.dropdown-menu') && !target.closest('button')){
       this.columnVisibilityDropdownVisible.set(false);
     }
+  }  
+
+  onExportExcelButtonClick() {
+    if (this.exportExcelButtonClick) {
+      this.exportExcelButtonClick();
+    } else {
+      this.exportExcel();
+    }
   }
 
-  exportExcel(){
-    
+  exportExcel() {
+    const visibleColumns: any[] = this.columns?.filter(column => column.visible).map(column => {
+      return { field: column.field, title: column.title || column.field };
+    }) || [];
+  
+    let csvData = visibleColumns.map(col => col.title).join(',') + '\n';
+
+    let exportData = this.data;
+
+    exportData.forEach(row => {
+      let rowData = visibleColumns.map(col => {
+        // Hücre içeriğindeki virgüller ve çift tırnakları kaçış karakteri ile değiştir
+        const cellData = row[col.field] ? row[col.field].toString().replace(/"/g, '""') : '';
+        return `"${cellData}"`;
+      }).join(',');
+      csvData += rowData + '\n';
+    });
+  
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', this.exportExcelFileName + '.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 }

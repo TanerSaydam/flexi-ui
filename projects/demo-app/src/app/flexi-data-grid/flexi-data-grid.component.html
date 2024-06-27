@@ -43,14 +43,18 @@
     <div id="first-use" style="padding-top: 5px;">
       <app-card id="first-use" cardTitle="İlk Kullanım">
         <div class="card-body">
-          <ol>
+          <ul>
+            <li><p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p></li>
             <li>
-              <p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
-              <pre><code class="language-typescript">imports: [FlexiGridComponent, FlexiGridColumnComponent],</code></pre>
+              <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
+              istediğiniz verileri yerleştirmelisiniz</p>
+              <h3>Örnek kod:</h3>
+              <b>component.ts</b>
+              <my-code className="" language="typescript" [code]="firstUseTSCodeExample()"></my-code>
+              <b>component.html</b>
+              <my-code className="" language="html" [code]="firstUseHTMLCodeExample()"></my-code>
             </li>
-            <li>
-              HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
-              istediğiniz verileri yerleştirmelisiniz
+            <li> 
               @defer {
                 <app-first-use [dataCode]="dataCode()"></app-first-use>
               }@placeholder {
@@ -98,18 +102,20 @@
     
               <p class="alert alert-success">İlk örneğimizle beraber listemizi grid içerisinde göstermeyi başardık.</p>
             </li>
-          </ol>
+          </ul>
         </div>
       </app-card>
     </div>
  
-    <!-- Index Sıras -->
+    <!-- Index -->
     <div id="index" style="padding-top: 5px;">
       <app-card cardTitle="Index">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="indexCodeExample()"></my-code>
             </li>
             <li>
               @defer {
@@ -151,7 +157,31 @@
                 </table>
               </div>              
             </li>
-          </ol>
+          </ul>
+        </div>
+      </app-card>
+    </div>
+
+     <!-- Custom Column -->
+     <div id="custom-column" style="padding-top: 5px;">
+      <app-card cardTitle="Custom Column">
+        <div class="card-body">
+          <ul>
+            <li>
+              <p>İsterseniz gride yeni column ekleyebilirsiniz. Bu column mevcut datanızdaki verileri de kullanabilir, isterseniz de tamamen farklı bir şey içinde kullanabilirsiniz. Örneğin Edit, Delete butonu eklemek gibi</p>
+              <h3>Örnek kod:</h3>
+              <my-code [code]="customColumnCodeExample()" language="html"></my-code>    
+              <hr>
+            </li>
+            <li>
+              @defer {
+                <app-custom-column [dataCode]="dataCode()"></app-custom-column>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
+              <hr>         
+            </li>
+          </ul>
         </div>
       </app-card>
     </div>
@@ -160,9 +190,11 @@
     <div id="pagination" style="padding-top: 5px;">
       <app-card cardTitle="Pagination">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="paginationCodeExample()"></my-code>
             </li>
             <li>
               @defer {
@@ -211,7 +243,7 @@
                 </table>
               </div>
             </li>
-          </ol>
+          </ul>
         </div>
       </app-card>
     </div>
@@ -220,10 +252,12 @@
     <div id="sort" style="padding-top: 5px;">
       <app-card cardTitle="Sort">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Sıralama yapısını aktif etmek için grid elementinde <b>[sortable]</b> attribute'üne true değeri
                 vermelisiniz. İsterseniz column bazlı sıralama işlemini kapatabiliyorsunuz.</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="sortCodeExample()"></my-code>
             </li>
             <li>
               @defer {
@@ -259,7 +293,7 @@
                 </table>                
               </div>
             </li>
-          </ol>
+          </ul>
         </div>
       </app-card>
     </div>
@@ -268,11 +302,13 @@
     <div id="filter" style="padding-top: 5px;">
       <app-card id="filter" cardTitle="Filter">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Filtreleme yapısını aktif etmek için grid elementinde <b>[filterable]</b> attribute'üne true değeri
                 vermelisiniz. İsterseniz column bazlı filtreleme işlemini kapatabiliyorsunuz. Farklı türde veriler için
                 filter özelliğine ayrı type verebiliyorsunuz</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="filterCodeExample()"></my-code>
             </li>
             <li>
               @defer {
@@ -320,19 +356,21 @@
                 </table>                
               </div>
             </li>
-          </ol>
+          </ul>
         </div>
       </app-card>
     </div>     
   
     <!-- Caption -->
     <div id="caption" style="padding-top: 5px;">
-      <app-card id="caption" cardTitle="Caption">
+      <app-card cardTitle="Caption">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Table üst başlığı ekleyebilir, üst başlıkta bulunan Column Visibility ve Refresh Data buttonlarını
                 kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="captionCodeExample()"></my-code>
             </li>
             <li>
               @defer {
@@ -410,7 +448,70 @@
                 </table>                
               </div>
             </li>
-          </ol>
+          </ul>
+        </div>
+      </app-card>
+    </div>
+
+     <!-- ExportExcel -->
+    <div id="export-excel" style="padding-top: 5px;">
+      <app-card cardTitle="Export Excel">
+        <div class="card-body">
+          <ul>
+            <li>
+              <p>Table üst başlığı eklediğinizde kullanabileceğiniz seçeneklerden biri de export excel butonu. Bu buton ile mevcut datanızdaki verileri ya da istediğiniz başka verileri excel çıktısı olarak alabilirsiniz</p>              
+              <h3>Örnek:</h3>
+              <b>component.html</b>
+              <my-code className="" [code]="exportExcelCodeExample1()" language="html"></my-code>
+              <p class="alert alert-warning">Not: Bu seçeneğe normal bir metodu parantezsiz vermeniz gerekiyor. Arkasına .bind(this) yazmalısınız. Ya da TS tarafında arrow functionlu bir metot oluşturup onu vermelisiniz</p>
+              <b>component.ts</b>
+              <my-code className="" [code]="exportExcelCodeExample2()" language="typescript"></my-code>
+            </li>
+            <li>
+              @defer {
+                <app-export-excel></app-export-excel>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[showExportExcel] :</b> Export Excel butonunu görmek için bu attribute true değer vermelisiniz</li>
+                <li><b>exportExcelFileName :</b> Export edeceğiniz excele özel bir isim vermek için bu attribute değer atayabilirsiniz. Boş geçerseniz export-excel değerini kullanır</li>
+                <li><b>exportExcelButtonClick :</b> Normalde export excel butonuna bastığınızda data griddeki mevcut veriyi indirir. Ama siz başka veriyi excele almak isterseniz bu attribute bir metot atayarak orada önce veriyi yakalarsınız, arkasına <b>Flexi Service</b> içerisindeki exportExcel metoduna yeni datanızı yollarak excel export yapabilirsiniz                                  
+                </li>
+              </ul>    
+              <hr>
+              <div class="overflow-x">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Attribute</th>
+                      <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>showExportExcel</th>
+                      <td>true | false</td>
+                      <th>false</th>
+                    </tr>
+                    <tr>
+                      <th>exportExcelFileName</th>
+                      <td>text</td>
+                      <th>excel-export</th>
+                    </tr>
+                    <tr>
+                      <th>exportExcelButtonClick</th>
+                      <td>() => void | null</td>
+                      <th>null</th>
+                    </tr>
+                  </tbody>
+                </table>                
+              </div>
+            </li>
+          </ul>
         </div>
       </app-card>
     </div>
@@ -419,9 +520,11 @@
     <div id="footer" style="padding-top: 5px;">
       <app-card id="footer" cardTitle="Footer">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Table footer alanına isterseniz müdahale edebilir ve oraya istediğiniz yapıyı ekleyebilirsiniz.</p>
+              <h3>Örnek:</h3>
+              <my-code className="" [code]="footerCodeExample()" language="html"></my-code>
             </li>
             <li>
               @defer {
@@ -462,7 +565,7 @@
                 </table>                
               </div>
             </li>
-          </ol>
+          </ul>
         </div>
       </app-card>
     </div>  
@@ -471,7 +574,7 @@
     <div id="data-binding" style="padding-top: 5px;">
       <app-card id="data-binding" cardTitle="Data Binding">
         <div class="card-body">
-          <ol>
+          <ul>
             <li>
               <p>Data Binding özelliği ile table da yapılan her bir işlemin değerini alıp OData ile birlikte
                 kullanabilirsiniz. Ya da istediğiniz gibi işleyebilirsiniz. Data Binding attribute true değeri verdiğinizde
@@ -534,7 +637,7 @@
                 </table>                
               </div>
             </li>
-          </ol>
+          </ul>
         </div>
       </app-card>
     </div>    
@@ -564,6 +667,7 @@
             <li><b>width (table) :</b> Table'ın uzunluğunu bununla değiştirebilirsiniz. Default %100 dür</li>
             <li><b>width (column) :</b> Columnların uzunluklarını ayarlayabiliyorsunuz. Örneğin: 100px, 20% gibi</li>
             <li><b>[visible] (column) :</b> Eklediğiniz columnların gizli kalmasını, istediğiniz zaman görünmesini istiyorsanız bu ayar ile yapabilirsiniz</li>
+            <li><b>footerPerPageText :</b> Pagination da bulunan page size selectinin devamındaki yazıyı isterseniz bu attribute ile değiştirebilirsiniz</li>
           </ul>
     
           <hr>
@@ -616,6 +720,11 @@
                   <th>visible</th>
                   <td>true | false</td>
                   <th>true</th>
+                </tr>
+                <tr>
+                  <th>footerPerPageText</th>
+                  <td>text</td>
+                  <th>items per page</th>
                 </tr>
                 <tr>
                   <th></th>

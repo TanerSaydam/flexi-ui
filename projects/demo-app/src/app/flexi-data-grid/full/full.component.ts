@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
-import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+//import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 
@@ -44,5 +44,11 @@ export class FullComponent {
   dataStateChange(event:any){
     this.state.set(event);
     this.getAll();
-  }  
+  }
+
+  exportExcel(){
+    this.http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
+      this.flexi.exportDataToExcel(res.data, "my-excel");
+    })  
+  }
 }

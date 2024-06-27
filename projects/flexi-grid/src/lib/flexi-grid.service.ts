@@ -74,4 +74,35 @@ export class FlexiGridService {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Her kelimenin ilk harfini büyük yapıyoruz.
             .join(' '); // Kelimeleri tekrar birleştiriyoruz.
     }
+
+    exportDataToExcel(data: any[], fileName: string) {
+        if (data.length === 0) {
+          console.error('No data to export');
+          return;
+        }
+      
+        // Sütun başlıklarını elde et
+        const headers = Object.keys(data[0]);
+      
+        // CSV string oluşturma
+        let csvData = headers.join(',') + '\n';
+        data.forEach(row => {
+          let rowData = headers.map(header => {
+            const cellData = row[header] ? row[header].toString().replace(/"/g, '""') : '';
+            return `"${cellData}"`;
+          }).join(',');
+          csvData += rowData + '\n';
+        });
+      
+        // CSV dosyasını indirme
+        const blob = new Blob([csvData], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('hidden', '');
+        a.setAttribute('href', url);
+        a.setAttribute('download', fileName + '.csv');
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
 }

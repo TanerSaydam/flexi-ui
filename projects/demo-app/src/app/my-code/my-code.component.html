@@ -1,4 +1,4 @@
 <pre style="position: relative;">
-    <button style="position: absolute; z-index: 1; top: 20px; right: 20px;" class="btn" (click)="copy()">Copy</button>
-  <code class="my-code language-{{language}}">{{code}}</code>
+  <button style="position: absolute; z-index: 1; top: 20px; right: 20px;" class="btn" (click)="copy()">Copy</button>
+  <code class="language-{{language}}" [ngClass]="className">{{code}}</code>
 </pre>

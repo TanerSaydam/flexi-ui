@@ -1,8 +1,8 @@
 import { Component, Input, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { FormsModule } from '@angular/forms';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { indexHTMLCode, indexTSCode } from '../code';

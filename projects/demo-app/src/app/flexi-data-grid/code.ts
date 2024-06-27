@@ -41,6 +41,12 @@ export class FullComponent {
     this.state.set(event);
     this.getAll();
   }  
+
+  exportExcel(){
+    this.http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
+      this.flexi.exportDataToExcel(res.data, "my-excel");
+    })  
+  }
 }
 `;
 
@@ -61,7 +67,8 @@ export const fullExampleHTMLCode: string = `
   [captionTemplate]="captionTemplate"
   [footerTemplate]="footerTemplate"
   [showCaption]="true"
-  (refreshData)="getAll()"
+  [showExportExcel]="true"
+  [exportExcelButtonClick]="exportExcel.bind(this)"
   (dataStateChange)="dataStateChange($event)"
   [sortable]="true">
     <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
@@ -408,7 +415,7 @@ import { FormsModule } from '@angular/forms';
 export class PaginationComponent {
   users = signal<UserModel[]>(UsersData);
   pageable = signal<boolean>(true);
-  pageSize = signal<number>(15);
+  pageSize = signal<number>(10);
   pageSizeList = signal<number[]>([3,5,10,15,20,50]);
   numbers = signal<number[]>([1,2,3,4,5,10,15,20,25,30,35,40,45,50,100,150,200]);  
 }
@@ -732,12 +739,156 @@ export const optionsHTMLCode: string = `
 [useMinWidth]="useMinWidth()"
 [minWidth]="minWidth()"
 [width]="width()"
-[autoWidth]="autoWidth()"        
+[autoWidth]="autoWidth()"
+footerPerPageText="items per page"        
 >
     <flexi-grid-column field="id" [visible]="visibleIdColumn()" [width]="idWidth()" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" [visible]="visibleFirstNameColumn()" [width]="firstNameWidth()" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" [visible]="visibleLastNameColumn()" [width]="lastNameWidth()" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" [visible]="visibleDateOfBirthColumn()" [width]="dateOfBirthWidth()" title="Date Of Birth"></flexi-grid-column>
     <flexi-grid-column field="salary" [visible]="visibleSalaryColumn()" [width]="salaryWidth()" title="Salary"></flexi-grid-column>
+</flexi-grid>
+`;
+
+export const exportExcelTSCode: string = `
+import { Component, signal } from '@angular/core';
+import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { exportExcelHTMLCode, exportExcelTSCode } from '../code';
+import { FormsModule } from '@angular/forms';
+import { UserModel } from '../../models/user.model';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-export-excel',
+  standalone: true,
+  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
+  templateUrl: './export-excel.component.html',
+  styleUrl: './export-excel.component.css'
+})
+export class ExportExcelComponent {
+  users = signal<UserModel[]>([]);
+  total = signal<number>(0);
+  state = signal<StateModel>(new StateModel());
+  loading = signal<boolean>(false);  
+  dataBinding = signal<boolean>(true);
+  pageable = signal<boolean>(true);
+  pageSize = signal<number>(10);
+  pageSizeList = signal<number[]>([3,5,10,15,20,50]);
+  numbers = signal<number[]>([1,2,3,4,5,10,15,20,25,30,35,40,45,50,100,150,200]);  
+  showIndex = signal<boolean>(true);
+  sortable = signal<boolean>(true);
+  showCaption = signal<boolean>(true);
+  captionTitle = signal<string>("User list");
+  showColumnVisibility = signal<boolean>(true);
+  showRefreshData = signal<boolean>(true);
+  filterable = signal<boolean>(true);
+  exportExcelTSCode = signal<string>(exportExcelTSCode);
+  exportExcelHTMLCode = signal<string>(exportExcelHTMLCode);
+  
+  constructor(
+    private http: HttpClient,
+    private flexi: FlexiGridService
+  ){
+    this.getAll();
+  }
+
+  getAll(){
+    this.loading.set(true);
+
+    let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
+    let endpoint = 'https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&' + oDataEndpointPart;
+
+    this.http.get(endpoint).subscribe((res:any)=> {
+      this.users.set(res.data);
+      this.total.set(res.total);      
+      this.loading.set(false);
+    });
+  }
+
+  dataStateChange(event:any){
+    this.state.set(event);
+    this.getAll();
+  }
+  
+  exportExcel(){
+    this.http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
+      this.flexi.exportDataToExcel(res.data, "my-excel");
+    })  
+  }
+}`;
+
+export const exportExcelHTMLCode: string = `
+<flexi-grid 
+  [data]="users()"
+  [total]="total()"
+  [dataBinding]="dataBinding()"
+  .
+  .
+  .
+  [showRefreshData]="showRefreshData()"
+  [showExportExcel]="true"
+  exportExcelFileName="my-file"
+  [exportExcelButtonClick]="exportExcel.bind(this)"            
+>
+  <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+  <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+  <flexi-grid-column field="dateOfBirth" filterType="date" title="Date Of Birth"></flexi-grid-column>
+  <flexi-grid-column field="salary" filterType="number" title="Salary"></flexi-grid-column>
+</flexi-grid>
+`;
+
+export const customColumnTSCode: string = `
+import { Component, Input, signal } from '@angular/core';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { UsersData } from '../data';
+import { UserModel } from '../../models/user.model';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-custom-column',
+  standalone: true,
+  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent, CommonModule],
+  templateUrl: './custom-column.component.html',
+  styleUrl: './custom-column.component.css'
+})
+export class CustomColumnComponent {
+  users = signal<UserModel[]>(UsersData);
+
+  edit(id: any){
+
+  }
+
+  remove(id: any){
+    
+  }
+}
+`;
+
+export const customColumnHTMLCode: string = `
+<flexi-grid [data]="users()">
+    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary" [columnTemplate]="customSalaryColumnTemplate"></flexi-grid-column>
+    <flexi-grid-column title="Actions" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>
+
+    <ng-template #customSalaryColumnTemplate let-salary="value" let-item="item">
+        <!--{{ salary }}Bu direkt işaretlediğimiz column da field değerine karşılık değeri alır-->
+        {{ item.salary | currency: '': '' }}
+        <!--Bu o döngüdeki tüm datayı alır. İçerisinden istediğiniz field a erişebilirsiniz-->
+    </ng-template>
+
+    <ng-template #customButtonColumnTemplate let-item="item">
+        <button (click)="edit(item.id)" class="btn btn-outline-info">
+            <i class="fa-solid fa-edit"></i>
+        </button>
+        <button (click)="remove(item.id)" class="btn btn-outline-danger ms-1">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </ng-template>
 </flexi-grid>
 `;

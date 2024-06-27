@@ -17,7 +17,7 @@ import { paginationHTMLCode, paginationTSCode } from '../code';
 export class PaginationComponent {
   users = signal<UserModel[]>(UsersData);
   pageable = signal<boolean>(true);
-  pageSize = signal<number>(15);
+  pageSize = signal<number>(10);
   pageSizeList = signal<number[]>([3,5,10,15,20,50]);
   numbers = signal<number[]>([1,2,3,4,5,10,15,20,25,30,35,40,45,50,100,150,200]);  
   paginationTSCode = signal<string>(paginationTSCode);

@@ -12,18 +12,19 @@ import 'prismjs/components/prism-sass';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-ruby';
 import 'prismjs/components/prism-powershell';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'my-code',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './my-code.component.html',
   styleUrl: './my-code.component.css'
 })
 export class MyCodeComponent implements AfterViewInit {
   @Input() language: string = "";
   @Input() code: string = ""
-
+  @Input() className: string = "my-code";
   constructor(
     private swal: SwalService
   ){}

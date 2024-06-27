@@ -18,37 +18,41 @@
     <div class="tab-content">
       <div class="tab-pane active show" id="tabs-example-caption">
         <h4>Caption örneği</h4>                    
-        <div style="margin-left: 30px;">
+        <div style="margin-left: 30px; display: flex; gap:15px">
+          <div class="form-group">
+              <label class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="showCaption">
+                  <span class="form-check-label">Show or hide Caption</span>
+              </label>
+              <div class="form-group">
+                  <label>Caption Title</label>
+                  <input class="form-control" [(ngModel)]="captionTitle" style="width: 150px;">
+              </div>
+          </div>
+          <div class="form-group">
             <div class="form-group">
-                <label class="form-check">
-                    <input class="form-check-input" type="checkbox" [(ngModel)]="showCaption">
-                    <span class="form-check-label">Show or hide Caption</span>
-                </label>
-            </div>
-            <div class="form-group mt-1">
-                <label>Caption Title</label>
-                <input class="form-control" [(ngModel)]="captionTitle" style="width: 150px;">
-            </div>
-            <div class="form-group mt-1">
                 <label class="form-check">
                     <input class="form-check-input" [disabled]="!showCaption()" type="checkbox" [(ngModel)]="showColumnVisibility">
                     <span class="form-check-label">Show or hide Column Visibility</span>
                 </label>
             </div>
-            <div class="form-group mt-1">
+            <div class="form-group">
               <label>Column Visibility Button Class</label>
               <input class="form-control" [(ngModel)]="columnVisibilityBtnClass" style="width: 150px;">
             </div>
-            <div class="form-group mt-1">
+          </div>
+          <div class="form-group">
+            <div class="form-group">
                 <label class="form-check">
                     <input class="form-check-input" [disabled]="!showRefreshData()" type="checkbox" [(ngModel)]="showRefreshData">
                     <span class="form-check-label">Show or hide Refresh Data</span>
                 </label>
-            </div>
-            <div class="form-group mt-1">
-              <label>Refresh Data Button Class</label>
-              <input class="form-control" [(ngModel)]="refreshDataBtnClass" style="width: 150px;">
-            </div>
+              </div>
+              <div class="form-group mt-1">
+                <label>Refresh Data Button Class</label>
+                <input class="form-control" [(ngModel)]="refreshDataBtnClass" style="width: 150px;">
+              </div>
+          </div>
         </div>
         
         <flexi-grid 
