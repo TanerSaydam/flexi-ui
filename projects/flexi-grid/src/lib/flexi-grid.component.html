@@ -43,11 +43,11 @@
         }
         @for(column of columns; track column.field){          
           @if(sortable && column.sortable){
-            <th [ngStyle]="{'width': column.width}" (click)="sort(column.field)" class="cursor my-border" [hidden]="!column.visible">
+            <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible">
               @if(resizable && column.resizable){
                 <div class="resize-handle" (mousedown)="onMouseDown($event, column)"></div>
               }
-              <div>
+              <div (click)="sort(column.field)">
                 <span>{{ column.title ? column.title : column.field }}</span>
                 <span class="ms-2">
                   @if(this.state.sort.field === column.field){

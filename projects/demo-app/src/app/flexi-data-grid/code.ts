@@ -69,6 +69,7 @@ export const fullExampleHTMLCode: string = `
   [showCaption]="true"
   [showExportExcel]="true"
   [exportExcelButtonClick]="exportExcel.bind(this)"
+  [resizable]="true"
   (dataStateChange)="dataStateChange($event)"
   [sortable]="true">
     <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
