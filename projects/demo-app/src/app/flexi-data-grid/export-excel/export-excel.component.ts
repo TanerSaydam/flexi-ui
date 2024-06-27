@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { exportExcelHTMLCode, exportExcelTSCode } from '../code';
@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
   templateUrl: './export-excel.component.html',
-  styleUrl: './export-excel.component.css'
+  styleUrl: './export-excel.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ExportExcelComponent {
   users = signal<UserModel[]>([]);

@@ -955,3 +955,32 @@ export const draggableHTMLCode: string = `
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
 </flexi-grid>
 `;
+
+export const changeThemeTSCode: string = `
+import { Component, signal } from '@angular/core';
+import { UserModel } from '../../models/user.model';
+import { UsersData } from '../data';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+
+@Component({
+  selector: 'app-change-theme',
+  standalone: true,
+  imports: [FlexiGridComponent, FlexiGridColumnComponent],
+  templateUrl: './change-theme.component.html',
+  styleUrl: './change-theme.component.css'
+})
+export class ChangeThemeComponent {
+  users = signal<UserModel[]>(UsersData);
+  themeClass = signal<string>("light");
+}
+`;
+
+export const changeThemeHTMLCode: string = `
+<flexi-grid [data]="users()" [themeClass]="themeClass">
+    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+</flexi-grid>
+`;

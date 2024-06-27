@@ -1,8 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* *{
-    font-family: "Poppins", sans-serif;
-}  */
+[data-bs-theme="light"] {
+    --background-color: #f8f9fa;
+    --background-color-part: #fff;
+    --bg-color-gray: #f8f9fa;
+    --text-color: #000;
+    --active-text-color:#f8f9fa;
+    --active-background-color: #007bff;
+    --tbody-hover: #f1f1f1;
+    --hover-background-color:#007bff;
+    --hover-text-color: #f1f1f1;
+}
+
+[data-bs-theme="dark"] {
+    --background-color: #212529;
+    --background-color-part: #141414;
+    --bg-color-gray: #000;
+    --text-color: #fff;
+    --tbody-hover: #353232;
+    --active-text-color:#141414;
+    --active-background-color: #f8f9fa;
+    --hover-background-color:#f8f9fa;
+    --hover-text-color: #212529;
+}
+
+svg{
+    fill: var(--text-color);
+}
 
 a {
     cursor: pointer;
@@ -86,7 +110,9 @@ a {
     overflow-x: auto;
 }
 
-
+.pagination a{
+    color: var(--text-color);
+}
 
 .svg {
     width: 27px;
@@ -111,29 +137,33 @@ a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    background-color: var(--background-color-part);
+    color: var(--text-color);
+    
 }
 
 .table-container table {
     caption-side: top;
+    background-color: var(--background-color-part);
 }
 
 .table-container caption {
     caption-side: top;
     padding: 10px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-color-gray);
     text-align: left;
     font-weight: bold;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;    
 }
 
 .bg-color-gray {
-    background-color: #f8f9fa !important;
+    background-color: var(--bg-color-gray);
 }
 
 .table-container table {
     width: 99.99%;
     border-collapse: collapse;
-    overflow-x: auto;
+    overflow-x: auto;    
 }
 
 .table-container th,
@@ -168,7 +198,7 @@ a {
 }
 
 .table-container th {
-    background-color: #f8f9fa;
+    background-color: var(--background-color);
     padding-top: 20px;
     padding-bottom: 15px;
     position: sticky;
@@ -177,26 +207,23 @@ a {
 }
 
 .table-container tbody tr:nth-child(odd) {
-    background-color: #f8f9fa;
+    background-color: var(--background-color);
 }
 
 .table-container tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: var(--tbody-hover);
 }
 
 .table-container tbody {
     flex: 1;
-    /* Flex-grow özelliğini kullanarak tbody'nin alanı kaplamasını sağlayın */
     overflow-x: auto;
-    /* Tbody kısmına overflow özelliği ekleyin */
     display: block;
-    /* Display özelliğini block olarak ayarlayın */
 }
 
 .table-container tbody tr {
     display: table;
     width: 100%;
-    table-layout: fixed;
+    table-layout: fixed;    
 }
 
 .table-container thead,
@@ -211,6 +238,8 @@ a {
     padding: 5px;
     border: 1px solid #ced4da;
     border-radius: 3px;
+    background-color: var(--bg-color-gray);
+    color: var(--text-color);
 }
 
 .select-container {
@@ -223,15 +252,23 @@ a {
     margin-right: 10px;
 }
 
-/* .page-item {
-    padding: 1px 3px;
-} */
+div .my-active{
+    background-color: var(--active-background-color) !important;
+    color: var(--active-text-color)  !important; 
+}
+
+.active> .page-link{
+    background-color: var(--active-background-color);  
+}
 
 .active {
-    z-index: 3 !important;
-    color: #ffffff !important;
-    background-color: #206bc4 !important;
-    border-color: #206bc4 !important;
+    z-index: 3;
+    color: var(--active-text-color)  !important;    
+    border-color: var(--active-background-color) !important;
+}
+
+.active a{
+    color: var(--active-text-color);
 }
 
 .pagination .page-item.disabled {
@@ -265,10 +302,10 @@ a {
     padding: 5px 0;
     margin: 0;
     font-size: 14px;
-    color: #212529;
+    color: var(--text-color);
     text-align: left;
     list-style: none;
-    background-color: #fff;
+    background-color: var(--background-color);
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
@@ -284,9 +321,8 @@ a {
     padding: 3px 1.5rem;
     clear: both;
     font-weight: 400;
-    color: #212529;
+    color: var(--text-color);
     text-align: inherit;
-    white-space: nowrap;
     background-color: transparent;
     border: 0;
 }
@@ -295,7 +331,8 @@ a {
 .dropdown-item:focus {
     color: #fff;
     text-decoration: none;
-    background-color: #007bff;
+    background-color: var(--hover-background-color);
+    color: var(--hover-text-color);
 }
 
 .dropdown-checkbox-item {
@@ -308,7 +345,8 @@ a {
 .dropdown-checkbox-item:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #007bff;
+    background-color: var(--hover-background-color);
+    color: var(--hover-text-color);
 }
 
 .dropdown-title {
@@ -318,16 +356,14 @@ a {
 }
 
 .my-btn {
-    white-space: nowrap;
     box-shadow: 0 1px 0 rgba(var(--tblr-body-color-rgb), 0.04);
     display: inline-block;
     padding: 0.4075rem 1rem;
     font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-    ;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.5;
-    color: #182433;
+    color: var(--text-color);
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -337,7 +373,7 @@ a {
     user-select: none;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: var(--background-color);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }

@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-blank',
   standalone: true,
   imports: [],
   templateUrl: './blank.component.html',
-  styleUrl: './blank.component.css'
+  styleUrl: './blank.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class BlankComponent {
   @Input() pageName:string = "";

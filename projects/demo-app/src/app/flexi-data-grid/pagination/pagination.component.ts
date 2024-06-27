@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 //import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
 import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
@@ -12,7 +12,8 @@ import { paginationHTMLCode, paginationTSCode } from '../code';
   standalone: true,
   imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule, MyCodeComponent],
   templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.css'
+  styleUrl: './pagination.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent {
   users = signal<UserModel[]>(UsersData);

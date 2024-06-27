@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { UsersData } from '../data';
@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent, CommonModule],
   templateUrl: './custom-column.component.html',
-  styleUrl: './custom-column.component.css'
+  styleUrl: './custom-column.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class CustomColumnComponent {
   users = signal<UserModel[]>(UsersData);

@@ -12,7 +12,7 @@
                 </a>
             </h1>            
             <div class="collapse navbar-collapse" id="sidebar-menu">
-                <ul class="navbar-nav pt-lg-3">
+                <ul class="navbar-nav pt-lg-3">                    
                     <li class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                         <a class="nav-link">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -35,55 +35,38 @@
                         <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiGridDropDown() ? 'show' : ''">
                             <div class="dropdown-menu-columns">
                               <div class="dropdown-menu-column">
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="what-is-flexi-grid">
-                                  Flexi Grid nedir?
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="installation">
-                                  Kurulum                                  
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="first-use">
-                                  İlk Kullanım
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="index">
-                                  Index
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="custom-column">
-                                  Custom Column
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="pagination">
-                                  Pagination
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="sort">
-                                  Sort
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="filter">
-                                  Filter
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="caption">
-                                  Caption
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="export-excel">
-                                  Export Excel
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="footer">
-                                  Footer
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="data-binding">
-                                  Data Binding
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="resizable">
-                                  Resizable
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="draggable">
-                                  Draggable
-                                </a>
-                                <a class="dropdown-item" routerLink="/flexi-grid" fragment="options">
-                                  Ek Ayarlar
-                                </a>
+                                @for(document of flexiGridDocument; track $index){
+                                  <div>
+                                    <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
+                                        {{ document.title }}
+                                    </a>
+                                  </div>
+                                }
                               </div>                             
                             </div>
                           </div>
-                    </li>                   
+                    </li>  
+                    <li class="nav-item">
+                      @if(shared.themeClass === "light"){
+                          <div (click)="changeTheme('dark')" class="nav-link">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                              <i class="fa-solid fa-moon theme-class me-2"></i>
+                            </span>
+                            <span class="nav-link-title">
+                              Dark Theme
+                            </span>      
+                          </div>
+                        }@else {
+                          <div (click)="changeTheme('light')" class="nav-link">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                              <i class="fa-regular fa-moon theme-class me-2"></i>
+                            </span>
+                            <span class="nav-link-title">
+                              Light Theme
+                            </span>  
+                        </div>
+                        }                     
+                    </li>                 
                 </ul>
             </div>
         </div>

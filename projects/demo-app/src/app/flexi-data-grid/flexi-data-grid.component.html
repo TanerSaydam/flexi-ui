@@ -41,7 +41,7 @@
 
     <!-- İlk kullanım -->
     <div id="first-use" style="padding-top: 5px;">
-      <app-card id="first-use" cardTitle="İlk Kullanım">
+      <app-card cardTitle="İlk Kullanım">
         <div class="card-body">
           <ul>
             <li><p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p></li>
@@ -748,6 +748,51 @@
                   </tbody>
                 </table>                
               </div>
+            </li>
+          </ul>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- Theme Değiştir -->
+    <div id="change-theme" style="padding-top: 5px;">
+      <app-card cardTitle="Theme Değiştir">
+        <div class="card-body">
+          <ul>
+            <li>
+              <p>Grid iki farklı theme desteklidir. Light ve Dark. Theme arasında geçiş yapmak için [themeClass] attribute değer göndermen yeterli</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="typescript" [code]="changeThemeCodeExample()"></my-code>
+            </li>            
+            <li> 
+              @defer {
+                <app-change-theme [dataCode]="dataCode()"></app-change-theme>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>changeTheme :</b> Theme rengini belirleyeceğiniz alan. light | dark değeri alır.</li>
+              </ul>
+    
+              <hr>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Alabileceği Değer Türleri</th>
+                    <th>Default Değer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>changeTheme</th>
+                    <td>text (light | dark)</td>
+                    <th>light</th>
+                  </tr>
+                </tbody>
+              </table>
             </li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 //import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
 import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,8 @@ import { footerHTMLCode, footerTSCode } from '../code';
   standalone: true,
   imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css'
+  styleUrl: './footer.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
   users = signal<UserModel[]>(UsersData);

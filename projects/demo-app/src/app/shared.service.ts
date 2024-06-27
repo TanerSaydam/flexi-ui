@@ -5,6 +5,11 @@ import { Injectable, signal } from '@angular/core';
 })
 export class SharedService {
   openOrCloseFlexiGridDropDown = signal(false);
-  
-  constructor() { }
+  themeClass: string = "light";
+
+  constructor() { 
+    if(localStorage.getItem("themeColor")){
+      this.themeClass = localStorage.getItem("themeClass") ?? "light";
+    }
+  }
 }

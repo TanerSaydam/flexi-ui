@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 //import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
 import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
@@ -13,7 +13,8 @@ import { sortHTMLCode, sortTSCode } from '../code';
   standalone: true,
   imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule, MyCodeComponent],
   templateUrl: './sort.component.html',
-  styleUrl: './sort.component.css'
+  styleUrl: './sort.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class SortComponent {
   users = signal<UserModel[]>(UsersData);

@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 //import { FlexiGridColumnComponent, FlexiGridComponent, FilterType } from '../../../../../flexi-grid/src/public-api';
 import { FlexiGridComponent,FlexiGridColumnComponent, FilterType } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
@@ -13,7 +13,8 @@ import { filterHTMLCode, filterTSCode } from '../code';
   standalone: true,
   imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule, MyCodeComponent],
   templateUrl: './filter.component.html',
-  styleUrl: './filter.component.css'
+  styleUrl: './filter.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class FilterComponent {
   users = signal<UserModel[]>(UsersData);

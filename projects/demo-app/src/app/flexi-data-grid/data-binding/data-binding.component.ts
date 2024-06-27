@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserModel } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +12,8 @@ import { dataBindingHTMLCode, dataBindingTSCode } from '../code';
   standalone: true,
   imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
   templateUrl: './data-binding.component.html',
-  styleUrl: './data-binding.component.css'
+  styleUrl: './data-binding.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class DataBindingComponent {
   users = signal<UserModel[]>([]);

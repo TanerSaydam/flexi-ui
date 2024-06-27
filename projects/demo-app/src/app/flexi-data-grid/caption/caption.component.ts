@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
@@ -12,7 +12,8 @@ import { captionHTMLCode, captionTSCode } from '../code';
   standalone: true,
   imports: [FormsModule, FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
   templateUrl: './caption.component.html',
-  styleUrl: './caption.component.css'
+  styleUrl: './caption.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class CaptionComponent {
   users = signal<UserModel[]>(UsersData);

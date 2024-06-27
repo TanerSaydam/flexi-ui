@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, ViewEncapsulation, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlankComponent } from '../blank/blank.component';
 import { CardComponent } from '../blank/card/card.component';
@@ -21,6 +21,7 @@ import { ExportExcelComponent } from './export-excel/export-excel.component';
 import { CustomColumnComponent } from './custom-column/custom-column.component';
 import { ResizableComponent } from './resizable/resizable.component';
 import { DraggableComponent } from './draggable/draggable.component';
+import { ChangeThemeComponent } from './change-theme/change-theme.component';
 
 @Component({
   selector: 'app-flexi-data-grid',
@@ -44,10 +45,12 @@ import { DraggableComponent } from './draggable/draggable.component';
     ExportExcelComponent,
     CustomColumnComponent,
     ResizableComponent,
-    DraggableComponent
+    DraggableComponent,
+    ChangeThemeComponent
   ],
   templateUrl: './flexi-data-grid.component.html',
-  styleUrl: './flexi-data-grid.component.css'
+  styleUrl: './flexi-data-grid.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class FlexiDataGridComponent implements OnDestroy {  
   dataCode = signal<string>(dataTSCode);
@@ -59,21 +62,21 @@ export class FlexiDataGridComponent implements OnDestroy {
   })
   `);
   firstUseHTMLCodeExample = signal<string>(firstUseHTMLCode);
-  indexCodeExample= signal<string>(`<flexi-grid
+  indexCodeExample = signal<string>(`<flexi-grid
   .
   .
   [showIndex]="true"
   indexWidth="70px" <!--  İsteğe bağlı değiştirebilirsiniz. Default değeri 70px -->
   >
   `);
-  paginationCodeExample= signal<string>(`<flexi-grid
+  paginationCodeExample = signal<string>(`<flexi-grid
     .
     .
     [pageable]="true"
     [pageSize]="10" <!--  İsteğe bağlı değiştirebilirsiniz. Default değeri 10 -->
     >
   `);
-  sortCodeExample= signal<string>(`<flexi-grid
+  sortCodeExample = signal<string>(`<flexi-grid
     .
     .
     [sortable]="true"
@@ -82,7 +85,7 @@ export class FlexiDataGridComponent implements OnDestroy {
     <!-- İsterseniz column bazlı sort özelliğini kapatabilirsiniz -->
     <flexi-grid-column field="id" [sortable]="false" title="Id"></flexi-grid-column>
   `);
-  filterCodeExample= signal<string>(`<flexi-grid
+  filterCodeExample = signal<string>(`<flexi-grid
     .
     .
     [filterable]="true"
@@ -92,7 +95,7 @@ export class FlexiDataGridComponent implements OnDestroy {
     <!-- İsterseniz column bazlı filter özelliğini kapatabilirsiniz -->
     <flexi-grid-column field="id" [filterable]="false" title="Id"></flexi-grid-column>
   `);
-  captionCodeExample= signal<string>(`<flexi-grid
+  captionCodeExample = signal<string>(`<flexi-grid
     .
     .
     [showCaption]="true"
@@ -117,7 +120,7 @@ export class FlexiDataGridComponent implements OnDestroy {
     [exportExcelButtonClick]="exportExcel.bind(this)" <!-- Eğer default export şeklini kullanmak istemezseniz bu seçenek ile metodu kendiniz yönetebilirsiniz -->
     >
   `);
-  exportExcelCodeExample2= signal<string>(`
+  exportExcelCodeExample2 = signal<string>(`
   exportExcel(){ //eğer metodumuz bu şekildise
     this.http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
       this.flexi.exportDataToExcel(res.data, "my-excel"); //flexi servicedeki metodu kullanarak datanızı excel export yapabilirsiniz
@@ -135,7 +138,7 @@ export class FlexiDataGridComponent implements OnDestroy {
   //html tarafında aşağıdaki gibi atamalıyız
   [exportExcelButtonClick]="exportExcel"
   `);
-  customColumnCodeExample= signal<string>(`
+  customColumnCodeExample = signal<string>(`
   <!-- Öncelikle custom column yerleştireceğimiz yere böyle bir işaretleyici koyuyoruz -->
   <flexi-grid-column field="salary" title="Salary" [columnTemplate]="customSalaryColumnTemplate"></flexi-grid-column>
 
@@ -172,7 +175,7 @@ export class FlexiDataGridComponent implements OnDestroy {
     </ng-template>
   </flexi-grid>
   `);
-  resizableCodeExample= signal<string>(`<flexi-grid
+  resizableCodeExample = signal<string>(`<flexi-grid
     .
     .
     [resizable]="true"
@@ -181,7 +184,7 @@ export class FlexiDataGridComponent implements OnDestroy {
     <!-- İsterseniz column bazlı resizable özelliğini kapatabilirsiniz -->
     <flexi-grid-column field="id" [resizable]="false" title="Id"></flexi-grid-column>    
   `);
-  draggableCodeExample= signal<string>(`<flexi-grid
+  draggableCodeExample = signal<string>(`<flexi-grid
     .
     .
     [draggable]="true"
@@ -190,6 +193,12 @@ export class FlexiDataGridComponent implements OnDestroy {
     <!-- İsterseniz column bazlı draggable özelliğini kapatabilirsiniz -->
     <flexi-grid-column field="id" [draggable]="true" title="Id"></flexi-grid-column>    
   `);
+  changeThemeCodeExample = signal<string>(`<flexi-grid
+    .
+    .
+    themeClass="light"
+    >
+  `)
     
   constructor(
     private route: ActivatedRoute, 

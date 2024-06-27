@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 //import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
@@ -11,7 +11,8 @@ import { draggableHTMLCode, draggableTSCode } from '../code';
   standalone: true,
   imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
   templateUrl: './draggable.component.html',
-  styleUrl: './draggable.component.css'
+  styleUrl: './draggable.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class DraggableComponent {
   users = signal<UserModel[]>(UsersData);
