@@ -142,15 +142,15 @@
           }
           @for(column of columns; track column){
             @if(column.columnTemplate){
-              <td [ngStyle]="{'width': column.width}">
+              <td [ngStyle]="{'width': column.width}" [ngClass]="column.className">
                 <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item}"></ng-container>
               </td>
             }@else {
-              <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible">                
+              <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible" [ngClass]="column.className">                
                 @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                   {{ item[column.field] | date: column.format! }}
                 }@else if(column.filterType === "number" && column.filterType){
-                  {{ (item[column.field] | currency: '':'': column.format! === "n0" ? '1.0-0' : '1.2-2')!.toString().replace(",", ".") }}
+                  {{ (item[column.field] | currency: '':'': column.format! === "n0" ? '1.0-0' : '1.2-2')!.toString().replace(".", "!").replaceAll(",",".").replace("!",",") }}
                 }
                 @else {
                   {{ item[column.field] }}

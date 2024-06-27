@@ -19,6 +19,7 @@ export class FlexiGridColumnComponent {
   @Input() width: string = "100%";
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
+  @Input() className: string = "";
   value: string = "";
   filterOperator: string = "contains";  
 }
