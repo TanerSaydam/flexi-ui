@@ -38,29 +38,29 @@
         }
       }
     },
-    "demo-app": {
+    "documentation": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/demo-app",
-      "sourceRoot": "projects/demo-app/src",
+      "root": "projects/documentation",
+      "sourceRoot": "projects/documentation/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/demo-app",
-            "index": "projects/demo-app/src/index.html",
-            "browser": "projects/demo-app/src/main.ts",
+            "outputPath": "dist/documentation",
+            "index": "projects/documentation/src/index.html",
+            "browser": "projects/documentation/src/main.ts",
             "polyfills": [],
-            "tsConfig": "projects/demo-app/tsconfig.app.json",
+            "tsConfig": "projects/documentation/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/demo-app/public"
+                "input": "projects/documentation/public"
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.css",
+              "projects/documentation/src/styles.css",
               "node_modules/prismjs/themes/prism.min.css"
             ],
             "scripts": [
@@ -96,10 +96,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "demo-app:build:production"
+              "buildTarget": "documentation:build:production"
             },
             "development": {
-              "buildTarget": "demo-app:build:development"
+              "buildTarget": "documentation:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -111,15 +111,15 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": [],
-            "tsConfig": "projects/demo-app/tsconfig.spec.json",
+            "tsConfig": "projects/documentation/tsconfig.spec.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/demo-app/public"
+                "input": "projects/documentation/public"
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.css",
+              "projects/documentation/src/styles.css",
               "node_modules/prismjs/themes/prism.min.css"
             ],
             "scripts": [

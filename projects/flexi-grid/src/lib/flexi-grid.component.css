@@ -104,6 +104,10 @@ a {
     }
 }
 
+.pagination-tr{
+    background-color: var(--background-color);
+}
+
 .pagination {
     display: flex;
     list-style: none;
@@ -238,7 +242,7 @@ a {
     padding: 5px;
     border: 1px solid #ced4da;
     border-radius: 3px;
-    background-color: var(--bg-color-gray);
+    background-color: var(--background-color-part);
     color: var(--text-color);
 }
 
@@ -274,6 +278,7 @@ div .my-active{
 .pagination .page-item.disabled {
     cursor: not-allowed;
     opacity: 0.5;
+    pointer-events: none;
 }
 
 .page-size-select {

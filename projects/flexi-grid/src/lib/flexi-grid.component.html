@@ -17,7 +17,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="cursor" style="width: 15px;" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
                 <div class="dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
                   <p class="dropdown-title">Column Visibility</p>
-                  @for(column of columns; track column.field){
+                  @for(column of columns; track $index){
                     <label class="dropdown-checkbox-item" [for]="column.field">
                       <input [(ngModel)]="column.visible" [id]="column.field" type="checkbox">
                       {{ column.title ? column.title : column.field }}
@@ -41,7 +41,7 @@
         @if(showIndex){
           <th [ngStyle]="{'width': indexWidth}">#</th>
         }
-        @for(column of columns; track column.field){          
+        @for(column of columns; track $index){          
           @if(sortable && column.sortable){
             <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible"
                 [draggable]="(draggable && column.draggable)"
@@ -82,7 +82,7 @@
           @if(showIndex){
             <th [ngStyle]="{'width': indexWidth}"></th>
           }
-          @for(column of columns; track column.field){
+          @for(column of columns; track $index){
             <th [hidden]="!column.visible">
               @if(filterable && column.filterable){
                 <div class="d-flex filter-container">
@@ -140,7 +140,7 @@
               <td [ngStyle]="{'width': indexWidth}">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
             }
           }
-          @for(column of columns; track column){
+          @for(column of columns; track $index){
             @if(column.columnTemplate){
               <td [ngStyle]="{'width': column.width}" [ngClass]="column.className">
                 <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
@@ -165,7 +165,7 @@
     <tfoot>
       <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>
       @if(pageable){
-        <tr>
+        <tr class="pagination-tr">
         <td [colSpan]="columns!.length">
           <div class="pagination-container">
             <ul class="pagination">

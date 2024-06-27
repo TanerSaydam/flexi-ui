@@ -231,12 +231,14 @@ export class FlexiGridComponent implements OnChanges {
     }
   
     // Pagination logic
-    if (filteredData.length > +this.state.pageSize && !this.dataBinding && this.pageable) {
-      const start = this.state.skip;
-      const end = start + +this.state.pageSize;
-      this.pagedData.set(filteredData.slice(start, end));
-    } else {
-      this.pagedData.set(filteredData);
+    if(filteredData){
+      if (filteredData.length > +this.state.pageSize && !this.dataBinding && this.pageable) {
+        const start = this.state.skip;
+        const end = start + +this.state.pageSize;
+        this.pagedData.set(filteredData.slice(start, end));
+      } else {
+        this.pagedData.set(filteredData);
+      }
     }
   }
 
