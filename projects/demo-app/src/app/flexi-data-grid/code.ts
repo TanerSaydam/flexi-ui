@@ -895,26 +895,60 @@ export const customColumnHTMLCode: string = `
 `;
 
 export const resizableTSCode: string = `
-import { Component, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { resizableHTMLCode, resizableTSCode } from '../code';
 
 @Component({
-  selector: 'app-first-use',
+  selector: 'app-resizable',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent],
-  templateUrl: './first-use.component.html',
-  styleUrl: './first-use.component.css'
+  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
+  templateUrl: './resizable.component.html',
+  styleUrl: './resizable.component.css'
 })
-export class FirstUseComponent {
+export class ResizableComponent {
   users = signal<UserModel[]>(UsersData);
 }
+
 `;
 
 export const resizableHTMLCode: string = `
 <flexi-grid [data]="users()" [resizable]="true">
     <flexi-grid-column [resizable]="true" field="id" title="Id"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+</flexi-grid>
+`;
+
+export const draggableTSCode: string = `
+import { Component, Input, signal } from '@angular/core';
+import { UserModel } from '../../models/user.model';
+import { UsersData } from '../data';
+import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { resizableHTMLCode, resizableTSCode } from '../code';
+
+@Component({
+  selector: 'app-draggable',
+  standalone: true,
+  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
+  templateUrl: './resizable.component.html',
+  styleUrl: './resizable.component.css'
+})
+export class DraggableComponent {
+  users = signal<UserModel[]>(UsersData);
+}
+
+`;
+
+export const draggableHTMLCode: string = `
+<flexi-grid [data]="users()" [draggable]="true">
+    <flexi-grid-column [draggable]="true" field="id" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>

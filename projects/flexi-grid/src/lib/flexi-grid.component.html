@@ -43,7 +43,11 @@
         }
         @for(column of columns; track column.field){          
           @if(sortable && column.sortable){
-            <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible">
+            <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible"
+                [draggable]="(draggable && column.draggable)"
+                (dragstart)="onDragStart($event, $index)" 
+                (dragover)="onDragOver($event, $index)" 
+                (drop)="onDrop($event, $index)">
               @if(resizable && column.resizable){
                 <div class="resize-handle" (mousedown)="onMouseDown($event, column)"></div>
               }
@@ -59,7 +63,10 @@
               </div>              
             </th>
           }@else {
-            <th [ngStyle]="{'width': column.width}" class="my-border" [hidden]="!column.visible">
+            <th [draggable]="(draggable && column.draggable)" [ngStyle]="{'width': column.width}" class="my-border" [hidden]="!column.visible"
+              (dragstart)="onDragStart($event, $index)" 
+              (dragover)="onDragOver($event, $index)" 
+              (drop)="onDrop($event, $index)">
               @if(resizable && column.resizable){
                 <div class="resize-handle" (mousedown)="onMouseDown($event, column)"></div>
               }

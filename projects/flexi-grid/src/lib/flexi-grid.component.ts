@@ -44,6 +44,7 @@ export class FlexiGridComponent implements OnChanges {
   @Input() exportExcelButtonClick: (() => void) | undefined;
   @Input() footerPerPageText: string = "items per page";
   @Input() resizable: boolean = false;
+  @Input() draggable: boolean = false;
 
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
@@ -68,6 +69,7 @@ export class FlexiGridComponent implements OnChanges {
     { operator: "lt", value: 'Is less than' },
     { operator: "le", value: 'Is less than or equal to' }
   ]);
+  draggedColumnIndex: number | undefined;
 
   @Output() dataStateChange = new EventEmitter<any>();
 
@@ -430,5 +432,33 @@ export class FlexiGridComponent implements OnChanges {
     this.resizingColumn = undefined;
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
+  }
+
+  onDragStart(event: DragEvent, index: number) {
+    this.draggedColumnIndex = index;
+  }
+
+  onDragOver(event: DragEvent, index: number) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent, index: number) {
+    event.preventDefault();
+    if (this.draggedColumnIndex === undefined) return;
+
+    const draggedColumn = this.columns?.toArray()[this.draggedColumnIndex];
+    const targetColumn = this.columns?.toArray()[index];
+
+    if (draggedColumn && targetColumn) {
+      const columnsArray = this.columns?.toArray();
+
+      // Remove dragged column and insert it at the new position
+      columnsArray!.splice(this.draggedColumnIndex, 1);
+      columnsArray!.splice(index, 0, draggedColumn);
+
+      this.columns?.reset(columnsArray!);
+    }
+
+    this.draggedColumnIndex = undefined;
   }
 }

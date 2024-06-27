@@ -35,22 +35,35 @@
         [resizable]="true"
         [exportExcelButtonClick]="exportExcel.bind(this)"
         (dataStateChange)="dataStateChange($event)"
-        [sortable]="true">
+        [sortable]="true"
+        [draggable]="true">
           <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
           <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
           <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
           <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
           <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
-      
+          <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>         
+
+          <ng-template #customButtonColumnTemplate let-item="item">
+            <button class="btn btn-outline-info">
+                <i class="fa-solid fa-edit"></i>
+            </button>
+            <button class="btn btn-outline-danger ms-1">
+                <i class="fa-solid fa-trash"></i>
+            </button>            
+          </ng-template>
+
           <ng-template #footerTemplate>
-          <!-- <tr>
-                <td colspan="5">Total</td>
-                <td>46546</td>
-              </tr> -->
+            <!-- <tr>
+              <td colspan="5">Total Users</td>
+              <td>{{total()}}</td>
+            </tr> -->
           </ng-template>
       
           <ng-template #captionTemplate>
-              <!-- <button>Kullanıcı ekle</button> -->
+              <button class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i>
+              </button>
           </ng-template>
       </flexi-grid>
     </div>

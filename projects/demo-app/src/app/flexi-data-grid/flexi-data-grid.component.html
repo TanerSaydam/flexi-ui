@@ -651,6 +651,8 @@
               <p>Columnları tekrar boyutlandırmak için [resizable] attribute'üne true değeri verebilirsiniz. Her column başlığından sonraki çizgiyi mouse ile resize yapabilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
               <h3>Örnek kod:</h3>
               <my-code className="" language="html" [code]="resizableCodeExample()"></my-code>
+              <h3>Örnek kullanım:</h3>
+              <img src="/img/resizable-example.gif" style="width: 100%;">
             </li>
             <li>
               @defer {
@@ -684,6 +686,62 @@
                     </tr>
                     <tr>
                       <th>resizable (column)</th>
+                      <td>true | false</td>
+                      <th>true</th>
+                    </tr>
+                  </tbody>
+                </table>                
+              </div>
+            </li>
+          </ul>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- Draggable -->
+    <div id="draggable" style="padding-top: 5px;">
+      <app-card cardTitle="Draggable">
+        <div class="card-body">
+          <ul>
+            <li>
+              <p>Columnların yerlerini değiştirmek için [resizable] attribute'üne true değeri verip columnları sürükleyerek yerlerini değiştirebilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
+              <h3>Örnek kod:</h3>
+              <my-code className="" language="html" [code]="draggableCodeExample()"></my-code>
+              <h3>Örnek kullanım:</h3>
+              <img src="/img/draggable-example.gif" style="width: 100%;">
+            </li>
+            <li>
+              @defer {
+                <app-draggable [dataCode]="dataCode()"></app-draggable>
+              }@placeholder {
+                <app-loading></app-loading>
+              }
+              <hr>
+              <h3>Kodların açıklaması</h3>
+              <ul>
+                <li><b>[draggable] :</b> Draggable yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+                  <b>false</b> vermeliyiz</li>
+                <li><b>[draggable] (column optional) :</b> Column bazlı draggable yapısını kapatıp açabiliriz</li>
+              </ul>
+    
+              <hr>
+              <div class="overflow-x">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Attribute</th>
+                      <th>Alabileceği Değer Türleri</th>
+                      <th>Default Değer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>draggable</th>
+                      <td>true | false</td>
+                      <th>false</th>
+                    </tr>
+                    <tr>
+                      <th>draggable (column)</th>
                       <td>true | false</td>
                       <th>true</th>
                     </tr>

@@ -20,6 +20,7 @@ import { LoadingComponent } from '../loading/loading.component';
 import { ExportExcelComponent } from './export-excel/export-excel.component';
 import { CustomColumnComponent } from './custom-column/custom-column.component';
 import { ResizableComponent } from './resizable/resizable.component';
+import { DraggableComponent } from './draggable/draggable.component';
 
 @Component({
   selector: 'app-flexi-data-grid',
@@ -42,7 +43,8 @@ import { ResizableComponent } from './resizable/resizable.component';
     LoadingComponent,
     ExportExcelComponent,
     CustomColumnComponent,
-    ResizableComponent
+    ResizableComponent,
+    DraggableComponent
   ],
   templateUrl: './flexi-data-grid.component.html',
   styleUrl: './flexi-data-grid.component.css'
@@ -178,6 +180,15 @@ export class FlexiDataGridComponent implements OnDestroy {
 
     <!-- İsterseniz column bazlı resizable özelliğini kapatabilirsiniz -->
     <flexi-grid-column field="id" [resizable]="false" title="Id"></flexi-grid-column>    
+  `);
+  draggableCodeExample= signal<string>(`<flexi-grid
+    .
+    .
+    [draggable]="true"
+    >
+
+    <!-- İsterseniz column bazlı draggable özelliğini kapatabilirsiniz -->
+    <flexi-grid-column field="id" [draggable]="true" title="Id"></flexi-grid-column>    
   `);
     
   constructor(

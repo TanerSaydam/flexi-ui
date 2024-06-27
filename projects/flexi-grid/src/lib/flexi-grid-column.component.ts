@@ -2,6 +2,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'flexi-grid-column',
+  host: { '[attr.host-id]': '"flexi-grid-column-1"' },
   standalone: true,
   imports: [],
   template:''
@@ -17,6 +18,7 @@ export class FlexiGridColumnComponent {
   @Input() format: DateFormatType | CurrencyFormatType | null = null;
   @Input() width: string = "100%";
   @Input() resizable: boolean = true;
+  @Input() draggable: boolean = true;
   value: string = "";
   filterOperator: string = "contains";  
 }
