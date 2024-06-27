@@ -143,7 +143,7 @@
           @for(column of columns; track column){
             @if(column.columnTemplate){
               <td [ngStyle]="{'width': column.width}" [ngClass]="column.className">
-                <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item}"></ng-container>
+                <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
               </td>
             }@else {
               <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible" [ngClass]="column.className">                
