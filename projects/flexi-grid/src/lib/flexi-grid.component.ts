@@ -4,10 +4,12 @@ import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.compon
 import { StateFilterModel, StateModel } from './state.model';
 import { FormsModule } from '@angular/forms';
 
+import { TrCurrencyPipe } from 'tr-currency'
+
 @Component({
   selector: 'flexi-grid',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TrCurrencyPipe],
   templateUrl: './flexi-grid.component.html',
   styleUrl: `./flexi-grid.component.css`  
 })

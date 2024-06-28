@@ -1,13 +1,17 @@
 {
   "name": "flexi-grid",
-  "version": "18.3.3",
+  "version": "18.4.0",
   "peerDependencies": {
     "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0"
+    "@angular/core": "^18.0.0",
+    "tr-currency": "^18.0.1"
   },
   "dependencies": {
+    "tr-currency": "^18.0.1",
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
-  "repository": {"url": "https://github.com/TanerSaydam/flexi-ui"}
+  "repository": {
+    "url": "https://github.com/TanerSaydam/flexi-ui"
+  }
 }

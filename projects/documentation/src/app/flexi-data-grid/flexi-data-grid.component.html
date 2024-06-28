@@ -43,68 +43,63 @@
     <div id="first-use" style="padding-top: 5px;">
       <app-card cardTitle="İlk Kullanım">
         <div class="card-body">
+          <p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
+          <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
+          istediğiniz verileri yerleştirmelisiniz</p>
+          <h3>Örnek kod:</h3>
+          <b>component.ts</b>
+          <my-code className="" language="typescript" [code]="firstUseTSCodeExample1()"></my-code>
+          <p><b>Ya da</b></p>
+          <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
+          <b>component.html</b>
+          <my-code className="" language="html" [code]="firstUseHTMLCodeExample()"></my-code>
+
+          @defer {
+            <app-first-use [dataCode]="dataCode()"></app-first-use>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li><p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p></li>
-            <li>
-              <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
-              istediğiniz verileri yerleştirmelisiniz</p>
-              <h3>Örnek kod:</h3>
-              <b>component.ts</b>
-              <my-code className="" language="typescript" [code]="firstUseTSCodeExample1()"></my-code>
-              <p><b>Ya da</b></p>
-              <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
-              <b>component.html</b>
-              <my-code className="" language="html" [code]="firstUseHTMLCodeExample()"></my-code>
+            <li><b>flexi-grid :</b> Flexi grid elementi. Bununla gridi sayfamıza ekliyoruz</li>
+            <li><b>[data] :</b> Data attributene listemizi veriyoruz.
+              <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.
+                İsterseniz siz normal değişken kullanabilirsiniz</p>
             </li>
-            <li> 
-              @defer {
-                <app-first-use [dataCode]="dataCode()"></app-first-use>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>flexi-grid :</b> Flexi grid elementi. Bununla gridi sayfamıza ekliyoruz</li>
-                <li><b>[data] :</b> Data attributene listemizi veriyoruz.
-                  <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.
-                    İsterseniz siz normal değişken kullanabilirsiniz</p>
-                </li>
-                <li><b>flexi-grid-column :</b> Grid içerisinde kolonlarımızı göstermek için hangi alanları göstermek
-                  istiyorsak her bir alan için bu elementten eklemeliyiz</li>
-                <li><b>field :</b> Grid columnun listedeki hangi fielde karşılık geldiğiniz buradan belirliyoruz</li>
-                <li><b>title :</b> Grid columnun başlığını özelleştirebiliyoruz.
-                  <p class="alert alert-info">Not: Eğer bu attribute atamazsak otomatik field'in adını alır</p>
-                </li>
-              </ul>
-    
-              <hr>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Attribute</th>
-                    <th>Alabileceği Değer Türleri</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>data</th>
-                    <td>object[] | number[] | string[] | boolean[] vs.</td>
-                  </tr>
-                  <tr>
-                    <th>field</th>
-                    <td>text</td>
-                  </tr>
-                  <tr>
-                    <th>title</th>
-                    <td>text</td>
-                  </tr>
-                </tbody>
-              </table>
-    
-              <p class="alert alert-success">İlk örneğimizle beraber listemizi grid içerisinde göstermeyi başardık.</p>
+            <li><b>flexi-grid-column :</b> Grid içerisinde kolonlarımızı göstermek için hangi alanları göstermek
+              istiyorsak her bir alan için bu elementten eklemeliyiz</li>
+            <li><b>field :</b> Grid columnun listedeki hangi fielde karşılık geldiğiniz buradan belirliyoruz</li>
+            <li><b>title :</b> Grid columnun başlığını özelleştirebiliyoruz.
+              <p class="alert alert-info">Not: Eğer bu attribute atamazsak otomatik field'in adını alır</p>
             </li>
           </ul>
+
+          <hr>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Alabileceği Değer Türleri</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>data</th>
+                <td>object[] | number[] | string[] | boolean[] vs.</td>
+              </tr>
+              <tr>
+                <th>field</th>
+                <td>text</td>
+              </tr>
+              <tr>
+                <th>title</th>
+                <td>text</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="alert alert-success">İlk örneğimizle beraber listemizi grid içerisinde göstermeyi başardık.</p>
         </div>
       </app-card>
     </div>
@@ -113,53 +108,48 @@
     <div id="index" style="padding-top: 5px;">
       <app-card cardTitle="Index">
         <div class="card-body">
+          <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="indexCodeExample()"></my-code>
+
+          @defer {
+            <app-index [dataCode]="dataCode()"></app-index>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="indexCodeExample()"></my-code>
-            </li>
-            <li>
-              @defer {
-                <app-index [dataCode]="dataCode()"></app-index>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[showIndex] :</b> Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</li>
-                <li><b>indexWidth :</b> Index uzunluğu default 70px. Eğer değiştirmek isterseniz bu attribute kullanabilirsiniz
-                  <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
-                </li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>showIndex</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>indexWidth</th>
-                      <td>text</td>
-                      <th>70px</th>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>              
+            <li><b>[showIndex] :</b> Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</li>
+            <li><b>indexWidth :</b> Index uzunluğu default 70px. Eğer değiştirmek isterseniz bu attribute kullanabilirsiniz
+              <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
             </li>
           </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>showIndex</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>indexWidth</th>
+                  <td>text</td>
+                  <th>70px</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </app-card>
     </div>
@@ -168,22 +158,15 @@
      <div id="custom-column" style="padding-top: 5px;">
       <app-card cardTitle="Custom Column">
         <div class="card-body">
-          <ul>
-            <li>
-              <p>İsterseniz gride yeni column ekleyebilirsiniz. Bu column mevcut datanızdaki verileri de kullanabilir, isterseniz de tamamen farklı bir şey içinde kullanabilirsiniz. Örneğin Edit, Delete butonu eklemek gibi</p>
-              <h3>Örnek kod:</h3>
-              <my-code [code]="customColumnCodeExample()" language="html"></my-code>    
-              <hr>
-            </li>
-            <li>
-              @defer {
-                <app-custom-column [dataCode]="dataCode()"></app-custom-column>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>         
-            </li>
-          </ul>
+          <p>İsterseniz gride yeni column ekleyebilirsiniz. Bu column mevcut datanızdaki verileri de kullanabilir, isterseniz de tamamen farklı bir şey içinde kullanabilirsiniz. Örneğin Edit, Delete butonu eklemek gibi</p>
+          <h3>Örnek kod:</h3>
+          <my-code [code]="customColumnCodeExample()" language="html"></my-code>    
+          
+          @defer {
+            <app-custom-column [dataCode]="dataCode()"></app-custom-column>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
         </div>
       </app-card>
     </div>
@@ -192,60 +175,55 @@
     <div id="pagination" style="padding-top: 5px;">
       <app-card cardTitle="Pagination">
         <div class="card-body">
+          <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="paginationCodeExample()"></my-code>
+
+          @defer {
+            <app-pagination [dataCode]="dataCode()"></app-pagination>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="paginationCodeExample()"></my-code>
-            </li>
-            <li>
-              @defer {
-                <app-pagination [dataCode]="dataCode()"></app-pagination>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[pagination] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false
-                  vermeliyiz</li>
-                <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri
-                  verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
-                <li><b>[pageSizeList] (optional) </b>: Page size listesini özelleştirmek isterseniz bu attribute değer
-                  olarak number bir liste vermelisiniz</li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>pagination</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>pageSize</th>
-                      <td>number</td>
-                      <th>10</th>
-                    </tr>
-                    <tr>
-                      <th>pageSizeList</th>
-                      <td>number[]</td>
-                      <th>[5, 10, 20, 30, 50, 100, 500, 1000]</th>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </li>
+            <li><b>[pagination] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false
+              vermeliyiz</li>
+            <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri
+              verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
+            <li><b>[pageSizeList] (optional) </b>: Page size listesini özelleştirmek isterseniz bu attribute değer
+              olarak number bir liste vermelisiniz</li>
           </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>pagination</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>pageSize</th>
+                  <td>number</td>
+                  <th>10</th>
+                </tr>
+                <tr>
+                  <th>pageSizeList</th>
+                  <td>number[]</td>
+                  <th>[5, 10, 20, 30, 50, 100, 500, 1000]</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </app-card>
     </div>
@@ -254,48 +232,43 @@
     <div id="sort" style="padding-top: 5px;">
       <app-card cardTitle="Sort">
         <div class="card-body">
+          <p>Sıralama yapısını aktif etmek için grid elementinde <b>[sortable]</b> attribute'üne true değeri
+            vermelisiniz. İsterseniz column bazlı sıralama işlemini kapatabiliyorsunuz.</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="sortCodeExample()"></my-code>
+
+          @defer {
+            <app-sort [dataCode]="dataCode()"></app-sort>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Sıralama yapısını aktif etmek için grid elementinde <b>[sortable]</b> attribute'üne true değeri
-                vermelisiniz. İsterseniz column bazlı sıralama işlemini kapatabiliyorsunuz.</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="sortCodeExample()"></my-code>
+            <li><b>[sortable] :</b> Sort yapısını aktif etmek istiyorsak true, pasife çekmek istiyorsak false vermeliyiz
             </li>
-            <li>
-              @defer {
-                <app-sort [dataCode]="dataCode()"></app-sort>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[sortable] :</b> Sort yapısını aktif etmek istiyorsak true, pasife çekmek istiyorsak false vermeliyiz
-                </li>
-                <li><b>[sortable] (column optional) :</b> Column bazlı sort yapısını kapatıp açabiliriz</li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>sortable</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
+            <li><b>[sortable] (column optional) :</b> Column bazlı sort yapısını kapatıp açabiliriz</li>
           </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>sortable</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+              </tbody>
+            </table>                
+          </div>          
         </div>
       </app-card>
     </div>
@@ -304,61 +277,77 @@
     <div id="filter" style="padding-top: 5px;">
       <app-card cardTitle="Filter">
         <div class="card-body">
+          <p>Filtreleme yapısını aktif etmek için grid elementinde <b>[filterable]</b> attribute'üne true değeri
+            vermelisiniz. İsterseniz column bazlı filtreleme işlemini kapatabiliyorsunuz. Farklı türde veriler için
+            filter özelliğine ayrı type verebiliyorsunuz</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="filterCodeExample()"></my-code>
+
+          @defer {
+            <app-filter [dataCode]="dataCode()"></app-filter>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Filtreleme yapısını aktif etmek için grid elementinde <b>[filterable]</b> attribute'üne true değeri
-                vermelisiniz. İsterseniz column bazlı filtreleme işlemini kapatabiliyorsunuz. Farklı türde veriler için
-                filter özelliğine ayrı type verebiliyorsunuz</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="filterCodeExample()"></my-code>
+            <li><b>[filterable] :</b> Filter yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+              <b>false</b> vermeliyiz</li>
+            <li><b>[filterable] (column) :</b> Column bazlı filter yapısını kapatıp açabiliriz</li>
+            <li><b>[filterType] (column) :</b> Column bazlı filter tipini değiştirebiliriz. Default tip text
+              ama tarih, tarih ve saat ve number değerler için özel filter tipi verebiliriz. Verebileceğimiz tipler:
+              text | date | date-time | number.
+              <p class="alert alert-info">Not: Filter tipini değiştirdiğimizde filitreleme yaptığımız seçenekte
+                değişiyor. Text filtrelerken benziyor | benzemiyor iken, number filtresinde eşit | büyük | küçük gibi
+                seçenekler geliyor. Date seçeneğinde filtre seçeneği sadece bir tane, o da eşit ise.</p>
             </li>
-            <li>
-              @defer {
-                <app-filter [dataCode]="dataCode()"></app-filter>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[filterable] :</b> Filter yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
-                  <b>false</b> vermeliyiz</li>
-                <li><b>[filterable] (column optional) :</b> Column bazlı filter yapısını kapatıp açabiliriz</li>
-                <li><b>[filterType] (column optional) :</b> Column bazlı filter tipini değiştirebiliriz. Default tip text
-                  ama tarih, tarih ve saat ve number değerler için özel filter tipi verebiliriz. Verebileceğimiz tipler:
-                  text | date | date-time | number.
-                  <p class="alert alert-info">Not: Filter tipini değiştirdiğimizde filitreleme yaptığımız seçenekte
-                    değişiyor. Text filtrelerken benziyor | benzemiyor iken, number filtresinde eşit | büyük | küçük gibi
-                    seçenekler geliyor. Date seçeneğinde filtre seçeneği sadece bir tane, o da eşit ise.</p>
-                </li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>filterable</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>filterType</th>
-                      <td>text | date | date-time | number</td>
-                      <th>text</th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
+            <li><b>format (column) :</b> FilterType date ya da number verdiyseniz columnu formatlayabilirsiniz. date için (d = gün || M = ay || y = yıl) formatı ile bir combinasyon yazabilirsiniz. Örnek: format="dd.MM.yyyy". Eğer number verdiyseniz <b>n</b> ya da <b>c</b> formatı seçenbilirsiniz. n = number, c = currency. n seçtiyseniz fraction (küsürat) sayısını belirleyebilirsiniz (default 2). c seçtiyseniz symbol, sembolün ön kısımdaki arkada mı görüneceği ve fraction belirleyebiliyorsunuz.</li>
           </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>filterable</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>filterType</th>
+                  <td>text | date | date-time | number</td>
+                  <th>text</th>
+                </tr>
+                <tr>
+                  <th>format</th>
+                  <td>(d = gün || M = ay || y = yıl) | n | c</td>
+                  <th></th>
+                </tr>
+                <tr>
+                  <th>(Eğer format c ise) symbol</th>
+                  <td>text</td>
+                  <td>default boş ama '₺', '$', '€' gibi sembolü verebilisiniz</td>
+                </tr>
+                <tr>
+                  <th>(Eğer format c ise) showSymbolInFront</th>
+                  <td>true | false</td>
+                  <td>true (true ise sembol önde false ise arkada gözükür)</td>
+                </tr>
+                <tr>
+                  <th>fraction</th>
+                  <td>number</td>
+                  <td>2 (küsürat da kaç rakam gözükeceği)</td>
+                </tr>
+              </tbody>
+            </table>                
+          </div>          
         </div>
       </app-card>
     </div>     
@@ -367,90 +356,85 @@
     <div id="caption" style="padding-top: 5px;">
       <app-card cardTitle="Caption">
         <div class="card-body">
+          <p>Table üst başlığı ekleyebilir, üst başlıkta bulunan Column Visibility ve Refresh Data buttonlarını
+            kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="captionCodeExample()"></my-code>
+
+          @defer {
+            <app-caption [dataCode]="dataCode()"></app-caption>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Table üst başlığı ekleyebilir, üst başlıkta bulunan Column Visibility ve Refresh Data buttonlarını
-                kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="captionCodeExample()"></my-code>
+            <li><b>[showCaption] :</b> Caption bölümünü göstermek için bu attribute true değer vermelisiniz</li>
+            <li><b>captionTitle (optional):</b> Caption'a title vermek için bu attribute değer atayabilirsiniz</li>
+            <li><b>[showColumnVisibility] (optional) :</b> Caption bölümü gözüküyorken columnların visibilitysini
+              yöneten bu dropdownu gösterip gizleyebilirsiniz</li>
+            <li><b>columnVisibilityBtnClass :</b> Column Visibility butonu için özel class vermek isterseniz bu attribute kullanabilirsiniz</li>
+            <li><b>[showRefreshData] (optional) :</b> Caption bölümü gözüküyorken datanın refresh olmasını sağlayan bu
+              butonu gösterip gizleyebilirsiniz. Bu butona tıkladığınızda tüm parametreleri sıfırlar. Order, filter vs gibi.</li>
+            <li><b>refreshDataBtnClass :</b> Refresh Data butonu için özel class vermek isterseniz bu attribute kullanabilirsiniz</li>
+            <li><b>ng-template #captionTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey caption sağ
+              taraftaki button kısmında gözükür</li>
+            <li><b>[captionTemplate] :</b> Eklediğiniz buttonların gözükmesi için bu elementin referansını attirbute
+              vermeniz gerekmektedir
+              <p class="alert alert-info">Not: ng-template #captionTemplate ile element oluşturmanız içerisine
+                ekleyeceklerinizi captionda göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
+                referansı [captionTemplate] attribute değer olarak vermelisiniz!</p>
             </li>
-            <li>
-              @defer {
-                <app-caption [dataCode]="dataCode()"></app-caption>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[showCaption] :</b> Caption bölümünü göstermek için bu attribute true değer vermelisiniz</li>
-                <li><b>captionTitle (optional):</b> Caption'a title vermek için bu attribute değer atayabilirsiniz</li>
-                <li><b>[showColumnVisibility] (optional) :</b> Caption bölümü gözüküyorken columnların visibilitysini
-                  yöneten bu dropdownu gösterip gizleyebilirsiniz</li>
-                <li><b>columnVisibilityBtnClass :</b> Column Visibility butonu için özel class vermek isterseniz bu attribute kullanabilirsiniz</li>
-                <li><b>[showRefreshData] (optional) :</b> Caption bölümü gözüküyorken datanın refresh olmasını sağlayan bu
-                  butonu gösterip gizleyebilirsiniz. Bu butona tıkladığınızda tüm parametreleri sıfırlar. Order, filter vs gibi.</li>
-                <li><b>refreshDataBtnClass :</b> Refresh Data butonu için özel class vermek isterseniz bu attribute kullanabilirsiniz</li>
-                <li><b>ng-template #captionTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey caption sağ
-                  taraftaki button kısmında gözükür</li>
-                <li><b>[captionTemplate] :</b> Eklediğiniz buttonların gözükmesi için bu elementin referansını attirbute
-                  vermeniz gerekmektedir
-                  <p class="alert alert-info">Not: ng-template #captionTemplate ile element oluşturmanız içerisine
-                    ekleyeceklerinizi captionda göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
-                    referansı [captionTemplate] attribute değer olarak vermelisiniz!</p>
-                </li>
-              </ul>    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>showCaption</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>captionTitle</th>
-                      <td>text</td>
-                      <th></th>
-                    </tr>
-                    <tr>
-                      <th>showColumnVisibility</th>
-                      <td>true | false</td>
-                      <th>true</th>
-                    </tr>
-                    <tr>
-                      <th>columnVisibilityBtnClass</th>
-                      <td>text</td>
-                      <th>my-btn</th>
-                    </tr>
-                    <tr>
-                      <th>showRefreshData</th>
-                      <td>true | false</td>
-                      <th>true</th>
-                    </tr>
-                    <tr>
-                      <th>refreshDataBtnClass</th>
-                      <td>text</td>
-                      <th>my-btn</th>
-                    </tr>
-                    <tr>
-                      <th>captionTemplate</th>
-                      <td>element ref</td>
-                      <th></th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
-          </ul>
+          </ul>    
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>showCaption</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>captionTitle</th>
+                  <td>text</td>
+                  <th></th>
+                </tr>
+                <tr>
+                  <th>showColumnVisibility</th>
+                  <td>true | false</td>
+                  <th>true</th>
+                </tr>
+                <tr>
+                  <th>columnVisibilityBtnClass</th>
+                  <td>text</td>
+                  <th>my-btn</th>
+                </tr>
+                <tr>
+                  <th>showRefreshData</th>
+                  <td>true | false</td>
+                  <th>true</th>
+                </tr>
+                <tr>
+                  <th>refreshDataBtnClass</th>
+                  <td>text</td>
+                  <th>my-btn</th>
+                </tr>
+                <tr>
+                  <th>captionTemplate</th>
+                  <td>element ref</td>
+                  <th></th>
+                </tr>
+              </tbody>
+            </table>                
+          </div>
         </div>
       </app-card>
     </div>
@@ -459,61 +443,56 @@
     <div id="export-excel" style="padding-top: 5px;">
       <app-card cardTitle="Export Excel">
         <div class="card-body">
+          <p>Table üst başlığı eklediğinizde kullanabileceğiniz seçeneklerden biri de export excel butonu. Bu buton ile mevcut datanızdaki verileri ya da istediğiniz başka verileri excel çıktısı olarak alabilirsiniz</p>              
+          <h3>Örnek:</h3>
+          <b>component.html</b>
+          <my-code className="" [code]="exportExcelCodeExample1()" language="html"></my-code>
+          <p class="alert alert-warning">Not: Bu seçeneğe normal bir metodu parantezsiz vermeniz gerekiyor. Arkasına .bind(this) yazmalısınız. Ya da TS tarafında arrow functionlu bir metot oluşturup onu vermelisiniz</p>
+          <b>component.ts</b>
+          <my-code className="" [code]="exportExcelCodeExample2()" language="typescript"></my-code>
+
+          @defer {
+            <app-export-excel></app-export-excel>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Table üst başlığı eklediğinizde kullanabileceğiniz seçeneklerden biri de export excel butonu. Bu buton ile mevcut datanızdaki verileri ya da istediğiniz başka verileri excel çıktısı olarak alabilirsiniz</p>              
-              <h3>Örnek:</h3>
-              <b>component.html</b>
-              <my-code className="" [code]="exportExcelCodeExample1()" language="html"></my-code>
-              <p class="alert alert-warning">Not: Bu seçeneğe normal bir metodu parantezsiz vermeniz gerekiyor. Arkasına .bind(this) yazmalısınız. Ya da TS tarafında arrow functionlu bir metot oluşturup onu vermelisiniz</p>
-              <b>component.ts</b>
-              <my-code className="" [code]="exportExcelCodeExample2()" language="typescript"></my-code>
+            <li><b>[showExportExcel] :</b> Export Excel butonunu görmek için bu attribute true değer vermelisiniz</li>
+            <li><b>exportExcelFileName :</b> Export edeceğiniz excele özel bir isim vermek için bu attribute değer atayabilirsiniz. Boş geçerseniz export-excel değerini kullanır</li>
+            <li><b>exportExcelButtonClick :</b> Normalde export excel butonuna bastığınızda data griddeki mevcut veriyi indirir. Ama siz başka veriyi excele almak isterseniz bu attribute bir metot atayarak orada önce veriyi yakalarsınız, arkasına <b>Flexi Service</b> içerisindeki exportExcel metoduna yeni datanızı yollarak excel export yapabilirsiniz                                  
             </li>
-            <li>
-              @defer {
-                <app-export-excel></app-export-excel>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[showExportExcel] :</b> Export Excel butonunu görmek için bu attribute true değer vermelisiniz</li>
-                <li><b>exportExcelFileName :</b> Export edeceğiniz excele özel bir isim vermek için bu attribute değer atayabilirsiniz. Boş geçerseniz export-excel değerini kullanır</li>
-                <li><b>exportExcelButtonClick :</b> Normalde export excel butonuna bastığınızda data griddeki mevcut veriyi indirir. Ama siz başka veriyi excele almak isterseniz bu attribute bir metot atayarak orada önce veriyi yakalarsınız, arkasına <b>Flexi Service</b> içerisindeki exportExcel metoduna yeni datanızı yollarak excel export yapabilirsiniz                                  
-                </li>
-              </ul>    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>showExportExcel</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>exportExcelFileName</th>
-                      <td>text</td>
-                      <th>excel-export</th>
-                    </tr>
-                    <tr>
-                      <th>exportExcelButtonClick</th>
-                      <td>() => void | null</td>
-                      <th>null</th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
-          </ul>
+          </ul>    
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>showExportExcel</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>exportExcelFileName</th>
+                  <td>text</td>
+                  <th>excel-export</th>
+                </tr>
+                <tr>
+                  <th>exportExcelButtonClick</th>
+                  <td>() => void | null</td>
+                  <th>null</th>
+                </tr>
+              </tbody>
+            </table>                
+          </div>
         </div>
       </app-card>
     </div>
@@ -576,209 +555,38 @@
     <div id="data-binding" style="padding-top: 5px;">
       <app-card id="data-binding" cardTitle="Data Binding">
         <div class="card-body">
-          <ul>
-            <li>
-              <p>Data Binding özelliği ile table da yapılan her bir işlemin değerini alıp OData ile birlikte
-                kullanabilirsiniz. Ya da istediğiniz gibi işleyebilirsiniz. Data Binding attribute true değeri verdiğinizde
-                artık bir event ile yapılan işlemlerin çıktıları (örn pagination da sayfa değiştirme, order, filter vs)
-                state nesnesinde alabiliyorsunuz. İsterseniz bu nesnede aldığınız değeri yine bu kütüphanede bulunan service
-                ile otomatik OData destekli bir endpointe çevirip kullanabilirsiniz isterseniz de kendi istediğiniz gibi
-                işleyebilirsiniz.</p>
-              <p class="alert alert-warning">Önemli not: Data Binding true yaptığınız da artık table otomatik hareket etmeyi
-                bırakıp her şeyi sizin halletmenizi ister. Sayfa değiştirmek için sayfa numarasına bastığınızda size yeni
-                sayfanın bilgilerini gönderir ama o sayfaya geçmez, ya da filter a değer yazdığınızda yazdığınızı state
-                objesinde size iletir ama arama yapmaz.</p>
-            </li>
-            <li>
-              @defer {
-                <app-data-binding></app-data-binding>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[dataBinding] :</b> Data Binding yapısının aktif olmasını sağlar. Buna true değer vermezseniz Data
-                  Binding'i kullanamazsınız</li>
-                <li><b>[total] :</b> Pagination hesaplamasında kullanılan değer. Data binding açık değilse otomatik kendi
-                  hesaplanıyor.</li>
-                <li><b>[loading] :</b> Data grid verileri yüklerken loader görünmesini istiyorsanız bir değişken oluşturup
-                  veri almadan önce ve sonra o değişken durumuna göre loader göndermesini sağlayabilirsiniz</li>
-                <li><b>(dataStateChange) :</b> Yapılan her işlemden sonra bu evente State objesi gelir. Bu objede tüm
-                  yapılan işlemlerin bilgileri yer alır, pageNumber, filter, order gibi. Bunu kullanarak verileri
-                  istediğiniz gibi yönetebilirsiniz</li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>dataBinding</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>total</th>
-                      <td>number</td>
-                      <th>0</th>
-                    </tr>
-                    <tr>
-                      <th>loading</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
-          </ul>
-        </div>
-      </app-card>
-    </div>   
-    
-    <!-- Resizable -->
-    <div id="resizable" style="padding-top: 5px;">
-      <app-card cardTitle="Resizable">
-        <div class="card-body">
-          <ul>
-            <li>
-              <p>Columnları tekrar boyutlandırmak için [resizable] attribute'üne true değeri verebilirsiniz. Her column başlığından sonraki çizgiyi mouse ile resize yapabilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="resizableCodeExample()"></my-code>
-              <h3>Örnek kullanım:</h3>
-              <img src="/img/resizable-example.gif" style="width: 100%;">
-            </li>
-            <li>
-              @defer {
-                <app-resizable [dataCode]="dataCode()"></app-resizable>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[resizable] :</b> Resize yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
-                  <b>false</b> vermeliyiz</li>
-                <li><b>[resizable] (column optional) :</b> Column bazlı resize yapısını kapatıp açabiliriz</li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>resizable</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>resizable (column)</th>
-                      <td>true | false</td>
-                      <th>true</th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
-          </ul>
-        </div>
-      </app-card>
-    </div>
+          <p>Data Binding özelliği ile table da yapılan her bir işlemin değerini alıp OData ile birlikte
+            kullanabilirsiniz. Ya da istediğiniz gibi işleyebilirsiniz. Data Binding attribute true değeri verdiğinizde
+            artık bir event ile yapılan işlemlerin çıktıları (örn pagination da sayfa değiştirme, order, filter vs)
+            state nesnesinde alabiliyorsunuz. İsterseniz bu nesnede aldığınız değeri yine bu kütüphanede bulunan service
+            ile otomatik OData destekli bir endpointe çevirip kullanabilirsiniz isterseniz de kendi istediğiniz gibi
+            işleyebilirsiniz.</p>
+          <p class="alert alert-warning">Önemli not: Data Binding true yaptığınız da artık table otomatik hareket etmeyi
+            bırakıp her şeyi sizin halletmenizi ister. Sayfa değiştirmek için sayfa numarasına bastığınızda size yeni
+            sayfanın bilgilerini gönderir ama o sayfaya geçmez, ya da filter a değer yazdığınızda yazdığınızı state
+            objesinde size iletir ama arama yapmaz.</p>
 
-    <!-- Draggable -->
-    <div id="draggable" style="padding-top: 5px;">
-      <app-card cardTitle="Draggable">
-        <div class="card-body">
+          @defer {
+              <app-data-binding></app-data-binding>
+          }@placeholder {
+              <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
           <ul>
-            <li>
-              <p>Columnların yerlerini değiştirmek için [resizable] attribute'üne true değeri verip columnları sürükleyerek yerlerini değiştirebilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="html" [code]="draggableCodeExample()"></my-code>
-              <h3>Örnek kullanım:</h3>
-              <img src="/img/draggable-example.gif" style="width: 100%;">
-            </li>
-            <li>
-              @defer {
-                <app-draggable [dataCode]="dataCode()"></app-draggable>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>[draggable] :</b> Draggable yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
-                  <b>false</b> vermeliyiz</li>
-                <li><b>[draggable] (column optional) :</b> Column bazlı draggable yapısını kapatıp açabiliriz</li>
-              </ul>
-    
-              <hr>
-              <div class="overflow-x">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Attribute</th>
-                      <th>Alabileceği Değer Türleri</th>
-                      <th>Default Değer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>draggable</th>
-                      <td>true | false</td>
-                      <th>false</th>
-                    </tr>
-                    <tr>
-                      <th>draggable (column)</th>
-                      <td>true | false</td>
-                      <th>true</th>
-                    </tr>
-                  </tbody>
-                </table>                
-              </div>
-            </li>
+            <li><b>[dataBinding] :</b> Data Binding yapısının aktif olmasını sağlar. Buna true değer vermezseniz Data
+              Binding'i kullanamazsınız</li>
+            <li><b>[total] :</b> Pagination hesaplamasında kullanılan değer. Data binding açık değilse otomatik kendi
+              hesaplanıyor.</li>
+            <li><b>[loading] :</b> Data grid verileri yüklerken loader görünmesini istiyorsanız bir değişken oluşturup
+              veri almadan önce ve sonra o değişken durumuna göre loader göndermesini sağlayabilirsiniz</li>
+            <li><b>(dataStateChange) :</b> Yapılan her işlemden sonra bu evente State objesi gelir. Bu objede tüm
+              yapılan işlemlerin bilgileri yer alır, pageNumber, filter, order gibi. Bunu kullanarak verileri
+              istediğiniz gibi yönetebilirsiniz</li>
           </ul>
-        </div>
-      </app-card>
-    </div>
-
-    <!-- Theme Değiştir -->
-    <div id="change-theme" style="padding-top: 5px;">
-      <app-card cardTitle="Theme Değiştir">
-        <div class="card-body">
-          <ul>
-            <li>
-              <p>Grid iki farklı theme desteklidir. Light ve Dark. Theme arasında geçiş yapmak için [themeClass] attribute değer göndermen yeterli</p>
-              <h3>Örnek kod:</h3>
-              <my-code className="" language="typescript" [code]="changeThemeCodeExample()"></my-code>
-            </li>            
-            <li> 
-              @defer {
-                <app-change-theme [dataCode]="dataCode()"></app-change-theme>
-              }@placeholder {
-                <app-loading></app-loading>
-              }
-              <hr>
-              <h3>Kodların açıklaması</h3>
-              <ul>
-                <li><b>changeTheme :</b> Theme rengini belirleyeceğiniz alan. light | dark değeri alır.</li>
-              </ul>
-    
-              <hr>
+  
+          <hr>
+          <div class="overflow-x">
               <table class="table">
                 <thead>
                   <tr>
@@ -789,14 +597,165 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th>changeTheme</th>
-                    <td>text (light | dark)</td>
-                    <th>light</th>
+                    <th>dataBinding</th>
+                    <td>true | false</td>
+                    <th>false</th>
+                  </tr>
+                  <tr>
+                    <th>total</th>
+                    <td>number</td>
+                    <th>0</th>
+                  </tr>
+                  <tr>
+                    <th>loading</th>
+                    <td>true | false</td>
+                    <th>false</th>
                   </tr>
                 </tbody>
-              </table>
-            </li>
+              </table>                
+          </div>
+        </div>
+      </app-card>
+    </div>   
+    
+    <!-- Resizable -->
+    <div id="resizable" style="padding-top: 5px;">
+      <app-card cardTitle="Resizable">
+        <div class="card-body">
+          <p>Columnları tekrar boyutlandırmak için [resizable] attribute'üne true değeri verebilirsiniz. Her column başlığından sonraki çizgiyi mouse ile resize yapabilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="resizableCodeExample()"></my-code>
+          <h3>Örnek kullanım:</h3>
+          <img src="/img/resizable-example.gif" style="width: 100%;">
+
+          @defer {
+            <app-resizable [dataCode]="dataCode()"></app-resizable>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
+          <ul>
+            <li><b>[resizable] :</b> Resize yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+              <b>false</b> vermeliyiz</li>
+            <li><b>[resizable] (column optional) :</b> Column bazlı resize yapısını kapatıp açabiliriz</li>
           </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>resizable</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>resizable (column)</th>
+                  <td>true | false</td>
+                  <th>true</th>
+                </tr>
+              </tbody>
+            </table>                
+          </div>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- Draggable -->
+    <div id="draggable" style="padding-top: 5px;">
+      <app-card cardTitle="Draggable">
+        <div class="card-body">
+          <p>Columnların yerlerini değiştirmek için [resizable] attribute'üne true değeri verip columnları sürükleyerek yerlerini değiştirebilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="html" [code]="draggableCodeExample()"></my-code>
+          <h3>Örnek kullanım:</h3>
+          <img src="/img/draggable-example.gif" style="width: 100%;">
+
+          @defer {
+            <app-draggable [dataCode]="dataCode()"></app-draggable>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
+          <ul>
+            <li><b>[draggable] :</b> Draggable yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+              <b>false</b> vermeliyiz</li>
+            <li><b>[draggable] (column optional) :</b> Column bazlı draggable yapısını kapatıp açabiliriz</li>
+          </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                  <th>Default Değer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>draggable</th>
+                  <td>true | false</td>
+                  <th>false</th>
+                </tr>
+                <tr>
+                  <th>draggable (column)</th>
+                  <td>true | false</td>
+                  <th>true</th>
+                </tr>
+              </tbody>
+            </table>                
+          </div>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- Theme Değiştir -->
+    <div id="change-theme" style="padding-top: 5px;">
+      <app-card cardTitle="Theme Değiştir">
+        <div class="card-body">
+          <p>Grid iki farklı theme desteklidir. Light ve Dark. Theme arasında geçiş yapmak için [themeClass] attribute değer göndermen yeterli</p>
+          <h3>Örnek kod:</h3>
+          <my-code className="" language="typescript" [code]="changeThemeCodeExample()"></my-code>
+
+          @defer {
+            <app-change-theme [dataCode]="dataCode()"></app-change-theme>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
+          <ul>
+            <li><b>changeTheme :</b> Theme rengini belirleyeceğiniz alan. light | dark değeri alır.</li>
+          </ul>
+
+          <hr>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Alabileceği Değer Türleri</th>
+                <th>Default Değer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>changeTheme</th>
+                <td>text (light | dark)</td>
+                <th>light</th>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </app-card>
     </div>

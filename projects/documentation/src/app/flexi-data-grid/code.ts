@@ -76,7 +76,17 @@ export const fullExampleHTMLCode: string = `
     <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" format="n2" filterType="number" title="Salary"></flexi-grid-column>
+    <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
+    <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></
+
+    <ng-template #customButtonColumnTemplate let-item="item">
+        <button class="btn btn-outline-info">
+          <i class="fa-solid fa-edit"></i>
+        </button>
+        <button class="btn btn-outline-danger ms-1">
+          <i class="fa-solid fa-trash"></i>
+        </button>            
+    </ng-template>
 
     <ng-template #footerTemplate>
     <!-- <tr>
@@ -514,8 +524,9 @@ export const filterHTMLCode: string = `
     <flexi-grid-column field="id" [filterable]="idFilterable()" [filterType]="idFilterType()" title="Id"></flexi-grid-column>
     <flexi-grid-column field="firstName" [filterable]="firstNameFilterable()" [filterType]="firstNameFilterType()" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" [filterable]="lastNameFilterable()" [filterType]="lastNameFilterType()" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" [filterable]="dateOfBirthFilterable()" [filterType]="dateOfBirthFilterType()" filterType="date" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" title="Salary"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" [filterable]="dateOfBirthFilterable()" [filterType]="dateOfBirthFilterType()" filterType="date" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+    <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" format="n" [fraction]="2" title="Salary"></flexi-grid-column>
+    <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
 </flexi-grid>
 `;
 

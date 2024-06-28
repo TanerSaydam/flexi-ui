@@ -101,6 +101,51 @@ export class FlexiDataGridComponent implements OnDestroy {
 
     <!-- İsterseniz column bazlı filter özelliğini kapatabilirsiniz -->
     <flexi-grid-column field="id" [filterable]="false" title="Id"></flexi-grid-column>
+
+    <!-- Filter açık olmasa bile fiter type vererek columnları formatlayabilirsiniz. Eğer filter açıksa onun tipini de belirliyor -->
+    <flexi-grid-column 
+    field="dateOfBirth" 
+    [filterable]="dateOfBirthFilterable()" 
+    [filterType]="dateOfBirthFilterType()" 
+    filterType="date" format="dd.MM.yyyy" 
+    title="Date Of Birth">
+    </flexi-grid-column>
+    <!-- Kodun çıktısı: 29.06.2024 -->
+    
+    <flexi-grid-column 
+    field="salary" 
+    [filterable]="salaryFilterable()" 
+    [filterType]="salaryFilterType()" 
+    filterType="number" 
+    format="n" 
+    [fraction]="2" 
+    title="Salary">
+    </flexi-grid-column>
+    <!-- Kodun çıktısı: 29.903,19 -->
+
+    <flexi-grid-column 
+    field="salary" 
+    [filterable]="salaryFilterable()" 
+    [filterType]="salaryFilterType()" 
+    filterType="number" 
+    format="n" 
+    [fraction]="2" 
+    title="Salary">
+    </flexi-grid-column>
+    <!-- Kodun çıktısı: 29.903,19 -->
+
+    <flexi-grid-column 
+    field="salary" 
+    [filterable]="salaryFilterable()" 
+    [filterType]="salaryFilterType()" 
+    filterType="number" 
+    format="c" 
+    symbol="₺" 
+    [showSymbolInFront]="true" 
+    [fraction]="2" 
+    title="Salary">
+    </flexi-grid-column>
+    <!-- Kodun çıktısı: ₺29.903,19 -->
   `);
   captionCodeExample = signal<string>(`<flexi-grid
     .

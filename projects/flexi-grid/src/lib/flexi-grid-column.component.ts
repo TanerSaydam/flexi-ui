@@ -16,6 +16,9 @@ export class FlexiGridColumnComponent {
   @Input() filterType: FilterType = "text";
   @Input() columnTemplate: TemplateRef<any> | any;
   @Input() format: DateFormatType | CurrencyFormatType | null = null;
+  @Input() fraction: number = 2;
+  @Input() symbol: string = "";
+  @Input() showSymbolInFront: boolean = true;
   @Input() width: string = "100%";
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
@@ -54,4 +57,4 @@ export type DateFormatType =
   "yyyy-MM-ddTHH:mm:ssZ" | "yyyy-MM-ddTHH:mm:ss.SSSZ" | // ISO 8601 formatları
   "MMMM dd, yyyy HH:mm" | "dd MMMM yyyy HH:mm"; // Özel formatlar
 
-  export type CurrencyFormatType = "n0" | "n2"
+  export type CurrencyFormatType = "n" | "c"

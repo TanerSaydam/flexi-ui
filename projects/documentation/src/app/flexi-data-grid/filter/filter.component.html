@@ -128,8 +128,9 @@
             <flexi-grid-column field="id" [filterable]="idFilterable()" [filterType]="idFilterType()" title="Id"></flexi-grid-column>
             <flexi-grid-column field="firstName" [filterable]="firstNameFilterable()" [filterType]="firstNameFilterType()" title="First Name"></flexi-grid-column>
             <flexi-grid-column field="lastName" [filterable]="lastNameFilterable()" [filterType]="lastNameFilterType()" title="Last Name"></flexi-grid-column>
-            <flexi-grid-column field="dateOfBirth" [filterable]="dateOfBirthFilterable()" [filterType]="dateOfBirthFilterType()" filterType="date" title="Date Of Birth"></flexi-grid-column>
-            <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" title="Salary"></flexi-grid-column>
+            <flexi-grid-column field="dateOfBirth" [filterable]="dateOfBirthFilterable()" [filterType]="dateOfBirthFilterType()" filterType="date" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+            <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" format="n" [fraction]="2" title="Salary"></flexi-grid-column>
+            <flexi-grid-column field="salary" [filterable]="salaryFilterable()" [filterType]="salaryFilterType()" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
         </flexi-grid>
         
       </div>

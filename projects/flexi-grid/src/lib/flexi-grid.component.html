@@ -158,7 +158,11 @@
                   @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                     {{ getFieldValue(item, column.field) | date: column.format! }}
                   }@else if(column.filterType === "number" && column.filterType){
-                    {{ (getFieldValue(item, column.field) | currency: '':'': column.format! === "n0" ? '1.0-0' : '1.2-2')!.toString().replace(".", "!").replaceAll(",",".").replace("!",",") }}
+                    @if(column.format === "n" || column.format === null){
+                      {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
+                    }@else if(column.format === "c"){
+                      {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront: column.fraction) }}
+                    }                    
                   }
                   @else {
                     {{ getFieldValue(item, column.field) }}
