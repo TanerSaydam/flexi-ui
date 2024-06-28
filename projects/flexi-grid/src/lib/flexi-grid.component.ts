@@ -54,20 +54,20 @@ export class FlexiGridComponent implements OnChanges {
   filterDropdownVisible = signal<{ [key: string]: boolean }>({});
   columnVisibilityDropdownVisible = signal(false);
   textFilterTypes = signal<{ operator: string, value: string }[]>([
-    { operator: "eq", value: 'Is equal to' },
-    { operator: "ne", value: 'Is not equal to' },
-    { operator: "contains", value: 'Contains' },
-    { operator: "not contains", value: 'Does not contain' },
-    { operator: "startswith", value: 'Starts with' },
-    { operator: "endswith", value: 'Ends with' }
+    { operator: "eq", value: 'Eşittir' },
+    { operator: "ne", value: 'Eşit değildir' },
+    { operator: "contains", value: 'İçerir' },
+    { operator: "not contains", value: 'İçermez' },
+    { operator: "startswith", value: 'İle başlar' },
+    { operator: "endswith", value: 'İle biter' }
   ]);
   numberFilterTypes = signal<{ operator: string, value: string }[]>([
-    { operator: "eq", value: 'Is equal to' },
-    { operator: "ne", value: 'Is not equal to' },
-    { operator: "gt", value: 'Is greater than' },
-    { operator: "ge", value: 'Is greater than or equal to' },
-    { operator: "lt", value: 'Is less than' },
-    { operator: "le", value: 'Is less than or equal to' }
+    { operator: "eq", value: 'Eşittir' },
+    { operator: "ne", value: 'Eşit değildir' },
+    { operator: "gt", value: 'Daha büyüktür' },
+    { operator: "ge", value: 'Daha büyüktür ya da eşittir' },
+    { operator: "lt", value: 'Daha küçüktür' },
+    { operator: "le", value: 'Daha küçüktür ya da eşittir' }
   ]);
   draggedColumnIndex: number | undefined;
   tempDraggable: boolean = false;
