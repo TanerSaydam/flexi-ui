@@ -70,6 +70,7 @@ export class FlexiGridComponent implements OnChanges {
     { operator: "le", value: 'Is less than or equal to' }
   ]);
   draggedColumnIndex: number | undefined;
+  tempDraggable: boolean = false;
 
   @Output() dataStateChange = new EventEmitter<any>();
 
@@ -419,6 +420,13 @@ export class FlexiGridComponent implements OnChanges {
     this.resizingColumn = column;
     this.startX = event.pageX;
     this.startWidth = event.target!.parentElement.offsetWidth;
+
+    // Eğer draggable ise, geçici olarak devre dışı bırak
+    if (this.draggable) {
+      this.tempDraggable = this.draggable;
+      this.draggable = false;
+    }
+    
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }
@@ -436,6 +444,12 @@ export class FlexiGridComponent implements OnChanges {
     this.resizingColumn = undefined;
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
+
+    // Resize işlemi bittiğinde draggable durumunu geri yükle
+    if (this.tempDraggable) {
+      this.draggable = this.tempDraggable;
+      this.tempDraggable = false;
+    }
   }
 
   onDragStart(event: DragEvent, index: number) {
