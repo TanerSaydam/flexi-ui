@@ -1,5 +1,5 @@
  <title>Angular Flexi Grid</title>
- <div [attr.data-bs-theme]="themeClass" class="table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width}">
+ <div [attr.data-bs-theme]="themeClass" class="my-table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width}">
   <table [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
     @if(showCaption){
       <caption class="bg-color-gray" style="padding: 10px;">
@@ -15,10 +15,10 @@
             @if(showColumnVisibility){
               <button [ngClass]="columnVisibilityBtnClass" title="Column Visibility" (click)="toggleColumnVisibilityDropdown()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="cursor" style="width: 15px;" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
-                <div class="dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
-                  <p class="dropdown-title">Column Visibility</p>
+                <div class="my-dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
+                  <p class="my-dropdown-title">Column Visibility</p>
                   @for(column of columns; track $index){
-                    <label class="dropdown-checkbox-item" [for]="column.field">
+                    <label class="my-dropdown-checkbox-item" [for]="column.field">
                       <input [(ngModel)]="column.visible" [id]="column.field" type="checkbox">
                       {{ column.title ? column.title : column.field }}
                     </label>                    
@@ -49,7 +49,7 @@
                 (dragover)="onDragOver($event, $index)" 
                 (drop)="onDrop($event, $index)">
               @if(resizable && column.resizable){
-                <div class="resize-handle" (mousedown)="onMouseDown($event, column)"></div>
+                <div class="my-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
               }
               <div (click)="sort(column.field)">
                 <span>{{ column.title ? column.title : column.field }}</span>
@@ -63,12 +63,16 @@
               </div>              
             </th>
           }@else {
-            <th [draggable]="(draggable && column.draggable)" [ngStyle]="{'width': column.width}" class="my-border" [hidden]="!column.visible"
+            <th 
+              [draggable]="(draggable && column.draggable)" 
+              [ngStyle]="{'width': column.width}" 
+              class="my-border" 
+              [hidden]="!column.visible"
               (dragstart)="onDragStart($event, $index)" 
               (dragover)="onDragOver($event, $index)" 
               (drop)="onDrop($event, $index)">
               @if(resizable && column.resizable){
-                <div class="resize-handle" (mousedown)="onMouseDown($event, column)"></div>
+                <div class="my-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
               }
               <div>
                 <span>{{ column.title ? column.title : column.field }}</span>
@@ -85,27 +89,27 @@
           @for(column of columns; track $index){
             <th [hidden]="!column.visible">
               @if(filterable && column.filterable){
-                <div class="d-flex filter-container">
+                <div class="d-flex my-filter-container">
                   @if(column.filterType === "text"){
-                    <input class="filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                    <input class="my-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                     <svg class="svg cursor" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-                    <div class="dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
+                    <div class="my-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
                       @for(filterType of textFilterTypes(); track filterType.operator){
-                        <a class="dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'my-active' : ''" (click)="applyFilter(column, filterType.operator)">
+                        <a class="my-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'my-active' : ''" (click)="applyFilter(column, filterType.operator)">
                           {{ filterType.value }}
                         </a>
                       }                    
                     </div>
                   }@else if(column.filterType === "date"){
-                    <input class="filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                    <input class="my-filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                   }@else if(column.filterType === "date-time"){
-                    <input class="filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                    <input class="my-filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                   }@else if(column.filterType === "number"){
-                    <input class="filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                    <input class="my-filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                     <svg class="svg cursor" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-                    <div class="dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
+                    <div class="my-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
                       @for(filterType of numberFilterTypes(); track filterType.operator){
-                        <a class="dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'my-active' : ''" (click)="applyFilter(column, filterType.operator)">
+                        <a class="my-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'my-active' : ''" (click)="applyFilter(column, filterType.operator)">
                           {{ filterType.value }}
                         </a>
                       }                    
@@ -125,7 +129,7 @@
     </thead>
     <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}">
       @if(loading){        
-        <div class="spinner-container">
+        <div class="my-spinner-container">
           <div class="spinner-1"></div>
           <div class="spinner-2"></div>
         </div>
@@ -165,54 +169,54 @@
     <tfoot>
       <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>
       @if(pageable){
-        <tr class="pagination-tr">
+        <tr class="my-pagination-tr">
         <td [colSpan]="columns!.length">
-          <div class="pagination-container">
-            <ul class="pagination">
+          <div class="my-pagination-container">
+            <ul class="my-pagination">
               @if(this.pageNumbers().length > 1){
                 
-                <li class="page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
-                  <a class="page-link" aria-label="Previous">
+                <li class="my-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
+                  <a class="my-page-link" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
-                <li class="page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''"
+                <li class="my-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''"
                   (click)="changePage(state.pageNumber - 1)">
-                  <a class="page-link" aria-label="Previous">
+                  <a class="my-page-link" aria-label="Previous">
                     <span aria-hidden="true">&#8249;</span>
                   </a>
                 </li>
                 @if(pageNumbers()[0] !== 1){
-                <li class="page-item" (click)="previousPageGroup()">
-                  <a class="page-link">...</a>
+                <li class="my-page-item" (click)="previousPageGroup()">
+                  <a class="my-page-link">...</a>
                 </li>
                 }
                 @for(pageNumber of pageNumbers(); track pageNumber){
-                <li class="page-item" [ngClass]="state.pageNumber === pageNumber ? 'active': ''">
-                  <a (click)="changePage(pageNumber)" class="page-link">
+                <li class="my-page-item" [ngClass]="state.pageNumber === pageNumber ? 'my-active': ''">
+                  <a (click)="changePage(pageNumber)" class="my-page-link">
                     {{pageNumber}}
                   </a>
                 </li>
                 }
                 @if(pageNumbers()[pageNumbers().length - 1] !== totalPageCount()){
-                <li class="page-item" (click)="nextPageGroup()">
-                  <a class="page-link">...</a>
+                <li class="my-page-item" (click)="nextPageGroup()">
+                  <a class="my-page-link">...</a>
                 </li>
                 }
-                <li class="page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
+                <li class="my-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
                   (click)="changePage(state.pageNumber + 1)">
-                  <a class="page-link" aria-label="Next">
+                  <a class="my-page-link" aria-label="Next">
                     <span aria-hidden="true">&#8250;</span>
                   </a>
                 </li>
-                <li class="page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
+                <li class="my-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
                   (click)="changePage(totalPageCount())">
-                  <a class="page-link" aria-label="Next">
+                  <a class="my-page-link" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>
               }
-              <div class="page-size-select">
+              <div class="my-page-size-select">
                 <select [ngModel]="state.pageSize" (change)="changePageSize($event)">
                   @for(size of pageSizeList; track size){
                   <option>{{size}}</option>

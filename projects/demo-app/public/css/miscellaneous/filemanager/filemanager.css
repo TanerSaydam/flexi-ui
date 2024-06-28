@@ -1,0 +1,348 @@
+[clear]:before, [clear]:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.filemanager-structure.big-file-manager {
+  width: 100%;
+  height: 60vh;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 1.5rem;
+}
+
+.big-file-manager.filemanager-structure ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.big-file-manager.filemanager-structure ul li {
+  padding: 0;
+}
+.big-file-manager.filemanager-structure ul > li {
+  cursor: pointer;
+  vertical-align: top;
+}
+.big-file-manager.filemanager-structure ul > li > b {
+  display: block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-align: center;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 0.1s linear;
+  transition: -webkit-transform 0.1s linear;
+  transition: transform 0.1s linear;
+  transition: transform 0.1s linear, -webkit-transform 0.1s linear;
+  width: 74px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  padding: 10px 4px;
+  font-weight: 400;
+}
+.big-file-manager.filemanager-structure ul > li > b svg {
+  display: block;
+  margin: 0 auto;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+.big-file-manager.filemanager-structure ul > li > b:hover {
+  background: rgba(145, 209, 239, 0.1803921569);
+  outline: 1px solid #c1e8f9;
+}
+.big-file-manager.filemanager-structure ul > li.show-up > b {
+  font-size: 14px;
+  display: block;
+  width: 100% !important;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+.big-file-manager.filemanager-structure ul > li.show-up > b > .cm-folder-back {
+  display: block;
+}
+.big-file-manager.filemanager-structure ul > li:not(.show-up) > b:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+.big-file-manager.filemanager-structure ul > li.hide-up > b > .cm-folder-back {
+  display: none;
+}
+.big-file-manager.filemanager-structure ul > li .no-item-inside-folder {
+  cursor: default;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.big-file-manager.filemanager-structure ul > li.data-moving:not(.show-up) > b {
+  opacity: 0.6;
+}
+.big-file-manager.filemanager-structure ul > li span.name {
+  border: 1px solid transparent;
+}
+.big-file-manager.filemanager-structure ul > li.renaming span.name {
+  border: 1px solid #ffffff;
+  display: block;
+  outline: 0;
+  cursor: text;
+  background: rgba(255, 255, 255, 0.1);
+}
+.big-file-manager.filemanager-structure ul li[data-file-icon=folder] > b > svg {
+  color: #F7D774;
+}
+.big-file-manager.filemanager-structure ul ul {
+  display: none;
+}
+.big-file-manager .cm-folder-back {
+  display: none;
+}
+
+.big-file-manager.filemanager-structure ul > li.context-visible > b,
+.big-file-manager.filemanager-structure ul > li.select > b {
+  background: rgba(145, 209, 239, 0.1803921569);
+  outline: 1px solid #c1e8f9;
+}
+
+/*-----------UnderStad-------------------|START--------*/
+.big-file-manager.filemanager-structure ul li.show-up.select > b {
+  background: transparent;
+  outline: none;
+}
+.big-file-manager.filemanager-structure ul li.file-sub-active.hide-up > b {
+  display: none;
+}
+.big-file-manager.filemanager-structure ul li:not(.show-up):not(.file-sub-active) {
+  display: inline-block;
+}
+.big-file-manager.filemanager-structure ul > li.show-up > b {
+  background: transparent;
+}
+.big-file-manager.filemanager-structure ul > li.show-up > b .cm-folder-back {
+  float: left;
+  padding: 5px 13px;
+  background: rbga(0, 0, 0, 0.1);
+}
+.big-file-manager.filemanager-structure ul > li.show-up > b .cm-folder-back + svg {
+  display: none !important;
+}
+.big-file-manager.filemanager-structure ul > li.show-up > b .cm-folder-back svg {
+  font-size: 16px;
+}
+.big-file-manager.filemanager-structure ul > li > b i.cm-folder-back svg {
+  position: relative;
+  top: 3px;
+}
+
+/*-----------UnderStad------------------|END---------*/
+/*-------------Folder Context Menu---------|START---*/
+.append-option-box {
+  position: fixed;
+  width: 200px;
+  top: 45px;
+  z-index: 999;
+  left: 57px;
+}
+
+.renaming-box {
+  position: absolute;
+  background: white;
+  padding: 10px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1803921569);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1803921569);
+  margin-left: 15px;
+  margin-top: -10px;
+  outline: 0;
+  border: 1px solid #c2c2c2;
+}
+
+.renaming-box input {
+  background: #fff;
+  padding: 2px;
+  font-size: 15px;
+  color: #000;
+  border: 1px solid #9E9E9E;
+  display: inline-block;
+  border-right: 0;
+  line-height: 23px;
+  outline: 0;
+}
+
+.renaming-box button {
+  cursor: pointer;
+  color: #2196F3;
+  background: #e9e9e9;
+  font-size: 13px;
+  line-height: 25px;
+  display: inline-block;
+  border: 1px solid #9E9E9E;
+  border-left: 0;
+  position: relative;
+  top: -1px;
+  outline: 0;
+}
+
+/*-------------Folder Context Menu---------|END---*/
+/*-------Context Menu Style-----------------|START-----*/
+.append-option-box > div > div {
+  position: relative;
+}
+.append-option-box > div > div > svg {
+  position: absolute;
+  right: 1.5rem;
+  font-size: 8px;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.filemanager-structure.big-file-manager.medium li svg {
+  font-size: 35px;
+}
+.filemanager-structure.big-file-manager.largesvg {
+  font-size: 45px;
+}
+.filemanager-structure.big-file-manager.large li svg {
+  font-size: 45px;
+}
+
+/*.big-file-manager {
+	&.filemanager-structure {
+		&.large {
+			ul {
+				& > li {
+					& > b {
+						width: 84px;
+					}
+				}
+			}
+		}
+		&.medium {
+			ul {
+				& > li {
+					& > b {
+						width: 74px;
+					}
+				}
+			}
+		}
+	}
+}*/
+/*-------Context Menu Style-----------------|END-----*/
+.filemanager-structure .show-up > b {
+  background: rgba(0, 0, 0, 0.05) !important;
+  outline: none !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem !important;
+  font-size: 1.2rem !important;
+  border-radius: 5px;
+}
+.filemanager-structure .show-up > b > .name {
+  margin-left: auto;
+}
+
+/*-------Search----------------|Start-----*/
+.cm-address-bar-search > div {
+  float: left;
+  padding: 0.5rem;
+  padding-bottom: 1rem;
+}
+.cm-address-bar-search > div.address-search {
+  width: 70%;
+}
+.cm-address-bar-search > div.search-file-and-folder {
+  width: 30%;
+}
+.cm-address-bar-search .cm-button {
+  padding: 6px 15px;
+  background: #ffffff;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5098039216);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 9;
+}
+
+.address-short-btn {
+  position: absolute;
+  overflow: hidden;
+  top: 1px;
+  bottom: 1px;
+  left: 1px;
+  padding: 0 6px;
+  white-space: nowrap;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 5px;
+}
+.address-short-btn > div {
+  float: left;
+  padding: 8px 10px;
+  cursor: pointer;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.address-short-btn > div svg {
+  margin-left: 16px;
+  color: rgba(0, 0, 0, 0.2705882353);
+  color: rgba(0, 0, 0, 0.2705882353);
+}
+.address-short-btn > div:last-child svg {
+  display: none;
+}
+.address-short-btn > div:hover {
+  background: #d9d9d9;
+}
+.address-short-btn:empty {
+  display: none;
+}
+
+/*-------Search----------------|END-----*/
+@media (max-width: 767px) {
+  .append-option-box {
+    position: fixed;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 100%;
+    left: 0 !important;
+  }
+  .append-option-box > div {
+    float: left !important;
+  }
+  .append-option-box > div > div {
+    float: left;
+    white-space: nowrap;
+  }
+  .append-option-box > .inner-contenxt-box {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: nowrap;
+        flex-flow: nowrap;
+  }
+}
+/*# sourceMappingURL=filemanager.css.map */

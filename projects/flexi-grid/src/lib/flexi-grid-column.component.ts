@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'flexi-grid-column',
@@ -7,7 +7,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
   imports: [],
   template:''
 })
-export class FlexiGridColumnComponent {
+export class FlexiGridColumnComponent { 
   @Input() field: string = '';
   @Input() title: string = '';
   @Input() sortable: boolean = true;
@@ -21,8 +21,23 @@ export class FlexiGridColumnComponent {
   @Input() draggable: boolean = true;
   @Input() className: string = "";
   value: string = "";
-  filterOperator: string = "contains";  
+  filterOperator: string = "contains";
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['filterType']) {
+      this.setDefaultFilterOperator();
+    }
+  }
+  
+  setDefaultFilterOperator() {
+    if (this.filterType === 'number') {
+      this.filterOperator = 'eq';
+    } else {
+      this.filterOperator = 'contains';
+    }
+  }
 }
+
 
 export type FilterType = "text" | "date" | "date-time" | "number"
 export type DateFormatType = 

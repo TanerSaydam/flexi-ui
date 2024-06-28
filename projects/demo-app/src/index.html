@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>DemoApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="img/splashscreens/iphone6_splash.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/iphoneplus_splash.png"
+    media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/iphonex_splash.png"
+    media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/iphonexr_splash.png"
+    media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/iphonexsmax_splash.png"
+    media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/ipad_splash.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/ipadpro1_splash.png"
+    media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/ipadpro3_splash.png"
+    media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <link href="img/splashscreens/ipadpro2_splash.png"
+    media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image">
+  <!-- Remove Tap Highlight on Windows Phone IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+  <!-- base css -->
+  <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="css/vendors.bundle.css">
+  <link id="appbundle" rel="stylesheet" media="screen, print" href="css/app.bundle.css">
+  <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
+  <link id="myskin" rel="stylesheet" media="screen, print" href="css/skins/skin-master.css">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+  <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+</head>
+
+<body>
+  <script>
+    /**
+     *	This script should be placed right after the body tag for fast execution 
+     *	Note: the script is written in pure javascript and does not depend on thirdparty library
+     **/
+    'use strict';
+
+    var htmlRoot = document.getElementsByTagName('HTML')[0],
+      classHolder = document.getElementsByTagName('BODY')[0],
+      head = document.getElementsByTagName('HEAD')[0],
+      themeID = document.getElementById('mytheme'),
+      filterClass = function (t, e) {
+        return String(t).split(/[^\w-]+/).filter(function (t) {
+          return e.test(t)
+        }).join(' ')
+      },
+      /** 
+       * Load theme options
+       **/
+      loadSettings = function () {
+        var t = localStorage.getItem('themeSettings') || '',
+          e = t ? JSON.parse(t) :
+            {};
+        return Object.assign(
+          {
+            htmlRoot: '',
+            classHolder: '',
+            themeURL: ''
+          }, e)
+      },
+      /** 
+       * Save to localstorage 
+       **/
+      saveSettings = function () {
+        themeSettings.htmlRoot = filterClass(htmlRoot.className, /^(root)-/i),
+          themeSettings.classHolder = filterClass(classHolder.className, /^(nav|header|footer|mod|display)-/i),
+          themeSettings.themeURL = themeID.getAttribute("href") ? themeID.getAttribute("href") : "",
+          localStorage.setItem("themeSettings", JSON.stringify(themeSettings))
+      },
+      /** 
+       * Reset settings
+       **/
+      resetSettings = function () {
+        localStorage.setItem("themeSettings", "")
+      },
+      themeSettings = loadSettings();
+
+    themeID || ((themeID = document.createElement('link')).id = 'mytheme',
+      themeID.rel = 'stylesheet',
+      themeID.href = '',
+      head.appendChild(themeID),
+      themeID = document.getElementById('mytheme')),
+      themeSettings.htmlRoot && (htmlRoot.className = themeSettings.htmlRoot),
+      themeSettings.classHolder && (classHolder.className = themeSettings.classHolder),
+      themeSettings.themeURL && themeID.setAttribute("href", themeSettings.themeURL);
+
+  </script>
+  
+  <app-root></app-root>
+
+  <script src="https://kit.fontawesome.com/dc59d75dac.js" crossorigin="anonymous"></script>
+  <script src="js/vendors.bundle.js"></script>
+  <script src="js/app.bundle.js"></script>
+</body>
+
+</html>

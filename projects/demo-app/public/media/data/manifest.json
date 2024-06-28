@@ -1,0 +1,34 @@
+{
+  "short_name": "SmartAdmin",
+  "name": "Application WebApp",
+  "description": "SmartAdmin WebApp",
+  "dir": "auto",
+  "icons": [
+    {
+      "src": "./img/splashscreens/launcher-icon.png",
+      "sizes": "48x48",
+      "type": "img/png"
+    },
+    {
+      "src": "./img/splashscreens/launcher-icon-2x.png",
+      "sizes": "96x96",
+      "type": "img/png"
+    },
+    {
+      "src": "./img/splashscreens/launcher-icon-4x.png",
+      "sizes": "192x192",
+      "type": "img/png"
+    },
+    {
+      "src": "./img/splashscreens/launcher-icon-8x.png",
+      "sizes": "256x256",
+      "type": "img/png"
+    }
+  ],
+  "display": "standalone",
+  "orientation": "portrait",
+  "prefer_related_applications": true,
+  "related_applications": [],
+  "theme_color": "#29BDBB",
+  "background_color": "#29BDBB"
+}

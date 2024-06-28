@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './flexi-grid.component.html',
-  styleUrl: `./flexi-grid.component.css`
+  styleUrl: `./flexi-grid.component.css`  
 })
 export class FlexiGridComponent implements OnChanges {
   @Input() data: any[] = [];
@@ -80,7 +80,7 @@ export class FlexiGridComponent implements OnChanges {
   startX: number | undefined;
   startWidth: number | undefined;
 
-  ngOnChanges(changes: SimpleChanges): void {   
+  ngOnChanges(changes: SimpleChanges): void {    
     if (this.pageSize !== this.state.pageSize) {     
       this.state.pageSize = +this.pageSize;
     }
@@ -179,13 +179,15 @@ export class FlexiGridComponent implements OnChanges {
     let filteredData = this.data;
     
     if (this.filterable && this.state.filter.length > 0 && !this.dataBinding) {
-      this.state.filter.forEach(filter => {
+      const filters = this.state.filter.filter(p=> p.value);
+
+      filters.forEach(filter => {
         filteredData = filteredData.filter(item => {
           const field = filter.field;
           const value = filter.value;
-          const itemValue = item[field].toString().toLowerCase();
-          const filterValue = value.toString().toLowerCase();
-    
+          const itemValue = item[field].toString().toLocaleLowerCase('tr');
+          const filterValue = value.toString().toLocaleLowerCase('tr');
+
           switch (filter.operator) {
             case 'eq':
               return itemValue === filterValue;
