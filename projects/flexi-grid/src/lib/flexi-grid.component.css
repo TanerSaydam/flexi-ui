@@ -148,7 +148,7 @@ a {
     border: 1px solid var(--border-color);
     border-radius: 12px;
     overflow-x: auto;
-    margin: 20px;
+    /* margin: 20px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;

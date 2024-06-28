@@ -42,7 +42,7 @@
           <th [ngStyle]="{'width': indexWidth}">#</th>
         }
         @for(column of columns; track $index){          
-          @if(sortable && column.sortable){
+          @if(sortable && column.sortable && column.field){
             <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible"
                 [draggable]="(draggable && column.draggable)"
                 (dragstart)="onDragStart($event, $index)" 
@@ -88,7 +88,7 @@
           }
           @for(column of columns; track $index){
             <th [hidden]="!column.visible">
-              @if(filterable && column.filterable){
+              @if(column.filterable && column.field){
                 <div class="d-flex my-filter-container">
                   @if(column.filterType === "text"){
                     <input class="my-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
@@ -150,15 +150,17 @@
                 <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
               </td>
             }@else {
-              <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible" [ngClass]="column.className">                
-                @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
-                  {{ item[column.field] | date: column.format! }}
-                }@else if(column.filterType === "number" && column.filterType){
-                  {{ (item[column.field] | currency: '':'': column.format! === "n0" ? '1.0-0' : '1.2-2')!.toString().replace(".", "!").replaceAll(",",".").replace("!",",") }}
+              <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible" [ngClass]="column.className">
+                @if(column.field){
+                  @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
+                    {{ getFieldValue(item, column.field) | date: column.format! }}
+                  }@else if(column.filterType === "number" && column.filterType){
+                    {{ (getFieldValue(item, column.field) | currency: '':'': column.format! === "n0" ? '1.0-0' : '1.2-2')!.toString().replace(".", "!").replaceAll(",",".").replace("!",",") }}
+                  }
+                  @else {
+                    {{ getFieldValue(item, column.field) }}
+                  }
                 }
-                @else {
-                  {{ item[column.field] }}
-                }                
               </td>
             }            
           }

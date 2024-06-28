@@ -179,6 +179,11 @@ export class FlexiGridComponent implements OnChanges {
   updatePagedData() {
     let filteredData = this.data;
     
+    if(!filteredData) {
+      this.pagedData.set([]);
+      return;
+    }
+
     if (this.filterable && this.state.filter.length > 0 && !this.dataBinding) {
       const filters = this.state.filter.filter(p=> p.value);
 
@@ -478,5 +483,19 @@ export class FlexiGridComponent implements OnChanges {
     }
 
     this.draggedColumnIndex = undefined;
+  }
+
+  getFieldValue(item: any, field: string){
+    if(!field.includes(".")){
+      return item[field]
+    }else{
+      const fields = field.split(".");
+      if(fields.length === 2){
+       return item[fields[0]][fields[1]]
+      }else{
+        console.log("Value not found!");        
+        return "";
+      }
+    }
   }
 }
