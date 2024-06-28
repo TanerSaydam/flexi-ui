@@ -41,6 +41,7 @@ svg{
 a {
     cursor: pointer;
     user-select: none;
+    text-decoration: none !important;
 }
 
 .my-page-size-select {
@@ -301,6 +302,11 @@ div .my-active{
     background-color: var(--background-color-part);
     border: 1px solid var(--border-color);
     border-radius: 3px;
+}
+
+.my-page-link:hover{
+    background-color: var(--hover-background-color) !important;
+    color: var(--hover-text-color) !important;
 }
 
 .my-pagination .my-page-item.disabled {
