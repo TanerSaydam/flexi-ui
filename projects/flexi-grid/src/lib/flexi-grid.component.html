@@ -137,43 +137,44 @@
           <div class="my-spinner-2"></div>
         </div>
       }
-      @for(item of pagedData(); track $index){
-        <tr>
-          @if(showIndex){
-            @if(!pageable){
-              <td [ngStyle]="{'width': indexWidth}">{{($index + 1)}}</td>
+      @if(data.length > 0){
+        @for(item of pagedData(); track $index){
+          <tr>
+            @if(showIndex){
+              @if(!pageable){
+                <td [ngStyle]="{'width': indexWidth}">{{($index + 1)}}</td>
+              }
+              @else{
+                <td [ngStyle]="{'width': indexWidth}">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
+              }
             }
-            @else{
-              <td [ngStyle]="{'width': indexWidth}">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
+            @for(column of columns; track $index){
+              @if(column.columnTemplate){
+                <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className">
+                  <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
+                </td>
+              }@else {
+                <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className">
+                  @if(column.field){
+                    @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
+                      {{ getFieldValue(item, column.field) | date: column.format! }}
+                    }@else if(column.filterType === "number" && column.filterType){
+                      @if(column.format === "n" || column.format === null){
+                        {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
+                      }@else if(column.format === "c"){
+                        {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront: column.fraction) }}
+                      }                    
+                    }
+                    @else {
+                      {{ getFieldValue(item, column.field) }}
+                    }
+                  }
+                </td>
+              }            
             }
-          }
-          @for(column of columns; track $index){
-            @if(column.columnTemplate){
-              <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className">
-                <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
-              </td>
-            }@else {
-              <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className">
-                @if(column.field){
-                  @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
-                    {{ getFieldValue(item, column.field) | date: column.format! }}
-                  }@else if(column.filterType === "number" && column.filterType){
-                    @if(column.format === "n" || column.format === null){
-                      {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
-                    }@else if(column.format === "c"){
-                      {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront: column.fraction) }}
-                    }                    
-                  }
-                  @else {
-                    {{ getFieldValue(item, column.field) }}
-                  }
-                }
-              </td>
-            }            
-          }
-        </tr>
-      }
-      @empty {
+          </tr>
+        }
+      }@else {
         @if(!loading){
           <tr style="height: 100%;">
             <td style="text-align: center;" [colSpan]="columns?.length">
@@ -182,7 +183,6 @@
           </tr>
         }
       }
-
     </tbody>
     <tfoot>
       <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>
