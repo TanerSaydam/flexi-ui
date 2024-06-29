@@ -13,7 +13,7 @@ import { SharedService } from '../../shared.service';
   imports: [FlexiGridColumnComponent,FlexiGridComponent, MyCodeComponent],
   templateUrl: './full.component.html',
   styleUrl: './full.component.css',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class FullComponent {
   users = signal<UserModel[]>([])
@@ -38,7 +38,7 @@ export class FullComponent {
     let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
 
     this.http.get(endpoint).subscribe((res:any)=> {
-      this.users.set(res.data);
+      this.users.set(res.data);      
       this.total.set(res.total);      
       this.loading.set(false);
     });

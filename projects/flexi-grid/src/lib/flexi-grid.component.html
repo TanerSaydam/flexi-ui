@@ -138,7 +138,7 @@
         </div>
       }
       @if(data.length > 0){
-        @for(item of pagedData(); track $index){
+        @for(item of pagedData(); track $index; let i = $index){
           <tr>
             @if(showIndex){
               @if(!pageable){
@@ -151,7 +151,7 @@
             @for(column of columns; track $index){
               @if(column.columnTemplate){
                 <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className">
-                  <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
+                  <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
                 </td>
               }@else {
                 <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className">
