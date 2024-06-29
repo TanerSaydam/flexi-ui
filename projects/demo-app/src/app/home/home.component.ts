@@ -36,7 +36,11 @@ export class HomeComponent {
     }
 
     this.loading.set(true);
-    this.http.post(enpoint, data).subscribe({
+    this.http.post(enpoint, data, {
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUQU5FUiBTQVlEQU0iLCJlbWFpbCI6InRhbmVyc2F5ZGFtQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2F1dGhlbnRpY2F0aW9uIjoiZjM5ZjA5MTctMWNmZi00MmI4LWIxOTQtNmYxNDk0ZjYzZmI5IiwiQ29tcGFueUlkIjoiN2JmNTYzZGEtNTE2Ni00MGJhLWE4NjEtMWJjNTQ4YTFhNjA5IiwibmJmIjoxNzE5NjE3NzY4LCJleHAiOjE3MjIyMDk3NjgsImlzcyI6Ind3dy5teXNpdGVtLmNvbSIsImF1ZCI6Ind3dy55b3Vyc2l0ZS5jb20ifQ.DHmLT1OPiec_LgK5_aNJodzU0W4lTkWVHmFtoE2kfLU"
+      }
+    }).subscribe({
       next: (res: any)=> {
         this.result.set(res);
         this.loading.set(false);

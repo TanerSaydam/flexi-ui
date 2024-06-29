@@ -62,40 +62,39 @@ a {
     z-index: 1;
     width: 100%;
     background-color: rgba(85, 83, 109, 0.1);
-    height: 100%;
-    padding-top: 150px;
+    height: 100%;    
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.spinner-1 {
+.my-spinner-1 {
     position: absolute;
     height: 60px;
     width: 60px;
     border: 3px solid;
-    top: 41.5%;
+    top: auto;
     border-radius: 50%;
     border-left-color: transparent;
     border-right-color: transparent;
-    animation: spin-1 0.8s linear infinite;
+    animation: my-spin-1 0.8s linear infinite;
     background-color: transparent;
 }
 
-.spinner-2 {
+.my-spinner-2 {
     position: absolute;
     height: 30px;
     width: 30px;
-    top: 45%;
+    top: auto;
     border: 3px solid;
     border-radius: 50%;
     border-top-color: transparent;
     border-bottom-color: transparent;
-    animation: spin-2 1.3s linear infinite;
+    animation: my-spin-2 1.3s linear infinite;
     background-color: transparent;
 }
 
-@keyframes spin-1 {
+@keyframes my-spin-1 {
     0% {
         transform: rotate(0deg);
     }
@@ -105,7 +104,7 @@ a {
     }
 }
 
-@keyframes spin-2 {
+@keyframes my-spin-2 {
     0% {
         transform: rotate(0deg);
     }

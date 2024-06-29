@@ -42,7 +42,7 @@
           <th [ngStyle]="{'width': indexWidth}">#</th>
         }
         @for(column of columns; track $index){          
-          @if(sortable && column.sortable && column.field){
+          @if(sortable && column.sortable && column.field && pagedData().length > 0){
             <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible"
                 [draggable]="(draggable && column.draggable)"
                 (dragstart)="onDragStart($event, $index)" 
@@ -81,7 +81,7 @@
           }
         }
       </tr>
-      @if(filterable){
+      @if(filterable && pagedData().length > 0){
         <tr>
           @if(showIndex){
             <th [ngStyle]="{'width': indexWidth}"></th>
@@ -130,11 +130,11 @@
         </tr>
       }
     </thead>
-    <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}">
+    <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;">
       @if(loading){        
         <div class="my-spinner-container">
-          <div class="spinner-1"></div>
-          <div class="spinner-2"></div>
+          <div class="my-spinner-1"></div>
+          <div class="my-spinner-2"></div>
         </div>
       }
       @for(item of pagedData(); track $index){
@@ -149,11 +149,11 @@
           }
           @for(column of columns; track $index){
             @if(column.columnTemplate){
-              <td [ngStyle]="{'width': column.width}" [ngClass]="column.className">
+              <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className">
                 <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: $index}"></ng-container>
               </td>
             }@else {
-              <td [ngStyle]="{'width': column.width}" [hidden]="!column.visible" [ngClass]="column.className">
+              <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className">
                 @if(column.field){
                   @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                     {{ getFieldValue(item, column.field) | date: column.format! }}
@@ -172,7 +172,16 @@
             }            
           }
         </tr>
+      }
+      @empty {
+        @if(!loading){
+          <tr style="height: 100%;">
+            <td style="text-align: center;" [colSpan]="columns?.length">
+              <h4>Gösterilecek veri bulunamadı!</h4>
+            </td>
+          </tr>
         }
+      }
 
     </tbody>
     <tfoot>

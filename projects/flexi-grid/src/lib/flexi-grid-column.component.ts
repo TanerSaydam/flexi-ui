@@ -23,6 +23,7 @@ export class FlexiGridColumnComponent {
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
   @Input() className: string = "";
+  @Input() textAlign: TextAlignType = "left";  
   value: string = "";
   filterOperator: string = "contains";
 
@@ -41,7 +42,7 @@ export class FlexiGridColumnComponent {
   }
 }
 
-
+export type TextAlignType = "left" | "center" | "right";
 export type FilterType = "text" | "date" | "date-time" | "number"
 export type DateFormatType = 
   "d" | "dd" | "ddd" | "dddd" | // Gün
