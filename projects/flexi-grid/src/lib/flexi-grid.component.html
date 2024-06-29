@@ -42,7 +42,7 @@
           <th [ngStyle]="{'width': indexWidth}">#</th>
         }
         @for(column of columns; track $index){          
-          @if(sortable && column.sortable && column.field && pagedData().length > 0){
+          @if(sortable && column.sortable && column.field && data.length > 0){
             <th [ngStyle]="{'width': column.width}" class="cursor my-border" [hidden]="!column.visible"
                 [draggable]="(draggable && column.draggable)"
                 (dragstart)="onDragStart($event, $index)" 
@@ -81,7 +81,7 @@
           }
         }
       </tr>
-      @if(filterable && pagedData().length > 0){
+      @if(filterable && data.length > 0){
         <tr>
           @if(showIndex){
             <th [ngStyle]="{'width': indexWidth}"></th>
