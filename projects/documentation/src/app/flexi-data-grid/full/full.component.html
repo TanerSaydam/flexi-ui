@@ -37,17 +37,12 @@
         (dataStateChange)="dataStateChange($event)"
         [sortable]="true"
         [draggable]="true">
-          <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
-          <flexi-grid-column field="avatarUrl" width="130px" textAlign="center" title="Resim" [filterable]="false" [sortable]="false" [columnTemplate]="imageColumnTemplate"></flexi-grid-column>
+          <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>          
           <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
           <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
           <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
           <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
-          <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>    
-          
-          <ng-template #imageColumnTemplate let-item="item">   
-            <img src="item.avatarUrl" width="100" height="100" style="object-fit: contain;">            
-          </ng-template>
+          <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>  
 
           <ng-template #customButtonColumnTemplate let-item="item">
             <button class="btn btn-outline-info">

@@ -48,7 +48,7 @@
                     </li>  
                     <li class="nav-item">
                       @if(shared.themeClass === "light"){
-                          <div (click)="changeTheme('dark')" class="nav-link">
+                          <div style="cursor: pointer;" (click)="changeTheme('dark')" class="nav-link">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                               <i class="fa-solid fa-moon theme-class me-2"></i>
                             </span>
@@ -57,7 +57,7 @@
                             </span>      
                           </div>
                         }@else {
-                          <div (click)="changeTheme('light')" class="nav-link">
+                          <div style="cursor: pointer;" (click)="changeTheme('light')" class="nav-link">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                               <i class="fa-regular fa-moon theme-class me-2"></i>
                             </span>
