@@ -21,12 +21,16 @@
     [sortable]="true"
     [draggable]="true">
       <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
-      <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+      <flexi-grid-column [columnTemplate]="firstNameTemplate" field="firstName" title="First Name"></flexi-grid-column>
       <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
       <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
       <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
       <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>         
     
+      <ng-template #firstNameTemplate let-item="item">
+        <span>{{item.firstName}}</span>
+      </ng-template>
+
       <ng-template #customButtonColumnTemplate let-item="item">
         <button class="btn btn-outline-info">
             <i class="fa-solid fa-edit"></i>

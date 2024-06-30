@@ -10,7 +10,7 @@ export const routes: Routes = [
         children: [
             {
                 path: "",
-                component: HomeComponent
+                component: UsersComponent
             },
             {
                 path: "users",

@@ -81,7 +81,7 @@
           }
         }
       </tr>
-      @if(filterable && data.length > 0){
+      @if(filterable){
         <tr>
           @if(showIndex){
             <th [ngStyle]="{'width': indexWidth}"></th>
@@ -149,7 +149,7 @@
               }
             }
             @for(column of columns; track $index){
-              @if(column.columnTemplate){
+              @if(column.columnTemplate && column.visible){
                 <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className">
                   <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
                 </td>
