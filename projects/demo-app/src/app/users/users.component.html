@@ -1,4 +1,68 @@
 <app-blank>
+  <div>
+    <form (ngSubmit)="save()">
+      <div class="form-group">
+        <label>User</label>
+        <flexi-select 
+        [data]="users()" 
+        label="firstName" 
+        value="id"
+        name="user"
+        [(ngModel)]="userId"></flexi-select>
+      </div>
+
+      <div class="form-group mt-1">
+        <label>Count</label>
+        <input type="text" class="form-control">
+      </div>
+
+      <div class="form-group mt-1">
+        <label>Count</label>
+        <select type="text" class="form-control">
+          <option>Select 1</option>
+          <option>Select 2</option>
+          <option>Select 3</option>
+          <option>Select 4</option>
+        </select>
+      </div>
+
+
+      <div class="form-group mt-1">
+        <button class="btn btn-default">Save</button>
+      </div>
+
+      
+    </form>
+  </div>
+
+</app-blank>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <app-blank>
     <flexi-grid
     [data]="users()"
     [total]="total()"
@@ -12,7 +76,6 @@
     [filterable]="true"
     captionTitle="Example User Table"
     [captionTemplate]="captionTemplate"
-    [footerTemplate]="footerTemplate"
     [showCaption]="true"
     [showExportExcel]="true"
     [resizable]="true"
@@ -38,19 +101,12 @@
         <button class="btn btn-outline-danger ms-1">
             <i class="fa-solid fa-trash"></i>
         </button>            
-      </ng-template>
-    
-      <ng-template #footerTemplate>
-        <!-- <tr>
-          <td colspan="5">Total Users</td>
-          <td>{{total()}}</td>
-        </tr> -->
-      </ng-template>
+      </ng-template> 
     
       <ng-template #captionTemplate>
           <button class="btn btn-primary">
             <i class="fa-solid fa-plus"></i>
           </button>
       </ng-template>
-    </flexi-grid>
-</app-blank>
+    </flexi-grid> 
+</app-blank>-->

@@ -1,0 +1,97 @@
+[data-bs-theme="light"] {
+    --background-color: #f8f9fa;
+    --background-color-part: #fff;
+    --bg-color-gray: #f8f9fa;
+    --text-color: #000;
+    --text-hover-color: #fff;
+    --active-text-color:#f8f9fa;
+    --active-background-color: #007bff;
+    --tbody-hover: #f1f1f1;
+    --hover-background-color:#007bff;
+    --hover-text-color: #f1f1f1;
+    --border-color: #dee2e6;
+    --input-border-color: #dee2e6;
+}
+
+[data-bs-theme="dark"] {
+    --background-color: #212529;
+    --background-color-part: #141414;
+    --bg-color-gray: #000;
+    --text-color: #fff;
+    --text-hover-color: #000;
+    --tbody-hover: #353232;
+    --active-text-color:#141414;
+    --active-background-color: #f8f9fa;
+    --hover-background-color:#f8f9fa;
+    --hover-text-color: #212529;
+    --border-color: #141414;
+    --input-border-color: #f8f9fa;
+}
+
+.my-select{
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: pointer;
+}
+
+.my-form-control, .my-select-search-input, .my-select-div{
+    display: block;
+    width: 100%;
+    height: calc(1.47em + 1rem + 2px);
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.47;
+    color: var(--text-color);
+    background-color: var(--background-color-part);
+    background-clip: padding-box;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.my-select-div{
+   
+}
+
+.my-active, .my-select-li:hover{
+    background-color: var(--active-background-color);
+    color: var(--active-text-color);
+}
+
+.my-select-search-input{
+    border-color: var(--input-border-color);
+}
+
+.my-select-dropdown {
+    position: absolute;
+    z-index: 999;
+    background-color: var(--background-color-part);
+    color: var(--text-color);
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;            
+}
+
+.my-select-ul {
+    height: 100%;
+    max-height: 180px !important;
+    overflow-y: auto;
+    list-style: none;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+  }
+
+.my-select-li{
+    padding: 5px;
+    cursor: pointer;
+}

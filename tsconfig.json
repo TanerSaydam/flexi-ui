@@ -11,6 +11,9 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "paths": {
+      "flexi-select": [
+        "./dist/flexi-select"
+      ],
       "my-lib": [
         "./dist/my-lib"
       ]

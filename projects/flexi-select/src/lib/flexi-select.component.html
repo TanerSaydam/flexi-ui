@@ -1,0 +1,18 @@
+<div class="my-select" data-bs-theme="light">
+    <div class="my-select-div" (click)="openOrClose()">        
+        {{selectedItem()[label] === undefined ? "Seçim yapınız" : selectedItem()[label]}}
+    </div>
+    <div class="my-select-dropdown" [hidden]="!isOpen()">
+        <input #mySelectInput class="my-select-search-input" (input)="search()" (keydown)="onKeyPress($event)" type="search">
+        <ul class="my-select-ul" (scroll)="onScroll($event)">
+            @for(item of filteredData(); track item){
+            <li (click)="select(item)" [class]="setLiClass(item)">
+                <span>{{item[label]}}</span>
+            </li>
+            }
+            @empty {
+                <span>Kayıt bulunamadı</span>
+            }
+        </ul>
+    </div>
+</div>
