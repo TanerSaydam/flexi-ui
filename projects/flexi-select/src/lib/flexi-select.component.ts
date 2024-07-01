@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, signal } from '@angular/core';
+import { AfterViewChecked, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FlexiOptionComponent } from './flexi-option.component';
 
 @Component({
   selector: 'flexi-select',
@@ -16,12 +17,14 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class FlexiSelectComponent implements OnChanges { 
+export class FlexiSelectComponent implements OnChanges{
   @Input() data: any[] = [];
   @Input() value: any;
   @Input() label: any;
  
-  @Output("selectedEvent") selectedEvent = new EventEmitter<any>();
+  @Output("change") change = new EventEmitter<any>();
+
+  @ContentChildren(forwardRef(() => FlexiOptionComponent)) options!: QueryList<FlexiOptionComponent>;
 
   @ViewChild("mySelectInput") mySelectInput: ElementRef<HTMLInputElement> | undefined;
   
@@ -36,9 +39,25 @@ export class FlexiSelectComponent implements OnChanges {
   clientHeight = signal<number>(180);
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.filteredData.set(changes["data"].currentValue.splice(0,this.itemsPerPage()));    
-    this.selectFirstOne();
-  }
+    this.filteredData.set(changes["data"].currentValue.splice(0, this.itemsPerPage()));
+    this.selectFirstOne();    
+}
+
+ngAfterContentInit() {
+  this.options.changes.subscribe(() => {
+    if (this.options && this.options.length) {
+      const optionData = this.options.map(option => ({
+        value: option.value,
+        label: option.viewValue
+      }));
+      this.data = optionData;
+      this.filteredData.set(this.data.slice(0, this.itemsPerPage()));
+      this.selectFirstOne();
+      this.label = "label"
+      this.value = "value";
+    }
+  });  
+}
 
   loadMoreData() {
     const newData = this.data.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage()));
@@ -87,11 +106,11 @@ export class FlexiSelectComponent implements OnChanges {
   }  
 
   search() {
-    const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
+    const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr");    
     const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
-    this.filteredData.set(filtered.slice(0, this.itemsPerPage()));    
+    this.filteredData.set(filtered.slice(0, this.itemsPerPage()));
     this.selectFirstOne();
-  }
+}
 
   setLiClass(item: any){    
     if(item.isSelected){
@@ -132,15 +151,23 @@ export class FlexiSelectComponent implements OnChanges {
     liElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  select(item:any){    
+  select(item: any) {
     this.clearAllSelected();
     item.isSelected = true;
     this.selectedItem.set(item);
     this.isOpen.set(false);
-    this.selectedEvent.emit(item);
+    this.change.emit(item[this.value]);
     this.onChange(item[this.value]);
   }
 
+  selectOption(option: FlexiOptionComponent) {
+    const selectedItem = {
+      [this.value]: option.value,
+      [this.label]: option.viewValue
+    };
+    this.select(selectedItem);
+  }
+  
   writeValue(value: any): void {
     this.selectedItem.set(value);
   }

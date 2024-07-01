@@ -7,11 +7,12 @@ import { SharedService } from '../shared.service';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiSelectComponent } from '../../../../flexi-select/src/public-api';
 import { FormsModule } from '@angular/forms';
+import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [BlankComponent, FlexiGridModule, FlexiSelectComponent, FormsModule],
+  imports: [BlankComponent, FlexiGridModule, FlexiSelectComponent, FormsModule, FlexiOptionComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -20,7 +21,8 @@ export class UsersComponent {
   total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
   loading = signal<boolean>(false);
-  userId = signal<string>("");
+  userId1 = signal<string>("");
+  userId2 = signal<string>("");
 
   constructor(
     private http: HttpClient,
@@ -55,12 +57,15 @@ export class UsersComponent {
     })  
   }
 
-  setSelected(event:any){
+  change(event:any){
     console.log(event);    
   }
 
   save(){
-    console.log(this.userId());
+    const user1 = this.users().find(p=> p.id === this.userId1());
+    const user2 = this.users().find(p=> p.id === this.userId2());
+   // console.log(user1);
+    //console.log(user2);
     
   }
 }

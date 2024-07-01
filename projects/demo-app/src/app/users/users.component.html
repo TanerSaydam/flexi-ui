@@ -2,13 +2,23 @@
   <div>
     <form (ngSubmit)="save()">
       <div class="form-group">
-        <label>User</label>
-        <flexi-select 
+         <flexi-select 
         [data]="users()" 
         label="firstName" 
         value="id"
-        name="user"
-        [(ngModel)]="userId"></flexi-select>
+        name="userId1"
+        [(ngModel)]="userId1"
+        (change)="change($event)">
+      </flexi-select>
+      </div>
+
+      <div class="form-group mt-1">
+        <label>User</label>
+        <flexi-select [(ngModel)]="userId2" name="userId2">
+          @for (user of users(); track user.id) {
+            <flexi-option [value]="user.id">{{user.firstName}} {{user.lastName}}</flexi-option>
+          }
+        </flexi-select>
       </div>
 
       <div class="form-group mt-1">

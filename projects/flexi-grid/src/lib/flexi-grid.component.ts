@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
+import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,8 @@ import { TrCurrencyPipe } from 'tr-currency'
   standalone: true,
   imports: [CommonModule, FormsModule, TrCurrencyPipe],
   templateUrl: './flexi-grid.component.html',
-  styleUrl: `./flexi-grid.component.css`  
+  styleUrl: `./flexi-grid.component.css`,
+  encapsulation: ViewEncapsulation.None
 })
 export class FlexiGridComponent implements OnChanges {
   @Input() data: any[] = [];
