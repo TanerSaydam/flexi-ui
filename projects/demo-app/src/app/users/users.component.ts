@@ -24,7 +24,6 @@ export class UsersComponent {
   userId1 = signal<string>("");
   userId2 = signal<string>("");
 
-  
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
@@ -32,7 +31,7 @@ export class UsersComponent {
   ){
     this.state().pageSize = 500;
     this.getAll();
-  }  
+  }
 
   getAll(){
     this.loading.set(true);
@@ -65,8 +64,8 @@ export class UsersComponent {
   save(){
     const user1 = this.users().find(p=> p.id === this.userId1());
     const user2 = this.users().find(p=> p.id === this.userId2());
-   // console.log(user1);
-    console.log(user2);
+    console.log(user1);
+   // console.log(user2);
     
   }
 }

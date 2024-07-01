@@ -23,6 +23,8 @@ export class FlexiSelectComponent implements OnChanges {
   @Input() label: any;
   @Input() noData: string = "Kayıt bulunamadı";
   @Input() selectOne: string = "Seçim yapınız";
+  @Input() themeClass: string = "light";
+  
   @Output("selected") selected = new EventEmitter<any>();
 
   @ContentChildren(forwardRef(() => FlexiOptionComponent)) options!: QueryList<FlexiOptionComponent>;
@@ -32,19 +34,16 @@ export class FlexiSelectComponent implements OnChanges {
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
-  totalData = signal<any[]>([]);
   filteredData = signal<any[]>([]);
   selectedItem = signal<any>({});
   isOpen = signal<boolean>(false);
-  itemsPerPage = signal<number>(50);
+  itemsPerPage = signal<number>(30);
   clientHeight = signal<number>(180);
   initialState : any;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.filteredData.set(changes["data"].currentValue.splice(0, this.itemsPerPage()).map((item:any) => ({
-      ...item,
-      id: item[this.value]
-    })));
+  ngOnChanges(changes: SimpleChanges): void {    
+    this.filteredData.set(this.data.slice(0, this.itemsPerPage()));    
+    
     this.selectFirstOne();
     this.selectInitialStateValue();  
   }
@@ -57,10 +56,7 @@ export class FlexiSelectComponent implements OnChanges {
           label: option.viewValue
         }));
         this.data = optionData;
-        this.filteredData.set(this.data.slice(0, this.itemsPerPage()).map((item:any) => ({
-          ...item,
-          id: item[this.value]
-        })));
+        this.filteredData.set(this.data.slice(0, this.itemsPerPage()));
         this.selectFirstOne();
         this.label = "label"
         this.value = "value";
@@ -77,7 +73,12 @@ export class FlexiSelectComponent implements OnChanges {
         this.initialState = undefined;
         this.clearAllSelected();
         val.isSelected = true;
-        this.filteredData.update((prev) => [val,...prev]);
+        const findValue = this.filteredData().find(p=> p[this.value] === val);
+        if(findValue){
+          findValue.isSelected = true;
+        }else{
+          this.filteredData.update((prev) => [val,...prev]);
+        }
       }
     }
   }
@@ -85,10 +86,7 @@ export class FlexiSelectComponent implements OnChanges {
   loadMoreData() {
     const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
     let newData = val === "" ? this.data : this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
-    newData = newData.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage())).map((item:any) => ({
-      ...item,
-      id: item[this.value]
-    }));
+    newData = newData.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage()));
     this.filteredData.set([...this.filteredData(), ...newData]);
     this.clientHeight.set(this.clientHeight() + 180);
   }
@@ -134,12 +132,10 @@ export class FlexiSelectComponent implements OnChanges {
   }
 
   search() {
-    const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
-    const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
-    this.filteredData.set(filtered.slice(0, this.itemsPerPage()).map((item:any) => ({
-      ...item,
-      id: item[this.value]
-    })));
+    const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr"); 
+    const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0,this.itemsPerPage());
+    this.filteredData.set(filtered);
+    this.clientHeight.set(180);
     this.selectFirstOne();
   }
 
@@ -189,12 +185,7 @@ export class FlexiSelectComponent implements OnChanges {
     this.isOpen.set(false);
     this.selected.emit(item[this.value]);
     this.onChange(item[this.value]);
-    this.mySelectInput!.nativeElement.value = "";    
-    this.filteredData.set(this.data.slice(0, this.itemsPerPage()).map(item => ({
-      ...item,
-      id: item[this.value]
-    })));
-    this.selectFirstOne();
+    this.mySelectInput!.nativeElement.select();
   }
 
   selectOption(option: FlexiOptionComponent) {
@@ -205,10 +196,10 @@ export class FlexiSelectComponent implements OnChanges {
     this.select(selectedItem);
   }
 
-  writeValue(value: any): void {
-    this.selectedItem.set(this.data.find(item => item[this.value] === value) || {});
+  writeValue(value: any): void {    
     if(value){
       this.initialState = value;
+      this.selectInitialStateValue();
     }
   }
 

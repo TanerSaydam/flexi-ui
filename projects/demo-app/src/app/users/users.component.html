@@ -3,16 +3,11 @@
     <div class="col-5">
       <form (ngSubmit)="save()">
         <div class="form-group">
-           <flexi-select 
-          [data]="users()" 
-          label="firstName" 
-          value="id"
-          name="userId1"
-          [(ngModel)]="userId1"
-          (selected)="change($event)">
-        </flexi-select>
+          <flexi-select [data]="users()" label="name" value="id" name="userId1" [(ngModel)]="userId1"
+            (selected)="change($event)">
+          </flexi-select>
         </div>
-  
+          
         <div class="form-group mt-1">
           <label>User</label>
           <flexi-select [(ngModel)]="userId2" name="userId2">

@@ -25,6 +25,7 @@
 
 .my-select-div{
     position: relative;
+    overflow-x: hidden;
 }
 
 .my-select-div-svg{

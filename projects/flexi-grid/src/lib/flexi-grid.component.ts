@@ -194,6 +194,10 @@ export class FlexiGridComponent implements OnChanges {
         filteredData = filteredData.filter(item => {
           const field = filter.field;
           const value = filter.value;
+          if (item[field] === undefined || item[field] === null) {
+            return true;
+          }
+          
           const itemValue = item[field].toString().toLocaleLowerCase('tr');
           const filterValue = value.toString().toLocaleLowerCase('tr');
 
