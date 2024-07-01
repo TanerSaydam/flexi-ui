@@ -29,7 +29,7 @@
 
 .my-select-div-svg{
     position: absolute;
-    top: auto;
+    top: 6px;
     right: 10px;
     fill: var(--text-color);
     width: 10px;    
@@ -90,4 +90,8 @@
 .my-select-li{
     padding: 5px;
     cursor: pointer;
+}
+
+.no-click{
+    pointer-events: none;
 }

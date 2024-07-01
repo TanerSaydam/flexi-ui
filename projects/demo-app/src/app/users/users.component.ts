@@ -24,6 +24,7 @@ export class UsersComponent {
   userId1 = signal<string>("");
   userId2 = signal<string>("");
 
+  
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
@@ -57,7 +58,7 @@ export class UsersComponent {
     })  
   }
 
-  change(event:any){
+  change(event:string){
     console.log(event);    
   }
 
@@ -65,7 +66,7 @@ export class UsersComponent {
     const user1 = this.users().find(p=> p.id === this.userId1());
     const user2 = this.users().find(p=> p.id === this.userId2());
    // console.log(user1);
-    //console.log(user2);
+    console.log(user2);
     
   }
 }
