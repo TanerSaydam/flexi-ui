@@ -1,48 +1,50 @@
 <app-blank>
-  <div>
-    <form (ngSubmit)="save()">
-      <div class="form-group">
-         <flexi-select 
-        [data]="users()" 
-        label="firstName" 
-        value="id"
-        name="userId1"
-        [(ngModel)]="userId1"
-        (change)="change($event)">
-      </flexi-select>
-      </div>
-
-      <div class="form-group mt-1">
-        <label>User</label>
-        <flexi-select [(ngModel)]="userId2" name="userId2">
-          @for (user of users(); track user.id) {
-            <flexi-option [value]="user.id">{{user.firstName}} {{user.lastName}}</flexi-option>
-          }
+  <div class="row">
+    <div class="col-5">
+      <form (ngSubmit)="save()">
+        <div class="form-group">
+           <flexi-select 
+          [data]="users()" 
+          label="firstName" 
+          value="id"
+          name="userId1"
+          [(ngModel)]="userId1"
+          (change)="change($event)">
         </flexi-select>
-      </div>
-
-      <div class="form-group mt-1">
-        <label>Count</label>
-        <input type="text" class="form-control">
-      </div>
-
-      <div class="form-group mt-1">
-        <label>Count</label>
-        <select type="text" class="form-control">
-          <option>Select 1</option>
-          <option>Select 2</option>
-          <option>Select 3</option>
-          <option>Select 4</option>
-        </select>
-      </div>
-
-
-      <div class="form-group mt-1">
-        <button class="btn btn-default">Save</button>
-      </div>
-
-      
-    </form>
+        </div>
+  
+        <div class="form-group mt-1">
+          <label>User</label>
+          <flexi-select [(ngModel)]="userId2" name="userId2">
+            @for (user of users(); track user.id) {
+              <flexi-option [value]="user.id">{{user.firstName}} {{user.lastName}}</flexi-option>
+            }
+          </flexi-select>
+        </div>
+  
+        <div class="form-group mt-1">
+          <label>Count</label>
+          <input type="text" class="form-control">
+        </div>
+  
+        <div class="form-group mt-1">
+          <label>Count</label>
+          <select type="text" class="form-control">
+            <option>Select 1</option>
+            <option>Select 2</option>
+            <option>Select 3</option>
+            <option>Select 4</option>
+          </select>
+        </div>
+  
+  
+        <div class="form-group mt-1">
+          <button class="btn btn-default">Save</button>
+        </div>
+  
+        
+      </form>
+    </div>
   </div>
 
 </app-blank>
