@@ -1,0 +1,37 @@
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+      <li class="nav-item">
+        <a href="#tabs-flexi-select-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-flexi-select-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-flexi-select-ts-full" class="nav-link" data-bs-toggle="tab">component.ts</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active show flexi-select" id="tabs-flexi-select-example-full">
+        <h4>Full halinin örnek görüntüsü</h4>
+        <flexi-select
+        [data]="users()"
+        label="fullName"
+        value="id"
+        [themeClass]="shared.themeClass"
+        [(ngModel)]="selectedUserId"
+        (selected)="selected($event)"
+        >
+        </flexi-select>
+      </div>
+      <div class="tab-pane" id="tabs-flexi-select-html-full">
+        <h4>HTML kodları</h4>
+        <my-code [code]="fullExampleHTMLCode()" language="html"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-flexi-select-ts-full">
+        <h4>Typescript kodları</h4>
+        <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
+      </div>
+    </div>
+  </div>

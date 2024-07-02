@@ -5,6 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class SharedService {
   openOrCloseFlexiGridDropDown = signal(false);
+  openOrCloseFlexiSelectDropDown = signal(false);
   themeClass: string = "light";
 
   constructor() { 

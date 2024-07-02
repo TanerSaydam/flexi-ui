@@ -1,0 +1,40 @@
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+      <li class="nav-item">
+        <a href="#tabs-example-custom-option" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-html-custom-option" class="nav-link" data-bs-toggle="tab">component.html</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-custom-option" class="nav-link" data-bs-toggle="tab">component.ts</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-custom-option-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+      </li>
+    </ul>
+</div>
+<div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active show flexi-select" id="tabs-example-custom-option">
+        <h4>Custom Option</h4>
+        <flexi-select [(ngModel)]="selectedUserId" name="selectedUserId" [themeClass]="shared.themeClass">
+          @for (user of users(); track user.id) {
+            <flexi-option [value]="user.id">{{user.firstName}} {{user.lastName}}</flexi-option>
+          }
+        </flexi-select>
+      </div>
+      <div class="tab-pane" id="tabs-html-custom-option">
+        <h4>HTML kodları</h4>
+        <my-code [code]="customOptionHTMLCode()" language="html"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-custom-option">
+        <h4>Typescript kodları</h4>
+        <my-code [code]="customOptionTSCode()" language="typescript"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-custom-option-data">
+        <h4>Data</h4>
+        <my-code [code]="dataCode" language="typescript"></my-code>
+      </div>
+    </div>
+</div>

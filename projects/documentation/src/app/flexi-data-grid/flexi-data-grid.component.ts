@@ -13,7 +13,7 @@ import { CaptionComponent } from './caption/caption.component';
 import { FooterComponent } from './footer/footer.component';
 import { DataBindingComponent } from './data-binding/data-binding.component';
 import { OptionsComponent } from './options/options.component';
-import { FullComponent } from './full/full.component';
+import FullComponent from './full/full.component';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { LoadingComponent } from '../loading/loading.component';

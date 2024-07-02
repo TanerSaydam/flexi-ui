@@ -46,6 +46,29 @@
                             </div>
                           </div>
                     </li>  
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/flexi-select" class="nav-link dropdown-toggle">
+                          <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="fa-solid fa-list-check me-2"></i>
+                          </span>
+                          <span class="nav-link-title">
+                              Flexi Select
+                          </span>
+                      </a>
+                      <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiSelectDropDown() ? 'show' : ''">
+                          <div class="dropdown-menu-columns">
+                            <div class="dropdown-menu-column">
+                              @for(document of fleciSelectDocument; track $index){
+                                <div>
+                                  <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
+                                      {{ document.title }}
+                                  </a>
+                                </div>
+                              }
+                            </div>                             
+                          </div>
+                        </div>
+                  </li>  
                     <li class="nav-item">
                       @if(shared.themeClass === "light"){
                           <div style="cursor: pointer;" (click)="changeTheme('dark')" class="nav-link">

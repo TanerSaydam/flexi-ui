@@ -86,3 +86,26 @@ export const flexiGridDocument: DocumentModel[] = [
         fragment: "options"
     }
 ];
+
+export const flexiSelectDocument: DocumentModel[] = [
+    {
+        title: "Flexi Select nedir?",
+        routerLink: "/flexi-select",
+        fragment: "what-is-flexi-select"
+    },
+    {
+        title: "Kurulum",
+        routerLink: "/flexi-select",
+        fragment: "installation"
+    },
+    {
+        title: "İlk Kullanım",
+        routerLink: "/flexi-select",
+        fragment: "first-use"
+    },
+    {
+        title: "Custom Option",
+        routerLink: "/flexi-select",
+        fragment: "custom-option"
+    }   
+]

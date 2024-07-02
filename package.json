@@ -21,7 +21,7 @@
     "@angular/router": "^18.0.0",
     "@sweetalert2/ngx-sweetalert2": "^12.4.0",
     "flexi-grid": "^18.5.4",
-    "flexi-select": "^18.1.0",
+    "flexi-select": "^18.1.1",
     "ngx-spinner": "^17.0.0",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",

@@ -15,3 +15,7 @@ a {
     max-height: 500px;
     overflow: auto;
 }
+
+.flexi-select{
+    width: 400px !important;
+}

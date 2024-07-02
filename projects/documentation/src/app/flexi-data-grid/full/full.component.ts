@@ -8,14 +8,14 @@ import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
 
 @Component({
-  selector: 'app-full',
+  selector: 'app-flexi-grid-full',
   standalone: true,
   imports: [FlexiGridColumnComponent,FlexiGridComponent, MyCodeComponent],
   templateUrl: './full.component.html',
   styleUrl: './full.component.css',
   encapsulation: ViewEncapsulation.None
 })
-export class FullComponent {
+export default class FullComponent {
   users = signal<UserModel[]>([])
   total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
