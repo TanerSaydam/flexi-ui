@@ -200,6 +200,9 @@ export class FlexiSelectComponent implements OnChanges {
     if(value){
       this.initialState = value;
       this.selectInitialStateValue();
+    } else {
+      this.selectedItem.set({});
+      this.selectFirstOne();
     }
   }
 

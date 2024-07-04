@@ -24,6 +24,8 @@ export class FlexiGridColumnComponent {
   @Input() draggable: boolean = true;
   @Input() className: string = "";
   @Input() textAlign: TextAlignType = "left";  
+  @Input() hideOverflow: boolean = false;
+
   value: string = "";
   filterOperator: string = "contains";
 

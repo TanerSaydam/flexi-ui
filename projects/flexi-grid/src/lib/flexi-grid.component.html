@@ -154,7 +154,7 @@
                   <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
                 </td>
               }@else {
-                <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className">
+                <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [class]="column.hideOverflow ? 'text-overflow-hidden' : ''" [hidden]="!column.visible" [ngClass]="column.className">
                   @if(column.field){
                     @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                       {{ getFieldValue(item, column.field) | date: column.format! }}

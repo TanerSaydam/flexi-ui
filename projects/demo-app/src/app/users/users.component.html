@@ -39,9 +39,57 @@
   
         
       </form>
+      
     </div>
   </div>
 
+<hr>
+  <flexi-grid
+    [data]="users()"
+    [total]="total()"
+    [dataBinding]="true"
+    [pageable]="true"
+    [pageSize]="state().pageSize"
+    [pageSizeList]="[10,20,30,50,100,1000]"
+    [showIndex]="true"
+    [loading]="loading()"
+    [themeClass]="shared.themeClass()"    
+    [filterable]="true"
+    captionTitle="Example User Table"
+    [captionTemplate]="captionTemplate"
+    [showCaption]="true"
+    [showExportExcel]="true"
+    [resizable]="true"
+    [exportExcelButtonClick]="exportExcel.bind(this)"
+    (dataStateChange)="dataStateChange($event)"
+    [sortable]="true"
+    [draggable]="true">
+      <flexi-grid-column [visible]="true" field="id" title="Id" [sortable]="false" [hideOverflow]="true"></flexi-grid-column>
+      <flexi-grid-column [columnTemplate]="firstNameTemplate" field="firstName" title="First Name"></flexi-grid-column>
+      <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+      <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+      <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
+      <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>         
+    
+      <ng-template #firstNameTemplate let-item="item">
+        <span>{{item.firstName}}</span>
+      </ng-template>
+
+      <ng-template #customButtonColumnTemplate let-item="item">
+        <button class="btn btn-outline-info">
+            <i class="fa-solid fa-edit"></i>
+        </button>
+        <button class="btn btn-outline-danger ms-1">
+            <i class="fa-solid fa-trash"></i>
+        </button>            
+      </ng-template> 
+    
+      <ng-template #captionTemplate>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+      </ng-template>
+    </flexi-grid> 
 </app-blank>
 
 
@@ -69,51 +117,6 @@
 
 
 
-<!-- <app-blank>
-    <flexi-grid
-    [data]="users()"
-    [total]="total()"
-    [dataBinding]="true"
-    [pageable]="true"
-    [pageSize]="state().pageSize"
-    [pageSizeList]="[10,20,30,50,100,1000]"
-    [showIndex]="true"
-    [loading]="loading()"
-    [themeClass]="shared.themeClass()"    
-    [filterable]="true"
-    captionTitle="Example User Table"
-    [captionTemplate]="captionTemplate"
-    [showCaption]="true"
-    [showExportExcel]="true"
-    [resizable]="true"
-    [exportExcelButtonClick]="exportExcel.bind(this)"
-    (dataStateChange)="dataStateChange($event)"
-    [sortable]="true"
-    [draggable]="true">
-      <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
-      <flexi-grid-column [columnTemplate]="firstNameTemplate" field="firstName" title="First Name"></flexi-grid-column>
-      <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-      <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
-      <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
-      <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>         
+<app-blank>
     
-      <ng-template #firstNameTemplate let-item="item">
-        <span>{{item.firstName}}</span>
-      </ng-template>
-
-      <ng-template #customButtonColumnTemplate let-item="item">
-        <button class="btn btn-outline-info">
-            <i class="fa-solid fa-edit"></i>
-        </button>
-        <button class="btn btn-outline-danger ms-1">
-            <i class="fa-solid fa-trash"></i>
-        </button>            
-      </ng-template> 
-    
-      <ng-template #captionTemplate>
-          <button class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i>
-          </button>
-      </ng-template>
-    </flexi-grid> 
-</app-blank>-->
+</app-blank>

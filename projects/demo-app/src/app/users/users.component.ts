@@ -8,7 +8,7 @@ import { BlankComponent } from '../blank/blank.component';
 import { FlexiSelectComponent } from '../../../../flexi-select/src/public-api';
 import { FormsModule } from '@angular/forms';
 import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
-
+import { UsersData } from '../../../../documentation/src/app/flexi-data-grid/data'
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -34,16 +34,17 @@ export class UsersComponent {
   }
 
   getAll(){
-    this.loading.set(true);
+    this.users.set(UsersData);    
+    // this.loading.set(true);
 
-    let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
+    // let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
+    // let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
 
-    this.http.get(endpoint).subscribe((res:any)=> {
-      this.users.set(res.data);
-      this.total.set(res.total);      
-      this.loading.set(false);
-    });
+    // this.http.get(endpoint).subscribe((res:any)=> {
+    //   this.users.set(res.data);
+    //   this.total.set(res.total);      
+    //   this.loading.set(false);
+    // });
   } 
 
   dataStateChange(event:any){
@@ -58,13 +59,13 @@ export class UsersComponent {
   }
 
   change(event:string){
-    console.log(event);    
+    //console.log(event);    
   }
 
   save(){
     const user1 = this.users().find(p=> p.id === this.userId1());
     const user2 = this.users().find(p=> p.id === this.userId2());
-    console.log(user1);
+    this.userId1.set("");
    // console.log(user2);
     
   }
