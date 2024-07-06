@@ -1,102 +1,16 @@
 <app-blank>
-  <div class="row">
-    <div class="col-5">
-      <form (ngSubmit)="save()">
-        <div class="form-group">
-          <flexi-select [themeClass]="shared.themeClass()" [data]="users()" label="firstName" value="id" name="userId1" [(ngModel)]="userId1"
-            (selected)="change($event)">
-          </flexi-select>
-        </div>
-
-        <div class="form-group mt-1">
-          <label>User</label>
-          <flexi-select [themeClass]="shared.themeClass()" [(ngModel)]="userId2" name="userId2">
-            @for (user of users(); track user.id) {
-            <flexi-option [value]="user.id">{{user.firstName}} {{user.lastName}}</flexi-option>
-            }
-          </flexi-select>
-        </div>
-
-        <div class="form-group mt-1">
-          <label>Count</label>
-          <input type="text" class="form-control">
-        </div>
-
-        <div class="form-group mt-1">
-          <label>Count</label>
-          <select type="text" class="form-control">
-            <option>Select 1</option>
-            <option>Select 2</option>
-            <option>Select 3</option>
-            <option>Select 4</option>
-          </select>
-        </div>
-
-
-        <div class="form-group mt-1">
-          <button type="submit" class="btn btn-default">Save</button>
-          <button type="button" class="btn btn-default">Show Swal</button>
-        </div>
-
-
-      </form>
-
-    </div>
-  </div>
-
-  <hr>
   <flexi-grid
-    [data]="users()"
-    [dataBinding]="false"
-    [pageable]="true"
-    [pageSize]="state().pageSize"
-    [pageSizeList]="[10,20,30,50,100,1000]"
-    [showIndex]="true"
-    [loading]="loading()"
-    [themeClass]="shared.themeClass()"
-    [filterable]="true"
-    captionTitle="Example User Table"
-    [captionTemplate]="captionTemplate"
-    [showCaption]="true"
-    [showExportExcel]="true"
-    [resizable]="true"
-    [exportExcelButtonClick]="exportExcel.bind(this)"    
-    [sortable]="true"
-    [draggable]="true">
-
-
-    <flexi-grid-column
-    [visible]="true"
-    field="id"
-    title="Id"
-    [sortable]="false"
-    [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column [columnTemplate]="firstNameTemplate" field="firstName" title="First Name"></flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
-      title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true"
-      [fraction]="2" title="Salary"></flexi-grid-column>
-    <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false"
-      [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>
-
-    <ng-template #firstNameTemplate let-item="item">
-      <span>{{item.firstName}}</span>
-    </ng-template>
-
-    <ng-template #customButtonColumnTemplate let-item="item">
-      <button class="btn btn-outline-info">
-        <i class="fa-solid fa-edit"></i>
-      </button>
-      <button class="btn btn-outline-danger ms-1" (click)="delete()">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-    </ng-template>   
-
-    <ng-template #captionTemplate>
-      <button class="btn btn-primary">
-        <i class="fa-solid fa-plus"></i>
-      </button>
-    </ng-template>
-  </flexi-grid>
+  [data]="users()"
+  [pageable]="true"
+  [filterable]="true"
+  [themeClass]="shared.themeClass()"
+  [showCaption]="true"  
+  captionTitle="User List"
+  [resizable]="true"
+  [draggable]="true"
+  >
+  <!-- <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+  <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column> -->
+</flexi-grid>
 </app-blank>

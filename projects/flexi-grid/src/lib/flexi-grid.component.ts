@@ -1,13 +1,14 @@
-import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 
 @Component({
   selector: 'flexi-grid',
   templateUrl: './flexi-grid.component.html',
-  styleUrl: `./flexi-grid.component.css`  
+  styleUrl: `./flexi-grid.component.css`,
+  encapsulation: ViewEncapsulation.None
 })
-export class FlexiGridComponent implements OnChanges {
+export class FlexiGridComponent implements OnChanges, AfterViewInit { 
   @Input() data: any[] = [];
   @Input() total: number | null | undefined = 0;
   @Input() pageable: boolean = false;
@@ -33,9 +34,9 @@ export class FlexiGridComponent implements OnChanges {
   @Input() autoWidth: boolean = false;
   @Input() width: string = "100%";
   @Input() indexWidth: string = "70px";
-  @Input() columnVisibilityBtnClass: string = "my-btn";
-  @Input() refreshDataBtnClass: string = "my-btn";
-  @Input() exportExcelBtnClass: string = "my-btn";
+  @Input() columnVisibilityBtnClass: string = "flexi-grid-btn";
+  @Input() refreshDataBtnClass: string = "flexi-grid-btn";
+  @Input() exportExcelBtnClass: string = "flexi-grid-btn";
   @Input() exportExcelFileName: string = "excel-export";
   @Input() exportExcelButtonClick: (() => void) | undefined;
   @Input() footerPerPageText: string = "items per page";
@@ -77,6 +78,8 @@ export class FlexiGridComponent implements OnChanges {
   startX: number | undefined;
   startWidth: number | undefined;
 
+  constructor(private cdr: ChangeDetectorRef){}
+
   ngOnChanges(changes: SimpleChanges): void {    
     if (this.pageSize !== this.state.pageSize) {     
       this.state.pageSize = +this.pageSize;
@@ -88,6 +91,36 @@ export class FlexiGridComponent implements OnChanges {
     } else {
       this.pagedData.set(this.data);
     }
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.columns || this.columns.length === 0) {
+      this.initializeColumnsFromData();
+      this.cdr.detectChanges();
+    }
+  }
+
+  initializeColumnsFromData(): void {
+    if (this.data && this.data.length > 0) {
+      const firstItem = this.data[0];
+      const columnsArray = Object.keys(firstItem).map(key => {
+        const column = new FlexiGridColumnComponent();
+        column.field = key;
+        column.title = this.capitalizeFirstLetter(key);
+        column.visible = true;
+        column.hideOverflow = true;
+        return column;
+      });
+  
+      // Resetting columns with the newly created columns array
+      if (this.columns) {
+        this.columns.reset(columnsArray);
+      }
+    }
+  }
+
+  capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   changePage(pageNumber: number) {

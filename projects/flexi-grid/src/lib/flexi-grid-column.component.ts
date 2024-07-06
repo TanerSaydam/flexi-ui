@@ -22,7 +22,7 @@ export class FlexiGridColumnComponent {
   @Input() draggable: boolean = true;
   @Input() className: string = "";
   @Input() textAlign: TextAlignType = "left";  
-  @Input() hideOverflow: boolean = false;
+  @Input() hideOverflow: boolean = true;
 
   value: string = "";
   filterOperator: string = "contains";
