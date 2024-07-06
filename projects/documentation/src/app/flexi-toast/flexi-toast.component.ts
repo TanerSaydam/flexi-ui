@@ -37,6 +37,11 @@ export class FlexiToastComponent {
   toastText = signal<string>("Kayıt işlemi başarıyla tamamlandı");
   swalTitle = signal<string>("Sil?");
   swalText = signal<string>("Kaydı silmek istiyor musunuz?");
+  angularJSONCode = signal<string>(`{
+    "styles": [
+        "./node_modules/flexi-toast/src/flexi-toast.css"
+    ]
+}`)
   toastTSCode = signal<string>(`options = signal<FlexiToastOptionsModel>({
     autoClose: true,
     icon: "success",
@@ -79,7 +84,8 @@ export class FlexiToastComponent {
       //Silme işlemi
       this.toast.showToast("Başarılı", "Silme işlemi başarıyla tamamlandı", "success");
     });
-  }`)
+  }`);
+  
   constructor(
     private toast: FlexiToastService
   ){
