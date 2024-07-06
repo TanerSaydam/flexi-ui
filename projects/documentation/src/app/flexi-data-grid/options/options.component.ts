@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { FormsModule } from '@angular/forms';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
@@ -10,7 +9,7 @@ import { optionsHTMLCode, optionsTSCode } from '../code';
 @Component({
   selector: 'app-options',
   standalone: true,
-  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
+  imports: [FlexiGridModule, FormsModule, MyCodeComponent],
   templateUrl: './options.component.html',
   styleUrl: './options.component.css',
   encapsulation: ViewEncapsulation.None,

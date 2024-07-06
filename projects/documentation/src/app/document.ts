@@ -108,4 +108,42 @@ export const flexiSelectDocument: DocumentModel[] = [
         routerLink: "/flexi-select",
         fragment: "custom-option"
     }   
+];
+
+export const flexiToastDocument: DocumentModel[] = [
+    {
+        title: "Toast Örnek",
+        routerLink: "/flexi-toast",
+        fragment: "toast-use"
+    },
+    {
+        title: "Swal Örnek",
+        routerLink: "/flexi-toast",
+        fragment: "swal-use"
+    },
+    {
+        title: "Kurulum",
+        routerLink: "/flexi-toast",
+        fragment: "installation"
+    },
+    {
+        title: "Toast Kullanımı",
+        routerLink: "/flexi-toast",
+        fragment: "toast-first-use"
+    },
+    {
+        title: "Swal Kullanımı",
+        routerLink: "/flexi-toast",
+        fragment: "swal-first-use"
+    },
+    {
+        title: "Toast Full Kullanım Örneği",
+        routerLink: "/flexi-toast",
+        fragment: "toast-full"
+    }, 
+    {
+        title: "Swal Full Kullanım Örneği",
+        routerLink: "/flexi-toast",
+        fragment: "swal-full"
+    }
 ]

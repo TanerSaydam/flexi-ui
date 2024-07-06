@@ -2,9 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angula
 
 @Component({
   selector: 'flexi-grid-column',
-  host: { '[attr.host-id]': '"flexi-grid-column-1"' },
-  standalone: true,
-  imports: [],
+  host: { '[attr.host-id]': '"flexi-grid-column-1"' },  
   template:''
 })
 export class FlexiGridColumnComponent { 

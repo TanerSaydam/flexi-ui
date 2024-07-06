@@ -28,10 +28,15 @@ export class FlexiToastComponent {
     showCloseBtn: true,
     showProgressBar: true,
     themeClass: "light",
-    timeOut: 3000
+    timeOut: 3000,
+    swalContentThemeClass: "error",
+    confirmBtnText: "Sil",
+    cancelBtnText: "Vazgeç"
   });
-  title = signal<string>("Success");
-  text = signal<string>("Create is successfull");
+  toastTitle = signal<string>("Başarılı");
+  toastText = signal<string>("Kayıt işlemi başarıyla tamamlandı");
+  swalTitle = signal<string>("Sil?");
+  swalText = signal<string>("Kaydı silmek istiyor musunuz?");
   toastTSCode = signal<string>(`options = signal<FlexiToastOptionsModel>({
     autoClose: true,
     icon: "success",
@@ -42,8 +47,8 @@ export class FlexiToastComponent {
     themeClass: "light",
     timeOut: 3000
   });
-  title = signal<string>("Success");
-  text = signal<string>("Create is successfull");
+  title = signal<string>("Başarılı");
+  text = signal<string>("Kayıt işlemi başarıyla tamamlandı");
 
   constructor(
     private toast: FlexiToastService
@@ -53,6 +58,27 @@ export class FlexiToastComponent {
 
   showToast(){    
     this.toast.showToast(this.title(), this.text(), this.options().icon);
+  }`);
+  swalTSCode = signal<string>(`options = signal<FlexiToastOptionsModel>({    
+    themeClass: "light",
+    cancelBtnText: "Vazgeç"; //Buradan tanımlayabildiğiniz gibi metoda özgü de değiştrebiliyorsunuz
+    confirmBtnText: "Sil";//Buradan tanımlayabildiğiniz gibi metoda özgü de değiştrebiliyorsunuz
+    swalContentThemeClass: "error";
+  });
+  title = signal<string>("Sil?");
+  text = signal<string>("Kaydı silmek istiyor musunuz?");
+
+  constructor(
+    private toast: FlexiToastService
+  ){
+    this.toast.options = this.options();
+  }
+
+  showSwal(){    
+    this.toast.showSwal(this.swalTitle(), this.swalText(),()=> {
+      //Silme işlemi
+      this.toast.showToast("Başarılı", "Silme işlemi başarıyla tamamlandı", "success");
+    });
   }`)
   constructor(
     private toast: FlexiToastService
@@ -61,6 +87,13 @@ export class FlexiToastComponent {
   }
 
   showToast(){    
-    this.toast.showToast(this.title(), this.text(), this.options().icon);
+    this.toast.showToast(this.toastTitle(), this.toastText(), this.options().icon);
+  }
+
+  showSwal(){    
+    this.toast.showSwal(this.swalTitle(), this.swalText(),()=> {
+      //Silme işlemi
+      this.toast.showToast("Başarılı", "Silme işlemi başarıyla tamamlandı", "success");
+    },"Sil","Vazgeç"); //sondaki Sil ve Vazgeç custom btn isimlendirme. Zorunlu değil. Optionsda ayarlarsanız orayı kullanabiliyorsunuz
   }
 }

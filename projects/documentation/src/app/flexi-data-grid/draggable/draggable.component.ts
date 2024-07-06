@@ -1,15 +1,14 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { draggableHTMLCode, draggableTSCode } from '../code';
 
 @Component({
   selector: 'app-draggable',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
+  imports: [FlexiGridModule, MyCodeComponent],
   templateUrl: './draggable.component.html',
   styleUrl: './draggable.component.css',
   encapsulation: ViewEncapsulation.None,

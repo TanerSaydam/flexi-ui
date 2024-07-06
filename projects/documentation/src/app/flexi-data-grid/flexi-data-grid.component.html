@@ -43,14 +43,12 @@
     <div id="first-use" style="padding-top: 5px;">
       <app-card cardTitle="İlk Kullanım">
         <div class="card-body">
-          <p>Flexi Grid'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
+          <p>Flexi Grid'i kullanmak istediğiniz standalone FlexGridModule'u import etmelisiniz</p>
           <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
           istediğiniz verileri yerleştirmelisiniz</p>
           <h3>Örnek kod:</h3>
-          <b>component.ts</b>
-          <my-code className="" language="typescript" [code]="firstUseTSCodeExample1()"></my-code>
-          <p><b>Ya da</b></p>
-          <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
+          <b>component.ts</b>          
+          <my-code className="" language="typescript" [code]="firstUseTSCodeExample()"></my-code>
           <b>component.html</b>
           <my-code className="" language="html" [code]="firstUseHTMLCodeExample()"></my-code>
 

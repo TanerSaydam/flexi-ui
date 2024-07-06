@@ -2,15 +2,14 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserModel } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
-//import { FlexiGridColumnComponent, FlexiGridComponent, StateModel, FlexiGridService} from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { StateModel, FlexiGridService, FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { dataBindingHTMLCode, dataBindingTSCode } from '../code';
 
 @Component({
   selector: 'app-data-binding',
   standalone: true,
-  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
+  imports: [FlexiGridModule, FormsModule, MyCodeComponent],
   templateUrl: './data-binding.component.html',
   styleUrl: './data-binding.component.css',
   encapsulation: ViewEncapsulation.None,

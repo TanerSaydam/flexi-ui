@@ -54,14 +54,7 @@ import { ChangeThemeComponent } from './change-theme/change-theme.component';
 })
 export class FlexiDataGridComponent implements OnDestroy {  
   dataCode = signal<string>(dataTSCode);
-  firstUseTSCodeExample1 = signal<string>(`import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
-
-  @Component({
-  ..
-  imports: [FlexiGridComponent, FlexiGridColumnComponent]
-  })
-  `);
-  firstUseTSCodeExample2 = signal<string>(`import { FlexiGridModule } from 'flexi-grid';
+  firstUseTSCodeExample = signal<string>(`import { FlexiGridModule } from 'flexi-grid';
 
     @Component({
     ..

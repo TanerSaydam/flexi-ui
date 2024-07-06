@@ -107,12 +107,12 @@ export const firstUseTSCode: string = `
 import { Component, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-first-use',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent],
+  imports: [FlexiGridModule],
   templateUrl: './first-use.component.html',
   styleUrl: './first-use.component.css'
 })
@@ -383,12 +383,12 @@ import { Component, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent,FormsModule],
+  imports: [FlexiGridModule,FormsModule],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })
@@ -411,7 +411,7 @@ export const indexHTMLCode: string = `
 
 export const paginationTSCode: string = `
 import { Component, signal } from '@angular/core';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
@@ -449,7 +449,7 @@ export const paginationHTMLCode: string = `
 export const sortTSCode: string = `
 import { Component, signal } from '@angular/core';
 import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-//import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+//import { FlexiGridModule } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
@@ -535,7 +535,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-caption',
@@ -587,7 +587,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-footer',
@@ -713,7 +713,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-options',
@@ -853,7 +853,7 @@ export const exportExcelHTMLCode: string = `
 
 export const customColumnTSCode: string = `
 import { Component, Input, signal } from '@angular/core';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
@@ -862,7 +862,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-custom-column',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent, CommonModule],
+  imports: [FlexiGridModule, MyCodeComponent, CommonModule],
   templateUrl: './custom-column.component.html',
   styleUrl: './custom-column.component.css'
 })
@@ -909,14 +909,14 @@ export const resizableTSCode: string = `
 import { Component, Input, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { resizableHTMLCode, resizableTSCode } from '../code';
 
 @Component({
   selector: 'app-resizable',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
+  imports: [FlexiGridModule, MyCodeComponent],
   templateUrl: './resizable.component.html',
   styleUrl: './resizable.component.css'
 })
@@ -940,14 +940,14 @@ export const draggableTSCode: string = `
 import { Component, Input, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { resizableHTMLCode, resizableTSCode } from '../code';
 
 @Component({
   selector: 'app-draggable',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent],
+  imports: [FlexiGridModule, MyCodeComponent],
   templateUrl: './resizable.component.html',
   styleUrl: './resizable.component.css'
 })
@@ -971,12 +971,12 @@ export const changeThemeTSCode: string = `
 import { Component, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-change-theme',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent],
+  imports: [FlexiGridModule],
   templateUrl: './change-theme.component.html',
   styleUrl: './change-theme.component.css'
 })

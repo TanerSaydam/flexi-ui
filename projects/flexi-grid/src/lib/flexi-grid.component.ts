@@ -1,18 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, computed, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
-import { FormsModule } from '@angular/forms';
-
-import { TrCurrencyPipe } from 'tr-currency'
 
 @Component({
   selector: 'flexi-grid',
-  standalone: true,
-  imports: [CommonModule, FormsModule, TrCurrencyPipe],
   templateUrl: './flexi-grid.component.html',
-  styleUrl: `./flexi-grid.component.css`,
-  encapsulation: ViewEncapsulation.None
+  styleUrl: `./flexi-grid.component.css`  
 })
 export class FlexiGridComponent implements OnChanges {
   @Input() data: any[] = [];
@@ -40,9 +33,9 @@ export class FlexiGridComponent implements OnChanges {
   @Input() autoWidth: boolean = false;
   @Input() width: string = "100%";
   @Input() indexWidth: string = "70px";
-  @Input() columnVisibilityBtnClass: string = "flexi-grid-btn";
-  @Input() refreshDataBtnClass: string = "flexi-grid-btn";
-  @Input() exportExcelBtnClass: string = "flexi-grid-btn";
+  @Input() columnVisibilityBtnClass: string = "my-btn";
+  @Input() refreshDataBtnClass: string = "my-btn";
+  @Input() exportExcelBtnClass: string = "my-btn";
   @Input() exportExcelFileName: string = "excel-export";
   @Input() exportExcelButtonClick: (() => void) | undefined;
   @Input() footerPerPageText: string = "items per page";
@@ -194,10 +187,6 @@ export class FlexiGridComponent implements OnChanges {
         filteredData = filteredData.filter(item => {
           const field = filter.field;
           const value = filter.value;
-          if (item[field] === undefined || item[field] === null) {
-            return true;
-          }
-          
           const itemValue = item[field].toString().toLocaleLowerCase('tr');
           const filterValue = value.toString().toLocaleLowerCase('tr');
 

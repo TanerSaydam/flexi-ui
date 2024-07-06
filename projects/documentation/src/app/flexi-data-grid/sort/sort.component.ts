@@ -1,6 +1,5 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
-//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,7 @@ import { sortHTMLCode, sortTSCode } from '../code';
 @Component({
   selector: 'app-sort',
   standalone: true,
-  imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule, MyCodeComponent],
+  imports: [FlexiGridModule, FormsModule, MyCodeComponent],
   templateUrl: './sort.component.html',
   styleUrl: './sort.component.css',
   encapsulation: ViewEncapsulation.None,

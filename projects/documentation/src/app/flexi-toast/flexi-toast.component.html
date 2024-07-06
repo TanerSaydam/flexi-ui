@@ -1,10 +1,18 @@
 <app-blank pag
 eName="Flexi Toast" pageDescription="Angular Flexi Toast">
-    <!-- Örnek Çıktısı -->
-    <app-card id="use" style="padding-top: 5px;" cardTitle="Örnek">
+    <!-- Toast Örnek Çıktısı -->
+    <app-card id="toast-use" style="padding-top: 5px;" cardTitle="Toast Örnek">
         <div class="card-body">            
             <img src="/img/flexi-toast-light.gif">
             <img src="/img/flexi-toast-dark.gif">
+        </div>
+    </app-card>
+
+    <!-- Swal Örnek Çıktısı -->
+    <app-card id="swal-use" style="padding-top: 5px;" cardTitle="Swal Örnek">
+        <div class="card-body" style="display: flex; gap: 20px;">            
+            <img src="/img/flexi-swal-light.png">
+            <img src="/img/flexi-swal-dark.png">
         </div>
     </app-card>
 
@@ -18,9 +26,9 @@ eName="Flexi Toast" pageDescription="Angular Flexi Toast">
         </app-card>
     </div>
 
-    <!-- First Use -->
-    <div id="first-use" style="padding-top: 5px;">
-        <app-card id="installation" cardTitle="Kullanım">    
+    <!-- Toast First Use -->
+    <div id="toast-first-use" style="padding-top: 5px;">
+        <app-card id="installation" cardTitle="Toast Kullanım">    
             <div class="card-body">
                 <img src="/img/flexi-toast-1.png">
             </div>        
@@ -31,9 +39,22 @@ eName="Flexi Toast" pageDescription="Angular Flexi Toast">
         </app-card>
     </div>
 
+    <!-- Swal First Use -->
+    <div id="swal-first-use" style="padding-top: 5px;">
+        <app-card id="installation" cardTitle="Swal Kullanım">    
+            <div class="card-body">
+                <img src="/img/flexi-swal-light.png">
+            </div>        
+            <div class="card-body">
+                <p>Swalı kullanmak istediğiniz component de servisi inject edip showSwal metodu ile swalı görüntüleyebilirsiniz. Metot parametre olarak callBack funtion istiyor. Bu yöntemle de eğer sorunuz onaylanırsa, örneğin sil tuşuna basılırsa ne işlem yapacağınızı kodlayabiliyorsunuz. Service de bulunan options üzerinden ayarlarınızı değiştirebilir ya da kendi ayarlarınızı oluşturup servicedeki options a set edebilirsiniz.</p>
+                <my-code [code]="swalTSCode()" language="typescript"></my-code>
+            </div>
+        </app-card>
+    </div>
 
-    <!-- Full Usage -->
-    <app-card id="full" style="padding-top: 5px;" cardTitle="Test">     
+
+    <!-- Toast Full Usage -->
+    <app-card id="toast-full" style="padding-top: 5px;" cardTitle="Toast Test">     
         <div class="card-body">
             <p>Bu bölümden Toast'ın tüm özelliklerini test edebilirsiniz</p>
         </div>  
@@ -42,11 +63,11 @@ eName="Flexi Toast" pageDescription="Angular Flexi Toast">
                 <div class="col-6">
                     <div class="form-group">
                         <label>Başlık</label>
-                        <input type="text" class="form-control" [(ngModel)]="title">
+                        <input type="text" class="form-control" [(ngModel)]="toastTitle">
                     </div>
                     <div class="form-group mt-2">
                         <label>Text</label>
-                        <input type="text" class="form-control" [(ngModel)]="text">
+                        <input type="text" class="form-control" [(ngModel)]="toastText">
                     </div>
                     <div class="form-group mt-2">
                         <label>Icon</label>
@@ -109,6 +130,44 @@ eName="Flexi Toast" pageDescription="Angular Flexi Toast">
             </div>        
             <div class="form-group mt-2">
                 <button class="btn btn-primary" (click)="showToast()">Toast Göster</button>
+            </div>
+        </div>
+    </app-card>
+
+     <!-- Swal Full Usage -->
+     <app-card id="swal-full" style="padding-top: 5px;" cardTitle="Swal Test">     
+        <div class="card-body">
+            <p>Bu bölümden Swal'ın tüm özelliklerini test edebilirsiniz</p>
+        </div>  
+        <div class="card-body">
+            <div class="row form-group">
+                <div class="form-group">
+                    <label>Başlık</label>
+                    <input type="text" class="form-control" [(ngModel)]="swalTitle">
+                </div>
+                <div class="form-group mt-2">
+                    <label>Text</label>
+                    <input type="text" class="form-control" [(ngModel)]="swalText">
+                </div>
+                <div class="form-group mt-2">
+                    <label>Class</label>
+                    <select class="form-control" [(ngModel)]="options().swalContentThemeClass">
+                        <option value="success">Success</option>
+                        <option value="info">Info</option>
+                        <option value="warning">Warning</option>
+                        <option value="error">Error</option>
+                    </select>
+                </div>      
+                <div class="form-group mt-2">
+                    <label>Theme</label>
+                    <select class="form-control" [(ngModel)]="options().themeClass">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>                
+            </div>        
+            <div class="form-group mt-2">
+                <button class="btn btn-primary" (click)="showSwal()">Swal Göster</button>
             </div>
         </div>
     </app-card>

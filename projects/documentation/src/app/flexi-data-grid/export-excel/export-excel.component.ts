@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { StateModel, FlexiGridService, FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { exportExcelHTMLCode, exportExcelTSCode } from '../code';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-export-excel',
   standalone: true,
-  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
+  imports: [FlexiGridModule, FormsModule, MyCodeComponent],
   templateUrl: './export-excel.component.html',
   styleUrl: './export-excel.component.css',
   encapsulation: ViewEncapsulation.None,

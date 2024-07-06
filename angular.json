@@ -52,6 +52,10 @@
             "index": "projects/documentation/src/index.html",
             "browser": "projects/documentation/src/main.ts",
             "polyfills": [],
+            "allowedCommonJsDependencies": [
+              "prismjs",
+              "prismjs/components/prism-typescript"
+            ],
             "tsConfig": "projects/documentation/tsconfig.app.json",
             "assets": [
               {
@@ -74,8 +78,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "5MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",

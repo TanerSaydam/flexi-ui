@@ -58,7 +58,7 @@
                       <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiSelectDropDown() ? 'show' : ''">
                         <div class="dropdown-menu-columns">
                           <div class="dropdown-menu-column">
-                            @for(document of fleciSelectDocument; track $index){
+                            @for(document of flexiSelectDocument; track $index){
                             <div>
                               <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
                                 {{ document.title }}
@@ -70,7 +70,7 @@
                       </div>
                     </li>
                     <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                      <a routerLink="/flexi-toast" class="nav-link">
+                      <a routerLink="/flexi-toast" class="nav-link dropdown-toggle">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                           <i class="fa-solid fa-comment me-2"></i>
                         </span>
@@ -78,6 +78,19 @@
                           Flexi Toast
                         </span>
                       </a>
+                      <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiToastDropDown() ? 'show' : ''">
+                        <div class="dropdown-menu-columns">
+                          <div class="dropdown-menu-column">
+                            @for(document of flexiToastDocument; track $index){
+                            <div>
+                              <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
+                                {{ document.title }}
+                              </a>
+                            </div>
+                            }
+                          </div>
+                        </div>
+                      </div>
                     </li>
                     <li class="nav-item">
                       @if(shared.themeClass === "light"){

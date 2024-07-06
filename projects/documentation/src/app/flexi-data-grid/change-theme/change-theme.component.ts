@@ -1,8 +1,7 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
-//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { changeThemeHTMLCode, changeThemeTSCode } from '../code';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-change-theme',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent, FormsModule, CommonModule],
+  imports: [FlexiGridModule, MyCodeComponent, FormsModule, CommonModule],
   templateUrl: './change-theme.component.html',
   styleUrl: './change-theme.component.css',
   encapsulation: ViewEncapsulation.None,

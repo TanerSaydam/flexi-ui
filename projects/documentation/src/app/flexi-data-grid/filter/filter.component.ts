@@ -1,6 +1,5 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
-//import { FlexiGridColumnComponent, FlexiGridComponent, FilterType } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent, FilterType } from 'flexi-grid';
+import { FilterType, FlexiGridModule } from 'flexi-grid';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,7 @@ import { filterHTMLCode, filterTSCode } from '../code';
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [FlexiGridComponent,FlexiGridColumnComponent, FormsModule, MyCodeComponent],
+  imports: [FlexiGridModule, FormsModule, MyCodeComponent],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css',
   encapsulation: ViewEncapsulation.None,

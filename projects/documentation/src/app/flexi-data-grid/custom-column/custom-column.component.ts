@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-custom-column',
   standalone: true,
-  imports: [FlexiGridComponent, FlexiGridColumnComponent, MyCodeComponent, CommonModule],
+  imports: [FlexiGridModule, MyCodeComponent, CommonModule],
   templateUrl: './custom-column.component.html',
   styleUrl: './custom-column.component.css',
   encapsulation: ViewEncapsulation.None,

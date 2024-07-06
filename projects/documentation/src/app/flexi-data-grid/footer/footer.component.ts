@@ -1,6 +1,5 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
-//import { FlexiGridColumnComponent, FlexiGridComponent } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent } from 'flexi-grid';
+import { FlexiGridModule } from 'flexi-grid';
 import { FormsModule } from '@angular/forms';
 import { UsersData } from '../data';
 import { UserModel } from '../../models/user.model';
@@ -10,7 +9,7 @@ import { footerHTMLCode, footerTSCode } from '../code';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [FlexiGridColumnComponent, FlexiGridComponent, FormsModule, MyCodeComponent],
+  imports: [FlexiGridModule, FormsModule, MyCodeComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css',
   encapsulation: ViewEncapsulation.None,

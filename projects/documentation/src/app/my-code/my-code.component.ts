@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
-import { SwalService } from '../swal.service';
 import { CommonModule } from '@angular/common';
 
 declare var Prism: any;
 import 'prismjs';
 import 'prismjs/components/prism-typescript';
+import { FlexiToastService } from 'flexi-toast';
 // import 'prismjs/components/prism-css';
 // import 'prismjs/components/prism-javascript';
 // import 'prismjs/components/prism-java';
@@ -27,7 +27,7 @@ export class MyCodeComponent implements AfterViewInit {
   @Input() code: string = ""
   @Input() className: string = "my-code";
   constructor(
-    private swal: SwalService
+    private swal: FlexiToastService
   ){}
 
   ngAfterViewInit(): void {
@@ -36,6 +36,6 @@ export class MyCodeComponent implements AfterViewInit {
 
   copy(){
     navigator.clipboard.writeText(this.code);
-    this.swal.callToast("Kod kopyalandı","success");
+    this.swal.showToast("Başarılı","Kod kopyalandı","success");
   }
 }

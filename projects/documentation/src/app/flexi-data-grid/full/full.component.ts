@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
 //import { FlexiGridColumnComponent, FlexiGridComponent,StateModel,FlexiGridService } from '../../../../../flexi-grid/src/public-api';
-import { FlexiGridComponent,FlexiGridColumnComponent, StateModel, FlexiGridService } from 'flexi-grid';
+import { FlexiGridModule, StateModel, FlexiGridService } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
@@ -10,7 +10,7 @@ import { SharedService } from '../../shared.service';
 @Component({
   selector: 'app-flexi-grid-full',
   standalone: true,
-  imports: [FlexiGridColumnComponent,FlexiGridComponent, MyCodeComponent],
+  imports: [FlexiGridModule, MyCodeComponent],
   templateUrl: './full.component.html',
   styleUrl: './full.component.css',
   encapsulation: ViewEncapsulation.None

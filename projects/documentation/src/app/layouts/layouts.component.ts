@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SharedService } from '../shared.service';
-import { flexiGridDocument, flexiSelectDocument } from '../document';
+import { flexiGridDocument, flexiSelectDocument, flexiToastDocument } from '../document';
 
 @Component({
   selector: 'app-layouts',
@@ -14,7 +14,8 @@ import { flexiGridDocument, flexiSelectDocument } from '../document';
 })
 export class LayoutsComponent {  
   flexiGridDocument = flexiGridDocument;
-  fleciSelectDocument = flexiSelectDocument;
+  flexiSelectDocument = flexiSelectDocument;
+  flexiToastDocument = flexiToastDocument;
 
   constructor(
     public shared: SharedService
