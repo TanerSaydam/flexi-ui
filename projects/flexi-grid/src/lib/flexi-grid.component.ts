@@ -40,9 +40,9 @@ export class FlexiGridComponent implements OnChanges {
   @Input() autoWidth: boolean = false;
   @Input() width: string = "100%";
   @Input() indexWidth: string = "70px";
-  @Input() columnVisibilityBtnClass: string = "my-btn";
-  @Input() refreshDataBtnClass: string = "my-btn";
-  @Input() exportExcelBtnClass: string = "my-btn";
+  @Input() columnVisibilityBtnClass: string = "flexi-grid-btn";
+  @Input() refreshDataBtnClass: string = "flexi-grid-btn";
+  @Input() exportExcelBtnClass: string = "flexi-grid-btn";
   @Input() exportExcelFileName: string = "excel-export";
   @Input() exportExcelButtonClick: (() => void) | undefined;
   @Input() footerPerPageText: string = "items per page";

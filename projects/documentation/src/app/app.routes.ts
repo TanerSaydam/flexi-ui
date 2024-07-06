@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { FlexiDataGridComponent } from './flexi-data-grid/flexi-data-grid.component';
 import { OptionsComponent } from './flexi-data-grid/options/options.component';
 import { FlexiSelectComponent } from './flexi-select/flexi-select.component';
+import { FlexiToastComponent } from './flexi-toast/flexi-toast.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,10 @@ export const routes: Routes = [
             {
                 path: "flex-grid-options",
                 component: OptionsComponent
+            },
+            {
+                path: "flexi-toast",
+                component: FlexiToastComponent
             }
         ]
     },    

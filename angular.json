@@ -61,7 +61,8 @@
             ],
             "styles": [
               "projects/documentation/src/styles.css",
-              "node_modules/prismjs/themes/prism.min.css"
+              "node_modules/prismjs/themes/prism.min.css",
+              "./node_modules/flexi-toast/src/flexi-toast.css"
             ],
             "scripts": [
               "node_modules/prismjs/prism.js",
@@ -154,7 +155,8 @@
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.css"
+              "projects/demo-app/src/styles.css",
+              "./node_modules/flexi-toast/src/flexi-toast.css"
             ],
             "scripts": []
           },
@@ -244,6 +246,39 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/flexi-select/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "flexi-toast": {
+      "projectType": "library",
+      "root": "projects/flexi-toast",
+      "sourceRoot": "projects/flexi-toast/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/flexi-toast/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/flexi-toast/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/flexi-toast/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/flexi-toast/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

@@ -14,82 +14,92 @@
             <div class="collapse navbar-collapse" id="sidebar-menu">
                 <ul class="navbar-nav pt-lg-3">                    
                     <li class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                        <a class="nav-link">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <i class="fa-solid fa-home me-2"></i>
-                            </span>
-                            <span class="nav-link-title">
-                                Ana Sayfa
-                            </span>
-                        </a>
-                    </li>    
+                      <a class="nav-link">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-solid fa-home me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Ana Sayfa
+                        </span>
+                      </a>
+                    </li>
                     <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                        <a routerLink="/flexi-grid" class="nav-link dropdown-toggle">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <i class="fa-solid fa-table me-2"></i>
-                            </span>
-                            <span class="nav-link-title">
-                                Flexi Grid
-                            </span>
-                        </a>
-                        <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiGridDropDown() ? 'show' : ''">
-                            <div class="dropdown-menu-columns">
-                              <div class="dropdown-menu-column">
-                                @for(document of flexiGridDocument; track $index){
-                                  <div>
-                                    <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
-                                        {{ document.title }}
-                                    </a>
-                                  </div>
-                                }
-                              </div>                             
+                      <a routerLink="/flexi-grid" class="nav-link dropdown-toggle">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-solid fa-table me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Flexi Grid
+                        </span>
+                      </a>
+                      <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiGridDropDown() ? 'show' : ''">
+                        <div class="dropdown-menu-columns">
+                          <div class="dropdown-menu-column">
+                            @for(document of flexiGridDocument; track $index){
+                            <div>
+                              <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
+                                {{ document.title }}
+                              </a>
                             </div>
+                            }
                           </div>
-                    </li>  
+                        </div>
+                      </div>
+                    </li>
                     <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                       <a routerLink="/flexi-select" class="nav-link dropdown-toggle">
-                          <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <i class="fa-solid fa-list-check me-2"></i>
-                          </span>
-                          <span class="nav-link-title">
-                              Flexi Select
-                          </span>
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-solid fa-list-check me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Flexi Select
+                        </span>
                       </a>
                       <div class="dropdown-menu" [ngClass]="shared.openOrCloseFlexiSelectDropDown() ? 'show' : ''">
-                          <div class="dropdown-menu-columns">
-                            <div class="dropdown-menu-column">
-                              @for(document of fleciSelectDocument; track $index){
-                                <div>
-                                  <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
-                                      {{ document.title }}
-                                  </a>
-                                </div>
-                              }
-                            </div>                             
+                        <div class="dropdown-menu-columns">
+                          <div class="dropdown-menu-column">
+                            @for(document of fleciSelectDocument; track $index){
+                            <div>
+                              <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
+                                {{ document.title }}
+                              </a>
+                            </div>
+                            }
                           </div>
                         </div>
-                  </li>  
+                      </div>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/flexi-toast" class="nav-link">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-solid fa-comment me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Flexi Toast
+                        </span>
+                      </a>
+                    </li>
                     <li class="nav-item">
                       @if(shared.themeClass === "light"){
-                          <div style="cursor: pointer;" (click)="changeTheme('dark')" class="nav-link">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                              <i class="fa-solid fa-moon theme-class me-2"></i>
-                            </span>
-                            <span class="nav-link-title">
-                              Dark Theme
-                            </span>      
-                          </div>
-                        }@else {
-                          <div style="cursor: pointer;" (click)="changeTheme('light')" class="nav-link">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                              <i class="fa-regular fa-moon theme-class me-2"></i>
-                            </span>
-                            <span class="nav-link-title">
-                              Light Theme
-                            </span>  
-                        </div>
-                        }                     
-                    </li>                 
+                      <div style="cursor: pointer;" (click)="changeTheme('dark')" class="nav-link">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-solid fa-moon theme-class me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Dark Theme
+                        </span>
+                      </div>
+                      }@else {
+                      <div style="cursor: pointer;" (click)="changeTheme('light')" class="nav-link">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-regular fa-moon theme-class me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Light Theme
+                        </span>
+                      </div>
+                      }
+                    </li>
                 </ul>
             </div>
         </div>

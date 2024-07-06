@@ -1,0 +1,115 @@
+<app-blank pag
+eName="Flexi Toast" pageDescription="Angular Flexi Toast">
+    <!-- Örnek Çıktısı -->
+    <app-card id="use" style="padding-top: 5px;" cardTitle="Örnek">
+        <div class="card-body">            
+            <img src="/img/flexi-toast-light.gif">
+            <img src="/img/flexi-toast-dark.gif">
+        </div>
+    </app-card>
+
+    <!-- Kurulum -->
+    <div id="installation" style="padding-top: 5px;">
+        <app-card id="installation" cardTitle="Kurulum">
+            <div class="card-body">
+                <p>Flexi Toast'ı kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
+                <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-toast</code></pre>
+            </div>
+        </app-card>
+    </div>
+
+    <!-- First Use -->
+    <div id="first-use" style="padding-top: 5px;">
+        <app-card id="installation" cardTitle="Kullanım">    
+            <div class="card-body">
+                <img src="/img/flexi-toast-1.png">
+            </div>        
+            <div class="card-body">
+                <p>Toastı kullanmak istediğiniz component de servisi inject edip showToast metodu ile toast görüntüleyebilirsiniz. Service de bulunan options üzerinden ayarlarınızı değiştirebilir ya da kendi ayarlarınızı oluşturup servicedeki options a set edebilirsiniz.</p>
+                <my-code [code]="toastTSCode()" language="typescript"></my-code>
+            </div>
+        </app-card>
+    </div>
+
+
+    <!-- Full Usage -->
+    <app-card id="full" style="padding-top: 5px;" cardTitle="Test">     
+        <div class="card-body">
+            <p>Bu bölümden Toast'ın tüm özelliklerini test edebilirsiniz</p>
+        </div>  
+        <div class="card-body">
+            <div class="row form-group">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Başlık</label>
+                        <input type="text" class="form-control" [(ngModel)]="title">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label>Text</label>
+                        <input type="text" class="form-control" [(ngModel)]="text">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label>Icon</label>
+                        <select class="form-control" [(ngModel)]="options().icon">
+                            <option value="success">Success</option>
+                            <option value="info">Info</option>
+                            <option value="warning">Warning</option>
+                            <option value="error">Error</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label>Pozisyon</label>
+                        <select class="form-control" [(ngModel)]="options().position">
+                            <option value="top-left">Yukarı sol</option>
+                            <option value="top-right">Yukarı sağ</option>
+                            <option value="bottom-left">Aşağı sol</option>
+                            <option value="bottom-right">Aşağı sağ</option>
+                            <option value="top-full">Yukarı full</option>
+                            <option value="bottom-full">Aşağı full</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="options().autoClose" id="autoClose">
+                        <label class="form-check-label" for="autoClose">
+                            Otomatik kapat
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="options().showCloseBtn" id="showCloseBtn">
+                        <label class="form-check-label" for="showCloseBtn">
+                            Kapat butonunu göster
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="options().showProgressBar" id="showProgressBar" [disabled]="!options().autoClose">
+                        <label class="form-check-label" for="showProgressBar">
+                            Progess barı göster
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="options().preventDuplicate" id="preventDuplicate">
+                        <label class="form-check-label" for="preventDuplicate">
+                            Birden fazla toast gözükmesini engelle
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Timeout</label>
+                        <input type="text" class="form-control" [(ngModel)]="options().timeOut">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label>Theme</label>
+                        <select class="form-control" [(ngModel)]="options().themeClass">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+            </div>        
+            <div class="form-group mt-2">
+                <button class="btn btn-primary" (click)="showToast()">Toast Göster</button>
+            </div>
+        </div>
+    </app-card>
+</app-blank>

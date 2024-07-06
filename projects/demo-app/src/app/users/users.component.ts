@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, Renderer2, signal } from '@angular/core';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { StateModel } from '../../../../flexi-grid/src/lib/state.model';
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid.service';
@@ -9,6 +9,7 @@ import { FlexiSelectComponent } from '../../../../flexi-select/src/public-api';
 import { FormsModule } from '@angular/forms';
 import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
 import { UsersData } from '../../../../documentation/src/app/flexi-data-grid/data'
+import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -27,10 +28,15 @@ export class UsersComponent {
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
-    public shared: SharedService
+    public shared: SharedService,
+    private toast: FlexiToastService
   ){
     this.state().pageSize = 500;
     this.getAll();
+    toast.options.position = "bottom-right";
+    toast.options.autoClose = true;
+    toast.options.themeClass = "light";
+    toast.options.timeOut = 4000;
   }
 
   getAll(){
@@ -63,12 +69,15 @@ export class UsersComponent {
   }
 
   save(){
-    const user1 = this.users().find(p=> p.id === this.userId1());
-    const user2 = this.users().find(p=> p.id === this.userId2());
-    this.userId1.set("");
-   // console.log(user2);
-    
+    // const user1 = this.users().find(p=> p.id === this.userId1());
+    // const user2 = this.users().find(p=> p.id === this.userId2());
+    // this.userId1.set("");
+    this.toast.showToast("Success","Create is successful", "success");
+    this.toast.showToast("Info","Update is successful", "info");
+    this.toast.showToast("Error","Something went wrong", "error");
+    this.toast.showToast("Warning","You need to fix this", "warning");
   }
+  
 }
 
 export class UserModel{
@@ -79,3 +88,5 @@ export class UserModel{
   salary: number = 0;
   avatarUrl: string = "";
 }
+
+

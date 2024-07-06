@@ -1,42 +1,47 @@
-[data-bs-theme="light"] {    
-    --background-color: #fff;
-    --text-color: #000;
-    --active-text-color:#f8f9fa;
-    --active-background-color: #007bff;
-    --border-color: #dee2e6;
-    --input-border-color: #dee2e6;
+[data-bs-theme="light"] {
+    --flexi-select-background-color: #fff;
+    --flexi-select-text-color: #000;
+    --flexi-select-active-text-color: #f8f9fa;
+    --flexi-select-active-background-color: #007bff;
+    --flexi-select-border-color: #dee2e6;
+    --flexi-select-input-border-color: #dee2e6;
 }
 
-[data-bs-theme="dark"] {    
-    --background-color: #212529;
-    --text-color: #fff;
-    --active-text-color:#141414;
-    --active-background-color: #f8f9fa;
-    --border-color: #141414;
-    --input-border-color: #f8f9fa;
+[data-bs-theme="dark"] {
+    --flexi-select-background-color: #212529;
+    --flexi-select-text-color: #fff;
+    --flexi-select-active-text-color: #141414;
+    --flexi-select-active-background-color: #f8f9fa;
+    --flexi-select-border-color: #141414;
+    --flexi-select-input-border-color: #f8f9fa;
 }
 
-.my-select{
+.flexi-select {
     position: relative;
     margin: 0 !important;
     padding: 0 !important;
     cursor: pointer;
 }
 
-.my-select-div{
+.flexi-select-div {
     position: relative;
     overflow-x: hidden;
 }
 
-.my-select-div-svg{
+.flexi-select-div-svg {
     position: absolute;
     top: 6px;
     right: 10px;
-    fill: var(--text-color);
-    width: 10px;    
+    fill: var(--flexi-select-text-color);
+    width: 10px;
 }
 
-.my-form-control, .my-select-search-input, .my-select-div{
+.flexi-select-search-input:focus {    
+    outline: none;
+}
+
+.flexi-select-search-input,
+.flexi-select-div {
     display: block;
     width: 100%;
     height: calc(1.47em + 1rem + 2px);
@@ -44,10 +49,10 @@
     font-size: 0.8125rem;
     font-weight: 400;
     line-height: 1.47;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    color: var(--flexi-select-text-color);
+    background-color: var(--flexi-select-background-color);
     background-clip: padding-box;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--flexi-select-border-color);
     border-radius: 4px;
     -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -55,29 +60,30 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.my-active, .my-select-li:hover{
-    background-color: var(--active-background-color);
-    color: var(--active-text-color);
+.flexi-active,
+.flexi-select-li:hover {
+    background-color: var(--flexi-select-active-background-color);
+    color: var(--flexi-select-active-text-color);
 }
 
-.my-select-search-input{
-    border-color: var(--input-border-color);
+.flexi-select-search-input {
+    border-color: var(--flexi-select-input-border-color);
 }
 
-.my-select-dropdown {
+.flexi-select-dropdown {
     position: absolute;
     z-index: 999;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--flexi-select-background-color);
+    color: var(--flexi-select-text-color);
     width: 100%;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--flexi-select-border-color);
     border-radius: 5px;
     padding-top: 10px;
     padding-left: 5px;
-    padding-right: 5px;            
+    padding-right: 5px;
 }
 
-.my-select-ul {
+.flexi-select-ul {
     height: 100%;
     max-height: 180px !important;
     overflow-y: auto;
@@ -86,13 +92,13 @@
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 0px;
-  }
+}
 
-.my-select-li{
+.flexi-select-li {
     padding: 5px;
     cursor: pointer;
 }
 
-.no-click{
+.no-click {
     pointer-events: none;
 }

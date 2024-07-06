@@ -31,7 +31,7 @@ export class FlexiSelectComponent implements OnChanges {
 
   @ContentChildren(forwardRef(() => FlexiOptionComponent)) options!: QueryList<FlexiOptionComponent>;
 
-  @ViewChild("mySelectInput") mySelectInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild("flexiSelectInput") flexiSelectInput: ElementRef<HTMLInputElement> | undefined;
 
   private onChange = (value: any) => { };
   private onTouched = () => { };
@@ -85,7 +85,7 @@ export class FlexiSelectComponent implements OnChanges {
   }
 
   loadMoreData() {
-    const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
+    const val = this.flexiSelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
     let newData = val === "" ? this.data : this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
     newData = newData.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage));
     this.filteredData.set([...this.filteredData(), ...newData]);
@@ -119,7 +119,7 @@ export class FlexiSelectComponent implements OnChanges {
 
     if (this.isOpen()) {
       setTimeout(() => {
-        this.mySelectInput?.nativeElement.focus();
+        this.flexiSelectInput?.nativeElement.focus();
       }, 100);
     }
   }
@@ -127,13 +127,13 @@ export class FlexiSelectComponent implements OnChanges {
   @HostListener('document:click', ['$event'])
   handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.my-select')) {
+    if (!target.closest('.flexi-select')) {
       this.isOpen.set(false);
     }
   }
 
   search() {
-    const val = this.mySelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr"); 
+    const val = this.flexiSelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr"); 
     const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0,this.itemsPerPage);
     this.filteredData.set(filtered);    
     this.selectFirstOne();
@@ -141,10 +141,10 @@ export class FlexiSelectComponent implements OnChanges {
 
   setLiClass(item: any) {
     if (item.isSelected) {
-      return "my-select-li my-active"
+      return "flexi-select-li flexi-active"
     }
 
-    return "my-select-li"
+    return "flexi-select-li"
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -173,7 +173,7 @@ export class FlexiSelectComponent implements OnChanges {
   }
 
   scrollToElement(index: number) {
-    const ulElement = document.querySelector('.my-select-ul') as HTMLElement;
+    const ulElement = document.querySelector('.flexi-select-ul') as HTMLElement;
     const liElement = ulElement.children[index] as HTMLElement;
     liElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -185,7 +185,7 @@ export class FlexiSelectComponent implements OnChanges {
     this.isOpen.set(false);
     this.selected.emit(item[this.value]);
     this.onChange(item[this.value]);
-    this.mySelectInput!.nativeElement.select();
+    this.flexiSelectInput!.nativeElement.select();
   }
 
   selectOption(option: FlexiOptionComponent) {

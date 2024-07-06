@@ -1,50 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 [data-bs-theme="light"] {
-    --background-color: #f8f9fa;
-    --background-color-part: #fff;
-    --bg-color-gray: #f8f9fa;
-    --text-color: #000;
-    --text-hover-color: #fff;
-    --active-text-color:#f8f9fa;
-    --active-background-color: #007bff;
-    --tbody-hover: #f1f1f1;
-    --hover-background-color:#007bff;
-    --hover-text-color: #f1f1f1;
-    --border-color: #dee2e6;
+    --flexi-grid-background-color: #f8f9fa;
+    --flexi-grid-background-color-part: #fff;
+    --flexi-grid-bg-color-gray: #f8f9fa;
+    --flexi-grid-text-color: #000;
+    --flexi-grid-text-hover-color: #fff;
+    --flexi-grid-active-text-color:#f8f9fa;
+    --flexi-grid-active-background-color: #007bff;
+    --flexi-grid-tbody-hover: #f1f1f1;
+    --flexi-grid-hover-background-color:#007bff;
+    --flexi-grid-hover-text-color: #f1f1f1;
+    --flexi-grid-border-color: #dee2e6;
 }
 
 [data-bs-theme="dark"] {
-    --background-color: #212529;
-    --background-color-part: #141414;
-    --bg-color-gray: #000;
-    --text-color: #fff;
-    --text-hover-color: #000;
-    --tbody-hover: #353232;
-    --active-text-color:#141414;
-    --active-background-color: #f8f9fa;
-    --hover-background-color:#f8f9fa;
-    --hover-text-color: #212529;
-    --border-color: #141414;
+    --flexi-grid-background-color: #212529;
+    --flexi-grid-background-color-part: #141414;
+    --flexi-grid-bg-color-gray: #000;
+    --flexi-grid-text-color: #fff;
+    --flexi-grid-text-hover-color: #000;
+    --flexi-grid-tbody-hover: #353232;
+    --flexi-grid-active-text-color:#141414;
+    --flexi-grid-active-background-color: #f8f9fa;
+    --flexi-grid-hover-background-color:#f8f9fa;
+    --flexi-grid-hover-text-color: #212529;
+    --flexi-grid-border-color: #141414;
 }
 
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+.flexi-grid-filter-input[type=number]::-webkit-outer-spin-button,
+.flexi-grid-filter-input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-svg{
-    fill: var(--text-color);
+.flexi-grid-svg-text-color{
+    fill: var(--flexi-grid-text-color);
 }
 
-a {
+.flexi-grid-a {
     cursor: pointer;
     user-select: none;
     text-decoration: none !important;
 }
 
-.my-page-size-select {
+.flexi-grid-page-size-select {
     margin-left: 20px;
     /* Adjust the value as needed */
 }
@@ -57,7 +57,7 @@ a {
     cursor: pointer;
 }
 
-.my-spinner-container {
+.flexi-grid-spinner-container {
     position: absolute;
     z-index: 1;
     width: 100%;
@@ -68,7 +68,7 @@ a {
     align-items: center;
 }
 
-.my-spinner-1 {
+.flexi-grid-spinner-1 {
     position: absolute;
     height: 60px;
     width: 60px;
@@ -81,7 +81,7 @@ a {
     background-color: transparent;
 }
 
-.my-spinner-2 {
+.flexi-grid-spinner-2 {
     position: absolute;
     height: 30px;
     width: 30px;
@@ -114,18 +114,18 @@ a {
     }
 }
 
-.my-pagination-tr{
-    background-color: var(--background-color);
+.flexi-grid-pagination-tr{
+    background-color: var(--flexi-grid-background-color);
 }
 
-.my-pagination {
+.flexi-grid-pagination {
     display: flex;
     list-style: none;
     overflow-x: auto;
 }
 
-.my-pagination a{
-    color: var(--text-color);
+.flexi-grid-pagination a{
+    color: var(--flexi-grid-text-color);
 }
 
 .svg {
@@ -143,56 +143,56 @@ a {
     align-items: center;
 }
 
-.my-table-container {
-    border: 1px solid var(--border-color);
+.flexi-grid-table-container {
+    border: 1px solid var(--flexi-grid-border-color);
     border-radius: 12px;
     overflow-x: auto;
     /* margin: 20px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    background-color: var(--background-color-part);
-    color: var(--text-color);
+    background-color: var(--flexi-grid-background-color-part);
+    color: var(--flexi-grid-text-color);
     
 }
 
-.my-table-container table {
+.flexi-grid-table-container table {
     caption-side: top;
-    background-color: var(--background-color-part);
+    background-color: var(--flexi-grid-background-color-part);
 }
 
-.my-table-container caption {
+.flexi-grid-table-container caption {
     caption-side: top;
     padding: 10px;
-    background-color: var(--bg-color-gray);
+    background-color: var(--flexi-grid-bg-color-gray);
     text-align: left;
     font-weight: bold;
-    border-bottom: 1px solid var(--border-color);    
+    border-bottom: 1px solid var(--flexi-grid-border-color);    
 }
 
 .bg-color-gray {
-    background-color: var(--bg-color-gray);
+    background-color: var(--flexi-grid-bg-color-gray);
 }
 
-.my-table-container table {
+.flexi-grid-table-container table {
     width: 99.99%;
     border-collapse: collapse;
     overflow-x: auto;    
 }
 
-.my-table-container th,
-.my-table-container td {
+.flexi-grid-table-container th,
+.flexi-grid-table-container td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--flexi-grid-border-color);
 }
 
-.my-border {
+.flexi-grid-border {
     position: relative;
     padding-right: 10px;
 }
 
-.my-border:after {
+.flexi-grid-border:after {
     content: "";
     position: absolute;
     top: 50%;
@@ -203,16 +203,16 @@ a {
     transform: translateY(-50%);
 }
 
-.my-border:last-child:after {
+.flexi-grid-border:last-child:after {
     display: none;
 }
 
-.my-table-container tfoot td {
+.flexi-grid-table-container tfoot td {
     border-right: 0px;
 }
 
-.my-table-container th {
-    background-color: var(--background-color);
+.flexi-grid-table-container th {
+    background-color: var(--flexi-grid-background-color);
     padding-top: 20px;
     padding-bottom: 15px;
     position: sticky;
@@ -220,116 +220,116 @@ a {
     z-index: 1;
 }
 
-.my-table-container th {
+.flexi-grid-table-container th {
     user-select: none;
 }
 
-.my-table-container tbody tr:nth-child(odd) {
-    background-color: var(--background-color);
+.flexi-grid-table-container tbody tr:nth-child(odd) {
+    background-color: var(--flexi-grid-background-color);
 }
 
-.my-table-container tbody tr:hover {
-    background-color: var(--tbody-hover);
+.flexi-grid-table-container tbody tr:hover {
+    background-color: var(--flexi-grid-tbody-hover);
 }
 
-.my-table-container tbody {
+.flexi-grid-table-container tbody {
     flex: 1;
     overflow-x: auto;
     display: block;
 }
 
-.my-table-container tbody tr {
+.flexi-grid-table-container tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-.my-table-container thead,
-.my-table-container tfoot {
+.flexi-grid-table-container thead,
+.flexi-grid-table-container tfoot {
     display: table;
     width: 100%;
     table-layout: fixed;
 }
 
-.my-filter-input {
+.flexi-grid-filter-input {
     width: 80%;
     padding: 5px;
     border: 1px solid #ced4da;
     border-radius: 3px;
-    background-color: var(--background-color-part);
-    color: var(--text-color);
+    background-color: var(--flexi-grid-background-color-part);
+    color: var(--flexi-grid-text-color);
 }
 
-.my-select-container {
+.flexi-grid-select-container {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
 
-.my-select-container select {
+.flexi-grid-select-container select {
     margin-right: 10px;
 }
 
-div .my-active{
-    background-color: var(--active-background-color) !important;
-    color: var(--active-text-color)  !important; 
+div .flexi-grid-active{
+    background-color: var(--flexi-grid-active-background-color) !important;
+    color: var(--flexi-grid-active-text-color)  !important; 
 }
 
-.my-active> .my-page-link{
-    background-color: var(--active-background-color);  
-    color: var(--active-text-color)  !important;
+.flexi-grid-active> .flexi-grid-page-link{
+    background-color: var(--flexi-grid-active-background-color);  
+    color: var(--flexi-grid-active-text-color)  !important;
 }
 
-.my-active {
+.flexi-grid-active {
     z-index: 3;
-    color: var(--active-text-color)  !important;    
-    border-color: var(--active-background-color) !important;
+    color: var(--flexi-grid-active-text-color)  !important;    
+    border-color: var(--flexi-grid-active-background-color) !important;
     border-radius: 5px;
 }
 
-.my-active a{
-    color: var(--active-text-color);
+.flexi-grid-active a{
+    color: var(--flexi-grid-active-text-color);
 }
 
-.my-page-link {
+.flexi-grid-page-link {
     position: relative;
     display: block;
     padding: 0.5rem 0.75rem;
     margin-left: -1px;
     line-height: 1.25;
     color: #886ab5;
-    background-color: var(--background-color-part);
-    border: 1px solid var(--border-color);
+    background-color: var(--flexi-grid-background-color-part);
+    border: 1px solid var(--flexi-grid-border-color);
     border-radius: 3px;
 }
 
-.my-page-link:hover{
-    background-color: var(--hover-background-color) !important;
-    color: var(--hover-text-color) !important;
+.flexi-grid-page-link:hover{
+    background-color: var(--flexi-grid-hover-background-color) !important;
+    color: var(--flexi-grid-hover-text-color) !important;
 }
 
-.my-pagination .my-page-item.disabled {
+.flexi-grid-pagination .flexi-grid-page-item.disabled {
     cursor: not-allowed;
     opacity: 0.5;
     pointer-events: none;
 }
 
-.my-page-size-select {
+.flexi-grid-page-size-select {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.my-page-size-select select {
+.flexi-grid-page-size-select select {
     margin-left: 5px;
     padding: 5px;
 }
 
-.my-filter-container {
+.flexi-grid-filter-container {
     position: relative;
 }
 
-.my-dropdown-menu {
+.flexi-grid-dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
@@ -340,70 +340,70 @@ div .my-active{
     padding: 5px 0;
     margin: 0;
     font-size: 14px;
-    color: var(--text-color);
+    color: var(--flexi-grid-text-color);
     text-align: left;
     list-style: none;
-    background-color: var(--background-color);
+    background-color: var(--flexi-grid-background-color);
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
 
-.my-dropdown-menu.show {
+.flexi-grid-dropdown-menu.show {
     display: block;
 }
 
-.my-dropdown-item {
+.flexi-grid-dropdown-item {
     display: block;
     padding: 3px 1.5rem;
     clear: both;
     font-weight: 400;
-    color: var(--text-color);
+    color: var(--flexi-grid-text-color);
     text-align: inherit;
     background-color: transparent;
     border: 0;
 }
 
-.my-dropdown-item:hover,
-.my-dropdown-item:focus {
-    color: var(--text-hover-color) !important;
+.flexi-grid-dropdown-item:hover,
+.flexi-grid-dropdown-item:focus {
+    color: var(--flexi-grid-text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--hover-background-color);
-    color: var(--hover-text-color);
+    background-color: var(--flexi-grid-hover-background-color);
+    color: var(--flexi-grid-hover-text-color);
     border-radius: 5px;
 }
 
-.my-dropdown-checkbox-item {
+.flexi-grid-dropdown-checkbox-item {
     padding: 5px;
     display: flex;
     align-items: center;
     gap: 3px;
 }
 
-.my-dropdown-checkbox-item:hover {
-    color: var(--text-hover-color) !important;
+.flexi-grid-dropdown-checkbox-item:hover {
+    color: var(--flexi-grid-text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--hover-background-color);
-    color: var(--hover-text-color);
+    background-color: var(--flexi-grid-hover-background-color);
+    color: var(--flexi-grid-hover-text-color);
     border-radius: 5px;
 }
 
-.my-dropdown-title {
+.flexi-grid-dropdown-title {
     text-align: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid (var(--border-color));
+    border-bottom: 1px solid (var(--flexi-grid-border-color));
 }
 
-.my-btn {
-    box-shadow: 0 1px 0 rgba(var(--tblr-body-color-rgb), 0.04);
+.flexi-grid-btn {
+    box-shadow: 0 1px 0 rgba(var(--flexi-grid-tblr-body-color-rgb), 0.04);
     display: inline-block;
     padding: 0.4075rem 1rem;
     font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.5;
-    color: var(--text-color);
+    color: var(--flexi-grid-text-color);
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -413,12 +413,12 @@ div .my-active{
     user-select: none;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: var(--background-color);
+    background-color: var(--flexi-grid-background-color);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
-.my-btn:hover {
+.flexi-grid-btn:hover {
     border-color: black;
 }
 
@@ -426,7 +426,7 @@ div .my-active{
     overflow-x: auto;
 }
 
-.my-resize-handle {
+.flexi-grid-resize-handle {
     position: absolute;
     right: 0;
     top: 0;

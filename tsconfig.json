@@ -14,6 +14,9 @@
       "flexi-select": [
         "./dist/flexi-select"
       ],
+      "flexi-toast": [
+        "./dist/flexi-toast"
+      ],
       "my-lib": [
         "./dist/my-lib"
       ]
