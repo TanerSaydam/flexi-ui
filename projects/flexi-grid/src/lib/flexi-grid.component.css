@@ -63,6 +63,7 @@
     width: 100%;
     background-color: rgba(85, 83, 109, 0.1);
     height: 100%;    
+    font-family: "Poppins", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,7 +78,7 @@
     border-radius: 50%;
     border-left-color: transparent;
     border-right-color: transparent;
-    animation: my-spin-1 0.8s linear infinite;
+    animation: flexi-grid-spin-1 0.8s linear infinite;
     background-color: transparent;
 }
 
@@ -90,11 +91,11 @@
     border-radius: 50%;
     border-top-color: transparent;
     border-bottom-color: transparent;
-    animation: my-spin-2 1.3s linear infinite;
+    animation: flexi-grid-spin-2 1.3s linear infinite;
     background-color: transparent;
 }
 
-@keyframes my-spin-1 {
+@keyframes flexi-grid-spin-1 {
     0% {
         transform: rotate(0deg);
     }
@@ -104,7 +105,7 @@
     }
 }
 
-@keyframes my-spin-2 {
+@keyframes flexi-grid-spin-2 {
     0% {
         transform: rotate(0deg);
     }
@@ -396,7 +397,7 @@ div .flexi-grid-active{
 }
 
 .flexi-grid-btn {
-    box-shadow: 0 1px 0 rgba(var(--flexi-grid-tblr-body-color-rgb), 0.04);
+    box-shadow: 0 1px 0 rgba(black, 0.04);
     display: inline-block;
     padding: 0.4075rem 1rem;
     font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;

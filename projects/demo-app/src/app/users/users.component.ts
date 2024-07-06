@@ -1,5 +1,5 @@
 import { Component, Renderer2, signal } from '@angular/core';
-import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
+// import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { StateModel } from '../../../../flexi-grid/src/lib/state.model';
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
 import { UsersData } from '../../../../documentation/src/app/flexi-data-grid/data'
 import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
+import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
+
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -29,14 +31,19 @@ export class UsersComponent {
     private http: HttpClient,
     private flexi: FlexiGridService,
     public shared: SharedService,
-    private toast: FlexiToastService
+    public toast: FlexiToastService,
+    private renderer: Renderer2
   ){
     this.state().pageSize = 500;
     this.getAll();
     toast.options.position = "bottom-right";
-    toast.options.autoClose = true;
+    toast.options.autoClose = false;
     toast.options.themeClass = "light";
-    toast.options.timeOut = 4000;
+    toast.options.timeOut = 4000;  
+    toast.options.swalContentThemeClass = "error"  
+    //toast.options.swalContentThemeClass = "info"  
+    //toast.options.swalContentThemeClass = "success"  
+    //toast.options.swalContentThemeClass = "warning"  
   }
 
   getAll(){
@@ -76,8 +83,13 @@ export class UsersComponent {
     this.toast.showToast("Info","Update is successful", "info");
     this.toast.showToast("Error","Something went wrong", "error");
     this.toast.showToast("Warning","You need to fix this", "warning");
+  } 
+
+  delete(){
+    this.toast.showSwal('Sil?',' Lorem ipsum dolor sit amet consectetur?',()=> {
+      this.toast.showToast("Info","Silme işlemi başarıyla tamamlandı", "info");
+    });
   }
-  
 }
 
 export class UserModel{

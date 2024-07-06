@@ -22,7 +22,7 @@
     "@sweetalert2/ngx-sweetalert2": "^12.4.0",
     "flexi-grid": "^18.5.7",
     "flexi-select": "^18.1.5",
-    "flexi-toast": "^18.0.5",
+    "flexi-toast": "^18.0.8",
     "ngx-spinner": "^17.0.0",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",

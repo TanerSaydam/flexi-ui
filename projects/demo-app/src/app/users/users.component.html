@@ -35,6 +35,7 @@
 
         <div class="form-group mt-1">
           <button type="submit" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default">Show Swal</button>
         </div>
 
 
@@ -44,13 +45,32 @@
   </div>
 
   <hr>
-  <flexi-grid [data]="users()" [total]="total()" [dataBinding]="true" [pageable]="true" [pageSize]="state().pageSize"
-    [pageSizeList]="[10,20,30,50,100,1000]" [showIndex]="true" [loading]="loading()" [themeClass]="shared.themeClass()"
-    [filterable]="true" captionTitle="Example User Table" [captionTemplate]="captionTemplate" [showCaption]="true"
-    [showExportExcel]="true" [resizable]="true" [exportExcelButtonClick]="exportExcel.bind(this)"
-    (dataStateChange)="dataStateChange($event)" [sortable]="true" [draggable]="true">
-    <flexi-grid-column [visible]="true" field="id" title="Id" [sortable]="false"
-      [hideOverflow]="true"></flexi-grid-column>
+  <flexi-grid
+    [data]="users()"
+    [dataBinding]="false"
+    [pageable]="true"
+    [pageSize]="state().pageSize"
+    [pageSizeList]="[10,20,30,50,100,1000]"
+    [showIndex]="true"
+    [loading]="loading()"
+    [themeClass]="shared.themeClass()"
+    [filterable]="true"
+    captionTitle="Example User Table"
+    [captionTemplate]="captionTemplate"
+    [showCaption]="true"
+    [showExportExcel]="true"
+    [resizable]="true"
+    [exportExcelButtonClick]="exportExcel.bind(this)"    
+    [sortable]="true"
+    [draggable]="true">
+
+
+    <flexi-grid-column
+    [visible]="true"
+    field="id"
+    title="Id"
+    [sortable]="false"
+    [hideOverflow]="true"></flexi-grid-column>
     <flexi-grid-column [columnTemplate]="firstNameTemplate" field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
@@ -68,10 +88,10 @@
       <button class="btn btn-outline-info">
         <i class="fa-solid fa-edit"></i>
       </button>
-      <button class="btn btn-outline-danger ms-1">
+      <button class="btn btn-outline-danger ms-1" (click)="delete()">
         <i class="fa-solid fa-trash"></i>
       </button>
-    </ng-template>
+    </ng-template>   
 
     <ng-template #captionTemplate>
       <button class="btn btn-primary">
