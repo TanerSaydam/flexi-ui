@@ -47,17 +47,18 @@ export class UsersComponent {
   }
 
   getAll(){
-    this.users.set(UsersData);    
-    // this.loading.set(true);
+    //this.users.set(UsersData);    
+    this.loading.set(true);
 
-    // let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
-    // let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
+    //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
+    //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
+    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=10000`;
 
-    // this.http.get(endpoint).subscribe((res:any)=> {
-    //   this.users.set(res.data);
-    //   this.total.set(res.total);      
-    //   this.loading.set(false);
-    // });
+    this.http.get(endpoint).subscribe((res:any)=> {
+      this.users.set(res.data);
+      //this.total.set(res.total);      
+      this.loading.set(false);
+    });
   } 
 
   dataStateChange(event:any){

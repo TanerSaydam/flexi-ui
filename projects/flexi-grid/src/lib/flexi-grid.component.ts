@@ -80,7 +80,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   constructor(private cdr: ChangeDetectorRef){}
 
-  ngOnChanges(changes: SimpleChanges): void {    
+  ngOnChanges(changes: SimpleChanges): void {       
+    if(this.data.length > 0){
+      if (!this.columns || this.columns.length === 0) {
+        this.initializeColumnsFromData();
+        this.cdr.detectChanges();
+      }
+    }
     if (this.pageSize !== this.state.pageSize) {     
       this.state.pageSize = +this.pageSize;
     }

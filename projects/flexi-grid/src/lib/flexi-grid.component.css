@@ -6,10 +6,10 @@
     --bg-color-gray: #f8f9fa;
     --text-color: #000;
     --text-hover-color: #fff;
-    --active-text-color:#f8f9fa;
+    --active-text-color: #f8f9fa;
     --active-background-color: #007bff;
     --tbody-hover: #f1f1f1;
-    --hover-background-color:#007bff;
+    --hover-background-color: #007bff;
     --hover-text-color: #f1f1f1;
     --border-color: #dee2e6;
 }
@@ -21,20 +21,20 @@
     --text-color: #fff;
     --text-hover-color: #000;
     --tbody-hover: #353232;
-    --active-text-color:#141414;
+    --active-text-color: #141414;
     --active-background-color: #f8f9fa;
-    --hover-background-color:#f8f9fa;
+    --hover-background-color: #f8f9fa;
     --hover-text-color: #212529;
     --border-color: #141414;
 }
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-svg{
+svg {
     fill: var(--text-color);
 }
 
@@ -46,7 +46,6 @@ a {
 
 .flexi-grid-page-size-select {
     margin-left: 20px;
-    /* Adjust the value as needed */
 }
 
 .relative {
@@ -62,7 +61,7 @@ a {
     z-index: 1;
     width: 100%;
     background-color: rgba(85, 83, 109, 0.1);
-    height: 100%;    
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,17 +113,36 @@ a {
     }
 }
 
-.flexi-grid-pagination-tr{
+.flexi-grid-pagination-tr {
     background-color: var(--background-color);
+    padding: 20px;
 }
 
-.flexi-grid-pagination {
+.flexi-grid-pagination-tr, .flexi-grid-pagination-div{    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 1350px) {
+    .flexi-grid-pagination-td{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .flexi-grid-pagination-div{
+        flex-direction: column;        
+    }
+}
+
+
+.flexi-grid-pagination{
     display: flex;
     list-style: none;
-    overflow-x: auto;
+    overflow-x: auto;    
 }
 
-.flexi-grid-pagination a{
+.flexi-grid-pagination a {
     color: var(--text-color);
 }
 
@@ -154,7 +172,7 @@ a {
     flex-direction: column;
     background-color: var(--background-color-part);
     color: var(--text-color);
-    
+
 }
 
 .flexi-grid-table-container table {
@@ -168,17 +186,14 @@ a {
     background-color: var(--bg-color-gray);
     text-align: left;
     font-weight: bold;
-    border-bottom: 1px solid var(--border-color);    
+    border-bottom: 1px solid var(--border-color);
 }
 
-.bg-color-gray {
-    background-color: var(--bg-color-gray);
-}
 
 .flexi-grid-table-container table {
     width: 99.99%;
     border-collapse: collapse;
-    overflow-x: auto;    
+    overflow-x: auto;
 }
 
 .flexi-grid-table-container th,
@@ -204,7 +219,9 @@ a {
     transform: translateY(-50%);
 } */
 
-.flexi-grid-table-container td, .flexi-grid-filter-th, .flexi-grid-table-container th{
+.flexi-grid-table-container td,
+.flexi-grid-filter-th,
+.flexi-grid-table-container th {
     border-right: 1px solid var(--border-color);
 }
 
@@ -275,24 +292,23 @@ a {
     margin-right: 10px;
 }
 
-div .flexi-grid-active{
+div .flexi-grid-active {
     background-color: var(--active-background-color) !important;
-    color: var(--active-text-color)  !important; 
+    color: var(--active-text-color) !important;
 }
 
-.flexi-grid-active> .flexi-grid-page-link{
-    background-color: var(--active-background-color);  
-    color: var(--active-text-color)  !important;
+.flexi-grid-active>.flexi-grid-page-link {
+    background-color: var(--active-background-color);
+    color: var(--active-text-color) !important;
 }
 
 .flexi-grid-active {
     z-index: 3;
-    color: var(--active-text-color)  !important;    
+    color: var(--active-text-color) !important;
     border-color: var(--active-background-color) !important;
-    border-radius: 5px;
 }
 
-.flexi-grid-active a{
+.flexi-grid-active a {
     color: var(--active-text-color);
 }
 
@@ -308,7 +324,7 @@ div .flexi-grid-active{
     border-radius: 3px;
 }
 
-.flexi-grid-page-link:hover{
+.flexi-grid-page-link:hover {
     background-color: var(--hover-background-color) !important;
     color: var(--hover-text-color) !important;
 }
@@ -376,7 +392,6 @@ div .flexi-grid-active{
     text-decoration: none;
     background-color: var(--hover-background-color);
     color: var(--hover-text-color);
-    border-radius: 5px;
 }
 
 .flexi-grid-dropdown-checkbox-item {
@@ -447,3 +462,69 @@ div .flexi-grid-active{
     text-overflow: ellipsis;
 }
 
+.flexi-grid-caption-div {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--bg-color-gray);
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .flexi-grid-table-container {
+        overflow-x: auto;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border: none;
+    }
+
+    .flexi-grid-table-container table,
+    .flexi-grid-table-container thead,
+    .flexi-grid-table-container tbody,
+    .flexi-grid-table-container th,
+    .flexi-grid-table-container td,
+    .flexi-grid-table-container tr {
+        display: block;
+    }
+
+    .flexi-grid-table-container thead tr {
+        display: none;
+    }
+
+    .flexi-grid-table-container tbody tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .flexi-grid-table-container td {
+        text-align: left;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .flexi-grid-table-container td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .flexi-grid-table-container td:last-child {
+        border-bottom: 0;
+    }   
+    
+    .flexi-grid-caption-div{
+        flex-direction: column;
+        align-items: center;
+    }
+}

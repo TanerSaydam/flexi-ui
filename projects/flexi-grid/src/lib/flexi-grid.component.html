@@ -1,42 +1,40 @@
 <title>Angular Flexi Grid</title>
 <div [attr.data-bs-theme]="themeClass" class="flexi-grid-table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width}">
+  @if(showCaption){
+    <div class="flexi-grid-caption-div">
+      <h3>{{captionTitle}}</h3>
+      <div class="d-flex" style="gap: 10px;">      
+        <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
+        @if(showExportExcel){
+          <button [ngClass]="exportExcelBtnClass" (click)="onExportExcelButtonClick()">
+            <svg style="width: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/></svg>
+          </button>
+        }
+        @if(showColumnVisibility){
+          <button [ngClass]="columnVisibilityBtnClass" title="Column Visibility" (click)="toggleColumnVisibilityDropdown()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="cursor" style="width: 15px;" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+            <div class="flexi-grid-dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
+              <p class="flexi-grid-dropdown-title">Column Visibility</p>
+              @for(column of columns; track $index){
+                <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field">
+                  <input [(ngModel)]="column.visible" [id]="column.field" type="checkbox">
+                  {{ column.title ? column.title : column.field }}
+                </label>                    
+              }                    
+            </div>
+          </button>
+        }
+        @if(showRefreshData && dataBinding){
+          <button [ngClass]="refreshDataBtnClass" (click)="refreshDataMethod()">
+            <svg style="width: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg>
+          </button>
+        }
+        <div style="margin-right: 10px;"></div>
+      </div>
+    </div>
+  }
  <table [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
-   @if(showCaption){
-     <caption class="bg-color-gray" style="padding: 10px;">
-       <div style="position: relative; display: flex; justify-content: space-between;">
-         <h3>{{captionTitle}}</h3>
-         <div class="d-flex" style="gap: 10px;">      
-           <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
-           @if(showExportExcel){
-             <button [ngClass]="exportExcelBtnClass" (click)="onExportExcelButtonClick()">
-               <svg style="width: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/></svg>
-             </button>
-           }
-           @if(showColumnVisibility){
-             <button [ngClass]="columnVisibilityBtnClass" title="Column Visibility" (click)="toggleColumnVisibilityDropdown()">
-               <svg xmlns="http://www.w3.org/2000/svg" class="cursor" style="width: 15px;" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
-               <div class="flexi-grid-dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
-                 <p class="flexi-grid-dropdown-title">Column Visibility</p>
-                 @for(column of columns; track $index){
-                   <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field">
-                     <input [(ngModel)]="column.visible" [id]="column.field" type="checkbox">
-                     {{ column.title ? column.title : column.field }}
-                   </label>                    
-                 }                    
-               </div>
-             </button>
-           }
-           @if(showRefreshData && dataBinding){
-             <button [ngClass]="refreshDataBtnClass" (click)="refreshDataMethod()">
-               <svg style="width: 13px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/></svg>
-             </button>
-           }
-           <div style="margin-right: 10px;"></div>
-         </div>
-       </div>
-     </caption>
-   }
-   <thead>
+   <thead>     
      <tr>
        @if(showIndex){
          <th [ngStyle]="{'width': indexWidth}">#</th>
@@ -150,11 +148,11 @@
            }
            @for(column of columns; track $index){
              @if(column.columnTemplate && column.visible){
-               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className">
+               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className" [attr.data-label]="column.title ? column.title : column.field">
                  <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
                </td>
              }@else {
-               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className" [ngClass]="column.hideOverflow ? 'text-overflow-hidden' : ''">
+               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className" [ngClass]="column.hideOverflow ? 'text-overflow-hidden' : ''" [attr.data-label]="column.title ? column.title : column.field">
                  @if(column.field){
                    @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                      {{ getFieldValue(item, column.field) | date: column.format! }}
@@ -185,73 +183,67 @@
      }
    </tbody>
    <tfoot>
-     <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>
-     @if(pageable){
-       <tr class="flexi-grid-pagination-tr">
-       <td [colSpan]="columns!.length">
-         <div class="flexi-grid-pagination-container">
-           <ul class="flexi-grid-pagination">
-             @if(this.pageNumbers().length > 1){
-               
-               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
-                 <a class="flexi-grid-page-link" aria-label="Previous">
-                   <span aria-hidden="true">&laquo;</span>
-                 </a>
-               </li>
-               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''"
-                 (click)="changePage(state.pageNumber - 1)">
-                 <a class="flexi-grid-page-link" aria-label="Previous">
-                   <span aria-hidden="true">&#8249;</span>
-                 </a>
-               </li>
-               @if(pageNumbers()[0] !== 1){
-               <li class="flexi-grid-page-item" (click)="previousPageGroup()">
-                 <a class="flexi-grid-page-link">...</a>
-               </li>
-               }
-               @for(pageNumber of pageNumbers(); track pageNumber){
-               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
-                 <a (click)="changePage(pageNumber)" class="flexi-grid-page-link">
-                   {{pageNumber}}
-                 </a>
-               </li>
-               }
-               @if(pageNumbers()[pageNumbers().length - 1] !== totalPageCount()){
-               <li class="flexi-grid-page-item" (click)="nextPageGroup()">
-                 <a class="flexi-grid-page-link">...</a>
-               </li>
-               }
-               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
-                 (click)="changePage(state.pageNumber + 1)">
-                 <a class="flexi-grid-page-link" aria-label="Next">
-                   <span aria-hidden="true">&#8250;</span>
-                 </a>
-               </li>
-               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
-                 (click)="changePage(totalPageCount())">
-                 <a class="flexi-grid-page-link" aria-label="Next">
-                   <span aria-hidden="true">&raquo;</span>
-                 </a>
-               </li>
-             }
-             <div class="flexi-grid-page-size-select">
-               <select [ngModel]="state.pageSize" (change)="changePageSize($event)">
-                 @for(size of pageSizeList; track size){
-                 <option>{{size}}</option>
-                 }
-               </select>
-               <span class="ms-1">{{footerPerPageText}}</span>
-             </div>
-           </ul>
-         </div>
-       </td>
-       <td>
-         <span> {{state.pageNumber}} - {{totalPageCount()}} of {{(total | currency: '': '': '1.0')!.replace(',','.')}}
-           items </span>
-       </td>
-       </tr>
-     }
+     <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>     
    </tfoot>
-
  </table>
+ @if(pageable){
+  <div class="flexi-grid-pagination-tr">
+    <div class="flexi-grid-pagination-div">
+      <ul class="flexi-grid-pagination">
+        @if(this.pageNumbers().length > 1){              
+          <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
+            <a class="flexi-grid-page-link" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''"
+            (click)="changePage(state.pageNumber - 1)">
+            <a class="flexi-grid-page-link" aria-label="Previous">
+              <span aria-hidden="true">&#8249;</span>
+            </a>
+          </li>
+          @if(pageNumbers()[0] !== 1){
+          <li class="flexi-grid-page-item" (click)="previousPageGroup()">
+            <a class="flexi-grid-page-link">...</a>
+          </li>
+          }
+          @for(pageNumber of pageNumbers(); track pageNumber){
+          <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
+            <a (click)="changePage(pageNumber)" class="flexi-grid-page-link">
+              {{pageNumber}}
+            </a>
+          </li>
+          }
+          @if(pageNumbers()[pageNumbers().length - 1] !== totalPageCount()){
+          <li class="flexi-grid-page-item" (click)="nextPageGroup()">
+            <a class="flexi-grid-page-link">...</a>
+          </li>
+          }
+          <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
+            (click)="changePage(state.pageNumber + 1)">
+            <a class="flexi-grid-page-link" aria-label="Next">
+              <span aria-hidden="true">&#8250;</span>
+            </a>
+          </li>
+          <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
+            (click)="changePage(totalPageCount())">
+            <a class="flexi-grid-page-link" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        }
+      </ul>
+      <div class="flexi-grid-page-size-select">
+        <select [ngModel]="state.pageSize" (change)="changePageSize($event)">
+          @for(size of pageSizeList; track size){
+          <option>{{size}}</option>
+          }
+        </select>
+        <span class="ms-1">{{footerPerPageText}}</span>
+      </div>
+    </div>
+    <span> {{state.pageNumber}} - {{totalPageCount()}} of {{(total | currency: '': '': '1.0')!.replace(',','.')}}
+      items </span>
+  </div>
+}
 </div>

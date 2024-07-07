@@ -8,7 +8,14 @@
   captionTitle="User List"
   [resizable]="true"
   [draggable]="true"
+  [useMinWidth]="false"
+  [loading]="loading()"
+  [captionTemplate]="captionTemplate"
   >
+  <ng-template #captionTemplate>
+    <button class="btn btn-primary">Ekle</button>
+    <button class="btn btn-dark">Export</button>
+  </ng-template>
   <!-- <flexi-grid-column field="id" title="Id"></flexi-grid-column>
   <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
   <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column> -->
