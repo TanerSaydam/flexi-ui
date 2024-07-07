@@ -52,7 +52,7 @@ export class UsersComponent {
 
     //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
     //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=10000`;
+    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=1000`;
 
     this.http.get(endpoint).subscribe((res:any)=> {
       this.users.set(res.data);

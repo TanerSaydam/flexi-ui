@@ -1,23 +1,34 @@
 <app-blank>
   <flexi-grid
   [data]="users()"
-  [pageable]="true"
-  [filterable]="true"
+  [pageable]="false"
+  [filterable]="false"
   [themeClass]="shared.themeClass()"
-  [showCaption]="true"  
+  [showCaption]="false"  
   captionTitle="User List"
   [resizable]="true"
   [draggable]="true"
   [useMinWidth]="false"
   [loading]="loading()"
   [captionTemplate]="captionTemplate"
+  [showIndex]="false"
   >
   <ng-template #captionTemplate>
     <button class="btn btn-primary">Ekle</button>
     <button class="btn btn-dark">Export</button>
   </ng-template>
-  <!-- <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+
+  <flexi-grid-column field="id" title="Id"></flexi-grid-column>
   <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column> -->
+  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+  <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
+  <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"></flexi-grid-column>
+  <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false"></flexi-grid-column>
+  <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler"></flexi-grid-column>
+
+  <ng-template #operationsColumnTemplate>
+    <button class="btn btn-primary btn-sm me-1">Update</button>
+    <button class="btn btn-danger btn-sm">Delete</button>    
+  </ng-template>
 </flexi-grid>
 </app-blank>

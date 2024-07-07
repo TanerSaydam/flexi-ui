@@ -18,7 +18,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() loading: boolean = false;
   @Input() sortable: boolean = false;
   @Input() themeClass: string = "light";
-  @Input() height: string = "420px";
+  @Input() height: string = "401px";
   @Input() filterable: boolean = false;
   @Input() captionTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
@@ -43,6 +43,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() resizable: boolean = false;
   @Input() draggable: boolean = false;
 
+  pageNumberCount = signal<number>(5);
   pageNumbers = signal<number[]>([]);
   totalPageCount = signal<number>(0);
   state: StateModel = new StateModel();
@@ -74,13 +75,17 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
   @ViewChild('table') table: ElementRef | undefined;
+  @ViewChild("flexiGridFilterTr") flexiGridFilterTr: ElementRef<HTMLTableRowElement> | undefined;
   resizingColumn: any;
   startX: number | undefined;
   startWidth: number | undefined;
+  isShowMobileFilter = signal<boolean>(false);
 
   constructor(private cdr: ChangeDetectorRef){}
 
-  ngOnChanges(changes: SimpleChanges): void {       
+  ngOnChanges(changes: SimpleChanges): void {    
+   // console.log("change is working...");
+       
     if(this.data.length > 0){
       if (!this.columns || this.columns.length === 0) {
         this.initializeColumnsFromData();
@@ -142,15 +147,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.dataStateChange.emit(this.state);
 
     // Check if the page number crossed a 10-page boundary
-    const previousGroup = Math.floor((previousPageNumber - 1) / 10);
-    const currentGroup = Math.floor((pageNumber - 1) / 10);
+    const previousGroup = Math.floor((previousPageNumber - 1) / this.pageNumberCount());
+    const currentGroup = Math.floor((pageNumber - 1) / this.pageNumberCount());
 
     if (currentGroup > previousGroup) {
       this.nextPageGroup();
     } else if (currentGroup < previousGroup) {
       this.previousPageGroup();
-    } else {
-      // If the group hasn't changed, update the page numbers
+    } else {      
       this.setPageNumbers();
     }
 
@@ -162,9 +166,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const numbers = [];
 
     // Calculate the current range of page numbers
-    const currentGroup = Math.floor((this.state.pageNumber - 1) / 10);
-    const startPage = currentGroup * 10 + 1;
-    const endPage = Math.min(startPage + 9, pageCount);
+    const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
+    const startPage = currentGroup * this.pageNumberCount() + 1;
+    const endPage = Math.min(startPage + (this.pageNumberCount() - 1), pageCount);
 
     for (let i = startPage; i <= endPage; i++) {
       numbers.push(i);
@@ -176,8 +180,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   nextPageGroup() {
     const pageCount = Math.ceil(this.total! / +this.state.pageSize);
-    const currentGroup = Math.floor((this.state.pageNumber - 1) / 10);
-    const nextGroupStartPage = (currentGroup + 1) * 10 + 1;
+    const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
+    const nextGroupStartPage = (currentGroup) * this.pageNumberCount() + 1;
 
     if (nextGroupStartPage <= pageCount) {
       this.state.pageNumber = nextGroupStartPage;
@@ -188,8 +192,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   previousPageGroup() {
-    const currentGroup = Math.floor((this.state.pageNumber - 1) / 10);
-    const previousGroupStartPage = (currentGroup - 1) * 10 + 1;
+    const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
+    const previousGroupStartPage = (currentGroup) * this.pageNumberCount() + 1;
 
     if (previousGroupStartPage > 0) {
       this.state.pageNumber = previousGroupStartPage;
@@ -532,5 +536,15 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         return "";
       }
     }
+  }
+
+  openMobileFilter(){
+    this.flexiGridFilterTr!.nativeElement.classList.add("show");
+    this.isShowMobileFilter.set(true);
+  }
+
+  closeMobileFilter(){
+    this.flexiGridFilterTr!.nativeElement.classList.remove("show");
+    this.isShowMobileFilter.set(false);
   }
 }
