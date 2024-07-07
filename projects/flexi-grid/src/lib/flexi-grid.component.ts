@@ -18,7 +18,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() loading: boolean = false;
   @Input() sortable: boolean = false;
   @Input() themeClass: string = "light";
-  @Input() height: string = "401px";
+  @Input() height: string = "420px";
   @Input() filterable: boolean = false;
   @Input() captionTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
