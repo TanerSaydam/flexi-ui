@@ -41,6 +41,7 @@ export class UsersComponent {
     toast.options.themeClass = "light";
     toast.options.timeOut = 4000;  
     toast.options.swalContentThemeClass = "error"  
+    //this.toast.showToast("Error","Something went wrong","error");
     //toast.options.swalContentThemeClass = "info"  
     //toast.options.swalContentThemeClass = "success"  
     //toast.options.swalContentThemeClass = "warning"  

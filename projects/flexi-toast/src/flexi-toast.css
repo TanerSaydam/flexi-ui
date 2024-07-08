@@ -65,8 +65,6 @@
 }
 
 .flexi-toast {
-    width: 100%;
-    min-height: 80px;
     padding: 20px;
     background-color: var(--flexi-toast-background-color);
     color: var(--flexi-toast-text-color);

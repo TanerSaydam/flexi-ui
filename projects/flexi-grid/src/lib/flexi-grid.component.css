@@ -202,9 +202,8 @@ a {
     position: relative;
 }
 
-/* Custom scroll bar */
 .flexi-grid-table-container tbody::-webkit-scrollbar {
-    display: none;
+    display: none !important;
     width: 12px;
 }
 
@@ -552,6 +551,10 @@ div .flexi-grid-active {
         white-space: nowrap;
         text-align: left;
         font-weight: bold;
+    }
+
+    .flexi-grid-table-container td{
+        width: 100% !important;
     }
 
     .flexi-grid-mobile-filter-tr{
