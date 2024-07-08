@@ -217,6 +217,10 @@ a {
     border: 3px solid var(--background-color-part);
 }
 
+.flexi-grid-table-container tr{
+    min-height: 35px !important;
+}
+
 .flexi-grid-table-container th,
 .flexi-grid-table-container td {  
     padding-left: 10px;
@@ -496,6 +500,8 @@ div .flexi-grid-active {
     width: 20px;
  }
 
+
+
 @media (max-width: 1000px) {
     .show-filter{
         display: none;
@@ -551,10 +557,10 @@ div .flexi-grid-active {
         white-space: nowrap;
         text-align: left;
         font-weight: bold;
-    }
-
+    }  
+  
     .flexi-grid-table-container td{
-        width: 100% !important;
+        width: 100% !important;        
     }
 
     .flexi-grid-mobile-filter-tr{

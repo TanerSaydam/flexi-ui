@@ -19,7 +19,7 @@
     <button class="btn btn-dark">Export</button>
   </ng-template>
 
-  <flexi-grid-column field="id" title="Id" [hideOverflow]="false"></flexi-grid-column>
+  <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
   <flexi-grid-column field="firstName" width="350px" title="First Name" [hideOverflow]="false"></flexi-grid-column>
   <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
   <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
@@ -28,8 +28,8 @@
   <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler"></flexi-grid-column>
 
   <ng-template #operationsColumnTemplate>
-    <button class="btn btn-primary btn-sm me-1">Update</button>
-    <button class="btn btn-danger btn-sm">Delete</button>    
+    <!-- <button class="btn btn-primary btn-sm me-1">Update</button>
+    <button class="btn btn-danger btn-sm">Delete</button>     -->
   </ng-template>
 </flexi-grid>
 </app-blank>
