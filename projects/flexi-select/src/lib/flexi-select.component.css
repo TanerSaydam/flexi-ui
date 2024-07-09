@@ -7,6 +7,7 @@
     --flexi-select-input-border-color: #dee2e6;
     --flexi-success: #47D764;
     --flexi-select: #ebf5ff;
+    --flexi-select-multiple-value-text: #212529;
 }
 
 [data-bs-theme="dark"] {
@@ -17,7 +18,8 @@
     --flexi-select-border-color: #141414;
     --flexi-select-input-border-color: #f8f9fa;
     --flexi-success: #47D764;
-    --flexi-select: #ebf5ff;;
+    --flexi-select: #ebf5ff;
+    --flexi-select-multiple-value-text: #212529;
 }
 
 .flexi-select {
@@ -68,10 +70,14 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
+.flexi-active{
+    font-weight: 700;
+}
+
 .flexi-active,
 .flexi-select-li:hover {
     background-color: var(--flexi-select-active-background-color);
-    color: var(--flexi-select-active-text-color);
+    color: var(--flexi-select-active-text-color);    
 }
 
 .flexi-select-search-input {
@@ -119,6 +125,7 @@
 
 .flexi-select-multiple-value{
     background-color: var(--flexi-select);
+    color: var(--flexi-select-multiple-value-text);
     padding: 2px 3px;
     display: flex;
     gap: 3px;

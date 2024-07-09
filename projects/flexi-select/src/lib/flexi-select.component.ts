@@ -73,7 +73,7 @@ export class FlexiSelectComponent implements OnChanges {
     if(this.data.length > 0 && this.initialState){
       if(this.multiple){
         this.clearAllSelected();
-
+        
         for(const val of this.initialState){
           const d = this.data.find(p=> p[this.value] === val);
           d.isSelected = true;
