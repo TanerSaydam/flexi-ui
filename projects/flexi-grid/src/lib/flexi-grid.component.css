@@ -5,12 +5,12 @@
     --background-color-part: #fff;
     --bg-color-gray: #f8f9fa;
     --text-color: #000;
-    --text-hover-color: #fff;
-    --active-text-color: #f8f9fa;
-    --active-background-color: #007bff;
+    --text-hover-color: #212529;
+    --active-text-color: #212529;
+    --active-background-color: #ebf5ff;
     --tbody-hover: #f1f1f1;
-    --hover-background-color: #007bff;
-    --hover-text-color: #f1f1f1;
+    --hover-background-color: #ebf5ff;
+    --hover-text-color: #212529;
     --border-color: #dee2e6;
 }
 
@@ -398,8 +398,7 @@ div .flexi-grid-active {
 .flexi-grid-dropdown-item:focus {
     color: var(--text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--hover-background-color);
-    color: var(--hover-text-color);
+    background-color: var(--hover-background-color);    
 }
 
 .flexi-grid-dropdown-checkbox-item {
