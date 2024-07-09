@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { CardComponent } from '../blank/card/card.component';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiToastOptionsModel, FlexiToastService } from 'flexi-toast';
 import { FormsModule } from '@angular/forms';
 import { MyCodeComponent } from '../my-code/my-code.component';
+import { SharedService } from '../shared.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-flexi-toast',
@@ -19,7 +21,7 @@ import { MyCodeComponent } from '../my-code/my-code.component';
   templateUrl: './flexi-toast.component.html',
   styleUrl: './flexi-toast.component.css'
 })
-export class FlexiToastComponent {  
+export class FlexiToastComponent implements OnDestroy {  
   options = signal<FlexiToastOptionsModel>({
     autoClose: true,
     icon: "success",
@@ -87,11 +89,33 @@ export class FlexiToastComponent {
   }`);
   
   constructor(
-    private toast: FlexiToastService
+    private toast: FlexiToastService,
+    private route: ActivatedRoute, 
+    private shared: SharedService
   ){
     this.toast.options = this.options();
+    this.shared.openOrCloseFlexiToastDropDown.set(true);
   }
 
+  ngOnDestroy(): void {
+    this.shared.openOrCloseFlexiToastDropDown.set(false);
+  }
+
+  ngOnInit(): void {
+    this.route.fragment.subscribe(fragment => {
+      this.scrollToElement(fragment);
+    });
+  }
+
+  scrollToElement(fragment: string | null): void {
+    if (fragment) {
+      const element = document.getElementById(fragment);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+  
   showToast(){    
     this.toast.showToast(this.toastTitle(), this.toastText(), this.options().icon);
   }

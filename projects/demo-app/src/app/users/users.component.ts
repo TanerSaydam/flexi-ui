@@ -26,7 +26,12 @@ export class UsersComponent {
   loading = signal<boolean>(false);
   userId1 = signal<string>("");
   userId2 = signal<string>("");
-
+  selectedItems = signal<string[]>([
+    "bf9a87fd-6fca-4210-a57b-000a404d0770",
+    "b7d90a7a-0f26-4bf7-90e0-000942c50a4c",
+    "5867ac21-4326-4fb0-9329-000d90f3736e"
+  ]);
+  selectedItem = signal<string>("1b5854a9-d39b-4b8f-b7aa-00a44227ddcc");
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
@@ -92,6 +97,11 @@ export class UsersComponent {
       this.toast.showToast("Info","Silme işlemi başarıyla tamamlandı", "info");
     });
   }
+
+  showSelected(event:any){
+    console.log(event);
+    
+  }
 }
 
 export class UserModel{
@@ -102,5 +112,3 @@ export class UserModel{
   salary: number = 0;
   avatarUrl: string = "";
 }
-
-

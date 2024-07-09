@@ -217,10 +217,6 @@ a {
     border: 3px solid var(--background-color-part);
 }
 
-.flexi-grid-table-container tr{
-    min-height: 35px !important;
-}
-
 .flexi-grid-table-container th,
 .flexi-grid-table-container td {  
     padding-left: 10px;

@@ -1,6 +1,19 @@
 <div class="flexi-select" [attr.data-bs-theme]="themeClass">
-    <div class="flexi-select-div" (click)="openOrClose()">
-        <span>{{selectedItem()[label] === undefined ? selectOne : selectedItem()[label]}}</span>
+    <div class="flexi-select-div" (click)="openOrClose()" [ngStyle]="{'height': height}">
+        @if(!multiple){
+            <span>
+                {{selectedItem()[label] === undefined ? selectOne : selectedItem()[label]}}
+            </span>
+        }@else {
+            <div class="flexi-select-multiple-container">
+                @for(item of selectedItems();track item){
+                    <div class="flexi-select-multiple-value">
+                        <span aria-hidden="true" class="flexi-select-multiple-value-icon-left" (click)="removeSelectedItemFromSelectedItems($index, item)">×</span>
+                        <span class="flexi-select-multiple-value-label">{{item.label}}</span>
+                    </div>
+                }            
+            </div>
+        }
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="flexi-select-div-svg">
             <path
                 d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128z" />
@@ -10,7 +23,7 @@
         <input #flexiSelectInput class="flexi-select-search-input" (input)="search()" (keydown)="onKeyDown($event)"
             type="search">
         <ul class="flexi-select-ul" (scroll)="onScroll($event)">
-            @for(item of filteredData(); track $index){
+            @for(item of filteredData(); track $index){                
                 <li (click)="select(item)" [class]="setLiClass(item)">
                     <span>{{item[label]}}</span>
                 </li>

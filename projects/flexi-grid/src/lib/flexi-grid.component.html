@@ -147,7 +147,7 @@
       </tr>
     }    
    </thead>
-   <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;">
+   <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;" [ngStyle]="tbodyStyle">
      @if(loading){        
        <div class="flexi-grid-spinner-container">
          <div class="flexi-grid-spinner-1"></div>
@@ -156,7 +156,7 @@
      }
      @if(data.length > 0){      
        @for(item of pagedData(); track $index; let i = $index){
-         <tr>
+         <tr [ngStyle]="{'min-height': trMinHeight}">
            @if(showIndex){
              @if(!pageable){
                <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + 1)}}</td>
@@ -193,7 +193,7 @@
        }
      }@else {
        @if(!loading){
-         <tr style="height: 100%;">
+         <tr style="height: 100%;" [ngStyle]="{'min-height': trMinHeight}">
            <td style="text-align: center;" [colSpan]="columns?.length">
              <h4>Gösterilecek veri bulunamadı!</h4>
            </td>

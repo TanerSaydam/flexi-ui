@@ -1,5 +1,40 @@
 <app-blank>
-  <flexi-grid
+  <div class="form-group row">
+    <!-- <div class="form-group">
+      <label>Name</label>
+      <input type="text" tabindex="1">
+    </div> -->
+
+    <div class="col-4 form-group mt-1">
+      <label>User</label>
+      <flexi-select
+        [data]="users()"
+        label="firstName"
+        value="id"
+        tabindex="2"
+        [multiple]="true"
+        [closeAfterSelect]="false"
+        (selected)="showSelected($event)"
+        [(ngModel)]="selectedItems"
+        ></flexi-select>
+    </div>
+
+    <div class="col-4 form-group mt-1">
+      <label>User</label>
+      <flexi-select
+        [data]="users()"
+        label="firstName"
+        value="id"
+        tabindex="2"
+        [multiple]="false"
+        [closeAfterSelect]="true"
+        (selected)="showSelected($event)"
+        [(ngModel)]="selectedItem"
+        ></flexi-select>
+    </div>
+  </div>
+
+  <!-- <flexi-grid
   [data]="users()"
   [pageable]="true"
   [filterable]="true"
@@ -28,8 +63,7 @@
   <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler"></flexi-grid-column>
 
   <ng-template #operationsColumnTemplate>
-    <!-- <button class="btn btn-primary btn-sm me-1">Update</button>
-    <button class="btn btn-danger btn-sm">Delete</button>     -->
+    
   </ng-template>
-</flexi-grid>
+  </flexi-grid> -->
 </app-blank>

@@ -12,6 +12,7 @@ import { dataTSCode } from '../flexi-data-grid/code';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { CustomOptionComponent } from './custom-option/custom-option.component';
+import { MultipleComponent } from './multiple/multiple.component';
 
 @Component({
   selector: 'app-flexi-select',
@@ -25,7 +26,8 @@ import { CustomOptionComponent } from './custom-option/custom-option.component';
     LoadingComponent,
     FirstUseComponent,
     MyCodeComponent,
-    CustomOptionComponent
+    CustomOptionComponent,
+    MultipleComponent
   ],
   templateUrl: './flexi-select.component.html',
   styleUrl: './flexi-select.component.css'
@@ -48,7 +50,14 @@ export class FlexiSelectComponent {
     `);
   firstUseHTMLCodeExample = signal<string>(firstUseHTMLCode);
   customOptionHTMLCodeExample = signal<string>(customOptionHTMLCode);
-
+  multipleHTMLCodeExample = signal<string>(`<flexi-select
+  ...
+  [multiple]="true"
+  [closeAfterSelect]="false"    
+  height="100%"
+  >
+  </flexi-select>`);
+  
   constructor(
     private route: ActivatedRoute, 
     private shared: SharedService

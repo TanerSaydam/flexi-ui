@@ -127,3 +127,50 @@ export const customOptionHTMLCode: string = `
   }
 </flexi-select>
 `;
+
+export const multipleTSCode: string = `
+import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
+import { UserModel } from '../../models/user.model';
+import { UsersData } from '../../flexi-data-grid/data';
+import { MyCodeComponent } from '../../my-code/my-code.component';
+import { FlexiSelectModule } from 'flexi-select';
+import { SharedService } from '../../shared.service';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-first-use',
+  standalone: true,
+  imports: [FlexiSelectModule, MyCodeComponent, FormsModule],
+  templateUrl: './first-use.component.html',
+  styleUrl: './first-use.component.css',
+  encapsulation: ViewEncapsulation.None,
+})
+export class MultipleComponent {
+  users = signal<UserModel[]>(UsersData);
+  selectedUserIds = signal<string[]>([]);
+  @Input() dataCode = "";
+
+  constructor(
+    public shared: SharedService
+  ){}
+
+  selected(event: string){
+    console.log(event);    
+  }
+}
+`;
+
+export const multipleHTMLCode: string = `
+<flexi-select
+  [data]="users()"
+  label="firstName"
+  value="id"
+  [multiple]="true"
+  [closeAfterSelect]="false"
+  [themeClass]="shared.themeClass"
+  [(ngModel)]="selectedUserIds"
+  height="100%"
+  (selected)="selected($event)"
+  >
+  </flexi-select>
+`;

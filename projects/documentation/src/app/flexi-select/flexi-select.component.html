@@ -127,4 +127,57 @@
         </div>
       </app-card>
   </div>
+
+  <!-- Çoklu Seçim -->
+  <div id="multiple" style="padding-top: 5px;">
+    <app-card cardTitle="Çoklu Seçim">
+      <div class="card-body">        
+        <p>Eğer çoklu seçim yapmak isterseniz multiple attribute'e true değer göndermeniz yeterli</p>
+        <h3>Örnek kod:</h3>        
+        <b>component.html</b>
+        <my-code className="" language="html" [code]="multipleHTMLCodeExample()"></my-code>
+
+        @defer {
+          <app-multiple [dataCode]="dataCode()"></app-multiple>
+        }@placeholder {
+          <app-loading></app-loading>
+        }
+        <hr>
+        <h3>Kodların açıklaması</h3>
+        <ul>
+          <li><b>[multiple] :</b> Çoklu seçimi aktif etmek için true değeri vermelisiniz</li>
+          <li><b>[closeAfterSelect] :</b> Seçim sonunda select açılsın isterseniz bu attribute'e false değer gönderin. Default true olduğu için her seçim sonrası selecti kapatır
+          <li><b>height :</b> Selectin yüksekliğini ayarlayabilirsiniz. Min yükseklik 36px'dir.</li>
+        </ul>
+
+        <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Alabileceği Değer Türleri</th>
+              <th>Default Değeri</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>multiple</th>
+              <td>true | false</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <th>closeAfterSelect</th>
+              <td>true | false</td>
+              <td>true</td>
+            </tr>
+            <tr>
+              <th>height</th>
+              <td>text</td>
+              <td>100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+</div>
 </app-blank>

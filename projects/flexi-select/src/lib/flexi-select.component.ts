@@ -1,11 +1,12 @@
 import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlexiOptionComponent } from './flexi-option.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'flexi-select',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: "./flexi-select.component.html",
   styleUrl: "./flexi-select.component.css",
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +28,9 @@ export class FlexiSelectComponent implements OnChanges {
   @Input() itemsPerPage : number = 30;
   @Input() clientHeight : number = 180;
   @Input() multiple : boolean = false;
-  @Output("selected") selected = new EventEmitter<any>();
+  @Input() closeAfterSelect : boolean = true;
+  @Input() height: string = "100%";
+  @Output("selected") selected = new EventEmitter<any>();  
 
   @ContentChildren(forwardRef(() => FlexiOptionComponent)) options!: QueryList<FlexiOptionComponent>;
 
@@ -38,7 +41,7 @@ export class FlexiSelectComponent implements OnChanges {
 
   filteredData = signal<any[]>([]);
   selectedItem = signal<any>({});
-  selectedITems = signal<any[]>([]);
+  selectedItems = signal<any[]>([]);
   isOpen = signal<boolean>(false);
   initialState : any;
 
@@ -68,19 +71,36 @@ export class FlexiSelectComponent implements OnChanges {
 
   selectInitialStateValue(){
     if(this.data.length > 0 && this.initialState){
-      const val = this.data.find(p=> p[this.value] === this.initialState);
-      if(val){
-        this.clearAllSelected();        
-        this.selectedItem.set({[this.label]:val[this.label], [this.value]:val[this.value]});
-        val.isSelected = true;
-        const findValue = this.filteredData().find(p=> p[this.value] === val);
+      if(this.multiple){
+        this.clearAllSelected();
+
+        for(const val of this.initialState){
+          const d = this.data.find(p=> p[this.value] === val);
+          d.isSelected = true;
+
+          const item = {
+            label: d[this.label],
+            value: val
+          };
+
+          this.selectedItems.update(prev => [...prev, item]);          
+        }
+
         this.initialState = undefined;
-        if(findValue){
-          findValue.isSelected = true;
-        }else{
-          this.filteredData.update((prev) => [val,...prev]);
+      }else{
+        const val = this.data.find(p=> p[this.value] === this.initialState);
+        if(val){
+          this.clearAllSelected();        
+          this.selectedItem.set({[this.label]:val[this.label], [this.value]:val[this.value]});
+          val.isSelected = true;
+          const findValue = this.filteredData().find(p=> p[this.value] === val);
+          this.initialState = undefined;
+          if(findValue){
+            findValue.isSelected = true;
+          }
         }
       }
+      
     }
   }
 
@@ -115,7 +135,7 @@ export class FlexiSelectComponent implements OnChanges {
   }
 
   openOrClose() {
-    this.isOpen.set(!this.isOpen());
+    this.isOpen.set(!this.isOpen()); 
 
     if (this.isOpen()) {
       setTimeout(() => {
@@ -135,8 +155,10 @@ export class FlexiSelectComponent implements OnChanges {
   search() {
     const val = this.flexiSelectInput!.nativeElement.value.toString().toLocaleLowerCase("tr"); 
     const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0,this.itemsPerPage);
-    this.filteredData.set(filtered);    
-    this.selectFirstOne();
+    this.filteredData.set(filtered);
+    if(!this.multiple){
+      this.selectFirstOne();
+    }    
   }
 
   setLiClass(item: any) {
@@ -158,14 +180,14 @@ export class FlexiSelectComponent implements OnChanges {
     } else if (event.key === 'ArrowDown') {
       event.preventDefault();
       if (currentIndex < this.filteredData().length - 1) {
-        this.clearAllSelected();
+        this.clearAllSelected();        
         this.filteredData()[currentIndex + 1].isSelected = true;
         this.scrollToElement(currentIndex + 1);
       }
     } else if (event.key === 'ArrowUp') {
       event.preventDefault();
       if (currentIndex > 0) {
-        this.clearAllSelected();
+        this.clearAllSelected();        
         this.filteredData()[currentIndex - 1].isSelected = true;
         this.scrollToElement(currentIndex - 1);
       }
@@ -178,14 +200,58 @@ export class FlexiSelectComponent implements OnChanges {
     liElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  select(item: any) {
+  selectForMultiple(item: any) {     
+     const selectedItem = {
+      label: item[this.label],
+      value: item[this.value]
+    };
+    
+    if(this.selectedItems().length === 0){
+      this.clearAllSelected();
+    }
+
+    const existingIndex = this.selectedItems().findIndex(existingItem => existingItem.value === selectedItem.value);
+
+    if (existingIndex > -1) {        
+        item.isSelected = false;
+        this.selectedItems.update(prev => {
+            const updatedItems = [...prev];
+            updatedItems.splice(existingIndex, 1);
+            return updatedItems;
+        });
+    } else {        
+        item.isSelected = true;
+        this.selectedItems.update(prev => [...prev, selectedItem]);
+    }    
+    
+    if(this.closeAfterSelect){
+      this.isOpen.set(false);
+    }
+    
+    this.selected.emit(this.selectedItems());
+    this.onChange(this.selectedItems());    
+    
+    this.flexiSelectInput!.nativeElement.select();
+  }
+
+  selectSingle(item:any){
     this.clearAllSelected();
     item.isSelected = true;
     this.selectedItem.set(item);
-    this.isOpen.set(false);
+    if(this.closeAfterSelect){
+      this.isOpen.set(false);
+    }
     this.selected.emit(item[this.value]);
     this.onChange(item[this.value]);
     this.flexiSelectInput!.nativeElement.select();
+  }
+
+  select(item: any) {
+    if(this.multiple){
+      this.selectForMultiple(item);
+    }else{
+      this.selectSingle(item);
+    }    
   }
 
   selectOption(option: FlexiOptionComponent) {
@@ -216,5 +282,20 @@ export class FlexiSelectComponent implements OnChanges {
 
   setDisabledState(isDisabled: boolean): void {
     // Implement if needed
+  }
+
+  removeSelectedItemFromSelectedItems(index: number, item: any){    
+    this.selectedItems.update(prev => {
+      const updatedItems = [...prev];
+      updatedItems.splice(index, 1);
+      return updatedItems;
+    });
+
+    const existingItem = this.data.find(p => p[this.value] === item.value);
+    if(existingItem){
+      existingItem.isSelected = false;
+    }
+
+    this.isOpen.set(true);
   }
 }

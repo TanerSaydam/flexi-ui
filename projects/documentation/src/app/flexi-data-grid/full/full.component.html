@@ -36,7 +36,8 @@
         [exportExcelButtonClick]="exportExcel.bind(this)"
         (dataStateChange)="dataStateChange($event)"
         [sortable]="true"
-        [draggable]="true">
+        [draggable]="true"
+        [autoHeight]="false">
           <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>          
           <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
           <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>

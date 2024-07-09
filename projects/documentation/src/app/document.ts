@@ -107,7 +107,12 @@ export const flexiSelectDocument: DocumentModel[] = [
         title: "Custom Option",
         routerLink: "/flexi-select",
         fragment: "custom-option"
-    }   
+    },
+    {
+        title: "Çoklu Seçim (multiple)",
+        routerLink: "/flexi-select",
+        fragment: "multiple"
+    }
 ];
 
 export const flexiToastDocument: DocumentModel[] = [
