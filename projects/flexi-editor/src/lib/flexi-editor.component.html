@@ -1,0 +1,33 @@
+<div class="editor-container">
+    <div class="toolbar">
+      <button (click)="format('bold')"><b>B</b></button>
+      <button (click)="format('italic')"><i>I</i></button>
+      <button (click)="format('underline')"><u>U</u></button>
+      <button (click)="format('strikeThrough')"><s>S</s></button>
+      <button (click)="insertLink()">Link</button>
+      <button (click)="insertImage()">Image</button>   
+      <!-- Font Family Dropdown -->
+      <select #fontSelect (change)="format('fontName',fontSelect.value)">
+        <option value="">Font Family</option>
+        @for(font of fonts(); track font){
+          <option>{{font}}</option>
+        }
+      </select>
+  
+      <!-- Font Size Dropdown -->
+      <select #colorSelect (change)="format('fontSize',colorSelect.value)">
+        <option value="">Font Size</option>
+        @for(size of fontSizes(); track size){
+          <option>{{size}}</option>
+        }
+      </select>
+  
+      <!-- Font Color Picker -->
+      <input type="color" #colorInput (change)="format('foreColor',colorInput.value)" title="Choose font color">
+  
+      <!-- Background Color Picker -->
+      <input type="color" #backgroundColorInput (change)="format('backgroundColor', backgroundColorInput.value)" title="Choose background color">      
+    </div>
+    <div class="editor" contenteditable="true" (input)="onInput($event)" #editor></div>
+  </div>
+  

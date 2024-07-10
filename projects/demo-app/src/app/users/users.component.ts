@@ -11,11 +11,12 @@ import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-opt
 import { UsersData } from '../../../../documentation/src/app/flexi-data-grid/data'
 import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
+import { FlexiEditorComponent } from '../../../../flexi-editor/src/public-api';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [BlankComponent, FlexiGridModule, FlexiSelectComponent, FormsModule, FlexiOptionComponent],
+  imports: [BlankComponent, FlexiGridModule, FlexiSelectComponent, FormsModule, FlexiOptionComponent, FlexiEditorComponent, FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -32,6 +33,8 @@ export class UsersComponent {
     "5867ac21-4326-4fb0-9329-000d90f3736e"
   ]);
   selectedItem = signal<string>("1b5854a9-d39b-4b8f-b7aa-00a44227ddcc");
+  editorContent: string = 'Flexi Grid is loading...';
+
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
@@ -50,6 +53,11 @@ export class UsersComponent {
     //toast.options.swalContentThemeClass = "info"  
     //toast.options.swalContentThemeClass = "success"  
     //toast.options.swalContentThemeClass = "warning"  
+  }
+
+  
+  onContentChange(content: string) {
+    this.editorContent = content;
   }
 
   changeIds(){

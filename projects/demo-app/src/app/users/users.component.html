@@ -1,11 +1,16 @@
-<app-blank>
-  <div class="form-group row">
+<app-blank>  
+  <flexi-editor [(ngModel)]="editorContent"></flexi-editor>
+  <div>
+    <h3>Editor Content:</h3>
+    <div [innerText]="editorContent"></div>
+  </div>
+  <!-- <div class="form-group row"> -->
     <!-- <div class="form-group">
       <label>Name</label>
       <input type="text" tabindex="1">
     </div> -->
 
-    <div class="col-4 form-group mt-1">
+    <!-- <div class="col-4 form-group mt-1">
       <label>User</label>
       <flexi-select
         [data]="users()"
@@ -20,7 +25,7 @@
         ></flexi-select>
     </div>
 
-    <button (click)="changeIds()">Change</button>
+    <button (click)="changeIds()">Change</button> -->
 
     <!-- <div class="col-4 form-group mt-1">
       <label>User</label>
@@ -36,9 +41,9 @@
         [(ngModel)]="selectedItem"
         ></flexi-select>
     </div> -->
-  </div>
+  <!-- </div> -->
 
-  <flexi-grid
+  <!-- <flexi-grid
   [data]="users()"
   [pageable]="true"
   [filterable]="true"
@@ -69,5 +74,5 @@
   <ng-template #operationsColumnTemplate>
     
   </ng-template>
-  </flexi-grid>
+  </flexi-grid> -->
 </app-blank>
