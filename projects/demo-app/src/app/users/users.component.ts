@@ -52,6 +52,14 @@ export class UsersComponent {
     //toast.options.swalContentThemeClass = "warning"  
   }
 
+  changeIds(){
+    console.log(this.selectedItems());
+    
+    // this.selectedItems.set(["bf9a87fd-6fca-4210-a57b-000a404d0770"]);
+    // console.log(this.selectedItems());
+    
+  }
+
   getAll(){
     //this.users.set(UsersData);    
     this.loading.set(true);
@@ -99,7 +107,7 @@ export class UsersComponent {
   }
 
   showSelected(event:any){
-    console.log(event);
+    //console.log(event);
     
   }
 }

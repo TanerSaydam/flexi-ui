@@ -9,7 +9,7 @@
                 @for(item of selectedItems();track item){
                     <div class="flexi-select-multiple-value">
                         <span aria-hidden="true" class="flexi-select-multiple-value-icon-left" (click)="removeSelectedItemFromSelectedItems($index, item)">×</span>
-                        <span class="flexi-select-multiple-value-label">{{item.label}}</span>
+                        <span class="flexi-select-multiple-value-label">{{item[label]}}</span>
                     </div>
                 }            
             </div>

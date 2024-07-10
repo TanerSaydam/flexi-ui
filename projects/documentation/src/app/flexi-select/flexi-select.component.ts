@@ -48,7 +48,12 @@ export class FlexiSelectComponent {
     imports: [FlexiSelectModule]
     })
     `);
-  firstUseHTMLCodeExample = signal<string>(firstUseHTMLCode);
+  firstUseHTMLCodeExample1 = signal<string>(firstUseHTMLCode);
+  firstUseHTMLCodeExample2 = signal<string>(`<flexi-select
+    ...
+    id="firstSelect"
+    >
+    </flexi-select>`);
   customOptionHTMLCodeExample = signal<string>(customOptionHTMLCode);
   multipleHTMLCodeExample = signal<string>(`<flexi-select
   ...
@@ -57,6 +62,7 @@ export class FlexiSelectComponent {
   height="100%"
   >
   </flexi-select>`);
+  
   
   constructor(
     private route: ActivatedRoute, 

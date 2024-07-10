@@ -20,7 +20,9 @@
         ></flexi-select>
     </div>
 
-    <div class="col-4 form-group mt-1">
+    <button (click)="changeIds()">Change</button>
+
+    <!-- <div class="col-4 form-group mt-1">
       <label>User</label>
       <flexi-select
         [data]="users()"
@@ -33,7 +35,7 @@
         (selected)="showSelected($event)"
         [(ngModel)]="selectedItem"
         ></flexi-select>
-    </div>
+    </div> -->
   </div>
 
   <flexi-grid

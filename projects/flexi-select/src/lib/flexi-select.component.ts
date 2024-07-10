@@ -36,7 +36,7 @@ export class FlexiSelectComponent implements OnChanges {
 
   @ViewChild("flexiSelectInput") flexiSelectInput: ElementRef<HTMLInputElement> | undefined;
 
-  private onChange = (value: any) => { };
+  private onChange = (value: any) => {};
   private onTouched = () => { };
 
   filteredData = signal<any[]>([]);
@@ -70,22 +70,23 @@ export class FlexiSelectComponent implements OnChanges {
   }
 
   selectInitialStateValue(){
-    if(this.data.length > 0 && this.initialState){
+    if(this.data.length > 0 && this.initialState){      
       if(this.multiple){
-        this.clearAllSelected();
-        
+        this.clearAllSelected();        
+        this.selectedItems.set([]);
+        const list = [];
         for(const val of this.initialState){
           const d = this.data.find(p=> p[this.value] === val);
           d.isSelected = true;
 
           const item = {
-            label: d[this.label],
-            value: val
+            [this.label]: d[this.label],
+            [this.value]: val
           };
 
-          this.selectedItems.update(prev => [...prev, item]);          
+          list.push(item);
         }
-
+        this.selectedItems.set(list);        
         this.initialState = undefined;
       }else{
         const val = this.data.find(p=> p[this.value] === this.initialState);
@@ -202,15 +203,16 @@ export class FlexiSelectComponent implements OnChanges {
 
   selectForMultiple(item: any) {     
      const selectedItem = {
-      label: item[this.label],
-      value: item[this.value]
+      [this.label]: item[this.label],
+      [this.value]: item[this.value]
     };
     
     if(this.selectedItems().length === 0){
       this.clearAllSelected();
     }
 
-    const existingIndex = this.selectedItems().findIndex(existingItem => existingItem.value === selectedItem.value);
+    
+    const existingIndex = this.selectedItems().findIndex(existingItem => existingItem[this.value] === selectedItem[this.value]);
 
     if (existingIndex > -1) {        
         item.isSelected = false;
@@ -228,8 +230,9 @@ export class FlexiSelectComponent implements OnChanges {
       this.isOpen.set(false);
     }
     
-    this.selected.emit(this.selectedItems());
-    this.onChange(this.selectedItems());    
+    const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value]);
+    this.selected.emit(selectedItemsForNgModel);
+    this.onChange(selectedItemsForNgModel);
     
     this.flexiSelectInput!.nativeElement.select();
   }
@@ -289,13 +292,18 @@ export class FlexiSelectComponent implements OnChanges {
       const updatedItems = [...prev];
       updatedItems.splice(index, 1);
       return updatedItems;
-    });
+  });
 
-    const existingItem = this.data.find(p => p[this.value] === item.value);
+    const existingItem = this.data.find(p => p[this.value] === item[this.value]);
     if(existingItem){
       existingItem.isSelected = false;
     }
 
+
+    const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value]);
+    this.selected.emit(selectedItemsForNgModel);
+    this.onChange(selectedItemsForNgModel);
+    
     this.isOpen.set(true);
   }
 }

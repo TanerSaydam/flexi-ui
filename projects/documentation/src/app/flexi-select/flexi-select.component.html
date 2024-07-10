@@ -54,8 +54,11 @@
             <p><b>Ya da</b></p>
             <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
             <b>component.html</b>
-            <my-code className="" language="html" [code]="firstUseHTMLCodeExample()"></my-code>
+            <my-code className="" language="html" [code]="firstUseHTMLCodeExample1()"></my-code>
   
+            <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
+            <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
+
             @defer {
               <app-first-use [dataCode]="dataCode()"></app-first-use>
             }@placeholder {
@@ -136,6 +139,9 @@
         <h3>Örnek kod:</h3>        
         <b>component.html</b>
         <my-code className="" language="html" [code]="multipleHTMLCodeExample()"></my-code>
+
+        <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
+            <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
 
         @defer {
           <app-multiple [dataCode]="dataCode()"></app-multiple>
