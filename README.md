@@ -2,4 +2,7 @@
 
 Angular için tasarladığım UI libraries
 
-Loading...
+Dökümantasyon ve detaylar için
+
+https://flexi-ui.ecnorow.com/
+
