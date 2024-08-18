@@ -183,7 +183,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   nextPageGroup() {
     const pageCount = Math.ceil(this.total! / +this.state.pageSize);
     const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
-    const nextGroupStartPage = (currentGroup) * this.pageNumberCount() + 1;
+    const nextGroupStartPage = (currentGroup + 1) * this.pageNumberCount() + 1;
 
     if (nextGroupStartPage <= pageCount) {
       this.state.pageNumber = nextGroupStartPage;
@@ -195,7 +195,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   previousPageGroup() {
     const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
-    const previousGroupStartPage = (currentGroup) * this.pageNumberCount() + 1;
+    const previousGroupStartPage = (currentGroup - 1) * this.pageNumberCount() + 1;
 
     if (previousGroupStartPage > 0) {
       this.state.pageNumber = previousGroupStartPage;
