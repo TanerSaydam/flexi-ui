@@ -156,7 +156,8 @@ a {
     width: 30px;
     margin-left: 3px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
+    border-radius: 5px;
 }
 
 .svg:hover {
