@@ -494,9 +494,7 @@ div .flexi-grid-active {
 
  .svg-mobile{
     width: 20px;
- }
-
-
+}
 
 @media (max-width: 1000px) {
     .show-filter{

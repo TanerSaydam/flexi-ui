@@ -23,7 +23,8 @@ export class FlexiGridColumnComponent {
   @Input() className: string = "";
   @Input() textAlign: TextAlignType = "left";  
   @Input() hideOverflow: boolean = true;
-
+  @Input() fixedThisColumn: boolean = false;
+  
   value: string = "";
   filterOperator: string = "contains";
 

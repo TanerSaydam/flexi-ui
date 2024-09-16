@@ -33,178 +33,182 @@
       </div>
     </div>
   }
- <table [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
-   <thead>     
-     <tr>
-       @if(showIndex){
-         <th [ngStyle]="{'width': indexWidth}">#</th>
-       }
-       @for(column of columns; track $index){          
-         @if(sortable && column.sortable && column.field && data.length > 0){
-           <th [ngStyle]="{'width': column.width}" class="cursor flexi-grid-border" [hidden]="!column.visible"
-               [draggable]="(draggable && column.draggable)"
-               (dragstart)="onDragStart($event, $index)" 
-               (dragover)="onDragOver($event, $index)" 
-               (drop)="onDrop($event, $index)">
-             @if(resizable && column.resizable){
-               <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
-             }
-             <div (click)="sort(column.field)">
-               <span>{{ column.title ? column.title : column.field }}</span>
-               <span class="ms-2">
-                 @if(this.state.sort.field === column.field){
-                   <span *ngIf="state.sort.field === column.field">
-                     {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
-                   </span>
-                 }
-               </span>
-             </div>              
-           </th>
-         }@else {
-           <th 
-             [draggable]="(draggable && column.draggable)" 
-             [ngStyle]="{'width': column.width}" 
-             class="flexi-grid-border" 
-             [hidden]="!column.visible"
-             (dragstart)="onDragStart($event, $index)" 
-             (dragover)="onDragOver($event, $index)" 
-             (drop)="onDrop($event, $index)">
-             @if(resizable && column.resizable){
-               <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
-             }
-             <div>
-               <span>{{ column.title ? column.title : column.field }}</span>
-             </div>
-           </th>
-         }
-       }
-     </tr> 
-     @if(filterable){
-      <tr class="flexi-grid-mobile-filter-tr">
-        <th colSpan="2">
-          @if(isShowMobileFilter()){
-            <button class="flexi-grid-btn" (click)="closeMobileFilter()">              
-              <svg class="svg-mobile cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
-              Filtreyi Kapat
-            </button>
-          }@else {
-            <button class="flexi-grid-btn" (click)="openMobileFilter()">
-              <svg class="svg-mobile cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-              Filtreyi Aç
-            </button>
+  <div style="width: 100%; overflow-x: auto;">
+    <table class="flexi-grid-table"  [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
+      <thead>     
+        <tr>
+          @if(showIndex){
+            <th [ngStyle]="{'width': indexWidth}">#</th>
           }
-        </th>
-      </tr>
-      <tr class="flexi-grid-filter-tr" #flexiGridFilterTr>
-        @if(showIndex && !isShowMobileFilter()){
-          <th class="flexi-grid-filter-th" [ngStyle]="{'width': indexWidth}"></th>
-        }
-        @for(column of columns; track $index){          
-          @if(column.filterable && column.field){            
-            <th class="flexi-grid-filter-th" [hidden]="!column.visible" [attr.data-label]="column.title ? column.title : column.field">
-              <div class="d-flex flexi-grid-filter-container">
-                @if(column.filterType === "text"){
-                  <input class="flexi-grid-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
-                  @if(!column.value){                   
-                    <svg class="svg cursor show-filter" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-                    <div class="flexi-grid-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
-                      @for(filterType of textFilterTypes(); track filterType.operator){
-                        <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
-                          {{ filterType.value }}
-                        </a>
-                      }                    
-                    </div>
-                  }
-                }@else if(column.filterType === "date"){
-                  <input class="flexi-grid-filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
-                }@else if(column.filterType === "date-time"){
-                  <input class="flexi-grid-filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
-                }@else if(column.filterType === "number"){
-                  <input class="flexi-grid-filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
-                  @if(!column.value){
-                    <svg class="svg cursor show-filter" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-                    <div class="flexi-grid-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
-                      @for(filterType of numberFilterTypes(); track filterType.operator){
-                        <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
-                          {{ filterType.value }}
-                        </a>
-                      }                    
-                    </div>
-                  }
+          @for(column of columns; track $index){          
+            @if(sortable && column.sortable && column.field && data.length > 0){
+              <th [ngStyle]="{'width': column.width}" class="cursor flexi-grid-border" [hidden]="!column.visible"
+              [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''"
+                  [draggable]="(draggable && column.draggable)"
+                  (dragstart)="onDragStart($event, $index)" 
+                  (dragover)="onDragOver($event, $index)" 
+                  (drop)="onDrop($event, $index)">
+                @if(resizable && column.resizable){
+                  <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
                 }
-                
-                @if(showClearFilter(column.value)){
-                  <svg (click)="clearFilter(column.field)" class="svg cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
+                <div (click)="sort(column.field)">
+                  <span>{{ column.title ? column.title : column.field }}</span>
+                  <span class="ms-2">
+                    @if(this.state.sort.field === column.field){
+                      <span *ngIf="state.sort.field === column.field">
+                        {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
+                      </span>
+                    }
+                  </span>
+                </div>              
+              </th>
+            }@else {
+              <th 
+                [draggable]="(draggable && column.draggable)" 
+                [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''"
+                [ngStyle]="{'width': column.width}" 
+                class="flexi-grid-border" 
+                [hidden]="!column.visible"
+                (dragstart)="onDragStart($event, $index)" 
+                (dragover)="onDragOver($event, $index)" 
+                (drop)="onDrop($event, $index)">
+                @if(resizable && column.resizable){
+                  <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
                 }
-              </div>
-            </th>
-          }@else {
-            @if(!isShowMobileFilter()){
-              <th [hidden]="!column.visible"></th>
+                <div>
+                  <span>{{ column.title ? column.title : column.field }}</span>
+                </div>
+              </th>
             }
           }
-        }
-      </tr>
-    }    
-   </thead>
-   <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;" [ngStyle]="tbodyStyle">
-     @if(loading){        
-       <div class="flexi-grid-spinner-container">
-         <div class="flexi-grid-spinner-1"></div>
-         <div class="flexi-grid-spinner-2"></div>
-       </div>
-     }
-     @if(data.length > 0){      
-       @for(item of pagedData(); track $index; let i = $index){
-         <tr [ngStyle]="{'min-height': trMinHeight}">
-           @if(showIndex){
-             @if(!pageable){
-               <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + 1)}}</td>
-             }
-             @else{
-               <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
-             }
-           }
-           @for(column of columns; track $index){
-             @if(column.columnTemplate && column.visible){
-               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className" [attr.data-label]="column.title ? column.title : column.field">
-                 <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
-               </td>
+        </tr> 
+        @if(filterable){
+         <tr class="flexi-grid-mobile-filter-tr">
+           <th colSpan="2">
+             @if(isShowMobileFilter()){
+               <button class="flexi-grid-btn" (click)="closeMobileFilter()">              
+                 <svg class="svg-mobile cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
+                 Filtreyi Kapat
+               </button>
              }@else {
-               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className" [ngClass]="column.hideOverflow ? 'text-overflow-hidden' : ''" [attr.data-label]="column.title ? column.title : column.field" [title]="item ? getFieldValue(item, column.field) : ''">
-                 @if(column.field){
-                   @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
-                     {{ getFieldValue(item, column.field) | date: column.format! }}
-                   }@else if(column.filterType === "number" && column.filterType){
-                     @if(column.format === "n" || column.format === null){
-                       {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
-                     }@else if(column.format === "c"){
-                       {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront: column.fraction) }}
-                     }                    
+               <button class="flexi-grid-btn" (click)="openMobileFilter()">
+                 <svg class="svg-mobile cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                 Filtreyi Aç
+               </button>
+             }
+           </th>
+         </tr>
+         <tr class="flexi-grid-filter-tr" #flexiGridFilterTr>
+           @if(showIndex && !isShowMobileFilter()){
+             <th class="flexi-grid-filter-th" [ngStyle]="{'width': indexWidth}"></th>
+           }
+           @for(column of columns; track $index){          
+             @if(column.filterable && column.field){            
+               <th class="flexi-grid-filter-th" [hidden]="!column.visible" [attr.data-label]="column.title ? column.title : column.field">
+                 <div class="d-flex flexi-grid-filter-container">
+                   @if(column.filterType === "text"){
+                     <input class="flexi-grid-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                     @if(!column.value){                   
+                       <svg class="svg cursor show-filter" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                       <div class="flexi-grid-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
+                         @for(filterType of textFilterTypes(); track filterType.operator){
+                           <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
+                             {{ filterType.value }}
+                           </a>
+                         }                    
+                       </div>
+                     }
+                   }@else if(column.filterType === "date"){
+                     <input class="flexi-grid-filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                   }@else if(column.filterType === "date-time"){
+                     <input class="flexi-grid-filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                   }@else if(column.filterType === "number"){
+                     <input class="flexi-grid-filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                     @if(!column.value){
+                       <svg class="svg cursor show-filter" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                       <div class="flexi-grid-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
+                         @for(filterType of numberFilterTypes(); track filterType.operator){
+                           <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
+                             {{ filterType.value }}
+                           </a>
+                         }                    
+                       </div>
+                     }
                    }
-                   @else {
-                     {{ getFieldValue(item, column.field) }}
+                   
+                   @if(showClearFilter(column.value)){
+                     <svg (click)="clearFilter(column.field)" class="svg cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
                    }
-                 }
-               </td>
-             }            
+                 </div>
+               </th>
+             }@else {
+               @if(!isShowMobileFilter()){
+                 <th [hidden]="!column.visible"></th>
+               }
+             }
            }
          </tr>
-       }
-     }@else {
-       @if(!loading){
-         <tr style="height: 100%;" [ngStyle]="{'min-height': trMinHeight}">
-           <td style="text-align: center;" [colSpan]="columns?.length">
-             <h4>Gösterilecek veri bulunamadı!</h4>
-           </td>
-         </tr>
-       }
-     }
-   </tbody>
-   <tfoot>
-     <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>     
-   </tfoot>
- </table>
+       }    
+      </thead>
+      <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;" [ngStyle]="tbodyStyle">
+        @if(loading){        
+          <div class="flexi-grid-spinner-container">
+            <div class="flexi-grid-spinner-1"></div>
+            <div class="flexi-grid-spinner-2"></div>
+          </div>
+        }
+        @if(data.length > 0){      
+          @for(item of pagedData(); track $index; let i = $index){
+            <tr [ngStyle]="{'min-height': trMinHeight}">
+              @if(showIndex){
+                @if(!pageable){
+                  <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + 1)}}</td>
+                }
+                @else{
+                  <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
+                }
+              }
+              @for(column of columns; track $index){
+                @if(column.columnTemplate && column.visible){
+                  <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className" [attr.data-label]="column.title ? column.title : column.field" [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''">
+                    <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
+                  </td>
+                }@else {
+                  <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className" [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''" [ngClass]="column.hideOverflow ? 'text-overflow-hidden' : ''" [attr.data-label]="column.title ? column.title : column.field" [title]="item ? getFieldValue(item, column.field) : ''">
+                    @if(column.field){
+                      @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
+                        {{ getFieldValue(item, column.field) | date: column.format! }}
+                      }@else if(column.filterType === "number" && column.filterType){
+                        @if(column.format === "n" || column.format === null){
+                          {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
+                        }@else if(column.format === "c"){
+                          {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront: column.fraction) }}
+                        }                    
+                      }
+                      @else {
+                        {{ getFieldValue(item, column.field) }}
+                      }
+                    }
+                  </td>
+                }            
+              }
+            </tr>
+          }
+        }@else {
+          @if(!loading){
+            <tr style="height: 100%;" [ngStyle]="{'min-height': trMinHeight}">
+              <td style="text-align: center;" [colSpan]="columns?.length">
+                <h4>Gösterilecek veri bulunamadı!</h4>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+      <tfoot>
+        <ng-container *ngTemplateOutlet="footerTemplate" class="overflow-x"></ng-container>     
+      </tfoot>
+    </table>
+  </div>
   @if(pageable){
     <div class="flexi-grid-pagination-container">
       @if(!isShowMobileFilter()){

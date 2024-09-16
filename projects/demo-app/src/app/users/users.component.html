@@ -57,6 +57,8 @@
   [captionTemplate]="captionTemplate"
   [showIndex]="true"
   [autoHeight]="false"
+  [useMinWidth]="true"
+  minWidth="1000px"
   >
   <ng-template #captionTemplate>
     <button class="btn btn-primary">Ekle</button>
@@ -69,7 +71,7 @@
   <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
   <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"></flexi-grid-column>
   <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [hideOverflow]="true"></flexi-grid-column>
-  <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler">
+  <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" [fixedThisColumn]="true">
     <ng-template #operationsColumnTemplate>
         <button (click)="delete()">Remove</button>
     </ng-template>

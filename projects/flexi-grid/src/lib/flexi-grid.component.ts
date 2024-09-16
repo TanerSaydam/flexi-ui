@@ -43,7 +43,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() resizable: boolean = false;
   @Input() draggable: boolean = false;
   @Input() tbodyStyle: any = {};
-  @Input() trMinHeight: string = "45px";
+  @Input() trMinHeight: string = "45px";  
 
   pageNumberCount = signal<number>(5);
   pageNumbers = signal<number[]>([]);
