@@ -33,7 +33,7 @@
       </div>
     </div>
   }
-  <div style="width: 100%; overflow-x: auto;">
+  <div style="width: 100%; overflow-x: auto; position: relative">
     <table class="flexi-grid-table"  [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
       <thead>     
         <tr>
@@ -170,11 +170,11 @@
               }
               @for(column of columns; track $index){
                 @if(column.columnTemplate && column.visible){
-                  <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="column.className" [attr.data-label]="column.title ? column.title : column.field" [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''">
+                  <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [ngClass]="tdTemplateClassName(column)" [attr.data-label]="column.title ? column.title : column.field">
                     <ng-container *ngTemplateOutlet="column.columnTemplate; context: {value: item[column.field], item: item, index: i}"></ng-container>
                   </td>
                 }@else {
-                  <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="column.className" [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''" [ngClass]="column.hideOverflow ? 'text-overflow-hidden' : ''" [attr.data-label]="column.title ? column.title : column.field" [title]="item ? getFieldValue(item, column.field) : ''">
+                  <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible" [ngClass]="tdNoTemplateClassName(column)" [attr.data-label]="column.title ? column.title : column.field" [title]="item ? getFieldValue(item, column.field) : ''">
                     @if(column.field){
                       @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
                         {{ getFieldValue(item, column.field) | date: column.format! }}

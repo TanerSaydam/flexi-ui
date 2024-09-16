@@ -549,4 +549,23 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.flexiGridFilterTr!.nativeElement.classList.remove("show");
     this.isShowMobileFilter.set(false);
   }
+
+  tdNoTemplateClassName(column:FlexiGridColumnComponent){
+    let className: string = column.className;
+    if(className !== "") className += " ";
+    className += column.fixedThisColumn ? 'flexi-grid-column-fixed': '';
+
+    if(className !== "") className += " ";
+    className += column.hideOverflow ? 'text-overflow-hidden' : ''
+
+    return className;
+  }
+
+  tdTemplateClassName(column: FlexiGridColumnComponent){
+    let className: string = column.className;
+    if(className !== "") className += " ";
+    className += column.fixedThisColumn ? 'flexi-grid-column-fixed': '';
+
+    return className;
+  }
 }

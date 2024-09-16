@@ -496,6 +496,14 @@ div .flexi-grid-active {
     width: 20px;
 }
 
+/* .flexi-grid-column-fixed {
+    position: sticky;
+    right: 0;
+    background-color: var(--background-color-part);
+    z-index: 2;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+} */
+
 @media (max-width: 1000px) {
     .show-filter{
         display: none;
