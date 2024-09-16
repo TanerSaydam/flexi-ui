@@ -69,10 +69,11 @@
   <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
   <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"></flexi-grid-column>
   <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [hideOverflow]="true"></flexi-grid-column>
-  <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler"></flexi-grid-column>
+  <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler">
+    <ng-template #operationsColumnTemplate>
+        <button (click)="delete()">Remove</button>
+    </ng-template>
+  </flexi-grid-column>
 
-  <ng-template #operationsColumnTemplate>
-    
-  </ng-template>
   </flexi-grid>
 </app-blank>

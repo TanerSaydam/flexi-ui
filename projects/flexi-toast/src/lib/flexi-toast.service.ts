@@ -157,8 +157,8 @@ export class FlexiToastService {
     this.renderer.setAttribute(container, `data-bs-theme`, this.options.themeClass!)
 
     const content = this.renderer.createElement('div');
-    this.renderer.addClass(content, 'flexi-swal-content');
-    this.renderer.addClass(content, `flexi-swal-content-left-border-${this.options.swalContentThemeClass}`);
+    this.renderer.addClass(content, 'flexi-swal-content');    
+    this.renderer.addClass(content, `flexi-swal-content-left-border-${this.options.swalContentThemeClass}`);    
 
     // const iconContainer = this.renderer.createElement('div');
     // this.renderer.addClass(iconContainer, 'flexi-swal-icon');
@@ -173,19 +173,21 @@ export class FlexiToastService {
     // this.renderer.appendChild(svgIcon, path);
     // this.renderer.appendChild(iconContainer, svgIcon);
 
-    const closeBtn = this.renderer.createElement('span');
-      this.renderer.addClass(closeBtn, 'flexi-swal-close-btn');
-      const closeText = this.renderer.createText('×');
-      this.renderer.appendChild(closeBtn, closeText);
-
-      this.renderer.listen(closeBtn, 'click', () => {        
-        this.renderer.addClass(content, 'fade-out');
-        setTimeout(() => {
-          this.renderer.removeChild(body, container);
-        }, 200);
-      });
-
-      this.renderer.appendChild(content, closeBtn);
+    if(this.options.showCloseBtn){
+      const closeBtn = this.renderer.createElement('span');
+        this.renderer.addClass(closeBtn, 'flexi-swal-close-btn');
+        const closeText = this.renderer.createText('×');
+        this.renderer.appendChild(closeBtn, closeText);
+  
+        this.renderer.listen(closeBtn, 'click', () => {        
+          this.renderer.addClass(content, 'fade-out');
+          setTimeout(() => {
+            this.renderer.removeChild(body, container);
+          }, 200);
+        });
+  
+        this.renderer.appendChild(content, closeBtn);
+    }
 
     const titleEl = this.renderer.createElement('h1');
     const titleText = this.renderer.createText(title);
@@ -248,12 +250,12 @@ export class FlexiToastOptionsModel {
   preventDuplicate?: boolean = false;
   position?: FlexiToastPositionType = "bottom-right"
   themeClass?: FlexiToastThemeClassType | string = "light";
-  cancelBtnText?: string = "Cancel";
-  confirmBtnText?: string = "Delete";
-  swalContentThemeClass?: FlexiSwalContentThemeClass = "error";
+  cancelBtnText?: string = "Vazgeç";
+  confirmBtnText?: string = "Sil";
+  swalContentThemeClass?: FlexiSwalContentThemeClass = "default";  
 }
 
 export type FlexiToastIconType = "success" | "warning" | "info" | "error";
 export type FlexiToastThemeClassType = "light" | "dark";
 export type FlexiToastPositionType = "top-left" | "top-right" | "bottom-left" | "bottom-right" | "full-bottom" | "full-top";
-export type FlexiSwalContentThemeClass = "success" | "warning" | "info" | "error";
+export type FlexiSwalContentThemeClass = "success" | "warning" | "info" | "error" | "default";

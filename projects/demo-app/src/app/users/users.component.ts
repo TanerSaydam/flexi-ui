@@ -1,17 +1,16 @@
 import { Component, Renderer2, signal } from '@angular/core';
 // import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { StateModel } from '../../../../flexi-grid/src/lib/state.model';
-import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid.service';
 import { HttpClient } from '@angular/common/http';
 import { SharedService } from '../shared.service';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiSelectComponent } from '../../../../flexi-select/src/public-api';
 import { FormsModule } from '@angular/forms';
 import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
-import { UsersData } from '../../../../documentation/src/app/flexi-data-grid/data'
-import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { FlexiEditorComponent } from '../../../../flexi-editor/src/public-api';
+import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid.service';
+import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
 
 @Component({
   selector: 'app-users',
@@ -48,7 +47,7 @@ export class UsersComponent {
     toast.options.autoClose = false;
     toast.options.themeClass = "light";
     toast.options.timeOut = 4000;  
-    toast.options.swalContentThemeClass = "error"  
+    toast.options.swalContentThemeClass = "default"  
     //this.toast.showToast("Error","Something went wrong","error");
     //toast.options.swalContentThemeClass = "info"  
     //toast.options.swalContentThemeClass = "success"  
