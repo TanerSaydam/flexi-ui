@@ -43,39 +43,75 @@
     </div> -->
   <!-- </div> -->
 
-  <flexi-grid
-  [data]="users()"
-  [pageable]="true"
-  [filterable]="true"
-  [themeClass]="shared.themeClass()"
-  [showCaption]="true"  
-  captionTitle="User List"
-  [resizable]="true"
-  [draggable]="true"
-  [useMinWidth]="false"
-  [loading]="loading()"
-  [captionTemplate]="captionTemplate"
-  [showIndex]="true"
-  [autoHeight]="false"
-  [useMinWidth]="true"
-  minWidth="1000px"
-  >
-  <ng-template #captionTemplate>
-    <button class="btn btn-primary">Ekle</button>
-    <button class="btn btn-dark">Export</button>
-  </ng-template>
+  <div style="width: 500px;">
+    <!-- <div style="width: 100%; overflow: auto;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Salary</th>
+            <th>Avatar Url</th>
+            <th class="sticky">Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(val of users();track val.id){
+            <tr>
+              <td>{{$index + 1}}</td>
+              <td>{{val.firstName}}</td>
+              <td>{{val.lastName}}</td>
+              <td>{{val.dateOfBirth}}</td>
+              <td>{{val.salary}}</td>
+              <td>{{val.avatarUrl}}</td>
+              <td class="sticky">
+                <button>Update</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div> -->
 
-  <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
-  <flexi-grid-column field="firstName" width="350px" title="First Name" [hideOverflow]="false"></flexi-grid-column>
-  <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
-  <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
-  <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"></flexi-grid-column>
-  <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [fixedThisColumn]="false" [hideOverflow]="true"></flexi-grid-column>
-  <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" [fixedThisColumn]="true">
-    <ng-template #operationsColumnTemplate>
-        <button (click)="delete()">Remove</button>
+
+
+    <flexi-grid
+    [data]="users()"
+    [pageable]="true"
+    [filterable]="true"
+    [themeClass]="shared.themeClass()"
+    [showCaption]="true"  
+    captionTitle="User List"
+    [resizable]="true"
+    [draggable]="true"
+    [useMinWidth]="false"
+    [loading]="loading()"
+    [captionTemplate]="captionTemplate"
+    [showIndex]="true"
+    [autoHeight]="false"
+    [useMinWidth]="true"
+    minWidth="1000px"
+    >
+    <ng-template #captionTemplate>
+      <button class="btn btn-primary">Ekle</button>
+      <button class="btn btn-dark">Export</button>
     </ng-template>
-  </flexi-grid-column>
-
-  </flexi-grid>
+  
+    <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
+    <flexi-grid-column field="firstName" width="350px" title="First Name" [hideOverflow]="false"></flexi-grid-column>
+    <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"></flexi-grid-column>
+    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [fixedThisColumn]="false" [hideOverflow]="true"></flexi-grid-column>
+    <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" [fixedThisColumn]="true">
+      <ng-template #operationsColumnTemplate>
+          <button (click)="delete()">Remove</button>
+      </ng-template>
+    </flexi-grid-column>
+  
+    </flexi-grid>    
+  </div>
 </app-blank>

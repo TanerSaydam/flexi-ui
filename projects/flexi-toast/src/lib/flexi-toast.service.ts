@@ -45,7 +45,7 @@ export class FlexiToastService {
     this.renderer.addClass(toast, `flexi-toast-${options.icon}`);
     this.renderer.setAttribute(toast, `data-bs-theme`, options.themeClass!)
 
-    if (!options.showCloseBtn) {
+    if (!options.showToastCloseBtn) {
       this.renderer.listen(toast, 'click', () => {
         this.renderer.removeClass(toast, 'flexi-toast-fade-in');
         this.renderer.addClass(toast, 'flexi-toast-fade-out');
@@ -113,7 +113,7 @@ export class FlexiToastService {
 
     this.renderer.appendChild(toast, container);
 
-    if (options.showCloseBtn) {
+    if (options.showToastCloseBtn) {
       const closeBtn = this.renderer.createElement('span');
       this.renderer.addClass(closeBtn, 'flexi-toast-close-btn');
       const closeText = this.renderer.createText('×');
@@ -173,7 +173,7 @@ export class FlexiToastService {
     // this.renderer.appendChild(svgIcon, path);
     // this.renderer.appendChild(iconContainer, svgIcon);
 
-    if(this.options.showCloseBtn){
+    if(this.options.showSwalCloseBtn){
       const closeBtn = this.renderer.createElement('span');
         this.renderer.addClass(closeBtn, 'flexi-swal-close-btn');
         const closeText = this.renderer.createText('×');
@@ -246,7 +246,8 @@ export class FlexiToastOptionsModel {
   autoClose?: boolean = true;
   timeOut?: number = 3000;
   showProgressBar?: boolean = true;
-  showCloseBtn?: boolean = true;
+  showToastCloseBtn?: boolean = true;
+  showSwalCloseBtn?: boolean = false;
   preventDuplicate?: boolean = false;
   position?: FlexiToastPositionType = "bottom-right"
   themeClass?: FlexiToastThemeClassType | string = "light";

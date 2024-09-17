@@ -160,7 +160,7 @@
             ],
             "styles": [
               "projects/demo-app/src/styles.css",
-              "./node_modules/flexi-toast/src/flexi-toast.css"
+              "projects/flexi-toast/src/flexi-toast.css"
             ],
             "scripts": []
           },
