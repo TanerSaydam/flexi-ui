@@ -11,6 +11,7 @@ import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.modul
 import { FlexiEditorComponent } from '../../../../flexi-editor/src/public-api';
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid.service';
 import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
+import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/flexi-grid-filter-data.model';
 
 @Component({
   selector: 'app-users',
@@ -33,7 +34,16 @@ export class UsersComponent {
   ]);
   selectedItem = signal<string>("1b5854a9-d39b-4b8f-b7aa-00a44227ddcc");
   editorContent: string = 'Flexi Grid is loading...';
-
+  filterData: FlexiGridFilterDataModel[] = [
+    {
+      value: true,
+      name: "Active"
+    },
+    {
+      value: false,
+      name: "Passive"
+    }
+  ];
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
@@ -73,9 +83,12 @@ export class UsersComponent {
 
     //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
     //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=5`;
+    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
 
-    this.http.get(endpoint).subscribe((res:any)=> {
+    this.http.get<any>(endpoint).subscribe((res)=> {
+      res.data.forEach((val:any)=> {
+        val.isActive = Math.random() > 0.5 ? true : false;
+      });
       this.users.set(res.data);
       //this.total.set(res.total);      
       this.loading.set(false);
@@ -126,4 +139,5 @@ export class UserModel{
   dateOfBirth: string = "";
   salary: number = 0;
   avatarUrl: string = "";
+  isActive: boolean = false;
 }

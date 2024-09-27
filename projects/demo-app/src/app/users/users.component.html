@@ -43,7 +43,7 @@
     </div> -->
   <!-- </div> -->
 
-  <div style="width: 500px;">
+  <div>
     <!-- <div style="width: 100%; overflow: auto;">
       <table class="table">
         <thead>
@@ -85,6 +85,7 @@
     [themeClass]="shared.themeClass()"
     [showCaption]="true"  
     captionTitle="User List"
+    [sortable]="true"
     [resizable]="true"
     [draggable]="true"
     [useMinWidth]="false"
@@ -101,12 +102,17 @@
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="firstName" width="350px" title="First Name" [hideOverflow]="false"></flexi-grid-column>
+    <flexi-grid-column field="firstName" textAlign="center" title="First Name" [hideOverflow]="false"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy"></flexi-grid-column>
-    <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"></flexi-grid-column>
-    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [fixedThisColumn]="false" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" [fixedThisColumn]="true">
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy" textAlign="center"></flexi-grid-column>
+    <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
+    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
+     <flexi-grid-column field="isActive" title="Is Active" filterType="select" [filterData]="filterData" [columnTemplate]="isActiveColumnTemplate" textAlign="center">
+        <ng-template #isActiveColumnTemplate let-item="item">
+          <span>{{item.isActive ? 'Active' : 'Passive'}}</span>
+        </ng-template>
+     </flexi-grid-column>
+    <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" width="100px" textAlign="center">
       <ng-template #operationsColumnTemplate>
           <button (click)="delete()">Remove</button>
       </ng-template>

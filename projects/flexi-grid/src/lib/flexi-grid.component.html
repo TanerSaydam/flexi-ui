@@ -38,106 +38,97 @@
       <thead>     
         <tr>
           @if(showIndex){
-            <th [ngStyle]="{'width': indexWidth}">#</th>
+            <th [ngStyle]="{'width': indexWidth, 'text-align': indexTextAlign}" style="text-align: center;">
+              <span>#</span>
+            </th>
           }
           @for(column of columns; track $index){          
-            @if(sortable && column.sortable && column.field && data.length > 0){
-              <th [ngStyle]="{'width': column.width}" class="cursor flexi-grid-border" [hidden]="!column.visible"
-              [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''"
-                  [draggable]="(draggable && column.draggable)"
-                  (dragstart)="onDragStart($event, $index)" 
-                  (dragover)="onDragOver($event, $index)" 
-                  (drop)="onDrop($event, $index)">
+            <th
+              [draggable]="(draggable && column.draggable)"
+              class="cursor flexi-grid-border"
+              [hidden]="!column.visible"
+              [ngStyle]="{'width': column.width}"
+              (dragstart)="onDragStart($event, $index)"
+              (dragover)="onDragOver($event, $index)"
+              (drop)="onDrop($event, $index)">
+              <div class="flexi-th" [ngClass]="column.textAlign === 'right' ? 'flexi-flex-reverse' : (column.textAlign === 'center'? 'flexi-flex-center' : '')">
                 @if(resizable && column.resizable){
                   <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
                 }
-                <div (click)="sort(column.field)">
-                  <span>{{ column.title ? column.title : column.field }}</span>
-                  <span class="ms-2">
-                    @if(this.state.sort.field === column.field){
-                      <span *ngIf="state.sort.field === column.field">
-                        {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
-                      </span>
+                @if(sortable && column.sortable && column.field && data.length > 0){
+                  <div (click)="sort(column.field)">
+                    <span>{{ column.title ? column.title : column.field }}</span>
+                    <span class="ms-2">
+                      @if(this.state.sort.field === column.field){
+                        <span *ngIf="state.sort.field === column.field">
+                          {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
+                        </span>
+                      }
+                    </span>
+                  </div>
+                }@else {
+                  <div>
+                    <span>{{ column.title ? column.title : column.field }}</span>
+                  </div>
+                }
+                @if(filterable && column.field && column.filterable && showFilterButton(column.filterType)){
+                  <div class="p-relative">
+                    <i class="fa-solid fa-filter svg cursor show-filter" (click)="toggleFilterDropdown(column.field)"></i>
+                    @if(showClearFilter(column.value)){
+                      <i class="fa-solid fa-filter-circle-xmark svg cursor" (click)="clearFilter(column.field)"></i>
                     }
-                  </span>
-                </div>              
-              </th>
-            }@else {
-              <th 
-                [draggable]="(draggable && column.draggable)" 
-                [ngClass]="column.fixedThisColumn ? 'flexi-grid-column-fixed': ''"
-                [ngStyle]="{'width': column.width}" 
-                class="flexi-grid-border" 
-                [hidden]="!column.visible"
-                (dragstart)="onDragStart($event, $index)" 
-                (dragover)="onDragOver($event, $index)" 
-                (drop)="onDrop($event, $index)">
-                @if(resizable && column.resizable){
-                  <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
-                }
-                <div>
-                  <span>{{ column.title ? column.title : column.field }}</span>
-                </div>
-              </th>
-            }
+                    <div class="flexi-grid-dropdown-menu" [ngClass]="column.textAlign === 'right' ? 'flexi-grid-dropdown-menu-right' : ''" [class.show]="filterDropdownVisible()[column.field]">
+                      @for(filterType of giveFilterValueByFilterType(column.filterType); track filterType.operator){
+                        <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
+                          {{ filterType.value }}
+                        </a>
+                      }
+                    </div>
+                  </div>
+                }  
+              </div>
+          </th>
           }
         </tr> 
         @if(filterable){
          <tr class="flexi-grid-mobile-filter-tr">
            <th colSpan="2">
              @if(isShowMobileFilter()){
-               <button class="flexi-grid-btn" (click)="closeMobileFilter()">              
-                 <svg class="svg-mobile cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
+               <button class="flexi-grid-btn" (click)="closeMobileFilter()">
+                <i class="fa-solid fa-filter-circle-xmark cursor"></i>
                  Filtreyi Kapat
                </button>
              }@else {
                <button class="flexi-grid-btn" (click)="openMobileFilter()">
-                 <svg class="svg-mobile cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                <i class="fa-solid fa-filter cursor"></i>                 
                  Filtreyi Aç
                </button>
              }
            </th>
          </tr>
-         <tr class="flexi-grid-filter-tr" #flexiGridFilterTr>
+         <tr class="flexi-grid-filter-tr" #filterTr>
            @if(showIndex && !isShowMobileFilter()){
-             <th class="flexi-grid-filter-th" [ngStyle]="{'width': indexWidth}"></th>
+             <th class="flexi-grid-filter-th" [ngStyle]="{'width': indexWidth}" [ngStyle]="{}"></th>
            }
-           @for(column of columns; track $index){          
+           @for(column of columns; track $index){
              @if(column.filterable && column.field){            
                <th class="flexi-grid-filter-th" [hidden]="!column.visible" [attr.data-label]="column.title ? column.title : column.field">
                  <div class="d-flex flexi-grid-filter-container">
                    @if(column.filterType === "text"){
-                     <input class="flexi-grid-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
-                     @if(!column.value){                   
-                       <svg class="svg cursor show-filter" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-                       <div class="flexi-grid-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
-                         @for(filterType of textFilterTypes(); track filterType.operator){
-                           <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
-                             {{ filterType.value }}
-                           </a>
-                         }                    
-                       </div>
-                     }
+                     <input class="flexi-grid-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">                     
                    }@else if(column.filterType === "date"){
                      <input class="flexi-grid-filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                    }@else if(column.filterType === "date-time"){
                      <input class="flexi-grid-filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
                    }@else if(column.filterType === "number"){
                      <input class="flexi-grid-filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
-                     @if(!column.value){
-                       <svg class="svg cursor show-filter" (click)="toggleFilterDropdown(column.field)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
-                       <div class="flexi-grid-dropdown-menu" [class.show]="filterDropdownVisible()[column.field]">
-                         @for(filterType of numberFilterTypes(); track filterType.operator){
-                           <a class="flexi-grid-dropdown-item" [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''" (click)="applyFilter(column, filterType.operator)">
-                             {{ filterType.value }}
-                           </a>
-                         }                    
-                       </div>
-                     }
-                   }
-                   
-                   @if(showClearFilter(column.value)){
-                     <svg (click)="clearFilter(column.field)" class="svg cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
+                   }@else if(column.filterType === "select"){
+                    <select class="flexi-grid-filter-select" (change)="filterSelect(column.field, 'eq', $event, column.filterType)">
+                      <option value="">Seçim yapınız</option>
+                      @for(data of column.filterData;track data.value){
+                        <option [value]="data.value">{{data.name}}</option>
+                      }
+                    </select>
                    }
                  </div>
                </th>
@@ -150,7 +141,7 @@
          </tr>
        }    
       </thead>
-      <tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;" [ngStyle]="tbodyStyle">
+      <tbody #tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;" [ngStyle]="tbodyStyle">
         @if(loading){        
           <div class="flexi-grid-spinner-container">
             <div class="flexi-grid-spinner-1"></div>
@@ -161,12 +152,13 @@
           @for(item of pagedData(); track $index; let i = $index){
             <tr [ngStyle]="{'min-height': trMinHeight}">
               @if(showIndex){
-                @if(!pageable){
-                  <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + 1)}}</td>
-                }
-                @else{
-                  <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth}" [attr.data-label]="'#'">{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</td>
-                }
+                <td class="flexi-grid-index-td" [ngStyle]="{'width': indexWidth, 'text-align': indexTextAlign}" [attr.data-label]="'#'">
+                    @if(!pageable){
+                      <span>{{($index + 1)}}</span>
+                    }@else {
+                      <span>{{($index + ((state.pageNumber -1) * +state.pageSize)) + 1}}</span>
+                    }
+                </td>                
               }
               @for(column of columns; track $index){
                 @if(column.columnTemplate && column.visible){

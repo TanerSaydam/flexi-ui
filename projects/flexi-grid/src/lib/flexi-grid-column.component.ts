@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { FlexiGridFilterDataModel } from './flexi-grid-filter-data.model';
 
 @Component({
   selector: 'flexi-grid-column',
@@ -17,14 +18,14 @@ export class FlexiGridColumnComponent {
   @Input() fraction: number = 2;
   @Input() symbol: string = "";
   @Input() showSymbolInFront: boolean = true;
-  @Input() width: string = "100%";
+  @Input() width: string = "200px";
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
   @Input() className: string = "";
   @Input() textAlign: TextAlignType = "left";  
   @Input() hideOverflow: boolean = true;
-  @Input() fixedThisColumn: boolean = false;
-  
+  @Input() filterData: FlexiGridFilterDataModel[] = [];
+
   value: string = "";
   filterOperator: string = "contains";
 
@@ -36,7 +37,7 @@ export class FlexiGridColumnComponent {
   
   setDefaultFilterOperator() {
     if (this.filterType === 'number') {
-      this.filterOperator = 'eq';
+      this.filterOperator = 'ge';
     } else {
       this.filterOperator = 'contains';
     }
@@ -44,7 +45,7 @@ export class FlexiGridColumnComponent {
 }
 
 export type TextAlignType = "left" | "center" | "right";
-export type FilterType = "text" | "date" | "date-time" | "number"
+export type FilterType = "text" | "date" | "date-time" | "number" | "select"
 export type DateFormatType = 
   "d" | "dd" | "ddd" | "dddd" | // Gün
   "M" | "MM" | "MMM" | "MMMM" | // Ay

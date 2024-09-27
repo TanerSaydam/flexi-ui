@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, signal } from '@angular/core';
-import { FilterType, FlexiGridColumnComponent } from './flexi-grid-column.component';
+import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 
 @Component({
@@ -14,6 +14,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() pageable: boolean = false;
   @Input() pageSize: number = 10;
   @Input() showIndex: boolean = false;
+  @Input() indexTextAlign: TextAlignType = "center";
   @Input() pageSizeList: number[] = [5, 10, 20, 30, 50, 100, 500, 1000];
   @Input() loading: boolean = false;
   @Input() sortable: boolean = false;
@@ -77,7 +78,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
   @ViewChild('table') table: ElementRef | undefined;
-  @ViewChild("flexiGridFilterTr") flexiGridFilterTr: ElementRef<HTMLTableRowElement> | undefined;
+  @ViewChild("filterTr") filterTr: ElementRef<HTMLTableRowElement> | undefined;
+  @ViewChild("tbody") tbody: ElementRef | undefined;
+
   resizingColumn: any;
   startX: number | undefined;
   startWidth: number | undefined;
@@ -85,9 +88,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   constructor(private cdr: ChangeDetectorRef){}
 
-  ngOnChanges(changes: SimpleChanges): void {    
-   // console.log("change is working...");
-       
+  ngOnChanges(changes: SimpleChanges): void {
     if(this.data.length > 0){
       if (!this.columns || this.columns.length === 0) {
         this.initializeColumnsFromData();
@@ -103,6 +104,32 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       this.updatePagedData();
     } else {
       this.pagedData.set(this.data);
+    }
+  }
+
+  giveFilterValueByFilterType(filterType: string){
+    switch (filterType) {
+      case "text":
+        return this.textFilterTypes();
+    
+      case "number":
+        return this.numberFilterTypes();
+
+      default:
+        return [];
+    }
+  }
+
+  showFilterButton(filterType: string){
+    switch (filterType) {
+      case "text":
+        return true;
+    
+      case "number":
+        return true;
+
+      default:
+        return false;
     }
   }
 
@@ -338,6 +365,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  filterSelect(field: string, operator: string, event:any, type: FilterType){
+    const value = event.target.value;
+    
+    this.filter(field, operator, value, type);    
+  }
+
   filter(field: string, operator: string, value: string, type: FilterType) {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
@@ -541,19 +574,19 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   openMobileFilter(){
-    this.flexiGridFilterTr!.nativeElement.classList.add("show");
+    this.filterTr!.nativeElement.classList.add("show");
     this.isShowMobileFilter.set(true);
+    this.tbody!.nativeElement.classList.add("hide");
   }
 
   closeMobileFilter(){
-    this.flexiGridFilterTr!.nativeElement.classList.remove("show");
+    this.filterTr!.nativeElement.classList.remove("show");
     this.isShowMobileFilter.set(false);
+    this.tbody!.nativeElement.classList.remove("hide");
   }
 
   tdNoTemplateClassName(column:FlexiGridColumnComponent){
     let className: string = column.className;
-    if(className !== "") className += " ";
-    className += column.fixedThisColumn ? 'flexi-grid-column-fixed': '';
 
     if(className !== "") className += " ";
     className += column.hideOverflow ? 'text-overflow-hidden' : ''
@@ -563,8 +596,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   tdTemplateClassName(column: FlexiGridColumnComponent){
     let className: string = column.className;
-    if(className !== "") className += " ";
-    className += column.fixedThisColumn ? 'flexi-grid-column-fixed': '';
 
     return className;
   }
