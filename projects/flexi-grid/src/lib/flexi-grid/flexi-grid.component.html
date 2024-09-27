@@ -2,7 +2,7 @@
 <div [attr.data-bs-theme]="themeClass" class="flexi-grid-table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width, 'font-size': fontSize}">
   @if(showCaption){
     <div class="flexi-grid-caption-div">
-      <h3>{{captionTitle}}</h3>
+      <span class="flexi-grid-caption-title">{{captionTitle}}</span>
       <div class="d-flex" style="gap: 10px;">      
         <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
         @if(showExportExcelBtn){
@@ -153,7 +153,7 @@
          </tr>
        }    
       </thead>
-      <tbody #tbody class="relative" [ngStyle]="{'height': autoHeight ? '100%' : height}" style="min-height: 100px;" [ngStyle]="tbodyStyle">
+      <tbody #tbody class="relative" [ngStyle]="getTBodyStyle()">
         @if(loading){        
           <div class="flexi-grid-spinner-container">
             <div class="flexi-grid-spinner-1"></div>

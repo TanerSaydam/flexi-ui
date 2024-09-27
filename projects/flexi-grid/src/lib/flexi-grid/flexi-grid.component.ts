@@ -29,7 +29,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
   @Input() showExportExcelBtn: boolean = false;
-  @Input() autoHeight: boolean = false;
+  @Input() autoHeight: boolean = true;
+  @Input() useMinHeight: boolean = true;
+  @Input() minHeight: string = "420px";
   @Input() minWidth: string = "1050px";
   @Input() useMinWidth: boolean = false;
   @Input() autoWidth: boolean = false;
@@ -268,8 +270,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         filteredData = filteredData.filter(item => {
           const field = filter.field;
           const value = filter.value;
-          const itemValue = item[field].toString().toLocaleLowerCase('tr');
-          const filterValue = value.toString().toLocaleLowerCase('tr');
+          let itemValue = item[field].toString();
+          itemValue = itemValue ? itemValue.toString().toLocaleLowerCase('tr') : '';
+          const filterValue = value ? value.toString().toLocaleLowerCase('tr') : '';
 
           switch (filter.operator) {
             case 'eq':
@@ -392,7 +395,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   filterSelect(field: string, operator: string, event:any, type: FilterType){
     const value = event.target.value;    
     
-    this.filter(field, operator, value, type);    
+    this.filter(field, operator, value, type);
   }
 
   filter(field: string, operator: string, value: string, type: FilterType) {
@@ -588,16 +591,23 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   getFieldValue(item: any, field: string){
-    if(!field.includes(".")){
-      return item[field]
-    }else{
+    if (!field.includes(".")) {
+      const value = item[field];
+      return value !== undefined && value !== null ? value : "";
+    } else {
       const fields = field.split(".");
-      if(fields.length === 2){
-       return item[fields[0]][fields[1]]
-      }else{
-        console.log("Value not found!");        
-        return "";
+      let currentValue = item;
+  
+      for (const f of fields) {
+        if (currentValue && f in currentValue) {
+          currentValue = currentValue[f];
+        } else {
+          //console.warn(`Field "${f}" not found in item`, item);
+          return "";
+        }
       }
+        
+      return currentValue !== undefined && currentValue !== null ? currentValue : "";
     }
   }
 
@@ -640,5 +650,17 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     let className: string = column.className;
 
     return className;
+  }
+
+  getTBodyStyle() {
+    const style: { [key: string]: any } = {
+      ...this.tbodyStyle
+    };
+  
+    style['height'] = this.autoHeight ? '100%' : this.height;
+    if(this.useMinHeight){
+      style['min-height'] = this.minHeight;
+    }
+    return style;
   }
 }

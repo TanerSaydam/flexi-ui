@@ -18,7 +18,7 @@ export class FlexiGridColumnComponent {
   @Input() fraction: number = 2;
   @Input() symbol: string = "";
   @Input() showSymbolInFront: boolean = true;
-  @Input() width: string = "200px";
+  @Input() width: string = "180px";
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
   @Input() className: string = "";
@@ -26,7 +26,7 @@ export class FlexiGridColumnComponent {
   @Input() hideOverflow: boolean = true;
   @Input() filterData: FlexiGridFilterDataModel[] = [];  
   @Input() booleanData: string[] = [];
-  @Input() showCheckbox: boolean = false;  
+  @Input() showCheckbox: boolean = false;
 
   @Output() onChange = new EventEmitter<any>();
   
