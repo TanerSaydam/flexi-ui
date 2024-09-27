@@ -1,13 +1,12 @@
-import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
-import { UsersData } from '../../flexi-data-grid/data';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { customOptionTSCode, customOptionHTMLCode } from '../code';
 import { FlexiSelectModule } from 'flexi-select';
 import { SharedService } from '../../shared.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { dataTSCode } from '../../flexi-data-grid/code';
+import { dataTSCode } from '../../flexi-grid/code';
 import { CommonModule } from '@angular/common';
 import { BlankComponent } from '../../blank/blank.component';
 import { CardComponent } from '../../blank/card/card.component';

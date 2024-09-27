@@ -1,0 +1,118 @@
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
+  <app-card cardTitle="Index">
+    <div class="card-body">
+      <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
+      <h3>Örnek kod:</h3>
+      <my-code className="" language="html" [code]="indexCodeExample()"></my-code>
+
+      @defer {
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+          <li class="nav-item">
+            <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-html-index" class="nav-link" data-bs-toggle="tab">component.html</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-ts-index" class="nav-link" data-bs-toggle="tab">component.ts</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-ts-index-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tabs-example-index">
+            <h4>Index sırası örneği</h4>
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+              <div style="margin-left: 30px;">
+                <label class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="showIndex">
+                  <span class="form-check-label">Show or hide Index</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Index width</label>
+                <input [disabled]="!showIndex()" type="text" [(ngModel)]="indexWidth" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Index Text Align</label>
+                <select class="form-control" [(ngModel)]="indexTextAlign">
+                  <option>center</option>
+                  <option>right</option>
+                  <option>left</option>
+                </select>                
+              </div>
+            </div>
+            <flexi-grid [data]="users()" [showIndex]="showIndex()" [indexWidth]="indexWidth()" [indexTextAlign]="indexTextAlign()">
+              <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+              <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+              <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+              <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+              <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+            </flexi-grid>
+          </div>
+          <div class="tab-pane" id="tabs-html-index">
+            <h4>HTML kodları</h4>
+            <my-code [code]="indexHTMLCode()" language="html"></my-code>
+          </div>
+          <div class="tab-pane" id="tabs-ts-index">
+            <h4>Typescript kodları</h4>
+            <my-code [code]="indexTSCode()" language="typescript"></my-code>
+          </div>
+          <div class="tab-pane" id="tabs-ts-index-data">
+            <h4>Data</h4>
+            <my-code [code]="dataCode()" language="typescript"></my-code>
+          </div>
+        </div>
+      </div>
+
+      }@placeholder {
+      <app-loading></app-loading>
+      }
+      <hr>
+      <h3>Kodların açıklaması</h3>
+      <ul>
+        <li><b>[showIndex] :</b> Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</li>
+        <li><b>indexWidth :</b> Index uzunluğu default 70px. Eğer değiştirmek isterseniz bu attribute kullanabilirsiniz
+          <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
+        </li>
+        <li><b>indexTextAlign :</b> Index'in text align olarak nerede duracağını belirler
+          <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
+        </li>
+      </ul>
+
+      <hr>
+      <div class="overflow-x">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Alabileceği Değer Türleri</th>
+              <th>Default Değer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>showIndex</th>
+              <td>true | false</td>
+              <th>false</th>
+            </tr>
+            <tr>
+              <th>indexWidth</th>
+              <td>text</td>
+              <th>70px</th>
+            </tr>
+            <tr>
+              <th>indexTextAlign</th>
+              <td>center | right | left</td>
+              <th>center</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </app-card>
+</app-blank>

@@ -7,83 +7,71 @@ export class DocumentModel{
 export const flexiGridDocument: DocumentModel[] = [
     {
         title: "Flexi Grid nedir?",
-        routerLink: "/flexi-grid",
-        fragment: "what-is-flexi-grid"
+        routerLink: "/flexi-grid"
     },
     {
         title: "Kurulum",
-        routerLink: "/flexi-grid",
-        fragment: "installation"
+        routerLink: "/flexi-grid/installation"
     },
     {
         title: "İlk Kullanım",
-        routerLink: "/flexi-grid",
-        fragment: "first-use"
+        routerLink: "/flexi-grid/first-use"
+    },
+    {
+        title: "Button",
+        routerLink: "/flexi-grid/button"
     },
     {
         title: "Index",
-        routerLink: "/flexi-grid",
-        fragment: "index"
+        routerLink: "/flexi-grid/index"
     },
     {
         title: "Custom Column",
-        routerLink: "/flexi-grid",
-        fragment: "custom-column"
+        routerLink: "/flexi-grid/custom-column"
     },
     {
         title: "Pagination",
-        routerLink: "/flexi-grid",
-        fragment: "pagination"
+        routerLink: "/flexi-grid/pagination"
     },
     {
         title: "Sort",
-        routerLink: "/flexi-grid",
-        fragment: "sort"
+        routerLink: "/flexi-grid/sort"
     },
     {
         title: "Filter",
-        routerLink: "/flexi-grid",
-        fragment: "filter"
+        routerLink: "/flexi-grid/filter"
     },
     {
         title: "Caption",
-        routerLink: "/flexi-grid",
-        fragment: "caption"
+        routerLink: "/flexi-grid/caption"
     },
     {
         title: "Export Excel",
-        routerLink: "/flexi-grid",
-        fragment: "export-excel"
+        routerLink: "/flexi-grid/export-excel"
     },
     {
         title: "Footer",
-        routerLink: "/flexi-grid",
-        fragment: "footer"
+        routerLink: "/flexi-grid/footer"
     },
     {
         title: "Data Binding",
-        routerLink: "/flexi-grid",
-        fragment: "data-binding"
+        routerLink: "/flexi-grid/data-binding"
     },
     {
         title: "Resizable",
-        routerLink: "/flexi-grid",
-        fragment: "resizable"
+        routerLink: "/flexi-grid/resizable"
     },
     {
         title: "Draggable",
-        routerLink: "/flexi-grid",
-        fragment: "draggable"
+        routerLink: "/flexi-grid/draggable"
     },
     {
         title: "Change Theme",
-        routerLink: "/flexi-grid",
-        fragment: "change-theme"
+        routerLink: "/flexi-grid/change-theme"
     },
     {
         title: "Ek Ayarlar",
-        routerLink: "/flexi-grid",
-        fragment: "options"
+        routerLink: "/flexi-grid/options"
     }
 ];
 

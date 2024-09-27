@@ -13,7 +13,7 @@
             </h1>            
             <div class="collapse navbar-collapse" id="sidebar-menu">
                 <ul class="navbar-nav pt-lg-3">                    
-                    <li class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <li class="nav-item" routerLink="/" routerLinkActive="active1" [routerLinkActiveOptions]="{exact:true}">
                       <a class="nav-link">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                           <i class="fa-solid fa-home me-2"></i>
@@ -37,7 +37,7 @@
                           <div class="dropdown-menu-column">
                             @for(document of flexiGridDocument; track $index){
                             <div>
-                              <a class="dropdown-item" [routerLink]="document.routerLink" [fragment]="document.fragment">
+                              <a class="dropdown-item" [routerLink]="document.routerLink" routerLinkActive="active1 active2" [routerLinkActiveOptions]="{exact:true}">
                                 {{ document.title }}
                               </a>
                             </div>

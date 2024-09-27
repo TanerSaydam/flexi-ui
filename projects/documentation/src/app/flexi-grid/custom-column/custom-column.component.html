@@ -1,0 +1,74 @@
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
+  <app-card cardTitle="Custom Column">
+    <div class="card-body">
+      <p>İsterseniz gride yeni column ekleyebilirsiniz. Bu column mevcut datanızdaki verileri de kullanabilir,
+        isterseniz de tamamen farklı bir şey içinde kullanabilirsiniz. Örneğin Edit, Delete butonu eklemek gibi</p>
+      <h3>Örnek kod:</h3>
+      <my-code [code]="customColumnCodeExample()" language="html"></my-code>
+
+      @defer {
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+          <li class="nav-item">
+            <a href="#tabs-example-custom-column" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-html-custom-column" class="nav-link" data-bs-toggle="tab">component.html</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-ts-custom-column" class="nav-link" data-bs-toggle="tab">component.ts</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-ts-custom-column-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tabs-example-custom-column">
+            <h4>Custom Column</h4>
+            <flexi-grid [data]="users()" [commandColumnTemplate]="customButtonColumnTemplate" [commandColumnTextAlign]="'center'" [stickyCommandColumn]="true" [showCommandColumn]="true">
+              <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+              <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+              <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+              <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+              <flexi-grid-column field="salary" title="Salary"
+                [columnTemplate]="customSalaryColumnTemplate"></flexi-grid-column>              
+
+              <ng-template #customSalaryColumnTemplate let-salary="value" let-item="item">
+                <!--{{ salary }}Bu direkt işaretlediğimiz column da field değerine karşılık değeri alır-->
+                {{ item.salary | currency: '': '' }}
+                <!--Bu o döngüdeki tüm datayı alır. İçerisinden istediğiniz field a erişebilirsiniz-->
+              </ng-template>
+
+              <ng-template #customButtonColumnTemplate let-item="item">
+                <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
+                <flexi-button (click)="edit(item.id)" btnColor="primary" [outline]="true">
+                  <i class="fa-solid fa-edit"></i>
+                </flexi-button>
+                <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger" [outline]="true">
+                  <i class="fa-solid fa-trash"></i>
+                </flexi-button>
+              </ng-template>
+            </flexi-grid>
+          </div>
+          <div class="tab-pane" id="tabs-html-custom-column">
+            <h4>HTML kodları</h4>
+            <my-code [code]="customColumnHTMLCode()" language="html"></my-code>
+          </div>
+          <div class="tab-pane" id="tabs-ts-custom-column">
+            <h4>Typescript kodları</h4>
+            <my-code [code]="customColumnTSCode()" language="typescript"></my-code>
+          </div>
+          <div class="tab-pane" id="tabs-ts-custom-column-data">
+            <h4>Data</h4>
+            <my-code [code]="dataCode()" language="typescript"></my-code>
+          </div>
+        </div>
+      </div>
+      }@placeholder {
+      <app-loading></app-loading>
+      }
+    </div>
+  </app-card>
+</app-blank>

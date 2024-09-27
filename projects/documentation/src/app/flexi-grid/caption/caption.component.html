@@ -1,0 +1,179 @@
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
+  <app-card cardTitle="Caption">
+    <div class="card-body">
+      <p>Table üst başlığı ekleyebilir, üst başlıkta bulunan Column Visibility ve Refresh Data buttonlarını
+        kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
+      <h3>Örnek kod:</h3>
+      <my-code className="" language="html" [code]="captionCodeExample()"></my-code>
+
+      @defer {
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+          <li class="nav-item">
+            <a href="#tabs-example-caption" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-html-caption" class="nav-link" data-bs-toggle="tab">component.html</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-ts-caption" class="nav-link" data-bs-toggle="tab">component.ts</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tabs-ts-caption-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tabs-example-caption">
+            <h4>Caption örneği</h4>
+            <div style="margin-left: 30px; display: flex; gap:15px; margin-bottom: 15px;">
+              <div class="form-group">
+                <label class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="showCaption">
+                  <span class="form-check-label">Caption alanını göster</span>
+                </label>
+                <div class="form-group">
+                  <label>Caption Title</label>
+                  <input class="form-control" [(ngModel)]="captionTitle" style="width: 150px;">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label class="form-check">
+                    <input class="form-check-input" [disabled]="!showCaption()" type="checkbox"
+                      [(ngModel)]="showColumnVisibility">
+                    <span class="form-check-label">Column Visibility butonunu göster</span>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label>Column Visibility Button Class</label>
+                  <input class="form-control" [(ngModel)]="columnVisibilityBtnClass" style="width: 150px;">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label class="form-check">
+                    <input class="form-check-input" [disabled]="!showRefreshBtn()" type="checkbox"
+                      [(ngModel)]="showRefreshBtn">
+                    <span class="form-check-label">Refresh Data butonunu göster</span>
+                  </label>
+                </div>
+                <div class="form-group mt-1">
+                  <label>Refresh Data Button Class</label>
+                  <input class="form-control" [(ngModel)]="refreshDataBtnClass" style="width: 150px;">
+                </div>
+              </div>
+            </div>
+
+            <flexi-grid [data]="users()" [showCaption]="showCaption()" [captionTitle]="captionTitle()"
+              [showColumnVisibility]="showColumnVisibility()" [columnVisibilityBtnClass]="columnVisibilityBtnClass()"
+              [showRefreshBtn]="showRefreshBtn()" [refreshDataBtnClass]="refreshDataBtnClass()"
+              [captionTemplate]="captionTemplate">
+
+              <ng-template #captionTemplate>
+                <flexi-button btnColor="default">
+                  <i class="fa-solid fa-plus me-1"></i>
+                  Kullanıcı ekle
+                </flexi-button>
+              </ng-template>
+
+              <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+              <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+              <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+              <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+              <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+            </flexi-grid>
+          </div>
+          <div class="tab-pane" id="tabs-html-caption">
+            <h4>HTML kodları</h4>
+            <my-code [code]="captionHTMLCode()" language="html"></my-code>
+          </div>
+          <div class="tab-pane" id="tabs-ts-caption">
+            <h4>Typescript kodları</h4>
+            <my-code [code]="captionTSCode()" language="typescript"></my-code>
+          </div>
+          <div class="tab-pane" id="tabs-ts-caption-data">
+            <h4>Data</h4>
+            <my-code [code]="dataCode()" language="typescript"></my-code>
+          </div>
+        </div>
+      </div>
+      }@placeholder {
+      <app-loading></app-loading>
+      }
+      <hr>
+      <h3>Kodların açıklaması</h3>
+      <ul>
+        <li><b>[showCaption] :</b> Caption bölümünü göstermek için bu attribute true değer vermelisiniz</li>
+        <li><b>captionTitle (optional):</b> Caption'a title vermek için bu attribute değer atayabilirsiniz</li>
+        <li><b>[showColumnVisibility] (optional) :</b> Caption bölümü gözüküyorken columnların visibilitysini
+          yöneten bu dropdownu gösterip gizleyebilirsiniz</li>
+        <li><b>columnVisibilityBtnClass :</b> Column Visibility butonu için özel class vermek isterseniz bu attribute
+          kullanabilirsiniz</li>
+        <li><b>[showRefreshBtn] (optional) :</b> Caption bölümü gözüküyorken datanın refresh olmasını sağlayan bu
+          butonu gösterip gizleyebilirsiniz. Bu butona tıkladığınızda tüm parametreleri sıfırlar. Order, filter vs gibi.
+        </li>
+        <li><b>refreshDataBtnClass :</b> Refresh Data butonu için özel class vermek isterseniz bu attribute
+          kullanabilirsiniz</li>
+        <li><b>ng-template #captionTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey caption sağ
+          taraftaki button kısmında gözükür</li>
+        <li><b>[captionTemplate] :</b> Eklediğiniz buttonların gözükmesi için bu elementin referansını attirbute
+          vermeniz gerekmektedir
+          <p class="alert alert-info">Not: ng-template #captionTemplate ile element oluşturmanız içerisine
+            ekleyeceklerinizi captionda göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
+            referansı [captionTemplate] attribute değer olarak vermelisiniz!</p>
+        </li>
+      </ul>
+      <hr>
+      <div class="overflow-x">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Alabileceği Değer Türleri</th>
+              <th>Default Değer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>showCaption</th>
+              <td>true | false</td>
+              <th>false</th>
+            </tr>
+            <tr>
+              <th>captionTitle</th>
+              <td>text</td>
+              <th></th>
+            </tr>
+            <tr>
+              <th>showColumnVisibility</th>
+              <td>true | false</td>
+              <th>true</th>
+            </tr>
+            <tr>
+              <th>columnVisibilityBtnClass</th>
+              <td>text</td>
+              <th>flexi-grid-btn</th>
+            </tr>
+            <tr>
+              <th>showRefreshBtn</th>
+              <td>true | false</td>
+              <th>true</th>
+            </tr>
+            <tr>
+              <th>refreshDataBtnClass</th>
+              <td>text</td>
+              <th>flexi-grid-btn</th>
+            </tr>
+            <tr>
+              <th>captionTemplate</th>
+              <td>element ref</td>
+              <th></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </app-card>
+</app-blank>

@@ -1,0 +1,255 @@
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
+    <app-card cardTitle="Filter">
+        <div class="card-body">
+            <p>Filtreleme yapısını aktif etmek için grid elementinde <b>[filterable]</b> attribute'üne true değeri
+                vermelisiniz. İsterseniz column bazlı filtreleme işlemini kapatabiliyorsunuz. Farklı türde veriler için
+                filter özelliğine ayrı type verebiliyorsunuz</p>
+            <h3>Örnek kod:</h3>
+            <my-code language="html" [code]="filterCodeExample()"></my-code>
+
+            @defer {
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                    <li class="nav-item">
+                        <a href="#tabs-example-filter" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#tabs-html-filter" class="nav-link" data-bs-toggle="tab">component.html</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#tabs-ts-filter" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#tabs-ts-filter-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="tabs-example-filter">
+                        <h4>Filter örneği</h4>
+                        <div style="margin-left: 30px; display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+                            <div class="form-group">
+                                <label class="form-check">
+                                    <input class="form-check-input" type="checkbox" [(ngModel)]="filterable">
+                                    <span class="form-check-label">Filter özelliğini aç</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" [disabled]="!filterable()" type="checkbox"
+                                            [(ngModel)]="idFilterable">
+                                        <span class="form-check-label">Id için filter kullan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" [disabled]="!filterable()" type="checkbox"
+                                            [(ngModel)]="firstNameFilterable">
+                                        <span class="form-check-label">First Name için filter kullan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" [disabled]="!filterable()" type="checkbox"
+                                            [(ngModel)]="lastNameFilterable">
+                                        <span class="form-check-label">Last Name içib filter kullan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" [disabled]="!filterable()" type="checkbox"
+                                            [(ngModel)]="dateOfBirthFilterable">
+                                        <span class="form-check-label">Date of birth için filter kullan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" [disabled]="!filterable()" type="checkbox"
+                                            [(ngModel)]="salaryFilterable">
+                                        <span class="form-check-label">Salary için filter kullan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-check">
+                                        <input class="form-check-input" [disabled]="!filterable()" type="checkbox"
+                                            [(ngModel)]="isActiveFilterable">
+                                        <span class="form-check-label">Is Active için filter kullan</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <flexi-grid [data]="users()" [filterable]="filterable()">
+                            <flexi-grid-column
+                              field="id"
+                              [filterable]="idFilterable()"
+                              [filterType]="idFilterType()"
+                              title="Id">
+                            </flexi-grid-column>
+                            <flexi-grid-column
+                              field="firstName"
+                              [filterable]="firstNameFilterable()"
+                              [filterType]="firstNameFilterType()"
+                              title="First Name">
+                            </flexi-grid-column>
+                            <flexi-grid-column
+                              field="lastName"
+                              [filterable]="lastNameFilterable()"
+                              [filterType]="lastNameFilterType()"
+                              title="Last Name">
+                            </flexi-grid-column>
+                            <flexi-grid-column
+                              field="dateOfBirth"
+                              [filterable]="dateOfBirthFilterable()"
+                              [filterType]="dateOfBirthFilterType()"
+                              filterType="date"
+                              format="dd.MM.yyyy"
+                              title="Date Of Birth"
+                              textAlign="center">
+                            </flexi-grid-column>
+                            <flexi-grid-column
+                              field="salary"
+                              [filterable]="salaryFilterable()"
+                              [filterType]="salaryFilterType()"
+                              filterType="number"
+                              format="n"
+                              [fraction]="2"
+                              title="Salary"
+                              textAlign="right"
+                              >
+                            </flexi-grid-column>
+                            <flexi-grid-column
+                              field="isActive"
+                              title="Is Active"
+                              [filterable]="isActiveFilterable()"
+                              [filterType]="isActiveFilterType()"
+                              [booleanData]="['Aktif', 'Pasif']"                                                            
+                              textAlign="center"
+                              [showCheckbox]="false"
+                              >
+                            </flexi-grid-column>
+                            <flexi-grid-column
+                              field="city"
+                              title="City"
+                              filterType="select"
+                              [filterData]="filterData()"
+                              textAlign="center">
+                            </flexi-grid-column>
+
+                        </flexi-grid>
+
+                    </div>
+                    <div class="tab-pane" id="tabs-html-filter">
+                        <h4>HTML kodları</h4>
+                        <my-code [code]="filterHTMLCode()" language="html"></my-code>
+                    </div>
+                    <div class="tab-pane" id="tabs-ts-filter">
+                        <h4>Typescript kodları</h4>
+                        <my-code [code]="filterTSCode()" language="typescript"></my-code>
+                    </div>
+                    <div class="tab-pane" id="tabs-ts-filter-data">
+                        <h4>Data</h4>
+                        <my-code [code]="dataCode()" language="typescript"></my-code>
+                    </div>
+                </div>
+            </div>
+            }@placeholder {
+            <app-loading></app-loading>
+            }
+            <hr>
+            <h3>Kodların açıklaması</h3>
+            <ul>
+                <li><b>[filterable] :</b> Filter yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
+                    <b>false</b> vermeliyiz
+                </li>
+                <li><b>[filterable] (column) :</b> Column bazlı filter yapısını kapatıp açabiliriz</li>
+                <li><b>[filterType] (column) :</b> Column bazlı filter tipini değiştirebiliriz. Default tip text
+                    ama tarih, tarih ve saat ve number değerler için özel filter tipi verebiliriz. Verebileceğimiz
+                    tipler:
+                    text | date | date-time | number.
+                    <p class="alert alert-info">Not: Filter tipini değiştirdiğimizde filitreleme yaptığımız seçenekte
+                        değişiyor. Text filtrelerken benziyor | benzemiyor iken, number filtresinde eşit | büyük | küçük
+                        gibi
+                        seçenekler geliyor. Date seçeneğinde filtre seçeneği sadece bir tane, o da eşit ise.</p>
+                </li>
+                <li><b>format (column) :</b> FilterType date ya da number verdiyseniz columnu formatlayabilirsiniz. date
+                    için (d = gün || M = ay || y = yıl) formatı ile bir combinasyon yazabilirsiniz. Örnek:
+                    format="dd.MM.yyyy". Eğer number verdiyseniz <b>n</b> ya da <b>c</b> formatı seçenbilirsiniz. n =
+                    number, c = currency. n seçtiyseniz fraction (küsürat) sayısını belirleyebilirsiniz (default 2). c
+                    seçtiyseniz symbol, sembolün ön kısımdaki arkada mı görüneceği ve fraction belirleyebiliyorsunuz.
+                </li>
+            </ul>
+
+            <hr>
+            <div class="overflow-x">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Alabileceği Değer Türleri</th>
+                            <th>Default Değer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>filterable</th>
+                            <td>true | false</td>
+                            <th>false</th>
+                        </tr>
+                        <tr>
+                            <th>filterType</th>
+                            <td>text | date | date-time | number | boolean | select</td>
+                            <th>text</th>
+                        </tr>
+                        <tr>
+                            <th>booleanData</th>
+                            <td>string[]</td>
+                            <th>['true için değer', 'false için değer']</th>
+                        </tr>
+                        <tr>
+                            <th>filterData</th>
+                            <td>FlexiGridFilterDataModel[]</td>
+                            <th>[{{'{value: any, name: any}'}}] (value select içi değer, name görünecek değer)</th>
+                        </tr>
+                        <tr>
+                            <th>showCheckbox</th>
+                            <td>true | false</td>
+                            <th>true (true yaparsanız işaretlenebilir bir checkbox gelir. onChange eventi ile de o satırın tüm değerlerini alabilirsiniz)</th>
+                        </tr>
+                        <tr>
+                            <th>format</th>
+                            <td>(d = gün || M = ay || y = yıl) | n | c</td>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>(Eğer format c ise) symbol</th>
+                            <td>text</td>
+                            <td>default boş ama '₺', '$', '€' gibi sembolü verebilisiniz</td>
+                        </tr>
+                        <tr>
+                            <th>(Eğer format c ise) showSymbolInFront</th>
+                            <td>true | false</td>
+                            <td>true (true ise sembol önde false ise arkada gözükür)</td>
+                        </tr>
+                        <tr>
+                            <th>fraction</th>
+                            <td>number</td>
+                            <td>2 (küsürat da kaç rakam gözükeceği)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </app-card>
+</app-blank>

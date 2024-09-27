@@ -1,3 +1,14 @@
+*{
+    --success: #1dc9b7;
+    --danger: #f44336;
+    --info: #03a9f4;
+    --primary: #627ca0;
+    --warning: #e5bc62;
+    --secondary: #6c757d;
+    --danger: #Be2d2d;
+    --dark: #212529;
+}
+
 .flexi-grid-btn {
     box-shadow: 0 1px 0 rgba(var(--tblr-body-color-rgb), 0.04);
     display: inline-block;

@@ -1,0 +1,116 @@
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
+  <app-card cardTitle="Pagination">
+    <div class="card-body">
+      <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
+      <h3>Örnek kod:</h3>
+      <my-code className="" language="html" [code]="paginationCodeExample()"></my-code>
+
+      @defer {
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+            <li class="nav-item">
+              <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-html-pagination" class="nav-link" data-bs-toggle="tab">component.html</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-pagination" class="nav-link" data-bs-toggle="tab">component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-pagination-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active show" id="tabs-example-pagination">
+              <h4>Pagination örneği</h4>
+              <div style="margin-left: 30px; display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+                <div class="form-group">
+                  <label class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="pageable">
+                    <span class="form-check-label">Use or not Pagination</span>
+                  </label>
+                </div>
+                <div class="form-group mt-1">
+                  <label>Page Size</label>
+                  <input class="form-control" style="width: 70px;" type="text" [(ngModel)]="pageSize">
+                </div>
+                <div class="form-group mt-1">
+                  <div class="form-label">Page Size List</div>
+                  <select type="text" class="form-select" [(ngModel)]="pageSizeList" multiple>
+                    @for(number of numbers(); track number){
+                    <option [value]="number">{{number}}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+              <flexi-grid [data]="users()" [pageable]="pageable()" [pageSize]="pageSize()" [pageSizeList]="pageSizeList()">
+                <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+                <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+                <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+                <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+                <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+              </flexi-grid>
+            </div>
+            <div class="tab-pane" id="tabs-html-pagination">
+              <h4>HTML kodları</h4>
+              <my-code [code]="paginationHTMLCode()" language="html"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-pagination">
+              <h4>Typescript kodları</h4>
+              <my-code [code]="paginationTSCode()" language="typescript"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-pagination-data">
+              <h4>Data</h4>
+              <my-code [code]="dataCode()" language="typescript"></my-code>
+            </div>
+          </div>
+        </div>
+      }@placeholder {
+        <app-loading></app-loading>
+      }
+      <hr>
+      <h3>Kodların açıklaması</h3>
+      <ul>
+        <li><b>[pagination] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false
+          vermeliyiz</li>
+        <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri
+          verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
+        <li><b>[pageSizeList] (optional) </b>: Page size listesini özelleştirmek isterseniz bu attribute değer
+          olarak number bir liste vermelisiniz</li>
+      </ul>
+
+      <hr>
+      <div class="overflow-x">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Alabileceği Değer Türleri</th>
+              <th>Default Değer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>pagination</th>
+              <td>true | false</td>
+              <th>false</th>
+            </tr>
+            <tr>
+              <th>pageSize</th>
+              <td>number</td>
+              <th>10</th>
+            </tr>
+            <tr>
+              <th>pageSizeList</th>
+              <td>number[]</td>
+              <th>[5, 10, 20, 30, 50, 100, 500, 1000]</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </app-card>
+</app-blank>

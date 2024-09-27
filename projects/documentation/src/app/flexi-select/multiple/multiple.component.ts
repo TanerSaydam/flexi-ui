@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
-import { UsersData } from '../../flexi-data-grid/data';
+import { UsersData } from '../../flexi-grid/data';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { multipleTSCode, multipleHTMLCode } from '../code';
 import { FlexiSelectModule } from 'flexi-select';
@@ -10,7 +10,7 @@ import { LoadingComponent } from '../../loading/loading.component';
 import { BlankComponent } from '../../blank/blank.component';
 import { CardComponent } from '../../blank/card/card.component';
 import { CommonModule } from '@angular/common';
-import { dataTSCode } from '../../flexi-data-grid/code';
+import { dataTSCode } from '../../flexi-grid/code';
 
 @Component({
   selector: 'app-multiple',

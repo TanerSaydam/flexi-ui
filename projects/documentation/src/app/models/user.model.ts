@@ -5,4 +5,6 @@ export class UserModel{
     dateOfBirth: string = "";
     salary: number = 0;
     avatarUrl: string = "";
+    isActive: boolean = true;
+    city: string = "";
 }

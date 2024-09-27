@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutsComponent } from './layouts/layouts.component';
 import { HomeComponent } from './home/home.component';
-import { FlexiDataGridComponent } from './flexi-data-grid/flexi-data-grid.component';
 import { routeGuard } from './route.guard';
 
 export const routes: Routes = [
@@ -16,7 +15,81 @@ export const routes: Routes = [
             },
             {
                 path: "flexi-grid",
-                component: FlexiDataGridComponent
+                canActivateChild: [routeGuard],
+                children: [
+                    {
+                        path: "",
+                        loadComponent:()=> import("./flexi-grid/flexi-grid.component")
+                    },
+                    {
+                        path: "installation",
+                        loadComponent:()=> import("./flexi-grid/installation/installation.component")
+                    },
+                    {
+                        path: "first-use",
+                        loadComponent:() => import("./flexi-grid/first-use/first-use.component")
+                    },
+                    {
+                        path: "first-use",
+                        loadComponent:() => import("./flexi-grid/first-use/first-use.component")
+                    },
+                    {
+                        path: "caption",
+                        loadComponent:() => import("./flexi-grid/caption/caption.component")
+                    },
+                    {
+                        path: "change-theme",
+                        loadComponent:() => import("./flexi-grid/change-theme/change-theme.component")
+                    },
+                    {
+                        path: "custom-column",
+                        loadComponent:() => import("./flexi-grid/custom-column/custom-column.component")
+                    },
+                    {
+                        path: "data-binding",
+                        loadComponent:() => import("./flexi-grid/data-binding/data-binding.component")
+                    },
+                    {
+                        path: "draggable",
+                        loadComponent:() => import("./flexi-grid/draggable/draggable.component")
+                    },
+                    {
+                        path: "export-excel",
+                        loadComponent:() => import("./flexi-grid/export-excel/export-excel.component")
+                    },
+                    {
+                        path: "filter",
+                        loadComponent:() => import("./flexi-grid/filter/filter.component")
+                    },
+                    {
+                        path: "footer",
+                        loadComponent:() => import("./flexi-grid/footer/footer.component")
+                    },
+                    {
+                        path: "index",
+                        loadComponent:() => import("./flexi-grid/index/index.component")
+                    },
+                    {
+                        path: "options",
+                        loadComponent:() => import("./flexi-grid/options/options.component")
+                    },
+                    {
+                        path: "pagination",
+                        loadComponent:() => import("./flexi-grid/pagination/pagination.component")
+                    },
+                    {
+                        path: "resizable",
+                        loadComponent:() => import("./flexi-grid/resizable/resizable.component")
+                    },
+                    {
+                        path: "sort",
+                        loadComponent:() => import("./flexi-grid/sort/sort.component")
+                    },
+                    {
+                        path: "button",
+                        loadComponent:() => import("./flexi-grid/button/button.component")
+                    },
+                ]
             },
             {
                 path: "flexi-select",

@@ -1,0 +1,81 @@
+<div class="card-header">
+  <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+    <li class="nav-item">
+      <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tabs-ts-full" class="nav-link" data-bs-toggle="tab">component.ts</a>
+    </li>
+  </ul>
+</div>
+<div class="card-body">
+  <div class="tab-content">
+    <div class="tab-pane active show" id="tabs-example-full">
+      <h4>Full halinin örnek görüntüsü</h4>
+        <flexi-grid
+          [data]="users()"
+          [total]="total()"
+          [dataBinding]="true"
+          [pageable]="true"
+          [pageSize]="state().pageSize"
+          [pageSizeList]="[10,20,30,50,100,1000]"
+          [showIndex]="true"
+          [loading]="loading()"
+          [themeClass]="shared.themeClass"
+          height="420px"
+          [filterable]="true"
+          captionTitle="Example User Table"
+          [captionTemplate]="captionTemplate"          
+          [showCaption]="true"
+          [showExportExcelBtn]="true"
+          [resizable]="true"
+          [exportExcelButtonClick]="exportExcel.bind(this)"
+          (dataStateChange)="dataStateChange($event)"
+          [sortable]="true"
+          [draggable]="true"
+          [autoHeight]="false"
+          [showCommandColumn]="true"
+          [commandColumnTemplate]="commandButtonColumnTemplate"
+          commandColumnWidth="150px"
+          [useMinWidth]="true"
+          minWidth="1000px"
+          [stickyCommandColumn]="true"
+          >
+            <ng-template #captionTemplate>
+                <flexi-button btnColor="primary">
+                  <i class="fa-solid fa-plus"></i>
+                  Add User
+                </flexi-button>
+            </ng-template>
+          
+            <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>          
+            <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+            <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+            <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+            <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
+            <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']" textAlign="center" width="100px"></flexi-grid-column>
+            <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()" textAlign="center"></flexi-grid-column>
+
+            <ng-template #commandButtonColumnTemplate let-item="item">
+              <flexi-button btnColor="default">
+                  <i class="fa-solid fa-edit"></i>
+              </flexi-button>
+              <flexi-button btnColor="default" class="ms-1" (click)="deleteByItem(item)">
+                  <i class="fa-solid fa-trash"></i>
+              </flexi-button>            
+            </ng-template>
+        </flexi-grid>
+    </div>
+    <div class="tab-pane" id="tabs-html-full">
+      <h4>HTML kodları</h4>
+      <my-code [code]="fullExampleHTMLCode()" language="html"></my-code>
+    </div>
+    <div class="tab-pane" id="tabs-ts-full">
+      <h4>Typescript kodları</h4>
+      <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
+    </div>
+  </div>
+</div>

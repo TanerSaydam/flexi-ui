@@ -28,7 +28,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() showRefreshBtn: boolean = true;
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
-  @Input() showExportExcel: boolean = false;
+  @Input() showExportExcelBtn: boolean = false;
   @Input() autoHeight: boolean = false;
   @Input() minWidth: string = "1050px";
   @Input() useMinWidth: boolean = false;

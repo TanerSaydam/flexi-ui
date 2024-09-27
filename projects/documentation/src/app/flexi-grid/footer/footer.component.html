@@ -1,0 +1,100 @@
+<app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
+  <app-card id="footer" cardTitle="Footer">
+    <div class="card-body">
+      <ul>
+        <li>
+          <p>Table footer alanına isterseniz müdahale edebilir ve oraya istediğiniz yapıyı ekleyebilirsiniz.</p>
+          <h3>Örnek:</h3>
+          <my-code className="" [code]="footerCodeExample()" language="html"></my-code>
+        </li>
+        <li>
+          @defer {
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                <li class="nav-item">
+                  <a href="#tabs-example-footer" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-html-footer" class="nav-link" data-bs-toggle="tab">component.html</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-footer" class="nav-link" data-bs-toggle="tab">component.ts</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#tabs-ts-footer-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active show" id="tabs-example-footer">
+                  <h4>Footer örneği</h4>
+                  <flexi-grid [data]="users()" [footerTemplate]="footerTemplate">
+                    <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+                    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+                    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+                    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+                    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+            
+                    <ng-template #footerTemplate>
+                      <tr style="height: 50px;">
+                        <th style="padding-left: 50px;" colspan="4">Total Count</th>
+                        <th>{{users().length}}</th>
+                      </tr>
+                    </ng-template>
+                  </flexi-grid>
+                </div>
+                <div class="tab-pane" id="tabs-html-footer">
+                  <h4>HTML kodları</h4>
+                  <my-code [code]="footerHTMLCode()" language="html"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-footer">
+                  <h4>Typescript kodları</h4>
+                  <my-code [code]="footerTSCode()" language="typescript"></my-code>
+                </div>
+                <div class="tab-pane" id="tabs-ts-footer-data">
+                  <h4>Data</h4>
+                  <my-code [code]="dataCode()" language="typescript"></my-code>
+                </div>
+              </div>
+            </div>
+          }@placeholder {
+            <app-loading></app-loading>
+          }
+          <hr>
+          <h3>Kodların açıklaması</h3>
+          <ul>
+            <li><b>ng-template #footerTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey table da footer
+              alanında gözükür</li>
+            <li><b>[footerTemplate] :</b> Eklediğiniz yapının gözükmesi için bu elementin referansını attirbute'e
+              vermeniz gerekmektedir
+              <p class="alert alert-info">Not: ng-template #footerTemplate ile element oluşturmanız içerisine
+                ekleyeceklerinizi footer da göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
+                referansı [footerTemplate] attribute değer olarak vermelisiniz! Değer verirken oranın table footer alanı
+                oluduğunu unutmayın. Yani tr elementi ile satır ekleyip td ya da th ile column ekleyerek original
+                tasarımı korumazsanız responsive yapıyı bozma ihtimaliniz var.</p>
+            </li>
+          </ul>
+
+          <hr>
+          <div class="overflow-x">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Alabileceği Değer Türleri</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>footerTemplate</th>
+                  <td>element ref</td>
+                </tr>
+              </tbody>
+            </table>                
+          </div>
+        </li>
+      </ul>
+    </div>
+  </app-card>
+</app-blank>

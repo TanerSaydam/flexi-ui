@@ -3,7 +3,7 @@ import { FlexiSelectModule } from 'flexi-select';
 import { BlankComponent } from '../blank/blank.component';
 import { CardComponent } from '../blank/card/card.component';
 import { CommonModule } from '@angular/common';
-import FullComponent from './full/full.component'
+import SelectFullComponent from './full/full.component'
 import { LoadingComponent } from '../loading/loading.component';
 import { MyCodeComponent } from '../my-code/my-code.component';
 
@@ -15,7 +15,7 @@ import { MyCodeComponent } from '../my-code/my-code.component';
     CardComponent, 
     CommonModule, 
     FlexiSelectModule,
-    FullComponent,
+    SelectFullComponent,
     LoadingComponent,
     MyCodeComponent,
   ],

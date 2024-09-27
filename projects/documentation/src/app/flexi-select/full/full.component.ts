@@ -14,7 +14,7 @@ import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
   templateUrl: './full.component.html',
   styleUrl: './full.component.css'
 })
-export default class FullComponent {
+export default class SelectFullComponent {
   users = signal<UserModel[]>([]);
   fullExampleTSCode = signal<string>(fullExampleTSCode);
   fullExampleHTMLCode =signal<string>(fullExampleHTMLCode);

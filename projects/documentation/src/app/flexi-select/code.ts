@@ -53,7 +53,7 @@ export const fullExampleHTMLCode: string = `
 export const firstUseTSCode: string = `
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
-import { UsersData } from '../../flexi-data-grid/data';
+import { UsersData } from '../../flexi-grid/data';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { FlexiSelectModule } from 'flexi-select';
 import { SharedService } from '../../shared.service';
@@ -95,7 +95,7 @@ export const firstUseHTMLCode: string = `
 export const customOptionTSCode: string = `
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
-import { UsersData } from '../../flexi-data-grid/data';
+import { UsersData } from '../../flexi-grid/data';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { FlexiSelectModule } from 'flexi-select';
 import { SharedService } from '../../shared.service';
@@ -131,7 +131,7 @@ export const customOptionHTMLCode: string = `
 export const multipleTSCode: string = `
 import { Component, Input, ViewEncapsulation, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
-import { UsersData } from '../../flexi-data-grid/data';
+import { UsersData } from '../../flexi-grid/data';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { FlexiSelectModule } from 'flexi-select';
 import { SharedService } from '../../shared.service';
