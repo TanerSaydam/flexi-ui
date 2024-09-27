@@ -1,0 +1,97 @@
+.flexi-grid-btn {
+    box-shadow: 0 1px 0 rgba(var(--tblr-body-color-rgb), 0.04);
+    display: inline-block;
+    padding: 0.4075rem 0.8rem;
+    font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-color);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+.flexi-grid-btn:hover {
+    opacity: 0.8;    
+}
+
+.flexi-grid-btn-primary, .flexi-grid-btn-outline-primary:hover{
+    background-color: var(--primary);
+    color: white;
+}
+
+.flexi-grid-btn-info, .flexi-grid-btn-outline-info:hover{
+    background-color: var(--info);
+    color: white;
+}
+
+.flexi-grid-btn-secondary{
+    background-color: var(--secondary);
+    color: white;
+}
+
+.flexi-grid-btn-success, .flexi-grid-btn-outline-success:hover{
+    background-color: var(--success);    
+    color: black;
+}
+
+.flexi-grid-btn-warning, .flexi-grid-btn-outline-warning:hover{
+    background-color: var(--warning);    
+    color: black;
+}
+
+.flexi-grid-btn-danger, .flexi-grid-btn-outline-danger:hover{
+    background-color: var(--danger);    
+    color: white;
+}
+
+.flexi-grid-btn-dark, .flexi-grid-btn-outline-dark:hover{
+    background-color: var(--dark);    
+    color: white;
+}
+
+.flexi-grid-btn-outline-primary{
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: white;
+}
+
+.flexi-grid-btn-outline-success{
+    color: var(--success);
+    border-color: var(--success);
+    background-color: white;
+}
+
+.flexi-grid-btn-outline-warning{
+    color: var(--warning);
+    border-color: var(--warning);
+    background-color: white;
+}
+
+.flexi-grid-btn-outline-danger{
+    color: var(--danger);
+    border-color: var(--danger);
+    background-color: white;
+}
+
+.flexi-grid-btn-outline-info{
+    color: var(--info);
+    border-color: var(--info);
+    background-color: white;
+}
+
+.flexi-grid-btn-outline-dark{
+    color: var(--dark);
+    border-color: var(--dark);
+    background-color: white;
+}

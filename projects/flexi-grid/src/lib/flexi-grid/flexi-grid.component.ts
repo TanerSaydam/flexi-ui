@@ -25,7 +25,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() captionTemplate: TemplateRef<any> | any;
   @Input() footerTemplate: TemplateRef<any> | any;
   @Input() showColumnVisibility: boolean = true;
-  @Input() showRefreshData: boolean = true;
+  @Input() showRefreshBtn: boolean = true;
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
   @Input() showExportExcel: boolean = false;
@@ -51,6 +51,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() commandColumnTextAlign: AlignSetting = "center"
   @Input() commandColumnTemplate: TemplateRef<any> | any;
   @Input() stickyCommandColumn: boolean = true;
+  @Input() fontSize: string = "12px";
 
   pageNumberCount = signal<number>(5);
   pageNumbers = signal<number[]>([]);
@@ -81,6 +82,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   @Output() dataStateChange = new EventEmitter<any>();
   @Output() onChange = new EventEmitter<any>();
+  @Output() refreshBtnClick = new EventEmitter<any>();
 
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
@@ -454,6 +456,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   refreshDataMethod(){
+    this.refreshBtnClick.emit();
+
+    if(!this.dataBinding) return;
+
     this.state = new StateModel();
     this.state.pageSize = this.pageSize;
     this.columns?.forEach(val => {

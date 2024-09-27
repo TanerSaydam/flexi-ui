@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { StateFilterModel, StateModel } from "./state.model";
+import { StateFilterModel, StateModel } from "./state.model"
 
 @Injectable({
     providedIn: "root"

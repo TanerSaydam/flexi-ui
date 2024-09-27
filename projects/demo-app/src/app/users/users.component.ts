@@ -1,6 +1,6 @@
 import { Component, Renderer2, signal } from '@angular/core';
 // import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
-import { StateModel } from '../../../../flexi-grid/src/lib/state.model';
+import { StateModel } from '../../../../flexi-grid/src/lib/flexi-grid/state.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../shared.service';
 import { BlankComponent } from '../blank/blank.component';
@@ -9,9 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { FlexiEditorComponent } from '../../../../flexi-editor/src/public-api';
-import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid.service';
 import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
-import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/flexi-grid-filter-data.model';
+import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/flexi-grid/flexi-grid-filter-data.model';
+import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid/flexi-grid.service';
 
 @Component({
   selector: 'app-users',
@@ -86,9 +86,9 @@ export class UsersComponent {
     this.loading.set(true);
     //const apiUrl = "https://localhost:7040/api";
     const apiUrl = "https://flexi-ui.webapi.ecnorow.com/api";
-    let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
-    let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
-    //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
+    //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
+    //let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
+    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
 
     this.http.get<any>(endpoint).subscribe({
       next: (res)=> {      

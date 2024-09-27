@@ -80,7 +80,8 @@
 <button (click)="showToast()">Show Toast</button>
     <flexi-grid
     [data]="users()"
-    [dataBinding]="true"
+    [dataBinding]="false"
+    [showRefreshBtn]="true"
     [total]="total()"
     [pageable]="true"    
     [pageSize]="10"
@@ -97,16 +98,28 @@
     [showIndex]="true"
     [autoHeight]="false"
     [useMinWidth]="true"
-    minWidth="1000px"
-    (dataStateChange)="dataStateChange($event)"
+    minWidth="1000px"    
     [showCommandColumn]="true"
     [commandColumnTemplate]="operationsColumnTemplate"
     [stickyCommandColumn]="true"
     commandColumnTitle="İşlemler"
+    (refreshBtnClick)="getAll()"
     >
-    <ng-template #captionTemplate>
-      <button class="btn btn-primary">Ekle</button>
-      <button class="btn btn-dark">Export</button>
+    <ng-template #captionTemplate>      
+      <flexi-button btnColor="primary" [outline]="true">Primary</flexi-button>
+      <flexi-button btnColor="success" [outline]="true">Success</flexi-button>
+      <flexi-button btnColor="warning" [outline]="true">Warning</flexi-button>
+      <flexi-button btnColor="info" [outline]="true">Info</flexi-button>
+      <flexi-button btnColor="dark" [outline]="true">Dark</flexi-button>
+
+      <flexi-button btnColor="default">Default</flexi-button>
+      <flexi-button btnColor="primary">Primary</flexi-button>
+      <flexi-button btnColor="success">Success</flexi-button>
+      <flexi-button btnColor="warning">Warning</flexi-button>
+      <flexi-button btnColor="info">Info</flexi-button>
+      <flexi-button btnColor="secondary">Secondary</flexi-button>
+      <flexi-button btnColor="dark">dark</flexi-button>
+      
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
@@ -114,11 +127,13 @@
     <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
-    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="true" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']"></flexi-grid-column>
+    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
+    <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="true"></flexi-grid-column>
     
-    <ng-template #operationsColumnTemplate>
-        <button (click)="delete()">Remove</button>
+    <ng-template #operationsColumnTemplate>        
+        <flexi-button btnColor="danger" title="Sil" [outline]="true" (click)="delete()">
+          <i class="fa-solid fa-trash"></i>
+        </flexi-button>
     </ng-template>
     <!-- <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" width="100px" textAlign="center">
     </flexi-grid-column> -->
