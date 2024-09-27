@@ -5,6 +5,7 @@ import { FlexiGridModule, StateModel, FlexiGridService } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
+import { FlexiToastService } from 'flexi-toast';
 
 @Component({
   selector: 'app-flexi-grid-full',
@@ -25,7 +26,8 @@ export default class FullComponent {
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
-    public shared: SharedService
+    public shared: SharedService,
+    private toast: FlexiToastService
   ){
     this.getAll();
   }  
@@ -52,5 +54,11 @@ export default class FullComponent {
     this.http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
       this.flexi.exportDataToExcel(res.data, "my-excel");
     })  
+  }
+
+  deleteByItem(item: any){
+    this.toast.showSwal("Kaydı Sil?","Kaydı silmek istiyor musunuz?<br>(Test mesajıdır, gerçekte kaydı silmez!)",()=> {
+      this.toast.showToast("Başarılı","Kayıt başarıyla silindi","info");
+    })
   }
 }

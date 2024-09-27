@@ -54,9 +54,9 @@ export class UsersComponent {
     //this.state().pageSize = 500;
     this.getAll();
     toast.options.position = "bottom-right";
-    toast.options.autoClose = false;
+    toast.options.autoClose = true;
     toast.options.themeClass = "light";
-    toast.options.timeOut = 4000;  
+    toast.options.timeOut = 2000;  
     toast.options.swalContentThemeClass = "default"  
     //this.toast.showToast("Error","Something went wrong","error");
     //toast.options.swalContentThemeClass = "info"  
@@ -67,6 +67,10 @@ export class UsersComponent {
   
   onContentChange(content: string) {
     this.editorContent = content;
+  }
+
+  showToast(){
+    this.toast.showToast("Başarılı","İşlem başarıyla tamamlandı","success");
   }
 
   changeIds(){
@@ -80,8 +84,8 @@ export class UsersComponent {
   getAll(){
     //this.users.set(UsersData);    
     this.loading.set(true);
-    const apiUrl = "https://localhost:7040/api";
-    //const apiUrl = "https://flexi-ui.webapi.ecnorow.com/api";
+    //const apiUrl = "https://localhost:7040/api";
+    const apiUrl = "https://flexi-ui.webapi.ecnorow.com/api";
     let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
     let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
     //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
@@ -125,7 +129,7 @@ export class UsersComponent {
   } 
 
   delete(){
-    this.toast.showSwal('Sil?',' Lorem ipsum dolor sit amet consectetur?',()=> {
+    this.toast.showSwal('Sil?',' Lorem ipsum dolor sit amet consectetur?<br>Test 2.satır',()=> {
       this.toast.showToast("Info","Silme işlemi başarıyla tamamlandı", "info");
     });
   }

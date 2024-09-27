@@ -89,7 +89,10 @@
               </div>
           </th>
           }
-        </tr> 
+          @if(showCommandColumn){
+            <th [ngStyle]="{'width': commandColumnWidth, 'text-align': commandColumnTextAlign}" [ngClass]="stickyCommandColumn ? 'flexi-sticky-column' : ''">{{commandColumnTitle}}</th>
+          }
+        </tr>
         @if(filterable){
          <tr class="flexi-grid-mobile-filter-tr">
            <th colSpan="2">
@@ -144,6 +147,9 @@
                }
              }
            }
+           @if(showCommandColumn){
+            <th [ngClass]="stickyCommandColumn ? 'flexi-sticky-column' : ''"></th>
+          }
          </tr>
        }    
       </thead>
@@ -199,10 +205,15 @@
                       }
                     }
                   </td>
-                }            
+                }
+              }
+              @if(showCommandColumn){
+                <td [ngStyle]="{'width': commandColumnWidth, 'text-align': commandColumnTextAlign}" [ngClass]="stickyCommandColumn ? 'flexi-sticky-column' : ''" [attr.data-label]="commandColumnTitle">
+                  <ng-container *ngTemplateOutlet="commandColumnTemplate; context: {item: item, index: i}"></ng-container>
+                </td>
               }
             </tr>
-          }
+          }          
         }@else {
           @if(!loading){
             <tr style="height: 100%;" [ngStyle]="{'min-height': trMinHeight}">

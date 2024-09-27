@@ -26,7 +26,7 @@ export class FlexiGridColumnComponent {
   @Input() hideOverflow: boolean = true;
   @Input() filterData: FlexiGridFilterDataModel[] = [];  
   @Input() booleanData: string[] = [];
-  @Input() showCheckbox: boolean = false;
+  @Input() showCheckbox: boolean = false;  
 
   @Output() onChange = new EventEmitter<any>();
   

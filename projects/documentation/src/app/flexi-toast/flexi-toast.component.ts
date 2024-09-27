@@ -27,7 +27,7 @@ export class FlexiToastComponent implements OnDestroy {
     icon: "success",
     position: "bottom-right",
     preventDuplicate: false,
-    showCloseBtn: true,
+    showToastCloseBtn: true,
     showProgressBar: true,
     themeClass: "light",
     timeOut: 3000,

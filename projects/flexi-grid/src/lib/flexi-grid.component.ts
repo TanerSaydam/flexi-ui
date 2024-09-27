@@ -44,7 +44,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() resizable: boolean = false;
   @Input() draggable: boolean = false;
   @Input() tbodyStyle: any = {};
-  @Input() trMinHeight: string = "45px";  
+  @Input() trMinHeight: string = "45px";
+  @Input() showCommandColumn: Boolean = false;
+  @Input() commandColumnTitle: string = "İşlemler";
+  @Input() commandColumnWidth: string = "200px";
+  @Input() commandColumnTextAlign: AlignSetting = "center"
+  @Input() commandColumnTemplate: TemplateRef<any> | any;
+  @Input() stickyCommandColumn: boolean = true;
 
   pageNumberCount = signal<number>(5);
   pageNumbers = signal<number[]>([]);

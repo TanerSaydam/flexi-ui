@@ -77,7 +77,7 @@
     </div> -->
 
 
-
+<button (click)="showToast()">Show Toast</button>
     <flexi-grid
     [data]="users()"
     [dataBinding]="true"
@@ -99,6 +99,10 @@
     [useMinWidth]="true"
     minWidth="1000px"
     (dataStateChange)="dataStateChange($event)"
+    [showCommandColumn]="true"
+    [commandColumnTemplate]="operationsColumnTemplate"
+    [stickyCommandColumn]="true"
+    commandColumnTitle="İşlemler"
     >
     <ng-template #captionTemplate>
       <button class="btn btn-primary">Ekle</button>
@@ -110,13 +114,14 @@
     <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
-    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
+    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="true" [hideOverflow]="true"></flexi-grid-column>
     <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']"></flexi-grid-column>
-    <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" width="100px" textAlign="center">
-      <ng-template #operationsColumnTemplate>
-          <button (click)="delete()">Remove</button>
-      </ng-template>
-    </flexi-grid-column>
+    
+    <ng-template #operationsColumnTemplate>
+        <button (click)="delete()">Remove</button>
+    </ng-template>
+    <!-- <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" width="100px" textAlign="center">
+    </flexi-grid-column> -->
   
     </flexi-grid>    
   </div>

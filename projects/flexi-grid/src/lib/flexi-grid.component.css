@@ -17,6 +17,7 @@
     --hover-background-color: #ebf5ff;
     --hover-text-color: #212529;
     --border-color: #dee2e6;
+    --sticky-border-color: #dee2e6;
     --text-success: #1dc9b7;
     --text-danger: #fd3995;
 }
@@ -33,6 +34,7 @@
     --hover-background-color: #f8f9fa;
     --hover-text-color: #212529;
     --border-color: #141414;
+    --sticky-border-color: #141414;
     --text-success: #1dc9b7;
     --text-danger: #fd3995;
 }
@@ -271,8 +273,6 @@ a {
     background-color: var(--background-color);
     padding-top: 20px;
     padding-bottom: 15px;
-    /* position: sticky; */
-    /* top: 0; */
     z-index: 1;
 }
 
@@ -298,12 +298,6 @@ a {
 
 .flexi-grid-table-container tbody tr:hover {
     background-color: var(--tbody-hover);
-}
-
-.flexi-grid-table-container tbody {
-    flex: 1;
-    overflow: auto;
-    display: block;
 }
 
 .flexi-grid-table-container tbody tr {
@@ -546,13 +540,37 @@ div .flexi-grid-active {
     align-items: center;
 }
 
-/* .flexi-grid-column-fixed {
+.flexi-sticky-column {    
     position: sticky;
-    right: 0;
+    right: 0; /* Sağ tarafa sabitlemek için */    
+    z-index: 100; /* Diğer sütunların üstünde olması için */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Hafif bir gölge */    
+}
+
+/* Tek sayılı satırlar için */
+.flexi-grid-table-container tbody tr:nth-child(odd) .flexi-sticky-column {
+    background-color: var(--background-color);
+}
+
+/* Çift sayılı satırlar için */
+.flexi-grid-table-container tbody tr:nth-child(even) .flexi-sticky-column {
     background-color: var(--background-color-part);
-    z-index: 2;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-} */
+}
+
+.flexi-sticky-column::before {
+    content: '';
+    position: absolute;
+    left: -1px; /* Çizginin konumu */
+    top: 0;
+    height: 100%;
+    width: 1px; /* Çizginin kalınlığı */
+    background-color: var(--sticky-border-color);
+    z-index: 101; /* İçeriğin üzerinde olması için */
+}
+
+.flexi-grid-table-container tbody tr:hover .flexi-sticky-column {
+    background-color: var(--tbody-hover);
+}
 
 .hide{
     display: none !important;
@@ -564,7 +582,7 @@ div .flexi-grid-active {
     }
     
     .flexi-grid-table-container {
-        overflow-x: auto;
+        overflow-x: auto;        
         width: 100%;
         margin: 0;
         padding: 0;
@@ -610,9 +628,9 @@ div .flexi-grid-active {
 
     .flexi-grid-index-td{
         width: 100% !important;
-    }
+    }   
 
-    .flexi-grid-table-container td::before, .flexi-grid-filter-tr .flexi-grid-filter-th::before {
+    .flexi-grid-table-container td::before, .flexi-grid-filter-tr .flexi-grid-filter-th::before, .flexi-sticky-column::before {
         content: attr(data-label);
         position: absolute;
         left: 10px;
@@ -621,6 +639,9 @@ div .flexi-grid-active {
         white-space: nowrap;
         text-align: left;
         font-weight: bold;
+        background-color: transparent;
+        display: flex;
+        align-items: end;
     }  
   
     .flexi-grid-table-container td{
