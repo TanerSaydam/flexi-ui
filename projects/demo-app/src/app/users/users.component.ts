@@ -1,7 +1,7 @@
 import { Component, Renderer2, signal } from '@angular/core';
 // import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { StateModel } from '../../../../flexi-grid/src/lib/state.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../shared.service';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiSelectComponent } from '../../../../flexi-select/src/public-api';
@@ -51,7 +51,7 @@ export class UsersComponent {
     public toast: FlexiToastService,
     private renderer: Renderer2
   ){
-    this.state().pageSize = 500;
+    //this.state().pageSize = 500;
     this.getAll();
     toast.options.position = "bottom-right";
     toast.options.autoClose = false;
@@ -80,18 +80,22 @@ export class UsersComponent {
   getAll(){
     //this.users.set(UsersData);    
     this.loading.set(true);
+    const apiUrl = "https://localhost:7040/api";
+    //const apiUrl = "https://flexi-ui.webapi.ecnorow.com/api";
+    let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
+    let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
+    //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
 
-    //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
-    //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
-
-    this.http.get<any>(endpoint).subscribe((res)=> {
-      res.data.forEach((val:any)=> {
-        val.isActive = Math.random() > 0.5 ? true : false;
-      });
-      this.users.set(res.data);
-      //this.total.set(res.total);      
-      this.loading.set(false);
+    this.http.get<any>(endpoint).subscribe({
+      next: (res)=> {      
+        this.users.set(res.data);
+        this.total.set(res.total);
+        this.loading.set(false);
+      },
+      error: (err: HttpErrorResponse)=> {
+        this.toast.showToast("Error","Something went wrong","error");
+        this.loading.set(false);
+      }
     });
   } 
 
@@ -128,6 +132,11 @@ export class UsersComponent {
 
   showSelected(event:any){
     //console.log(event);
+    
+  }
+
+  onChange(event:any){
+    console.log(event);
     
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { FlexiGridFilterDataModel } from './flexi-grid-filter-data.model';
 
 @Component({
@@ -24,8 +24,12 @@ export class FlexiGridColumnComponent {
   @Input() className: string = "";
   @Input() textAlign: TextAlignType = "left";  
   @Input() hideOverflow: boolean = true;
-  @Input() filterData: FlexiGridFilterDataModel[] = [];
+  @Input() filterData: FlexiGridFilterDataModel[] = [];  
+  @Input() booleanData: string[] = [];
+  @Input() showCheckbox: boolean = false;
 
+  @Output() onChange = new EventEmitter<any>();
+  
   value: string = "";
   filterOperator: string = "contains";
 
@@ -45,7 +49,7 @@ export class FlexiGridColumnComponent {
 }
 
 export type TextAlignType = "left" | "center" | "right";
-export type FilterType = "text" | "date" | "date-time" | "number" | "select"
+export type FilterType = "text" | "date" | "date-time" | "number" | "select" | "boolean"
 export type DateFormatType = 
   "d" | "dd" | "ddd" | "dddd" | // Gün
   "M" | "MM" | "MMM" | "MMMM" | // Ay

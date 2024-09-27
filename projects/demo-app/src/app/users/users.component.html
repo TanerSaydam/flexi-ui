@@ -80,7 +80,10 @@
 
     <flexi-grid
     [data]="users()"
-    [pageable]="true"
+    [dataBinding]="true"
+    [total]="total()"
+    [pageable]="true"    
+    [pageSize]="10"
     [filterable]="true"
     [themeClass]="shared.themeClass()"
     [showCaption]="true"  
@@ -95,6 +98,7 @@
     [autoHeight]="false"
     [useMinWidth]="true"
     minWidth="1000px"
+    (dataStateChange)="dataStateChange($event)"
     >
     <ng-template #captionTemplate>
       <button class="btn btn-primary">Ekle</button>
@@ -102,16 +106,12 @@
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="firstName" textAlign="center" title="First Name" [hideOverflow]="false"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name" [hideOverflow]="false"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
     <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="false" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
-     <flexi-grid-column field="isActive" title="Is Active" filterType="select" [filterData]="filterData" [columnTemplate]="isActiveColumnTemplate" textAlign="center">
-        <ng-template #isActiveColumnTemplate let-item="item">
-          <span>{{item.isActive ? 'Active' : 'Passive'}}</span>
-        </ng-template>
-     </flexi-grid-column>
+    <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']"></flexi-grid-column>
     <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" width="100px" textAlign="center">
       <ng-template #operationsColumnTemplate>
           <button (click)="delete()">Remove</button>

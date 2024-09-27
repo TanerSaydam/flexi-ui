@@ -51,16 +51,16 @@
               (dragstart)="onDragStart($event, $index)"
               (dragover)="onDragOver($event, $index)"
               (drop)="onDrop($event, $index)">
-              <div class="flexi-th" [ngClass]="column.textAlign === 'right' ? 'flexi-flex-reverse' : (column.textAlign === 'center'? 'flexi-flex-center' : '')">
+              <div [ngClass]="setTextAlignForTh(filterable, column)">
                 @if(resizable && column.resizable){
                   <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
                 }
                 @if(sortable && column.sortable && column.field && data.length > 0){
-                  <div (click)="sort(column.field)">
-                    <span>{{ column.title ? column.title : column.field }}</span>
+                  <div (click)="sort(sortable,column)">
+                    <span class="flexi-grid-th-title-span">{{ column.title ? column.title : column.field }}</span>
                     <span class="ms-2">
-                      @if(this.state.sort.field === column.field){
-                        <span *ngIf="state.sort.field === column.field">
+                      @if(state.sort.field === column.field){
+                        <span>
                           {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
                         </span>
                       }
@@ -129,6 +129,12 @@
                         <option [value]="data.value">{{data.name}}</option>
                       }
                     </select>
+                   }@else if(column.filterType === "boolean" && column.booleanData.length > 0){
+                    <select class="flexi-grid-filter-select" (change)="filterSelect(column.field, 'eq', $event, column.filterType)">
+                      <option value="">Seçim yapınız</option>
+                      <option [value]="true">{{column.booleanData[0]}}</option>
+                      <option [value]="false">{{column.booleanData[1]}}</option>                      
+                    </select>
                    }
                  </div>
                </th>
@@ -176,6 +182,17 @@
                         }@else if(column.format === "c"){
                           {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront: column.fraction) }}
                         }                    
+                      }
+                      @else if(column.filterType === "boolean"){
+                        @if(column.showCheckbox){
+                          <input class="flexi-grid-checkbox" type="checkbox" [checked]="getFieldValue(item, column.field)" (change)="getBooleanInputValue(item, column, $event)">                          
+                        }@else {
+                          @if(getFieldValue(item, column.field)){
+                            <i class="fa-solid fa-check flexi-text-success"></i>
+                          }@else {
+                            <i class="fa-solid fa-x flexi-text-danger"></i>
+                          }
+                        }                        
                       }
                       @else {
                         {{ getFieldValue(item, column.field) }}

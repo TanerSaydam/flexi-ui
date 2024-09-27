@@ -74,6 +74,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   tempDraggable: boolean = false;
 
   @Output() dataStateChange = new EventEmitter<any>();
+  @Output() onChange = new EventEmitter<any>();
 
   @ContentChildren(FlexiGridColumnComponent) columns: QueryList<FlexiGridColumnComponent> | undefined;
 
@@ -334,8 +335,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  sort(field: string) {
-    this.state.sort.field = field;
+  sort(sortable: boolean, column: any) {
+    if(!column.sortable || !sortable) return;
+    
+    this.state.sort.field = column.field;
     this.state.pageNumber = 1;
     if (this.state.sort.dir === "asc") {
       this.state.sort.dir = "desc";
@@ -347,6 +350,19 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     this.sortData();
+  }
+
+  setTextAlignForTh(filterable: boolean,column: any){
+    let className:string = "";
+    const filter: boolean = (filterable && column.field && column.filterable && this.showFilterButton(column.filterType));
+    className +=  filter ? 'flexi-th ' : '';
+    if(column.textAlign === "right"){
+      if(filter) className += 'flexi-flex-reverse';
+      else className += 'flexi-right';
+    }
+    else if(column.textAlign === "center" && !filter) className += "flexi-center"
+
+    return className;
   }
 
   toggleTheme() {
@@ -366,7 +382,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   filterSelect(field: string, operator: string, event:any, type: FilterType){
-    const value = event.target.value;
+    const value = event.target.value;    
     
     this.filter(field, operator, value, type);    
   }
@@ -571,6 +587,20 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         return "";
       }
     }
+  }
+
+  getBooleanInputValue(item:any, column: FlexiGridColumnComponent, event:any, ){
+    const value = event.target.checked;
+    if(!column.field.includes(".")){
+      item[column.field] = value;
+    }else{
+      const fields = column.field.split(".");
+      if(fields.length === 2){
+       item[fields[0]][fields[1]] = value;
+      }
+    }
+
+    column.onChange.emit(item);
   }
 
   openMobileFilter(){

@@ -64,6 +64,8 @@ export class FlexiGridService {
                                 filterValue += `${this.toTitleCase(val.field)} ${val.operator} '${val.value}'`;
                                 break;
                         }
+                    }else if(val.type === "select" || val.type === "boolean"){
+                        filterValue += `${this.toTitleCase(val.field)} eq ${val.value}`
                     }
                 });
                 endpoint += filterValue;

@@ -17,6 +17,8 @@
     --hover-background-color: #ebf5ff;
     --hover-text-color: #212529;
     --border-color: #dee2e6;
+    --text-success: #1dc9b7;
+    --text-danger: #fd3995;
 }
 
 [data-bs-theme="dark"] {
@@ -31,6 +33,8 @@
     --hover-background-color: #f8f9fa;
     --hover-text-color: #212529;
     --border-color: #141414;
+    --text-success: #1dc9b7;
+    --text-danger: #fd3995;
 }
 
 input[type=number]::-webkit-outer-spin-button,
@@ -47,6 +51,14 @@ a {
     cursor: pointer;
     user-select: none;
     text-decoration: none !important;
+}
+
+.flexi-text-success{
+    color: var(--text-success);    
+}
+
+.flexi-text-danger{
+    color: var(--text-danger);    
 }
 
 .flexi-grid-page-size-select {
@@ -265,12 +277,15 @@ a {
 }
 
 .flexi-flex-reverse{
-    flex-direction: row-reverse;
+    flex-direction: row-reverse;    
 }
 
-.flexi-flex-center{
-    justify-content: center !important;
-    gap: 8px;
+.flexi-right{
+    text-align: right;
+}
+
+.flexi-center{    
+    text-align: center;
 }
 
 .flexi-grid-table-container th {
@@ -306,6 +321,12 @@ a {
     z-index: 1;
 }
 
+.flexi-grid-checkbox{
+    transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);    
+}
+
 .flexi-grid-filter-input, .flexi-grid-filter-select {
     width: 100%;
     padding: 5px;
@@ -313,10 +334,6 @@ a {
     border-radius: 3px;
     background-color: var(--background-color-part);
     color: var(--text-color);    
-}
-
-.flexi-grid-filter-select-option{
-    padding: 50px;
 }
 
 .flexi-grid-select-container {
@@ -526,6 +543,7 @@ div .flexi-grid-active {
 .flexi-th{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /* .flexi-grid-column-fixed {
