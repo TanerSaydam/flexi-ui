@@ -1,189 +1,22 @@
 <app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
-    <!-- Full hali-->
-    <div id="what-is-flexi-select" style="padding-top: 5px;">
-        <app-card cardTitle="Flexi Select nedir?">
-            <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Select olan Flexi select ile tanışın.
-                Bu
-                component ile listelerinizi select içerisinde gösterirken search yapabileceksiniz, lazy loading yapısı
-                sayesinde listelerinizi göstermede performans elde edeceksiniz.</p>
-            <p>Flexi Select, açık kaynak kodludur. Kaynak kodlarına <a
-                    href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-select/src/lib"
-                    target="_blank">buraya
-                    tıklayarak</a> ulaşabilirsiniz.</p>
-            <hr>
-            <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a
-                    href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için
-                    tıklayın</a>.</p>
-            <p>Dökümantasyonu adım adım inceleyerek Flexi Grid'i projenize nasıl kurup kullanabileceğinizi
-                öğrenebilirsiniz.
-                Aşağıda, Flexi Select'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni
-                nasıl kurup
-                yapılandıracağınızı adım adım öğreneceksiniz.</p>
-            <p><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>
-            <br>
-            <p>Full özelliklerin açık olduğu örnek aşağıdadır.</p>
-
-            @defer {
-            <app-flexi-select-full></app-flexi-select-full>
-            }@placeholder {
-            <app-loading></app-loading>
-            }
-        </app-card>
-    </div>
-
-    <!-- Kurulum -->
-    <div id="installation" style="padding-top: 5px;">
-        <app-card id="installation" cardTitle="Kurulum">
-            <div class="card-body">
-                <p>Flexi Select'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız
-                </p>
-                <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-select</code></pre>
-            </div>
-        </app-card>
-    </div>
-
-    <!-- İlk kullanım -->
-    <div id="first-use" style="padding-top: 5px;">
-        <app-card cardTitle="İlk Kullanım">
-          <div class="card-body">
-            <p>Flexi Select'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
-            <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına selecte gözükmesini istediğiniz alanı label'a, size vermesini istediğiniz alanı value attribute'üne atamalısınız</p>
-            <h3>Örnek kod:</h3>
-            <b>component.ts</b>
-            <my-code className="" language="typescript" [code]="firstUseTSCodeExample1()"></my-code>
-            <p><b>Ya da</b></p>
-            <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
-            <b>component.html</b>
-            <my-code className="" language="html" [code]="firstUseHTMLCodeExample1()"></my-code>
-  
-            <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
-            <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
-
-            @defer {
-              <app-first-use [dataCode]="dataCode()"></app-first-use>
-            }@placeholder {
-              <app-loading></app-loading>
-            }
-            <hr>
-            <h3>Kodların açıklaması</h3>
-            <ul>
-              <li><b>flexi-select :</b> Flexi select elementi. Bununla selecti sayfamıza ekliyoruz</li>
-              <li><b>[data] :</b> Data attributene listemizi veriyoruz.
-                <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.
-                  İsterseniz siz normal değişken kullanabilirsiniz</p>
-              </li>
-              <li><b>label :</b> Select'de gözükmesini istediğimiz property ismini buraya veriyoruz</li>
-              <li><b>value :</b> Her bir kaydın unique değerini, yani bizim için id niteliği taşıyan property ismini buraya veriyoruz. </li>
-              <li><b>[(ngModel)] :</b> İstersek selecte bir değişkeni two-data-binding ile bağlayabiliyoruz </li>
-              <li><b>selected($event) :</b> Seçtiğimiz değeri seçimin hemen sonrası bu event ile yakalayabiliyoruz
-              </li>
-            </ul>
-  
-            <hr>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Attribute</th>
-                  <th>Alabileceği Değer Türleri</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>data</th>
-                  <td>object[] | number[] | string[] | boolean[] vs.</td>
-                </tr>
-                <tr>
-                  <th>label</th>
-                  <td>text</td>
-                </tr>
-                <tr>
-                  <th>value</th>
-                  <td>text</td>
-                </tr>
-              </tbody>
-            </table>
-  
-            <p class="alert alert-success">İlk örneğimizle beraber listemizi select içerisinde göstermeyi başardık.</p>
-          </div>
-        </app-card>
-    </div>
-
-    <!-- Custom Option -->
-    <div id="custom-option" style="padding-top: 5px;">
-      <app-card cardTitle="Custom Option">
-        <div class="card-body">
-          <p>Flexi Select içerisine özel bir option yapılanması kurmak isterseniz bunu flexi-option ile yapabiliyorsunuz</p>
-          <h3>Örnek kod:</h3>       
-          <b>component.html</b>
-          <my-code className="" language="html" [code]="customOptionHTMLCodeExample()"></my-code>
-
-          @defer {
-            <app-custom-option [dataCode]="dataCode()"></app-custom-option>
-          }@placeholder {
-            <app-loading></app-loading>
-          }
-          <hr>
-          <h3>Kodların açıklaması</h3>
-          <ul>
-            <li><b>flexi-option :</b> Flexi select içerisine ekleyebileceğimiz özel option elementi</li>
-          </ul>
-        </div>
-      </app-card>
-  </div>
-
-  <!-- Çoklu Seçim -->
-  <div id="multiple" style="padding-top: 5px;">
-    <app-card cardTitle="Çoklu Seçim">
-      <div class="card-body">        
-        <p>Eğer çoklu seçim yapmak isterseniz multiple attribute'e true değer göndermeniz yeterli</p>
-        <h3>Örnek kod:</h3>        
-        <b>component.html</b>
-        <my-code className="" language="html" [code]="multipleHTMLCodeExample()"></my-code>
-
-        <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
-            <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
+    <app-card cardTitle="Flexi Select nedir?">
+        <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Select olan Flexi select ile tanışın. Bu component ile listelerinizi select içerisinde gösterirken search yapabileceksiniz, lazy loading yapısı sayesinde listelerinizi göstermede performans elde edeceksiniz.</p>
+        <p>Flexi Select, açık kaynak kodludur. Kaynak kodlarına 
+            <a href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-select/src/lib" target="_blank">buraya tıklayarak</a> ulaşabilirsiniz.
+        </p>
+        <hr>
+        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. 
+            <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için tıklayın</a>.
+        </p>
+        <p>Dökümantasyonu adım adım inceleyerek Flexi Select'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda, Flexi Select'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.</p>
+        <p><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>
+        <br>
+        <p>Full özelliklerin açık olduğu örnek aşağıdadır.</p>
 
         @defer {
-          <app-multiple [dataCode]="dataCode()"></app-multiple>
+        <app-flexi-select-full></app-flexi-select-full>
         }@placeholder {
-          <app-loading></app-loading>
+        <app-loading></app-loading>
         }
-        <hr>
-        <h3>Kodların açıklaması</h3>
-        <ul>
-          <li><b>[multiple] :</b> Çoklu seçimi aktif etmek için true değeri vermelisiniz</li>
-          <li><b>[closeAfterSelect] :</b> Seçim sonunda select açılsın isterseniz bu attribute'e false değer gönderin. Default true olduğu için her seçim sonrası selecti kapatır
-          <li><b>height :</b> Selectin yüksekliğini ayarlayabilirsiniz. Min yükseklik 36px'dir.</li>
-        </ul>
-
-        <hr>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değeri</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>multiple</th>
-              <td>true | false</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <th>closeAfterSelect</th>
-              <td>true | false</td>
-              <td>true</td>
-            </tr>
-            <tr>
-              <th>height</th>
-              <td>text</td>
-              <td>100%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </app-card>
-</div>
+    </app-card>    
 </app-blank>

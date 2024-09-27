@@ -23,7 +23,7 @@
     --flexi-toast-warning: #FFC021;
     --flexi-toast-error: #ff355b;
     --flexi-toast-info: #2F86EB;
-    --flexi-toast-default: #fff;
+    --flexi-toast-default: #212529;
 }
 
 .flexi-toast-wrapper {
@@ -320,7 +320,7 @@
 
 .flexi-swal-btn:hover,
 .flexi-swal-btn-cancel:hover{
-    background-color: #f2f2f2;
+    opacity: 0.8;
 }
 
 .flexi-swal-btn-cancel-background-success{

@@ -1,5 +1,9 @@
+*{
+    font-family: "Poppins", system-ui;  
+}
+
 a {
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .my-pre{
@@ -18,4 +22,16 @@ a {
 
 .flexi-select{
     width: 250px !important;
+}
+
+.active1{    
+    background-color: black;
+}
+
+.active2{
+    color: rgb(176, 171, 197) !important;
+}
+
+.me-1{
+    margin-right: 8px;
 }

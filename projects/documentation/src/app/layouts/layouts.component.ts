@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { flexiGridDocument, flexiSelectDocument, flexiToastDocument } from '../document';
 
@@ -27,6 +27,7 @@ export class LayoutsComponent {
 
     this.changeBodyThemeClass();
   }
+
 
   changeTheme(className: string){
     this.shared.themeClass = className;

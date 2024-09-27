@@ -20,7 +20,7 @@ export class CaptionComponent {
   captionTitle = signal<string>("User list");
   showColumnVisibility = signal<boolean>(true);
   columnVisibilityBtnClass = signal<string>("my-btn");
-  showRefreshData = signal<boolean>(true);
+  showRefreshBtn = signal<boolean>(true);
   refreshDataBtnClass = signal<string>("my-btn");
   captionTSCode = signal<string>(captionTSCode);
   captionHTMLCode = signal<string>(captionHTMLCode);

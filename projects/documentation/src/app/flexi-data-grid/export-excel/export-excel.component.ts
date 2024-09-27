@@ -29,7 +29,7 @@ export class ExportExcelComponent {
   showCaption = signal<boolean>(true);
   captionTitle = signal<string>("User list");
   showColumnVisibility = signal<boolean>(true);
-  showRefreshData = signal<boolean>(true);
+  showRefreshBtn = signal<boolean>(true);
   filterable = signal<boolean>(true);
   exportExcelTSCode = signal<string>(exportExcelTSCode);
   exportExcelHTMLCode = signal<string>(exportExcelHTMLCode);

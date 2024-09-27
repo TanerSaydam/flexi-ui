@@ -1,44 +1,107 @@
-<div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-      <li class="nav-item">
-        <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-      </li>
-    </ul>
-</div>
-<div class="card-body">
-    <div class="tab-content">
-      <div class="tab-pane active show flexi-select" id="tabs-example-first-use">
-        <h4>İlk kullanım</h4>
-        <flexi-select
-          [data]="users()"
-          label="firstName"
-          value="id"
-          [themeClass]="shared.themeClass"
-          [(ngModel)]="selectedUserId"
-          (selected)="selected($event)"
-          >
-        </flexi-select>
+<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
+  <app-card cardTitle="İlk Kullanım">
+    <div class="card-body">
+      <p>Flexi Select'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
+      <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına selecte gözükmesini istediğiniz alanı label'a, size vermesini istediğiniz alanı value attribute'üne atamalısınız</p>
+      <h3>Örnek kod:</h3>
+      <b>component.ts</b>
+      <my-code className="" language="typescript" [code]="firstUseTSCodeExample1()"></my-code>
+      <p><b>Ya da</b></p>
+      <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
+      <b>component.html</b>
+      <my-code className="" language="html" [code]="firstUseHTMLCodeExample1()"></my-code>
+  
+      <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
+      <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
+  
+      @defer {
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+            <li class="nav-item">
+              <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-first-use" class="nav-link" data-bs-toggle="tab">component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-first-use-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+            </li>
+          </ul>
       </div>
-      <div class="tab-pane" id="tabs-html-first-use">
-        <h4>HTML kodları</h4>
-        <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
+      <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active show flexi-select" id="tabs-example-first-use">
+              <h4>İlk kullanım</h4>
+              <flexi-select
+                [data]="users()"
+                label="firstName"
+                value="id"
+                [themeClass]="shared.themeClass"
+                [(ngModel)]="selectedUserId"
+                (selected)="selected($event)"
+                >
+              </flexi-select>
+            </div>
+            <div class="tab-pane" id="tabs-html-first-use">
+              <h4>HTML kodları</h4>
+              <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-first-use">
+              <h4>Typescript kodları</h4>
+              <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-first-use-data">
+              <h4>Data</h4>
+              <my-code [code]="dataCode()" language="typescript"></my-code>
+            </div>
+          </div>
       </div>
-      <div class="tab-pane" id="tabs-ts-first-use">
-        <h4>Typescript kodları</h4>
-        <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
-      </div>
-      <div class="tab-pane" id="tabs-ts-first-use-data">
-        <h4>Data</h4>
-        <my-code [code]="dataCode" language="typescript"></my-code>
-      </div>
+      }@placeholder {
+        <app-loading></app-loading>
+      }
+      <hr>
+      <h3>Kodların açıklaması</h3>
+      <ul>
+        <li><b>flexi-select :</b> Flexi select elementi. Bununla selecti sayfamıza ekliyoruz</li>
+        <li><b>[data] :</b> Data attributene listemizi veriyoruz.
+          <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.
+            İsterseniz siz normal değişken kullanabilirsiniz</p>
+        </li>
+        <li><b>label :</b> Select'de gözükmesini istediğimiz property ismini buraya veriyoruz</li>
+        <li><b>value :</b> Her bir kaydın unique değerini, yani bizim için id niteliği taşıyan property ismini buraya veriyoruz. </li>
+        <li><b>[(ngModel)] :</b> İstersek selecte bir değişkeni two-data-binding ile bağlayabiliyoruz </li>
+        <li><b>selected($event) :</b> Seçtiğimiz değeri seçimin hemen sonrası bu event ile yakalayabiliyoruz
+        </li>
+      </ul>
+  
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Alabileceği Değer Türleri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>data</th>
+            <td>object[] | number[] | string[] | boolean[] vs.</td>
+          </tr>
+          <tr>
+            <th>label</th>
+            <td>text</td>
+          </tr>
+          <tr>
+            <th>value</th>
+            <td>text</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <p class="alert alert-success">İlk örneğimizle beraber listemizi select içerisinde göstermeyi başardık.</p>
     </div>
-</div>
+  </app-card>
+</app-blank>

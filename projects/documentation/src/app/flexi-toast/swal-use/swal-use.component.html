@@ -1,0 +1,12 @@
+<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast">
+    <app-card id="installation" cardTitle="Swal Kullanım">    
+        <div class="card-body">
+            <img class="me-1" src="/img/flexi-swal-light.png">
+            <img src="/img/flexi-swal-dark.png">
+        </div>        
+        <div class="card-body">
+            <p>Swalı kullanmak istediğiniz component de servisi inject edip showSwal metodu ile swalı görüntüleyebilirsiniz. Metot parametre olarak callBack funtion istiyor. Bu yöntemle de eğer sorunuz onaylanırsa, örneğin sil tuşuna basılırsa ne işlem yapacağınızı kodlayabiliyorsunuz. Service de bulunan options üzerinden ayarlarınızı değiştirebilir ya da kendi ayarlarınızı oluşturup servicedeki options a set edebilirsiniz.</p>
+            <my-code [code]="swalTSCode()" language="typescript"></my-code>
+        </div>
+    </app-card>    
+</app-blank>

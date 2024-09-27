@@ -60,46 +60,51 @@ export const fullExampleHTMLCode: string = `
   [pageSizeList]="[10,20,30,50,100,1000]"
   [showIndex]="true"
   [loading]="loading()"
-  themeClass="light"
+  [themeClass]="shared.themeClass"
   height="420px"
   [filterable]="true"
   captionTitle="Example User Table"
   [captionTemplate]="captionTemplate"
-  [footerTemplate]="footerTemplate"
   [showCaption]="true"
   [showExportExcel]="true"
-  [exportExcelButtonClick]="exportExcel.bind(this)"
   [resizable]="true"
+  [exportExcelButtonClick]="exportExcel.bind(this)"
   (dataStateChange)="dataStateChange($event)"
-  [sortable]="true">
-    <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
-    <flexi-grid-column title="Actions" [filterable]="false" width="180px" [sortable]="false" [columnTemplate]="customButtonColumnTemplate"></
+  [sortable]="true"
+  [draggable]="true"
+  [autoHeight]="false"
+  [showCommandColumn]="true"
+  [commandColumnTemplate]="commandButtonColumnTemplate"
+  commandColumnWidth="150px"
+  [useMinWidth]="true"
+  minWidth="1000px"
+  [stickyCommandColumn]="true">
 
-    <ng-template #customButtonColumnTemplate let-item="item">
-        <button class="btn btn-outline-info">
-          <i class="fa-solid fa-edit"></i>
-        </button>
-        <button class="btn btn-outline-danger ms-1">
-          <i class="fa-solid fa-trash"></i>
-        </button>            
-    </ng-template>
+  <!-- Caption Alanı -->
+  <ng-template #captionTemplate>
+    <flexi-button btnColor="primary">
+      <i class="fa-solid fa-plus"></i>
+      Add User
+    </flexi-button>
+  </ng-template>
 
-    <ng-template #footerTemplate>
-    <!-- <tr>
-           <td colspan="5">Total</td>
-           <td>46546</td>
-        </tr> -->
-    </ng-template>
+  <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
+  <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+  <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
+  <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right" [showSymbolInFront]="true" [fraction]="2" title="Salary">    
+  </flexi-grid-column>
+  <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']" textAlign="center" width="100px"></flexi-grid-column>
 
-    <ng-template #captionTemplate>
-        <!-- <button>Kullanıcı ekle</button> -->
-    </ng-template>
-
-
+  <!-- Command alanı -->
+  <ng-template #commandButtonColumnTemplate let-item="item">
+    <flexi-button btnColor="default">
+      <i class="fa-solid fa-edit"></i>
+    </flexi-button>
+    <flexi-button btnColor="default" class="ms-1" (click)="deleteByItem(item)">
+      <i class="fa-solid fa-trash"></i>
+    </flexi-button>
+  </ng-template>  
 </flexi-grid>
 `;
 
@@ -550,7 +555,7 @@ export class CaptionComponent {
   captionTitle = signal<string>("User list");
   showColumnVisibility = signal<boolean>(true);
   columnVisibilityBtnClass = signal<string>("btn");
-  showRefreshData = signal<boolean>(true);
+  showRefreshBtn = signal<boolean>(true);
   refreshDataBtnClass = signal<string>("btn");
 }
 `;
@@ -562,7 +567,7 @@ export const captionHTMLCode: string = `
     [captionTitle]="captionTitle()"
     [showColumnVisibility]="showColumnVisibility()" 
     [columnVisibilityBtnClass]="columnVisibilityBtnClass()"
-    [showRefreshData]="showRefreshData()"
+    [showRefreshBtn]="showRefreshBtn()"
     [refreshDataBtnClass]="refreshDataBtnClass()"
     [captionTemplate]="captionTemplate"
     >
@@ -651,7 +656,7 @@ export class DataBindingComponent {
   showCaption = signal<boolean>(true);
   captionTitle = signal<string>("User list");
   showColumnVisibility = signal<boolean>(true);
-  showRefreshData = signal<boolean>(true);
+  showRefreshBtn = signal<boolean>(true);
   filterable = signal<boolean>(true);
   
   constructor(
@@ -695,7 +700,7 @@ export const dataBindingHTMLCode: string = `
     [showCaption]="showCaption()"
     [captionTitle]="captionTitle()"
     [showColumnVisibility]="showColumnVisibility()" 
-    [showRefreshData]="showRefreshData()"
+    [showRefreshBtn]="showRefreshBtn()"
     [filterable]="filterable()"
     (dataStateChange)="dataStateChange($event)"
     (refreshData)="getAll()"
@@ -793,7 +798,7 @@ export class ExportExcelComponent {
   showCaption = signal<boolean>(true);
   captionTitle = signal<string>("User list");
   showColumnVisibility = signal<boolean>(true);
-  showRefreshData = signal<boolean>(true);
+  showRefreshBtn = signal<boolean>(true);
   filterable = signal<boolean>(true);
   exportExcelTSCode = signal<string>(exportExcelTSCode);
   exportExcelHTMLCode = signal<string>(exportExcelHTMLCode);
@@ -838,7 +843,7 @@ export const exportExcelHTMLCode: string = `
   .
   .
   .
-  [showRefreshData]="showRefreshData()"
+  [showRefreshBtn]="showRefreshBtn()"
   [showExportExcel]="true"
   exportExcelFileName="my-file"
   [exportExcelButtonClick]="exportExcel.bind(this)"            

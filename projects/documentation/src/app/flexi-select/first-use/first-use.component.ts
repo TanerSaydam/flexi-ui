@@ -6,21 +6,54 @@ import { firstUseHTMLCode, firstUseTSCode } from '../code';
 import { FlexiSelectModule } from 'flexi-select';
 import { SharedService } from '../../shared.service';
 import { FormsModule } from '@angular/forms';
+import { BlankComponent } from '../../blank/blank.component';
+import { CardComponent } from '../../blank/card/card.component';
+import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../../loading/loading.component';
+import { dataTSCode } from '../../flexi-data-grid/code';
 
 @Component({
   selector: 'app-first-use',
   standalone: true,
-  imports: [FlexiSelectModule, MyCodeComponent, FormsModule],
+  imports: [
+    BlankComponent, 
+    CardComponent, 
+    CommonModule, 
+    FlexiSelectModule, 
+    MyCodeComponent, 
+    FormsModule,
+    LoadingComponent
+  ],
   templateUrl: './first-use.component.html',
   styleUrl: './first-use.component.css',
   encapsulation: ViewEncapsulation.None,
 })
-export class FirstUseComponent {
+export default class FirstUseComponent {
   users = signal<UserModel[]>(UsersData);
   selectedUserId = signal<string>("");
   firstUseTSCode = signal<string>(firstUseTSCode);
   firstUseHTMLCode = signal<string>(firstUseHTMLCode);
-  @Input() dataCode = "";
+  dataCode = signal<string>(dataTSCode);
+  firstUseTSCodeExample1 = signal<string>(`import { FlexiSelectComponent,FlexiOptionColumnComponent } from 'flexi-select';
+
+    @Component({
+    ..
+    imports: [FlexiSelectComponent, FlexiOptionColumnComponent]
+    })
+    `);
+  firstUseTSCodeExample2 = signal<string>(`import { FlexiSelectModule } from 'flexi-select';
+
+    @Component({
+    ..
+    imports: [FlexiSelectModule]
+    })
+    `);
+  firstUseHTMLCodeExample1 = signal<string>(firstUseHTMLCode);
+  firstUseHTMLCodeExample2 = signal<string>(`<flexi-select
+    ...
+    id="firstSelect"
+    >
+    </flexi-select>`);
 
   constructor(
     public shared: SharedService

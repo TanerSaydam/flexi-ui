@@ -19,7 +19,7 @@ export default class FullComponent {
   users = signal<UserModel[]>([])
   total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
-  loading = signal<boolean>(true);  
+  loading = signal<boolean>(false);  
   fullExampleTSCode = signal<string>(fullExampleTSCode);
   fullExampleHTMLCode =signal<string>(fullExampleHTMLCode);  
 
@@ -41,7 +41,7 @@ export default class FullComponent {
     this.http.get(endpoint).subscribe((res:any)=> {
       this.users.set(res.data);      
       this.total.set(res.total);      
-      this.loading.set(true);
+      this.loading.set(false);
     });
   } 
 

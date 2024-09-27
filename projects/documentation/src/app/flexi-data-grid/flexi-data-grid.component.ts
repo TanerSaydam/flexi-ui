@@ -145,7 +145,7 @@ export class FlexiDataGridComponent implements OnDestroy {
     .
     [showCaption]="true"
     [showColumnVisibility]="true" <!-- Columnlarınızı gizleyip açabilmeniz için kullanabileceğiniz button -->
-    [showRefreshData]="true" <!-- Verilerinizi yenilemek için kullanabileceğiniz button -->
+    [showRefreshBtn]="true" <!-- Verilerinizi yenilemek için kullanabileceğiniz button -->
     [captionTemplate]="captionTemplate"  <!-- Yukarıdaki butonların yanına yeni elementler ekleyebilirsiniz -->
     >
     

@@ -1,7 +1,7 @@
 export class DocumentModel{
     title: string = "";
     routerLink: string = "";
-    fragment: string = "";
+    fragment?: string = "";
 }
 
 export const flexiGridDocument: DocumentModel[] = [
@@ -90,65 +90,49 @@ export const flexiGridDocument: DocumentModel[] = [
 export const flexiSelectDocument: DocumentModel[] = [
     {
         title: "Flexi Select nedir?",
-        routerLink: "/flexi-select",
-        fragment: "what-is-flexi-select"
+        routerLink: "/flexi-select"
     },
     {
         title: "Kurulum",
-        routerLink: "/flexi-select",
-        fragment: "installation"
+        routerLink: "/flexi-select/installation"
     },
     {
         title: "İlk Kullanım",
-        routerLink: "/flexi-select",
-        fragment: "first-use"
+        routerLink: "/flexi-select/first-use"
     },
     {
         title: "Custom Option",
-        routerLink: "/flexi-select",
-        fragment: "custom-option"
+        routerLink: "/flexi-select/custom-option"
     },
     {
         title: "Çoklu Seçim (multiple)",
-        routerLink: "/flexi-select",
-        fragment: "multiple"
+        routerLink: "/flexi-select/multiple"
     }
 ];
 
 export const flexiToastDocument: DocumentModel[] = [
     {
-        title: "Toast Örnek",
-        routerLink: "/flexi-toast",
-        fragment: "toast-use"
+        title: "Flexi Toast Nedir?",
+        routerLink: "/flexi-toast/"
     },
     {
-        title: "Swal Örnek",
-        routerLink: "/flexi-toast",
-        fragment: "swal-use"
+        title: "Flexi Toast Kurulum",
+        routerLink: "/flexi-toast/installation"
     },
     {
-        title: "Kurulum",
-        routerLink: "/flexi-toast",
-        fragment: "installation"
+        title: "Flexi Toast Kullanımı",
+        routerLink: "/flexi-toast/toast-use"
     },
     {
-        title: "Toast Kullanımı",
-        routerLink: "/flexi-toast",
-        fragment: "toast-first-use"
+        title: "Flexi Toast Test",
+        routerLink: "/flexi-toast/toast-test"
     },
     {
-        title: "Swal Kullanımı",
-        routerLink: "/flexi-toast",
-        fragment: "swal-first-use"
+        title: "Flexi Swal Kullanımı",
+        routerLink: "/flexi-toast/swal-use"
     },
     {
-        title: "Toast Full Kullanım Örneği",
-        routerLink: "/flexi-toast",
-        fragment: "toast-full"
-    }, 
-    {
-        title: "Swal Full Kullanım Örneği",
-        routerLink: "/flexi-toast",
-        fragment: "swal-full"
+        title: "Flexi Swal Test",
+        routerLink: "/flexi-toast/swal-test"
     }
 ]

@@ -1,47 +1,101 @@
-<div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-      <li class="nav-item">
-        <a href="#tabs-example-multiple" class="nav-link active" data-bs-toggle="tab">Örnek</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tabs-html-multiple" class="nav-link" data-bs-toggle="tab">component.html</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tabs-ts-multiple" class="nav-link" data-bs-toggle="tab">component.ts</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tabs-ts-multiple-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
-      </li>
-    </ul>
-</div>
-<div class="card-body">
-    <div class="tab-content">
-      <div class="tab-pane active show flexi-select" id="tabs-example-multiple">
-        <h4>İlk kullanım</h4>
-        <flexi-select
-          [data]="users()"
-          label="firstName"
-          value="id"
-          [multiple]="true"
-          [closeAfterSelect]="false"          
-          [themeClass]="shared.themeClass"
-          [(ngModel)]="selectedUserIds"
-          height="100%"
-          (selected)="selected($event)"
-          >
-        </flexi-select>
+
+<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
+  <app-card cardTitle="Çoklu Seçim">
+    <div class="card-body">        
+      <p>Eğer çoklu seçim yapmak isterseniz multiple attribute'e true değer göndermeniz yeterli</p>
+      <h3>Örnek kod:</h3>        
+      <b>component.html</b>
+      <my-code className="" language="html" [code]="multipleHTMLCodeExample()"></my-code>
+  
+      <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
+          <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
+  
+      @defer {
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+            <li class="nav-item">
+              <a href="#tabs-example-multiple" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-html-multiple" class="nav-link" data-bs-toggle="tab">component.html</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-multiple" class="nav-link" data-bs-toggle="tab">component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabs-ts-multiple-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+            </li>
+          </ul>
       </div>
-      <div class="tab-pane" id="tabs-html-multiple">
-        <h4>HTML kodları</h4>
-        <my-code [code]="multipleHTMLCode()" language="html"></my-code>
+      <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active show flexi-select" id="tabs-example-multiple">
+              <h4>İlk kullanım</h4>
+              <flexi-select
+                [data]="users()"
+                label="firstName"
+                value="id"
+                [multiple]="true"
+                [closeAfterSelect]="false"          
+                [themeClass]="shared.themeClass"
+                [(ngModel)]="selectedUserIds"
+                height="100%"
+                (selected)="selected($event)"
+                >
+              </flexi-select>
+            </div>
+            <div class="tab-pane" id="tabs-html-multiple">
+              <h4>HTML kodları</h4>
+              <my-code [code]="multipleHTMLCode()" language="html"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-multiple">
+              <h4>Typescript kodları</h4>
+              <my-code [code]="multipleTSCode()" language="typescript"></my-code>
+            </div>
+            <div class="tab-pane" id="tabs-ts-multiple-data">
+              <h4>Data</h4>
+              <my-code [code]="dataCode()" language="typescript"></my-code>
+            </div>
+          </div>
       </div>
-      <div class="tab-pane" id="tabs-ts-multiple">
-        <h4>Typescript kodları</h4>
-        <my-code [code]="multipleTSCode()" language="typescript"></my-code>
-      </div>
-      <div class="tab-pane" id="tabs-ts-multiple-data">
-        <h4>Data</h4>
-        <my-code [code]="dataCode" language="typescript"></my-code>
-      </div>
+      }@placeholder {
+        <app-loading></app-loading>
+      }
+      <hr>
+      <h3>Kodların açıklaması</h3>
+      <ul>
+        <li><b>[multiple] :</b> Çoklu seçimi aktif etmek için true değeri vermelisiniz</li>
+        <li><b>[closeAfterSelect] :</b> Seçim sonunda select açılsın isterseniz bu attribute'e false değer gönderin. Default true olduğu için her seçim sonrası selecti kapatır
+        <li><b>height :</b> Selectin yüksekliğini ayarlayabilirsiniz. Min yükseklik 36px'dir.</li>
+      </ul>
+  
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Alabileceği Değer Türleri</th>
+            <th>Default Değeri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>multiple</th>
+            <td>true | false</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <th>closeAfterSelect</th>
+            <td>true | false</td>
+            <td>true</td>
+          </tr>
+          <tr>
+            <th>height</th>
+            <td>text</td>
+            <td>100%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
+  </app-card>
+</app-blank>

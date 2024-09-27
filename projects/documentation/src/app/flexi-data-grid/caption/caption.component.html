@@ -44,7 +44,7 @@
           <div class="form-group">
             <div class="form-group">
                 <label class="form-check">
-                    <input class="form-check-input" [disabled]="!showRefreshData()" type="checkbox" [(ngModel)]="showRefreshData">
+                    <input class="form-check-input" [disabled]="!showRefreshBtn()" type="checkbox" [(ngModel)]="showRefreshBtn">
                     <span class="form-check-label">Show or hide Refresh Data</span>
                 </label>
               </div>
@@ -61,7 +61,7 @@
             [captionTitle]="captionTitle()"
             [showColumnVisibility]="showColumnVisibility()" 
             [columnVisibilityBtnClass]="columnVisibilityBtnClass()"
-            [showRefreshData]="showRefreshData()"
+            [showRefreshBtn]="showRefreshBtn()"
             [refreshDataBtnClass]="refreshDataBtnClass()"
             [captionTemplate]="captionTemplate"
             >
