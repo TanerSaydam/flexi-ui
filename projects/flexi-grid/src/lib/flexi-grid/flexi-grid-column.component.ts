@@ -14,7 +14,7 @@ export class FlexiGridColumnComponent {
   @Input() visible: boolean = true;
   @Input() filterType: FilterType = "text";
   @Input() columnTemplate: TemplateRef<any> | any;
-  @Input() format: DateFormatType | CurrencyFormatType | null = null;
+  @Input() format: DateFormatType | DateTimeFormatType | CurrencyFormatType | null = null;
   @Input() fraction: number = 2;
   @Input() symbol: string = "";
   @Input() showSymbolInFront: boolean = true;
@@ -55,17 +55,34 @@ export class FlexiGridColumnComponent {
 export type TextAlignType = "left" | "center" | "right";
 export type FilterType = "text" | "date" | "date-time" | "number" | "select" | "boolean"
 export type DateFormatType =
-  "d" | "dd" | "ddd" | "dddd" | // Gün
-  "M" | "MM" | "MMM" | "MMMM" | // Ay
-  "yy" | "yyyy" | // Yıl
-  "h" | "hh" | "H" | "HH" | // Saat
-  "m" | "mm" | // Dakika
-  "s" | "ss" | // Saniye
-  "dd.MM.yyyy" | "MM/dd/yyyy" | "yyyy-MM-dd" | "dd MMMM yyyy" | "MMMM dd, yyyy" |
-  "d/M/yyyy" | "d/M/yy" | "dd/MM/yyyy" | "MM/dd/yy" | // Gün/Ay/Yıl
-  "yyyy/MM/dd" | "yy/MM/dd" | "yyyy-MM-ddTHH:mm:ss" | "dd-MM-yyyy HH:mm:ss" | // Yıl/Ay/Gün Saat
-  "HH:mm:ss" | "hh:mm:ss a" | // Saat/Dakika/Saniye
-  "yyyy-MM-ddTHH:mm:ssZ" | "yyyy-MM-ddTHH:mm:ss.SSSZ" | // ISO 8601 formatları
-  "MMMM dd, yyyy HH:mm" | "dd MMMM yyyy HH:mm"; // Özel formatlar
+  "d" | "dd" | "ddd" | "dddd" | 
+  "M" | "MM" | "MMM" | "MMMM" | 
+  "yy" | "yyyy" |
+  "dd.MM.yyyy" | "dd.MMM.yyyy" | "dd.MMMM.yyyy" | "dd.MM.yy" | "dd.MMM.yy" | "dd.MMMM.yy" | 
+  "MM/dd/yyyy" | "MMM/dd/yyyy" | "MMMM/dd/yyyy" |  "MM/dd/yy" | "MMM/dd/yy" | "MMMM/dd/yy" |
+  "yyyy-MM-dd" | 
+  "dd MM yyyy" | "dd MMM yyyy" | "dd MMMM yyyy" | "dd MM yy" | "dd MMM yy" | "dd MMMM yy" |
+  "MMMM dd, yyyy" |
+  "d/M/yyyy" | "d/M/yy" | "dd/MM/yyyy" | "MM/dd/yy";
+
+  export type DateTimeFormatType =
+  "H" | "HH" | "HH:mm:ss" | "HH:mm:ss.SSS" | "MM/dd/yy HH:mm" | "MM/dd/yy HH:mm:ss" | "MM/dd/yyyy HH:mm" | "MM/dd/yyyy HH:mm:ss"| 
+  "MMM/dd/yy HH:mm" | "MMM/dd/yy HH:mm:ss" | "MMM/dd/yyyy HH:mm" | "MMM/dd/yyyy HH:mm:ss" | "MMMM dd, yyyy HH:mm" | 
+  "MMMM/dd/yy HH:mm" | "MMMM/dd/yy HH:mm:ss" | "MMMM/dd/yyyy HH:mm" | "MMMM/dd/yyyy HH:mm:ss" | 
+  "dd MM yy HH:mm" | "dd MM yyyy HH:mm" |
+  "dd MMM yy HH:mm" | "dd MMM yyyy" | "dd MMM yyyy HH:mm" |
+  "dd MMMM yy HH:mm" | "dd MMMM yyyy" | "dd MMMM yyyy HH:mm" |
+  "dd-MM-yyyy HH:mm:ss" |
+  "dd.MM.yy HH:mm" | "dd.MM.yy HH:mm:ss" |
+  "dd.MM.yyyy HH:mm" | "dd.MM.yyyy HH:mm:ss" |
+  "dd.MMM.yy HH:mm" | "dd.MMM.yy HH:mm:ss" |
+  "dd.MMM.yyyy HH:mm" | "dd.MMM.yyyy HH:mm:ss" |
+  "dd.MMMM.yy HH:mm" | "dd.MMMM.yy HH:mm:ss" |
+  "dd.MMMM.yyyy HH:mm" | "dd.MMMM.yyyy HH:mm:ss" |
+  "dd/MM/yyyy HH:mm" |
+  "h" | "hh" | "hh:mm:ss a" |
+  "m" | "mm" | "s" | "ss" |
+  "yyyy-MM-dd HH:mm" | "yyyy-MM-dd HH:mm:ss" |
+  "yyyy-MM-ddTHH:mm:ss" | "yyyy-MM-ddTHH:mm:ss.SSS" | "yyyy-MM-ddTHH:mm:ss.SSSZ" | "yyyy-MM-ddTHH:mm:ssZ";
 
 export type CurrencyFormatType = "n" | "c"

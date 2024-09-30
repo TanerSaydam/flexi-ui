@@ -20,10 +20,9 @@
         </svg>
     </div>
     <div class="flexi-select-dropdown" [hidden]="!isOpen()">
-        <input #flexiSelectInput class="flexi-select-search-input" (input)="search()" (keydown)="onKeyDown($event)"
-            type="search">
+        <input #flexiSelectInput class="flexi-select-search-input" (input)="search()" (keydown)="onKeyDown($event)" type="search" [name]="name">
         <ul class="flexi-select-ul" (scroll)="onScroll($event)">
-            @for(item of filteredData(); track $index){                
+            @for(item of filteredData(); track trackByFn()){                
                 <li (click)="select(item)" [class]="setLiClass(item)">
                     <span>{{item[label]}}</span>
                 </li>

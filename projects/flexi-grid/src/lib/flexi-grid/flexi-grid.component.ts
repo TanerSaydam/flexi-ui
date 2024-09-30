@@ -273,7 +273,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       const filters = this.state.filter.filter(p=> p.value != undefined);
 
       filters.forEach((filter) => {
-        filteredData = filteredData.filter(item => {          
+        filteredData = filteredData.filter(item => {
           const field = filter.field;
           const value = filter.value;
           let itemValue = item[field];
@@ -281,9 +281,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
           if(filter.type !== "boolean" && filter.type !== "select" && filter.type !== "number"){
             itemValue = itemValue ? itemValue.toString().toLocaleLowerCase('tr') : '';
             filterValue = value ? value.toString().toLocaleLowerCase('tr') : '';
-          }else if(filter.type === "boolean" || filter.type === "select"){
-            itemValue = itemValue ? true : false;
-            filterValue = value ? true : false;
+          }else if(filter.type === "boolean" || filter.type === "select"){            
+            filterValue = value == "true" ? true : false;
           }else if(filter.type === "number"){
             filterValue = +value.toString().replace(",", ".");
           }
@@ -407,12 +406,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   } 
 
   filter(field: string, operator: string, value: string, type: FilterType) {
+    if(value.toString() === 'undefined') value = "";
+
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
 
-    this.timeoutId = setTimeout(() => {      
-      if (value != undefined) {
+    this.timeoutId = setTimeout(() => {
+      if (value.toString() !== '') {
         this.state.pageNumber = 1;
         this.state.skip = 0;
         let filterField = this.state.filter.find(p => p.field === field);

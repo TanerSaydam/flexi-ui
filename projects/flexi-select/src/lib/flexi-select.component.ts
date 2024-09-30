@@ -1,4 +1,4 @@
-import { Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, inject, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlexiOptionComponent } from './flexi-option.component';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: "./flexi-select.component.html",
   styleUrl: "./flexi-select.component.css",
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -22,6 +23,7 @@ export class FlexiSelectComponent implements OnChanges {
   @Input() data: any[] = [];
   @Input() value: any;
   @Input() label: any;
+  @Input() name: any;
   @Input() noData: string = "Kayıt bulunamadı";
   @Input() selectOne: string = "Seçim yapınız";
   @Input() themeClass: string = "light";
@@ -45,11 +47,13 @@ export class FlexiSelectComponent implements OnChanges {
   isOpen = signal<boolean>(false);
   initialState : any;
 
+  #cdr = inject(ChangeDetectorRef);
+
   ngOnChanges(changes: SimpleChanges): void {    
-    this.filteredData.set(this.data.slice(0, this.itemsPerPage));    
-    
+    this.filteredData.set(this.data.slice(0, this.itemsPerPage));
     this.selectFirstOne();
-    this.selectInitialStateValue();  
+    this.selectInitialStateValue();
+    this.#cdr.detectChanges();
   }
 
   ngAfterContentInit() {
@@ -67,6 +71,10 @@ export class FlexiSelectComponent implements OnChanges {
         this.selectInitialStateValue();        
       }
     });
+  }
+
+  trackByFn() {
+    return 'id-' + (Date.now() * Math.random());
   }
 
   selectInitialStateValue(){

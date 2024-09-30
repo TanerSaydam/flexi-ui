@@ -16,14 +16,13 @@ export class FlexiGridService {
         }
 
         if (state.filter.length > 0) {
-            const filters = state.filter.filter(p=> p.value);
-            
+            const filters = state.filter.filter(p=> p.value.toString() !== 'undefined' && p.value.toString() !== "");
+
             if(filters.length > 0) {
                 endpoint += `&$filter=`;
                 let filterValue: string = "";
     
                 filters.forEach((val: StateFilterModel) => {
-    
                     if (filterValue !== "") {
                         filterValue = filterValue + " and ";
                     }
