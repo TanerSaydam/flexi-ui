@@ -40,7 +40,8 @@ export class FlexiGridService {
                     }
                     else if (val.type === "number") {
                         if (val.operator === "contains") val.operator = "eq";
-                        filterValue += `${this.toTitleCase(val.field)} ${val.operator} ${val.value}`;
+                        const value = +val.value.toString().replace(",", ".");
+                        filterValue += `${this.toTitleCase(val.field)} ${val.operator} ${value}`;
                     }
                     else if (val.type === "text") {
                         switch (val.operator) {
@@ -65,7 +66,7 @@ export class FlexiGridService {
                                 break;
                         }
                     }else if(val.type === "select" || val.type === "boolean"){
-                        filterValue += `${this.toTitleCase(val.field)} eq ${val.value}`
+                        filterValue += `${this.toTitleCase(val.field)} ${val.operator} ${val.value}`
                     }
                 });
                 endpoint += filterValue;

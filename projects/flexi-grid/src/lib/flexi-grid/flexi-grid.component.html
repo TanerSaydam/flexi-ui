@@ -1,5 +1,5 @@
 <title>Angular Flexi Grid</title>
-<div [attr.data-bs-theme]="themeClass" class="flexi-grid-table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width, 'font-size': fontSize}">
+<div [attr.data-bs-theme]="themeClass" class="flexi-grid-table-container overflow-x" [ngClass]="loading ? 'flexi-grid-disabled-div' : ''" [ngStyle]="{'width': autoWidth ? '100%' : width, 'font-size': fontSize}">
   @if(showCaption){
     <div class="flexi-grid-caption-div">
       <span class="flexi-grid-caption-title">{{captionTitle}}</span>
@@ -34,6 +34,12 @@
     </div>
   }
   <div style="width: 100%; overflow-x: auto; position: relative">
+    @if(loading){
+      <div class="flexi-grid-spinner-container">
+        <div class="flexi-grid-spinner-1"></div>
+        <div class="flexi-grid-spinner-2"></div>
+      </div>
+    }
     <table class="flexi-grid-table"  [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}">
       <thead>     
         <tr>
@@ -74,7 +80,7 @@
                 @if(filterable && column.field && column.filterable && showFilterButton(column.filterType)){
                   <div class="p-relative">
                     <i class="fa-solid fa-filter svg cursor show-filter" (click)="toggleFilterDropdown(column.field)"></i>
-                    @if(showClearFilter(column.value)){
+                    @if(showClearFilter(column.filterValue)){
                       <i class="fa-solid fa-filter-circle-xmark svg cursor" (click)="clearFilter(column.field)"></i>
                     }
                     <div class="flexi-grid-dropdown-menu" [ngClass]="column.textAlign === 'right' ? 'flexi-grid-dropdown-menu-right' : ''" [class.show]="filterDropdownVisible()[column.field]">
@@ -118,23 +124,23 @@
                <th class="flexi-grid-filter-th" [hidden]="!column.visible" [attr.data-label]="column.title ? column.title : column.field">
                  <div class="d-flex flexi-grid-filter-container">
                    @if(column.filterType === "text"){
-                     <input class="flexi-grid-filter-input" type="text" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">                     
+                     <input class="flexi-grid-filter-input" type="search" [(ngModel)]="column.filterValue" (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">                     
                    }@else if(column.filterType === "date"){
-                     <input class="flexi-grid-filter-input" type="date" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                     <input class="flexi-grid-filter-input" type="date" [(ngModel)]="column.filterValue" (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">
                    }@else if(column.filterType === "date-time"){
-                     <input class="flexi-grid-filter-input" type="datetime-local" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                     <input class="flexi-grid-filter-input" type="datetime-local" [(ngModel)]="column.filterValue" (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">
                    }@else if(column.filterType === "number"){
-                     <input class="flexi-grid-filter-input" type="number" [(ngModel)]="column.value" (input)="filter(column.field, column.filterOperator, column.value, column.filterType)">
+                     <input class="flexi-grid-filter-input" type="search" [(ngModel)]="column.filterValue" (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">
                    }@else if(column.filterType === "select"){
-                    <select class="flexi-grid-filter-select" (change)="filterSelect(column.field, 'eq', $event, column.filterType)">
-                      <option value="">Seçim yapınız</option>
+                    <select class="flexi-grid-filter-select" [(ngModel)]="column.filterValue" (change)="filter(column.field, 'eq', column.filterValue, column.filterType)">
+                      <option [value]="undefined">Seçim yapınız</option>
                       @for(data of column.filterData;track data.value){
                         <option [value]="data.value">{{data.name}}</option>
                       }
                     </select>
                    }@else if(column.filterType === "boolean" && column.booleanData.length > 0){
-                    <select class="flexi-grid-filter-select" (change)="filterSelect(column.field, 'eq', $event, column.filterType)">
-                      <option value="">Seçim yapınız</option>
+                    <select class="flexi-grid-filter-select" [(ngModel)]="column.filterValue" (change)="filter(column.field, 'eq', column.filterValue, column.filterType)">
+                      <option [value]="undefined">Seçim yapınız</option>
                       <option [value]="true">{{column.booleanData[0]}}</option>
                       <option [value]="false">{{column.booleanData[1]}}</option>                      
                     </select>
@@ -153,13 +159,7 @@
          </tr>
        }    
       </thead>
-      <tbody #tbody class="relative" [ngStyle]="getTBodyStyle()">
-        @if(loading){        
-          <div class="flexi-grid-spinner-container">
-            <div class="flexi-grid-spinner-1"></div>
-            <div class="flexi-grid-spinner-2"></div>
-          </div>
-        }
+      <tbody #tbody class="relative" [ngStyle]="getTBodyStyle()">        
         @if(data.length > 0){      
           @for(item of pagedData(); track $index; let i = $index){
             <tr [ngStyle]="{'min-height': trMinHeight}">

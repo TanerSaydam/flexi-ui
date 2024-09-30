@@ -18,14 +18,8 @@
     --hover-text-color: #212529;
     --border-color: #dee2e6;
     --sticky-border-color: #dee2e6;
-    --success: #1dc9b7;
-    --danger: #f44336;
-    --info: #03a9f4;
-    --primary: #627ca0;
-    --warning: #e5bc62;
-    --secondary: #6c757d;
-    --danger: #Be2d2d;
-    --dark: #212529;
+    --flexi-success: #1dc9b7;
+    --flexi-danger: #f44336;
 }
 
 [data-bs-theme="dark"] {
@@ -39,8 +33,8 @@
     --active-background-color: #f8f9fa;
     --hover-background-color: #f8f9fa;
     --hover-text-color: #212529;
-    --border-color: #141414;
-    --sticky-border-color: #141414;
+    --border-color: #353232;
+    --sticky-border-color: #353232;
 }
 
 input[type=number]::-webkit-outer-spin-button,
@@ -59,12 +53,17 @@ a {
     text-decoration: none !important;
 }
 
+.flexi-grid-disabled-div{
+    pointer-events: none;
+    opacity: 0.95;
+}
+
 .flexi-text-success{
-    color: var(--success);    
+    color: var(--flexi-success);    
 }
 
 .flexi-text-danger{
-    color: var(--danger);    
+    color: var(--flexi-danger);    
 }
 
 .flexi-grid-page-size-select {
@@ -86,8 +85,7 @@ a {
 .flexi-grid-spinner-container {
     position: absolute;
     z-index: 999;
-    width: 100%;
-    background-color: rgba(85, 83, 109, 0.1);
+    width: 100%;    
     height: 100%;
     display: flex;
     justify-content: center;
@@ -308,6 +306,10 @@ a {
 
 .flexi-grid-table-container tbody tr:nth-child(odd) {
     background-color: var(--background-color);
+}
+
+.flexi-grid-table-container tbody tr:nth-child(even) {
+    background-color: var(--background-color-part);
 }
 
 .flexi-grid-table-container tbody tr:hover {

@@ -88,7 +88,7 @@ export class UsersComponent {
     const apiUrl = "https://flexi-ui.webapi.ecnorow.com/api";
     //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
     //let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=500`;
+    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=50`;
 
     this.http.get<any>(endpoint).subscribe({
       next: (res)=> {      

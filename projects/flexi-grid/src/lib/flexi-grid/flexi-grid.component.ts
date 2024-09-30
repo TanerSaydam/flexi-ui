@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, effect, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 
@@ -49,11 +49,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() trMinHeight: string = "45px";
   @Input() showCommandColumn: Boolean = false;
   @Input() commandColumnTitle: string = "İşlemler";
-  @Input() commandColumnWidth: string = "200px";
+  @Input() commandColumnWidth: string = "180px";
   @Input() commandColumnTextAlign: AlignSetting = "center"
   @Input() commandColumnTemplate: TemplateRef<any> | any;
   @Input() stickyCommandColumn: boolean = true;
-  @Input() fontSize: string = "12px";
+  @Input() fontSize: string = "11px";
 
   pageNumberCount = signal<number>(5);
   pageNumbers = signal<number[]>([]);
@@ -106,6 +106,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         this.cdr.detectChanges();
       }
     }
+
     if (this.pageSize !== this.state.pageSize) {     
       this.state.pageSize = +this.pageSize;
     }
@@ -116,6 +117,19 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     } else {
       this.pagedData.set(this.data);
     }
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.columns || this.columns.length === 0) {
+      this.initializeColumnsFromData();
+      this.cdr.detectChanges();
+    }
+
+    this.columns?.forEach(column => {
+      if (column.filterValue != undefined) {
+        this.filter(column.field, column.filterOperator, column.filterValue, column.filterType);
+      }
+    });
   }
 
   giveFilterValueByFilterType(filterType: string){
@@ -144,13 +158,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    if (!this.columns || this.columns.length === 0) {
-      this.initializeColumnsFromData();
-      this.cdr.detectChanges();
-    }
-  }
-
   initializeColumnsFromData(): void {
     if (this.data && this.data.length > 0) {
       const firstItem = this.data[0];
@@ -159,11 +166,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         column.field = key;
         column.title = this.capitalizeFirstLetter(key);
         column.visible = true;
-        column.hideOverflow = true;
+        column.hideOverflow = true;        
         return column;
-      });
-  
-      // Resetting columns with the newly created columns array
+      });  
+      
       if (this.columns) {
         this.columns.reset(columnsArray);
       }
@@ -264,15 +270,23 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     if (this.filterable && this.state.filter.length > 0 && !this.dataBinding) {
-      const filters = this.state.filter.filter(p=> p.value);
+      const filters = this.state.filter.filter(p=> p.value != undefined);
 
-      filters.forEach(filter => {
-        filteredData = filteredData.filter(item => {
+      filters.forEach((filter) => {
+        filteredData = filteredData.filter(item => {          
           const field = filter.field;
           const value = filter.value;
-          let itemValue = item[field].toString();
-          itemValue = itemValue ? itemValue.toString().toLocaleLowerCase('tr') : '';
-          const filterValue = value ? value.toString().toLocaleLowerCase('tr') : '';
+          let itemValue = item[field];
+          let filterValue:any = value;
+          if(filter.type !== "boolean" && filter.type !== "select" && filter.type !== "number"){
+            itemValue = itemValue ? itemValue.toString().toLocaleLowerCase('tr') : '';
+            filterValue = value ? value.toString().toLocaleLowerCase('tr') : '';
+          }else if(filter.type === "boolean" || filter.type === "select"){
+            itemValue = itemValue ? true : false;
+            filterValue = value ? true : false;
+          }else if(filter.type === "number"){
+            filterValue = +value.toString().replace(",", ".");
+          }
 
           switch (filter.operator) {
             case 'eq':
@@ -387,16 +401,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   applyFilter(column: FlexiGridColumnComponent, operator: string){    
     this.filterDropdownVisible()[column.field] = false;    
     column.filterOperator = operator;
-    if(column.value !== ""){
-      this.filter(column.field, operator, column.value, column.filterType);
+    if(column.filterValue !== ""){
+      this.filter(column.field, operator, column.filterValue, column.filterType);
     }
-  }
-
-  filterSelect(field: string, operator: string, event:any, type: FilterType){
-    const value = event.target.value;    
-    
-    this.filter(field, operator, value, type);
-  }
+  } 
 
   filter(field: string, operator: string, value: string, type: FilterType) {
     if (this.timeoutId) {
@@ -404,7 +412,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     this.timeoutId = setTimeout(() => {      
-      if (value !== "") {
+      if (value != undefined) {
         this.state.pageNumber = 1;
         this.state.skip = 0;
         let filterField = this.state.filter.find(p => p.field === field);
@@ -444,7 +452,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.filter(field, "contains", "", "text");
     const column = this.columns?.find(p => p.field === field);
     if (column) {
-      column.value = "";
+      column.filterValue = "";
     }
 
     if(this.dataBinding){
@@ -466,7 +474,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.state = new StateModel();
     this.state.pageSize = this.pageSize;
     this.columns?.forEach(val => {
-      val.value = "";
+      val.filterValue = "";
     });
     this.dataStateChange.emit(this.state);
   }

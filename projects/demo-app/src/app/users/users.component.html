@@ -1,4 +1,4 @@
-<app-blank>  
+<div>  
   <!-- <flexi-editor [(ngModel)]="editorContent"></flexi-editor>
   <div>
     <h3>Editor Content:</h3>
@@ -97,9 +97,9 @@
     [captionTemplate]="captionTemplate"
     [showIndex]="true"
     [autoHeight]="true"
-    [useMinHeight]="false"
+    [useMinHeight]="true"
     [useMinWidth]="true"
-    minHeight="1000px"
+    minHeight="400px"
     minWidth="1000px"    
     [showCommandColumn]="true"
     [commandColumnTemplate]="operationsColumnTemplate"
@@ -107,6 +107,7 @@
     commandColumnTitle="İşlemler"
     (refreshBtnClick)="getAll()"
     [showExportExcelBtn]="true"
+    (dataStateChange)="dataStateChange($event)"
     >
     <ng-template #captionTemplate>      
       <flexi-button btnColor="primary" [outline]="true">Primary</flexi-button>
@@ -143,4 +144,4 @@
   
     </flexi-grid>    
   </div>
-</app-blank>
+</div>

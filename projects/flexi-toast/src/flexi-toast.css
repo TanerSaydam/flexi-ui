@@ -237,21 +237,18 @@
 
 .flexi-swal-content {
     position: relative;
-    padding: 20px;
-    max-width: 650px;
-    min-width: 400px;
-    min-height: 200px;
+    padding: 15px 20px;
     border-radius: 3px;
     background-color: var(--flexi-toast-background-color);
     color: var(--flexi-toast-text-color);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     border-left: 8px solid;
-    animation: flexi-swal-fade-in 0.5s forwards; /* Apply fade-in animation */
+    animation: flexi-swal-fade-in 0.5s forwards;
 }
 
 .flexi-swal-content-left-border-default{

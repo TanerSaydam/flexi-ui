@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { FlexiGridFilterDataModel } from './flexi-grid-filter-data.model';
 
 @Component({
   selector: 'flexi-grid-column',
-  host: { '[attr.host-id]': '"flexi-grid-column-1"' },  
-  template:''
+  host: { '[attr.host-id]': '"flexi-grid-column-1"' },
+  template: ''
 })
-export class FlexiGridColumnComponent { 
+export class FlexiGridColumnComponent {
   @Input() field: string = '';
   @Input() title: string = '';
   @Input() sortable: boolean = true;
@@ -22,15 +22,15 @@ export class FlexiGridColumnComponent {
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
   @Input() className: string = "";
-  @Input() textAlign: TextAlignType = "left";  
+  @Input() textAlign: TextAlignType = "left";
   @Input() hideOverflow: boolean = true;
-  @Input() filterData: FlexiGridFilterDataModel[] = [];  
+  @Input() filterData: FlexiGridFilterDataModel[] = [];
   @Input() booleanData: string[] = [];
   @Input() showCheckbox: boolean = false;
+  @Input() filterValue: any;
 
   @Output() onChange = new EventEmitter<any>();
-  
-  value: string = "";
+
   filterOperator: string = "contains";
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,11 +38,15 @@ export class FlexiGridColumnComponent {
       this.setDefaultFilterOperator();
     }
   }
-  
+
   setDefaultFilterOperator() {
     if (this.filterType === 'number') {
       this.filterOperator = 'ge';
-    } else {
+    }
+    else if (this.filterType === "boolean" || this.filterType === "select") {
+      this.filterOperator = "eq";
+    }
+    else {
       this.filterOperator = 'contains';
     }
   }
@@ -50,7 +54,7 @@ export class FlexiGridColumnComponent {
 
 export type TextAlignType = "left" | "center" | "right";
 export type FilterType = "text" | "date" | "date-time" | "number" | "select" | "boolean"
-export type DateFormatType = 
+export type DateFormatType =
   "d" | "dd" | "ddd" | "dddd" | // Gün
   "M" | "MM" | "MMM" | "MMMM" | // Ay
   "yy" | "yyyy" | // Yıl
@@ -64,4 +68,4 @@ export type DateFormatType =
   "yyyy-MM-ddTHH:mm:ssZ" | "yyyy-MM-ddTHH:mm:ss.SSSZ" | // ISO 8601 formatları
   "MMMM dd, yyyy HH:mm" | "dd MMMM yyyy HH:mm"; // Özel formatlar
 
-  export type CurrencyFormatType = "n" | "c"
+export type CurrencyFormatType = "n" | "c"
