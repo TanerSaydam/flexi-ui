@@ -77,7 +77,41 @@
     </div> -->
 
 
-<button (click)="showToast()">Show Toast</button>
+    <div class="form-troup">
+      <input type="text" class="form-control" tabindex="1">
+    </div>
+
+    <div class="form-troup">
+      <input type="text" class="form-control" tabindex="2">
+    </div>
+
+    <div class="form-troup">
+      <flexi-select
+        [data]="users()"
+        label="firstName"
+        
+        value="id"
+        [tabindex]="3"
+        [multiple]="false"
+        [closeAfterSelect]="true"
+        (selected)="showSelected($event)"
+        [(ngModel)]="selectedItem"
+        ></flexi-select>
+    </div>
+
+    <div class="form-troup">
+      <input type="text" class="form-control" tabindex="4">
+    </div>
+
+    <div class="form-troup">
+      <input type="text" class="form-control" tabindex="5">
+    </div>
+
+    <div class="form-troup">
+      <input type="text" class="form-control" tabindex="6">
+    </div>
+    
+<!-- <button (click)="showToast()">Show Toast</button>
     <flexi-grid
     [data]="users()"
     [dataBinding]="true"
@@ -144,4 +178,4 @@
     </ng-template>
     </flexi-grid>
   </div>
-</div>
+</div> -->

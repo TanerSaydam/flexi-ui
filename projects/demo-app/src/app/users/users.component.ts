@@ -1,5 +1,4 @@
 import { Component, Renderer2, signal } from '@angular/core';
-// import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
 import { StateModel } from '../../../../flexi-grid/src/lib/flexi-grid/state.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../shared.service';
@@ -66,9 +65,6 @@ export class UsersComponent {
 
 
   read(item:any, column:any, rowIndex:any){
-    console.log(item);
-    
-    
   }
   
   onContentChange(content: string) {
