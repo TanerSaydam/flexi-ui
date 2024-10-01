@@ -1,5 +1,5 @@
 <title>Angular Flexi Grid</title>
-<div [attr.data-bs-theme]="themeClass" class="flexi-grid-table-container overflow-x" [ngClass]="loading ? 'flexi-grid-disabled-div' : ''" [ngStyle]="{'width': autoWidth ? '100%' : width, 'font-size': fontSize}">
+<div [attr.data-bs-theme]="themeClass" class="flexi-grid-table-container overflow-x" [ngStyle]="{'width': autoWidth ? '100%' : width, 'font-size': fontSize}">
   @if(showCaption){
     <div class="flexi-grid-caption-div">
       <span class="flexi-grid-caption-title">{{captionTitle}}</span>
@@ -33,7 +33,7 @@
       </div>
     </div>
   }
-  <div style="width: 100%; overflow-x: auto; position: relative">
+  <div style="width: 100%; overflow-x: auto; position: relative" [ngClass]="loading ? 'flexi-grid-disabled-div' : ''">
     @if(loading){
       <div class="flexi-grid-spinner-container">
         <div class="flexi-grid-spinner-1"></div>
