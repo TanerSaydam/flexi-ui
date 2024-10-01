@@ -29,17 +29,16 @@ export default class CustomColumnComponent {
       [stickyCommandColumn]="true" 
       [showCommandColumn]="true">
 
-    <!-- Öncelikle custom column yerleştireceğimiz yere böyle bir işaretleyici koyuyoruz -->
-    <flexi-grid-column field="salary" title="Salary" [columnTemplate]="customSalaryColumnTemplate"></flexi-grid-column>
+    <!-- Öncelikle custom column yerleştireceğimiz yerin içine girip flexiGridCellTemplate attribute'ünü yazıyoruz. Otomatik olarak column içindeki değeri columnda gösteriyor.-->
+    <!-- let-item ile o döngüdeki tüm değerleri yakalıyoruz -->
+    <!-- let-rowIndex="rowIndex" ile index'i yakalıyoruz -->
+    <flexi-grid-column field="salary" title="Salary">      
+      <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">
+        Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}
+      </ng-template>
+    </flexi-grid-column>  
   
-    <!-- let-salary="value" ile value değerindeki bu döngüde gelen salary field değerini yakalıyoruz -->
-    <!-- let-item="item" ile bu döngüdeki tüm datayı yakalıyoruz -->
-    <ng-template #customSalaryColumnTemplate let-salary="value" let-item="item">
-      <!--{{ salary }}Bu direkt işaretlediğimiz column da field değerine karşılık değeri alır-->
-      {{ item.salary | currency: '': '' }} <!--Bu o döngüdeki tüm datayı alır. İçerisinden istediğiniz field a erişebilirsiniz-->
-    </ng-template>
-  
-    <ng-template #customButtonColumnTemplate let-item="item">
+    <ng-template #customButtonColumnTemplate let-item let-index="index">
       <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
       <!-- flexi-button grid ile beraber gelen bir component. İsterseniz uygulamanızda kullanabilirsiniz. -->
       <flexi-button (click)="edit(item.id)" btnColor="primary" [outline]="true">

@@ -32,16 +32,13 @@
               <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
               <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
               <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
-              <flexi-grid-column field="salary" title="Salary"
-                [columnTemplate]="customSalaryColumnTemplate"></flexi-grid-column>              
+              <flexi-grid-column field="salary" title="Salary">
+                <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">                  
+                  Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}                  
+                </ng-template>
+              </flexi-grid-column>
 
-              <ng-template #customSalaryColumnTemplate let-salary="value" let-item="item">
-                <!--{{ salary }}Bu direkt işaretlediğimiz column da field değerine karşılık değeri alır-->
-                {{ item.salary | currency: '': '' }}
-                <!--Bu o döngüdeki tüm datayı alır. İçerisinden istediğiniz field a erişebilirsiniz-->
-              </ng-template>
-
-              <ng-template #customButtonColumnTemplate let-item="item">
+              <ng-template #customButtonColumnTemplate let-item>
                 <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
                 <flexi-button (click)="edit(item.id)" btnColor="primary" [outline]="true">
                   <i class="fa-solid fa-edit"></i>

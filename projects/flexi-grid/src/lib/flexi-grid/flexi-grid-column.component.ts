@@ -1,5 +1,7 @@
-import { Component, EventEmitter, input, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, ContentChild, EventEmitter, input, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { FlexiGridFilterDataModel } from './flexi-grid-filter-data.model';
+import { FlexiGridCellTemplateDirective } from './directives/flexi-grid-cell-template.directive';
+import { FlexiGridHeaderTemplateDirective } from './directives/flexi-grid-header-template.directive';
 
 @Component({
   selector: 'flexi-grid-column',
@@ -12,8 +14,7 @@ export class FlexiGridColumnComponent {
   @Input() sortable: boolean = true;
   @Input() filterable: boolean = true;
   @Input() visible: boolean = true;
-  @Input() filterType: FilterType = "text";
-  @Input() columnTemplate: TemplateRef<any> | any;
+  @Input() filterType: FilterType = "text";  
   @Input() format: DateFormatType | DateTimeFormatType | CurrencyFormatType | null = null;
   @Input() fraction: number = 2;
   @Input() symbol: string = "";
@@ -29,6 +30,12 @@ export class FlexiGridColumnComponent {
   @Input() showCheckbox: boolean = false;
   @Input() filterValue: any;
 
+  @ContentChild(FlexiGridCellTemplateDirective, {read: TemplateRef})
+  cellTemplate?: TemplateRef<any>;
+
+  @ContentChild(FlexiGridHeaderTemplateDirective, {read: TemplateRef})
+  headerTemplate?: TemplateRef<any>;
+  
   @Output() onChange = new EventEmitter<any>();
 
   filterOperator: string = "contains";

@@ -19,7 +19,7 @@
     "@angular/platform-browser": "^18.0.6",
     "@angular/platform-browser-dynamic": "^18.0.6",
     "@angular/router": "^18.0.6",
-    "flexi-grid": "^18.8.0",
+    "flexi-grid": "^18.8.77",
     "flexi-select": "^18.2.1",
     "flexi-toast": "^18.1.5",
     "prismjs": "^1.29.0",

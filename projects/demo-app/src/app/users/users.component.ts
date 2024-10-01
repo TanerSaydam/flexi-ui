@@ -64,6 +64,12 @@ export class UsersComponent {
     //toast.options.swalContentThemeClass = "warning"  
   }
 
+
+  read(item:any, column:any, rowIndex:any){
+    console.log(item);
+    
+    
+  }
   
   onContentChange(content: string) {
     this.editorContent = content;
@@ -86,9 +92,9 @@ export class UsersComponent {
     this.loading.set(true);
     //const apiUrl = "https://localhost:7040/api";
     const apiUrl = "https://flexi-ui.webapi.ecnorow.com/api";
-    //let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
-    //let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=50`;
+    let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
+    let endpoint = `${apiUrl}/Users/GetAll?$count=true&${oDataEndpointPart}`;
+    //let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&$top=50`;
 
     this.http.get<any>(endpoint).subscribe({
       next: (res)=> {      

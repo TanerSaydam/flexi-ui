@@ -14,13 +14,13 @@
         }
       },
       "architect": {
-        "build": {
+        "build": {          
           "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
+          "options": {            
             "project": "projects/flexi-grid/ng-package.json"
           },
-          "configurations": {
-            "production": {
+          "configurations": {            
+            "production": {              
               "tsConfig": "projects/flexi-grid/tsconfig.lib.prod.json"
             },
             "development": {
@@ -48,6 +48,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "outputHashing": "all",
+            "aot": true,
             "outputPath": "dist/documentation",
             "index": "projects/documentation/src/index.html",
             "browser": "projects/documentation/src/main.ts",
@@ -145,6 +147,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "aot": true,
             "outputPath": "dist/demo-app",
             "index": "projects/demo-app/src/index.html",
             "browser": "projects/demo-app/src/main.ts",

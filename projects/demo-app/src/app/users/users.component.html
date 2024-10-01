@@ -83,7 +83,7 @@
     [dataBinding]="true"
     [showRefreshBtn]="true"
     [total]="total()"
-    [pageable]="true"    
+    [pageable]="true"
     [pageSize]="10"
     [filterable]="true"
     [themeClass]="shared.themeClass()"
@@ -104,8 +104,7 @@
     [showCommandColumn]="true"
     [commandColumnTemplate]="operationsColumnTemplate"
     [stickyCommandColumn]="true"
-    commandColumnTitle="İşlemler"
-    (refreshBtnClick)="getAll()"
+    commandColumnTitle="İşlemler"    
     [showExportExcelBtn]="true"
     (dataStateChange)="dataStateChange($event)"
     >
@@ -127,7 +126,11 @@
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name" [hideOverflow]="false"></flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name" [hideOverflow]="false">
+      <ng-template flexiGridCellTemplate let-item let-column="column" let-rowIndex="rowIndex">
+        {{read(item,column,rowIndex)}}
+      </ng-template>
+    </flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
@@ -139,9 +142,6 @@
           <i class="fa-solid fa-trash"></i>
         </flexi-button>
     </ng-template>
-    <!-- <flexi-grid-column [columnTemplate]="operationsColumnTemplate" title="İşlemler" width="100px" textAlign="center">
-    </flexi-grid-column> -->
-  
-    </flexi-grid>    
+    </flexi-grid>
   </div>
 </div>

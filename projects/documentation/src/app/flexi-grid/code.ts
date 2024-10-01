@@ -105,6 +105,11 @@ export const fullExampleHTMLCode: string = `
   <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
   <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
   <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+  <flexi-grid-column title="Custom Column">
+     <ng-template flexiGridCellTemplate let-item>
+        Burası Custom Column
+     </ng-template>
+  </flexi-grid-column>
   <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
   <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right" [showSymbolInFront]="true" [fraction]="2" title="Salary">    
   </flexi-grid-column>
@@ -946,14 +951,13 @@ export const customColumnHTMLCode: string = `
     <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
     <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" title="Salary" [columnTemplate]="customSalaryColumnTemplate"></flexi-grid-column>
-    <flexi-grid-column title="Actions" [columnTemplate]="customButtonColumnTemplate"></flexi-grid-column>
-
-    <ng-template #customSalaryColumnTemplate let-salary="value" let-item="item">
-        <!--{{ salary }}Bu direkt işaretlediğimiz column da field değerine karşılık değeri alır-->
-        {{ item.salary | currency: '': '' }}
-        <!--Bu o döngüdeki tüm datayı alır. İçerisinden istediğiniz field a erişebilirsiniz-->
-    </ng-template>
+    
+    <flexi-grid-column field="salary" title="Salary">
+      <!-- let-item ile bu döngüdeki tüm datayı yakalıyoruz -->
+      <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">
+        Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}
+      </ng-template>
+    </flexi-grid-column>
 
     <ng-template #customButtonColumnTemplate let-item="item">
         <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->

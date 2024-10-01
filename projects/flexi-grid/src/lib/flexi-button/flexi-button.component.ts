@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'flexi-button',
   templateUrl: './flexi-button.component.html',
   styleUrl: './flexi-button.component.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  host: { 'data-host': 'flexi-button' },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlexiBtnComponent implements OnInit {
   @Input() className: string = "flexi-grid-btn";
