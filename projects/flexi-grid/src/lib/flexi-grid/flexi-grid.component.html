@@ -24,7 +24,7 @@
           </flexi-button>
         }
         @if(showRefreshBtn || dataBinding){
-          <flexi-button [className]="refreshDataBtnClass" (click)="refreshBtnClick">
+          <flexi-button [className]="refreshDataBtnClass" (click)="refreshDataMethod()">
             <i class="fa-solid fa-arrow-rotate-right"></i>
           </flexi-button>
         }
@@ -237,7 +237,7 @@
   </div>
   @if(pageable){
     <div class="flexi-grid-pagination-container">
-      @if(!isShowMobileFilter){
+      @if(!isShowMobileFilter()){
         <div class="flexi-grid-pagination-part-one">
           <select class="flexi-grid-pagesize-select" [ngModel]="state.pageSize" (change)="changePageSize($event)">
             @for(size of pageSizeList; track size){
@@ -247,7 +247,7 @@
         </div>
         <div class="flexi-grid-pagination-part-two">
           <ul class="flexi-grid-pagination">
-            @if(this.pageNumbers.length > 1){              
+            @if(this.pageNumbers().length > 1){              
               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
                 <a class="flexi-grid-page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
@@ -264,7 +264,7 @@
                 <a class="flexi-grid-page-link">...</a>
               </li>
               }
-              @for(pageNumber of pageNumbers(); track pageNumber){
+              @for(pageNumber of pageNumbers(); track trackByFn()){
               <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
                 <a (click)="changePage(pageNumber)" class="flexi-grid-page-link">
                   {{pageNumber}}
@@ -294,7 +294,7 @@
       }
       <div class="flexi-grid-pagination-part-third">
         <span> 
-            {{state.pageNumber}} - {{totalPageCount()}} sayfasındasınız. Toplam kayıt sayısı {{(total | currency: '': '': '1.0')!.replace(',','.')}}
+            {{state.pageNumber}} - {{totalPageCount()}} of {{(total | currency: '': '': '1.0')!.replace(',','.')}} items 
         </span>
       </div>
     </div>

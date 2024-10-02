@@ -142,14 +142,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       }
     });
   }
-
-  ngAfterContentInit() {
-    console.log('Columns:', this.columns?.toArray());
-    this.columns?.forEach(column => {
-      console.log('Column:', column.field, 'Header Template:', column.headerTemplate);
-    });   
-  }
-
+ 
   giveFilterValueByFilterType(filterType: string) {
     switch (filterType) {
       case "text":

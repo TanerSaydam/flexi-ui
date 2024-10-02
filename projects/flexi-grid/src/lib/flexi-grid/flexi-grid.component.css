@@ -332,7 +332,7 @@ div .flexi-grid-active {
     display: none;
     position: absolute;
     top: 100%;
-    z-index: 999;
+    z-index: 1000;
     right: 0;
     float: left;
     min-width: 160px;    
@@ -442,7 +442,7 @@ div .flexi-grid-active {
 .flexi-sticky-column {    
     position: sticky;
     right: 0; /* Sağ tarafa sabitlemek için */    
-    z-index: 100; /* Diğer sütunların üstünde olması için */
+    z-index: 50; /* Diğer sütunların üstünde olması için */
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Hafif bir gölge */    
 }
 
