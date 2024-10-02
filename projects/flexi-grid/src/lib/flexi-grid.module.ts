@@ -6,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { TrCurrencyPipe } from 'tr-currency';
 import { FlexiBtnComponent } from './flexi-button/flexi-button.component';
 import { FlexiGridCellTemplateDirective } from './flexi-grid/directives/flexi-grid-cell-template.directive';
+import { FlexiGridHeaderTemplateDirective } from './flexi-grid/directives/flexi-grid-header-template.directive';
 
 @NgModule({
   declarations: [
     FlexiGridComponent,
     FlexiGridColumnComponent,
     FlexiBtnComponent,
-    FlexiGridCellTemplateDirective
+    FlexiGridCellTemplateDirective,
+    FlexiGridHeaderTemplateDirective
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { FlexiGridCellTemplateDirective } from './flexi-grid/directives/flexi-gr
     FlexiGridComponent,
     FlexiGridColumnComponent,
     FlexiBtnComponent,
-    FlexiGridCellTemplateDirective
+    FlexiGridCellTemplateDirective,
+    FlexiGridHeaderTemplateDirective
   ]
 })
 export class FlexiGridModule { }

@@ -30,7 +30,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   @Input() itemsPerPage: number = 30;
   @Input() clientHeight: number = 180;
   @Input() multiple: boolean = false;
-  @Input() closeAfterSelect: boolean = true;
+  @Input() closeAfterSelect: boolean = false;
   @Input() height: string = "100%";
   @Input() tabindex: number = 0;
 
@@ -157,15 +157,6 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     this.filteredData()[0].isSelected = true;
   }
 
-  toggleDropdown() {
-    this.isOpen.set(!this.isOpen());
-
-    if (this.isOpen()) {
-      setTimeout(() => {
-        this.searchInput?.nativeElement.focus();
-      }, 100);
-    }
-  }
 
   @HostListener('document:click', ['$event'])
   handleClick(event: MouseEvent) {
@@ -212,8 +203,6 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   }
 
   private handleAlphabeticInput(char: string) {
-    console.log(char);
-    // Dropdown'ı aç
     if (!this.isOpen()) {
       this.isOpen.set(true);
       setTimeout(() => {
@@ -224,8 +213,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
 
   }
   
-  onKeyDown(event: KeyboardEvent) {
-    console.log(event);
+  onKeyDown(event: KeyboardEvent) {    
     const currentIndex = this.filteredData().findIndex(item => item.isSelected);
     if (event.key === 'Enter' || event.key === 'Tab') {
       event.preventDefault();      
@@ -354,9 +342,9 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     this.clearAllSelected();
     item.isSelected = true;
     this.selectedItem.set(item);
-    if (this.closeAfterSelect) {
-      this.isOpen.set(false);
-    }
+    this.isOpen.set(false);    
+    this.closedAfterSelect.set(false);
+
     this.selected.emit(item[this.value]);
     this.onChange(item[this.value]);
     this.searchInput!.nativeElement.select();
@@ -365,9 +353,14 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   select(item: any) {
     if (this.multiple) {
       this.selectForMultiple(item);
+      if(this.closeAfterSelect){
+        this.moveToNextElement();
+      }
     } else {
       this.selectSingle(item);
+      this.moveToNextElement();
     }
+
   }
 
   selectOption(option: FlexiOptionComponent) {

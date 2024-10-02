@@ -1,10 +1,9 @@
 <div class="flexi-select" (keypress)="onKeyPress($event)" [attr.data-bs-theme]="themeClass" role="combobox" [attr.aria-expanded]="isOpen()" [attr.aria-owns]="uniqueName + '-listbox'" aria-haspopup="listbox">
     <div class="flexi-select-div"
          #flexiSelectDiv
-         (click)="toggleDropdown()" 
          [ngStyle]="{'height': height}"
          [tabindex]="tabindex"
-         (keydown.space)="$event.preventDefault(); toggleDropdown()"         
+         (keydown.space)="$event.preventDefault(); this.isOpen.set(true)"         
          (focus)="onFocus()"
          (blur)="onBlur()"
          [attr.aria-controls]="uniqueName() + '-listbox'"
