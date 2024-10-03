@@ -92,8 +92,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     { operator: "le", value: 'Daha küçüktür ya da eşittir' }
   ]);
   draggedColumnIndex: number | undefined;
-  tempDraggable: boolean = false;
-  tableInitialWidth: number = 0;
+  tempDraggable: boolean = false;  
 
   private _pageSize: number = 10;
 
@@ -142,9 +141,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       if (column.filterValue != undefined) {
         this.filter(column.field, column.filterOperator, column.filterValue, column.filterType);
       }
-    });
-
-    this.tableInitialWidth = this.tableElement!.nativeElement.querySelector('table').offsetWidth;
+    });    
   }
  
   giveFilterValueByFilterType(filterType: string) {
@@ -575,12 +572,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   onMouseMove = (event: MouseEvent) => {
     if (this.resizingColumn) {
       const offset = event.pageX - this.startX!;
-      const newWidth = this.startWidth! + offset;
-      this.resizingColumn.width = newWidth + 'px';
-  
-      // Tablonun toplam genişliğini güncelle
-      const table = this.tableElement!.nativeElement.querySelector('table');
-      table.style.width = (this.tableInitialWidth + offset) + 'px';
+      this.resizingColumn.width = this.startWidth! + offset + 'px';
     }
   }
 
@@ -595,8 +587,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       this.draggable = this.tempDraggable;
       this.tempDraggable = false;
     }
-
-    this.tableInitialWidth = this.tableElement!.nativeElement.querySelector('table').offsetWidth;
   }
 
   onDragStart(event: DragEvent, index: number) {
