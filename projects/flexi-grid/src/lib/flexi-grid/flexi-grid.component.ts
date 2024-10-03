@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, computed, effect, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, inject, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from './state.model';
 
@@ -93,6 +93,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   ]);
   draggedColumnIndex: number | undefined;
   tempDraggable: boolean = false;
+  tableInitialWidth: number = 0;
 
   private _pageSize: number = 10;
 
@@ -106,13 +107,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @ViewChild('table') table: ElementRef | undefined;
   @ViewChild("filterTr") filterTr: ElementRef<HTMLTableRowElement> | undefined;
   @ViewChild("tbody") tbody: ElementRef | undefined;
+  @ViewChild('table') tableElement: ElementRef | undefined;
 
   resizingColumn: any;
   startX: number | undefined;
   startWidth: number | undefined;
   isShowMobileFilter = signal<boolean>(false);
 
-  #cdr = inject(ChangeDetectorRef);
+  #cdr = inject(ChangeDetectorRef);  
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data.length > 0) {
@@ -141,6 +143,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         this.filter(column.field, column.filterOperator, column.filterValue, column.filterType);
       }
     });
+
+    this.tableInitialWidth = this.tableElement!.nativeElement.querySelector('table').offsetWidth;
   }
  
   giveFilterValueByFilterType(filterType: string) {
@@ -475,8 +479,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  toggleColumnVisibilityDropdown() {
-    this.columnVisibilityDropdownVisible.set(!this.columnVisibilityDropdownVisible())
+  openColumnVisibilityDropdown() {
+    this.columnVisibilityDropdownVisible.set(true)
   }
 
   refreshDataMethod() {
@@ -571,7 +575,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   onMouseMove = (event: MouseEvent) => {
     if (this.resizingColumn) {
       const offset = event.pageX - this.startX!;
-      this.resizingColumn.width = this.startWidth! + offset + 'px';
+      const newWidth = this.startWidth! + offset;
+      this.resizingColumn.width = newWidth + 'px';
+  
+      // Tablonun toplam genişliğini güncelle
+      const table = this.tableElement!.nativeElement.querySelector('table');
+      table.style.width = (this.tableInitialWidth + offset) + 'px';
     }
   }
 
@@ -586,6 +595,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       this.draggable = this.tempDraggable;
       this.tempDraggable = false;
     }
+
+    this.tableInitialWidth = this.tableElement!.nativeElement.querySelector('table').offsetWidth;
   }
 
   onDragStart(event: DragEvent, index: number) {
@@ -660,17 +671,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.tbody!.nativeElement.classList.remove("hide");
   }
 
-  tdNoTemplateClassName(column: FlexiGridColumnComponent) {
+  tdTemplateClassName(column: FlexiGridColumnComponent) {
     let className: string = column.className;
 
     if (className !== "") className += " ";
     className += column.hideOverflow ? 'text-overflow-hidden' : ''
-
-    return className;
-  }
-
-  tdTemplateClassName(column: FlexiGridColumnComponent) {
-    let className: string = column.className;
 
     return className;
   }
@@ -706,8 +711,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     return 'none';
   }
 
-  getSortIcon(column: string): string {
-    if (this.state.sort.field === column) {
+  getSortIcon(column: any): string {
+    debugger
+    if (this.state.sort.field === column.field) {
       return this.state.sort.dir === 'asc' ? '↑' : '↓';
     }
     return '';

@@ -10,7 +10,7 @@
           </flexi-button>
         }
         @if(showColumnVisibility){
-          <flexi-button [className]="columnVisibilityBtnClass" title="Sütun Görünürlüğü" (click)="toggleColumnVisibilityDropdown()">
+          <flexi-button [className]="columnVisibilityBtnClass" title="Sütun Görünürlüğü" (click)="openColumnVisibilityDropdown()">
             <i class="fa-solid fa-list-check cursor"></i>
             <div class="flexi-grid-dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
               <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
@@ -39,7 +39,7 @@
         <div class="flexi-grid-spinner-2"></div>
     </div>
     }
-    <table class="flexi-grid-table"  [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth}" aria-label="Flexi Grid Table" role="table">
+    <table #table class="flexi-grid-table"  [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth, 'width': 'auto'}" aria-label="Flexi Grid Table" role="table">
       <thead role="rowgroup">     
         <tr role="row">
           @if(showIndex){
@@ -64,10 +64,14 @@
                   <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
                 }
                 @if(sortable && column.sortable && column.field && data.length > 0){
-                  <div (click)="sort(sortable,column)">
+                  <div (click)="sort(sortable,column)" style="display: flex; gap: 10px;">
                     <span class="flexi-grid-th-title-span">{{ column.title ? column.title : column.field }}</span>
                     <div class="ms-2">
-                      <span aria-hidden="true">{{ getSortIcon('name') }}</span>
+                      @if(this.state.sort.field === column.field){
+                        <span>
+                          {{ state.sort.dir === 'asc' ? '↑' : '↓' }}
+                        </span>
+                      }
                     </div>
                   </div>
                 }@else {
