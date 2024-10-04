@@ -141,13 +141,12 @@
     commandColumnTitle="İşlemler"    
     [showExportExcelBtn]="true"
     (dataStateChange)="dataStateChange($event)"
-    >
+    dataBindingEndpoint="https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll"
+    dataPath='data'
+  >
     <ng-template #captionTemplate>
       <flexi-button icon="add" btnColor="success">
       </flexi-button>
-      <flexi-button icon="menu" btnColor="info"></flexi-button>
-      <flexi-button icon="file_save" btnColor="warning"></flexi-button>
-      <flexi-button icon="refresh" btnColor="dark"></flexi-button>
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
@@ -161,7 +160,7 @@
         <input type="datetime" class="form-control">
       </ng-template>
     </flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd.MM.yyyy" textAlign="center"></flexi-grid-column>
+    <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd MMM yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
     <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
     <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="true"></flexi-grid-column>

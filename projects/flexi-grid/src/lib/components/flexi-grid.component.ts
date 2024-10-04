@@ -1,6 +1,9 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, inject, signal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from '../models/state.model';
+import * as ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'flexi-grid',
@@ -36,10 +39,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() useMinWidth: boolean = false;
   @Input() autoWidth: boolean = false;
   @Input() width: string = "100%";
-  @Input() indexWidth: string = "70px";
-  @Input() columnVisibilityBtnClass: string = "flexi-grid-btn";
-  @Input() refreshDataBtnClass: string = "flexi-grid-btn";
-  @Input() exportExcelBtnClass: string = "flexi-grid-btn";
+  @Input() indexWidth: string = "70px";     
   @Input() exportExcelFileName: string = "excel-export";
   @Input() exportExcelButtonClick: (() => void) | undefined;
   @Input() footerPerPageText: string = "items per page";
@@ -54,6 +54,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() commandColumnTemplate: TemplateRef<any> | any;
   @Input() stickyCommandColumn: boolean = true;
   @Input() fontSize: string = "11px";
+  @Input() dataBindingEndpoint: string = '';
+  @Input() dataPath: string = 'data';
 
   @Input()
   set pageSize(value: number) {
@@ -114,6 +116,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   isShowMobileFilter = signal<boolean>(false);
 
   #cdr = inject(ChangeDetectorRef);  
+  #http = inject(HttpClient);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data.length > 0) {
@@ -476,8 +479,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  openColumnVisibilityDropdown() {
-    this.columnVisibilityDropdownVisible.set(true)
+  toggleColumnVisibilityDropdown() {
+    this.columnVisibilityDropdownVisible.set(!this.columnVisibilityDropdownVisible())
   }
 
   refreshDataMethod() {
@@ -514,43 +517,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     if (!target.closest('.dropdown-menu') && !target.closest('button')) {
       this.columnVisibilityDropdownVisible.set(false);
     }
-  }
-
-  onExportExcelButtonClick() {
-    if (this.exportExcelButtonClick) {
-      this.exportExcelButtonClick();
-    } else {
-      this.exportExcel();
-    }
-  }
-
-  exportExcel() {
-    const visibleColumns: any[] = this.columns?.filter(column => column.visible).map(column => {
-      return { field: column.field, title: column.title || column.field };
-    }) || [];
-
-    let csvData = visibleColumns.map(col => col.title).join(',') + '\n';
-
-    let exportData = this.data;
-
-    exportData.forEach(row => {
-      let rowData = visibleColumns.map(col => {
-        // Hücre içeriğindeki virgüller ve çift tırnakları kaçış karakteri ile değiştir
-        const cellData = row[col.field] ? row[col.field].toString().replace(/"/g, '""') : '';
-        return `"${cellData}"`;
-      }).join(',');
-      csvData += rowData + '\n';
-    });
-
-    const blob = new Blob([csvData], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', this.exportExcelFileName + '.csv');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   }
 
   onMouseDown(event: MouseEvent | any, column: any) {
@@ -707,5 +673,80 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       return this.state.sort.dir === 'asc' ? '↑' : '↓';
     }
     return '';
+  }
+
+  async onExportExcelButtonClick() {
+    if (this.exportExcelButtonClick) {
+      this.exportExcelButtonClick();
+    } else {
+      if (this.dataBinding && this.dataBindingEndpoint) {
+        await this.fetchAllData();
+      }
+      this.exportExcel();
+    }
+  }
+
+  async fetchAllData() {
+    try {
+      const response: any = await this.#http.get(this.dataBindingEndpoint).toPromise();
+      
+      let fetchedData: any[] = [];
+  
+      if (this.dataPath) {
+        // Kullanıcının belirttiği yolu kullanarak veriyi al
+        fetchedData = this.getNestedProperty(response, this.dataPath);
+      } else if (Array.isArray(response)) {
+        // Yanıt doğrudan bir dizi ise
+        fetchedData = response;
+      } else if (typeof response === 'object' && response.hasOwnProperty('data') && Array.isArray(response.data)) {
+        // Yanıt bir nesne ve 'data' özelliği bir dizi ise
+        fetchedData = response.data;
+      }
+  
+      if (Array.isArray(fetchedData) && fetchedData.length > 0) {
+        this.data = fetchedData;
+      } else {
+        console.error('Geçerli veri bulunamadı');
+      }
+    } catch (error) {
+      console.error('Veri çekme hatası:', error);
+    }
+  }
+
+  private getNestedProperty(obj: any, path: string): any {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  }
+
+  async exportExcel() {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Sayfa1');
+
+    const visibleColumns = this.columns?.filter(column => column.visible) || [];
+
+    // Başlıkları ekle
+    worksheet.addRow(visibleColumns.map(col => col.title || col.field));
+
+    // Verileri ekle
+    this.data.forEach(row => {
+      const rowData = visibleColumns.map(col => this.getFieldValue(row, col.field));
+      worksheet.addRow(rowData);
+    });
+
+    // Stil ayarları
+    worksheet.getRow(1).font = { bold: true };
+    visibleColumns.forEach((col, index) => {
+      const column = worksheet.getColumn(index + 1);
+      column.width = 15;
+      if (col.textAlign === 'right') {
+        column.alignment = { horizontal: 'right' };
+      } else if (col.textAlign === 'center') {
+        column.alignment = { horizontal: 'center' };
+      }
+    });
+
+    // Excel dosyasını oluştur ve indir
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(blob, `${this.exportExcelFileName}.xlsx`);
   }
 }

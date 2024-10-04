@@ -26,16 +26,11 @@
   justify-content: center;  
   line-height: 1;
   border-radius: 3px;
-  transition: all 0.3s ease; /* Yumuşak geçiş efekti ekleyin */
-}
-
-.flexi-button:hover{
-  opacity: 0.8; /* Hover durumunda şeffaflık ekleyin */
-  transform: translateY(-2px); /* Hafif yukarı kaldırma efekti */
+  transition: all 0.3s ease;
 }
 
 .flexi-button:active {
-  transform: translateY(1px); /* Tıklama anında hafif aşağı inme efekti */
+  transform: translateY(1px);
 }
 
 .flexi-button-success{
@@ -73,13 +68,11 @@
   color: #fff;
 }
 
-/* Devre dışı durum için stil */
 .flexi-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* Boyut varyasyonları */
 .flexi-button-size-small {
   font-size: 8px;
   padding: 2.5px;
@@ -95,7 +88,6 @@
   padding: 4px 6px;
 }
 
-/* Outline varyasyonları */
 .flexi-button-outline {
   background-color: transparent;
   border-width: 2px;
@@ -136,7 +128,6 @@
   color: #000;
 }
 
-/* Hover efektleri için ek stiller */
 .flexi-button-outline:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }

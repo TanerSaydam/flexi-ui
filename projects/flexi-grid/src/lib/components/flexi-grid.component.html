@@ -5,28 +5,24 @@
       <div class="d-flex" style="gap: 10px;">      
         <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
         @if(showExportExcelBtn){
-          <button [className]="exportExcelBtnClass" (click)="onExportExcelButtonClick()">
-            <i class="fa-solid fa-file-excel"></i>            
-          </button>
+          <flexi-button icon="file_save" btnColor="warning" (click)="onExportExcelButtonClick()" />
         }
         @if(showColumnVisibility){
-          <button [className]="columnVisibilityBtnClass" title="Sütun Görünürlüğü" (click)="openColumnVisibilityDropdown()">
-            <i class="fa-solid fa-list-check cursor"></i>
+          <div style="position: relative;">
+            <flexi-button icon="menu" btnColor="info" (click)="toggleColumnVisibilityDropdown()"/>
             <div class="flexi-grid-dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
               <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
               @for(column of columns; track trackByFn()){
-                <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field">
-                  <input [(ngModel)]="column.visible" [id]="column.field" type="checkbox">
+                <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field ? column.field : column.title">
+                  <input [(ngModel)]="column.visible" [id]="column.field ? column.field : column.title" type="checkbox">
                   {{ column.title ? column.title : column.field }}
                 </label>                    
-              }                    
+              }
             </div>
-          </button>
+          </div>
         }
         @if(showRefreshBtn || dataBinding){
-          <button [className]="refreshDataBtnClass" (click)="refreshDataMethod()">
-            <i class="fa-solid fa-arrow-rotate-right"></i>
-          </button>
+          <flexi-button icon="refresh" btnColor="dark" (click)="refreshDataMethod()" />
         }
         <div style="margin-right: 10px;"></div>
       </div>
@@ -129,7 +125,11 @@
                     <ng-container *ngTemplateOutlet="column.headerTemplate"></ng-container>
                   }@else if(column.field){
                     @if(column.filterType === "text"){
-                      <input class="flexi-grid-filter-input" type="search" [(ngModel)]="column.filterValue" (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">                     
+                      <input
+                        class="flexi-grid-filter-input"
+                        type="search"
+                        [(ngModel)]="column.filterValue"
+                        (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">                  
                     }@else if(column.filterType === "date"){
                       <input class="flexi-grid-filter-input" type="date" [(ngModel)]="column.filterValue" (input)="filter(column.field, column.filterOperator, column.filterValue, column.filterType)">
                     }@else if(column.filterType === "date-time"){
