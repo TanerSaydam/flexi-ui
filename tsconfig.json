@@ -11,8 +11,14 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "paths": {
+      "flexi-button": [
+        "./dist/flexi-button"
+      ],
       "flexi-editor": [
         "./dist/flexi-editor"
+      ],
+      "flexi-icon": [
+        "./dist/flexi-icon"
       ],
       "flexi-select": [
         "./dist/flexi-select"

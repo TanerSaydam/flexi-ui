@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;  /* Preferred icon size */
+    display: inline-flex;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;    
+}
+
+.flexi-button{
+  box-sizing: border-box;
+  border: 1px solid transparent;  
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;  
+  line-height: 1;
+  border-radius: 3px;
+  transition: all 0.3s ease; /* Yumuşak geçiş efekti ekleyin */
+}
+
+.flexi-button:hover{
+  opacity: 0.8; /* Hover durumunda şeffaflık ekleyin */
+  transform: translateY(-2px); /* Hafif yukarı kaldırma efekti */
+}
+
+.flexi-button:active {
+  transform: translateY(1px); /* Tıklama anında hafif aşağı inme efekti */
+}
+
+.flexi-button-success{
+  background-color: #28a745;
+  color: #fff;
+}
+
+.flexi-button-danger{
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.flexi-button-warning{
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.flexi-button-info{
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.flexi-button-dark{
+  background-color: #343a40;
+  color: #fff;
+}
+
+.flexi-button-default{
+  background-color: #fff;
+  color: #000;
+}
+
+.flexi-button-primary{
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Devre dışı durum için stil */
+.flexi-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Boyut varyasyonları */
+.flexi-button-size-small {
+  font-size: 8px;
+  padding: 2.5px;
+}
+
+.flexi-button-size-default {
+  font-size: 12px;
+  padding: 4px;
+}
+
+.flexi-button-size-large {
+  font-size: 14px;
+  padding: 4px 6px;
+}
+
+/* Outline varyasyonları */
+.flexi-button-outline {
+  background-color: transparent;
+  border-width: 2px;
+}
+
+.flexi-button-outline.flexi-button-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.flexi-button-outline.flexi-button-success {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.flexi-button-outline.flexi-button-danger {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.flexi-button-outline.flexi-button-warning {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.flexi-button-outline.flexi-button-info {
+  border-color: #17a2b8;
+  color: #17a2b8;
+}
+
+.flexi-button-outline.flexi-button-dark {
+  border-color: #343a40;
+  color: #343a40;
+}
+
+.flexi-button-outline.flexi-button-default {
+  border-color: #000;
+  color: #000;
+}
+
+/* Hover efektleri için ek stiller */
+.flexi-button-outline:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

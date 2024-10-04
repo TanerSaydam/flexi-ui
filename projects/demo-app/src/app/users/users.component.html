@@ -110,7 +110,7 @@
     <div class="form-troup">
       <input type="text" class="form-control" tabindex="6">
     </div>
-     -->
+     --> 
 <button (click)="showToast()">Show Toast</button>
     <flexi-grid
     [data]="users()"
@@ -142,21 +142,12 @@
     [showExportExcelBtn]="true"
     (dataStateChange)="dataStateChange($event)"
     >
-    <ng-template #captionTemplate>      
-      <flexi-button btnColor="primary" [outline]="true">Primary</flexi-button>
-      <flexi-button btnColor="success" [outline]="true">Success</flexi-button>
-      <flexi-button btnColor="warning" [outline]="true">Warning</flexi-button>
-      <flexi-button btnColor="info" [outline]="true">Info</flexi-button>
-      <flexi-button btnColor="dark" [outline]="true">Dark</flexi-button>
-
-      <flexi-button btnColor="default">Default</flexi-button>
-      <flexi-button btnColor="primary">Primary</flexi-button>
-      <flexi-button btnColor="success">Success</flexi-button>
-      <flexi-button btnColor="warning">Warning</flexi-button>
-      <flexi-button btnColor="info">Info</flexi-button>
-      <flexi-button btnColor="secondary">Secondary</flexi-button>
-      <flexi-button btnColor="dark">dark</flexi-button>
-      
+    <ng-template #captionTemplate>
+      <flexi-button icon="add" btnColor="success">
+      </flexi-button>
+      <flexi-button icon="menu" btnColor="info"></flexi-button>
+      <flexi-button icon="file_save" btnColor="warning"></flexi-button>
+      <flexi-button icon="refresh" btnColor="dark"></flexi-button>
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
@@ -176,9 +167,8 @@
     <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="true"></flexi-grid-column>
     
     <ng-template #operationsColumnTemplate>        
-        <flexi-button btnColor="danger" title="Sil" [outline]="true" (click)="delete()">
-          <i class="fa-solid fa-trash"></i>
-        </flexi-button>
+      <flexi-button btnColor="danger" icon="delete" btnSize="small" title="Sil" (click)="delete()">          
+      </flexi-button>
     </ng-template>
     </flexi-grid>
   </div>

@@ -1,21 +1,28 @@
 import { Component, Renderer2, signal } from '@angular/core';
-import { StateModel } from '../../../../flexi-grid/src/lib/flexi-grid/state.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SharedService } from '../shared.service';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiSelectComponent } from '../../../../flexi-select/src/public-api';
 import { FormsModule } from '@angular/forms';
 import { FlexiOptionComponent } from '../../../../flexi-select/src/lib/flexi-option.component';
-import { FlexiGridModule } from '../../../../flexi-grid/src/lib/flexi-grid.module';
-import { FlexiEditorComponent } from '../../../../flexi-editor/src/public-api';
 import { FlexiToastService } from '../../../../flexi-toast/src/lib/flexi-toast.service';
-import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/flexi-grid/flexi-grid-filter-data.model';
-import { FlexiGridService } from '../../../../flexi-grid/src/lib/flexi-grid/flexi-grid.service';
+import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
+import { StateModel } from '../../../../flexi-grid/src/lib/models/state.model';
+import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/models/flexi-grid-filter-data.model';
+import { FlexiGridService } from '../../../../flexi-grid/src/lib/services/flexi-grid.service';
+import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-button.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [BlankComponent, FlexiGridModule, FlexiSelectComponent, FormsModule, FlexiOptionComponent, FlexiEditorComponent, FormsModule],
+  imports: [
+    BlankComponent, 
+    FlexiGridModule, 
+    FlexiSelectComponent, 
+    FormsModule, 
+    FlexiButtonComponent,
+    FlexiOptionComponent,
+    FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })

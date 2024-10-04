@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, inject, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlexiOptionComponent } from './flexi-option.component';
-import { CommonModule } from '@angular/common';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'flexi-select',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgStyle],  
   templateUrl: "./flexi-select.component.html",
   styleUrl: "./flexi-select.component.css",
   encapsulation: ViewEncapsulation.None,
@@ -184,12 +184,12 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   }
 
   onFocus() { //odaklandığında        
-    if(!this.closedAfterSelect()){
+    /* if(!this.closedAfterSelect()){
       this.isOpen.set(true);
       setTimeout(() => {
         this.searchInput?.nativeElement.focus();
       }, 100);
-    }
+    } */
   }
 
   onBlur() { //odağı kaybettiğinde    
@@ -211,6 +211,16 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       }, 100);
     }
 
+  }
+
+  toggleDropdown() {
+    this.isOpen.set(!this.isOpen());
+
+    if(this.isOpen()){
+      setTimeout(() => {
+        this.searchInput!.nativeElement.focus();
+      }, 100);
+    }
   }
   
   onKeyDown(event: KeyboardEvent) {    
@@ -245,7 +255,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     }
     else if (event.key === 'Space') {
       if(!this.isOpen()) {
-        this.isOpen.set(true);
+        this.toggleDropdown();
       }
     }
   }
