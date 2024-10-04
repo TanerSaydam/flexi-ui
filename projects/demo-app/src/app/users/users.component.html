@@ -117,32 +117,18 @@
     [dataBinding]="true"
     [showRefreshBtn]="true"
     [total]="total()"
-    [pageable]="true"
-    [pageSize]="10"
-    [filterable]="true"
     [themeClass]="shared.themeClass()"
     [showCaption]="true"  
     captionTitle="User List"
-    [sortable]="true"
-    [resizable]="true"
-    [draggable]="true"
-    [useMinWidth]="false"
     [loading]="loading()"
     [captionTemplate]="captionTemplate"
-    [showIndex]="true"
-    [autoHeight]="true"
-    [useMinHeight]="true"
-    [useMinWidth]="true"
-    minHeight="400px"
-    minWidth="1000px"    
+    [showIndex]="true"     
     [showCommandColumn]="true"
     [commandColumnTemplate]="operationsColumnTemplate"
-    [stickyCommandColumn]="true"
-    commandColumnTitle="İşlemler"    
     [showExportExcelBtn]="true"
     (dataStateChange)="dataStateChange($event)"
-    dataBindingEndpoint="https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll"
-    dataPath='data'
+    dataBindingExportEndpoint="https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll"
+    dataBindingExportPath='data'
   >
     <ng-template #captionTemplate>
       <flexi-button icon="add" btnColor="success">
@@ -150,16 +136,8 @@
     </ng-template>
   
     <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name" [hideOverflow]="false">
-      <ng-template flexiGridCellTemplate let-item let-column="column" let-rowIndex="rowIndex">
-        {{read(item,column,rowIndex)}}
-      </ng-template>
-    </flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false">
-      <ng-template flexiGridHeaderTemplate>
-        <input type="datetime" class="form-control">
-      </ng-template>
-    </flexi-grid-column>
+    <flexi-grid-column field="firstName" title="First Name" [hideOverflow]="false" />
+    <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"/>
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd MMM yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"></flexi-grid-column>
     <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="false" [hideOverflow]="true"></flexi-grid-column>

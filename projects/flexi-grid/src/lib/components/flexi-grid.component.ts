@@ -15,15 +15,15 @@ import { HttpClient } from '@angular/common/http';
 export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() data: any[] = [];
   @Input() total: number | null | undefined = 0;
-  @Input() pageable: boolean = false;
+  @Input() pageable: boolean = true;
   @Input() showIndex: boolean = false;
   @Input() indexTextAlign: TextAlignType = "center";
   @Input() pageSizeList: number[] = [5, 10, 20, 30, 50, 100, 500, 1000];
   @Input() loading: boolean = false;
-  @Input() sortable: boolean = false;
+  @Input() sortable: boolean = true;
   @Input() themeClass: string = "light";
-  @Input() height: string = "420px";
-  @Input() filterable: boolean = false;
+  @Input() height: string = "440px";
+  @Input() filterable: boolean = true;
   @Input() captionTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
   @Input() footerTemplate: TemplateRef<any> | any;
@@ -32,30 +32,29 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
   @Input() showExportExcelBtn: boolean = false;
-  @Input() autoHeight: boolean = true;
+  @Input() autoHeight: boolean = false;
   @Input() useMinHeight: boolean = true;
-  @Input() minHeight: string = "420px";
+  @Input() minHeight: string = "440px";
   @Input() minWidth: string = "1050px";
   @Input() useMinWidth: boolean = false;
   @Input() autoWidth: boolean = false;
   @Input() width: string = "100%";
   @Input() indexWidth: string = "70px";     
   @Input() exportExcelFileName: string = "excel-export";
-  @Input() exportExcelButtonClick: (() => void) | undefined;
-  @Input() footerPerPageText: string = "items per page";
-  @Input() resizable: boolean = false;
-  @Input() draggable: boolean = false;
+  @Input() exportExcelButtonClick: (() => void) | undefined;  
+  @Input() resizable: boolean = true;
+  @Input() draggable: boolean = true;
   @Input() tbodyStyle: any = {};
   @Input() trMinHeight: string = "45px";
   @Input() showCommandColumn: Boolean = false;
   @Input() commandColumnTitle: string = "İşlemler";
-  @Input() commandColumnWidth: string = "180px";
+  @Input() commandColumnWidth: string = "100px";
   @Input() commandColumnTextAlign: AlignSetting = "center"
   @Input() commandColumnTemplate: TemplateRef<any> | any;
   @Input() stickyCommandColumn: boolean = true;
   @Input() fontSize: string = "11px";
-  @Input() dataBindingEndpoint: string = '';
-  @Input() dataPath: string = 'data';
+  @Input() dataBindingExportEndpoint: string = '';
+  @Input() dataBindingExportPath: string = 'data';
 
   @Input()
   set pageSize(value: number) {
@@ -104,11 +103,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   @ContentChildren(FlexiGridColumnComponent)
   columns?: QueryList<FlexiGridColumnComponent>;
-
-  @ViewChild('table') table: ElementRef | undefined;
+  
   @ViewChild("filterTr") filterTr: ElementRef<HTMLTableRowElement> | undefined;
   @ViewChild("tbody") tbody: ElementRef | undefined;
-  @ViewChild('table') tableElement: ElementRef | undefined;
 
   resizingColumn: any;
   startX: number | undefined;
@@ -640,8 +637,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const style: { [key: string]: any } = {
       ...this.tbodyStyle
     };
-
-    style['height'] = this.autoHeight ? '100%' : this.height;
+  
+    if (!this.autoHeight) {
+      style['max-height'] = `calc(${this.height} - 50px)`; // Başlık yüksekliğini çıkarın
+    }
     if (this.useMinHeight) {
       style['min-height'] = this.minHeight;
     }
@@ -679,7 +678,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     if (this.exportExcelButtonClick) {
       this.exportExcelButtonClick();
     } else {
-      if (this.dataBinding && this.dataBindingEndpoint) {
+      if (this.dataBinding && this.dataBindingExportEndpoint) {
         await this.fetchAllData();
       }
       this.exportExcel();
@@ -688,13 +687,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   async fetchAllData() {
     try {
-      const response: any = await this.#http.get(this.dataBindingEndpoint).toPromise();
+      const response: any = await this.#http.get(this.dataBindingExportEndpoint).toPromise();
       
       let fetchedData: any[] = [];
   
-      if (this.dataPath) {
+      if (this.dataBindingExportPath) {
         // Kullanıcının belirttiği yolu kullanarak veriyi al
-        fetchedData = this.getNestedProperty(response, this.dataPath);
+        fetchedData = this.getNestedProperty(response, this.dataBindingExportPath);
       } else if (Array.isArray(response)) {
         // Yanıt doğrudan bir dizi ise
         fetchedData = response;

@@ -70,7 +70,11 @@ a {
     margin-left: 20px;
 }
 
-
+.flexi-grid-table-wrapper {
+    position: relative;
+    padding-right: 8px;
+    background-color: var(--background-color);    
+}
 
 .relative {
     position: relative;
@@ -674,4 +678,49 @@ div .flexi-grid-active {
     .flexi-grid-pagination {
         font-size: 10px;
     }
+}
+
+
+.flexi-grid-table {
+    width: 100%;
+    border-collapse: collapse;    
+  }
+  
+  .flexi-grid-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--background-color);
+  }
+  
+  .flexi-grid-tbody-wrapper {
+    overflow-y: scroll;    
+    max-height: calc(100% - 50px); /* Başlık yüksekliğini çıkarın */
+  }
+
+
+  /* Customize website's scrollbar like Mac OS
+Not supports in Firefox and IE */
+
+/* total width */
+.flexi-grid-tbody-wrapper::-webkit-scrollbar {
+    background-color: var(--background-color);
+    width: 8px;
+}
+
+/* background of the scrollbar except button or resizer */
+.flexi-grid-tbody-wrapper::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+}
+
+/* scrollbar itself */
+.flexi-grid-tbody-wrapper::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 1px solid #fff;
+}
+
+/* set button(top and bottom of the scrollbar) */
+.flexi-grid-tbody-wrapper::-webkit-scrollbar-button {
+    display:none;
 }
