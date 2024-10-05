@@ -8,6 +8,8 @@
 [data-bs-theme="light"] {
     --background-color: #f8f9fa;
     --background-color-part: #fff;
+    --scroll-background-color: #dee2e6;
+    --dropdown-background-color: #dee2e6;
     --bg-color-gray: #f8f9fa;
     --text-color: #000;
     --text-hover-color: #212529;
@@ -25,12 +27,14 @@
 [data-bs-theme="dark"] {
     --background-color: #212529;
     --background-color-part: #141414;
+    --scroll-background-color: #504e4e;
+    --dropdown-background-color: #504e4e;
     --bg-color-gray: #000;
     --text-color: #fff;
     --text-hover-color: #000;
-    --tbody-hover: #353232;
-    --active-text-color: #141414;
-    --active-background-color: #f8f9fa;
+    --tbody-hover: #1d1d1d;
+    --active-text-color: #212529;
+    --active-background-color: #f8f9fa;;
     --hover-background-color: #f8f9fa;
     --hover-text-color: #212529;
     --border-color: #353232;
@@ -275,24 +279,9 @@ a {
     margin-right: 10px;
 }
 
-div .flexi-grid-active {
-    /* background-color: var(--active-background-color) !important; */
+.flexi-grid-active {    
+    background-color: var(--active-background-color) !important;
     color: var(--active-text-color) !important;
-}
-
-.flexi-grid-active>.flexi-grid-page-link {
-    background-color: var(--active-background-color);
-    color: var(--active-text-color) !important;
-}
-
-.flexi-grid-active {
-    z-index: 3;
-    color: var(--active-text-color) !important;
-    border-color: var(--active-background-color) !important;
-}
-
-.flexi-grid-active a {
-    color: var(--active-text-color);
 }
 
 .flexi-grid-page-link {
@@ -301,7 +290,7 @@ div .flexi-grid-active {
     padding: 0.5rem 0.75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #886ab5;
+    color: var(--text-color);
     background-color: var(--background-color-part);
     border: 1px solid var(--border-color);
     border-radius: 3px;
@@ -340,9 +329,9 @@ div .flexi-grid-active {
     color: var(--text-color);
     text-align: left;
     list-style: none;
-    background-color: var(--background-color);
+    background-color: var(--dropdown-background-color);
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);    
 }
@@ -544,6 +533,7 @@ div .flexi-grid-active {
 }
 
 .flexi-grid-pagination {
+    cursor: pointer;
     display: flex;
     list-style: none;
     overflow-x: auto;
@@ -551,7 +541,7 @@ div .flexi-grid-active {
     padding: 0;
 }
 
-.flexi-grid-pagination a {
+.flexi-grid-pagination {
     color: var(--text-color);
 }
 
@@ -679,31 +669,56 @@ div .flexi-grid-active {
     }
 }
 
+.flexi-grid-table-container-wrapper{
+    width: 100%; 
+    position: relative; 
+    overflow-x: auto;
+}
 
-  /* Customize website's scrollbar like Mac OS
-Not supports in Firefox and IE */
+.flexi-grid-table-container-wrapper,
+.flexi-grid-table-container {
+    scrollbar-width: thin; /* Firefox için */
+    scrollbar-color: var(--scroll-background-color) var(--background-color); /* Firefox için */
+}
 
-/* total width */
+.flexi-grid-table-container-wrapper::-webkit-scrollbar,
 .flexi-grid-table-container::-webkit-scrollbar {
-    background-color: var(--background-color);
     width: 8px;
+    height: 8px;
 }
 
-/* background of the scrollbar except button or resizer */
-.flexi-grid-table-containerr::-webkit-scrollbar-track {
+.flexi-grid-table-container-wrapper::-webkit-scrollbar-track,
+.flexi-grid-table-container::-webkit-scrollbar-track {
     background-color: var(--background-color);
 }
 
-/* scrollbar itself */
+.flexi-grid-table-container-wrapper::-webkit-scrollbar-thumb,
 .flexi-grid-table-container::-webkit-scrollbar-thumb {
-    background-color: #babac0;
+    background-color: var(--scroll-background-color);
     border-radius: 16px;
-    border: 1px solid #fff;
 }
 
-/* set button(top and bottom of the scrollbar) */
+.flexi-grid-table-container-wrapper::-webkit-scrollbar-button,
 .flexi-grid-table-container::-webkit-scrollbar-button {
-    display:none;
+    display: none;
+}
+
+.flexi-grid-table-container-wrapper::-webkit-scrollbar-corner,
+.flexi-grid-table-container::-webkit-scrollbar-corner {
+    background-color: var(--scroll-background-color);
+}
+
+/* Mobil cihazlar için ek düzenlemeler */
+@media (max-width: 1000px) {
+    .flexi-grid-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* iOS için daha iyi kaydırma */
+    }
+
+    /* Mobil görünümde yatay kaydırma çubuğunu göster */
+    .flexi-grid-table-container::-webkit-scrollbar {
+        display: block;
+    }
 }
 
 .flexi-grid-table-wrapper{

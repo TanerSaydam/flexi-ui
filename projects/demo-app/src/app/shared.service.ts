@@ -6,5 +6,14 @@ import { Injectable, signal } from '@angular/core';
 export class SharedService {
   themeClass = signal("light");
 
-  constructor() { }
+  constructor() { 
+    if(localStorage.getItem("themeSettings")){
+      const data = JSON.parse(localStorage.getItem("themeSettings")!);
+      if(data.classHolder.includes("dark")){
+        this.themeClass.set("dark");
+      }else{
+        this.themeClass.set("light");
+      }
+    }
+  }
 }

@@ -12,7 +12,7 @@
       @if(showColumnVisibility){
       <div style="position: relative;">
         <flexi-button icon="menu" btnColor="info" (click)="toggleColumnVisibilityDropdown()" />
-        <div class="flexi-grid-dropdown-menu" [class.show]="columnVisibilityDropdownVisible()">
+        <div class="flexi-grid-dropdown-menu" style="top: 40px;" [class.show]="columnVisibilityDropdownVisible()">
           <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
           @for(column of columns; track trackByFn()){
           <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field ? column.field : column.title">
@@ -30,7 +30,7 @@
     </div>
   </div>
   }
-  <div style="width: 100%; position: relative; overflow-x: auto;">
+  <div class="flexi-grid-table-container-wrapper">
     @if(loading){
     <div class="flexi-grid-spinner-container">
       <div class="flexi-grid-spinner-1"></div>
@@ -84,11 +84,11 @@
                       [ngClass]="column.textAlign === 'right' ? 'flexi-grid-dropdown-menu-right' : ''"
                       [class.show]="filterDropdownVisible()[column.field]">
                       @for(filterType of giveFilterValueByFilterType(column.filterType); track filterType.operator){
-                      <a class="flexi-grid-dropdown-item"
+                      <div class="flexi-grid-dropdown-item"
                         [ngClass]="column.filterOperator === filterType.operator ? 'flexi-grid-active' : ''"
                         (click)="applyFilter(column, filterType.operator)">
                         {{ filterType.value }}
-                      </a>
+                      </div>
                       }
                     </div>
                   </div>
@@ -272,44 +272,44 @@
       <ul class="flexi-grid-pagination">
         @if(this.pageNumbers().length > 1){
         <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
-          <a class="flexi-grid-page-link" aria-label="Previous">
+          <div class="flexi-grid-page-link" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
-          </a>
+          </div>
         </li>
         <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''"
           (click)="changePage(state.pageNumber - 1)">
-          <a class="flexi-grid-page-link" aria-label="Previous">
+          <div class="flexi-grid-page-link" aria-label="Previous">
             <span aria-hidden="true">&#8249;</span>
-          </a>
+          </div>
         </li>
         @if(pageNumbers()[0] !== 1){
         <li class="flexi-grid-page-item" (click)="previousPageGroup()">
-          <a class="flexi-grid-page-link">...</a>
+          <div class="flexi-grid-page-link">...</div>
         </li>
         }
         @for(pageNumber of pageNumbers(); track trackByFn()){
-        <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
-          <a (click)="changePage(pageNumber)" class="flexi-grid-page-link">
+        <li class="flexi-grid-page-item">
+          <div (click)="changePage(pageNumber)" class="flexi-grid-page-link" [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
             {{pageNumber}}
-          </a>
+          </div>
         </li>
         }
         @if(pageNumbers()[pageNumbers().length - 1] !== totalPageCount()){
         <li class="flexi-grid-page-item" (click)="nextPageGroup()">
-          <a class="flexi-grid-page-link">...</a>
+          <div class="flexi-grid-page-link">...</div>
         </li>
         }
         <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
           (click)="changePage(state.pageNumber + 1)">
-          <a class="flexi-grid-page-link" aria-label="Next">
+          <div class="flexi-grid-page-link" aria-label="Next">
             <span aria-hidden="true">&#8250;</span>
-          </a>
+          </div>
         </li>
         <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === totalPageCount() ? 'disabled': ''"
           (click)="changePage(totalPageCount())">
-          <a class="flexi-grid-page-link" aria-label="Next">
+          <div class="flexi-grid-page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
-          </a>
+          </div>
         </li>
         }
       </ul>
