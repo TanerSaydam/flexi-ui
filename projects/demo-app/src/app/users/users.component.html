@@ -145,7 +145,7 @@
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd MMM yyyy" textAlign="center"></flexi-grid-column>
     <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right" width="100px"></flexi-grid-column>
     <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="true"></flexi-grid-column>
+    <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="false"></flexi-grid-column>
     
     <ng-template #operationsColumnTemplate>        
       <flexi-button btnColor="danger" icon="delete" btnSize="small" title="Sil" (click)="delete()">          

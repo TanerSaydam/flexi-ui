@@ -39,20 +39,20 @@
     }
     <div class="flexi-grid-table-wrapper">
       <div class="flexi-grid-table-wrapper-inner">
-        <table class="flexi-grid-table" [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth, 'position': 'relative'}"
+        <table class="flexi-grid-table"
+          [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth, 'position': 'relative'}"
           aria-label="Flexi Grid Table" role="table">
           <thead role="rowgroup">
             <tr role="row">
               @if(showIndex){
-              <th [ngStyle]="{'width': indexWidth, 'text-align': indexTextAlign}" style="text-align: center;" scope="col"
-                role="columnheader">
+              <th [ngStyle]="{'width': indexWidth, 'text-align': indexTextAlign}" style="text-align: center;"
+                scope="col" role="columnheader">
                 <span>#</span>
               </th>
               }
               @for(column of columns; track trackByFn()){
-              <th class="cursor flexi-grid-border"
-                [hidden]="!column.visible" [ngStyle]="{'width': column.width}" scope="col" role="columnheader"
-                [attr.aria-sort]="getSortState('name')">
+              <th class="cursor flexi-grid-border" [hidden]="!column.visible" [ngStyle]="{'width': column.width}"
+                scope="col" role="columnheader" [attr.aria-sort]="getSortState('name')">
                 <div [ngClass]="setTextAlignForTh(filterable, column)">
                   @if(resizable && column.resizable){
                   <div class="flexi-grid-resize-handle" (mousedown)="onMouseDown($event, column)"></div>
@@ -75,9 +75,13 @@
                   }
                   @if(filterable && column.field && column.filterable && showFilterButton(column.filterType)){
                   <div class="p-relative">
-                    <i class="fa-solid fa-filter svg cursor show-filter" (click)="toggleFilterDropdown(column.field)"></i>
+                    <span class="material-symbols-outlined svg cursor" (click)="toggleFilterDropdown(column.field)">
+                      filter_list
+                    </span>
                     @if(showClearFilter(column.filterValue)){
-                    <i class="fa-solid fa-filter-circle-xmark svg cursor" (click)="clearFilter(column.field)"></i>
+                    <span class="material-symbols-outlined svg cursor" (click)="clearFilter(column.field)">
+                      filter_list_off
+                    </span>
                     }
                     <div class="flexi-grid-dropdown-menu"
                       [ngClass]="column.textAlign === 'right' ? 'flexi-grid-dropdown-menu-right' : ''"
@@ -97,7 +101,8 @@
               }
               @if(showCommandColumn){
               <th [ngStyle]="{'width': commandColumnWidth, 'text-align': commandColumnTextAlign}"
-                [ngClass]="stickyCommandColumn ? 'flexi-sticky-column flexi-sticky-th-column' : ''" scope="col" role="columnheader">
+                [ngClass]="stickyCommandColumn ? 'flexi-sticky-column flexi-sticky-th-column' : ''" scope="col"
+                role="columnheader">
                 {{commandColumnTitle}}</th>
               }
             </tr>
@@ -105,11 +110,11 @@
             <tr class="flexi-grid-mobile-filter-tr" role="row">
               <th colSpan="2" scope="col" role="columnheader">
                 @if(isShowMobileFilter()){
-                <flexi-button btnColor="success" icon="sweep" (click)="closeMobileFilter()">                
+                <flexi-button btnColor="success" icon="sweep" (click)="closeMobileFilter()">
                   Uygula
                 </flexi-button>
                 }@else {
-                <flexi-button btnColor="primary" icon="filter_list" (click)="openMobileFilter()">                
+                <flexi-button btnColor="primary" icon="filter_list" (click)="openMobileFilter()">
                   Filtreyi Aç
                 </flexi-button>
                 }
@@ -165,19 +170,21 @@
               }
               }
               @if(showCommandColumn){
-              <th [ngClass]="stickyCommandColumn ? 'flexi-sticky-column flexi-sticky-th-column' : ''" scope="col" role="columnheader"></th>
+              <th [ngClass]="stickyCommandColumn ? 'flexi-sticky-column flexi-sticky-th-column' : ''" scope="col"
+                role="columnheader"></th>
               }
             </tr>
             }
           </thead>
-        </table>        
+        </table>
       </div>
     </div>
 
     <div class="flexi-grid-tbody-wrapper">
       <div class="flexi-grid-tbody-wrapper-inner">
-        <table class="flexi-grid-table" [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth, 'position': 'relative'}"
-          aria-label="Flexi Grid Table" role="table">       
+        <table class="flexi-grid-table"
+          [ngStyle]="{'min-width': !useMinWidth ? '100%' : minWidth, 'position': 'relative'}"
+          aria-label="Flexi Grid Table" role="table">
           <tbody #tbody class="relative" [ngStyle]="getTBodyStyle()" role="rowgroup">
             @if(data.length > 0){
             @for(item of pagedData(); track trackByFn(); let i = $index){
@@ -212,16 +219,20 @@
                 }
                 }
                 @else if(column.filterType === "boolean"){
-                @if(column.showCheckbox){
-                <input class="flexi-grid-checkbox" type="checkbox" [checked]="getFieldValue(item, column.field)"
-                  (change)="getBooleanInputValue(item, column, $event)">
-                }@else {
-                @if(getFieldValue(item, column.field)){
-                <i class="fa-solid fa-check flexi-text-success"></i>
-                }@else {
-                <i class="fa-solid fa-x flexi-text-danger"></i>
-                }
-                }
+                  @if(column.showCheckbox){
+                  <input class="flexi-grid-checkbox" type="checkbox" [checked]="getFieldValue(item, column.field)"
+                    (change)="getBooleanInputValue(item, column, $event)">
+                  }@else {
+                    @if(getFieldValue(item, column.field)){
+                    <span class="material-symbols-outlined flexi-text-success">
+                      check
+                    </span>
+                    }@else {
+                    <span class="material-symbols-outlined flexi-text-danger">
+                      close
+                    </span>
+                    }
+                  }
                 }
                 @else {
                 {{ getFieldValue(item, column.field) }}
@@ -232,8 +243,8 @@
               }
               @if(showCommandColumn){
               <td [ngStyle]="{'width': commandColumnWidth, 'text-align': commandColumnTextAlign}"
-                [ngClass]="stickyCommandColumn ? 'flexi-sticky-column flexi-sticky-td-column' : ''" [attr.data-label]="commandColumnTitle"
-                scope="cell">
+                [ngClass]="stickyCommandColumn ? 'flexi-sticky-column flexi-sticky-td-column' : ''"
+                [attr.data-label]="commandColumnTitle" scope="cell">
                 <ng-container
                   *ngTemplateOutlet="commandColumnTemplate; context: { $implicit: item, index: i}"></ng-container>
               </td>
@@ -288,7 +299,8 @@
         }
         @for(pageNumber of pageNumbers(); track trackByFn()){
         <li class="flexi-grid-page-item">
-          <div (click)="changePage(pageNumber)" class="flexi-grid-page-link" [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
+          <div (click)="changePage(pageNumber)" class="flexi-grid-page-link"
+            [ngClass]="state.pageNumber === pageNumber ? 'flexi-grid-active': ''">
             {{pageNumber}}
           </div>
         </li>
