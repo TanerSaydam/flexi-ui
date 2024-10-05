@@ -20,8 +20,7 @@ export class FlexiGridColumnComponent {
   @Input() symbol: string = "";
   @Input() showSymbolInFront: boolean = true;
   @Input() width: string = "160px";
-  @Input() resizable: boolean = true;
-  @Input() draggable: boolean = true;
+  @Input() resizable: boolean = true;  
   @Input() className: string = "";
   @Input() textAlign: TextAlignType = "left";
   @Input() hideOverflow: boolean = true;

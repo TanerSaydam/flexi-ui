@@ -42,8 +42,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() indexWidth: string = "70px";     
   @Input() exportExcelFileName: string = "excel-export";
   @Input() exportExcelButtonClick: (() => void) | undefined;  
-  @Input() resizable: boolean = true;
-  @Input() draggable: boolean = true;
+  @Input() resizable: boolean = true;  
   @Input() tbodyStyle: any = {};
   @Input() trMinHeight: string = "45px";
   @Input() showCommandColumn: Boolean = false;
@@ -519,13 +518,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   onMouseDown(event: MouseEvent | any, column: any) {
     this.resizingColumn = column;
     this.startX = event.pageX;
-    this.startWidth = event.target!.parentElement.offsetWidth;
-
-    // Eğer draggable ise, geçici olarak devre dışı bırak
-    if (this.draggable) {
-      this.tempDraggable = this.draggable;
-      this.draggable = false;
-    }
+    this.startWidth = event.target!.parentElement.offsetWidth;    
 
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
@@ -543,13 +536,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   onMouseUp = () => {
     this.resizingColumn = undefined;
     document.removeEventListener('mousemove', this.onMouseMove);
-    document.removeEventListener('mouseup', this.onMouseUp);
-
-    // Resize işlemi bittiğinde draggable durumunu geri yükle
-    if (this.tempDraggable) {
-      this.draggable = this.tempDraggable;
-      this.tempDraggable = false;
-    }
+    document.removeEventListener('mouseup', this.onMouseUp);   
   }
 
   onDragStart(event: DragEvent, index: number) {

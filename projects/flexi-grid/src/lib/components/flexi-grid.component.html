@@ -50,9 +50,8 @@
               </th>
               }
               @for(column of columns; track trackByFn()){
-              <th [draggable]="(draggable && column.draggable)" class="cursor flexi-grid-border"
-                [hidden]="!column.visible" [ngStyle]="{'width': column.width}" (dragstart)="onDragStart($event, $index)"
-                (dragover)="onDragOver($event, $index)" (drop)="onDrop($event, $index)" scope="col" role="columnheader"
+              <th class="cursor flexi-grid-border"
+                [hidden]="!column.visible" [ngStyle]="{'width': column.width}" scope="col" role="columnheader"
                 [attr.aria-sort]="getSortState('name')">
                 <div [ngClass]="setTextAlignForTh(filterable, column)">
                   @if(resizable && column.resizable){
