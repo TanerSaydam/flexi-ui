@@ -438,10 +438,15 @@ div .flexi-grid-active {
 }
 
 .flexi-sticky-column {    
-    position: sticky;
-    right: 0; /* Sağ tarafa sabitlemek için */    
-    z-index: 50; /* Diğer sütunların üstünde olması için */
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Hafif bir gölge */    
+    position: sticky;    
+    right: 0;
+    z-index: 1;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.flexi-sticky-th-column{
+    top: 0;
+    z-index: 100;
 }
 
 /* Tek sayılı satırlar için */
@@ -679,24 +684,30 @@ div .flexi-grid-active {
 Not supports in Firefox and IE */
 
 /* total width */
-.flexi-grid-tbody-wrapper::-webkit-scrollbar {
+.flexi-grid-table-container::-webkit-scrollbar {
     background-color: var(--background-color);
     width: 8px;
 }
 
 /* background of the scrollbar except button or resizer */
-.flexi-grid-tbody-wrapper::-webkit-scrollbar-track {
+.flexi-grid-table-containerr::-webkit-scrollbar-track {
     background-color: var(--background-color);
 }
 
 /* scrollbar itself */
-.flexi-grid-tbody-wrapper::-webkit-scrollbar-thumb {
+.flexi-grid-table-container::-webkit-scrollbar-thumb {
     background-color: #babac0;
     border-radius: 16px;
     border: 1px solid #fff;
 }
 
 /* set button(top and bottom of the scrollbar) */
-.flexi-grid-tbody-wrapper::-webkit-scrollbar-button {
+.flexi-grid-table-container::-webkit-scrollbar-button {
     display:none;
+}
+
+.flexi-grid-table-wrapper{
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }

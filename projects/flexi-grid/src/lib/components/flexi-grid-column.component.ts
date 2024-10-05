@@ -19,7 +19,7 @@ export class FlexiGridColumnComponent {
   @Input() fraction: number = 2;
   @Input() symbol: string = "";
   @Input() showSymbolInFront: boolean = true;
-  @Input() width: string = "180px";
+  @Input() width: string = "160px";
   @Input() resizable: boolean = true;
   @Input() draggable: boolean = true;
   @Input() className: string = "";

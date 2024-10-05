@@ -117,6 +117,7 @@
     [dataBinding]="true"
     [showRefreshBtn]="true"
     [total]="total()"
+    [pageSize]="100"
     [themeClass]="shared.themeClass()"
     [showCaption]="true"  
     captionTitle="User List"
@@ -126,6 +127,9 @@
     [showCommandColumn]="true"
     [commandColumnTemplate]="operationsColumnTemplate"
     [showExportExcelBtn]="true"
+    height="500px"
+    [useMinWidth]="false"
+    [autoHeight]="false"
     (dataStateChange)="dataStateChange($event)"
     dataBindingExportEndpoint="https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll"
     dataBindingExportPath='data'
