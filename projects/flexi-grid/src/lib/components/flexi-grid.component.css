@@ -70,12 +70,6 @@ a {
     margin-left: 20px;
 }
 
-.flexi-grid-table-wrapper {
-    position: relative;
-    padding-right: 8px;
-    background-color: var(--background-color);    
-}
-
 .relative {
     position: relative;
 }
@@ -679,24 +673,6 @@ div .flexi-grid-active {
         font-size: 10px;
     }
 }
-
-
-.flexi-grid-table {
-    width: 100%;
-    border-collapse: collapse;    
-  }
-  
-  .flexi-grid-table thead {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--background-color);
-  }
-  
-  .flexi-grid-tbody-wrapper {
-    overflow-y: scroll;    
-    max-height: calc(100% - 50px); /* Başlık yüksekliğini çıkarın */
-  }
 
 
   /* Customize website's scrollbar like Mac OS

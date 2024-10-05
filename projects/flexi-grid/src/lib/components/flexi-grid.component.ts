@@ -22,7 +22,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() loading: boolean = false;
   @Input() sortable: boolean = true;
   @Input() themeClass: string = "light";
-  @Input() height: string = "440px";
   @Input() filterable: boolean = true;
   @Input() captionTitle: string = "";
   @Input() captionTemplate: TemplateRef<any> | any;
@@ -32,9 +31,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() dataBinding: boolean = false;
   @Input() showCaption: boolean = false;
   @Input() showExportExcelBtn: boolean = false;
-  @Input() autoHeight: boolean = false;
-  @Input() useMinHeight: boolean = true;
-  @Input() minHeight: string = "440px";
+  @Input() autoHeight: boolean = true;
+  @Input() height: string = "500px";
+  @Input() useMinHeight: boolean = false;
+  @Input() minHeight: string = "500px";
   @Input() minWidth: string = "1050px";
   @Input() useMinWidth: boolean = false;
   @Input() autoWidth: boolean = false;
