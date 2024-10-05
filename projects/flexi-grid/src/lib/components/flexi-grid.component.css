@@ -208,7 +208,7 @@ a {
     background-color: var(--background-color);
     padding-top: 20px;
     padding-bottom: 15px;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .flexi-flex-reverse{
