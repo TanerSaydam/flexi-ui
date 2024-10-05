@@ -23,7 +23,7 @@ export class FlexiButtonComponent {
   @Input() btnSize: FlexiButtonSizeType = 'default';
 }
 
-export type FlexiButtonIconType = "" | "delete" | "remove" | "delete_forever" | "refresh" | "add" | "feature_search" | "zoom_in" | "sim_card_download" | "browser_updated" | "file_save" | "filter_list" | "sort" | "order" | "filter_list_off" | "reorder" | "menu" | "sweep" | "check"
+export type FlexiButtonIconType = "" | "delete" | "remove" | "delete_forever" | "refresh" | "add" | "feature_search" | "zoom_in" | "sim_card_download" | "browser_updated" | "file_save" | "filter_list" | "sort" | "order" | "filter_list_off" | "reorder" | "menu" | "sweep" | "check" | "add_shopping_cart" | "shopping_cart"
 
 export type FlexiButtonColorType = "default" | "primary" | "success" | "danger" | "warning" | "info" | "dark";
 
