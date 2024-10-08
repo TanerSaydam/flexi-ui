@@ -7,11 +7,13 @@
     <div class="d-flex" style="gap: 10px;">
       <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
       @if(showExportExcelBtn){
-      <flexi-button icon="file_save" flexiTooltip title="Excel'e Aktar" btnColor="warning" (click)="onExportExcelButtonClick()" />
+      <flexi-button icon="file_save" flexiTooltip title="Excel'e Aktar" btnColor="warning"
+        (click)="onExportExcelButtonClick()" />
       }
       @if(showColumnVisibility){
       <div style="position: relative;">
-        <flexi-button icon="menu" btnColor="info" flexiTooltip title="Sütun Görünürlüğü" (click)="toggleColumnVisibilityDropdown()" />
+        <flexi-button icon="menu" btnColor="info" flexiTooltip title="Sütun Görünürlüğü"
+          (click)="toggleColumnVisibilityDropdown()" />
         <div class="flexi-grid-dropdown-menu" style="top: 40px;" [class.show]="columnVisibilityDropdownVisible()">
           <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
           @for(column of columns; track trackByFn()){
@@ -110,13 +112,10 @@
             <tr class="flexi-grid-mobile-filter-tr" role="row">
               <th colSpan="2" scope="col" role="columnheader">
                 @if(isShowMobileFilter()){
-                <flexi-button btnColor="success" icon="sweep" (click)="closeMobileFilter()">
-                  Uygula
-                </flexi-button>
+                <flexi-button btnColor="success" icon="sweep" (click)="closeMobileFilter()" btnText="Uygula" />
                 }@else {
-                <flexi-button btnColor="primary" icon="filter_list" (click)="openMobileFilter()">
-                  Filtreyi Aç
-                </flexi-button>
+                <flexi-button btnColor="primary" icon="filter_list" (click)="openMobileFilter()"
+                  btnText="Filtreyi Aç" />
                 }
               </th>
             </tr>
@@ -203,40 +202,28 @@
               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible"
                 [ngClass]="tdTemplateClassName(column)" [attr.data-label]="column.title ? column.title : column.field"
                 [title]="(item && !column.cellTemplate) ? getFieldValue(item, column.field) : ''" scope="cell">
+                @if(column.field === treeColumn){
+                <div class="flexi-grid-tree-cell" [style.padding-left]="getIndent(item._level)">
+                  @if(isExpandable(item)){
+                  <button class="flexi-grid-tree-toggle" (click)="toggleExpand(item)">
+                    {{ item._expanded ? '▼' : '▶' }}
+                  </button>
+                  }
+                  @if(column.cellTemplate){
+                  <ng-container
+                    *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }">
+                  </ng-container>
+                  }@else{
+                  {{ getFieldValue(item, column.field) }}
+                  }
+                </div>
+                }@else{
                 @if(column.cellTemplate){
                 <ng-container
-                  *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }"></ng-container>
+                  *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }">
+                </ng-container>
                 }@else{
-                @if(column.field){
-                @if((column.filterType === "date" || column.filterType === "date-time") && column.filterType){
-                {{ getFieldValue(item, column.field) | date: column.format! }}
-                }@else if(column.filterType === "number" && column.filterType){
-                @if(column.format === "n" || column.format === null){
-                {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
-                }@else if(column.format === "c"){
-                {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront:
-                column.fraction) }}
-                }
-                }
-                @else if(column.filterType === "boolean"){
-                  @if(column.showCheckbox){
-                  <input class="flexi-grid-checkbox" type="checkbox" [checked]="getFieldValue(item, column.field)"
-                    (change)="getBooleanInputValue(item, column, $event)">
-                  }@else {
-                    @if(getFieldValue(item, column.field)){
-                    <span class="material-symbols-outlined flexi-text-success">
-                      check
-                    </span>
-                    }@else {
-                    <span class="material-symbols-outlined flexi-text-danger">
-                      close
-                    </span>
-                    }
-                  }
-                }
-                @else {
                 {{ getFieldValue(item, column.field) }}
-                }
                 }
                 }
               </td>

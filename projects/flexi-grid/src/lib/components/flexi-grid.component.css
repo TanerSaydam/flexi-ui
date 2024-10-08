@@ -2,15 +2,16 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
-*{
-    font-family: "Poppins", system-ui;    
+* {
+    font-family: "Poppins", system-ui;
 }
 
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-weight: 400;
     font-style: normal;
-    font-size: 20px;  /* Preferred icon size */
+    font-size: 20px;
+    /* Preferred icon size */
     display: inline-flex;
     line-height: 1;
     text-transform: none;
@@ -20,7 +21,7 @@
     direction: ltr;
     -webkit-font-feature-settings: "liga";
     font-feature-settings: "liga";
-    -webkit-font-smoothing: antialiased;    
+    -webkit-font-smoothing: antialiased;
 }
 
 [data-bs-theme="light"] {
@@ -52,14 +53,15 @@
     --text-hover-color: #000;
     --tbody-hover: #1d1d1d;
     --active-text-color: #212529;
-    --active-background-color: #f8f9fa;;
+    --active-background-color: #f8f9fa;
+    ;
     --hover-background-color: #f8f9fa;
     --hover-text-color: #212529;
     --border-color: #353232;
     --sticky-border-color: #353232;
 }
 
-flexi-button{
+flexi-button {
     display: inline-block !important;
 }
 
@@ -79,17 +81,17 @@ a {
     text-decoration: none !important;
 }
 
-.flexi-grid-disabled-div{
+.flexi-grid-disabled-div {
     pointer-events: none;
     opacity: 0.95;
 }
 
-.flexi-text-success{
-    color: var(--flexi-success);    
+.flexi-text-success {
+    color: var(--flexi-success);
 }
 
-.flexi-text-danger{
-    color: var(--flexi-danger);    
+.flexi-text-danger {
+    color: var(--flexi-danger);
 }
 
 .flexi-grid-page-size-select {
@@ -105,7 +107,7 @@ a {
 }
 
 
-.p-relative{
+.p-relative {
     position: relative;
 }
 
@@ -122,7 +124,7 @@ a {
     border-bottom: 1px solid var(--border-color);
 }
 
-.flexi-grid-caption-title{
+.flexi-grid-caption-title {
     font-size: 1.05rem;
 }
 
@@ -144,14 +146,14 @@ a {
     flex-wrap: wrap;
 }
 
-.flexi-grid-table-container tbody{    
-    display:block
+.flexi-grid-table-container tbody {
+    display: block
 }
 
 .flexi-grid-table-container {
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    overflow-x: auto;    
+    overflow-x: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -188,18 +190,18 @@ a {
     width: 12px;
 }
 
-.flexi-grid-table-container tbody::-webkit-scrollbar-track {    
+.flexi-grid-table-container tbody::-webkit-scrollbar-track {
     background: var(--background-color-part);
 }
 
-.flexi-grid-table-container tbody::-webkit-scrollbar-thumb {    
+.flexi-grid-table-container tbody::-webkit-scrollbar-thumb {
     background-color: var(--text-color);
     border-radius: 20px;
     border: 3px solid var(--background-color-part);
 }
 
 .flexi-grid-table-container th,
-.flexi-grid-table-container td {  
+.flexi-grid-table-container td {
     padding-left: 10px;
     padding-right: 10px;
     text-align: left;
@@ -233,15 +235,15 @@ a {
     /* z-index: 1; */
 }
 
-.flexi-flex-reverse{
-    flex-direction: row-reverse;    
+.flexi-flex-reverse {
+    flex-direction: row-reverse;
 }
 
-.flexi-right{
+.flexi-right {
     text-align: right;
 }
 
-.flexi-center{    
+.flexi-center {
     text-align: center;
 }
 
@@ -276,19 +278,20 @@ a {
     z-index: 1;
 }
 
-.flexi-grid-checkbox{
+.flexi-grid-checkbox {
     transform: scale(1.2);
     -ms-transform: scale(1.2);
-    -webkit-transform: scale(1.2);    
+    -webkit-transform: scale(1.2);
 }
 
-.flexi-grid-filter-input, .flexi-grid-filter-select {
+.flexi-grid-filter-input,
+.flexi-grid-filter-select {
     width: 100%;
     padding: 5px;
     border: 1px solid #ced4da;
     border-radius: 3px;
     background-color: var(--background-color-part);
-    color: var(--text-color);    
+    color: var(--text-color);
 }
 
 .flexi-grid-select-container {
@@ -301,7 +304,7 @@ a {
     margin-right: 10px;
 }
 
-.flexi-grid-active {    
+.flexi-grid-active {
     background-color: var(--active-background-color) !important;
     color: var(--active-text-color) !important;
 }
@@ -344,7 +347,7 @@ a {
     z-index: 1000;
     right: 0;
     float: left;
-    min-width: 160px;    
+    min-width: 160px;
     padding: 5px 0;
     margin: 0;
     font-size: 14px;
@@ -355,10 +358,10 @@ a {
     background-clip: padding-box;
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);    
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
 
-.flexi-grid-dropdown-menu-right{
+.flexi-grid-dropdown-menu-right {
     right: -170px;
 }
 
@@ -382,7 +385,7 @@ a {
 .flexi-grid-dropdown-item:focus {
     color: var(--text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--hover-background-color);    
+    background-color: var(--hover-background-color);
 }
 
 .flexi-grid-dropdown-checkbox-item {
@@ -428,34 +431,34 @@ a {
 
 
 
-.flexi-grid-mobile-filter-tr{
-   display: none !important;
+.flexi-grid-mobile-filter-tr {
+    display: none !important;
 }
 
-.flexi-grid-mobile-filter-tr th{
+.flexi-grid-mobile-filter-tr th {
     display: flex !important;
     width: 100%;
     justify-content: center;
- }
+}
 
- .svg-mobile{
+.svg-mobile {
     width: 20px;
 }
 
-.flexi-th{
+.flexi-th {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.flexi-sticky-column {    
-    position: sticky;    
+.flexi-sticky-column {
+    position: sticky;
     right: 0;
     z-index: 1;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.flexi-sticky-th-column{
+.flexi-sticky-th-column {
     top: 0;
     z-index: 100;
 }
@@ -473,26 +476,29 @@ a {
 .flexi-sticky-column::before {
     content: '';
     position: absolute;
-    left: -1px; /* Çizginin konumu */
+    left: -1px;
+    /* Çizginin konumu */
     top: 0;
     height: 100%;
-    width: 1px; /* Çizginin kalınlığı */
+    width: 1px;
+    /* Çizginin kalınlığı */
     background-color: var(--sticky-border-color);
-    z-index: 101; /* İçeriğin üzerinde olması için */
+    z-index: 101;
+    /* İçeriğin üzerinde olması için */
 }
 
 .flexi-grid-table-container tbody tr:hover .flexi-sticky-column {
     background-color: var(--tbody-hover);
 }
 
-.hide{
+.hide {
     display: none !important;
 }
 
 .flexi-grid-spinner-container {
     position: absolute;
     z-index: 999;
-    width: 100%;    
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -591,12 +597,12 @@ a {
 }
 
 @media (max-width: 1000px) {
-    .show-filter{
+    .show-filter {
         display: none;
     }
-    
+
     .flexi-grid-table-container {
-        overflow-x: auto;        
+        overflow-x: auto;
         width: 100%;
         margin: 0;
         padding: 0;
@@ -622,29 +628,32 @@ a {
         border-bottom: 2px solid var(--border-color);
     }
 
-    .flexi-grid-table-container td, .flexi-grid-filter-tr .flexi-grid-filter-th{
+    .flexi-grid-table-container td,
+    .flexi-grid-filter-tr .flexi-grid-filter-th {
         text-align: left;
         padding-left: 50%;
         position: relative;
     }
 
-    .flexi-grid-table-container table{
-        min-width: 100% !important;        
+    .flexi-grid-table-container table {
+        min-width: 100% !important;
     }
 
-    .flexi-grid-table-container table td{
+    .flexi-grid-table-container table td {
         text-align: left !important;
     }
 
-    .flexi-grid-filter-tr{
-        background: rgba(0, 0, 0, 0.5) !important;        
+    .flexi-grid-filter-tr {
+        background: rgba(0, 0, 0, 0.5) !important;
     }
 
-    .flexi-grid-index-td{
+    .flexi-grid-index-td {
         width: 100% !important;
-    }   
+    }
 
-    .flexi-grid-table-container td::before, .flexi-grid-filter-tr .flexi-grid-filter-th::before, .flexi-sticky-column::before {
+    .flexi-grid-table-container td::before,
+    .flexi-grid-filter-tr .flexi-grid-filter-th::before,
+    .flexi-sticky-column::before {
         content: attr(data-label);
         position: absolute;
         left: 10px;
@@ -656,26 +665,26 @@ a {
         background-color: transparent;
         display: flex;
         align-items: center;
-    }  
-  
-    .flexi-grid-table-container td{
-        width: 100% !important;    
-        margin-top: 5px;    
     }
 
-    .flexi-grid-mobile-filter-tr{
+    .flexi-grid-table-container td {
+        width: 100% !important;
+        margin-top: 5px;
+    }
+
+    .flexi-grid-mobile-filter-tr {
         display: block !important;
     }
- 
-    .flexi-grid-filter-tr{
+
+    .flexi-grid-filter-tr {
         width: 100%;
         height: 100%;
-        background-color: rgb(0, 0, 0,0.1);
+        background-color: rgb(0, 0, 0, 0.1);
     }
 
-    .flexi-grid-filter-tr.show{
+    .flexi-grid-filter-tr.show {
         display: block !important;
-    }  
+    }
 
     .flexi-grid-table-container td:last-child {
         border-bottom: 0;
@@ -691,16 +700,18 @@ a {
     }
 }
 
-.flexi-grid-table-container-wrapper{
-    width: 100%; 
-    position: relative; 
+.flexi-grid-table-container-wrapper {
+    width: 100%;
+    position: relative;
     overflow-x: auto;
 }
 
 .flexi-grid-table-container-wrapper,
 .flexi-grid-table-container {
-    scrollbar-width: thin; /* Firefox için */
-    scrollbar-color: var(--scroll-background-color) var(--background-color); /* Firefox için */
+    scrollbar-width: thin;
+    /* Firefox için */
+    scrollbar-color: var(--scroll-background-color) var(--background-color);
+    /* Firefox için */
 }
 
 .flexi-grid-table-container-wrapper::-webkit-scrollbar,
@@ -734,7 +745,8 @@ a {
 @media (max-width: 1000px) {
     .flexi-grid-table-container {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch; /* iOS için daha iyi kaydırma */
+        -webkit-overflow-scrolling: touch;
+        /* iOS için daha iyi kaydırma */
     }
 
     /* Mobil görünümde yatay kaydırma çubuğunu göster */
@@ -743,8 +755,25 @@ a {
     }
 }
 
-.flexi-grid-table-wrapper{
+.flexi-grid-table-wrapper {
     position: sticky;
     top: 0;
     z-index: 2;
+}
+
+.flexi-grid-tr-expanded {
+    background-color: var(--active-background-color);
+}
+
+.flexi-grid-tree-cell {
+    display: flex;
+    align-items: center;
+}
+
+.flexi-grid-tree-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
 }

@@ -13,7 +13,7 @@ import { FlexiGridService } from '../../../../flexi-grid/src/lib/services/flexi-
 import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-button.component';
 import { FlexiTooltipDirective } from '../../../../flexi-tooltip/src/lib/flexi-tooltip.directive';
 import { FlexiTreeviewComponent, TreeNode } from '../../../../flexi-treeview/src/public-api';
-import { roles } from '../constants';
+import { roles, ucafs, ucafs2 } from '../constants';
 import { FlexiTreeviewService } from '../../../../flexi-treeview/src/lib/flexi-treeview.service';
 
 
@@ -40,6 +40,8 @@ export class UsersComponent {
     console.log('Seçilen düğüm:', node);
   }
 
+  ucafs = signal<any[]>(ucafs);
+  treeDataForTable = signal<any[]>([]);
   users = signal<UserModel[]>([])
   total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
@@ -83,6 +85,11 @@ export class UsersComponent {
 
     this.treeData = treeData;
 
+    const treeData2 = this.flexi.buildHierarchy(ucafs,{codeProperty:"code",separator:"-"});
+    //this.treeDataForTable.set(treeData2);
+    this.treeDataForTable.set(ucafs);
+    console.log(treeData2);
+    
     //this.toast.showToast("Error","Something went wrong","error");
     //toast.options.swalContentThemeClass = "info"  
     //toast.options.swalContentThemeClass = "success"  

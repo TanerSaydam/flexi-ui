@@ -28,6 +28,12 @@
   line-height: 1;
   border-radius: 3px;
   transition: all 0.3s ease;
+  padding: 2px;
+}
+
+.flexi-button-content{
+  display: flex; 
+  align-items: center;
 }
 
 .flexi-button:active {
@@ -74,19 +80,28 @@
   cursor: not-allowed;
 }
 
-.flexi-button-size-small {
+.flexi-button-size-text-small {
+  font-size: 12px;
+}
+
+.flexi-button-size-text-default {
   font-size: 14px;
-  padding: 2px;
+}
+
+.flexi-button-size-text-large {
+  font-size: 16px;
+}
+
+.flexi-button-size-small {
+  font-size: 16px;
 }
 
 .flexi-button-size-default {
   font-size: 20px;
-  padding: 2px;
 }
 
 .flexi-button-size-large {
-  font-size: 30px;
-  padding: 2px;
+  font-size: 24px;
 }
 
 .flexi-button-outline {

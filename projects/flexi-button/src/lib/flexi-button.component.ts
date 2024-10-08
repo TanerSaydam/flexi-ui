@@ -6,10 +6,10 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   standalone: true,
   imports: [CommonModule],
   template: `
-    <button class="flexi-button flexi-button-{{btnColor}} flexi-button-size-{{btnSize}}">
-      <div style="display: flex; gap:3px; align-items: center;">
+    <button class="flexi-button flexi-button-{{btnColor}}">
+      <div class="flexi-button-content">
         <span class="material-symbols-outlined flexi-button-size-{{btnSize}}">{{ icon }}</span>
-        <ng-content></ng-content>
+        <span class="flexi-button-text flexi-button-text-size-{{btnSize}}" [style.padding-left]="btnText ? '3px' : ''" [style.padding-right]="btnText ? '5px' : ''">{{ btnText }}</span>
       </div>
     </button>
   `,
@@ -21,6 +21,7 @@ export class FlexiButtonComponent {
   @Input() icon: string = ''; 
   @Input() btnColor: FlexiButtonColorType = 'default';
   @Input() btnSize: FlexiButtonSizeType = 'default';
+  @Input() btnText: string = '';
 }
 
 export type FlexiButtonIconType = "" | "delete" | "remove" | "delete_forever" | "refresh" | "add" | "feature_search" | "zoom_in" | "sim_card_download" | "browser_updated" | "file_save" | "filter_list" | "sort" | "order" | "filter_list_off" | "reorder" | "menu" | "sweep" | "check" | "add_shopping_cart" | "shopping_cart" | "print" | "edit" | "swap_horiz" | "chat" | "local_shipping" | "library_add_check" | "sell" | "settings" | "unfold_less" | "unfold_more" | "check_box" | "check_box_outline_blank"

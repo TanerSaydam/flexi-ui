@@ -168,8 +168,17 @@
     <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="large" />    
   </div>  -->
 
-
+<!-- 
   <flexi-treeview [treeData]="treeData" (onSelected)="onNodeSelected($event)" width="1000px" height="500px" fontSize="12px" btnSize="small" checkboxSize="1.5em" actionBtnPosition="right" [themeClass]="shared.themeClass()" (onDelete)="deleteNode($event)" (onEdit)="editNode($event)" >    
     <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="small" />
-  </flexi-treeview>
+  </flexi-treeview> -->
+
+  <flexi-grid [data]="treeDataForTable()" [pageable]="true" [pageSize]="10">
+    <flexi-grid-column field="code" title="Kod"></flexi-grid-column>
+    <flexi-grid-column field="name" title="İsim"></flexi-grid-column>
+    <flexi-grid-column field="type" title="Tip"></flexi-grid-column>
+    <flexi-grid-column field="currencyType" title="Para Birimi"></flexi-grid-column>
+    <flexi-grid-column field="tlCredit" title="TL Alacak" filterType="number"></flexi-grid-column>
+    <flexi-grid-column field="tlDebit" title="TL Borç" filterType="number"></flexi-grid-column>
+  </flexi-grid>
 </div>
