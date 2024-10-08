@@ -75,18 +75,18 @@
 }
 
 .flexi-button-size-small {
-  font-size: 8px;
-  padding: 2.5px;
+  font-size: 14px;
+  padding: 2px;
 }
 
 .flexi-button-size-default {
-  font-size: 12px;
-  padding: 4px;
+  font-size: 20px;
+  padding: 2px;
 }
 
 .flexi-button-size-large {
-  font-size: 14px;
-  padding: 4px 6px;
+  font-size: 30px;
+  padding: 2px;
 }
 
 .flexi-button-outline {

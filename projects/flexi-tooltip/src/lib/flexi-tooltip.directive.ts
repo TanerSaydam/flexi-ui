@@ -95,10 +95,11 @@ export class FlexiTooltipDirective implements OnInit {
       topOrBottomPX = ((tooltipHeight + 9) * -1) + "px";
       leftOrRightPX = tooltipWidth > elWidth ? ((tooltipWidth - elWidth ) / 2 * -1) + "px" : "0px";
     }else if(this.tooltipPosition == 'left'){
-      topOrBottomPX = ((tooltipHeight - elHeight) * -1) + "px";
+      console.log(tooltipHeight, elHeight);
+      topOrBottomPX = (tooltipHeight > elHeight ? ((tooltipHeight - elHeight) / 2) * -1 : (elHeight - tooltipHeight) / 2) + "px";
       leftOrRightPX = ((tooltipWidth + 9) * -1) + "px";
     }else if(this.tooltipPosition == 'right'){
-      topOrBottomPX = ((tooltipHeight - elHeight) * -1) + "px";
+      topOrBottomPX = (tooltipHeight > elHeight ? ((tooltipHeight - elHeight) / 2) * -1 : (elHeight - tooltipHeight) / 2) + "px";
       leftOrRightPX = ((tooltipWidth + 9) * -1) + "px";
     }
 

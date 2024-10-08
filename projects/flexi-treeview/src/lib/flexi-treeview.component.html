@@ -1,0 +1,50 @@
+<div class="search-container">
+    <div class="flexi-tooltip-search-container">
+      <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Ara...">
+      <span class="material-symbols-outlined flexi-tooltip-search-icon">
+        search
+      </span>
+    </div>
+    <div class="search-results" *ngIf="searchTerm.trim() !== ''">
+      {{ foundItemsCount }} sonuç bulundu
+    </div>
+  </div>
+  <ul class="flexi-treeview">
+    <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: filteredTreeData }"></ng-container>
+  </ul>
+
+  <ng-template #treeTemplate let-nodes="nodes">
+    @for(node of nodes; track node.id){
+      <li class="node-item">
+        <div class="node-container">
+          <div class="node-content">
+            @if(node.children && node.children.length){
+              <div class="expand-icon" (click)="toggleNode(node)">
+                <span class="material-symbols-outlined">
+                    {{ node.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
+                </span>
+              </div>
+            }
+            @if(showCheckbox){
+              <input type="checkbox" [checked]="node.selected" (change)="toggleSelection(node, $event)">
+            }
+            <div class="node-name">
+              {{ node.name }}
+            </div>
+            <div class="node-description" *ngIf="node.description">{{ node.description }}</div>
+          </div>
+          <div class="node-actions">
+            @if(showEditButton){
+              <flexi-button icon="edit" btnColor="dark" btnSize="small" flexiTooltip title="Güncelle"/>
+            }
+            @if(showDeleteButton){
+              <flexi-button icon="delete" btnColor="danger" btnSize="small" flexiTooltip title="Sil"/>
+            }
+          </div>
+        </div>
+        <ul *ngIf="node.expanded && node.children && node.children.length">
+          <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: node.children }"></ng-container>
+        </ul>
+      </li>
+    }      
+  </ng-template>

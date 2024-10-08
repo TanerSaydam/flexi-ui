@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   template: `
     <button class="flexi-button flexi-button-{{btnColor}} flexi-button-size-{{btnSize}}">
       <div style="display: flex; gap:3px; align-items: center;">
-        <span class="material-symbols-outlined">{{ icon }}</span>
+        <span class="material-symbols-outlined flexi-button-size-{{btnSize}}">{{ icon }}</span>
         <ng-content></ng-content>
       </div>
     </button>
@@ -27,4 +27,4 @@ export type FlexiButtonIconType = "" | "delete" | "remove" | "delete_forever" | 
 
 export type FlexiButtonColorType = "default" | "primary" | "success" | "danger" | "warning" | "info" | "dark";
 
-export type FlexiButtonSizeType = "default" | "small" | "large";
+export type FlexiButtonSizeType = "default" | "small" | "large"

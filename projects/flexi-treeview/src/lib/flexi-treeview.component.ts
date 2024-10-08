@@ -1,6 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FlexiButtonComponent } from 'flexi-button';
+import { FlexiTooltipDirective } from 'flexi-tooltip';
 
 export interface TreeNode {
   id: string;
@@ -13,118 +15,19 @@ export interface TreeNode {
 }
 
 @Component({
-  selector: 'lib-flexi-treeview',
+  selector: 'flexi-treeview',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `
-    <div class="search-container">
-      <div class="flexi-tooltip-search-container">
-        <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Ara...">
-        <span class="material-symbols-outlined flexi-tooltip-search-icon">
-          search
-        </span>
-      </div>
-      <div class="search-results" *ngIf="searchTerm.trim() !== ''">
-        {{ foundItemsCount }} sonuç bulundu
-      </div>
-    </div>
-    <ul class="flexi-treeview">
-      <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: filteredTreeData }"></ng-container>
-    </ul>
-
-    <ng-template #treeTemplate let-nodes="nodes">
-      @for(node of nodes; track node.id){
-        <li class="node-item">
-          <div class="node-content" (click)="toggleNode(node)">
-            @if(node.children && node.children.length){
-              <div class="expand-icon">            
-                <span class="material-symbols-outlined">
-                    {{ node.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
-                </span>
-              </div>
-            }
-            @if(showCheckbox){
-              <input type="checkbox" [checked]="node.selected" (change)="toggleSelection(node, $event)">
-            }
-            <div class="node-name">
-              {{ node.name }}
-            </div>
-            <div class="node-description" *ngIf="node.description">{{ node.description }}</div>
-          </div>
-          <ul *ngIf="node.expanded && node.children && node.children.length">
-            <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: node.children }"></ng-container>
-          </ul>
-        </li>
-      }      
-    </ng-template>
-  `,
-  styles: [`
-    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chevron_right,keyboard_arrow_down,search');
-
-    ul{
-      list-style-type: none;      
-    }
-
-    .flexi-tooltip-search-container{
-      position: relative;
-    }
-
-    .flexi-tooltip-search-icon{
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
-    }
-
-    .node-item{
-      margin-bottom: 5px;
-    }
-
-    .flexi-treeview {
-      list-style-type: none;
-      padding-left: 20px;
-    }
-    .node-content {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-    .expand-icon {
-      margin-right: 5px;
-      font-size: 16px;      
-    }
-    .node-name {
-      font-weight: bold;
-      margin-left: 5px;
-    }
-    .node-description {
-      display: block;
-      margin-left: 20px;
-      font-size: 0.9em;
-      color: #666;
-    }
-    .search-container {
-      margin-bottom: 10px;
-    }
-
-    .search-container input {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding-left: 40px;
-    }
-
-    .search-results {
-      margin-top: 5px;
-      font-size: 0.9em;
-      color: #666;
-    }
-  `]
+  imports: [CommonModule, FormsModule, FlexiButtonComponent, FlexiTooltipDirective],
+  templateUrl: "./flexi-treeview.component.html",
+  styleUrl: "./flexi-treeview.component.css",
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlexiTreeviewComponent implements OnInit {
   @Input() treeData: TreeNode[] = [];
-  @Input() showCheckbox: boolean = false;
+  @Input() showCheckbox: boolean = true;
+  @Input() showEditButton: boolean = false;
+  @Input() showDeleteButton: boolean = true;
   @Output() nodeSelected = new EventEmitter<TreeNode>();
 
   searchTerm: string = '';

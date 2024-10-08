@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons');
+
+    ul{
+      list-style-type: none;      
+    }
+
+    .flexi-tooltip-search-container{
+      position: relative;
+    }
+
+    .flexi-tooltip-search-icon{
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+
+    .node-item{
+      margin-bottom: 5px;
+    }
+
+    .node-container:hover{
+      cursor: pointer;
+      background-color: #f0f0f0;
+    }
+
+    .flexi-treeview {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    .node-content {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+    }
+
+    .node-container{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 0;
+    }
+    .expand-icon {
+      display: flex;
+      align-items: center;
+      margin-right: 5px;
+      font-size: 16px;      
+    }
+    .node-name {
+      font-weight: 500;
+      margin-left: 5px;
+    }
+    .node-description {
+      display: block;
+      margin-left: 20px;
+      font-size: 0.9em;
+      color: #666;
+    }
+    .node-actions {
+      display: flex;
+      gap: 5px;
+    }
+    .search-container {
+      margin-bottom: 10px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding-left: 40px;
+    }
+
+    .search-results {
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #666;
+    }
