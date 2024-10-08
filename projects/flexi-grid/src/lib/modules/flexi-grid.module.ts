@@ -7,6 +7,7 @@ import { FlexiGridHeaderTemplateDirective } from '../directives/flexi-grid-heade
 import { FlexiGridComponent } from '../components/flexi-grid.component';
 import { FlexiGridColumnComponent } from '../components/flexi-grid-column.component';
 import { FlexiButtonComponent } from 'flexi-button';
+import { FlexiTooltipDirective } from 'flexi-tooltip';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,9 @@ import { FlexiButtonComponent } from 'flexi-button';
     CommonModule,
     FormsModule,
     TrCurrencyPipe,
+    FlexiTooltipDirective,
     FlexiButtonComponent
-  ],
+    ],
   exports: [
     FlexiGridComponent,
     FlexiGridColumnComponent,

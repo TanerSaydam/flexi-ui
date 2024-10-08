@@ -11,6 +11,10 @@ import { StateModel } from '../../../../flexi-grid/src/lib/models/state.model';
 import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/models/flexi-grid-filter-data.model';
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/services/flexi-grid.service';
 import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-button.component';
+import { FlexiTooltipDirective } from '../../../../flexi-tooltip/src/lib/flexi-tooltip.directive';
+import { FlexiTreeviewComponent, TreeNode } from '../../../../flexi-treeview/src/public-api';
+import { roles } from '../constants';
+
 
 @Component({
   selector: 'app-users',
@@ -22,11 +26,19 @@ import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-but
     FormsModule, 
     FlexiButtonComponent,
     FlexiOptionComponent,
+    FlexiTooltipDirective,
+    FlexiTreeviewComponent,
     FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
+  treeData:TreeNode[] = [];
+
+  onNodeSelected(node: any) {
+    console.log('Seçilen düğüm:', node);
+  }
+
   users = signal<UserModel[]>([])
   total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
@@ -64,12 +76,56 @@ export class UsersComponent {
     toast.options.themeClass = "light";
     toast.options.timeOut = 2000;  
     toast.options.swalContentThemeClass = "default"  
+
+    const treeData = this.convertRolesToTreeNodes(roles);
+
+    this.treeData = treeData;
+
     //this.toast.showToast("Error","Something went wrong","error");
     //toast.options.swalContentThemeClass = "info"  
     //toast.options.swalContentThemeClass = "success"  
     //toast.options.swalContentThemeClass = "warning"  
   }
 
+
+  convertRolesToTreeNodes(roles: any[]): TreeNode[] {
+    const codeMap = new Map<string, TreeNode>();
+
+  roles.forEach(role => {
+    const code = role.code;
+    let parentNode = codeMap.get(code);
+
+    // If the parent node for this code doesn't exist, create it
+    if (!parentNode) {
+      parentNode = {
+        id: code, // Using code as the id for parent nodes
+        name: code,
+        code: code,
+        description: '', // Parent nodes may not have a description
+        children: [],
+        expanded: true,
+        selected: false
+      };
+      codeMap.set(code, parentNode);
+    }
+
+    // Create a child node for each role, including the description
+    const childNode: TreeNode = {
+      id: role.id,
+      name: role.name,
+      code: role.code,
+      description: role.description,
+      expanded: true,
+      selected: false
+    };
+
+    // Add the child node to the parent node's children
+    parentNode.children!.push(childNode);
+  });
+
+  // Convert the map values to an array and return
+  return Array.from(codeMap.values());
+  }
 
   read(item:any, column:any, rowIndex:any){
   }

@@ -21,7 +21,8 @@
   box-sizing: border-box;
   border: 1px solid transparent;  
   cursor: pointer;
-  display: inline-flex;
+  display: inline-block;
+  height: 100%;
   align-items: center;
   justify-content: center;  
   line-height: 1;

@@ -26,6 +26,12 @@
       "flexi-toast": [
         "./dist/flexi-toast"
       ],
+      "flexi-tooltip": [
+        "./dist/flexi-tooltip"
+      ],
+      "flexi-treeview": [
+        "./dist/flexi-treeview"
+      ],
       "my-lib": [
         "./dist/my-lib"
       ]

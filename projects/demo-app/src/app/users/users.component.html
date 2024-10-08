@@ -1,5 +1,5 @@
-<div>  
-  <!-- <flexi-editor [(ngModel)]="editorContent"></flexi-editor>
+<!-- <div>  
+  <flexi-editor [(ngModel)]="editorContent"></flexi-editor>
   <div>
     <h3>Editor Content:</h3>
     <div [innerText]="editorContent"></div>
@@ -43,8 +43,8 @@
     </div> -->
   <!-- </div> -->
 
-  <div>
-    <!-- <div style="width: 100%; overflow: auto;">
+  <!--<div>
+     <div style="width: 100%; overflow: auto;">
       <table class="table">
         <thead>
           <tr>
@@ -111,7 +111,10 @@
       <input type="text" class="form-control" tabindex="6">
     </div>
      --> 
-<button (click)="showToast()">Show Toast</button>
+    <!--  <div style="text-align: center; padding-top: 10px;">
+      <button flexiTooltip="top" title="Click to save">Save</button>
+      <button flexiTooltip="bottom" title="Click to cancel">Cancel</button>
+    </div>
     <flexi-grid
     [data]="users()"
     [dataBinding]="true"
@@ -148,9 +151,15 @@
     <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="false"></flexi-grid-column>
     
     <ng-template #operationsColumnTemplate>        
-      <flexi-button btnColor="danger" icon="delete" btnSize="small" title="Sil" (click)="delete()">          
+      <flexi-button btnColor="danger" class="me-1" tooltipPosition="left" icon="edit" flexiTooltip btnSize="small" title="Güncelle">          
+      </flexi-button>
+      <flexi-button btnColor="danger" tooltipPosition="left" icon="delete" flexiTooltip btnSize="small" title="Sil" (click)="delete()">          
       </flexi-button>
     </ng-template>
     </flexi-grid>
   </div>
+</div> -->
+
+<div>
+  <lib-flexi-treeview [treeData]="treeData" (nodeSelected)="onNodeSelected($event)"></lib-flexi-treeview>
 </div>

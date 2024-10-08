@@ -59,6 +59,10 @@
     --sticky-border-color: #353232;
 }
 
+flexi-button{
+    display: inline-block !important;
+}
+
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;

@@ -7,11 +7,11 @@
     <div class="d-flex" style="gap: 10px;">
       <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
       @if(showExportExcelBtn){
-      <flexi-button icon="file_save" btnColor="warning" (click)="onExportExcelButtonClick()" />
+      <flexi-button icon="file_save" flexiTooltip title="Excel'e Aktar" btnColor="warning" (click)="onExportExcelButtonClick()" />
       }
       @if(showColumnVisibility){
       <div style="position: relative;">
-        <flexi-button icon="menu" btnColor="info" (click)="toggleColumnVisibilityDropdown()" />
+        <flexi-button icon="menu" btnColor="info" flexiTooltip title="Sütun Görünürlüğü" (click)="toggleColumnVisibilityDropdown()" />
         <div class="flexi-grid-dropdown-menu" style="top: 40px;" [class.show]="columnVisibilityDropdownVisible()">
           <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
           @for(column of columns; track trackByFn()){
@@ -24,7 +24,7 @@
       </div>
       }
       @if(showRefreshBtn || dataBinding){
-      <flexi-button icon="refresh" btnColor="dark" (click)="refreshDataMethod()" />
+      <flexi-button icon="refresh" btnColor="dark" flexiTooltip title="Yenile" (click)="refreshDataMethod()" />
       }
       <div style="margin-right: 10px;"></div>
     </div>
