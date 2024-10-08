@@ -162,12 +162,14 @@
 
 <div>
 
-   <div style="display: flex; gap: 10px; align-items: end;">
+   <!-- <div style="display: flex; gap: 10px; align-items: end;">
     <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="small" />
     <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="default" />    
     <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="large" />    
-  </div> 
+  </div>  -->
 
 
-  <flexi-treeview [treeData]="treeData" (nodeSelected)="onNodeSelected($event)"></flexi-treeview>
+  <flexi-treeview [treeData]="treeData" (onSelected)="onNodeSelected($event)" width="1000px" height="500px" fontSize="12px" btnSize="small" checkboxSize="1.5em" actionBtnPosition="right" [themeClass]="shared.themeClass()" (onDelete)="deleteNode($event)" (onEdit)="editNode($event)" >    
+    <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="small" />
+  </flexi-treeview>
 </div>

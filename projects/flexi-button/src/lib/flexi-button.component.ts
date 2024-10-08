@@ -18,12 +18,12 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlexiButtonComponent {
-  @Input() icon: FlexiButtonIconType = ''; 
+  @Input() icon: string = ''; 
   @Input() btnColor: FlexiButtonColorType = 'default';
   @Input() btnSize: FlexiButtonSizeType = 'default';
 }
 
-export type FlexiButtonIconType = "" | "delete" | "remove" | "delete_forever" | "refresh" | "add" | "feature_search" | "zoom_in" | "sim_card_download" | "browser_updated" | "file_save" | "filter_list" | "sort" | "order" | "filter_list_off" | "reorder" | "menu" | "sweep" | "check" | "add_shopping_cart" | "shopping_cart" | "print" | "edit" | "swap_horiz" | "chat" | "local_shipping" | "library_add_check" | "sell" | "settings"
+export type FlexiButtonIconType = "" | "delete" | "remove" | "delete_forever" | "refresh" | "add" | "feature_search" | "zoom_in" | "sim_card_download" | "browser_updated" | "file_save" | "filter_list" | "sort" | "order" | "filter_list_off" | "reorder" | "menu" | "sweep" | "check" | "add_shopping_cart" | "shopping_cart" | "print" | "edit" | "swap_horiz" | "chat" | "local_shipping" | "library_add_check" | "sell" | "settings" | "unfold_less" | "unfold_more" | "check_box" | "check_box_outline_blank"
 
 export type FlexiButtonColorType = "default" | "primary" | "success" | "danger" | "warning" | "info" | "dark";
 

@@ -79,7 +79,7 @@ export class UsersComponent {
     toast.options.timeOut = 2000;  
     toast.options.swalContentThemeClass = "default"  
 
-    const treeData = this.treeService.convertToTreeNodes(roles,"code","name","description");
+    const treeData = this.treeService.convertToTreeNodes(roles,"id","code","name","description");
 
     this.treeData = treeData;
 
@@ -89,8 +89,17 @@ export class UsersComponent {
     //toast.options.swalContentThemeClass = "warning"  
   }
 
+  editNode(event:any){
+    console.log(event);    
+  }
 
+  selectedNodes(event:any){
+    console.log(event);    
+  }
   
+  deleteNode(event:any){
+    console.log(event);
+  }
 
   read(item:any, column:any, rowIndex:any){
   }

@@ -1,6 +1,6 @@
 {
   "name": "flexi-button",
-  "version": "18.0.38",
+  "version": "18.0.39",
   "peerDependencies": {
     "@angular/common": "^18.0.0",
     "@angular/core": "^18.0.0"

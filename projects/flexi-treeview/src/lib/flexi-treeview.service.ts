@@ -8,6 +8,7 @@ export class FlexiTreeviewService {
 
   convertToTreeNodes<T>(
     data: T[],
+    idField: keyof T,
     codeField: keyof T,
     nameField: keyof T,
     descriptionField?: keyof T
@@ -21,7 +22,7 @@ export class FlexiTreeviewService {
       // Eğer bu kod için üst düğüm yoksa, oluştur
       if (!parentNode) {
         parentNode = {
-          id: code,
+          id: String(item[idField]),
           name: code,
           code: code,
           description: '',
@@ -34,7 +35,7 @@ export class FlexiTreeviewService {
 
       // Her rol için bir alt düğüm oluştur
       const childNode: TreeNode = {
-        id: String(item[nameField]),
+        id: String(item[idField]),
         name: String(item[nameField]),
         code: code,
         description: descriptionField ? String(item[descriptionField]) : '',

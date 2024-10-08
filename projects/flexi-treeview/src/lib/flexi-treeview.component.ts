@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FlexiButtonComponent } from 'flexi-button';
+import { FlexiButtonComponent, FlexiButtonSizeType } from 'flexi-button';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 
 export interface TreeNode {
@@ -26,16 +26,29 @@ export interface TreeNode {
 export class FlexiTreeviewComponent implements OnInit {
   @Input() treeData: TreeNode[] = [];
   @Input() showCheckbox: boolean = true;
-  @Input() showEditButton: boolean = false;
+  @Input() showEditButton: boolean = true;
   @Input() showDeleteButton: boolean = true;
-  @Output() nodeSelected = new EventEmitter<TreeNode>();
+  @Input() showSearch: boolean = true;
+  @Input() showActions: boolean = true;
+  @Input() width: string = '100%';
+  @Input() height: string = '100%';
+  @Input() fontSize: string = '12px';
+  @Input() btnSize: FlexiButtonSizeType = 'small';
+  @Input() checkboxSize: string = '1.4em';
+  @Input() actionBtnPosition: 'left' | 'right' = 'right';
+  @Input() themeClass: string = 'light';
 
-  searchTerm: string = '';
-  filteredTreeData: TreeNode[] = [];
-  foundItemsCount: number = 0;
+  @Output() onSelected = new EventEmitter<TreeNode[]>();
+  @Output() onEdit = new EventEmitter<TreeNode>();
+  @Output() onDelete = new EventEmitter<TreeNode>();  
+
+  searchTerm = signal<string>('');
+  filteredTreeData = signal<TreeNode[]>([]);
+  foundItemsCount = signal<number>(0);
+  selectedNodes = signal<TreeNode[]>([]);
 
   ngOnInit() {
-    this.filteredTreeData = this.treeData;
+    this.filteredTreeData.set(this.treeData);
   }
 
   toggleNode(node: TreeNode): void {
@@ -46,23 +59,23 @@ export class FlexiTreeviewComponent implements OnInit {
 
   toggleSelection(node: TreeNode, event: Event): void {
     event.stopPropagation();
-    node.selected = !node.selected;
-    this.nodeSelected.emit(node);
+    const isSelected = !node.selected;
+    this.updateNodeAndChildrenSelection(node, isSelected);
+    this.updateSelectedNodes();
+    this.onSelected.emit(this.selectedNodes());
   }
 
   onSearch() {
-    if (this.searchTerm.trim() === '') {
-      this.filteredTreeData = this.treeData;
-      this.foundItemsCount = 0;
+    if (this.searchTerm().trim() === '') {
+      this.filteredTreeData.set(this.treeData);
+      this.foundItemsCount.set(0);
     } else {
-      this.filteredTreeData = this.filterNodes(this.treeData, this.searchTerm.toLowerCase());
-      this.foundItemsCount = this.countFilteredNodes(this.filteredTreeData);
+      this.filteredTreeData.set(this.filterNodes(this.treeData, this.searchTerm().toLowerCase()));
+      this.foundItemsCount.set(this.countFilteredNodes(this.filteredTreeData()));
     }
   }
 
   filterNodes(nodes: TreeNode[], term: string): TreeNode[] {
-    console.log(term.length);
-    
     if(term === ''){
       return nodes;
     }
@@ -90,11 +103,77 @@ export class FlexiTreeviewComponent implements OnInit {
   countFilteredNodes(nodes: TreeNode[]): number {
     let count = 0;
     for (const node of nodes) {
-      count++; // Her düğümü say
+      count++;
       if (node.children && node.children.length) {
-        count += this.countFilteredNodes(node.children); // Alt düğümleri özyinelemeli olarak say
+        count += this.countFilteredNodes(node.children);
       }
     }
     return count;
+  }
+
+  collapseAll(): void {
+    this.updateNodeExpansion(this.filteredTreeData(), false);    
+  }
+
+  expandAll(): void {
+    this.updateNodeExpansion(this.filteredTreeData(), true);    
+  }
+
+  selectAll(): void {
+    this.updateNodeSelection(this.filteredTreeData(), true);
+  }
+
+  deselectAll(): void {
+    this.updateNodeSelection(this.filteredTreeData(), false);
+  }
+
+  private updateNodeExpansion(nodes: TreeNode[], expanded: boolean): void {
+    nodes.forEach(node => {
+      if (node.children && node.children.length) {
+        node.expanded = expanded;       
+        this.updateNodeExpansion(node.children, expanded);
+      }
+    });
+  }
+
+  private updateNodeAndChildrenSelection(node: TreeNode, isSelected: boolean): void {
+    node.selected = isSelected;
+    if (node.children && node.children.length) {
+      node.children.forEach(child => this.updateNodeAndChildrenSelection(child, isSelected));
+    }
+  }
+
+  private updateSelectedNodes(): void {
+    const allSelectedNodes: TreeNode[] = [];
+    const collectSelectedNodes = (nodes: TreeNode[]) => {
+      nodes.forEach(node => {
+        if (node.selected) {
+          allSelectedNodes.push(node);
+        }
+        if (node.children && node.children.length) {
+          collectSelectedNodes(node.children);
+        }
+      });
+    };
+    collectSelectedNodes(this.filteredTreeData());
+    this.selectedNodes.set(allSelectedNodes);
+  }
+
+  private updateNodeSelection(nodes: TreeNode[], selected: boolean): void {
+    nodes.forEach(node => {
+      this.updateNodeAndChildrenSelection(node, selected);
+    });
+    this.updateSelectedNodes();
+    this.onSelected.emit(this.selectedNodes());
+  }
+
+  onDeleteClick(node: TreeNode, event: Event): void {
+    event.stopPropagation();
+    this.onDelete.emit(node);
+  }
+
+  onEditClick(node: TreeNode, event: Event): void {
+    event.stopPropagation();
+    this.onEdit.emit(node);
   }
 }
