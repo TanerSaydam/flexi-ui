@@ -1,38 +1,43 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
-    font-weight: 400;
-    font-style: normal;
-    font-size: 20px;  /* Preferred icon size */
-    display: inline-flex;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    -webkit-font-feature-settings: "liga";
-    font-feature-settings: "liga";
-    -webkit-font-smoothing: antialiased;    
+* {
+  font-family: 'Poppins', sans-serif;
 }
 
-.flexi-button{
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  display: inline-flex;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.flexi-button {
   box-sizing: border-box;
-  border: 1px solid transparent;  
+  border: 1px solid transparent;
   cursor: pointer;
   display: inline-block;
   height: 100%;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   line-height: 1;
   border-radius: 3px;
   transition: all 0.3s ease;
   padding: 2px;
 }
 
-.flexi-button-content{
-  display: flex; 
+.flexi-button-content {
+  display: flex;
   align-items: center;
 }
 
@@ -40,37 +45,38 @@
   transform: translateY(1px);
 }
 
-.flexi-button-success{
+.flexi-button-success {
   background-color: #28a745;
   color: #fff;
 }
 
-.flexi-button-danger{
+.flexi-button-danger {
   background-color: #dc2626;
   color: #fff;
 }
 
-.flexi-button-warning{
+.flexi-button-warning {
   background-color: #ffc107;
   color: #fff;
 }
 
-.flexi-button-info{
+.flexi-button-info {
   background-color: #17a2b8;
   color: #fff;
 }
 
-.flexi-button-dark{
+.flexi-button-dark {
   background-color: #343a40;
   color: #fff;
 }
 
-.flexi-button-default{
+.flexi-button-default {
   background-color: #fff;
+  border: 1px solid #ccc;
   color: #000;
 }
 
-.flexi-button-primary{
+.flexi-button-primary {
   background-color: #007bff;
   color: #fff;
 }
@@ -94,14 +100,17 @@
 
 .flexi-button-size-small {
   font-size: 16px;
+  padding: 2px;
 }
 
 .flexi-button-size-default {
   font-size: 20px;
+  padding: 2px;
 }
 
 .flexi-button-size-large {
   font-size: 24px;
+  padding: 2px;
 }
 
 .flexi-button-outline {

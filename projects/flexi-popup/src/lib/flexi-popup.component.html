@@ -1,0 +1,23 @@
+<div [attr.data-bs-theme]="themeClass" class="popup-backdrop" [class.visible]="isPopupVisible">
+    <div class="popup-container">
+        <div class="popup-header">
+            <h2>{{popupTitle}}</h2>
+            <flexi-button (click)="closePopup()" icon="close" btnSize="small" />
+        </div>
+        <div class="popup-content" [style.width]="width" [style.height]="height">
+            <ng-content></ng-content>
+        </div>
+        @if (showActionButtons) {
+        <div class="popup-actions">
+            @if(actionTemplate){
+            <ng-container>
+                <ng-container *ngTemplateOutlet="actionTemplate.templateRef"></ng-container>
+            </ng-container>
+            }@else {
+            <flexi-button (click)="closePopup()" btnSize="large" icon="block" btnColor="default" btnText="Cancel" />
+            <flexi-button (click)="saveChanges()" btnSize="large" icon="save" btnColor="primary" btnText="Save" />
+            }
+        </div>
+        }
+    </div>
+</div>

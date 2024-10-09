@@ -15,6 +15,7 @@ import { FlexiTooltipDirective } from '../../../../flexi-tooltip/src/lib/flexi-t
 import { FlexiTreeviewComponent, TreeNode } from '../../../../flexi-treeview/src/public-api';
 import { roles, ucafs, ucafs2 } from '../constants';
 import { FlexiTreeviewService } from '../../../../flexi-treeview/src/lib/flexi-treeview.service';
+import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.module';
 
 
 @Component({
@@ -29,6 +30,7 @@ import { FlexiTreeviewService } from '../../../../flexi-treeview/src/lib/flexi-t
     FlexiOptionComponent,
     FlexiTooltipDirective,
     FlexiTreeviewComponent,
+    FlexiPopupModule,
     FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
@@ -65,6 +67,8 @@ export class UsersComponent {
       name: "Passive"
     }
   ];
+  showPopup = signal<boolean>(false);
+
   constructor(
     private http: HttpClient,
     private flexi: FlexiGridService,
@@ -81,6 +85,8 @@ export class UsersComponent {
     toast.options.timeOut = 2000;  
     toast.options.swalContentThemeClass = "default"  
 
+    
+
     const treeData = this.treeService.convertToTreeNodes(roles,"id","code","name","description");
 
     this.treeData = treeData;
@@ -88,12 +94,18 @@ export class UsersComponent {
     const treeData2 = this.flexi.buildHierarchy(ucafs,{codeProperty:"code",separator:"-"});
     //this.treeDataForTable.set(treeData2);
     this.treeDataForTable.set(ucafs);
-    console.log(treeData2);
+   // console.log(treeData2);
     
     //this.toast.showToast("Error","Something went wrong","error");
     //toast.options.swalContentThemeClass = "info"  
     //toast.options.swalContentThemeClass = "success"  
     //toast.options.swalContentThemeClass = "warning"  
+  }
+
+  openPopup(){
+    this.showPopup.set(true);
+    console.log(this.showPopup());
+    
   }
 
   editNode(event:any){

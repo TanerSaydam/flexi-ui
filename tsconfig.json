@@ -20,6 +20,9 @@
       "flexi-icon": [
         "./dist/flexi-icon"
       ],
+      "flexi-popup": [
+        "./dist/flexi-popup"
+      ],
       "flexi-select": [
         "./dist/flexi-select"
       ],

@@ -1,184 +1,27 @@
-<!-- <div>  
-  <flexi-editor [(ngModel)]="editorContent"></flexi-editor>
-  <div>
-    <h3>Editor Content:</h3>
-    <div [innerText]="editorContent"></div>
-  </div> -->
-  <!-- <div class="form-group row"> -->
-    <!-- <div class="form-group">
-      <label>Name</label>
-      <input type="text" tabindex="1">
-    </div> -->
-
-    <!-- <div class="col-4 form-group mt-1">
-      <label>User</label>
-      <flexi-select
-        [data]="users()"
-        label="firstName"
-        value="id"
-        name="test2"
-        tabindex="2"
-        [multiple]="true"
-        [closeAfterSelect]="false"
-        (selected)="showSelected($event)"
-        [(ngModel)]="selectedItems"
-        ></flexi-select>
-    </div>
-
-    <button (click)="changeIds()">Change</button> -->
-
-    <!-- <div class="col-4 form-group mt-1">
-      <label>User</label>
-      <flexi-select
-        [data]="users()"
-        label="firstName"
-        name="test"
-        value="id"
-        tabindex="2"
-        [multiple]="false"
-        [closeAfterSelect]="true"
-        (selected)="showSelected($event)"
-        [(ngModel)]="selectedItem"
-        ></flexi-select>
-    </div> -->
-  <!-- </div> -->
-
-  <!--<div>
-     <div style="width: 100%; overflow: auto;">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Date of Birth</th>
-            <th>Salary</th>
-            <th>Avatar Url</th>
-            <th class="sticky">Operations</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for(val of users();track val.id){
-            <tr>
-              <td>{{$index + 1}}</td>
-              <td>{{val.firstName}}</td>
-              <td>{{val.lastName}}</td>
-              <td>{{val.dateOfBirth}}</td>
-              <td>{{val.salary}}</td>
-              <td>{{val.avatarUrl}}</td>
-              <td class="sticky">
-                <button>Update</button>
-                <button>Delete</button>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div> -->
-
-
-    <!-- <div class="form-troup">
-      <input type="text" class="form-control" tabindex="1">
-    </div>
-
-    <div class="form-troup">
-      <input type="text" class="form-control" tabindex="2">
-    </div>
-
-    <div class="form-troup">
-      <flexi-select
-        [data]="users()"
-        label="firstName"
-        
-        value="id"
-        [tabindex]="3"
-        [multiple]="false"
-        [closeAfterSelect]="true"
-        (selected)="showSelected($event)"
-        [(ngModel)]="selectedItem"
-        ></flexi-select>
-    </div>
-
-    <div class="form-troup">
-      <input type="text" class="form-control" tabindex="4">
-    </div>
-
-    <div class="form-troup">
-      <input type="text" class="form-control" tabindex="5">
-    </div>
-
-    <div class="form-troup">
-      <input type="text" class="form-control" tabindex="6">
-    </div>
-     --> 
-    <!--  <div style="text-align: center; padding-top: 10px;">
-      <button flexiTooltip="top" title="Click to save">Save</button>
-      <button flexiTooltip="bottom" title="Click to cancel">Cancel</button>
-    </div>
-    <flexi-grid
-    [data]="users()"
-    [dataBinding]="true"
-    [showRefreshBtn]="true"
-    [total]="total()"
-    [pageSize]="100"
-    [themeClass]="shared.themeClass()"
-    [showCaption]="true"  
-    captionTitle="User List"
-    [loading]="loading()"
-    [captionTemplate]="captionTemplate"
-    [showIndex]="true"     
-    [showCommandColumn]="true"
-    [commandColumnTemplate]="operationsColumnTemplate"
-    [showExportExcelBtn]="true"
-    height="300px"
-    [useMinWidth]="false"
-    [autoHeight]="false"
-    (dataStateChange)="dataStateChange($event)"
-    dataBindingExportEndpoint="https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll"
-    dataBindingExportPath='data'
-  >
-    <ng-template #captionTemplate>
-      <flexi-button icon="add" btnColor="success">
-      </flexi-button>
-    </ng-template>
-  
-    <flexi-grid-column field="id" title="Id" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name" [hideOverflow]="false" />
-    <flexi-grid-column field="lastName" title="Last Name" [hideOverflow]="false"/>
-    <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd MMM yyyy" textAlign="center"></flexi-grid-column>
-    <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right" width="100px"></flexi-grid-column>
-    <flexi-grid-column field="avatarUrl" title="Avatar URL" [filterable]="true" [visible]="false" [hideOverflow]="true"></flexi-grid-column>
-    <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" textAlign="center" [booleanData]="['Active', 'Passive']" [showCheckbox]="false"></flexi-grid-column>
-    
-    <ng-template #operationsColumnTemplate>        
-      <flexi-button btnColor="danger" class="me-1" tooltipPosition="left" icon="edit" flexiTooltip btnSize="small" title="Güncelle">          
-      </flexi-button>
-      <flexi-button btnColor="danger" tooltipPosition="left" icon="delete" flexiTooltip btnSize="small" title="Sil" (click)="delete()">          
-      </flexi-button>
-    </ng-template>
-    </flexi-grid>
-  </div>
-</div> -->
-
 <div>
-
-   <!-- <div style="display: flex; gap: 10px; align-items: end;">
-    <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="small" />
-    <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="default" />    
-    <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="large" />    
-  </div>  -->
-
-<!-- 
-  <flexi-treeview [treeData]="treeData" (onSelected)="onNodeSelected($event)" width="1000px" height="500px" fontSize="12px" btnSize="small" checkboxSize="1.5em" actionBtnPosition="right" [themeClass]="shared.themeClass()" (onDelete)="deleteNode($event)" (onEdit)="editNode($event)" >    
-    <flexi-button btnColor="primary" flexiTooltip title="Ekle" icon="add" btnSize="small" />
-  </flexi-treeview> -->
-
-  <flexi-grid [data]="treeDataForTable()" [pageable]="true" [pageSize]="10">
-    <flexi-grid-column field="code" title="Kod"></flexi-grid-column>
-    <flexi-grid-column field="name" title="İsim"></flexi-grid-column>
-    <flexi-grid-column field="type" title="Tip"></flexi-grid-column>
-    <flexi-grid-column field="currencyType" title="Para Birimi"></flexi-grid-column>
-    <flexi-grid-column field="tlCredit" title="TL Alacak" filterType="number"></flexi-grid-column>
-    <flexi-grid-column field="tlDebit" title="TL Borç" filterType="number"></flexi-grid-column>
-  </flexi-grid>
+  <flexi-button btnColor="primary" btnText="Open Popup" (click)="openPopup()" icon="add"/> 
 </div>
+
+<flexi-popup [(isPopupVisible)]="showPopup" width="500px" height="400px" popupTitle="User Form" [themeClass]="shared.themeClass()">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" name="firstName" id="firstName" class="form-control">
+  </div>
+
+  <div class="form-group mt-2">
+    <label>Last Name</label>
+    <input type="text" name="lastName" id="lastName" class="form-control">
+  </div>
+
+  <div class="form-group mt-2">
+    <label>Email</label>
+    <input type="text" name="email" id="email" class="form-control">
+  </div>
+
+  <div class="form-group mt-2">
+    <label>Phone</label>
+    <input type="text" name="phone" id="phone" class="form-control">
+  </div> 
+
+  
+</flexi-popup>
