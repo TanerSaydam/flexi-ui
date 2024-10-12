@@ -1,18 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation, ChangeDetectionStrategy, signal, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlexiButtonComponent, FlexiButtonSizeType } from 'flexi-button';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
-
-export interface TreeNode {
-  id: string;
-  name: string;
-  code: string;
-  description?: string;
-  children?: TreeNode[];
-  expanded?: boolean;
-  selected?: boolean;
-}
+import { FlexiTreeNode } from './flexi-tree-node.model';
 
 @Component({
   selector: 'flexi-treeview',
@@ -23,9 +14,10 @@ export interface TreeNode {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FlexiTreeviewComponent implements OnInit {
-  @Input() treeData: TreeNode[] = [];
-  @Input() showCheckbox: boolean = true;
+export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {  
+  @Input() data: FlexiTreeNode[] = [];
+  @Input() treeviewTitle: string = '';
+  @Input() showCheckbox: boolean = false;
   @Input() showEditButton: boolean = true;
   @Input() showDeleteButton: boolean = true;
   @Input() showSearch: boolean = true;
@@ -37,27 +29,32 @@ export class FlexiTreeviewComponent implements OnInit {
   @Input() checkboxSize: string = '1.4em';
   @Input() actionBtnPosition: 'left' | 'right' = 'right';
   @Input() themeClass: string = 'light';
-
-  @Output() onSelected = new EventEmitter<TreeNode[]>();
-  @Output() onEdit = new EventEmitter<TreeNode>();
-  @Output() onDelete = new EventEmitter<TreeNode>();  
+  @Input() loading: boolean = false;
+  
+  @Output() onSelected = new EventEmitter<FlexiTreeNode[]>();
+  @Output() onEdit = new EventEmitter<FlexiTreeNode>();
+  @Output() onDelete = new EventEmitter<FlexiTreeNode>();  
 
   searchTerm = signal<string>('');
-  filteredTreeData = signal<TreeNode[]>([]);
+  filteredTreeData = signal<FlexiTreeNode[]>([]);
   foundItemsCount = signal<number>(0);
-  selectedNodes = signal<TreeNode[]>([]);
+  selectedNodes = signal<FlexiTreeNode[]>([]);
 
-  ngOnInit() {
-    this.filteredTreeData.set(this.treeData);
+  ngAfterViewInit(): void {
+    this.filteredTreeData.set(this.data);
   }
 
-  toggleNode(node: TreeNode): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.filteredTreeData.set(this.data);
+  } 
+
+  toggleNode(node: FlexiTreeNode): void {
     if (node.children && node.children.length) {
       node.expanded = !node.expanded;
     }
   }
 
-  toggleSelection(node: TreeNode, event: Event): void {
+  toggleSelection(node: FlexiTreeNode, event: Event): void {
     event.stopPropagation();
     const isSelected = !node.selected;
     this.updateNodeAndChildrenSelection(node, isSelected);
@@ -67,15 +64,15 @@ export class FlexiTreeviewComponent implements OnInit {
 
   onSearch() {
     if (this.searchTerm().trim() === '') {
-      this.filteredTreeData.set(this.treeData);
+      this.filteredTreeData.set(this.data);
       this.foundItemsCount.set(0);
     } else {
-      this.filteredTreeData.set(this.filterNodes(this.treeData, this.searchTerm().toLowerCase()));
+      this.filteredTreeData.set(this.filterNodes(this.data, this.searchTerm().toLowerCase()));
       this.foundItemsCount.set(this.countFilteredNodes(this.filteredTreeData()));
     }
   }
 
-  filterNodes(nodes: TreeNode[], term: string): TreeNode[] {
+  filterNodes(nodes: FlexiTreeNode[], term: string): FlexiTreeNode[] {
     if(term === ''){
       return nodes;
     }
@@ -100,7 +97,7 @@ export class FlexiTreeviewComponent implements OnInit {
     });
   }
 
-  countFilteredNodes(nodes: TreeNode[]): number {
+  countFilteredNodes(nodes: FlexiTreeNode[]): number {
     let count = 0;
     for (const node of nodes) {
       count++;
@@ -127,7 +124,7 @@ export class FlexiTreeviewComponent implements OnInit {
     this.updateNodeSelection(this.filteredTreeData(), false);
   }
 
-  private updateNodeExpansion(nodes: TreeNode[], expanded: boolean): void {
+  private updateNodeExpansion(nodes: FlexiTreeNode[], expanded: boolean): void {
     nodes.forEach(node => {
       if (node.children && node.children.length) {
         node.expanded = expanded;       
@@ -136,7 +133,7 @@ export class FlexiTreeviewComponent implements OnInit {
     });
   }
 
-  private updateNodeAndChildrenSelection(node: TreeNode, isSelected: boolean): void {
+  private updateNodeAndChildrenSelection(node: FlexiTreeNode, isSelected: boolean): void {
     node.selected = isSelected;
     if (node.children && node.children.length) {
       node.children.forEach(child => this.updateNodeAndChildrenSelection(child, isSelected));
@@ -144,8 +141,8 @@ export class FlexiTreeviewComponent implements OnInit {
   }
 
   private updateSelectedNodes(): void {
-    const allSelectedNodes: TreeNode[] = [];
-    const collectSelectedNodes = (nodes: TreeNode[]) => {
+    const allSelectedNodes: FlexiTreeNode[] = [];
+    const collectSelectedNodes = (nodes: FlexiTreeNode[]) => {
       nodes.forEach(node => {
         if (node.selected) {
           allSelectedNodes.push(node);
@@ -159,7 +156,7 @@ export class FlexiTreeviewComponent implements OnInit {
     this.selectedNodes.set(allSelectedNodes);
   }
 
-  private updateNodeSelection(nodes: TreeNode[], selected: boolean): void {
+  private updateNodeSelection(nodes: FlexiTreeNode[], selected: boolean): void {
     nodes.forEach(node => {
       this.updateNodeAndChildrenSelection(node, selected);
     });
@@ -167,12 +164,12 @@ export class FlexiTreeviewComponent implements OnInit {
     this.onSelected.emit(this.selectedNodes());
   }
 
-  onDeleteClick(node: TreeNode, event: Event): void {
+  onDeleteClick(node: FlexiTreeNode, event: Event): void {
     event.stopPropagation();
     this.onDelete.emit(node);
   }
 
-  onEditClick(node: TreeNode, event: Event): void {
+  onEditClick(node: FlexiTreeNode, event: Event): void {
     event.stopPropagation();
     this.onEdit.emit(node);
   }

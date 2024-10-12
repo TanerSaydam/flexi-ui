@@ -1,19 +1,22 @@
 <div class="flexi-treeview" [style.fontSize]="fontSize" [attr.data-bs-theme]="themeClass" [style.width]="width">
   @if(showActions){
-  <div class="flexi-treeview-actions" [style.justify-content]="actionBtnPosition === 'left' ? 'start' : 'space-between'">
-    <div class="flexi-treeview-actions-buttons">
-      <ng-content></ng-content>
-    </div>
-    <div class="flexi-treeview-actions-buttons">
-      <flexi-button (click)="selectAll()" [btnSize]="btnSize" icon="check_box" btnColor="dark" flexiTooltip="bottom"
-        title="Tümünü Seç" />
-      <flexi-button (click)="deselectAll()" [btnSize]="btnSize" icon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
-        title="Tümünün Seçimini Kaldır" />
-      <flexi-button (click)="collapseAll()" [btnSize]="btnSize" icon="unfold_less" btnColor="dark" flexiTooltip="bottom"
-        title="Tümünü Daralt" />
-      <flexi-button (click)="expandAll()" [btnSize]="btnSize" icon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
-        title="Tümünü Genişlet" />
-    </div>
+    <div class="flexi-treeview-caption" [style.justify-content]="actionBtnPosition === 'left' ? 'start' : 'space-between'">
+      <h2 style="margin:0;">
+        {{treeviewTitle}}
+      </h2>  
+      <div class="flexi-treeview-actions-buttons">
+        <ng-content></ng-content>
+        @if(showCheckbox){
+          <flexi-button (click)="selectAll()" [btnSize]="btnSize" icon="check_box" btnColor="dark" flexiTooltip="bottom"
+            title="Tümünü Seç" />
+          <flexi-button (click)="deselectAll()" [btnSize]="btnSize" icon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
+            title="Tümünün Seçimini Kaldır" />
+        }
+        <flexi-button (click)="collapseAll()" [btnSize]="btnSize" icon="unfold_less" btnColor="dark" flexiTooltip="bottom"
+          title="Tümünü Daralt" />
+        <flexi-button (click)="expandAll()" [btnSize]="btnSize" icon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
+          title="Tümünü Genişlet" />
+      </div>
   </div>
   }
 
@@ -38,44 +41,53 @@
   <div class="flexi-treeview-divider"></div>
 
   <div class="flexi-treeview-container" [style.height]="height">
-    <ul class="flexi-treeview-nodes">
-      <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: filteredTreeData() }"></ng-container>
-    </ul>
 
-    <ng-template #treeTemplate let-nodes="nodes">
-      @for(node of nodes; track node.id){
-      <li class="flexi-treeview-node-item">
-        <div class="flexi-treeview-node-container">
-          <div class="flexi-treeview-node-content">
-            @if(node.children && node.children.length){
-            <div class="flexi-treeview-expand-icon" (click)="toggleNode(node)">
-              <span class="material-symbols-outlined">
-                {{ node.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
-              </span>
+    @if(loading){
+    <div class="flexi-treeview-spinner-container">
+      <div class="flexi-treeview-spinner-1"></div>
+      <div class="flexi-treeview-spinner-2"></div>
+    </div>
+    }@else {
+      <ul class="flexi-treeview-nodes">
+        <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: filteredTreeData() }"></ng-container>
+      </ul>
+  
+      <ng-template #treeTemplate let-nodes="nodes">
+        @for(node of nodes; track node.id){
+        <li class="flexi-treeview-node-item">
+          <div class="flexi-treeview-node-container">
+            <div class="flexi-treeview-node-content">
+              @if(node.children && node.children.length){
+              <div class="flexi-treeview-expand-icon" (click)="toggleNode(node)">
+                <span class="material-symbols-outlined">
+                  {{ node.expanded ? 'keyboard_arrow_down' : 'chevron_right' }}
+                </span>
+              </div>
+              }
+              @if(showCheckbox){
+              <input class="flexi-treeview-node-checkbox" type="checkbox" [checked]="node.selected" (change)="toggleSelection(node, $event)" [style.width]="checkboxSize" [style.height]="checkboxSize">
+              }
+              <div class="flexi-treeview-node-name">
+                {{ node.name }}
+              </div>
+              <div class="flexi-treeview-node-description" *ngIf="node.description">{{ node.description }}</div>
             </div>
-            }
-            @if(showCheckbox){
-            <input class="flexi-treeview-node-checkbox" type="checkbox" [checked]="node.selected" (change)="toggleSelection(node, $event)" [style.width]="checkboxSize" [style.height]="checkboxSize">
-            }
-            <div class="flexi-treeview-node-name">
-              {{ node.name }}
+            <div class="flexi-treeview-node-actions">
+              @if(showEditButton){
+              <flexi-button icon="edit" [btnSize]="btnSize" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
+              }
+              @if(showDeleteButton){
+              <flexi-button icon="delete" [btnSize]="btnSize" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
+              }
             </div>
-            <div class="flexi-treeview-node-description" *ngIf="node.description">{{ node.description }}</div>
           </div>
-          <div class="flexi-treeview-node-actions">
-            @if(showEditButton){
-            <flexi-button icon="edit" [btnSize]="btnSize" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
-            }
-            @if(showDeleteButton){
-            <flexi-button icon="delete" [btnSize]="btnSize" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
-            }
-          </div>
-        </div>
-        <ul *ngIf="node.expanded && node.children && node.children.length">
-          <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: node.children }"></ng-container>
-        </ul>
-      </li>
-      }
-    </ng-template>
+          <ul *ngIf="node.expanded && node.children && node.children.length">
+            <ng-container *ngTemplateOutlet="treeTemplate; context: { nodes: node.children }"></ng-container>
+          </ul>
+        </li>
+        }
+      </ng-template>
+    }
+
   </div>
 </div>

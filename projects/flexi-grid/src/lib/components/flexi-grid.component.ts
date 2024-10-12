@@ -54,7 +54,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() fontSize: string = "11px";
   @Input() dataBindingExportEndpoint: string = '';
   @Input() dataBindingExportPath: string = 'data';
-  @Input() treeColumn: string = ''; // Ağaç yapısını gösterecek sütun
+  @Input() treeColumn: string = ''; // Ağaç yapısını gösterecek sütun  
+  @Input() showTreeColumn: boolean = false;
   @Input() childrenField: string = 'children'; // Alt öğeleri içeren alan adı
 
   @Input()
@@ -183,9 +184,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         return column;
       });
 
-      // if (this.columns) {
-      //   this.columns.reset(columnsArray);
-      // }
+       if (this.columns) {
+        this.columns.reset(columnsArray);
+      }
     }
   }
 
@@ -600,10 +601,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   getFieldValue(item: any, field: string): any {
-    if (!field.includes("-")) {
+    if (!field.includes(".")) {
       return item[field];
     } else {
-      const fields = field.split("-");
+      const fields = field.split(".");
       let currentValue = item;
 
       for (const f of fields) {
@@ -793,5 +794,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       }
     }
     return result;
+  }
+
+  isTableTreeTable(column: FlexiGridColumnComponent): boolean {
+    const response = column.field === this.treeColumn && this.showTreeColumn;
+    return response;
   }
 }

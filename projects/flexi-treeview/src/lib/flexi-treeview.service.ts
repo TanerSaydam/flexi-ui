@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeNode } from './flexi-treeview.component';
+import { FlexiTreeNode } from './flexi-tree-node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class FlexiTreeviewService {
     codeField: keyof T,
     nameField: keyof T,
     descriptionField?: keyof T
-  ): TreeNode[] {
-    const codeMap = new Map<string, TreeNode>();
+  ): FlexiTreeNode[] {
+    const codeMap = new Map<string, FlexiTreeNode>();
 
     data.forEach(item => {
       const code = String(item[codeField]);
@@ -28,19 +28,21 @@ export class FlexiTreeviewService {
           description: '',
           children: [],
           expanded: true,
-          selected: false
+          selected: false,
+          originalData: item
         };
         codeMap.set(code, parentNode);
       }
 
       // Her rol için bir alt düğüm oluştur
-      const childNode: TreeNode = {
+      const childNode: FlexiTreeNode = {
         id: String(item[idField]),
         name: String(item[nameField]),
         code: code,
         description: descriptionField ? String(item[descriptionField]) : '',
         expanded: true,
-        selected: false
+        selected: false,
+        originalData: item
       };
 
       // Alt düğümü üst düğümün children dizisine ekle

@@ -12,10 +12,11 @@ import { FlexiGridFilterDataModel } from '../../../../flexi-grid/src/lib/models/
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/services/flexi-grid.service';
 import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-button.component';
 import { FlexiTooltipDirective } from '../../../../flexi-tooltip/src/lib/flexi-tooltip.directive';
-import { FlexiTreeviewComponent, TreeNode } from '../../../../flexi-treeview/src/public-api';
 import { roles, ucafs, ucafs2 } from '../constants';
 import { FlexiTreeviewService } from '../../../../flexi-treeview/src/lib/flexi-treeview.service';
 import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.module';
+import { FlexiTreeviewComponent } from '../../../../flexi-treeview/src/lib/flexi-treeview.component';
+import { FlexiTreeNode } from '../../../../flexi-treeview/src/lib/flexi-tree-node.model';
 
 
 @Component({
@@ -36,13 +37,13 @@ import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.mo
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  treeData:TreeNode[] = [];
-
   onNodeSelected(node: any) {
     console.log('Seçilen düğüm:', node);
   }
 
   ucafs = signal<any[]>(ucafs);
+  roles = signal<any[]>([]);
+  treeData = signal<FlexiTreeNode[]>([]);
   treeDataForTable = signal<any[]>([]);
   users = signal<UserModel[]>([])
   total = signal<number>(0);
@@ -77,29 +78,18 @@ export class UsersComponent {
     private renderer: Renderer2,
     private treeService: FlexiTreeviewService
   ){
-    //this.state().pageSize = 500;
-    this.getAll();
-    toast.options.position = "bottom-right";
-    toast.options.autoClose = true;
-    toast.options.themeClass = "light";
-    toast.options.timeOut = 2000;  
-    toast.options.swalContentThemeClass = "default"  
+    this.getRoles();
+  }
 
-    
-
-    const treeData = this.treeService.convertToTreeNodes(roles,"id","code","name","description");
-
-    this.treeData = treeData;
-
-    const treeData2 = this.flexi.buildHierarchy(ucafs,{codeProperty:"code",separator:"-"});
-    //this.treeDataForTable.set(treeData2);
-    this.treeDataForTable.set(ucafs);
-   // console.log(treeData2);
-    
-    //this.toast.showToast("Error","Something went wrong","error");
-    //toast.options.swalContentThemeClass = "info"  
-    //toast.options.swalContentThemeClass = "success"  
-    //toast.options.swalContentThemeClass = "warning"  
+  getRoles(){
+    this.http.post("https://emuhasebe.webapi.ecnorow.com/api/Roles/GetAll",  {},{
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUQU5FUiBTQVlEQU0iLCJlbWFpbCI6InRhbmVyc2F5ZGFtQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2F1dGhlbnRpY2F0aW9uIjoiZjM5ZjA5MTctMWNmZi00MmI4LWIxOTQtNmYxNDk0ZjYzZmI5IiwiQ29tcGFueUlkIjoiN2JmNTYzZGEtNTE2Ni00MGJhLWE4NjEtMWJjNTQ4YTFhNjA5IiwibmJmIjoxNzI4MzQ1Mjk3LCJleHAiOjE3MzEwMjM2OTcsImlzcyI6Ind3dy5teXNpdGVtLmNvbSIsImF1ZCI6Ind3dy55b3Vyc2l0ZS5jb20ifQ.aanzBeNsl-Om9N303MAEnddKrCzT5colLZ0hB_bmtW8"
+      }
+    }).subscribe((res:any)=> {
+      this.roles.set(res);
+      this.treeData.set(this.treeService.convertToTreeNodes(res,"id","code","name","description"));
+    });
   }
 
   openPopup(){

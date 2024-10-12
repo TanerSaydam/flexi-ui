@@ -12,11 +12,17 @@ export class FlexiPopupComponent {
   @Input() isPopupVisible: boolean = false;
   @Input() popupTitle: string = "";
   @Input() width: string = "500px";
-  @Input() height: string = "500px";
+  @Input() height: string = "100%";
   @Input() showActionButtons: boolean = true;
   @Input() themeClass: string = "light";
+  @Input() saveBtnText: string = "Kaydet";
+  @Input() cancelBtnText: string = "Kapat";
+  @Input() saveBtnIcon: string = "save";
+  @Input() cancelBtnIcon: string = "block";
 
-  @Output() isPopupVisibleChange = new EventEmitter<boolean>();
+  @Output() isPopupVisibleChange = new EventEmitter<boolean>();  
+  @Output() onSave = new EventEmitter<any>();
+  @Output() onCancel = new EventEmitter<any>();
 
   @ContentChild(FlexiPopupActionTemplateDirective) actionTemplate?: FlexiPopupActionTemplateDirective;
   
@@ -26,10 +32,10 @@ export class FlexiPopupComponent {
   }
 
   cancel() {
-    // İptal işlemi mantığı
+    this.onCancel.emit(); 
   }
 
   saveChanges() {
-    // Kaydetme işlemi mantığı
+    this.onSave.emit(); 
   }
 }

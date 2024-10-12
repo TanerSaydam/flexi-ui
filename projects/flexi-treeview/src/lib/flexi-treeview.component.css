@@ -2,21 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 [data-bs-theme="light"] {
-  --background-color: #f8f9fa;
-  --scroll-background-color: #dee2e6;    
-  --text-color: #000;      
-  --hover-background-color: #ebf5ff;
-  --hover-text-color: #212529;
-  --border-color: #dee2e6;  
+  --flexi-treeview-background-color: white;
+  --flexi-treeview-scroll-background-color: #dee2e6;    
+  --flexi-treeview-text-color: #000;      
+  --flexi-treeview-hover-background-color: #ebf5ff;
+  --flexi-treeview-hover-text-color: #212529;
+  --flexi-treeview-border-color: #dee2e6;  
 }
 
 [data-bs-theme="dark"] {
-  --background-color: #212529;  
-  --scroll-background-color: #504e4e;
-  --text-color: #fff;
-  --hover-background-color: #504e4e;
-  --hover-text-color: #212529;
-  --border-color: #353232;
+  --flexi-treeview-background-color: #212529;  
+  --flexi-treeview-scroll-background-color: #504e4e;
+  --flexi-treeview-text-color: #fff;
+  --flexi-treeview-hover-background-color: #504e4e;
+  --flexi-treeview-hover-text-color: #212529;
+  --flexi-treeview-border-color: #353232;
 }
 
 .flexi-treeview {  
@@ -25,20 +25,22 @@
   font-size: 12px;
   font-weight: 400;
   font-style: normal;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--flexi-treeview-background-color);
+  color: var(--flexi-treeview-text-color);
   border-radius: 5px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--flexi-treeview-border-color);
 }
 
 .flexi-treeview-divider{
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--flexi-treeview-border-color);
   margin: 10px 0;
 }
 
 .flexi-treeview-container{
+  position: relative;
   padding-right: 20px;
   overflow: auto;
+  min-height: 200px;
 }
 
 .material-symbols-outlined {
@@ -58,7 +60,7 @@ ul {
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  color: var(--text-color);
+  color: var(--flexi-treeview-text-color);
 }
 
 .flexi-treeview-node-item {
@@ -67,7 +69,7 @@ ul {
 
 .flexi-treeview-node-container:hover {
   cursor: pointer;
-  background-color: var(--hover-background-color);
+  background-color: var(--flexi-treeview-hover-background-color);
 }
 
 .flexi-treeview-nodes {
@@ -104,7 +106,7 @@ ul {
   display: block;
   margin-left: 20px;
   font-size: 0.9em;
-  color: var(--text-color);
+  color: var(--flexi-treeview-text-color);
 }
 
 .flexi-treeview-node-actions {
@@ -120,9 +122,9 @@ ul {
 .flexi-treeview-search-input {
   width: 100%;
   padding: 5px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
+  background-color: var(--flexi-treeview-background-color);
+  color: var(--flexi-treeview-text-color);
+  border: 1px solid var(--flexi-treeview-border-color);
   border-radius: 4px;
   padding-left: 40px;
 }
@@ -130,16 +132,18 @@ ul {
 .flexi-treeview-search-results {
   margin-top: 5px;
   font-size: 0.9em;
-  color: var(--text-color);
+  color: var(--flexi-treeview-text-color);
 }
 
-.flexi-treeview-actions {
+.flexi-treeview-caption {
   display: flex;  
   gap: 10px;
+  margin-top: 5px;
   margin-bottom: 10px;
   align-items: center;
   justify-content: space-between;
   margin-right: 20px;
+  margin-left: 5px;
 }
 
 .flexi-treeview-actions-buttons{
@@ -159,7 +163,7 @@ ul {
 .flexi-treeview-container-wrapper,
 .flexi-treeview-container {
     scrollbar-width: thin; /* Firefox için */
-    scrollbar-color: var(--scroll-background-color) var(--background-color); /* Firefox için */
+    scrollbar-color: var(--flexi-treeview-scroll-background-color) var(--flexi-treeview-background-color); /* Firefox için */
 }
 
 .flexi-treeview-container-wrapper::-webkit-scrollbar,
@@ -170,12 +174,12 @@ ul {
 
 .flexi-treeview-container-wrapper::-webkit-scrollbar-track,
 .flexi-treeview-container::-webkit-scrollbar-track {
-    background-color: var(--background-color);
+    background-color: var(--flexi-treeview-background-color);
 }
 
 .flexi-treeview-container-wrapper::-webkit-scrollbar-thumb,
 .flexi-treeview-container::-webkit-scrollbar-thumb {
-    background-color: var(--scroll-background-color);
+    background-color: var(--flexi-treeview-scroll-background-color);
     border-radius: 16px;
 }
 
@@ -186,5 +190,61 @@ ul {
 
 .flexi-treeview-container-wrapper::-webkit-scrollbar-corner,
 .flexi-treeview-container::-webkit-scrollbar-corner {
-    background-color: var(--scroll-background-color);
+    background-color: var(--flexi-treeview-scroll-background-color);
+}
+
+.flexi-treeview-spinner-container {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexi-treeview-spinner-1 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  border: 3px solid;
+  top: auto;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: flexi-treeview-spin-1 0.8s linear infinite;
+  background-color: transparent;
+}
+
+.flexi-treeview-spinner-2 {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: auto;
+  border: 3px solid;
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: flexi-treeview-spin-2 1.3s linear infinite;
+  background-color: transparent;
+}
+
+@keyframes flexi-treeview-spin-1 {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes flexi-treeview-spin-2 {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(-360deg);
+  }
 }

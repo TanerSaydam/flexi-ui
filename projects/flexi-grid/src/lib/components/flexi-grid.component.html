@@ -201,30 +201,57 @@
               @for(column of columns; track trackByFn()){
               <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign}" [hidden]="!column.visible"
                 [ngClass]="tdTemplateClassName(column)" [attr.data-label]="column.title ? column.title : column.field"
-                [title]="(item && !column.cellTemplate) ? getFieldValue(item, column.field) : ''" scope="cell">
-                @if(column.field === treeColumn){
-                <div class="flexi-grid-tree-cell" [style.padding-left]="getIndent(item._level)">
-                  @if(isExpandable(item)){
-                  <button class="flexi-grid-tree-toggle" (click)="toggleExpand(item)">
-                    {{ item._expanded ? '▼' : '▶' }}
-                  </button>
-                  }
+                [title]="(item && !column.cellTemplate) ? getFieldValue(item, column.field) : ''" scope="cell">                
+                  @if(isTableTreeTable(column)){
+                  <div class="flexi-grid-tree-cell" [style.padding-left]="getIndent(item._level)">
+                    @if(isExpandable(item)){
+                    <button class="flexi-grid-tree-toggle" (click)="toggleExpand(item)">
+                      {{ item._expanded ? '▼' : '▶' }}
+                    </button>
+                    }
+                    @if(column.cellTemplate){
+                    <ng-container
+                      *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }">
+                    </ng-container>
+                    }@else{
+                      {{ getFieldValue(item, column.field) }}
+                    }
+                  </div>
+                }@else{
                   @if(column.cellTemplate){
-                  <ng-container
-                    *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }">
-                  </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }">
+                    </ng-container>
                   }@else{
-                  {{ getFieldValue(item, column.field) }}
-                  }
-                </div>
-                }@else{
-                @if(column.cellTemplate){
-                <ng-container
-                  *ngTemplateOutlet="column.cellTemplate; context: { $implicit: item, column: column, rowIndex: i }">
-                </ng-container>
-                }@else{
-                {{ getFieldValue(item, column.field) }}
-                }
+                    @if(column.field){
+                      @if((column.filterType === "date" || column.filterType === "date-time")){
+                        {{ getFieldValue(item, column.field) | date: column.format! }}
+                      }@else if(column.filterType === "number"){
+                        @if(column.format === "n" || column.format === null){
+                          {{ (getFieldValue(item, column.field) | trCurrency: "": true: column.fraction) }}
+                        }@else if(column.format === "c"){
+                          {{ (getFieldValue(item, column.field) | trCurrency : column.symbol: column.showSymbolInFront:
+                        column.fraction) }}
+                        }
+                      }
+                      @else if(column.filterType === "boolean" || column.filterType == "select"){
+                        @if(column.showCheckbox){
+                          <input class="flexi-grid-checkbox" type="checkbox" [checked]="getFieldValue(item, column.field)"
+                          (change)="getBooleanInputValue(item, column, $event)">
+                        }@else {
+                          @if(getFieldValue(item, column.field)){
+                            <i class="fa-solid fa-check flexi-text-success"></i>
+                          }@else {
+                            <i class="fa-solid fa-x flexi-text-danger"></i>
+                          }
+                        }
+                      }@else {
+                        {{ getFieldValue(item, column.field) }}
+                      }
+                    }@else {
+                      {{ getFieldValue(item, column.field) }}
+                    }
+                  }                  
                 }
               </td>
               }
