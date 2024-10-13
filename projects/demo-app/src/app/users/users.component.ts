@@ -17,6 +17,7 @@ import { FlexiTreeviewService } from '../../../../flexi-treeview/src/lib/flexi-t
 import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.module';
 import { FlexiTreeviewComponent } from '../../../../flexi-treeview/src/lib/flexi-treeview.component';
 import { FlexiTreeNode } from '../../../../flexi-treeview/src/lib/flexi-tree-node.model';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -32,6 +33,7 @@ import { FlexiTreeNode } from '../../../../flexi-treeview/src/lib/flexi-tree-nod
     FlexiTooltipDirective,
     FlexiTreeviewComponent,
     FlexiPopupModule,
+    RouterLink,
     FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
@@ -51,6 +53,7 @@ export class UsersComponent {
   loading = signal<boolean>(false);
   userId1 = signal<string>("");
   userId2 = signal<string>("");
+  invoices = signal<any[]>([]);
   selectedItems = signal<string[]>([
     "bf9a87fd-6fca-4210-a57b-000a404d0770",
     "b7d90a7a-0f26-4bf7-90e0-000942c50a4c",
@@ -78,14 +81,17 @@ export class UsersComponent {
     private renderer: Renderer2,
     private treeService: FlexiTreeviewService
   ){
-    this.getRoles();
+    //this.getRoles();
+    this.getInvoices();
   }
 
   getRoles(){
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUQU5FUiBTQVlEQU0iLCJlbWFpbCI6InRhbmVyc2F5ZGFtQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2F1dGhlbnRpY2F0aW9uIjoiZjM5ZjA5MTctMWNmZi00MmI4LWIxOTQtNmYxNDk0ZjYzZmI5IiwiQ29tcGFueUlkIjoiN2JmNTYzZGEtNTE2Ni00MGJhLWE4NjEtMWJjNTQ4YTFhNjA5IiwibmJmIjoxNzI4ODI1MzQ2LCJleHAiOjE3MzE1MDM3NDYsImlzcyI6Ind3dy5teXNpdGVtLmNvbSIsImF1ZCI6Ind3dy55b3Vyc2l0ZS5jb20ifQ.0-vRLqAQje8lEFnpliVz3hn8K4ADMvCm7VEf9VqX7NI";
     this.http.post("https://emuhasebe.webapi.ecnorow.com/api/Roles/GetAll",  {},{
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUQU5FUiBTQVlEQU0iLCJlbWFpbCI6InRhbmVyc2F5ZGFtQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2F1dGhlbnRpY2F0aW9uIjoiZjM5ZjA5MTctMWNmZi00MmI4LWIxOTQtNmYxNDk0ZjYzZmI5IiwiQ29tcGFueUlkIjoiN2JmNTYzZGEtNTE2Ni00MGJhLWE4NjEtMWJjNTQ4YTFhNjA5IiwibmJmIjoxNzI4MzQ1Mjk3LCJleHAiOjE3MzEwMjM2OTcsImlzcyI6Ind3dy5teXNpdGVtLmNvbSIsImF1ZCI6Ind3dy55b3Vyc2l0ZS5jb20ifQ.aanzBeNsl-Om9N303MAEnddKrCzT5colLZ0hB_bmtW8"
-      }
+        "Authorization": "Bearer " + token,
+        "Year": "2024"
+      }      
     }).subscribe((res:any)=> {
       this.roles.set(res);
       this.treeData.set(this.treeService.convertToTreeNodes(res,"id","code","name","description"));
@@ -98,6 +104,29 @@ export class UsersComponent {
     
   }
 
+  getInvoices(){
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUQU5FUiBTQVlEQU0iLCJlbWFpbCI6InRhbmVyc2F5ZGFtQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2F1dGhlbnRpY2F0aW9uIjoiZjM5ZjA5MTctMWNmZi00MmI4LWIxOTQtNmYxNDk0ZjYzZmI5IiwiQ29tcGFueUlkIjoiN2JmNTYzZGEtNTE2Ni00MGJhLWE4NjEtMWJjNTQ4YTFhNjA5IiwibmJmIjoxNzI4ODI1MzQ2LCJleHAiOjE3MzE1MDM3NDYsImlzcyI6Ind3dy5teXNpdGVtLmNvbSIsImF1ZCI6Ind3dy55b3Vyc2l0ZS5jb20ifQ.0-vRLqAQje8lEFnpliVz3hn8K4ADMvCm7VEf9VqX7NI";
+    this.http.post("https://emuhasebe.webapi.ecnorow.com/api/Invoices/GetAll?$count=true&$top=10&$skip=0", {
+      "startDate": "2024-01-01",
+      "endDate": "2024-10-13",
+      "type": "ALIŞ"
+  },{
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Year": "2024"
+    }      
+    }).subscribe((res:any)=> {
+      console.log(res);
+      
+      this.invoices.set(res.data);
+    });
+  }
+
+  showInvoice(item:any){
+    console.log(item);
+    
+  }
+
   editNode(event:any){
     console.log(event);    
   }
@@ -107,6 +136,9 @@ export class UsersComponent {
   }
   
   deleteNode(event:any){
+    this.toast.showSwal('Sil?',' Lorem ipsum dolor sit amet consectetur?<br>Test 2.satır',()=> {
+      this.toast.showToast("Info","Silme işlemi başarıyla tamamlandı", "info");
+    });
     console.log(event);
   }
 

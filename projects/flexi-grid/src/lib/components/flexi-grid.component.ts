@@ -54,9 +54,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() fontSize: string = "11px";
   @Input() dataBindingExportEndpoint: string = '';
   @Input() dataBindingExportPath: string = 'data';
-  @Input() treeColumn: string = ''; // Ağaç yapısını gösterecek sütun  
-  @Input() showTreeColumn: boolean = false;
-  @Input() childrenField: string = 'children'; // Alt öğeleri içeren alan adı
 
   @Input()
   set pageSize(value: number) {
@@ -184,9 +181,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         return column;
       });
 
-       if (this.columns) {
-        this.columns.reset(columnsArray);
-      }
+      // if (this.columns) {
+      //   this.columns.reset(columnsArray);
+      // }
     }
   }
 
@@ -286,7 +283,48 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
     if (this.filterable && this.state.filter.length > 0 && !this.dataBinding) {
       const filters = this.state.filter.filter(p => p.value != undefined);
-      filteredData = this.filterTreeData(filteredData, filters);
+
+      filters.forEach((filter) => {
+        filteredData = filteredData.filter(item => {
+          const field = filter.field;
+          const value = filter.value;
+          let itemValue = item[field];
+          let filterValue: any = value;
+          if (filter.type !== "boolean" && filter.type !== "select" && filter.type !== "number") {
+            itemValue = itemValue ? itemValue.toString().toLocaleLowerCase('tr') : '';
+            filterValue = value ? value.toString().toLocaleLowerCase('tr') : '';
+          } else if (filter.type === "boolean" || filter.type === "select") {
+            filterValue = value == "true" ? true : false;
+          } else if (filter.type === "number") {
+            filterValue = +value.toString().replace(",", ".");
+          }
+
+          switch (filter.operator) {
+            case 'eq':
+              return itemValue === filterValue;
+            case 'ne':
+              return itemValue !== filterValue;
+            case 'contains':
+              return itemValue.includes(filterValue);
+            case 'not contains':
+              return !itemValue.includes(filterValue);
+            case 'startswith':
+              return itemValue.startsWith(filterValue);
+            case 'endswith':
+              return itemValue.endsWith(filterValue);
+            case 'gt':
+              return parseFloat(itemValue) > parseFloat(filterValue);
+            case 'ge':
+              return parseFloat(itemValue) >= parseFloat(filterValue);
+            case 'lt':
+              return parseFloat(itemValue) < parseFloat(filterValue);
+            case 'le':
+              return parseFloat(itemValue) <= parseFloat(filterValue);
+            default:
+              return true;
+          }
+        });
+      });
     }
 
     // Order data if sortable is true
@@ -307,9 +345,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
     // Pagination logic
     if (filteredData) {
-      if (this.treeColumn) {
-        this.pagedData.set(this.flattenTree(filteredData));
-      } else if (filteredData.length > +this.state.pageSize && !this.dataBinding && this.pageable) {
+      if (filteredData.length > +this.state.pageSize && !this.dataBinding && this.pageable) {
         const start = this.state.skip;
         const end = start + +this.state.pageSize;
         this.pagedData.set(filteredData.slice(start, end));
@@ -319,78 +355,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  filterTreeData(data: any[], filters: StateFilterModel[]): any[] {
-    return data.reduce((acc, item) => {
-      let matchesFilter = this.itemMatchesFilters(item, filters);
-  
-      let filteredChildren = [];
-      if (item[this.childrenField] && item[this.childrenField].length > 0) {
-        filteredChildren = this.filterTreeData(item[this.childrenField], filters);
-        if (filteredChildren.length > 0) {
-          matchesFilter = true;
-        }
-      }
-  
-      if (matchesFilter) {
-        const newItem = { ...item }; // Create a shallow copy of the item
-        newItem[this.childrenField] = filteredChildren;
-  
-        // Automatically expand items that have matching children
-        if (filteredChildren.length > 0) {
-          newItem._expanded = true;
-        }
-  
-        acc.push(newItem);
-      }
-  
-      return acc;
-    }, []);
-  }
-
-  itemMatchesFilters(item: any, filters: StateFilterModel[]): boolean {
-    return filters.every(filter => {
-      const field = filter.field;
-      const value = filter.value;
-      let itemValue = this.getFieldValue(item, field);
-      let filterValue: any = value;
-
-      if (filter.type !== "boolean" && filter.type !== "select" && filter.type !== "number") {
-        itemValue = itemValue ? itemValue.toString().toLocaleLowerCase('tr') : '';
-        filterValue = value ? value.toString().toLocaleLowerCase('tr') : '';
-      } else if (filter.type === "boolean" || filter.type === "select") {
-        filterValue = value == "true" ? true : false;
-      } else if (filter.type === "number") {
-        filterValue = +value.toString().replace(",", ".");
-      }
-
-      switch (filter.operator) {
-        case 'eq':
-          return itemValue === filterValue;
-        case 'ne':
-          return itemValue !== filterValue;
-        case 'contains':
-          return itemValue.includes(filterValue);
-        case 'not contains':
-          return !itemValue.includes(filterValue);
-        case 'startswith':
-          return itemValue.startsWith(filterValue);
-        case 'endswith':
-          return itemValue.endsWith(filterValue);
-        case 'gt':
-          return parseFloat(itemValue) > parseFloat(filterValue);
-        case 'ge':
-          return parseFloat(itemValue) >= parseFloat(filterValue);
-        case 'lt':
-          return parseFloat(itemValue) < parseFloat(filterValue);
-        case 'le':
-          return parseFloat(itemValue) <= parseFloat(filterValue);
-        default:
-          return true;
-      }
-    });
-  }
-
-  
   sortData() {
     this.data = this.data.sort((a, b) => {
       const field = this.state.sort.field;
@@ -600,9 +564,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.draggedColumnIndex = undefined;
   }
 
-  getFieldValue(item: any, field: string): any {
+  getFieldValue(item: any, field: string) {
     if (!field.includes(".")) {
-      return item[field];
+      const value = item[field];
+      return value !== undefined && value !== null ? value : "";
     } else {
       const fields = field.split(".");
       let currentValue = item;
@@ -611,11 +576,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         if (currentValue && f in currentValue) {
           currentValue = currentValue[f];
         } else {
-          return undefined;
+          //console.warn(`Field "${f}" not found in item`, item);
+          return "";
         }
       }
 
-      return currentValue;
+      return currentValue !== undefined && currentValue !== null ? currentValue : "";
     }
   }
 
@@ -768,36 +734,5 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(blob, `${this.exportExcelFileName}.xlsx`);
-  }
-
-  // Yeni metodlar ekleyelim
-  isExpandable(item: any): boolean {
-    return item[this.childrenField] && item[this.childrenField].length > 0;
-  }
-
-  toggleExpand(item: any) {
-    item._expanded = !item._expanded;
-    this.updatePagedData();
-  }
-
-  getIndent(level: number): string {
-    return `${level * 20}px`;
-  }
-
-  flattenTree(items: any[], level: number = 0): any[] {
-    let result: any[] = [];
-    for (const item of items) {
-      item._level = level;
-      result.push(item);
-      if (item._expanded && item[this.childrenField]) {
-        result = result.concat(this.flattenTree(item[this.childrenField], level + 1));
-      }
-    }
-    return result;
-  }
-
-  isTableTreeTable(column: FlexiGridColumnComponent): boolean {
-    const response = column.field === this.treeColumn && this.showTreeColumn;
-    return response;
   }
 }
