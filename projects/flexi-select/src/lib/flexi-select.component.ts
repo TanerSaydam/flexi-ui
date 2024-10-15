@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewEncapsulation, forwardRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewChildren, ViewEncapsulation, forwardRef, inject, signal, viewChildren } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlexiOptionComponent } from './flexi-option.component';
 import { NgStyle } from '@angular/common';
@@ -6,7 +6,7 @@ import { NgStyle } from '@angular/common';
 @Component({
   selector: 'flexi-select',
   standalone: true,
-  imports: [NgStyle],  
+  imports: [NgStyle],
   templateUrl: "./flexi-select.component.html",
   styleUrl: "./flexi-select.component.css",
   encapsulation: ViewEncapsulation.None,
@@ -41,6 +41,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   @ViewChild("searchInput") searchInput: ElementRef<HTMLInputElement> | undefined;
   @ViewChild('flexiSelectContainer') flexiSelectContainer!: ElementRef;
   @ViewChild('flexiSelectDiv') flexiSelectDiv!: ElementRef;
+  @ViewChild("flexiSelectDropDownDiv") flexiSelectDropDownDiv!: ElementRef;
 
   private onChange = (value: any) => { };
   private onTouched = () => { };
@@ -202,44 +203,77 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     }
   }
 
-  private handleAlphabeticInput(char: string) {
+  scrollDown() {
+    setTimeout(() => {
+      const element = this.flexiSelectDropDownDiv.nativeElement;
+      const rect = element.getBoundingClientRect();
+
+      const isElementNotFullyVisible = rect.top < 0 || rect.bottom > window.innerHeight;
+
+      if (isElementNotFullyVisible) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  handleAlphabeticInput(char: string) {
     if (!this.isOpen()) {
       this.isOpen.set(true);
       setTimeout(() => {
         this.searchInput!.nativeElement.value += char;
         this.searchInput!.nativeElement.focus();
+        this.scrollDown();
       }, 100);
     }
-
   }
 
   toggleDropdown() {
     this.isOpen.set(!this.isOpen());
 
-    if(this.isOpen()){
+    if (this.isOpen()) {
       setTimeout(() => {
         this.searchInput!.nativeElement.focus();
+        this.scrollDown();
       }, 100);
     }
   }
-  
-  onKeyDown(event: KeyboardEvent) {    
+
+  onKeyDownForMainDiv(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown') {
+      if (!this.isOpen()) {
+        this.toggleDropdown();
+      }
+    } else if (event.code === 'Space') {
+      if (this.isOpen()) {
+        setTimeout(() => {
+          this.searchInput!.nativeElement.focus();
+          this.scrollDown();
+        }, 100);
+      }
+    }
+  }
+
+  onKeyDown(event: KeyboardEvent) {
     const currentIndex = this.filteredData().findIndex(item => item.isSelected);
+
     if (event.key === 'Enter' || event.key === 'Tab') {
-      event.preventDefault();      
+      event.preventDefault();
       if (currentIndex !== -1) {
         this.select(this.filteredData()[currentIndex]);
       }
       this.moveToNextElement();
-    } 
+    }
     else if (event.key === 'ArrowDown') {
       event.preventDefault();
+      if (!this.isOpen()) {
+        this.toggleDropdown();
+      }
       if (currentIndex < this.filteredData().length - 1) {
         this.clearAllSelected();
         this.filteredData()[currentIndex + 1].isSelected = true;
         this.scrollToElement(currentIndex + 1);
       }
-    } 
+    }
     else if (event.key === 'ArrowUp') {
       event.preventDefault();
       if (currentIndex > 0) {
@@ -254,7 +288,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       this.flexiSelectDiv.nativeElement.focus();
     }
     else if (event.key === 'Space') {
-      if(!this.isOpen()) {
+      if (!this.isOpen()) {
         this.toggleDropdown();
       }
     }
@@ -352,7 +386,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     this.clearAllSelected();
     item.isSelected = true;
     this.selectedItem.set(item);
-    this.isOpen.set(false);    
+    this.isOpen.set(false);
     this.closedAfterSelect.set(false);
 
     this.selected.emit(item[this.value]);
@@ -363,7 +397,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   select(item: any) {
     if (this.multiple) {
       this.selectForMultiple(item);
-      if(this.closeAfterSelect){
+      if (this.closeAfterSelect) {
         this.moveToNextElement();
       }
     } else {
@@ -421,6 +455,8 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     this.onChange(selectedItemsForNgModel);
 
     this.isOpen.set(true);
+
+    this.scrollDown();
   }
 
 

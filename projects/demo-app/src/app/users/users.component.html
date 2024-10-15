@@ -36,6 +36,9 @@
   </div>
 </div>
 
+<flexi-select [data]="invoices()" label="ucafName" value="ucafId" [tabindex]="2"    
+ />
+
 <flexi-grid 
             [data]="invoices()"
             [total]="total()"
@@ -112,6 +115,12 @@
             </ng-template>
 
         </flexi-grid>
+
+       
+        <flexi-select [data]="invoices()" label="ucafName" value="ucafId" [tabindex]="3"    
+        />
+
+        <div style="margin-bottom: 300px;"></div>
 
 <flexi-popup [(isPopupVisible)]="showPopup" width="500px" height="400px" popupTitle="User Form" [themeClass]="shared.themeClass()">
   <div class="form-group">
