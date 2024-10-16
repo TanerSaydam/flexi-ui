@@ -42,6 +42,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   @ViewChild('flexiSelectContainer') flexiSelectContainer!: ElementRef;
   @ViewChild('flexiSelectDiv') flexiSelectDiv!: ElementRef;
   @ViewChild("flexiSelectDropDownDiv") flexiSelectDropDownDiv!: ElementRef;
+  @ViewChild("flexiSelectUl") flexiSelectUl!: ElementRef;
 
   private onChange = (value: any) => { };
   private onTouched = () => { };
@@ -53,15 +54,21 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   initialState: any;
   uniqueName = signal<string>("");
   closedAfterSelect = signal<boolean>(false);
+  currentHighlightIndex = signal<number>(0);
 
   #cdr = inject(ChangeDetectorRef);
   #elementRef = inject(ElementRef);
-  ngOnChanges(changes: SimpleChanges): void {
-    this.filteredData.set(this.data.slice(0, this.itemsPerPage));
-    this.selectFirstOne();
-    this.selectInitialStateValue();
-    this.#cdr.detectChanges();
+
+ngOnChanges(changes: SimpleChanges): void {
+  if (changes["data"] && changes["data"].currentValue) {
+    this.data = [...changes["data"].currentValue]; // Clone the data array
   }
+  this.filteredData.set(this.data.slice(0, this.itemsPerPage));
+  this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
+  this.selectFirstOne();
+  this.selectInitialStateValue();
+  this.#cdr.detectChanges();
+}
 
   ngOnInit(): void {
     this.uniqueName.set(this.name || this.generateUniqueName());
@@ -95,36 +102,26 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   selectInitialStateValue() {
     if (this.data.length > 0 && this.initialState) {
       if (this.multiple) {
-        this.clearAllSelected();
-        this.selectedItems.set([]);
         const list = [];
         for (const val of this.initialState) {
           const d = this.data.find(p => p[this.value] === val);
-          d.isSelected = true;
-
-          const item = {
-            [this.label]: d[this.label],
-            [this.value]: val
-          };
-
-          list.push(item);
+          if (d) {
+            const item = {
+              [this.label]: d[this.label],
+              [this.value]: val
+            };
+            list.push(item);
+          }
         }
         this.selectedItems.set(list);
         this.initialState = undefined;
       } else {
         const val = this.data.find(p => p[this.value] === this.initialState);
         if (val) {
-          this.clearAllSelected();
           this.selectedItem.set({ [this.label]: val[this.label], [this.value]: val[this.value] });
-          val.isSelected = true;
-          const findValue = this.filteredData().find(p => p[this.value] === val);
           this.initialState = undefined;
-          if (findValue) {
-            findValue.isSelected = true;
-          }
         }
       }
-
     }
   }
 
@@ -144,18 +141,13 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     }
   }
 
-  clearAllSelected() {
-    this.filteredData().forEach(val => {
-      val.isSelected = false;
-    });
-  }
-
   selectFirstOne() {
     if (this.filteredData().length === 0) {
       return;
     }
-    this.clearAllSelected();
-    this.filteredData()[0].isSelected = true;
+    if (!this.multiple) {
+      this.selectedItem.set(this.filteredData()[0]);
+    }
   }
 
 
@@ -171,17 +163,27 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     const val = this.searchInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
     const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0, this.itemsPerPage);
     this.filteredData.set(filtered);
+    this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
     if (!this.multiple) {
       this.selectFirstOne();
     }
   }
 
-  setLiClass(item: any) {
-    if (item.isSelected) {
-      return "flexi-select-li flexi-active"
+  setLiClass(item: any, index: number) {
+    let classes = "flexi-select-li";
+    if (this.multiple) {
+      if (this.selectedItems().some(selected => selected[this.value] === item[this.value])) {
+        classes += " flexi-active";
+      }
+    } else {
+      if (this.selectedItem() && item[this.value] === this.selectedItem()[this.value]) {
+        classes += " flexi-active";
+      }
     }
-
-    return "flexi-select-li"
+    if (index === this.currentHighlightIndex()) {
+      classes += " flexi-highlighted";
+    }
+    return classes;
   }
 
   onFocus() { //odaklandığında        
@@ -198,7 +200,11 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   }
 
   onKeyPress(event: KeyboardEvent) {
+    if (event.target === this.searchInput?.nativeElement) {
+      return; // Input alanından geliyorsa işlemi sonlandır
+    }
     if (event.key.length === 1 && event.key.match(/[a-z]/i)) {
+      event.preventDefault();
       this.handleAlphabeticInput(event.key.toLowerCase());
     }
   }
@@ -222,6 +228,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       setTimeout(() => {
         this.searchInput!.nativeElement.value += char;
         this.searchInput!.nativeElement.focus();
+        this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
         this.scrollDown();
       }, 100);
     }
@@ -254,40 +261,39 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   }
 
   onKeyDown(event: KeyboardEvent) {
-    const currentIndex = this.filteredData().findIndex(item => item.isSelected);
-
-    if (event.key === 'Enter' || event.key === 'Tab') {
-      event.preventDefault();
-      if (currentIndex !== -1) {
-        this.select(this.filteredData()[currentIndex]);
-      }
-      this.moveToNextElement();
-    }
-    else if (event.key === 'ArrowDown') {
+    if (event.key === 'ArrowDown') {
       event.preventDefault();
       if (!this.isOpen()) {
         this.toggleDropdown();
       }
-      if (currentIndex < this.filteredData().length - 1) {
-        this.clearAllSelected();
-        this.filteredData()[currentIndex + 1].isSelected = true;
-        this.scrollToElement(currentIndex + 1);
+      if (this.currentHighlightIndex() < this.filteredData().length - 1) {
+        this.currentHighlightIndex.update(index => index + 1);
+        this.scrollToElement(this.currentHighlightIndex());
       }
-    }
-    else if (event.key === 'ArrowUp') {
+    } else if (event.key === 'ArrowUp') {
       event.preventDefault();
-      if (currentIndex > 0) {
-        this.clearAllSelected();
-        this.filteredData()[currentIndex - 1].isSelected = true;
-        this.scrollToElement(currentIndex - 1);
+      if (this.currentHighlightIndex() > 0) {
+        this.currentHighlightIndex.update(index => index - 1);
+        this.scrollToElement(this.currentHighlightIndex());
       }
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      const item = this.filteredData()[this.currentHighlightIndex()];
+      if (item) {
+        this.select(item);
+      }
+      if(!this.multiple){
+        this.moveToNextElement();
+      }
+    }else if(event.key === 'Tab'){
+      this.moveToNextElement();
+      this.isOpen.set(false);
     }
     else if (event.key === 'Escape') {
       this.isOpen.set(false);
       this.closedAfterSelect.set(true);
       this.flexiSelectDiv.nativeElement.focus();
-    }
-    else if (event.key === 'Space') {
+    } else if (event.key === 'Space') {
       if (!this.isOpen()) {
         this.toggleDropdown();
       }
@@ -336,14 +342,17 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     return elementWithLowestTabIndex;
   }
 
-  private isFocusable(element: HTMLElement): boolean {
+  isFocusable(element: HTMLElement): boolean {
     const focusableTags = ['A', 'BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'];
     return focusableTags.includes(element.tagName) || element.tabIndex >= 0;
   }
+
   scrollToElement(index: number) {
-    const ulElement = document.querySelector('.flexi-select-ul') as HTMLElement;
-    const liElement = ulElement.children[index] as HTMLElement;
-    liElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const ulElement = this.flexiSelectUl.nativeElement;
+    const liElement = ulElement.children[index];
+    if (liElement) {
+      liElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   }
 
   selectForMultiple(item: any) {
@@ -352,22 +361,15 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       [this.value]: item[this.value]
     };
 
-    if (this.selectedItems().length === 0) {
-      this.clearAllSelected();
-    }
-
-
     const existingIndex = this.selectedItems().findIndex(existingItem => existingItem[this.value] === selectedItem[this.value]);
 
     if (existingIndex > -1) {
-      item.isSelected = false;
       this.selectedItems.update(prev => {
         const updatedItems = [...prev];
         updatedItems.splice(existingIndex, 1);
         return updatedItems;
       });
     } else {
-      item.isSelected = true;
       this.selectedItems.update(prev => [...prev, selectedItem]);
     }
 
@@ -383,8 +385,6 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   }
 
   selectSingle(item: any) {
-    this.clearAllSelected();
-    item.isSelected = true;
     this.selectedItem.set(item);
     this.isOpen.set(false);
     this.closedAfterSelect.set(false);
@@ -443,21 +443,13 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       updatedItems.splice(index, 1);
       return updatedItems;
     });
-
-    const existingItem = this.data.find(p => p[this.value] === item[this.value]);
-    if (existingItem) {
-      existingItem.isSelected = false;
-    }
-
-
+  
     const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value]);
     this.selected.emit(selectedItemsForNgModel);
     this.onChange(selectedItemsForNgModel);
-
+  
     this.isOpen.set(true);
-
+  
     this.scrollDown();
   }
-
-
 }

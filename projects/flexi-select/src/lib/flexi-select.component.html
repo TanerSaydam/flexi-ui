@@ -39,10 +39,9 @@
           autocomplete="off"
           [attr.name]="uniqueName()" 
      [attr.tabindex]="tabindex">
-        <ul class="flexi-select-ul" (scroll)="onScroll($event)">
+        <ul class="flexi-select-ul" (scroll)="onScroll($event)" #flexiSelectUl>
             @for(item of filteredData(); track trackByFn()){                
-                <li (click)="select(item)" [class]="setLiClass(item)"
-                [attr.id]="uniqueName + '-option-' + $index">
+                <li (click)="select(item)" [class]="setLiClass(item, $index)">
                     <span>{{item[label]}}</span>
                 </li>
             }

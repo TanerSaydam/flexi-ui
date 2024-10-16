@@ -36,7 +36,15 @@
   </div>
 </div>
 
-<flexi-select [data]="invoices()" label="ucafName" value="ucafId" [tabindex]="2"    
+<flexi-select name="a" id="a" [data]="ucafs()" label="name" value="id" [tabindex]="1"    
+ />
+
+ 
+<flexi-select name="b" id="b" [data]="ucafs()" label="name" value="id" [tabindex]="1" [multiple]="true"    
+/>
+
+
+<flexi-select name="c" id="c" [data]="ucafs()" label="name" value="id" [tabindex]="3"    
  />
 
 <flexi-grid 
@@ -115,10 +123,6 @@
             </ng-template>
 
         </flexi-grid>
-
-       
-        <flexi-select [data]="invoices()" label="ucafName" value="ucafId" [tabindex]="3"    
-        />
 
         <div style="margin-bottom: 300px;"></div>
 

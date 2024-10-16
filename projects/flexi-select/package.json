@@ -1,6 +1,6 @@
 {
   "name": "flexi-select",
-  "version": "18.2.26",
+  "version": "18.2.27",
   "peerDependencies": {
     "@angular/common": "^18.0.0",
     "@angular/core": "^18.0.0"
