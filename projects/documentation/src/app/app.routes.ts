@@ -147,6 +147,10 @@ export const routes: Routes = [
             {
                 path: "flexi-button",
                 loadComponent: ()=> import("./flexi-button/flexi-button.component")
+            },
+            {
+                path: "flexi-tooltip",
+                loadComponent: ()=> import("./flexi-tooltip/flexi-tooltip.component")
             }
         ]
     },    
