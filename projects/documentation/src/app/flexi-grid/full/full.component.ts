@@ -6,11 +6,12 @@ import { MyCodeComponent } from '../../my-code/my-code.component';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
 import { FlexiToastService } from 'flexi-toast';
+import { FlexiTooltipDirective } from 'flexi-tooltip';
 
 @Component({
   selector: 'app-flexi-grid-full',
   standalone: true,
-  imports: [FlexiGridModule, MyCodeComponent],
+  imports: [FlexiGridModule, MyCodeComponent, FlexiTooltipDirective],
   templateUrl: './full.component.html',
   styleUrl: './full.component.css',
   encapsulation: ViewEncapsulation.None

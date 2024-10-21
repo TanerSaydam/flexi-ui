@@ -7,10 +7,14 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   imports: [CommonModule],
   template: `
     <button class="flexi-button flexi-button-{{btnColor}}">
-      <div class="flexi-button-content">
-        <span class="material-symbols-outlined flexi-button-size-{{btnSize}}">{{ icon }}</span>
-        <span class="flexi-button-text flexi-button-text-size-{{btnSize}}" [style.padding-left]="btnText ? '3px' : ''" [style.padding-right]="btnText ? '5px' : ''">{{ btnText }}</span>
-      </div>
+    <div class="flexi-button-content" [style]="btnStyle">        
+        <span class="material-symbols-outlined flexi-button-size-{{btnSize}}">
+          {{ btnIcon }}
+        </span>
+        <span class="flexi-button-text flexi-button-text-size-{{btnSize}}" [style.padding-left]="btnText ? '3px' : ''" [style.padding-right]="btnText ? '5px' : ''">
+          {{ btnText }}
+        </span>
+    </div>
     </button>
   `,
   styleUrl: './flexi-button.component.css',
@@ -18,10 +22,11 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlexiButtonComponent {
-  @Input() icon: string = ''; 
+  @Input() btnIcon: string = '';
   @Input() btnColor: FlexiButtonColorType = 'default';
   @Input() btnSize: FlexiButtonSizeType = 'default';
-  @Input() btnText: string = '';
+  @Input() btnText: string = '';  
+  @Input() btnStyle: string = "";
 }
 
 export type FlexiButtonColorType = "default" | "primary" | "success" | "danger" | "warning" | "info" | "dark";

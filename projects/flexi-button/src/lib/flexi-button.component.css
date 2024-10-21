@@ -22,7 +22,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.flexi-button {
+.flexi-button {  
   box-sizing: border-box;
   border: 1px solid transparent;
   cursor: pointer;
@@ -39,6 +39,7 @@
 .flexi-button-content {
   display: flex;
   align-items: center;
+  gap:3px;
 }
 
 .flexi-button:active {

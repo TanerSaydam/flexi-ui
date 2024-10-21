@@ -84,11 +84,7 @@ export const routes: Routes = [
                     {
                         path: "sort",
                         loadComponent:() => import("./flexi-grid/sort/sort.component")
-                    },
-                    {
-                        path: "button",
-                        loadComponent:() => import("./flexi-grid/button/button.component")
-                    },
+                    }                    
                 ]
             },
             {
@@ -147,6 +143,10 @@ export const routes: Routes = [
                         loadComponent: ()=>import("./flexi-toast/swal-test/swal-test.component")
                     }
                 ]
+            },
+            {
+                path: "flexi-button",
+                loadComponent: ()=> import("./flexi-button/flexi-button.component")
             }
         ]
     },    

@@ -1,4 +1,4 @@
-export const  fullExampleTSCode: string = `
+export const fullExampleTSCode: string = `
 import { Component, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
@@ -70,61 +70,49 @@ export const fullExampleHTMLCode: string = `
   [total]="total()"
   [dataBinding]="true"
   [pageable]="true"
-  [pageSize]="state().pageSize"
-  [pageSizeList]="[10,20,30,50,100,1000]"
   [showIndex]="true"
   [loading]="loading()"
   [themeClass]="shared.themeClass"
-  height="420px"
   [filterable]="true"
-  captionTitle="Example User Table"
+  captionTitle="Örnek User Listesi"
   [captionTemplate]="captionTemplate"
   [showCaption]="true"
-  [showExportExcel]="true"
+  [showExportExcelBtn]="true"
   [resizable]="true"
-  [exportExcelButtonClick]="exportExcel.bind(this)"
   (dataStateChange)="dataStateChange($event)"
   [sortable]="true"
-  [draggable]="true"
-  [autoHeight]="false"
   [showCommandColumn]="true"
   [commandColumnTemplate]="commandButtonColumnTemplate"
-  commandColumnWidth="150px"
+  commandColumnWidth="80px"
   [useMinWidth]="true"
   minWidth="1000px"
-  [stickyCommandColumn]="true">
-
-  <!-- Caption Alanı -->
+  exportExcelFileName="userlists">
   <ng-template #captionTemplate>
-    <flexi-button btnColor="primary">
-      <i class="fa-solid fa-plus"></i>
-      Add User
-    </flexi-button>
+    <flexi-button btnColor="primary" btnIcon="add" flexiTooltip title="Ekle" />
   </ng-template>
 
   <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
   <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
   <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
   <flexi-grid-column title="Custom Column">
-     <ng-template flexiGridCellTemplate let-item>
-        Burası Custom Column
-     </ng-template>
+    <ng-template flexiGridCellTemplate let-item>
+      Burası Custom Column
+    </ng-template>
   </flexi-grid-column>
-  <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy" title="Date Of Birth"></flexi-grid-column>
-  <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right" [showSymbolInFront]="true" [fraction]="2" title="Salary">    
-  </flexi-grid-column>
-  <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']" textAlign="center" width="100px"></flexi-grid-column>
-  <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()" textAlign="center"></flexi-grid-column>
+  <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
+    title="Date Of Birth"></flexi-grid-column>
+  <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right"
+    [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
+  <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']"
+    textAlign="center" width="100px"></flexi-grid-column>
+  <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()"
+    textAlign="center"></flexi-grid-column>
 
-  <!-- Command alanı -->
   <ng-template #commandButtonColumnTemplate let-item="item">
-    <flexi-button btnColor="default">
-      <i class="fa-solid fa-edit"></i>
-    </flexi-button>
-    <flexi-button btnColor="default" class="ms-1" (click)="deleteByItem(item)">
-      <i class="fa-solid fa-trash"></i>
-    </flexi-button>
-  </ng-template>  
+    <flexi-button btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="Güncelle" />
+    <flexi-button btnColor="danger" class="ms-1" btnSize="small" (click)="deleteByItem(item)" btnIcon="remove"
+      flexiTooltip title="Sil" />
+  </ng-template>
 </flexi-grid>
 `;
 
@@ -156,7 +144,7 @@ export const firstUseHTMLCode: string = `
 </flexi-grid>
 `;
 
-export const dataTSCode:string = `
+export const dataTSCode: string = `
 import { UserModel } from "../models/user.model";
 
 export const UsersData: UserModel[] = [
@@ -953,6 +941,11 @@ export const customColumnHTMLCode: string = `
     <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
     
     <flexi-grid-column field="salary" title="Salary">
+      <!-- Eklediğiniz özel column a özel filter alanı da ekleyebiliyorsunuz -->
+      <ng-template flexiGridHeaderTemplate>
+        <input type="search" class="flexi-grid-filter-input" (keyup)="onKeyUp($event)" placeholder="Custom filter...">
+      </ng-template> 
+
       <!-- let-item ile bu döngüdeki tüm datayı yakalıyoruz -->
       <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">
         Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}
@@ -960,7 +953,8 @@ export const customColumnHTMLCode: string = `
     </flexi-grid-column>
 
     <ng-template #customButtonColumnTemplate let-item="item">
-        <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
+        <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. 
+        Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
         <flexi-button (click)="edit(item.id)" btnColor="primary" [outline]="true">
           <i class="fa-solid fa-edit"></i>
         </flexi-button>

@@ -66,9 +66,12 @@
               </div>
             </div>
 
-            <flexi-grid [data]="users()" [showCaption]="showCaption()" [captionTitle]="captionTitle()"
-              [showColumnVisibility]="showColumnVisibility()" [columnVisibilityBtnClass]="columnVisibilityBtnClass()"
-              [showRefreshBtn]="showRefreshBtn()" [refreshDataBtnClass]="refreshDataBtnClass()"
+            <flexi-grid 
+              [data]="users()" 
+              [showCaption]="showCaption()" 
+              [captionTitle]="captionTitle()"
+              [showColumnVisibility]="showColumnVisibility()"
+              [showRefreshBtn]="showRefreshBtn()"
               [captionTemplate]="captionTemplate">
 
               <ng-template #captionTemplate>

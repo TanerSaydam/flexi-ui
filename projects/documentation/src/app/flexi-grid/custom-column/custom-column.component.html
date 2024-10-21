@@ -32,7 +32,10 @@
               <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
               <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
               <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
-              <flexi-grid-column field="salary" title="Salary">
+              <flexi-grid-column title="Custom Column">
+                <ng-template flexiGridHeaderTemplate>
+                  <input type="search" class="flexi-grid-filter-input" (keyup)="onKeyUp($event)" placeholder="Custom filter...">
+                </ng-template>
                 <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">                  
                   Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}                  
                 </ng-template>
@@ -40,12 +43,8 @@
 
               <ng-template #customButtonColumnTemplate let-item>
                 <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
-                <flexi-button (click)="edit(item.id)" btnColor="primary" [outline]="true">
-                  <i class="fa-solid fa-edit"></i>
-                </flexi-button>
-                <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger" [outline]="true">
-                  <i class="fa-solid fa-trash"></i>
-                </flexi-button>
+                <flexi-button (click)="edit(item.id)" btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="Güncelle" />
+                <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger"  btnIcon="delete" btnSize="small" flexiTooltip title="Sil" />
               </ng-template>
             </flexi-grid>
           </div>

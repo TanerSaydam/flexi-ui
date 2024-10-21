@@ -35,6 +35,9 @@
       "flexi-treeview": [
         "./dist/flexi-treeview"
       ],
+      "flexi-ui": [
+        "./dist/flexi-ui"
+      ],
       "my-lib": [
         "./dist/my-lib"
       ]

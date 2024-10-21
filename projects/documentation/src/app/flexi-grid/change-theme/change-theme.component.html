@@ -26,7 +26,7 @@
       <div class="tab-content">
         <div class="tab-pane active show" id="tabs-example-change-theme">
           <h4>Theme Değiştir (Light / Dark)</h4>
-          <div class="form-group">
+          <div class="form-group" style="margin-bottom: 10px;">
             <button class="btn" [ngClass]="changeTheme() ? 'btn-dark' : ''" (click)="changeTheme.set(!changeTheme())">
               {{changeTheme() ? 'Dark theme' : 'Light theme'}}
             </button>

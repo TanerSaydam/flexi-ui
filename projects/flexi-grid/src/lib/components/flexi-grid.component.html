@@ -7,12 +7,12 @@
     <div class="d-flex" style="gap: 10px;">
       <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
       @if(showExportExcelBtn){
-      <flexi-button icon="file_save" flexiTooltip title="Excel'e Aktar" btnColor="warning"
+      <flexi-button btnIcon="file_save" flexiTooltip title="Excel'e Aktar" btnColor="warning"
         (click)="onExportExcelButtonClick()" />
       }
       @if(showColumnVisibility){
       <div style="position: relative;">
-        <flexi-button icon="menu" btnColor="info" flexiTooltip title="Sütun Görünürlüğü"
+        <flexi-button btnIcon="menu" btnColor="info" flexiTooltip title="Sütun Görünürlüğü"
           (click)="toggleColumnVisibilityDropdown()" />
         <div class="flexi-grid-dropdown-menu" style="top: 40px;" [class.show]="columnVisibilityDropdownVisible()">
           <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
@@ -26,7 +26,7 @@
       </div>
       }
       @if(showRefreshBtn || dataBinding){
-      <flexi-button icon="refresh" btnColor="dark" flexiTooltip title="Yenile" (click)="refreshDataMethod()" />
+      <flexi-button btnIcon="refresh" btnColor="dark" flexiTooltip title="Yenile" (click)="refreshDataMethod()" />
       }
       <div style="margin-right: 10px;"></div>
     </div>
@@ -112,9 +112,9 @@
             <tr class="flexi-grid-mobile-filter-tr" role="row">
               <th colSpan="2" scope="col" role="columnheader">
                 @if(isShowMobileFilter()){
-                <flexi-button btnColor="success" icon="sweep" (click)="closeMobileFilter()" btnText="Uygula" />
+                <flexi-button btnColor="success" btnIcon="sweep" (click)="closeMobileFilter()" btnText="Uygula" />
                 }@else {
-                <flexi-button btnColor="primary" icon="filter_list" (click)="openMobileFilter()"
+                <flexi-button btnColor="primary" btnIcon="filter_list" (click)="openMobileFilter()"
                   btnText="Filtreyi Aç" />
                 }
               </th>

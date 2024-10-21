@@ -1,151 +1,73 @@
-
-<!-- 
-<flexi-treeview [data]="treeData()" [treeviewTitle]="'Roles'" actionBtnPosition="right" [loading]="false" [showCheckbox]="false" (onEdit)="editNode($event)">
-  <flexi-button btnColor="primary" btnText="Open Popup" (click)="openPopup()" icon="add"/> 
-</flexi-treeview>
- -->
-
-<!-- <div>
-  <flexi-button btnColor="primary" btnText="Open Popup" (click)="openPopup()" icon="add"/> 
-</div> -->
-
-<div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 50px;">
-  <div style="display: flex; gap: 10px;">
-    <flexi-button btnColor="primary" btnSize="small" icon="add" title="Add" flexiTooltip="top"/> 
-    <flexi-button btnColor="warning" btnSize="small" icon="info" title="Info" flexiTooltip="right"/> 
-    <flexi-button btnColor="info" btnSize="small" icon="delete" title="Delete" flexiTooltip="left"/> 
-    <flexi-button btnColor="danger" btnSize="small" icon="remove" title="Remove" flexiTooltip="bottom"/> 
-    <flexi-button btnColor="default" btnSize="small" icon="close" title="Close" flexiTooltip/> 
-    <flexi-button btnColor="dark" btnSize="small" icon="search" title="Search" flexiTooltip/> 
-  </div>
-  <div style="display: flex; gap: 10px;">
-    <flexi-button btnColor="primary" btnSize="default" icon="add"/> 
-    <flexi-button btnColor="warning" btnSize="default" icon="info"/> 
-    <flexi-button btnColor="info" btnSize="default" icon="delete"/> 
-    <flexi-button btnColor="danger" btnSize="default" icon="remove"/> 
-    <flexi-button btnColor="default" btnSize="default" icon="close"/> 
-    <flexi-button btnColor="dark" btnSize="default" icon="search"/> 
-  </div>
-  <div style="display: flex; gap: 10px;">
-    <flexi-button btnColor="primary" btnSize="large" icon="add"/> 
-    <flexi-button btnColor="warning" btnSize="large" icon="info"/> 
-    <flexi-button btnColor="info" btnSize="large" icon="delete"/> 
-    <flexi-button btnColor="danger" btnSize="large" icon="remove"/> 
-    <flexi-button btnColor="default" btnSize="large" icon="close"/> 
-    <flexi-button btnColor="dark" btnSize="large" icon="search"/> 
-  </div>
-</div>
-
-<flexi-select name="a" id="a" [data]="ucafs()" label="name" value="id" [tabindex]="1"    
- />
-
- 
-<flexi-select name="b" id="b" [data]="ucafs()" label="name" value="id" [tabindex]="1" [multiple]="true"    
-/>
-
-
-<flexi-select name="c" id="c" [data]="ucafs()" label="name" value="id" [tabindex]="3"    
- />
-
-<flexi-grid 
-            [data]="invoices()"
-            [total]="total()"
-            [dataBinding]="false"
-            [loading]="loading()"
-            [pageable]="true" 
-            [filterable]="true"
-            [sortable]="true" 
-            [resizable]="true" 
-            [draggable]="true"
-            [themeClass]="shared.themeClass()"
-            height="100%"
-            minWidth="1080px"
-            [showCaption]="true"
-            [showRefreshBtn]="false"
-            [captionTemplate]="captionTemplate"
-            captionTitle="Alış Faturaları"
-            (dataStateChange)="dataStateChange($event)"
-            [showCommandColumn]="true"
-            [commandColumnTemplate]="operationsColumnTemplate"
-            [showExportExcelBtn]="true"
-            [exportExcelButtonClick]="exportExcel.bind(this)"
-            >
-            <ng-template #captionTemplate>                
-                <flexi-button btnColor="primary" icon="add" class="no-mobile" title="Alış Faturası Oluştur" routerLink="/create-buying-invoice" flexiTooltip />               
-                <div>
-                    <input type="date" class="form-control no-mobile">
-                </div>
-                <div>
-                    <input type="date" class="form-control no-mobile">
-                </div>
-                <flexi-button btnColor="primary" icon="zoom_in" class="no-mobile" (click)="getAll()">                    
-                    <span>Getir</span>
-                </flexi-button>
-            </ng-template>
-
-            <flexi-grid-column field="invoiceNumber" width="13%" [hideOverflow]="true" title="Fatura Numarası">
-                <ng-template #invoiceNumberColumnTemplate flexiGridCellTemplate let-item>
-                    <a class="text-primary" (click)="showInvoice(item)" data-toggle="modal"
-                        data-target="#seeInvoiceModal">
-                        <span>{{item.invoiceNumber}}</span>
-                    </a>
-                </ng-template>
-            </flexi-grid-column>
-            <flexi-grid-column field="date" width="12%" filterType="date" format="dd.MM.yyyy" title="Tarih" textAlign="left"></flexi-grid-column>
-            <flexi-grid-column field="ucafCode" width="12%" [hideOverflow]="true" title="Cari Kod">
-                <ng-template #ucafCodeColumnTemplate flexiGridCellTemplate let-item>
-                    <a routerLink="/current-account-details/{{item.ucafId}}" title="Cari Hareketleri Görüntüle" >
-                        {{item.ucafCode}}
-                    </a>
-                </ng-template>
-            </flexi-grid-column>
-            <flexi-grid-column field="ucafName" width="22%" [hideOverflow]="true" title="Cari Ad">
-                <ng-template #ucafNameColumnTemplate flexiGridCellTemplate let-item>
-                    <a routerLink="/current-account-details/{{item.ucafId}}" title="Cari Hareketleri Görüntüle">
-                        {{item.ucafName}}
-                    </a>
-                </ng-template>
-            </flexi-grid-column>
-            <flexi-grid-column field="total" title="Tutar" width="10%" filterType="number" format="c" textAlign="right"></flexi-grid-column>
-            <flexi-grid-column field="discount" title="İndirim" width="10%" filterType="number" format="c" textAlign="right"></flexi-grid-column>
-            <flexi-grid-column field="generalTotal" title="Toplam" width="10%" filterType="number" format="c" textAlign="right"></flexi-grid-column>
-            <flexi-grid-column field="bookEntryNumber" width="10%" [visible]="false" title="Fiş Numarası" textAlign="center">
-                <ng-template #bookEntryNumberColumnTemplate flexiGridCellTemplate let-item>
-                    <a routerLink="/book-entries/{{item.bookEntryId}}">
-                        {{item.bookEntryNumber}}
-                    </a>
-                </ng-template>
-            </flexi-grid-column>            
-
-            <ng-template #operationsColumnTemplate let-item>
-                <flexi-button btnColor="danger" icon="delete" (click)="deleteNode(item)" title="Sil">                    
-                </flexi-button>
-            </ng-template>
-
-        </flexi-grid>
-
-        <div style="margin-bottom: 300px;"></div>
-
-<flexi-popup [(isPopupVisible)]="showPopup" width="500px" height="400px" popupTitle="User Form" [themeClass]="shared.themeClass()">
-  <div class="form-group">
-    <label>First Name</label>
-    <input type="text" name="firstName" id="firstName" class="form-control">
-  </div>
-
-  <div class="form-group mt-2">
-    <label>Last Name</label>
-    <input type="text" name="lastName" id="lastName" class="form-control">
-  </div>
-
-  <div class="form-group mt-2">
-    <label>Email</label>
-    <input type="text" name="email" id="email" class="form-control">
-  </div>
-
-  <div class="form-group mt-2">
-    <label>Phone</label>
-    <input type="text" name="phone" id="phone" class="form-control">
-  </div> 
-
+<app-blank>
+  <div style="display: flex; flex-direction: column; gap:5px">
+    <h6>Small Button (Sadece Icon)</h6>
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnSize="small" btnIcon="info" flexiTooltip title="Aç"/>
+      <flexi-button btnColor="primary" btnSize="small" btnIcon="add" flexiTooltip title="Kaydet"/>
+      <flexi-button btnColor="warning" btnSize="small" btnIcon="edit" flexiTooltip title="Güncelle"/>
+      <flexi-button btnColor="danger" btnSize="small" btnIcon="delete" flexiTooltip title="Sil"/>
+      <flexi-button btnColor="info" btnSize="small" btnIcon="visibility" flexiTooltip title="Göster"/>
+      <flexi-button btnColor="dark" btnSize="small" btnIcon="remove" flexiTooltip title="Çıkart"/>
+    </div> 
+    
+    <h6>Default Button (Sadece Icon)</h6>
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnSize="default" btnIcon="info" flexiTooltip title="Aç"/>
+      <flexi-button btnColor="primary" btnSize="default" btnIcon="add" flexiTooltip title="Kaydet"/>
+      <flexi-button btnColor="warning" btnSize="default" btnIcon="edit" flexiTooltip title="Güncelle"/>
+      <flexi-button btnColor="danger" btnSize="default" btnIcon="delete" flexiTooltip title="Sil"/>
+      <flexi-button btnColor="info" btnSize="default" btnIcon="visibility" flexiTooltip title="Göster"/>
+      <flexi-button btnColor="dark" btnSize="default" btnIcon="remove" flexiTooltip title="Çıkart"/>
+    </div>
   
-</flexi-popup>
+    <h6>Large Button (Sadece Icon)</h6>
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnSize="large" btnIcon="info" flexiTooltip title="Aç"/>
+      <flexi-button btnColor="primary" btnSize="large" btnIcon="add" flexiTooltip title="Kaydet"/>
+      <flexi-button btnColor="warning" btnSize="large" btnIcon="edit" flexiTooltip title="Güncelle"/>
+      <flexi-button btnColor="danger" btnSize="large" btnIcon="delete" flexiTooltip title="Sil"/>
+      <flexi-button btnColor="info" btnSize="large" btnIcon="visibility" flexiTooltip title="Göster"/>
+      <flexi-button btnColor="dark" btnSize="large" btnIcon="remove" flexiTooltip title="Çıkart"/>
+    </div>
+
+    <h6>Small Button (Yazı ile)</h6>
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnSize="small" btnIcon="info" btnText="Aç"/>
+      <flexi-button btnColor="primary" btnSize="small" btnIcon="add" btnText="Kaydet"/>
+      <flexi-button btnColor="warning" btnSize="small" btnIcon="edit" btnText="Güncelle"/>
+      <flexi-button btnColor="danger" btnSize="small" btnIcon="delete" btnText="Sil"/>
+      <flexi-button btnColor="info" btnSize="small" btnIcon="visibility" btnText="Göster"/>
+      <flexi-button btnColor="dark" btnSize="small" btnIcon="remove" btnText="Çıkart"/>
+    </div>
+
+    <h6>Default Button (Yazı ile)</h6>
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnSize="default" btnIcon="info" btnText="Aç"/>
+      <flexi-button btnColor="primary" btnSize="default" btnIcon="add" btnText="Kaydet"/>
+      <flexi-button btnColor="warning" btnSize="default" btnIcon="edit" btnText="Güncelle"/>
+      <flexi-button btnColor="danger" btnSize="default" btnIcon="delete" btnText="Sil"/>
+      <flexi-button btnColor="info" btnSize="default" btnIcon="visibility" btnText="Göster"/>
+      <flexi-button btnColor="dark" btnSize="default" btnIcon="remove" btnText="Çıkart"/>
+    </div>
+
+    <h6>Large Button (Yazı ile)</h6>
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnSize="large" btnIcon="info" btnText="Aç"/>
+      <flexi-button btnColor="primary" btnSize="large" btnIcon="add" btnText="Kaydet"/>
+      <flexi-button btnColor="warning" btnSize="large" btnIcon="edit" btnText="Güncelle"/>
+      <flexi-button btnColor="danger" btnSize="large" btnIcon="delete" btnText="Sil"/>
+      <flexi-button btnColor="info" btnSize="large" btnIcon="visibility" btnText="Göster"/>
+      <flexi-button btnColor="dark" btnSize="large" btnIcon="remove" btnText="Çıkart"/>
+    </div>
+
+    <h6>Button (Özel style ile)</h6>    
+    <div style="display: flex; gap: 5px;">
+      <flexi-button btnColor="default" btnIcon="info" flexiTooltip title="Aç" btnStyle="width: 30px;"/>
+      <flexi-button btnColor="primary" btnIcon="add" flexiTooltip title="Kaydet" btnStyle="width: 50px; justify-content:center"/>
+      <flexi-button btnColor="warning" btnIcon="edit" flexiTooltip title="Güncelle" btnStyle="width: 100px; justify-content:center"/>
+      <flexi-button btnColor="danger" btnIcon="delete" flexiTooltip title="Sil" btnStyle="width: 120px; justify-content:center"/>
+      <flexi-button btnColor="info" btnIcon="visibility" flexiTooltip title="Göster" btnStyle="width: 140px; justify-content:center"/>
+      <flexi-button btnColor="dark" btnIcon="remove" flexiTooltip title="Çıkart" btnStyle="width: 180px; justify-content:center"/>
+    </div>
+  </div>
+</app-blank>

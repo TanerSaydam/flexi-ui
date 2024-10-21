@@ -17,7 +17,8 @@ import { FlexiButtonComponent } from 'flexi-button';
   ],
   exports: [
     FlexiPopupComponent,
-    FlexiPopupActionTemplateDirective
+    FlexiPopupActionTemplateDirective,
+    FlexiButtonComponent
   ]
 })
 export class FlexiPopupModule { }

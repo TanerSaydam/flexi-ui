@@ -27,7 +27,9 @@ import { FlexiTooltipDirective } from 'flexi-tooltip';
     FlexiGridComponent,
     FlexiGridColumnComponent,
     FlexiGridCellTemplateDirective,
-    FlexiGridHeaderTemplateDirective
+    FlexiGridHeaderTemplateDirective,
+    FlexiTooltipDirective,
+    FlexiButtonComponent
   ]
 })
 export class FlexiGridModule { }
