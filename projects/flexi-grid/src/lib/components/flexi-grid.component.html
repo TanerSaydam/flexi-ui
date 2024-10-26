@@ -279,7 +279,7 @@
     </div>
     <div class="flexi-grid-pagination-part-two">
       <ul class="flexi-grid-pagination">
-        @if(this.pageNumbers().length > 1){
+        @if(this.pageNumbers().length > 0){
         <li class="flexi-grid-page-item" [ngClass]="state.pageNumber === 1 ? 'disabled': ''" (click)="changePage(1)">
           <div class="flexi-grid-page-link" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
