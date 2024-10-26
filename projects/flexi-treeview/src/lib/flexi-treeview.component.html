@@ -7,14 +7,14 @@
       <div class="flexi-treeview-actions-buttons">
         <ng-content></ng-content>
         @if(showCheckbox){
-          <flexi-button (click)="selectAll()" [btnSize]="btnSize" icon="check_box" btnColor="dark" flexiTooltip="bottom"
+          <flexi-button (click)="selectAll()" [btnSize]="btnSize" btnIcon="check_box" btnColor="dark" flexiTooltip="bottom"
             title="Tümünü Seç" />
-          <flexi-button (click)="deselectAll()" [btnSize]="btnSize" icon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
+          <flexi-button (click)="deselectAll()" [btnSize]="btnSize" btnIcon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
             title="Tümünün Seçimini Kaldır" />
         }
-        <flexi-button (click)="collapseAll()" [btnSize]="btnSize" icon="unfold_less" btnColor="dark" flexiTooltip="bottom"
+        <flexi-button (click)="collapseAll()" [btnSize]="btnSize" btnIcon="unfold_less" btnColor="dark" flexiTooltip="bottom"
           title="Tümünü Daralt" />
-        <flexi-button (click)="expandAll()" [btnSize]="btnSize" icon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
+        <flexi-button (click)="expandAll()" [btnSize]="btnSize" btnIcon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
           title="Tümünü Genişlet" />
       </div>
   </div>
@@ -74,10 +74,10 @@
             </div>
             <div class="flexi-treeview-node-actions">
               @if(showEditButton){
-              <flexi-button icon="edit" [btnSize]="btnSize" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
+              <flexi-button btnIcon="edit" [btnSize]="btnSize" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
               }
               @if(showDeleteButton){
-              <flexi-button icon="delete" [btnSize]="btnSize" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
+              <flexi-button btnIcon="delete" [btnSize]="btnSize" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
               }
             </div>
           </div>
