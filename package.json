@@ -21,7 +21,7 @@
     "@angular/router": "^18.0.6",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
-    "flexi-button": "^18.0.50",
+    "flexi-button": "^18.0.51",
     "flexi-grid": "^18.10.6",
     "flexi-popup": "^18.0.17",
     "flexi-toast": "^18.1.53",
