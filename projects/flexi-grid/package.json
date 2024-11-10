@@ -1,11 +1,11 @@
 {
   "name": "flexi-grid",
-  "version": "18.10.8",
+  "version": "18.10.9",
   "peerDependencies": {
     "@angular/common": "^18.0.3",
     "@angular/core": "^18.0.3",
     "tr-currency": "^18.0.5",
-    "flexi-button": "^18.0.51",
+    "flexi-button": "^18.0.52",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "@types/file-saver": "^2.0.7",

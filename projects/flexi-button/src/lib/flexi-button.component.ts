@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   standalone: true,
   imports: [CommonModule],
   template: `
-    <button class="flexi-button flexi-button-{{btnColor}}" [type]="btnType" [disabled]="btnDisabled"]>
+    <button class="flexi-button flexi-button-{{btnColor}}" [type]="btnType" [disabled]="btnDisabled">
     <div class="flexi-button-content" [style]="btnStyle">        
         <span class="material-symbols-outlined flexi-button-size-{{btnSize}}">
           {{ btnIcon }}
@@ -18,6 +18,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     </button>
   `,
   styleUrl: './flexi-button.component.css',
+  host: { '[attr.data-instance-id]': 'instanceId' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
