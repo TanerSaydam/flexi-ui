@@ -26,7 +26,7 @@
     "flexi-popup": "^19.0.1",
     "flexi-toast": "^19.0.1",
     "flexi-tooltip": "^19.0.1",
-    "flexi-treeview": "^19.0.1",
+    "flexi-treeview": "^19.0.2",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",
     "tr-currency": "^19.0.1",
