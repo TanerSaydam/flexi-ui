@@ -6,15 +6,14 @@ import { customColumnHTMLCode, customColumnTSCode, dataTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-custom-column',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './custom-column.component.html',
-  styleUrl: './custom-column.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-custom-column',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './custom-column.component.html',
+    styleUrl: './custom-column.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class CustomColumnComponent {
   users = signal<UserModel[]>(UsersData);

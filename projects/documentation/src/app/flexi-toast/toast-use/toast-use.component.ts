@@ -3,13 +3,12 @@ import { SharedModule } from '../../shared.module';
 import { FlexiToastOptionsModel, FlexiToastService } from 'flexi-toast';
 
 @Component({
-  selector: 'app-toast-use',
-  standalone: true,
-  imports: [
-    SharedModule
-  ],
-  templateUrl: './toast-use.component.html',
-  styleUrl: './toast-use.component.css'
+    selector: 'app-toast-use',
+    imports: [
+        SharedModule
+    ],
+    templateUrl: './toast-use.component.html',
+    styleUrl: './toast-use.component.css'
 })
 export default class ToastUseComponent {  
   toastTSCode = signal<string>(`options = signal<FlexiToastOptionsModel>({

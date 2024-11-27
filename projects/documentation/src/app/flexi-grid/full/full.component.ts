@@ -9,12 +9,11 @@ import { FlexiToastService } from 'flexi-toast';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 
 @Component({
-  selector: 'app-flexi-grid-full',
-  standalone: true,
-  imports: [FlexiGridModule, MyCodeComponent, FlexiTooltipDirective],
-  templateUrl: './full.component.html',
-  styleUrl: './full.component.css',
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-flexi-grid-full',
+    imports: [FlexiGridModule, MyCodeComponent, FlexiTooltipDirective],
+    templateUrl: './full.component.html',
+    styleUrl: './full.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class FullComponent {
   users = signal<UserModel[]>([])

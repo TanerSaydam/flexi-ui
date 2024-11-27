@@ -3,11 +3,10 @@ import { SharedModule } from '../../shared.module';
 import { FlexiButtonComponent } from 'flexi-button';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 @Component({
-  selector: 'app-button',
-  standalone: true,
-  imports: [SharedModule, FlexiButtonComponent, FlexiTooltipDirective],
-  templateUrl: './button.component.html',
-  styleUrl: './button.component.css'
+    selector: 'app-button',
+    imports: [SharedModule, FlexiButtonComponent, FlexiTooltipDirective],
+    templateUrl: './button.component.html',
+    styleUrl: './button.component.css'
 })
 export default class ButtonComponent {
   buttonTSCodeExample = signal<string>(`

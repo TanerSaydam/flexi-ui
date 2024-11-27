@@ -6,15 +6,14 @@ import { optionsHTMLCode, optionsTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-options',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './options.component.html',
-  styleUrl: './options.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-options',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './options.component.html',
+    styleUrl: './options.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class OptionsComponent {
   users = signal<UserModel[]>(UsersData);

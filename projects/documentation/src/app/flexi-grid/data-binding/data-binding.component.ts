@@ -6,15 +6,14 @@ import { dataBindingHTMLCode, dataBindingTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-data-binding',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './data-binding.component.html',
-  styleUrl: './data-binding.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-data-binding',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './data-binding.component.html',
+    styleUrl: './data-binding.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class DataBindingComponent {
   users = signal<UserModel[]>([]);

@@ -6,13 +6,12 @@ import { FlexiTooltipDirective } from 'flexi-tooltip';
 import { FlexiTreeNode } from './flexi-tree-node.model';
 
 @Component({
-  selector: 'flexi-treeview',
-  standalone: true,
-  imports: [CommonModule, FormsModule, FlexiButtonComponent, FlexiTooltipDirective],
-  templateUrl: "./flexi-treeview.component.html",
-  styleUrl: "./flexi-treeview.component.css",
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'flexi-treeview',
+    imports: [CommonModule, FormsModule, FlexiButtonComponent, FlexiTooltipDirective],
+    templateUrl: "./flexi-treeview.component.html",
+    styleUrl: "./flexi-treeview.component.css",
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {  
   @Input() data: FlexiTreeNode[] = [];

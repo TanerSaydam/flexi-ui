@@ -4,11 +4,10 @@ import { FlexiTooltipDirective } from 'flexi-tooltip';
 import { FlexiButtonComponent } from 'flexi-button';
 
 @Component({
-  selector: 'app-flexi-tooltip',
-  standalone: true,
-  imports: [SharedModule, FlexiTooltipDirective, FlexiButtonComponent],
-  templateUrl: './flexi-tooltip.component.html',
-  styleUrl: './flexi-tooltip.component.css'
+    selector: 'app-flexi-tooltip',
+    imports: [SharedModule, FlexiTooltipDirective, FlexiButtonComponent],
+    templateUrl: './flexi-tooltip.component.html',
+    styleUrl: './flexi-tooltip.component.css'
 })
 export default class FlexiTooltipComponent {
 tooltipTSCodeExample = signal<string>(`

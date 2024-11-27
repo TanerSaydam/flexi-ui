@@ -13,20 +13,19 @@ import { LoadingComponent } from '../../loading/loading.component';
 import { dataTSCode } from '../../flexi-grid/code';
 
 @Component({
-  selector: 'app-first-use',
-  standalone: true,
-  imports: [
-    BlankComponent, 
-    CardComponent, 
-    CommonModule, 
-    FlexiSelectModule, 
-    MyCodeComponent, 
-    FormsModule,
-    LoadingComponent
-  ],
-  templateUrl: './first-use.component.html',
-  styleUrl: './first-use.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-first-use',
+    imports: [
+        BlankComponent,
+        CardComponent,
+        CommonModule,
+        FlexiSelectModule,
+        MyCodeComponent,
+        FormsModule,
+        LoadingComponent
+    ],
+    templateUrl: './first-use.component.html',
+    styleUrl: './first-use.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class FirstUseComponent {
   users = signal<UserModel[]>(UsersData);

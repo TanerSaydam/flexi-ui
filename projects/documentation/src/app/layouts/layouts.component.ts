@@ -5,12 +5,11 @@ import { SharedService } from '../shared.service';
 import { flexiGridDocument, flexiSelectDocument, flexiToastDocument } from '../document';
 
 @Component({
-  selector: 'app-layouts',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
-  templateUrl: './layouts.component.html',
-  styleUrl: './layouts.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-layouts',
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
+    templateUrl: './layouts.component.html',
+    styleUrl: './layouts.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export class LayoutsComponent {  
   flexiGridDocument = flexiGridDocument;

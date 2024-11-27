@@ -6,15 +6,14 @@ import { dataTSCode, indexHTMLCode, indexTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-index',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './index.component.html',
-  styleUrl: './index.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-index',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './index.component.html',
+    styleUrl: './index.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class IndexComponent {
   users = signal<UserModel[]>(UsersData);

@@ -13,20 +13,19 @@ import { CommonModule } from '@angular/common';
 import { dataTSCode } from '../../flexi-grid/code';
 
 @Component({
-  selector: 'app-multiple',
-  standalone: true,
-  imports: [
-    BlankComponent, 
-    CardComponent, 
-    CommonModule,
-    LoadingComponent,
-    FlexiSelectModule, 
-    MyCodeComponent, 
-    FormsModule,
-  ],
-  templateUrl: './multiple.component.html',
-  styleUrl: './multiple.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-multiple',
+    imports: [
+        BlankComponent,
+        CardComponent,
+        CommonModule,
+        LoadingComponent,
+        FlexiSelectModule,
+        MyCodeComponent,
+        FormsModule,
+    ],
+    templateUrl: './multiple.component.html',
+    styleUrl: './multiple.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class MultipleComponent {
   users = signal<UserModel[]>(UsersData);

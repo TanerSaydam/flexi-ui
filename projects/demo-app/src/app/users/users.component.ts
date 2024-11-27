@@ -5,15 +5,14 @@ import { FlexiGridModule } from "../../../../flexi-grid/src/lib/modules/flexi-gr
 import { UsersData } from '../../../../documentation/src/app/flexi-grid/data';
 
 @Component({
-  selector: 'app-users',
-  standalone: true,
-  imports: [
-    BlankComponent,
-    FlexiButtonComponent,
-    FlexiGridModule
-],
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+    selector: 'app-users',
+    imports: [
+        BlankComponent,
+        FlexiButtonComponent,
+        FlexiGridModule
+    ],
+    templateUrl: './users.component.html',
+    styleUrl: './users.component.css'
 })
 export class UsersComponent {
   data = UsersData

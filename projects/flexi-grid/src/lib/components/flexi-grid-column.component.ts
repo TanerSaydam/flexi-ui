@@ -4,9 +4,10 @@ import { FlexiGridCellTemplateDirective } from '../directives/flexi-grid-cell-te
 import { FlexiGridHeaderTemplateDirective } from '../directives/flexi-grid-header-template.directive';
 
 @Component({
-  selector: 'flexi-grid-column',
-  host: { '[attr.host-id]': '"flexi-grid-column-1"' },
-  template: ''
+    selector: 'flexi-grid-column',
+    host: { '[attr.host-id]': '"flexi-grid-column-1"' },
+    template: '',
+    standalone: false
 })
 export class FlexiGridColumnComponent {
   @Input() field: string = '';

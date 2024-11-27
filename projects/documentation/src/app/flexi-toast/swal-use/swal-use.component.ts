@@ -3,11 +3,10 @@ import { SharedModule } from '../../shared.module';
 import { FlexiToastOptionsModel, FlexiToastService } from 'flexi-toast';
 
 @Component({
-  selector: 'app-swal-use',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './swal-use.component.html',
-  styleUrl: './swal-use.component.css'
+    selector: 'app-swal-use',
+    imports: [SharedModule],
+    templateUrl: './swal-use.component.html',
+    styleUrl: './swal-use.component.css'
 })
 export default class SwalUseComponent { 
   swalTSCode = signal<string>(`options = signal<FlexiToastOptionsModel>({    

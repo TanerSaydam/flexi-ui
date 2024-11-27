@@ -7,15 +7,14 @@ import { SharedModule } from '../../shared.module';
 
 
 @Component({
-  selector: 'app-filter',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './filter.component.html',
-  styleUrl: './filter.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-filter',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './filter.component.html',
+    styleUrl: './filter.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class FilterComponent {
   users = signal<UserModel[]>(UsersData);

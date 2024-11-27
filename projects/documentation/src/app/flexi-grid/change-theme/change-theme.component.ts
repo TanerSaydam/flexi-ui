@@ -9,15 +9,14 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-change-theme',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './change-theme.component.html',
-  styleUrl: './change-theme.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-change-theme',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './change-theme.component.html',
+    styleUrl: './change-theme.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class ChangeThemeComponent {
   users = signal<UserModel[]>(UsersData);

@@ -6,15 +6,14 @@ import { dataTSCode, footerHTMLCode, footerTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-footer',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-footer',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './footer.component.html',
+    styleUrl: './footer.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class FooterComponent {
   users = signal<UserModel[]>(UsersData);

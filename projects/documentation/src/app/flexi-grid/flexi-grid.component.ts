@@ -8,19 +8,18 @@ import FullComponent from './full/full.component';
 import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
-  selector: 'app-flexi-grid',
-  standalone: true,
-  imports: [
-    BlankComponent, 
-    CardComponent, 
-    CommonModule, 
-    FullComponent,
-    MyCodeComponent,    
-    LoadingComponent,        
-  ],
-  templateUrl: './flexi-grid.component.html',
-  styleUrl: './flexi-grid.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-flexi-grid',
+    imports: [
+        BlankComponent,
+        CardComponent,
+        CommonModule,
+        FullComponent,
+        MyCodeComponent,
+        LoadingComponent,
+    ],
+    templateUrl: './flexi-grid.component.html',
+    styleUrl: './flexi-grid.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class FlexiDataGridComponent {  
   dataCode = signal<string>(dataTSCode);

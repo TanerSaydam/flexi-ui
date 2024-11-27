@@ -8,11 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 
 @Component({
-  selector: 'app-flexi-select-full',
-  standalone: true,
-  imports: [MyCodeComponent, FlexiSelectModule, FormsModule],
-  templateUrl: './full.component.html',
-  styleUrl: './full.component.css'
+    selector: 'app-flexi-select-full',
+    imports: [MyCodeComponent, FlexiSelectModule, FormsModule],
+    templateUrl: './full.component.html',
+    styleUrl: './full.component.css'
 })
 export default class SelectFullComponent {
   users = signal<UserModel[]>([]);

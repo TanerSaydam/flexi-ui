@@ -6,11 +6,12 @@ import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'flexi-grid',
-  templateUrl: './flexi-grid.component.html',
-  styleUrl: `./flexi-grid.component.css`,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'flexi-grid',
+    templateUrl: './flexi-grid.component.html',
+    styleUrl: `./flexi-grid.component.css`,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FlexiGridComponent implements OnChanges, AfterViewInit {
   @Input() data: any[] = [];

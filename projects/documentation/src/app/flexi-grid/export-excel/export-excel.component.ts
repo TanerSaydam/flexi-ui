@@ -6,15 +6,14 @@ import { HttpClient } from '@angular/common/http';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-export-excel',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './export-excel.component.html',
-  styleUrl: './export-excel.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-export-excel',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './export-excel.component.html',
+    styleUrl: './export-excel.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class ExportExcelComponent {
   users = signal<UserModel[]>([]);

@@ -1,24 +1,23 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, forwardRef, signal, viewChild, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'flexi-editor',
-  standalone: true,
-  imports: [],
-  templateUrl: "./flexi-editor.component.html",
-  styleUrls: ["./flexi-editor.component.css"],
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FlexiEditorComponent),
-      multi: true
-    }
-  ]
+    selector: 'flexi-editor',
+    imports: [],
+    templateUrl: "./flexi-editor.component.html",
+    styleUrls: ["./flexi-editor.component.css"],
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FlexiEditorComponent),
+            multi: true
+        }
+    ]
 })
 export class FlexiEditorComponent implements ControlValueAccessor, AfterViewInit {
-  @ViewChild('editor', { static: true }) editor: ElementRef | undefined;  
+  editor = viewChild.required<ElementRef<HTMLDivElement>>("editor");
   fonts = signal<string[]>([
     "Poppins",
     "Arial",
@@ -76,7 +75,7 @@ export class FlexiEditorComponent implements ControlValueAccessor, AfterViewInit
    if(value){
     this.content.set(value);
     if(this.editor){
-      this.editor.nativeElement.innerHTML = this.content();
+      this.editor().nativeElement.innerHTML = this.content();
     }
    }
    
@@ -91,8 +90,8 @@ export class FlexiEditorComponent implements ControlValueAccessor, AfterViewInit
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    if (this.editor && this.editor.nativeElement) {
-      this.editor.nativeElement.contentEditable = !isDisabled;
+    if (this.editor && this.editor().nativeElement) {
+      //this.editor().nativeElement.contentEditable = !isDisabled;
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "name": "flexi-grid",
-  "version": "18.10.9",
+  "version": "19.0.1",
   "peerDependencies": {
-    "@angular/common": "^18.0.3",
-    "@angular/core": "^18.0.3",
-    "tr-currency": "^18.0.5",
-    "flexi-button": "^18.0.52",
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "tr-currency": "^19.0.1",
+    "flexi-button": "^19.0.1",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "@types/file-saver": "^2.0.7",
-    "flexi-tooltip": "^18.0.11"
+    "flexi-tooltip": "^19.0.1"
   },
   "dependencies": {
     "tslib": "^2.3.0"

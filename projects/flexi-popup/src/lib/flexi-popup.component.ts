@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, ViewEn
 import { FlexiPopupActionTemplateDirective } from './flexi-popup-action-template.directive';
 
 @Component({
-  selector: 'flexi-popup',    
-  templateUrl: "./flexi-popup.component.html",
-  styleUrl: "./flexi-popup.compenent.css",
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'flexi-popup',
+    templateUrl: "./flexi-popup.component.html",
+    styleUrl: "./flexi-popup.compenent.css",
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FlexiPopupComponent {
   @Input() isPopupVisible: boolean = false;

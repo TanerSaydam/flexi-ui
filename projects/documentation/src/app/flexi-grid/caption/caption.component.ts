@@ -6,15 +6,14 @@ import { captionHTMLCode, captionTSCode, dataTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-caption',
-  standalone: true,
-  imports: [
-    FlexiGridModule, 
-    SharedModule  
-  ],
-  templateUrl: './caption.component.html',
-  styleUrl: './caption.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-caption',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './caption.component.html',
+    styleUrl: './caption.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class CaptionComponent {
   users = signal<UserModel[]>(UsersData);

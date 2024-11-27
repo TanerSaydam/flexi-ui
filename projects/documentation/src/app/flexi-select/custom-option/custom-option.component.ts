@@ -13,20 +13,19 @@ import { CardComponent } from '../../blank/card/card.component';
 import { LoadingComponent } from '../../loading/loading.component';
 
 @Component({
-  selector: 'app-custom-option',
-  standalone: true,
-  imports: [
-    BlankComponent, 
-    CardComponent, 
-    CommonModule, 
-    LoadingComponent,
-    FlexiSelectModule, 
-    MyCodeComponent, 
-    FormsModule,
-  ],
-  templateUrl: './custom-option.component.html',
-  styleUrl: './custom-option.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-custom-option',
+    imports: [
+        BlankComponent,
+        CardComponent,
+        CommonModule,
+        LoadingComponent,
+        FlexiSelectModule,
+        MyCodeComponent,
+        FormsModule,
+    ],
+    templateUrl: './custom-option.component.html',
+    styleUrl: './custom-option.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class CustomOptionComponent {
   users = signal<UserModel[]>([]);

@@ -7,17 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { MyCodeComponent } from '../my-code/my-code.component';
 
 @Component({
-  selector: 'app-flexi-toast',
-  standalone: true,
-  imports: [
-    BlankComponent, 
-    CardComponent, 
-    CommonModule,
-    FormsModule,
-    MyCodeComponent
-  ],
-  templateUrl: './flexi-toast.component.html',
-  styleUrl: './flexi-toast.component.css'
+    selector: 'app-flexi-toast',
+    imports: [
+        BlankComponent,
+        CardComponent,
+        CommonModule,
+        FormsModule,
+        MyCodeComponent
+    ],
+    templateUrl: './flexi-toast.component.html',
+    styleUrl: './flexi-toast.component.css'
 })
 export default class FlexiToastComponent {    
   

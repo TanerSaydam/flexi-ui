@@ -4,7 +4,6 @@ import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
   providedIn: 'root'
 })
 export class FlexiToastService {
-
   options: FlexiToastOptionsModel = new FlexiToastOptionsModel();
 
   private renderer: Renderer2;

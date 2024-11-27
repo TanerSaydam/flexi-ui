@@ -6,15 +6,14 @@ import { dataTSCode, firstUseHTMLCode, firstUseTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-first-use',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './first-use.component.html',
-  styleUrl: './first-use.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-first-use',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './first-use.component.html',
+    styleUrl: './first-use.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class FirstUseComponent {
   users = signal<UserModel[]>(UsersData);

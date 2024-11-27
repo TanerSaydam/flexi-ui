@@ -8,19 +8,18 @@ import { LoadingComponent } from '../loading/loading.component';
 import { MyCodeComponent } from '../my-code/my-code.component';
 
 @Component({
-  selector: 'app-flexi-select',
-  standalone: true,
-  imports: [
-    BlankComponent, 
-    CardComponent, 
-    CommonModule, 
-    FlexiSelectModule,
-    SelectFullComponent,
-    LoadingComponent,
-    MyCodeComponent,
-  ],
-  templateUrl: './flexi-select.component.html',
-  styleUrl: './flexi-select.component.css'
+    selector: 'app-flexi-select',
+    imports: [
+        BlankComponent,
+        CardComponent,
+        CommonModule,
+        FlexiSelectModule,
+        SelectFullComponent,
+        LoadingComponent,
+        MyCodeComponent,
+    ],
+    templateUrl: './flexi-select.component.html',
+    styleUrl: './flexi-select.component.css'
 })
 export default class FlexiSelectComponent{
  

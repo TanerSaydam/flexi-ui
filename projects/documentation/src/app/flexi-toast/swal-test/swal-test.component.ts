@@ -3,11 +3,10 @@ import { SharedModule } from '../../shared.module';
 import { FlexiToastOptionsModel, FlexiToastService } from 'flexi-toast';
 
 @Component({
-  selector: 'app-swal-test',
-  standalone: true,
-  imports: [SharedModule],
-  templateUrl: './swal-test.component.html',
-  styleUrl: './swal-test.component.css'
+    selector: 'app-swal-test',
+    imports: [SharedModule],
+    templateUrl: './swal-test.component.html',
+    styleUrl: './swal-test.component.css'
 })
 export default class SwalTestComponent {
   swalTitle = signal<string>("Sil?");

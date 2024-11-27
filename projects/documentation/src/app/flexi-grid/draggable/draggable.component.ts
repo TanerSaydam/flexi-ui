@@ -6,15 +6,14 @@ import { dataTSCode, draggableHTMLCode, draggableTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-draggable',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './draggable.component.html',
-  styleUrl: './draggable.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-draggable',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './draggable.component.html',
+    styleUrl: './draggable.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class DraggableComponent {
   users = signal<UserModel[]>(UsersData);

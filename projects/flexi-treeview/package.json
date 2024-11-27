@@ -1,11 +1,11 @@
 {
   "name": "flexi-treeview",
-  "version": "18.0.15",
+  "version": "19.0.2",
   "peerDependencies": {
-    "@angular/common": "^18.0.3",
-    "@angular/core": "^18.0.3",
-    "flexi-button": "^18.0.52",
-    "flexi-tooltip": "^18.0.09"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "flexi-button": "^19.0.1",
+    "flexi-tooltip": "^19.0.1"
   },
   "dependencies": {
     "tslib": "^2.3.0"

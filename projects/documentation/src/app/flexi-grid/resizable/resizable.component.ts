@@ -6,15 +6,14 @@ import { dataTSCode, resizableHTMLCode, resizableTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-resizable',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './resizable.component.html',
-  styleUrl: './resizable.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-resizable',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './resizable.component.html',
+    styleUrl: './resizable.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class ResizableComponent {
   users = signal<UserModel[]>(UsersData);

@@ -7,15 +7,14 @@ import { SharedModule } from '../../shared.module';
 
 
 @Component({
-  selector: 'app-sort',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './sort.component.html',
-  styleUrl: './sort.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-sort',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './sort.component.html',
+    styleUrl: './sort.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class SortComponent {
   users = signal<UserModel[]>(UsersData);

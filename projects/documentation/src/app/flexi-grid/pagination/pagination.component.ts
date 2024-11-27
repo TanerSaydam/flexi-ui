@@ -6,15 +6,14 @@ import { dataTSCode, paginationHTMLCode, paginationTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
 
 @Component({
-  selector: 'app-pagination',
-  standalone: true,
-  imports: [
-    FlexiGridModule,
-    SharedModule
-  ],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-pagination',
+    imports: [
+        FlexiGridModule,
+        SharedModule
+    ],
+    templateUrl: './pagination.component.html',
+    styleUrl: './pagination.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export default class PaginationComponent {
   users = signal<UserModel[]>(UsersData);

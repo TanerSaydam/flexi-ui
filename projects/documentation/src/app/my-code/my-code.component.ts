@@ -15,12 +15,11 @@ import { FlexiToastService } from 'flexi-toast';
 // import 'prismjs/components/prism-powershell';
 
 @Component({
-  selector: 'my-code',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './my-code.component.html',
-  styleUrl: './my-code.component.css',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'my-code',
+    imports: [CommonModule],
+    templateUrl: './my-code.component.html',
+    styleUrl: './my-code.component.css',
+    encapsulation: ViewEncapsulation.None
 })
 export class MyCodeComponent implements AfterViewInit {
   @Input() language: string = "";
