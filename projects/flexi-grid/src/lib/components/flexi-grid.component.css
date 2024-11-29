@@ -240,11 +240,15 @@ a {
 }
 
 .flexi-right {
-    text-align: right;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .flexi-center {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flexi-grid-table-container th {
@@ -493,6 +497,12 @@ a {
 
 .hide {
     display: none !important;
+}
+
+.flexi-grid-th-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .flexi-grid-spinner-container {

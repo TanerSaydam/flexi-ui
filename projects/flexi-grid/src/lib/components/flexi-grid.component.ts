@@ -376,7 +376,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   sort(sortable: boolean, column: any) {
-    if (!column.sortable || !sortable) return;
+    if (!column.sortable() || !sortable) return;
 
     this.state.sort.field = column.field;
     this.state.pageNumber = 1;
@@ -394,13 +394,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   setTextAlignForTh(filterable: boolean, column: any) {
     let className: string = "";
-    const filter: boolean = (filterable && column.field && column.filterable && this.showFilterButton(column.filterType));
+    
+    const filter: boolean = (filterable && column.field && column.filterable() && this.showFilterButton(column.filterType()));
     className += filter ? 'flexi-th ' : '';
-    if (column.textAlign === "right") {
+    if (column.textAlign() === "right") {
       if (filter) className += 'flexi-flex-reverse';
       else className += 'flexi-right';
     }
-    else if (column.textAlign === "center" && !filter) className += "flexi-center"
+    else if (column.textAlign() === "center" && !filter) className += "flexi-center"
 
     return className;
   } 

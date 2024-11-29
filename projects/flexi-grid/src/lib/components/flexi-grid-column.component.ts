@@ -20,7 +20,7 @@ export class FlexiGridColumnComponent {
   readonly fraction = input<number>(2);
   readonly symbol = input<string>("");
   readonly showSymbolInFront = input<boolean>(true);
-  readonly width = input<string>("160px");
+  @Input() width: string = "160px";
   readonly resizable = input<boolean>(true);  
   readonly className = input<string>("");
   readonly textAlign = input<TextAlignType>("left");

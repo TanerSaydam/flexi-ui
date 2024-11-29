@@ -1,33 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
-import { RolesData, UsersData } from '../../../../documentation/src/app/flexi-grid/data';
-import { FlexiSelectModule } from "../../../../flexi-select/src/lib/flexi-select.module";
-import { FlexiTreeviewComponent } from "../../../../flexi-treeview/src/lib/flexi-treeview.component";
-import { FlexiTreeviewService } from '../../../../flexi-treeview/src/public-api';
-import { FlexiTooltipDirective } from '../../../../flexi-tooltip/src/public-api';
+import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
+import { RolesData } from '../../../../documentation/src/app/flexi-grid/data';
 
 
 @Component({
     imports: [
     BlankComponent,
-    FlexiSelectModule,
-    FlexiTreeviewComponent,
-    FlexiTooltipDirective
+    FlexiGridModule
 ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  data = RolesData
-  treeData:any[] = [];
-  #tree = inject(FlexiTreeviewService);
+  data = RolesData  
 
-  constructor(){
-    this.treeData = this.#tree.convertToTreeNodes(this.data,"id","code","name","description","isSelected");
-  }
-
-  onSelected(event:any){
-    console.log(event);
-    
+  constructor(){    
   }
 }

@@ -53,7 +53,7 @@
               </th>
               }
               @for(column of columns(); track trackByFn()){
-              <th class="cursor flexi-grid-border" [hidden]="!column.visible" [ngStyle]="{'width': column.width()}"
+              <th class="cursor flexi-grid-border" [hidden]="!column.visible" [ngStyle]="{'width': column.width}"
                 scope="col" role="columnheader" [attr.aria-sort]="getSortState('name')">
                 <div [ngClass]="setTextAlignForTh(filterable(), column)">
                   @if(resizable() && column.resizable()){
@@ -199,7 +199,7 @@
               </td>
               }
               @for(column of columns(); track trackByFn()){
-                <td [ngStyle]="{'width': column.width(), 'text-align': column.textAlign()}" [hidden]="!column.visible"
+                <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign()}" [hidden]="!column.visible"
                 [ngClass]="tdTemplateClassName(column)" [attr.data-label]="column.title ? column.title : column.field"
                 [title]="(item && !column.cellTemplate) ? getFieldValue(item, column.field) : ''" scope="cell">
                 @if(column.cellTemplate){
