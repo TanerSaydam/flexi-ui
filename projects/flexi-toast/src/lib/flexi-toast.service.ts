@@ -148,7 +148,7 @@ export class FlexiToastService {
     }
   }
 
-  showSwal(title: string, text: string, callBack: () => void, confirmBtnText: string = this.options.confirmBtnText ?? "Delete", cancelBtnText: string = this.options.cancelBtnText ?? "Cancel") {
+  showSwal(title: string, text: string, callBack: () => void, confirmBtnText: string = this.options.confirmBtnText ?? "Delete", cancelBtnText: string = this.options.cancelBtnText ?? "Cancel", cancelCallBack?:()=> void) {
     const body = this.renderer.selectRootElement('body', true);
 
     const container = this.renderer.createElement('div');
@@ -208,6 +208,9 @@ export class FlexiToastService {
 
     this.renderer.listen(cancelButton, 'click', () => {
       this.renderer.addClass(content, 'fade-out');
+      if(cancelCallBack){
+        cancelCallBack();
+      }
       setTimeout(() => {
         this.renderer.removeChild(body, container);
         this.renderer.removeStyle(body, 'overflow')

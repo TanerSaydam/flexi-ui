@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewChildren, ViewEncapsulation, forwardRef, inject, signal, viewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, HostListener, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren, ViewEncapsulation, forwardRef, inject, signal, viewChildren, output, input, viewChild, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlexiOptionComponent } from './flexi-option.component';
-import { NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'flexi-select',
   standalone: true,
-  imports: [NgStyle],
+  imports: [NgStyle, NgClass],
   templateUrl: "./flexi-select.component.html",
   styleUrl: "./flexi-select.component.css",
   encapsulation: ViewEncapsulation.None,
@@ -20,29 +20,29 @@ import { NgStyle } from '@angular/common';
   ]
 })
 export class FlexiSelectComponent implements OnChanges, OnInit {
-  @Input({required: true}) data: any[] = [];
-  @Input({required: true}) value: any;
-  @Input({required: true}) label: any;
-  @Input() name: any;
-  @Input() noData: string = "Kayıt bulunamadı";
-  @Input() selectOne: string = "Seçim yapınız";
-  @Input() themeClass: string = "light";
-  @Input() itemsPerPage: number = 30;
+  @Input({ required: true }) data: any[] = []
+  @Input({ required: true }) value: any;
+  @Input({ required: true }) label: any;
+  readonly name = input<any>();
+  readonly noData = input<string>("Kayıt bulunamadı");
+  readonly selectOne = input<string>("Seçim yapınız");
+  readonly themeClass = input<string>("light");
+  readonly itemsPerPage = input<number>(30);
   @Input() clientHeight: number = 180;
-  @Input() multiple: boolean = false;
-  @Input() closeAfterSelect: boolean = false;
-  @Input() height: string = "100%";
-  @Input() tabindex: number = 0;
+  readonly multiple = input<boolean>(false);
+  readonly closeAfterSelect = input<boolean>(false);
+  readonly height = input<string>("100%");
+  readonly tabindex = input<number>(0);
 
-  @Output("selected") selected = new EventEmitter<any>();
+  readonly selected = output<any>({ alias: 'selected' });
 
   @ContentChildren(forwardRef(() => FlexiOptionComponent)) options!: QueryList<FlexiOptionComponent>;
 
-  @ViewChild("searchInput") searchInput: ElementRef<HTMLInputElement> | undefined;
-  @ViewChild('flexiSelectContainer') flexiSelectContainer!: ElementRef;
-  @ViewChild('flexiSelectDiv') flexiSelectDiv!: ElementRef;
-  @ViewChild("flexiSelectDropDownDiv") flexiSelectDropDownDiv!: ElementRef;
-  @ViewChild("flexiSelectUl") flexiSelectUl!: ElementRef;
+  readonly searchInput = viewChild<ElementRef<HTMLInputElement>>("searchInput");
+  readonly flexiSelectContainer = viewChild.required<ElementRef>('flexiSelectContainer');
+  readonly flexiSelectDiv = viewChild.required<ElementRef>('flexiSelectDiv');
+  readonly flexiSelectDropDownDiv = viewChild.required<ElementRef>("flexiSelectDropDownDiv");
+  readonly flexiSelectUl = viewChild.required<ElementRef>("flexiSelectUl");
 
   private onChange = (value: any) => { };
   private onTouched = () => { };
@@ -59,36 +59,44 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   #cdr = inject(ChangeDetectorRef);
   #elementRef = inject(ElementRef);
 
-ngOnChanges(changes: SimpleChanges): void {
-  if (changes["data"] && changes["data"].currentValue) {
-    this.data = [...changes["data"].currentValue]; // Clone the data array
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["data"] && changes["data"].currentValue) {
+      this.data = [...changes["data"].currentValue];
+      this.addPlaceholderToData();
+    }
+    this.filteredData.set(this.data.slice(0, this.itemsPerPage()));
+    this.currentHighlightIndex.set(0);
+    this.selectFirstOne();
+    this.selectInitialStateValue();
+    this.#cdr.detectChanges();
   }
-  this.filteredData.set(this.data.slice(0, this.itemsPerPage));
-  this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
-  this.selectFirstOne();
-  this.selectInitialStateValue();
-  this.#cdr.detectChanges();
-}
 
   ngOnInit(): void {
-    this.uniqueName.set(this.name || this.generateUniqueName());
+    this.uniqueName.set(this.name() || this.generateUniqueName());
   }
 
   ngAfterContentInit() {
     this.options.changes.subscribe(() => {
       if (this.options && this.options.length) {
         const optionData = this.options.map(option => ({
-          value: option.value,
+          value: option.value(),
           label: option.viewValue
         }));
         this.data = optionData;
-        this.filteredData.set(this.data.slice(0, this.itemsPerPage));
+        this.filteredData.set(this.data.slice(0, this.itemsPerPage()));
         this.selectFirstOne();
         this.label = "label"
         this.value = "value";
         this.selectInitialStateValue();
       }
     });
+  }
+
+  addPlaceholderToData() {
+    const placeholder = { [this.value]: null, [this.label]: this.selectOne() };
+    if (!this.data.some(item => item[this.value] === null)) {
+      this.data.unshift(placeholder);
+    }
   }
 
   trackByFn() {
@@ -101,7 +109,7 @@ ngOnChanges(changes: SimpleChanges): void {
 
   selectInitialStateValue() {
     if (this.data.length > 0 && this.initialState) {
-      if (this.multiple) {
+      if (this.multiple()) {
         const list = [];
         for (const val of this.initialState) {
           const d = this.data.find(p => p[this.value] === val);
@@ -126,9 +134,9 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   loadMoreData() {
-    const val = this.searchInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
+    const val = this.searchInput()!.nativeElement.value.toString().toLocaleLowerCase("tr");
     let newData = val === "" ? this.data : this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
-    newData = newData.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage));
+    newData = newData.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage()));
     this.filteredData.set([...this.filteredData(), ...newData]);
     this.clientHeight = this.clientHeight + 180;
   }
@@ -145,7 +153,7 @@ ngOnChanges(changes: SimpleChanges): void {
     if (this.filteredData().length === 0) {
       return;
     }
-    if (!this.multiple) {
+    if (!this.multiple()) {
       this.selectedItem.set(this.filteredData()[0]);
     }
   }
@@ -160,18 +168,18 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   search() {
-    const val = this.searchInput!.nativeElement.value.toString().toLocaleLowerCase("tr");
-    const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0, this.itemsPerPage);
+    const val = this.searchInput()!.nativeElement.value.toString().toLocaleLowerCase("tr");
+    const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0, this.itemsPerPage());
     this.filteredData.set(filtered);
     this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
-    if (!this.multiple) {
+    if (!this.multiple()) {
       this.selectFirstOne();
     }
   }
 
   setLiClass(item: any, index: number) {
     let classes = "flexi-select-li";
-    if (this.multiple) {
+    if (this.multiple()) {
       if (this.selectedItems().some(selected => selected[this.value] === item[this.value])) {
         classes += " flexi-active";
       }
@@ -200,7 +208,7 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   onKeyPress(event: KeyboardEvent) {
-    if (event.target === this.searchInput?.nativeElement) {
+    if (event.target === this.searchInput()?.nativeElement) {
       return; // Input alanından geliyorsa işlemi sonlandır
     }
     if (event.key.length === 1 && event.key.match(/[a-z]/i)) {
@@ -211,7 +219,7 @@ ngOnChanges(changes: SimpleChanges): void {
 
   scrollDown() {
     setTimeout(() => {
-      const element = this.flexiSelectDropDownDiv.nativeElement;
+      const element = this.flexiSelectDropDownDiv().nativeElement;
       const rect = element.getBoundingClientRect();
 
       const isElementNotFullyVisible = rect.top < 0 || rect.bottom > window.innerHeight;
@@ -226,8 +234,9 @@ ngOnChanges(changes: SimpleChanges): void {
     if (!this.isOpen()) {
       this.isOpen.set(true);
       setTimeout(() => {
-        this.searchInput!.nativeElement.value += char;
-        this.searchInput!.nativeElement.focus();
+        const searchInput = this.searchInput();
+        searchInput!.nativeElement.value += char;
+        searchInput!.nativeElement.focus();
         this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
         this.scrollDown();
       }, 100);
@@ -239,7 +248,7 @@ ngOnChanges(changes: SimpleChanges): void {
 
     if (this.isOpen()) {
       setTimeout(() => {
-        this.searchInput!.nativeElement.focus();
+        this.searchInput()!.nativeElement.focus();
         this.scrollDown();
       }, 100);
     }
@@ -253,7 +262,7 @@ ngOnChanges(changes: SimpleChanges): void {
     } else if (event.code === 'Space') {
       if (this.isOpen()) {
         setTimeout(() => {
-          this.searchInput!.nativeElement.focus();
+          this.searchInput()!.nativeElement.focus();
           this.scrollDown();
         }, 100);
       }
@@ -282,17 +291,17 @@ ngOnChanges(changes: SimpleChanges): void {
       if (item) {
         this.select(item);
       }
-      if(!this.multiple){
+      if (!this.multiple()) {
         this.moveToNextElement();
       }
-    }else if(event.key === 'Tab'){
+    } else if (event.key === 'Tab') {
       this.moveToNextElement();
       this.isOpen.set(false);
     }
     else if (event.key === 'Escape') {
       this.isOpen.set(false);
       this.closedAfterSelect.set(true);
-      this.flexiSelectDiv.nativeElement.focus();
+      this.flexiSelectDiv().nativeElement.focus();
     } else if (event.key === 'Space') {
       if (!this.isOpen()) {
         this.toggleDropdown();
@@ -311,7 +320,7 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   private findNextFocusableElement(element: HTMLElement): HTMLElement | null {
-    const currentTabIndex = this.tabindex;
+    const currentTabIndex = this.tabindex();
     const nextTabIndex = currentTabIndex + 1;
 
     // Tüm belgeyi dolaşarak bir sonraki tabindex'e sahip elementi bul
@@ -348,7 +357,7 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   scrollToElement(index: number) {
-    const ulElement = this.flexiSelectUl.nativeElement;
+    const ulElement = this.flexiSelectUl().nativeElement;
     const liElement = ulElement.children[index];
     if (liElement) {
       liElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -373,7 +382,7 @@ ngOnChanges(changes: SimpleChanges): void {
       this.selectedItems.update(prev => [...prev, selectedItem]);
     }
 
-    if (this.closeAfterSelect) {
+    if (this.closeAfterSelect()) {
       this.isOpen.set(false);
     }
 
@@ -381,7 +390,7 @@ ngOnChanges(changes: SimpleChanges): void {
     this.selected.emit(selectedItemsForNgModel);
     this.onChange(selectedItemsForNgModel);
 
-    this.searchInput!.nativeElement.select();
+    this.searchInput()!.nativeElement.select();
   }
 
   selectSingle(item: any) {
@@ -389,15 +398,16 @@ ngOnChanges(changes: SimpleChanges): void {
     this.isOpen.set(false);
     this.closedAfterSelect.set(false);
 
-    this.selected.emit(item[this.value]);
-    this.onChange(item[this.value]);
-    this.searchInput!.nativeElement.select();
+    const value = this.value;
+    this.selected.emit(item[value]);
+    this.onChange(item[value]);
+    this.searchInput()!.nativeElement.select();
   }
 
   select(item: any) {
-    if (this.multiple) {
+    if (this.multiple()) {
       this.selectForMultiple(item);
-      if (this.closeAfterSelect) {
+      if (this.closeAfterSelect()) {
         this.moveToNextElement();
       }
     } else {
@@ -409,7 +419,7 @@ ngOnChanges(changes: SimpleChanges): void {
 
   selectOption(option: FlexiOptionComponent) {
     const selectedItem = {
-      [this.value]: option.value,
+      [this.value]: option.value(),
       [this.label]: option.viewValue
     };
     this.select(selectedItem);
@@ -443,13 +453,13 @@ ngOnChanges(changes: SimpleChanges): void {
       updatedItems.splice(index, 1);
       return updatedItems;
     });
-  
+
     const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value]);
     this.selected.emit(selectedItemsForNgModel);
     this.onChange(selectedItemsForNgModel);
-  
+
     this.isOpen.set(true);
-  
+
     this.scrollDown();
   }
 }

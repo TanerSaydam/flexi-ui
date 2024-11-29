@@ -81,7 +81,7 @@ export class FlexiTooltipDirective implements OnInit {
     const tooltipHeight = this.tooltipElement!.getBoundingClientRect().height;
     const tooltipWidth = this.tooltipElement!.getBoundingClientRect().width;    
 
-    if(this.tooltipPosition == ''){
+     if(this.tooltipPosition == ''){
       this.tooltipPosition = 'left';
     }
 

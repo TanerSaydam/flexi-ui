@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
   selector: 'flexi-option',
@@ -7,7 +7,7 @@ import { Component, ElementRef, Input, OnInit, AfterViewInit, ViewEncapsulation 
   encapsulation: ViewEncapsulation.None
 })
 export class FlexiOptionComponent implements OnInit, AfterViewInit {
-  @Input() value: any;
+  readonly value = input<any>();
   viewValue: string = "";
 
   constructor(private el: ElementRef) {}

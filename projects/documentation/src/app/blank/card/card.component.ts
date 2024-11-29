@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
     selector: 'app-card',
@@ -8,5 +8,5 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class CardComponent {
-  @Input() cardTitle: string = "";
+  readonly cardTitle = input<string>("");
 }

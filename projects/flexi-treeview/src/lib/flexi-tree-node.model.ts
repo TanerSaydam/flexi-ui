@@ -6,5 +6,7 @@ export interface FlexiTreeNode {
     children?: FlexiTreeNode[];
     expanded?: boolean;
     selected?: boolean;
+    isMain: boolean;
     originalData?: any;
+    indeterminate: boolean;
   }

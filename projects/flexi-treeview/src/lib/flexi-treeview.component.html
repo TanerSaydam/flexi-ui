@@ -1,26 +1,27 @@
-<div class="flexi-treeview" [style.fontSize]="fontSize" [attr.data-bs-theme]="themeClass" [style.width]="width">
-  @if(showActions){
-    <div class="flexi-treeview-caption" [style.justify-content]="actionBtnPosition === 'left' ? 'start' : 'space-between'">
+<div class="flexi-treeview" [style.fontSize]="fontSize()" [attr.data-bs-theme]="themeClass()" [style.width]="width()">
+  @if(showActions()){
+    <div class="flexi-treeview-caption" [style.justify-content]="actionBtnPosition() === 'left' ? 'start' : 'space-between'">
       <h2 style="margin:0;">
-        {{treeviewTitle}}
+        {{treeviewTitle()}}
       </h2>  
       <div class="flexi-treeview-actions-buttons">
         <ng-content></ng-content>
-        @if(showCheckbox){
-          <flexi-button (click)="selectAll()" [btnSize]="btnSize" btnIcon="check_box" btnColor="dark" flexiTooltip="bottom"
+        @if(showCheckbox()){
+          <flexi-button (click)="selectAll()" [btnSize]="btnSize()" btnIcon="check_box" btnColor="dark" flexiTooltip="bottom"
             title="Tümünü Seç" />
-          <flexi-button (click)="deselectAll()" [btnSize]="btnSize" btnIcon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
+          <flexi-button (click)="deselectAll()" [btnSize]="btnSize()" btnIcon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
             title="Tümünün Seçimini Kaldır" />
         }
-        <flexi-button (click)="collapseAll()" [btnSize]="btnSize" btnIcon="unfold_less" btnColor="dark" flexiTooltip="bottom"
+        <flexi-button (click)="collapseAll()" [btnSize]="btnSize()" btnIcon="unfold_less" btnColor="dark" flexiTooltip="bottom"
           title="Tümünü Daralt" />
-        <flexi-button (click)="expandAll()" [btnSize]="btnSize" btnIcon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
+        <flexi-button (click)="expandAll()" [btnSize]="btnSize()" btnIcon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
           title="Tümünü Genişlet" />
+        <flexi-button (click)="refresh()" [btnSize]="btnSize()" btnIcon="refresh" btnColor="dark" flexiTooltip="bottom" title="Yenile" />
       </div>
   </div>
   }
 
-  @if(showSearch){
+  @if(showSearch()){
   <div class="flexi-treeview-search-container">
     <div class="flexi-treeview-search-input-container">
       <input class="flexi-treeview-search-input" type="search" [(ngModel)]="searchTerm" (input)="onSearch()"
@@ -40,9 +41,9 @@
 
   <div class="flexi-treeview-divider"></div>
 
-  <div class="flexi-treeview-container" [style.height]="height">
+  <div class="flexi-treeview-container" [style.height]="height()">
 
-    @if(loading){
+    @if(loading()){
     <div class="flexi-treeview-spinner-container">
       <div class="flexi-treeview-spinner-1"></div>
       <div class="flexi-treeview-spinner-2"></div>
@@ -64,8 +65,25 @@
                 </span>
               </div>
               }
-              @if(showCheckbox){
-              <input class="flexi-treeview-node-checkbox" type="checkbox" [checked]="node.selected" (change)="toggleSelection(node, $event)" [style.width]="checkboxSize" [style.height]="checkboxSize">
+              @if(showCheckbox()){
+                @if(node.indeterminate){
+                  <input
+                  class="flexi-treeview-node-checkbox"
+                  type="checkbox"                  
+                  [indeterminate]="true"
+                  (change)="toggleSelection(node, $event)"
+                  [style.width]="checkboxSize()"
+                  [style.height]="checkboxSize()">
+                }@else {
+                  <input
+                  class="flexi-treeview-node-checkbox"
+                  type="checkbox"
+                  [checked]="node.selected"                  
+                  (change)="toggleSelection(node, $event)"
+                  [style.width]="checkboxSize()"
+                  [style.height]="checkboxSize()">
+                }
+              
               }
               <div class="flexi-treeview-node-name">
                 {{ node.name }}
@@ -73,11 +91,11 @@
               <div class="flexi-treeview-node-description" *ngIf="node.description">{{ node.description }}</div>
             </div>
             <div class="flexi-treeview-node-actions">
-              @if(showEditButton){
-              <flexi-button btnIcon="edit" [btnSize]="btnSize" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
+              @if(showEditButton()){
+              <flexi-button btnIcon="edit" [btnSize]="btnSize()" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
               }
-              @if(showDeleteButton){
-              <flexi-button btnIcon="delete" [btnSize]="btnSize" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
+              @if(showDeleteButton()){
+              <flexi-button btnIcon="delete" [btnSize]="btnSize()" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
               }
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ViewEncapsulation, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 declare var Prism: any;
@@ -22,9 +22,9 @@ import { FlexiToastService } from 'flexi-toast';
     encapsulation: ViewEncapsulation.None
 })
 export class MyCodeComponent implements AfterViewInit {
-  @Input() language: string = "";
-  @Input() code: string = ""
-  @Input() className: string = "my-code";
+  readonly language = input<string>("");
+  readonly code = input<string>("");
+  readonly className = input<string>("my-code");
   constructor(
     private swal: FlexiToastService
   ){}
@@ -34,7 +34,7 @@ export class MyCodeComponent implements AfterViewInit {
   }
 
   copy(){
-    navigator.clipboard.writeText(this.code);
+    navigator.clipboard.writeText(this.code());
     this.swal.showToast("Başarılı","Kod kopyalandı","success");
   }
 }

@@ -10,9 +10,11 @@ import { ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } f
         <span class="material-symbols-outlined flexi-button-size-{{btnSize()}}">
           {{ btnIcon() }}
         </span>
-        <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-left]="btnText() ? '3px' : ''" [style.padding-right]="btnText() ? '5px' : ''">
-          {{ btnText() }}
-        </span>
+        @if(btnText()){
+          <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-left]="btnText() ? '3px' : ''" [style.padding-right]="btnText() ? '5px' : ''">
+            {{ btnText() }}
+          </span>
+        }
     </div>
     </button>
   `,

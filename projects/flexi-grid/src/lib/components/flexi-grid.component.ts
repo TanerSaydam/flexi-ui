@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, QueryList, SimpleChanges, TemplateRef, ViewChild, ViewEncapsulation, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from '../models/state.model';
 import * as ExcelJS from 'exceljs';
@@ -14,47 +14,47 @@ import { HttpClient } from '@angular/common/http';
     standalone: false
 })
 export class FlexiGridComponent implements OnChanges, AfterViewInit {
-  @Input() data: any[] = [];
-  @Input() total: number | null | undefined = 0;
-  @Input() pageable: boolean = true;
-  @Input() showIndex: boolean = false;
-  @Input() indexTextAlign: TextAlignType = "center";
-  @Input() pageSizeList: number[] = [5, 10, 20, 30, 50, 100, 500, 1000];
-  @Input() loading: boolean = false;
-  @Input() sortable: boolean = true;
-  @Input() themeClass: string = "light";
-  @Input() filterable: boolean = true;
-  @Input() captionTitle: string = "";
-  @Input() captionTemplate: TemplateRef<any> | any;
-  @Input() footerTemplate: TemplateRef<any> | any;
-  @Input() showColumnVisibility: boolean = true;
-  @Input() showRefreshBtn: boolean = true;
-  @Input() dataBinding: boolean = false;
-  @Input() showCaption: boolean = false;
-  @Input() showExportExcelBtn: boolean = false;
-  @Input() autoHeight: boolean = true;
-  @Input() height: string = "500px";
-  @Input() useMinHeight: boolean = false;
-  @Input() minHeight: string = "500px";
-  @Input() minWidth: string = "1050px";
-  @Input() useMinWidth: boolean = false;
-  @Input() autoWidth: boolean = true;
-  @Input() width: string = "100%";
-  @Input() indexWidth: string = "70px";     
-  @Input() exportExcelFileName: string = "excel-export";
-  @Input() exportExcelButtonClick: (() => void) | undefined;  
-  @Input() resizable: boolean = true;  
-  @Input() tbodyStyle: any = {};
-  @Input() trMinHeight: string = "45px";
-  @Input() showCommandColumn: Boolean = false;
-  @Input() commandColumnTitle: string = "İşlemler";
-  @Input() commandColumnWidth: string = "100px";
-  @Input() commandColumnTextAlign: AlignSetting = "center"
-  @Input() commandColumnTemplate: TemplateRef<any> | any;
-  @Input() stickyCommandColumn: boolean = true;
-  @Input() fontSize: string = "11px";
-  @Input() dataBindingExportEndpoint: string = '';
-  @Input() dataBindingExportPath: string = 'data';
+  @Input({required:true}) data:any[] = [];
+  @Input() total:number | null = 0;
+  readonly pageable = input<boolean>(true);
+  readonly showIndex = input<boolean>(false);
+  readonly indexTextAlign = input<TextAlignType>("center");
+  readonly pageSizeList = input<number[]>([5, 10, 20, 30, 50, 100, 500, 1000]);
+  readonly loading = input<boolean>(false);
+  readonly sortable = input<boolean>(true);
+  readonly themeClass = input<string>("light");
+  readonly filterable = input<boolean>(true);
+  readonly captionTitle = input<string>("");
+  readonly captionTemplate = input<TemplateRef<any> | any>();
+  readonly footerTemplate = input<TemplateRef<any> | any>();
+  readonly showColumnVisibility = input<boolean>(true);
+  readonly showRefreshBtn = input<boolean>(true);
+  readonly dataBinding = input<boolean>(false);
+  readonly showCaption = input<boolean>(false);
+  readonly showExportExcelBtn = input<boolean>(false);
+  readonly autoHeight = input<boolean>(true);
+  readonly height = input<string>("500px");
+  readonly useMinHeight = input<boolean>(false);
+  readonly minHeight = input<string>("500px");
+  readonly minWidth = input<string>("1050px");
+  readonly useMinWidth = input<boolean>(false);
+  readonly autoWidth = input<boolean>(true);
+  readonly width = input<string>("100%");
+  readonly indexWidth = input<string>("70px");     
+  readonly exportExcelFileName = input<string>("excel-export");
+  readonly exportExcelButtonClick = input<(() => void)>();  
+  readonly resizable = input<boolean>(true);  
+  readonly tbodyStyle = input<any>({});
+  readonly trMinHeight = input<string>("45px");
+  readonly showCommandColumn = input<Boolean>(false);
+  readonly commandColumnTitle = input<string>("İşlemler");
+  readonly commandColumnWidth = input<string>("100px");
+  readonly commandColumnTextAlign = input<AlignSetting>("center");
+  readonly commandColumnTemplate = input<TemplateRef<any> | any>();
+  readonly stickyCommandColumn = input<boolean>(true);
+  readonly fontSize = input<string>("11px");
+  readonly dataBindingExportEndpoint = input<string>('');
+  readonly dataBindingExportPath = input<string>('data');
 
   @Input()
   set pageSize(value: number) {
@@ -97,15 +97,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   private _pageSize: number = 10;
 
-  @Output() dataStateChange = new EventEmitter<any>();
-  @Output() onChange = new EventEmitter<any>();
-  @Output() refreshBtnClick = new EventEmitter<void>();
+  readonly dataStateChange = output<any>();
+  readonly onChange = output<any>();
+  readonly refreshBtnClick = output<void>();
 
-  @ContentChildren(FlexiGridColumnComponent)
-  columns?: QueryList<FlexiGridColumnComponent>;
+  readonly columns = contentChildren(FlexiGridColumnComponent);
   
-  @ViewChild("filterTr") filterTr: ElementRef<HTMLTableRowElement> | undefined;
-  @ViewChild("tbody") tbody: ElementRef | undefined;
+  readonly filterTr = viewChild<ElementRef<HTMLTableRowElement>>("filterTr");
+  readonly tbody = viewChild<ElementRef>("tbody");
 
   resizingColumn: any;
   startX: number | undefined;
@@ -117,13 +116,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data.length > 0) {
-      if (!this.columns || this.columns.length === 0) {
+      const columns = this.columns();
+      if (!columns || columns.length === 0) {
         this.initializeColumnsFromData();
         this.#cdr.detectChanges();
       }
     }
 
-    if (this.pageable) {
+    if (this.pageable()) {
       this.setPageNumbers();
       this.updatePagedData();
     } else {
@@ -132,14 +132,15 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (!this.columns || this.columns.length === 0) {
+    const columns = this.columns();
+    if (!columns || columns.length === 0) {
       this.initializeColumnsFromData();
       this.#cdr.detectChanges();
     }
 
-    this.columns?.forEach(column => {
+    columns?.forEach(column => {
       if (column.filterValue != undefined) {
-        this.filter(column.field, column.filterOperator, column.filterValue, column.filterType);
+        this.filter(column.field, column.filterOperator, column.filterValue, column.filterType());
       }
     });    
   }
@@ -171,8 +172,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   initializeColumnsFromData(): void {
-    if (this.data && this.data.length > 0) {
-      const firstItem = this.data[0];
+    const data = this.data;
+    if (data && data.length > 0) {
+      const firstItem = data[0];
       const columnsArray = Object.keys(firstItem).map(key => {
         const column = new FlexiGridColumnComponent();
         column.field = key;
@@ -267,7 +269,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.state.pageSize = value;
     this.state.pageNumber = 1;
     this.state.skip = 0;
-    if (this.pageable && this.dataBinding) {
+    if (this.pageable() && this.dataBinding()) {
       this.dataStateChange.emit(this.state);
     } else {
       this.updatePagedData();
@@ -282,7 +284,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       return;
     }
 
-    if (this.filterable && this.state.filter.length > 0 && !this.dataBinding) {
+    const dataBinding = this.dataBinding();
+    if (this.filterable() && this.state.filter.length > 0 && !dataBinding) {
       const filters = this.state.filter.filter(p => p.value != undefined);
 
       filters.forEach((filter) => {
@@ -329,7 +332,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     // Order data if sortable is true
-    if (this.sortable && this.state.sort.field && !this.dataBinding) {
+    if (this.sortable() && this.state.sort.field && !dataBinding) {
       filteredData = filteredData.sort((a, b) => {
         const field = this.state.sort.field;
         const dir = this.state.sort.dir === 'asc' ? 1 : -1;
@@ -339,14 +342,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       });
     }
 
-    if (!this.dataBinding) {
+    if (!dataBinding) {
       this.total = filteredData.length;
       this.setPageNumbers();
     }
 
     // Pagination logic
     if (filteredData) {
-      if (filteredData.length > +this.state.pageSize && !this.dataBinding && this.pageable) {
+      if (filteredData.length > +this.state.pageSize && !dataBinding && this.pageable()) {
         const start = this.state.skip;
         const end = start + +this.state.pageSize;
         this.pagedData.set(filteredData.slice(start, end));
@@ -365,7 +368,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       return 0;
     });
 
-    if (this.dataBinding) {
+    if (this.dataBinding()) {
       this.dataStateChange.emit(this.state);
     } else {
       this.updatePagedData();
@@ -400,11 +403,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     else if (column.textAlign === "center" && !filter) className += "flexi-center"
 
     return className;
-  }
-
-  toggleTheme() {
-    this.themeClass = this.themeClass === 'light' ? 'dark' : 'light';
-  }
+  } 
 
   toggleFilterDropdown(field: string) {
     this.filterDropdownVisible()[field] = !this.filterDropdownVisible()[field];
@@ -413,8 +412,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   applyFilter(column: FlexiGridColumnComponent, operator: string) {
     this.filterDropdownVisible()[column.field] = false;
     column.filterOperator = operator;
-    if (column.filterValue !== "") {
-      this.filter(column.field, operator, column.filterValue, column.filterType);
+    const filterValue = column.filterValue;
+    if (filterValue !== "") {
+      this.filter(column.field, operator, filterValue, column.filterType());
     }
   }
 
@@ -449,12 +449,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         }
       }
 
-      if (this.dataBinding) {
+      if (this.dataBinding()) {
         this.dataStateChange.emit(this.state);
       } else {
         this.updatePagedData();
       }
-    }, this.dataBinding ? 500 : 1);
+    }, this.dataBinding() ? 500 : 1);
   }
 
   showClearFilter(value: any) {
@@ -464,12 +464,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   clearFilter(field: string) {
     this.filter(field, "contains", "", "text");
-    const column = this.columns?.find(p => p.field === field);
+    const column = this.columns()?.find(p => p.field === field);
     if (column) {
       column.filterValue = "";
     }
 
-    if (this.dataBinding) {
+    if (this.dataBinding()) {
 
     } else {
       this.updatePagedData();
@@ -483,12 +483,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   refreshDataMethod() {
     this.refreshBtnClick.emit();
 
-    if (!this.dataBinding) return;
+    if (!this.dataBinding()) return;
 
     this.state = new StateModel();
     this.state.pageSize = this.pageSize;
-    this.columns?.forEach(val => {
-      if (val.filterType === "boolean" || val.filterType === "select") {
+    this.columns()?.forEach(val => {
+      const filterType = val.filterType();
+      if (filterType === "boolean" || filterType === "select") {
         val.filterValue = undefined
       } else {
         val.filterValue = "";
@@ -550,19 +551,19 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   onDrop(event: DragEvent, index: number) {
     event.preventDefault();
-    if (this.draggedColumnIndex === undefined) return;
-    var columnsArray = this.columns?.toArray();
+    //todo: not working right now!
+    // if (this.draggedColumnIndex === undefined) return;
+    // let columnsArray = this.columns();
 
-    const draggedColumn = columnsArray?.[this.draggedColumnIndex];
-    const targetColumn = columnsArray?.[index];
+    // const draggedColumn = columnsArray?.[this.draggedColumnIndex];
+    // const targetColumn = columnsArray?.[index];
 
-    if (draggedColumn && targetColumn) {
-      // Remove dragged column and insert it at the new position
-      columnsArray!.splice(this.draggedColumnIndex, 1);
-      columnsArray!.splice(index, 0, draggedColumn);
-    }
+    // if (draggedColumn && targetColumn) {      
+    //   columnsArray!.splice(this.draggedColumnIndex, 1);
+    //   columnsArray!.splice(index, 0, draggedColumn);
+    // }
 
-    this.draggedColumnIndex = undefined;
+    // this.draggedColumnIndex = undefined;
   }
 
   getFieldValue(item: any, field: string) {
@@ -588,10 +589,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   getBooleanInputValue(item: any, column: FlexiGridColumnComponent, event: any,) {
     const value = event.target.checked;
-    if (!column.field.includes(".")) {
-      item[column.field] = value;
+    const field = column.field;
+    if (!field.includes(".")) {
+      item[field] = value;
     } else {
-      const fields = column.field.split(".");
+      const fields = field.split(".");
       if (fields.length === 2) {
         item[fields[0]][fields[1]] = value;
       }
@@ -601,19 +603,19 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   openMobileFilter() {
-    this.filterTr!.nativeElement.classList.add("show");
+    this.filterTr()!.nativeElement.classList.add("show");
     this.isShowMobileFilter.set(true);
-    this.tbody!.nativeElement.classList.add("hide");
+    this.tbody()!.nativeElement.classList.add("hide");
   }
 
   closeMobileFilter() {
-    this.filterTr!.nativeElement.classList.remove("show");
+    this.filterTr()!.nativeElement.classList.remove("show");
     this.isShowMobileFilter.set(false);
-    this.tbody!.nativeElement.classList.remove("hide");
+    this.tbody()!.nativeElement.classList.remove("hide");
   }
 
   tdTemplateClassName(column: FlexiGridColumnComponent) {
-    let className: string = column.className;
+    let className: string = column.className();
 
     if (className !== "") className += " ";
     className += column.hideOverflow ? 'text-overflow-hidden' : ''
@@ -623,14 +625,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   getTBodyStyle() {
     const style: { [key: string]: any } = {
-      ...this.tbodyStyle
+      ...this.tbodyStyle()
     };
   
-    if (!this.autoHeight) {
-      style['max-height'] = `calc(${this.height} - 50px)`; // Başlık yüksekliğini çıkarın
+    if (!this.autoHeight()) {
+      style['max-height'] = `calc(${this.height()} - 50px)`; // Başlık yüksekliğini çıkarın
     }
-    if (this.useMinHeight) {
-      style['min-height'] = this.minHeight;
+    if (this.useMinHeight()) {
+      style['min-height'] = this.minHeight();
     }
     return style;
   }
@@ -640,9 +642,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   calculateColspan(): number {
-    const columnsCount = this.columns ? this.columns.length : 0;
-    const indexCount = this.showIndex ? 1 : 0;
-    const commandCount = this.showCommandColumn ? 1 : 0;
+    const columns = this.columns();
+    const columnsCount = columns ? columns.length : 0;
+    const indexCount = this.showIndex() ? 1 : 0;
+    const commandCount = this.showCommandColumn() ? 1 : 0;
     const total = columnsCount + indexCount + commandCount;
     return total > 0 ? total : 1; // En az 1 olmasını sağlar
   }
@@ -663,10 +666,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   async onExportExcelButtonClick() {
-    if (this.exportExcelButtonClick) {
-      this.exportExcelButtonClick();
+    const exportExcelButtonClick = this.exportExcelButtonClick();
+    if (exportExcelButtonClick) {
+      exportExcelButtonClick();
     } else {
-      if (this.dataBinding && this.dataBindingExportEndpoint) {
+      if (this.dataBinding() && this.dataBindingExportEndpoint()) {
         await this.fetchAllData();
       }
       this.exportExcel();
@@ -675,13 +679,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   async fetchAllData() {
     try {
-      const response: any = await this.#http.get(this.dataBindingExportEndpoint).toPromise();
+      const response: any = await this.#http.get(this.dataBindingExportEndpoint()).toPromise();
       
       let fetchedData: any[] = [];
   
-      if (this.dataBindingExportPath) {
+      const dataBindingExportPath = this.dataBindingExportPath();
+      if (dataBindingExportPath) {
         // Kullanıcının belirttiği yolu kullanarak veriyi al
-        fetchedData = this.getNestedProperty(response, this.dataBindingExportPath);
+        fetchedData = this.getNestedProperty(response, dataBindingExportPath);
       } else if (Array.isArray(response)) {
         // Yanıt doğrudan bir dizi ise
         fetchedData = response;
@@ -708,7 +713,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Sayfa1');
 
-    const visibleColumns = this.columns?.filter(column => column.visible) || [];
+    const visibleColumns = this.columns()?.filter(column => column.visible) || [];
 
     // Başlıkları ekle
     worksheet.addRow(visibleColumns.map(col => col.title || col.field));
@@ -724,9 +729,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     visibleColumns.forEach((col, index) => {
       const column = worksheet.getColumn(index + 1);
       column.width = 15;
-      if (col.textAlign === 'right') {
+      const textAlign = col.textAlign();
+      if (textAlign === 'right') {
         column.alignment = { horizontal: 'right' };
-      } else if (col.textAlign === 'center') {
+      } else if (textAlign === 'center') {
         column.alignment = { horizontal: 'center' };
       }
     });
@@ -734,6 +740,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     // Excel dosyasını oluştur ve indir
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    saveAs(blob, `${this.exportExcelFileName}.xlsx`);
+    saveAs(blob, `${this.exportExcelFileName()}.xlsx`);
   }
 }

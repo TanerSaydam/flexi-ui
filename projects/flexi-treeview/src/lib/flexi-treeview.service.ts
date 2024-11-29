@@ -11,45 +11,68 @@ export class FlexiTreeviewService {
     idField: keyof T,
     codeField: keyof T,
     nameField: keyof T,
-    descriptionField?: keyof T
+    descriptionField?: keyof T,
+    selectedField?: keyof T,
   ): FlexiTreeNode[] {
     const codeMap = new Map<string, FlexiTreeNode>();
 
     data.forEach(item => {
       const code = String(item[codeField]);
       let parentNode = codeMap.get(code);
-
-      // Eğer bu kod için üst düğüm yoksa, oluştur
+      
       if (!parentNode) {
         parentNode = {
-          id: String(item[idField]),
+          id: this.generateUniqueId(),
+          isMain: true,
           name: code,
           code: code,
           description: '',
           children: [],
           expanded: true,
           selected: false,
-          originalData: item
+          originalData: item,
+          indeterminate: false
         };
         codeMap.set(code, parentNode);
       }
-
-      // Her rol için bir alt düğüm oluştur
+      
       const childNode: FlexiTreeNode = {
         id: String(item[idField]),
+        isMain: false,
         name: String(item[nameField]),
         code: code,
         description: descriptionField ? String(item[descriptionField]) : '',
         expanded: true,
-        selected: false,
-        originalData: item
+        selected: selectedField ? Boolean(item[selectedField]) : false,
+        originalData: item,
+        indeterminate: false
       };
 
-      // Alt düğümü üst düğümün children dizisine ekle
       parentNode.children!.push(childNode);
-    });
 
-    // Map değerlerini diziye dönüştür ve döndür
+      this.updateParentSelection(parentNode);
+    });
+    
     return Array.from(codeMap.values());
+  }
+
+  updateParentSelection(parentNode: FlexiTreeNode): void {
+    const totalChildren = parentNode.children!.length;
+    const selectedChildren = parentNode.children!.filter(child => child.selected).length;
+
+    if (selectedChildren === 0) {
+      parentNode.selected = false;
+      parentNode.indeterminate = false;
+    } else if (selectedChildren === totalChildren) {
+      parentNode.selected = true;
+      parentNode.indeterminate = false;
+    } else {
+      parentNode.selected = false;
+      parentNode.indeterminate = true;
+    }
+  }
+
+  generateUniqueId() {
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
   }
 }

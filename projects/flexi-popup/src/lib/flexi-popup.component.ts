@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, ViewEncapsulation, ContentChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, ContentChild, output, input, Input } from '@angular/core';
 import { FlexiPopupActionTemplateDirective } from './flexi-popup-action-template.directive';
 
 @Component({
@@ -11,19 +11,19 @@ import { FlexiPopupActionTemplateDirective } from './flexi-popup-action-template
 })
 export class FlexiPopupComponent {
   @Input() isPopupVisible: boolean = false;
-  @Input() popupTitle: string = "";
-  @Input() width: string = "500px";
-  @Input() height: string = "100%";
-  @Input() showActionButtons: boolean = true;
-  @Input() themeClass: string = "light";
-  @Input() saveBtnText: string = "Kaydet";
-  @Input() cancelBtnText: string = "Kapat";
-  @Input() saveBtnIcon: string = "save";
-  @Input() cancelBtnIcon: string = "block";
+  readonly popupTitle = input<string>("");
+  readonly width = input<string>("500px");
+  readonly height = input<string>("100%");
+  readonly showActionButtons = input<boolean>(true);
+  readonly themeClass = input<string>("light");
+  readonly saveBtnText = input<string>("Kaydet");
+  readonly cancelBtnText = input<string>("Kapat");
+  readonly saveBtnIcon = input<string>("save");
+  readonly cancelBtnIcon = input<string>("block");
 
-  @Output() isPopupVisibleChange = new EventEmitter<boolean>();  
-  @Output() onSave = new EventEmitter<any>();
-  @Output() onCancel = new EventEmitter<any>();
+  readonly isPopupVisibleChange = output<boolean>();  
+  readonly onSave = output();
+  readonly onCancel = output();
 
   @ContentChild(FlexiPopupActionTemplateDirective) actionTemplate?: FlexiPopupActionTemplateDirective;
   

@@ -1,17 +1,17 @@
-<div class="flexi-select" (keypress)="onKeyPress($event)" (keydown)="onKeyDownForMainDiv($event)" [attr.data-bs-theme]="themeClass" role="combobox" [attr.aria-expanded]="isOpen()" [attr.aria-owns]="uniqueName + '-listbox'" aria-haspopup="listbox">
+<div class="flexi-select" (keypress)="onKeyPress($event)" (keydown)="onKeyDownForMainDiv($event)" [attr.data-bs-theme]="themeClass()" role="combobox" [attr.aria-expanded]="isOpen()" [attr.aria-owns]="uniqueName + '-listbox'" aria-haspopup="listbox">
     <div class="flexi-select-div"
          #flexiSelectDiv
-         [ngStyle]="{'height': height}"
-         [tabindex]="tabindex"
+         [ngStyle]="{'height': height()}"
+         [tabindex]="tabindex()"
          (keydown.space)="$event.preventDefault(); this.isOpen.set(true)"         
          (focus)="onFocus()"
          (blur)="onBlur()"
          [attr.aria-controls]="uniqueName() + '-listbox'"
          [attr.aria-labelledby]="uniqueName() + '-label'"
          (click)="toggleDropdown()">
-        @if(!multiple){
+        @if(!multiple()){
             <span id="{{uniqueName()}}-label">
-                {{selectedItem()[label] === undefined ? selectOne : selectedItem()[label]}}
+                {{selectedItem()[label] === undefined ? selectOne() : selectedItem()[label]}}
             </span>
         }@else {
             <div class="flexi-select-multiple-container">
@@ -38,16 +38,16 @@
           [name]="uniqueName()"
           autocomplete="off"
           [attr.name]="uniqueName()" 
-     [attr.tabindex]="tabindex">
-        <ul class="flexi-select-ul" (scroll)="onScroll($event)" #flexiSelectUl>
+     [attr.tabindex]="tabindex()">
+        <ul class="flexi-select-ul" (scroll)="onScroll($event)" #flexiSelectUl>            
             @for(item of filteredData(); track trackByFn()){                
-                <li (click)="select(item)" [class]="setLiClass(item, $index)">
+                <li (click)="select(item)" [ngClass]="setLiClass(item, $index)">                    
                     <span>{{item[label]}}</span>
                 </li>
             }
             @empty {
             <li>
-                <span>{{noData}}</span>
+                <span>{{noData()}}</span>
             </li>
             }
         </ul>

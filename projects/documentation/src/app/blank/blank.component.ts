@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
     selector: 'app-blank',
@@ -8,6 +8,6 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class BlankComponent {
-  @Input() pageName:string = "";
-  @Input() pageDescription: string = "";
+  readonly pageName = input<string>("");
+  readonly pageDescription = input<string>("");
 }

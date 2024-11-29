@@ -1,4 +1,4 @@
-import { Component, ContentChild, EventEmitter,  Input, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, ContentChild, SimpleChanges, TemplateRef, output, input, Input } from '@angular/core';
 import { FlexiGridFilterDataModel } from '../models/flexi-grid-filter-data.model';
 import { FlexiGridCellTemplateDirective } from '../directives/flexi-grid-cell-template.directive';
 import { FlexiGridHeaderTemplateDirective } from '../directives/flexi-grid-header-template.directive';
@@ -10,25 +10,25 @@ import { FlexiGridHeaderTemplateDirective } from '../directives/flexi-grid-heade
     standalone: false
 })
 export class FlexiGridColumnComponent {
-  @Input() field: string = '';
-  @Input() title: string = '';
-  @Input() sortable: boolean = true;
-  @Input() filterable: boolean = true;
+  @Input() field:string = "";
+  @Input() title:string = "";
+  readonly sortable = input<boolean>(true);
+  readonly filterable = input<boolean>(true);
   @Input() visible: boolean = true;
-  @Input() filterType: FilterType = "text";  
-  @Input() format: string | CurrencyFormatType | null = null;
-  @Input() fraction: number = 2;
-  @Input() symbol: string = "";
-  @Input() showSymbolInFront: boolean = true;
-  @Input() width: string = "160px";
-  @Input() resizable: boolean = true;  
-  @Input() className: string = "";
-  @Input() textAlign: TextAlignType = "left";
+  readonly filterType = input<FilterType>("text");  
+  readonly format = input<string | CurrencyFormatType | null>(null);
+  readonly fraction = input<number>(2);
+  readonly symbol = input<string>("");
+  readonly showSymbolInFront = input<boolean>(true);
+  readonly width = input<string>("160px");
+  readonly resizable = input<boolean>(true);  
+  readonly className = input<string>("");
+  readonly textAlign = input<TextAlignType>("left");
   @Input() hideOverflow: boolean = true;
-  @Input() filterData: FlexiGridFilterDataModel[] = [];
-  @Input() booleanData: string[] = [];
-  @Input() showCheckbox: boolean = false;
-  @Input() filterValue: any;
+  readonly filterData = input<FlexiGridFilterDataModel[]>([]);
+  readonly booleanData = input<string[]>([]);
+  readonly showCheckbox = input<boolean>(false);
+  @Input() filterValue:any;
 
   @ContentChild(FlexiGridCellTemplateDirective, {read: TemplateRef})
   cellTemplate?: TemplateRef<any>;
@@ -36,7 +36,7 @@ export class FlexiGridColumnComponent {
   @ContentChild(FlexiGridHeaderTemplateDirective, {read: TemplateRef})
   headerTemplate?: TemplateRef<any>;
   
-  @Output() onChange = new EventEmitter<any>();
+  readonly onChange = output<any>();
 
   filterOperator: string = "contains";
 
@@ -47,10 +47,11 @@ export class FlexiGridColumnComponent {
   }
 
   setDefaultFilterOperator() {
-    if (this.filterType === 'number') {
+    const filterType = this.filterType();
+    if (filterType === 'number') {
       this.filterOperator = 'ge';
     }
-    else if (this.filterType === "boolean" || this.filterType === "select") {
+    else if (filterType === "boolean" || filterType === "select") {
       this.filterOperator = "eq";
     }
     else {
