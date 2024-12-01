@@ -515,38 +515,57 @@ export const UsersData: UserModel[] = [
 
 export const RolesData: any[] = [
     {
-        id: "f30dcd17-3738-4a74-ae82-f61d50a5ada1",
-        code: "Menü",
-        name: "Admin",
-        description: "Admin listesini göster",
-        isSelected: false
+        "applicationName": "Yönetim",
+        "code": "Şirketler",
+        "name": "Görüntüle",
+        "description": "",
+        "id": "4e7a08b0-8e60-42be-ab11-0ea66c495daa",
+        "isActive": true,
+        "createdDate": "2024-12-02T00:58:57.2938482",
+        "createdUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
+        "createdBy": "Sever Admin (admin@admin.com)",
+        "updatedDate": null,
+        "updatedUserId": null,
+        "updatedBy": null,
+        "isDeleted": false,
+        "deletedDate": null,
+        "deletedUserId": null,
+        "deletedBy": null
     },
     {
-        id: "c4dbcc84-9cd4-4958-bf70-b725b54e5796",
-        code: "Menü",
-        name: "Ana Sayfa",
-        description: "Ana Sayfayı görüntüle",
-        isSelected: false
+        "applicationName": "Yönetim",
+        "code": "Şirketler",
+        "name": "Ekle",
+        "description": "",
+        "id": "54e05db7-6757-4d93-bada-a849809cb0b6",
+        "isActive": true,
+        "createdDate": "2024-12-02T00:50:04.9541485",
+        "createdUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
+        "createdBy": "Sever Admin (admin@admin.com)",
+        "updatedDate": "2024-12-02T00:59:07.1464883",
+        "updatedUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
+        "updatedBy": "Sever Admin (admin@admin.com)",
+        "isDeleted": false,
+        "deletedDate": null,
+        "deletedUserId": null,
+        "deletedBy": null
     },
     {
-        id: "a43bffa6-c4d0-4b30-9e9d-d8f48aecc38b",
-        code: "Menü",
-        name: "Kullanıcılar",
-        description: "Kullanıcılar sayfasını görüntüle",
-        isSelected: false
-    },
-    {
-        id: "b8c4bfa1-50ea-44e7-bfa4-d707bf3e799c",
-        code: "Menü",
-        name: "Roller",
-        description: "Roller sayfasını görüntüle",
-        isSelected: false
-    },
-    {
-        id: "4abbcf9b-5c73-4d82-9960-46581b0f35ef",
-        code: "Menü",
-        name: "Şirketler",
-        description: "Şirketler sayfasını görüntüle",
-        isSelected: false
+        "applicationName": "Yönetim",
+        "code": "Şirketler",
+        "name": "Güncelle",
+        "description": "",
+        "id": "1ca29907-0579-44d9-9c95-d96c0f300375",
+        "isActive": true,
+        "createdDate": "2024-12-02T00:50:30.9845946",
+        "createdUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
+        "createdBy": "Sever Admin (admin@admin.com)",
+        "updatedDate": "2024-12-02T00:59:12.1040657",
+        "updatedUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
+        "updatedBy": "Sever Admin (admin@admin.com)",
+        "isDeleted": false,
+        "deletedDate": null,
+        "deletedUserId": null,
+        "deletedBy": null
     }
 ]

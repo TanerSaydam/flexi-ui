@@ -7,16 +7,16 @@
       <div class="flexi-treeview-actions-buttons">
         <ng-content></ng-content>
         @if(showCheckbox()){
-          <flexi-button (click)="selectAll()" [btnSize]="btnSize()" btnIcon="check_box" btnColor="dark" flexiTooltip="bottom"
+          <flexi-button (click)="selectAll()" [btnSize]="btnSize()" btnIcon="check_box" btnColor="dark" flexiTooltip="left"
             title="Tümünü Seç" />
-          <flexi-button (click)="deselectAll()" [btnSize]="btnSize()" btnIcon="check_box_outline_blank" btnColor="dark" flexiTooltip="bottom"
+          <flexi-button (click)="deselectAll()" [btnSize]="btnSize()" btnIcon="check_box_outline_blank" btnColor="dark" flexiTooltip="left"
             title="Tümünün Seçimini Kaldır" />
         }
-        <flexi-button (click)="collapseAll()" [btnSize]="btnSize()" btnIcon="unfold_less" btnColor="dark" flexiTooltip="bottom"
+        <flexi-button (click)="collapseAll()" [btnSize]="btnSize()" btnIcon="unfold_less" btnColor="dark" flexiTooltip="left"
           title="Tümünü Daralt" />
-        <flexi-button (click)="expandAll()" [btnSize]="btnSize()" btnIcon="unfold_more" btnColor="dark" flexiTooltip="bottom"  
+        <flexi-button (click)="expandAll()" [btnSize]="btnSize()" btnIcon="unfold_more" btnColor="dark" flexiTooltip="left"  
           title="Tümünü Genişlet" />
-        <flexi-button (click)="refresh()" [btnSize]="btnSize()" btnIcon="refresh" btnColor="dark" flexiTooltip="bottom" title="Yenile" />
+        <flexi-button (click)="refresh()" [btnSize]="btnSize()" btnIcon="refresh" btnColor="dark" flexiTooltip="left" title="Yenile" />
       </div>
   </div>
   }
@@ -91,11 +91,14 @@
               <div class="flexi-treeview-node-description" *ngIf="node.description">{{ node.description }}</div>
             </div>
             <div class="flexi-treeview-node-actions">
-              @if(showEditButton()){
-              <flexi-button btnIcon="edit" [btnSize]="btnSize()" btnColor="dark" flexiTooltip="bottom" title="Güncelle" (click)="onEditClick(node, $event)" />
+              @if(showDetailButton() && !node.isMain){
+                <flexi-button btnIcon="zoom_in" [btnSize]="btnSize()" btnColor="primary" flexiTooltip="left" title="Detay" [routerLink]="detailRouterLink() + '/' + node.id" />
               }
-              @if(showDeleteButton()){
-              <flexi-button btnIcon="delete" [btnSize]="btnSize()" btnColor="danger" flexiTooltip="bottom" title="Sil" (click)="onDeleteClick(node, $event)" />
+              @if(showEditButton() && !node.isMain){
+              <flexi-button btnIcon="edit" [btnSize]="btnSize()" btnColor="warning" flexiTooltip="left" title="Güncelle" (click)="onEditClick(node, $event)" />
+              }
+              @if(showDeleteButton() && !node.isMain){
+              <flexi-button btnIcon="delete" [btnSize]="btnSize()" btnColor="danger" flexiTooltip="left" title="Sil" (click)="onDeleteClick(node, $event)" />
               }
             </div>
           </div>

@@ -221,15 +221,15 @@
                   @if(column.showCheckbox()){
                   <input class="flexi-grid-checkbox" type="checkbox" [checked]="getFieldValue(item, column.field)"
                     (change)="getBooleanInputValue(item, column, $event)">
-                  }@else {
+                  }@else {                    
                     @if(getFieldValue(item, column.field)){
-                    <span class="material-symbols-outlined flexi-text-success">
-                      check
+                    <span class="flexi-grid-card flexi-grid-card-success">
+                      {{column.booleanData()[0]}}
                     </span>
                     }@else {
-                    <span class="material-symbols-outlined flexi-text-danger">
-                      close
-                    </span>
+                      <span class="flexi-grid-card flexi-grid-card-danger">
+                        {{column.booleanData()[1]}}
+                      </span>
                     }
                   }
                 }
@@ -254,7 +254,7 @@
             @if(!loading()){
             <tr style="height: 100%;" [ngStyle]="{'min-height': trMinHeight()}" role="row">
               <td style="text-align: center;" [attr.colspan]="calculateColspan()" scope="cell">
-                <h4>Gösterilecek veri bulunamadı!</h4>
+                <span>Gösterilecek veri bulunamadı!</span>
               </td>
             </tr>
             }

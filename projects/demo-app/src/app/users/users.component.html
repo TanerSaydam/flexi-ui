@@ -1,9 +1,10 @@
 <app-blank>
-    <flexi-grid [data]="data">
-        <flexi-grid-column field="id" value="Id" />
-        <flexi-grid-column field="code" value="Code" />
-        <flexi-grid-column field="name" value="Name" />
-        <flexi-grid-column field="description" value="Description" />
-        <flexi-grid-column field="isSelected" value="Is Selected" filterType="boolean" [booleanData]="['Selected','Not Selected']" textAlign="center" />
-    </flexi-grid>
+    <flexi-treeview
+    [data]="treeData"
+    [showCheckbox]="true"
+    [showDetailButton]="true"
+    detailRouterLink="/test"
+    >
+
+    </flexi-treeview>
 </app-blank>

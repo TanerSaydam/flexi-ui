@@ -1,10 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
-* {
-    font-family: "Poppins", system-ui;
-}
 
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
@@ -25,40 +21,41 @@
 }
 
 [data-bs-theme="light"] {
-    --background-color: #f8f9fa;
-    --background-color-part: #fff;
-    --scroll-background-color: #dee2e6;
-    --dropdown-background-color: #dee2e6;
-    --bg-color-gray: #f8f9fa;
-    --text-color: #000;
-    --text-hover-color: #212529;
-    --active-text-color: #212529;
-    --active-background-color: #ebf5ff;
-    --tbody-hover: #f1f1f1;
-    --hover-background-color: #ebf5ff;
-    --hover-text-color: #212529;
-    --border-color: #dee2e6;
-    --sticky-border-color: #dee2e6;
+    --flexi-background-color: #f8f9fa;
+    --flexi-background-color-part: #fff;
+    --flexi-scroll-background-color: #dee2e6;
+    --flexi-dropdown-background-color: #dee2e6;
+    --flexi-bg-color-gray: #f8f9fa;
+    --flexi-text-color: #000;    
+    --flexi-text-hover-color: #212529;
+    --flexi-active-text-color: #212529;
+    --flexi-active-background-color: #ebf5ff;
+    --flexi-tbody-hover: #f1f1f1;
+    --flexi-hover-background-color: #ebf5ff;
+    --flexi-hover-text-color: #212529;
+    --flexi-border-color: #dee2e6;
+    --flexi-sticky-border-color: #dee2e6;
     --flexi-success: #1dc9b7;
+    --flexi-card-success: 52, 199, 89;
+    --flexi-card-danger:255, 59, 48;
     --flexi-danger: #f44336;
 }
 
 [data-bs-theme="dark"] {
-    --background-color: #212529;
-    --background-color-part: #141414;
-    --scroll-background-color: #504e4e;
-    --dropdown-background-color: #504e4e;
-    --bg-color-gray: #000;
-    --text-color: #fff;
-    --text-hover-color: #000;
-    --tbody-hover: #1d1d1d;
-    --active-text-color: #212529;
-    --active-background-color: #f8f9fa;
-    ;
-    --hover-background-color: #f8f9fa;
-    --hover-text-color: #212529;
-    --border-color: #353232;
-    --sticky-border-color: #353232;
+    --flexi-background-color: #212529;
+    --flexi-background-color-part: #141414;
+    --flexi-scroll-background-color: #504e4e;
+    --flexi-dropdown-background-color: #504e4e;
+    --flexi-bg-color-gray: #000;
+    --flexi-text-color: #fff;
+    --flexi-text-hover-color: #000;
+    --flexi-tbody-hover: #1d1d1d;
+    --flexi-active-text-color: #212529;
+    --flexi-active-background-color: #f8f9fa;
+    --flexi-hover-background-color: #f8f9fa;
+    --flexi-hover-text-color: #212529;
+    --flexi-border-color: #353232;
+    --flexi-sticky-border-color: #353232;
 }
 
 flexi-button {
@@ -72,7 +69,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 svg {
-    fill: var(--text-color);
+    fill: var(--flexi-text-color);
 }
 
 a {
@@ -119,9 +116,9 @@ a {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    background-color: var(--bg-color-gray);
+    background-color: var(--flexi-bg-color-gray);
     padding: 15px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--flexi-border-color);
 }
 
 .flexi-grid-caption-title {
@@ -151,30 +148,30 @@ a {
 }
 
 .flexi-grid-table-container {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--flexi-border-color);
     border-radius: 12px;
     overflow-x: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    background-color: var(--background-color-part);
-    color: var(--text-color);
+    background-color: var(--flexi-background-color-part);
+    color: var(--flexi-text-color);
     font-size: 12px;
 
 }
 
 .flexi-grid-table-container table {
     caption-side: top;
-    background-color: var(--background-color-part);
+    background-color: var(--flexi-background-color-part);
 }
 
 .flexi-grid-table-container caption {
     caption-side: top;
     padding: 10px;
-    background-color: var(--bg-color-gray);
+    background-color: var(--flexi-bg-color-gray);
     text-align: left;
     font-weight: bold;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--flexi-border-color);
 }
 
 
@@ -191,13 +188,13 @@ a {
 }
 
 .flexi-grid-table-container tbody::-webkit-scrollbar-track {
-    background: var(--background-color-part);
+    background: var(--flexi-background-color-part);
 }
 
 .flexi-grid-table-container tbody::-webkit-scrollbar-thumb {
-    background-color: var(--text-color);
+    background-color: var(--flexi-text-color);
     border-radius: 20px;
-    border: 3px solid var(--background-color-part);
+    border: 3px solid var(--flexi-background-color-part);
 }
 
 .flexi-grid-table-container th,
@@ -205,7 +202,7 @@ a {
     padding-left: 10px;
     padding-right: 10px;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--flexi-border-color);
 }
 
 .flexi-grid-border {
@@ -216,7 +213,7 @@ a {
 .flexi-grid-table-container td,
 .flexi-grid-filter-th,
 .flexi-grid-table-container th {
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--flexi-border-color);
     overflow-wrap: anywhere;
 }
 
@@ -229,7 +226,7 @@ a {
 }
 
 .flexi-grid-table-container th {
-    background-color: var(--background-color);
+    background-color: var(--flexi-background-color);
     padding-top: 20px;
     padding-bottom: 15px;
     /* z-index: 1; */
@@ -256,15 +253,15 @@ a {
 }
 
 .flexi-grid-table-container tbody tr:nth-child(odd) {
-    background-color: var(--background-color);
+    background-color: var(--flexi-background-color);
 }
 
 .flexi-grid-table-container tbody tr:nth-child(even) {
-    background-color: var(--background-color-part);
+    background-color: var(--flexi-background-color-part);
 }
 
 .flexi-grid-table-container tbody tr:hover {
-    background-color: var(--tbody-hover);
+    background-color: var(--flexi-tbody-hover);
 }
 
 .flexi-grid-table-container tbody tr {
@@ -294,8 +291,8 @@ a {
     padding: 5px;
     border: 1px solid #ced4da;
     border-radius: 3px;
-    background-color: var(--background-color-part);
-    color: var(--text-color);
+    background-color: var(--flexi-background-color-part);
+    color: var(--flexi-text-color);
 }
 
 .flexi-grid-select-container {
@@ -309,8 +306,8 @@ a {
 }
 
 .flexi-grid-active {
-    background-color: var(--active-background-color) !important;
-    color: var(--active-text-color) !important;
+    background-color: var(--flexi-active-background-color) !important;
+    color: var(--flexi-active-text-color) !important;
 }
 
 .flexi-grid-page-link {
@@ -319,25 +316,25 @@ a {
     padding: 0.5rem 0.75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: var(--text-color);
-    background-color: var(--background-color-part);
-    border: 1px solid var(--border-color);
+    color: var(--flexi-text-color);
+    background-color: var(--flexi-background-color-part);
+    border: 1px solid var(--flexi-border-color);
     border-radius: 3px;
 }
 
 .flexi-grid-page-link:hover {
-    background-color: var(--hover-background-color) !important;
-    color: var(--hover-text-color) !important;
+    background-color: var(--flexi-hover-background-color) !important;
+    color: var(--flexi-hover-text-color) !important;
 }
 
 
 
 .flexi-grid-pagesize-select {
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--flexi-background-color);
+    color: var(--flexi-text-color);
     margin-left: 5px;
     padding: 5px;
-    border-color: var(--border-color);
+    border-color: var(--flexi-border-color);
 }
 
 .flexi-grid-filter-container {
@@ -355,12 +352,12 @@ a {
     padding: 5px 0;
     margin: 0;
     font-size: 14px;
-    color: var(--text-color);
+    color: var(--flexi-text-color);
     text-align: left;
     list-style: none;
-    background-color: var(--dropdown-background-color);
+    background-color: var(--flexi-dropdown-background-color);
     background-clip: padding-box;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--flexi-border-color);
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
@@ -379,7 +376,7 @@ a {
     clear: both;
     font-weight: 400;
     font-size: 13px;
-    color: var(--text-color);
+    color: var(--flexi-text-color);
     text-align: inherit;
     background-color: transparent;
     border: 0;
@@ -387,9 +384,9 @@ a {
 
 .flexi-grid-dropdown-item:hover,
 .flexi-grid-dropdown-item:focus {
-    color: var(--text-hover-color) !important;
+    color: var(--flexi-text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--hover-background-color);
+    background-color: var(--flexi-hover-background-color);
 }
 
 .flexi-grid-dropdown-checkbox-item {
@@ -400,17 +397,17 @@ a {
 }
 
 .flexi-grid-dropdown-checkbox-item:hover {
-    color: var(--text-hover-color) !important;
+    color: var(--flexi-text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--hover-background-color);
-    color: var(--hover-text-color);
+    background-color: var(--flexi-hover-background-color);
+    color: var(--flexi-hover-text-color);
     border-radius: 5px;
 }
 
 .flexi-grid-dropdown-title {
     text-align: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid (var(--border-color));
+    border-bottom: 1px solid (var(--flexi-border-color));
 }
 
 .overflow-x {
@@ -469,12 +466,12 @@ a {
 
 /* Tek sayılı satırlar için */
 .flexi-grid-table-container tbody tr:nth-child(odd) .flexi-sticky-column {
-    background-color: var(--background-color);
+    background-color: var(--flexi-background-color);
 }
 
 /* Çift sayılı satırlar için */
 .flexi-grid-table-container tbody tr:nth-child(even) .flexi-sticky-column {
-    background-color: var(--background-color-part);
+    background-color: var(--flexi-background-color-part);
 }
 
 .flexi-sticky-column::before {
@@ -486,13 +483,13 @@ a {
     height: 100%;
     width: 1px;
     /* Çizginin kalınlığı */
-    background-color: var(--sticky-border-color);
+    background-color: var(--flexi-sticky-border-color);
     z-index: 101;
     /* İçeriğin üzerinde olması için */
 }
 
 .flexi-grid-table-container tbody tr:hover .flexi-sticky-column {
-    background-color: var(--tbody-hover);
+    background-color: var(--flexi-tbody-hover);
 }
 
 .hide {
@@ -562,7 +559,7 @@ a {
 }
 
 .flexi-grid-pagination-container {
-    background-color: var(--background-color);
+    background-color: var(--flexi-background-color);
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -580,7 +577,7 @@ a {
 }
 
 .flexi-grid-pagination {
-    color: var(--text-color);
+    color: var(--flexi-text-color);
 }
 
 .flexi-grid-pagination .flexi-grid-page-item.disabled {
@@ -635,7 +632,7 @@ a {
 
     .flexi-grid-table-container tbody tr {
         margin-bottom: 15px;
-        border-bottom: 2px solid var(--border-color);
+        border-bottom: 2px solid var(--flexi-border-color);
     }
 
     .flexi-grid-table-container td,
@@ -720,7 +717,7 @@ a {
 .flexi-grid-table-container {
     scrollbar-width: thin;
     /* Firefox için */
-    scrollbar-color: var(--scroll-background-color) var(--background-color);
+    scrollbar-color: var(--flexi-scroll-background-color) var(--flexi-background-color);
     /* Firefox için */
 }
 
@@ -732,12 +729,12 @@ a {
 
 .flexi-grid-table-container-wrapper::-webkit-scrollbar-track,
 .flexi-grid-table-container::-webkit-scrollbar-track {
-    background-color: var(--background-color);
+    background-color: var(--flexi-background-color);
 }
 
 .flexi-grid-table-container-wrapper::-webkit-scrollbar-thumb,
 .flexi-grid-table-container::-webkit-scrollbar-thumb {
-    background-color: var(--scroll-background-color);
+    background-color: var(--flexi-scroll-background-color);
     border-radius: 16px;
 }
 
@@ -748,7 +745,7 @@ a {
 
 .flexi-grid-table-container-wrapper::-webkit-scrollbar-corner,
 .flexi-grid-table-container::-webkit-scrollbar-corner {
-    background-color: var(--scroll-background-color);
+    background-color: var(--flexi-scroll-background-color);
 }
 
 /* Mobil cihazlar için ek düzenlemeler */
@@ -772,7 +769,7 @@ a {
 }
 
 .flexi-grid-tr-expanded {
-    background-color: var(--active-background-color);
+    background-color: var(--flexi-active-background-color);
 }
 
 .flexi-grid-tree-cell {
@@ -786,4 +783,22 @@ a {
     cursor: pointer;
     font-size: 12px;
     margin-right: 5px;
+}
+
+.flexi-grid-card{
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.flexi-grid-card-success{
+    background-color: rgba(var(--flexi-card-success), .1);
+    border-color: rgb(var(--flexi-card-success));
+    color: var(--flexi-text-color);
+}
+
+.flexi-grid-card-danger{
+    background-color: rgba(var(--flexi-card-danger), .1);
+    border-color: rgb(var(--flexi-card-danger));
+    color: var(--flexi-text-color);
 }

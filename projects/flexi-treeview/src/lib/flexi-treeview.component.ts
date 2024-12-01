@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { FlexiButtonComponent, FlexiButtonSizeType } from 'flexi-button';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 import { FlexiTreeNode } from './flexi-tree-node.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'flexi-treeview',
-    imports: [CommonModule, FormsModule, FlexiButtonComponent, FlexiTooltipDirective],
+    imports: [CommonModule, FormsModule, FlexiButtonComponent, FlexiTooltipDirective, RouterLink],
     templateUrl: "./flexi-treeview.component.html",
     styleUrl: "./flexi-treeview.component.css",
     encapsulation: ViewEncapsulation.None,
@@ -23,12 +24,15 @@ export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
   readonly showActions = input<boolean>(true);
   readonly width = input<string>('100%');
   readonly height = input<string>('100%');
-  readonly fontSize = input<string>('12px');
-  readonly btnSize = input<FlexiButtonSizeType>('small');
+  readonly fontSize = input<string>('13px');
+  readonly btnSize = input<FlexiButtonSizeType>('default');
   readonly checkboxSize = input<string>('1.4em');
   readonly actionBtnPosition = input<'left' | 'right'>('right');
   readonly themeClass = input<string>('light');
-  readonly loading = input<boolean>(false);
+  readonly loading = input<boolean>(false);  
+  readonly expend = input<boolean>(true);
+  readonly showDetailButton = input<boolean>(false);
+  readonly detailRouterLink = input<string>("");
   
   readonly onSelected = output<FlexiTreeNode[]>();
   readonly onEdit = output<FlexiTreeNode>();
@@ -42,6 +46,9 @@ export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.filteredTreeData.set(this.data());
+    if(this.expend()){
+      this.expandAll();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -65,38 +72,47 @@ export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
 
   onSearch() {
     if (this.searchTerm().trim() === '') {
-      this.filteredTreeData.set(this.data());
-      this.foundItemsCount.set(0);
+        this.filteredTreeData.set(this.data());
+        this.foundItemsCount.set(0);
     } else {
-      this.filteredTreeData.set(this.filterNodes(this.data(), this.searchTerm().toLowerCase()));
-      this.foundItemsCount.set(this.countFilteredNodes(this.filteredTreeData()));
+        this.filteredTreeData.set(this.filterNodes(this.data(), this.searchTerm().toLowerCase()));
+        this.foundItemsCount.set(this.countFilteredNodes(this.filteredTreeData()));
     }
+}
+
+filterNodes(nodes: FlexiTreeNode[], term: string): FlexiTreeNode[] {
+  const filteredNodes: FlexiTreeNode[] = [];
+
+  for (const node of nodes) {
+      let matched = node.name.toLowerCase().includes(term) ||
+                    (node.description && node.description.toLowerCase().includes(term));
+
+      if (matched) {
+          // Düğüm eşleşiyorsa, tüm çocuklarını olduğu gibi ekleyin
+          const newNode: FlexiTreeNode = {
+              ...node,
+              expanded: true, // Eşleşen düğümleri genişletmek için
+              // Çocukları filtrelemeden ekliyoruz
+          };
+          filteredNodes.push(newNode);
+      } else if (node.children && node.children.length) {
+          // Düğüm eşleşmiyor, ancak çocukları olabilir
+          const filteredChildren = this.filterNodes(node.children, term);
+          if (filteredChildren.length > 0) {
+              const newNode: FlexiTreeNode = {
+                  ...node,
+                  children: filteredChildren,
+                  expanded: true, // Çocukları eşleşiyorsa düğümü genişletmek için
+              };
+              filteredNodes.push(newNode);
+          }
+          // Eğer çocuklardan hiçbiri eşleşmiyorsa, düğümü eklemiyoruz
+      }
+      // Düğüm eşleşmiyorsa ve çocukları yoksa, düğümü eklemiyoruz
   }
 
-  filterNodes(nodes: FlexiTreeNode[], term: string): FlexiTreeNode[] {
-    if(term === ''){
-      return nodes;
-    }
-    return nodes.filter(node => {
-      const nodeMatches = node.name.toLowerCase().includes(term) || 
-                          (node.description && node.description.toLowerCase().includes(term));
-      
-      if (nodeMatches) {
-        return true;
-      }
-
-      if (node.children && node.children.length) {
-        const filteredChildren = this.filterNodes(node.children, term);
-        if (filteredChildren.length) {
-          node.children = filteredChildren;
-          node.expanded = true;
-          return true;
-        }
-      }
-
-      return false;
-    });
-  }
+  return filteredNodes;
+}
 
   countFilteredNodes(nodes: FlexiTreeNode[]): number {
     let count = 0;

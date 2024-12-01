@@ -52,7 +52,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly commandColumnTextAlign = input<AlignSetting>("center");
   readonly commandColumnTemplate = input<TemplateRef<any> | any>();
   readonly stickyCommandColumn = input<boolean>(true);
-  readonly fontSize = input<string>("11px");
+  readonly fontSize = input<string>("13px");
   readonly dataBindingExportEndpoint = input<string>('');
   readonly dataBindingExportPath = input<string>('data');
 
