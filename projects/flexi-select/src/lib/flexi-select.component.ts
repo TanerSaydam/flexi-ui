@@ -20,9 +20,9 @@ import { NgClass, NgStyle } from '@angular/common';
   ]
 })
 export class FlexiSelectComponent implements OnChanges, OnInit {
-  @Input({ required: true }) data: any[] = []
-  @Input({ required: true }) value: any;
-  @Input({ required: true }) label: any;
+  @Input() data: any[] = []
+  @Input() value: any;
+  @Input() label: any;
   readonly name = input<any>();
   readonly noData = input<string>("Kayıt bulunamadı");
   readonly selectOne = input<string>("Seçim yapınız");

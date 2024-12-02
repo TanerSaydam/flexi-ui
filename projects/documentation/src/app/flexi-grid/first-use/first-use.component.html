@@ -3,14 +3,15 @@
     <div class="card-body">
       <p>Flexi Grid'i kullanmak istediğiniz standalone componente FlexGridModule'u import etmelisiniz</p>
       <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına column elementi ile de göstermek
-      istediğiniz verileri yerleştirmelisiniz</p>
-      <p class="alert alert-info">Not: Eğer column vermezseniz data da olan propertler geldiği sırayla ekrana basılır</p>
+      istediğiniz verileri yerleştirmelisiniz</p>      
       <h3>Örnek kod:</h3>
       <b>component.ts</b>          
       <my-code className="" language="typescript" [code]="firstUseTSCodeExample()"></my-code>
       <b>component.html</b>
       <my-code className="" language="html" [code]="firstUseHTMLCodeExample()"></my-code>
   
+      <p class="alert alert-danger">Not: Eğer flexi-grid-column eklememişseniz grid görünmez</p>
+      
       @defer {
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
@@ -84,7 +85,7 @@
         <tbody>
           <tr>
             <th>data</th>
-            <td>object[] | number[] | string[] | boolean[] vs.</td>
+            <td>object[]</td>
           </tr>
           <tr>
             <th>field</th>

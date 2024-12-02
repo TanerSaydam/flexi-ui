@@ -1,11 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FlexiSelectModule } from 'flexi-select';
 import { BlankComponent } from '../blank/blank.component';
 import { CardComponent } from '../blank/card/card.component';
 import { CommonModule } from '@angular/common';
 import SelectFullComponent from './full/full.component'
 import { LoadingComponent } from '../loading/loading.component';
-import { MyCodeComponent } from '../my-code/my-code.component';
 
 @Component({
     selector: 'app-flexi-select',
@@ -15,8 +14,7 @@ import { MyCodeComponent } from '../my-code/my-code.component';
         CommonModule,
         FlexiSelectModule,
         SelectFullComponent,
-        LoadingComponent,
-        MyCodeComponent,
+        LoadingComponent,        
     ],
     templateUrl: './flexi-select.component.html',
     styleUrl: './flexi-select.component.css'

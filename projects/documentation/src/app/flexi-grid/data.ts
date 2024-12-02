@@ -1,3 +1,4 @@
+import { FlexiTreeNode } from "flexi-treeview";
 import { UserModel } from "../models/user.model";
 
 export const UsersData: UserModel[] = [
@@ -513,59 +514,40 @@ export const UsersData: UserModel[] = [
     }
 ];
 
-export const RolesData: any[] = [
+export const CategoryTreeviewData: FlexiTreeNode[] = [
     {
-        "applicationName": "Yönetim",
-        "code": "Şirketler",
-        "name": "Görüntüle",
-        "description": "",
-        "id": "4e7a08b0-8e60-42be-ab11-0ea66c495daa",
-        "isActive": true,
-        "createdDate": "2024-12-02T00:58:57.2938482",
-        "createdUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
-        "createdBy": "Sever Admin (admin@admin.com)",
-        "updatedDate": null,
-        "updatedUserId": null,
-        "updatedBy": null,
-        "isDeleted": false,
-        "deletedDate": null,
-        "deletedUserId": null,
-        "deletedBy": null
+        id: "a", name: 'Teen', expanded: true, isMain: true, indeterminate: false, code: "Teen", children: [
+            { name: 'Adventure', id: "2", code: "Teen", isMain: false, indeterminate: false},
+            { name: 'Science', id: "3", code: "Teen", isMain: false, indeterminate: false}
+        ]
     },
     {
-        "applicationName": "Yönetim",
-        "code": "Şirketler",
-        "name": "Ekle",
-        "description": "",
-        "id": "54e05db7-6757-4d93-bada-a849809cb0b6",
-        "isActive": true,
-        "createdDate": "2024-12-02T00:50:04.9541485",
-        "createdUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
-        "createdBy": "Sever Admin (admin@admin.com)",
-        "updatedDate": "2024-12-02T00:59:07.1464883",
-        "updatedUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
-        "updatedBy": "Sever Admin (admin@admin.com)",
-        "isDeleted": false,
-        "deletedDate": null,
-        "deletedUserId": null,
-        "deletedBy": null
-    },
-    {
-        "applicationName": "Yönetim",
-        "code": "Şirketler",
-        "name": "Güncelle",
-        "description": "",
-        "id": "1ca29907-0579-44d9-9c95-d96c0f300375",
-        "isActive": true,
-        "createdDate": "2024-12-02T00:50:30.9845946",
-        "createdUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
-        "createdBy": "Sever Admin (admin@admin.com)",
-        "updatedDate": "2024-12-02T00:59:12.1040657",
-        "updatedUserId": "d1bd974a-f8a5-4be8-453c-08dd123a6879",
-        "updatedBy": "Sever Admin (admin@admin.com)",
-        "isDeleted": false,
-        "deletedDate": null,
-        "deletedUserId": null,
-        "deletedBy": null
-    }
-]
+        id: "b", name: 'IT', expanded: true, isMain: true, indeterminate: false, code: "IT", children: [
+            {
+                id: "c", name: 'Programming', expanded: true, isMain: true, indeterminate: false, code: "IT", children: [
+                    {
+                        id: "d", name: 'Frontend', expanded: true, isMain: true, indeterminate: false, code: "Programming", children: [
+                            { name: 'Angular', id: "1", code: "Frontend", isMain: false, indeterminate: false},
+                            { name: 'React', id: "2", code: "Frontend", isMain: false, indeterminate: false},
+                            { name: 'Vue', id: "3", code: "Frontend", isMain: false, indeterminate: false},
+                            { name: 'Blazor', id: "4", code: "Frontend", isMain: false, indeterminate: false}
+                        ]
+                    },
+                    {
+                        id: "e", name: 'Backend', expanded: true, isMain: true, indeterminate: false, code: "Programming", children: [
+                            { name: 'C#', id: "5", code: "Backend", isMain: false, indeterminate: false},
+                            { name: 'Java', id: "6", code: "Backend", isMain: false, indeterminate: false},
+                            { name: 'Pyhton', id: "7", code: "Backend", isMain: false, indeterminate: false},
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "f", name: 'Networking', expanded: true, isMain: true, indeterminate: false, code: "IT", children: [
+                    { name: 'Internet', id: "8", code: "Networking", isMain: false, indeterminate: false},
+                    { name: 'Security', id: "9", code: "Networking", isMain: false, indeterminate: false}
+                ]
+            }
+        ]
+    }    
+];

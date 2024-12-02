@@ -54,7 +54,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly stickyCommandColumn = input<boolean>(true);
   readonly fontSize = input<string>("13px");
   readonly dataBindingExportEndpoint = input<string>('');
-  readonly dataBindingExportPath = input<string>('data');
+  readonly dataBindingExportPath = input<string>('data');  
+
+  columnsArray = signal<FlexiGridColumnComponent[]>([]);
 
   @Input()
   set pageSize(value: number) {
@@ -176,17 +178,16 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     if (data && data.length > 0) {
       const firstItem = data[0];
       const columnsArray = Object.keys(firstItem).map(key => {
-        const column = new FlexiGridColumnComponent();
-        column.field = key;
-        column.title = this.capitalizeFirstLetter(key);
-        column.visible = true;
-        column.hideOverflow = true;
+        let column:any = {
+          field: key,
+          title: this.capitalizeFirstLetter(key),
+          visible: true,
+          hideOverflow: true,
+        };
         return column;
-      });
-
-      // if (this.columns) {
-      //   this.columns.reset(columnsArray);
-      // }
+      });    
+      
+      this.columnsArray.set(columnsArray);
     }
   }
 

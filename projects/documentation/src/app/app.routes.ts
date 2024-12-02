@@ -151,6 +151,16 @@ export const routes: Routes = [
             {
                 path: "flexi-tooltip",
                 loadComponent: ()=> import("./flexi-tooltip/flexi-tooltip.component")
+            },
+            {
+                path: "flexi-treeview",
+                canActivateChild: [routeGuard],
+                children: [
+                    {
+                        path: "",
+                        loadComponent: ()=> import("./flexi-treeview/flexi-treeview.component")
+                    },                                       
+                ]                
             }
         ]
     },    

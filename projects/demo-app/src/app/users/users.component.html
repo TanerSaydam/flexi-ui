@@ -1,10 +1,5 @@
 <app-blank>
-    <flexi-treeview
-    [data]="treeData"
-    [showCheckbox]="true"
-    [showDetailButton]="true"
-    detailRouterLink="/test"
-    >
-
-    </flexi-treeview>
+   <flexi-grid [data]="data">
+    <flexi-grid-column field="name" title="Name" />
+   </flexi-grid>
 </app-blank>

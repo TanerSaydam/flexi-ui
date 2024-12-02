@@ -112,6 +112,16 @@
                         </span>
                       </a>                      
                     </li>
+                    <li class="nav-item" routerLinkActive="active1" [routerLinkActiveOptions]="{exact:true}">
+                      <a routerLink="/flexi-treeview" class="nav-link">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <i class="fa-solid fa-check me-2"></i>
+                        </span>
+                        <span class="nav-link-title">
+                          Flexi Treeview
+                        </span>
+                      </a>                     
+                    </li>
                     <li class="nav-item">
                       @if(shared.themeClass === "light"){
                       <div style="cursor: pointer;" (click)="changeTheme('dark')" class="nav-link">

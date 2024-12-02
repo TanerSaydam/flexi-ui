@@ -22,10 +22,10 @@ export default class ExampleComponent {
 
 tooltipHTMLCodeExample = signal<string>(`
 <div style="display: flex; gap: 5px;">
-    <flexi-button btnColor="default" btnSize="small" btnIcon="info" flexiTooltip="left" title="Aç" />
-    <flexi-button btnColor="primary" btnSize="small" btnIcon="add" flexiTooltip="right" title="Kaydet" />
-    <flexi-button btnColor="warning" btnSize="small" btnIcon="edit" flexiTooltip="top" title="Güncelle" />
-    <flexi-button btnColor="danger" btnSize="small" btnIcon="delete" flexiTooltip="bottom" title="Sil" />
+    <flexi-button btnColor="default" btnSize="large" btnIcon="info" flexiTooltip="left" title="Aç" />
+    <flexi-button btnColor="primary" btnSize="large" btnIcon="add" flexiTooltip="right" title="Kaydet" />
+    <flexi-button btnColor="warning" btnSize="large" btnIcon="edit" flexiTooltip="top" title="Güncelle" />
+    <flexi-button btnColor="danger" btnSize="large" btnIcon="delete" flexiTooltip="bottom" title="Sil" />
 </div>
         `)
 }

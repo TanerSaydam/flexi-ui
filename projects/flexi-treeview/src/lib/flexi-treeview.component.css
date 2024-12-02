@@ -63,6 +63,7 @@ ul {
 
 .flexi-treeview-node-item {
   margin-bottom: 5px;
+  margin-left: 15px;
 }
 
 .flexi-treeview-node-container:hover {

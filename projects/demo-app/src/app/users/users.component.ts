@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
 import { RolesData } from '../../../../documentation/src/app/flexi-grid/data';
-import { FlexiTreeviewComponent } from "../../../../flexi-treeview/src/lib/flexi-treeview.component";
 import { FlexiTreeviewService } from '../../../../flexi-treeview/src/lib/flexi-treeview.service';
 import { FlexiTreeNode } from '../../../../flexi-treeview/src/lib/flexi-tree-node.model';
 
@@ -10,8 +9,7 @@ import { FlexiTreeNode } from '../../../../flexi-treeview/src/lib/flexi-tree-nod
 @Component({
     imports: [
     BlankComponent,
-    FlexiGridModule,
-    FlexiTreeviewComponent
+    FlexiGridModule    
 ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.css'

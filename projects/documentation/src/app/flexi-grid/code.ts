@@ -1055,3 +1055,94 @@ export const changeThemeHTMLCode: string = `
     <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
 </flexi-grid>
 `;
+
+export const flexiTreeviewfullExampleTSCode: string = `
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { SharedModule } from '../../shared.module';
+import { FlexiTreeNode, FlexiTreeviewComponent, FlexiTreeviewService } from 'flexi-treeview';
+import { CategoryTreeviewData } from '../../flexi-grid/data';
+
+@Component({
+  selector: 'app-flexi-treeview-full',
+  imports: [SharedModule, FlexiTreeviewComponent],
+  templateUrl: './full.component.html',  
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export default class FullTreeViewComponent {    
+  treeviewData = signal<FlexiTreeNode[]>(CategoryTreeviewData);
+  loading = signal<boolean>(false);
+
+  onDelete(node: FlexiTreeNode){
+    console.log(node);     
+  }
+
+  onEdit(node: FlexiTreeNode){
+    console.log(node);     
+  }
+
+  onRefresh(){
+    //getall metodunu çağırıyoruz
+  }
+
+  onSelected(selectedNodes: FlexiTreeNode[]){
+    console.log(selectedNodes);
+  }
+}
+`;
+
+export const flexiTreeviewfullExampleHTMLCode: string = `
+<flexi-treeview
+    [data]="treeviewData()"
+    [loading]="loading()"
+    height="500px"
+    [showCheckbox]="true"
+    [showActions]="true"
+    [showDetailButton]="true"
+    detailRouterLink="/flexi-treeview"
+    (onDelete)="onDelete($event)"
+    (onEdit)="onEdit($event)"
+    (onRefresh)="onRefresh()"
+    (onSelected)="onSelected($event)" 
+/>
+`;
+
+export const flexiTreeviewData: string = `
+export const CategoryTreeviewData: FlexiTreeNode[] = [
+    {
+        id: "a", name: 'Teen', expanded: true, isMain: true, indeterminate: false, code: "Teen", children: [
+            { name: 'Adventure', id: "2", code: "Teen", isMain: false, indeterminate: false},
+            { name: 'Science', id: "3", code: "Teen", isMain: false, indeterminate: false}
+        ]
+    },
+    {
+        id: "b", name: 'IT', expanded: true, isMain: true, indeterminate: false, code: "IT", children: [
+            {
+                id: "c", name: 'Programming', expanded: true, isMain: true, indeterminate: false, code: "IT", children: [
+                    {
+                        id: "d", name: 'Frontend', expanded: true, isMain: true, indeterminate: false, code: "Programming", children: [
+                            { name: 'Angular', id: "1", code: "Frontend", isMain: false, indeterminate: false},
+                            { name: 'React', id: "2", code: "Frontend", isMain: false, indeterminate: false},
+                            { name: 'Vue', id: "3", code: "Frontend", isMain: false, indeterminate: false},
+                            { name: 'Blazor', id: "4", code: "Frontend", isMain: false, indeterminate: false}
+                        ]
+                    },
+                    {
+                        id: "e", name: 'Backend', expanded: true, isMain: true, indeterminate: false, code: "Programming", children: [
+                            { name: 'C#', id: "5", code: "Backend", isMain: false, indeterminate: false},
+                            { name: 'Java', id: "6", code: "Backend", isMain: false, indeterminate: false},
+                            { name: 'Pyhton', id: "7", code: "Backend", isMain: false, indeterminate: false},
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "f", name: 'Networking', expanded: true, isMain: true, indeterminate: false, code: "IT", children: [
+                    { name: 'Internet', id: "8", code: "Networking", isMain: false, indeterminate: false},
+                    { name: 'Security', id: "9", code: "Networking", isMain: false, indeterminate: false}
+                ]
+            }
+        ]
+    }    
+];
+`

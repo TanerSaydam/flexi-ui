@@ -4,13 +4,16 @@ import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { dataTSCode, paginationHTMLCode, paginationTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
+import { FlexiSelectComponent } from "../../../../../flexi-select/src/lib/flexi-select.component";
+import { FlexiSelectModule } from 'flexi-select';
 
 @Component({
     selector: 'app-pagination',
     imports: [
-        FlexiGridModule,
-        SharedModule
-    ],
+    FlexiGridModule,
+    SharedModule,
+    FlexiSelectModule
+],
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.css',
     encapsulation: ViewEncapsulation.None

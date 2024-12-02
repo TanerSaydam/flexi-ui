@@ -1,0 +1,47 @@
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+      <li class="nav-item">
+        <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-full" class="nav-link" data-bs-toggle="tab">component.ts</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tabs-ts-data" class="nav-link" data-bs-toggle="tab">data.ts</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tabs-example-full">
+        <h4>Full halinin örnek görüntüsü</h4>
+       <flexi-treeview
+         [data]="treeviewData()"
+         [loading]="loading()"
+         height="500px"
+         [showCheckbox]="true"
+         [showActions]="true"
+         [showDetailButton]="true"
+         detailRouterLink="/flexi-treeview"
+         (onDelete)="onDelete($event)"
+         (onEdit)="onEdit($event)"
+         (onRefresh)="onRefresh()"
+         (onSelected)="onSelected($event)" />
+      </div>
+      <div class="tab-pane" id="tabs-html-full">
+        <h4>HTML kodları</h4>
+        <my-code [code]="fullExampleHTMLCode()" language="html"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-full">
+        <h4>Typescript kodları</h4>
+        <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
+      </div>
+      <div class="tab-pane" id="tabs-ts-data">
+        <h4>Data</h4>
+        <my-code [code]="dataCode()" language="typescript"></my-code>
+      </div>
+    </div>
+  </div>

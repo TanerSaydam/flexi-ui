@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MyCodeComponent } from '../../my-code/my-code.component';
 import { BlankComponent } from '../../blank/blank.component';
 import { CardComponent } from '../../blank/card/card.component';
 
@@ -8,7 +7,6 @@ import { CardComponent } from '../../blank/card/card.component';
     imports: [
         BlankComponent,
         CardComponent,
-        MyCodeComponent
     ],
     templateUrl: './installation.component.html',
     styleUrl: './installation.component.css'

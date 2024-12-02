@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { flexiGridDocument, flexiSelectDocument, flexiToastDocument } from '../document';
 
@@ -14,7 +14,7 @@ import { flexiGridDocument, flexiSelectDocument, flexiToastDocument } from '../d
 export class LayoutsComponent {  
   flexiGridDocument = flexiGridDocument;
   flexiSelectDocument = flexiSelectDocument;
-  flexiToastDocument = flexiToastDocument;
+  flexiToastDocument = flexiToastDocument;  
 
   constructor(
     public shared: SharedService

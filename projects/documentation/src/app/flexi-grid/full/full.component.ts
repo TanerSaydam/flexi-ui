@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
 import { FlexiGridModule, StateModel, FlexiGridService, FlexiGridFilterDataModel } from 'flexi-grid';
@@ -11,9 +11,9 @@ import { FlexiTooltipDirective } from 'flexi-tooltip';
 @Component({
     selector: 'app-flexi-grid-full',
     imports: [FlexiGridModule, MyCodeComponent, FlexiTooltipDirective],
-    templateUrl: './full.component.html',
-    styleUrl: './full.component.css',
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './full.component.html',    
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class FullComponent {
   users = signal<UserModel[]>([])

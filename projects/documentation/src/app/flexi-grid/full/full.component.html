@@ -43,8 +43,8 @@
           textAlign="center"></flexi-grid-column>
 
         <ng-template #commandButtonColumnTemplate let-item="item">
-          <flexi-button btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="Güncelle" />
-          <flexi-button btnColor="danger" class="ms-1" btnSize="small" (click)="deleteByItem(item)" btnIcon="remove"
+          <flexi-button btnColor="primary" btnIcon="edit" btnSize="default" flexiTooltip title="Güncelle" />
+          <flexi-button btnColor="danger" class="ms-1" btnSize="default" (click)="deleteByItem(item)" btnIcon="delete"
             flexiTooltip title="Sil" />
         </ng-template>
       </flexi-grid>

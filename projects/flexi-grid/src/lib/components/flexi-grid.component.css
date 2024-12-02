@@ -1,13 +1,11 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
-
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-weight: 400;
     font-style: normal;
-    font-size: 20px;
-    /* Preferred icon size */
+    font-size: 20px;    
     display: inline-flex;
     line-height: 1;
     text-transform: none;
@@ -565,6 +563,11 @@ a {
     justify-content: space-between;
     align-items: center;
     overflow-x: auto;
+    user-select: none;
+}
+
+.flexi-grid-pagination-part-third{
+    user-select: none;
 }
 
 .flexi-grid-pagination {
@@ -801,4 +804,8 @@ a {
     background-color: rgba(var(--flexi-card-danger), .1);
     border-color: rgb(var(--flexi-card-danger));
     color: var(--flexi-text-color);
+}
+
+th, td{
+    font-weight: 400 !important;
 }
