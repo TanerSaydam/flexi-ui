@@ -1,7 +1,7 @@
 <div class="flexi-select" (keypress)="onKeyPress($event)" (keydown)="onKeyDownForMainDiv($event)" [attr.data-bs-theme]="themeClass()" role="combobox" [attr.aria-expanded]="isOpen()" [attr.aria-owns]="uniqueName + '-listbox'" aria-haspopup="listbox">
     <div class="flexi-select-div"
          #flexiSelectDiv
-         [ngStyle]="{'height': height()}"
+         [ngStyle]="{'height': height(), 'cursor':'pointer'}"
          [tabindex]="tabindex()"
          (keydown.space)="$event.preventDefault(); this.isOpen.set(true)"         
          (focus)="onFocus()"

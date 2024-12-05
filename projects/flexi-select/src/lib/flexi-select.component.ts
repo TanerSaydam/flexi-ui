@@ -136,7 +136,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   loadMoreData() {
     const val = this.searchInput()!.nativeElement.value.toString().toLocaleLowerCase("tr");
     let newData = val === "" ? this.data : this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
-    newData = newData.slice((this.filteredData().length - 1), (this.filteredData().length + this.itemsPerPage()));
+    newData = newData.slice(this.filteredData().length, this.filteredData().length + this.itemsPerPage());
     this.filteredData.set([...this.filteredData(), ...newData]);
     this.clientHeight = this.clientHeight + 180;
   }

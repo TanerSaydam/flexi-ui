@@ -5,7 +5,7 @@
     @if(showCaption()){
     <div class="flexi-grid-caption-div">
       <span class="flexi-grid-caption-title">{{captionTitle()}}</span>
-      <div class="d-flex" style="gap: 10px;">
+      <div class="flexi-grid-caption-button-div" style="gap: 10px;">
         <ng-container *ngTemplateOutlet="captionTemplate()"></ng-container>
         @if(showExportExcelBtn()){
         <flexi-button btnIcon="file_save" flexiTooltip title="Excel'e Aktar" btnColor="warning"
@@ -253,15 +253,13 @@
               }
               }@else {
                 @if(!loading()){
-                  <tr style="height: 100%;" [ngStyle]="{'min-height': trMinHeight()}" role="row">
-                    <td style="text-align: center;" [attr.colspan]="calculateColspan()" scope="cell">
-                      <span>Gösterilecek veri bulunamadı!</span>
-                    </td>
-                  </tr>
+                  <div class="flexi-grid-no-data-div">
+                    <span class="flexi-grid-no-data-title"><i>Gösterilecek veri bulunamadı!</i></span>                    
+                  </div>
                 }
               }
             </tbody>
-            <tfoot>
+            <tfoot class="flexi-grid-foot">
               <ng-container *ngTemplateOutlet="footerTemplate()" class="overflow-x"></ng-container>
             </tfoot>
           </table>

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { StateFilterModel, StateModel } from "../models/state.model"
+import * as ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver';
 
 @Injectable({
     providedIn: "root"
@@ -82,35 +84,37 @@ export class FlexiGridService {
             .join(' '); // Kelimeleri tekrar birleştiriyoruz.
     }
 
-    exportDataToExcel(data: any[], fileName: string) {
+    async exportDataToExcel(data: any[], fileName: string) {
         if (data.length === 0) {
             console.error('No data to export');
             return;
         }
 
-        // Sütun başlıklarını elde et
-        const headers = Object.keys(data[0]);
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Sayfa1');
 
-        // CSV string oluşturma
-        let csvData = headers.join(',') + '\n';
+        // Sütun başlıklarını ekle
+        const headers = Object.keys(data[0]);
+        worksheet.addRow(headers);
+
+        // Verileri ekle
         data.forEach(row => {
-            let rowData = headers.map(header => {
-                const cellData = row[header] ? row[header].toString().replace(/"/g, '""') : '';
-                return `"${cellData}"`;
-            }).join(',');
-            csvData += rowData + '\n';
+            const rowData = headers.map(header => row[header] || '');
+            worksheet.addRow(rowData);
         });
 
-        // CSV dosyasını indirme
-        const blob = new Blob([csvData], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.setAttribute('hidden', '');
-        a.setAttribute('href', url);
-        a.setAttribute('download', fileName + '.csv');
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        // Stil ayarları
+        worksheet.getRow(1).font = { bold: true };
+        headers.forEach((header, index) => {
+            const column = worksheet.getColumn(index + 1);
+            column.width = 15; // Kolon genişliği
+            column.alignment = { horizontal: 'left' }; // Varsayılan hizalama
+        });
+
+        // Excel dosyasını oluştur ve indir
+        const buffer = await workbook.xlsx.writeBuffer();
+        const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        saveAs(blob, `${fileName}.xlsx`);
     }
 
     buildHierarchy(flatArray: any[], options?: {
