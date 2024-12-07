@@ -1,4 +1,4 @@
-@if(columns().length > 0){
+@if(getColumns().length > 0){
   <div [attr.data-bs-theme]="themeClass()" class="flexi-grid-table-container overflow-x"
     [ngClass]="loading() ? 'flexi-grid-disabled-div' : ''"
     [ngStyle]="{'width': autoWidth() ? '100%' : width(), 'font-size': fontSize()}">
@@ -17,7 +17,7 @@
             (click)="toggleColumnVisibilityDropdown()" />
           <div class="flexi-grid-dropdown-menu" style="top: 40px;" [class.show]="columnVisibilityDropdownVisible()">
             <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
-            @for(column of columns(); track trackByFn()){
+            @for(column of getColumns(); track trackByFn()){
             <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field ? column.field : column.title">
               <input [(ngModel)]="column.visible" [id]="column.field ? column.field : column.title" type="checkbox">
               {{ column.title ? column.title : column.field }}
@@ -53,7 +53,7 @@
                   <span>#</span>
                 </th>
                 }
-                @for(column of columns(); track trackByFn()){
+                @for(column of getColumns(); track trackByFn()){
                 <th class="cursor flexi-grid-border" [hidden]="!column.visible" [ngStyle]="{'width': column.width}"
                   scope="col" role="columnheader" [attr.aria-sort]="getSortState('name')">
                   <div [ngClass]="setTextAlignForTh(filterable(), column)">
@@ -124,7 +124,7 @@
                 @if(showIndex() && !isShowMobileFilter()){
                 <th class="flexi-grid-filter-th" [ngStyle]="{'width': indexWidth()}" scope="col" role="columnheader"></th>
                 }
-                @for(column of columns(); track trackByFn()){
+                @for(column of getColumns(); track trackByFn()){
                   @if(column.filterable()){
                     <th class="flexi-grid-filter-th" [hidden]="!column.visible"
                       [attr.data-label]="column.title ? column.title : column.field" scope="col" role="columnheader">
@@ -199,7 +199,7 @@
                   }
                 </td>
                 }
-                @for(column of columns(); track trackByFn()){
+                @for(column of getColumns(); track trackByFn()){
                   <td [ngStyle]="{'width': column.width, 'text-align': column.textAlign()}" [hidden]="!column.visible"
                   [ngClass]="tdTemplateClassName(column)" [attr.data-label]="column.title ? column.title : column.field"
                   [title]="(item && !column.cellTemplate) ? getFieldValue(item, column.field) : ''" scope="cell">

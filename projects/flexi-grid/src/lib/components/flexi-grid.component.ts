@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, AfterContentInit } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from '../models/state.model';
 import * as ExcelJS from 'exceljs';
@@ -55,6 +55,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly fontSize = input<string>("13px");
   readonly dataBindingExportEndpoint = input<string>('');
   readonly dataBindingExportPath = input<string>('data');  
+  readonly customColumns = input<any>([]);
 
   columnsArray = signal<FlexiGridColumnComponent[]>([]);
 
@@ -103,7 +104,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly onChange = output<any>();
   readonly refreshBtnClick = output<void>();
 
-  readonly columns = contentChildren(FlexiGridColumnComponent);
+  readonly columns = contentChildren(FlexiGridColumnComponent, {descendants: true});
   
   readonly filterTr = viewChild<ElementRef<HTMLTableRowElement>>("filterTr");
   readonly tbody = viewChild<ElementRef>("tbody");
@@ -116,9 +117,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   #cdr = inject(ChangeDetectorRef);  
   #http = inject(HttpClient);
 
+  getColumns(){    
+    return [...this.customColumns(), ...this.columns() ]
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data.length > 0) {
-      const columns = this.columns();
+      const columns = this.getColumns();
       if (!columns || columns.length === 0) {
         this.initializeColumnsFromData();
         this.#cdr.detectChanges();
@@ -134,13 +139,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const columns = this.columns();
+    const columns = this.getColumns();
     if (!columns || columns.length === 0) {
       this.initializeColumnsFromData();
       this.#cdr.detectChanges();
     }
 
-    columns?.forEach(column => {
+    columns?.forEach((column:any) => {
       if (column.filterValue != undefined) {
         this.filter(column.field, column.filterOperator, column.filterValue, column.filterType());
       }
@@ -466,7 +471,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   clearFilter(field: string) {
     this.filter(field, "contains", "", "text");
-    const column = this.columns()?.find(p => p.field === field);
+    const column = this.getColumns()?.find((p:any) => p.field === field);
     if (column) {
       column.filterValue = "";
     }
@@ -489,7 +494,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
     this.state = new StateModel();
     this.state.pageSize = this.pageSize;
-    this.columns()?.forEach(val => {
+    this.getColumns()?.forEach((val:any) => {
       const filterType = val.filterType();
       if (filterType === "boolean" || filterType === "select") {
         val.filterValue = undefined
@@ -644,7 +649,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   calculateColspan(): number {
-    const columns = this.columns();
+    const columns = this.getColumns();
     const columnsCount = columns ? columns.length : 0;
     const indexCount = this.showIndex() ? 1 : 0;
     const commandCount = this.showCommandColumn() ? 1 : 0;
@@ -715,20 +720,20 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Sayfa1');
 
-    const visibleColumns = this.columns()?.filter(column => column.visible) || [];
+    const visibleColumns = this.getColumns()?.filter((column:any) => column.visible) || [];
 
     // Başlıkları ekle
-    worksheet.addRow(visibleColumns.map(col => col.title || col.field));
+    worksheet.addRow(visibleColumns.map((col:any) => col.title || col.field));
 
     // Verileri ekle
     this.data.forEach(row => {
-      const rowData = visibleColumns.map(col => this.getFieldValue(row, col.field));
+      const rowData = visibleColumns.map((col:any) => this.getFieldValue(row, col.field));
       worksheet.addRow(rowData);
     });
 
     // Stil ayarları
     worksheet.getRow(1).font = { bold: true };
-    visibleColumns.forEach((col, index) => {
+    visibleColumns.forEach((col: any, index: number) => {
       const column = worksheet.getColumn(index + 1);
       column.width = 15;
       const textAlign = col.textAlign();

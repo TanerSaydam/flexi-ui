@@ -1,13 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
-import { FlexiSelectModule } from '../../../../flexi-select/src/lib/flexi-select.module';
+import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
+import { TestGridComponent } from '../test-grid/test-grid.component';
+
 
 
 
 @Component({
     imports: [
-    BlankComponent,    
-    FlexiSelectModule 
+    BlankComponent,        
+    FlexiGridModule,
+    TestGridComponent
 ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.css'
@@ -15,6 +18,11 @@ import { FlexiSelectModule } from '../../../../flexi-select/src/lib/flexi-select
 export class UsersComponent {
   data = signal<KasaHareketiResponseModel>(new KasaHareketiResponseModel());
   gelirGideler = signal<any[]>(gelirGideler);
+
+  get(i: any){
+    console.log(i);
+    
+  }
 }
 
 export class KasaHareketiResponseModel{

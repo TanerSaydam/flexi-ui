@@ -1,0 +1,23 @@
+<flexi-grid
+[data]="data()"
+[customColumns]="columns()"
+[showCaption]="true"
+[captionTemplate]="captiondColumnTemplate"
+[commandColumnTemplate]="commandColumnTemplate"
+[showCommandColumn]="true"
+>
+<ng-content />
+
+<ng-template>
+
+</ng-template>
+<ng-template #captiondColumnTemplate>
+    <ng-content select="[footer]"/>
+</ng-template>
+
+<ng-template #commandColumnTemplate let-item> 
+    @if(commandTemplateRef() !== undefined && commandTemplateRef() !== null){
+        <ng-container *ngTemplateOutlet="commandTemplateRef()!; context:{ $implicit: item }"></ng-container>
+    }
+  </ng-template>
+</flexi-grid>

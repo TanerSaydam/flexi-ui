@@ -1,3 +1,16 @@
 <app-blank>
-   <flexi-select [data]="gelirGideler()" label="name" value="id" />
+   <app-test-grid [data]="gelirGideler()">
+      <flexi-grid-column field="id" title="Id"/>
+      <flexi-grid-column field="name" title="Name"/>
+      <flexi-grid-column field="isActive" title="IsActive" filterType="boolean" [booleanData]="['Aktif','Pasif']"/>
+
+      <div footer>
+         <flexi-button btnColor="primary" btnIcon="add"/>
+      </div>
+
+      
+   <ng-template #commandTemplate let-item>
+      <flexi-button btnColor="info" btnSize="default" flexiTooltip title="Migrate" btnIcon="cached" (click)="get(item)"></flexi-button>
+   </ng-template>
+   </app-test-grid>
 </app-blank>
