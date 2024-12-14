@@ -1,16 +1,11 @@
 <app-blank>
-   <app-test-grid [data]="gelirGideler()">
-      <flexi-grid-column field="id" title="Id"/>
-      <flexi-grid-column field="name" title="Name"/>
-      <flexi-grid-column field="isActive" title="IsActive" filterType="boolean" [booleanData]="['Aktif','Pasif']"/>
-
-      <div footer>
-         <flexi-button btnColor="primary" btnIcon="add"/>
-      </div>
-
-      
-   <ng-template #commandTemplate let-item>
-      <flexi-button btnColor="info" btnSize="default" flexiTooltip title="Migrate" btnIcon="cached" (click)="get(item)"></flexi-button>
-   </ng-template>
-   </app-test-grid>
+   <flexi-grid
+   [data]="gelirGideler()">
+      <flexi-grid-column field="name" title="Name" />
+      <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active', 'Passive']" />
+      <flexi-grid-column field="createdDate" title="Created Date" filterType="date" format="dd MMM yyyy HH:mm"  />
+      <flexi-grid-column field="createdBy" title="Created By"  />
+      <flexi-grid-column field="updatedDate" title="Updated Date" filterType="date" format="dd MMM yyyy HH:mm"  />
+      <flexi-grid-column field="updatedBy" title="Updated By"  />
+   </flexi-grid>
 </app-blank>

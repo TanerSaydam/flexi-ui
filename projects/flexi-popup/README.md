@@ -1,24 +1,13 @@
-# FlexiPopup
+# Flexi Grid
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.0.
+Angular için Data Grid.
 
-## Code scaffolding
+## Kurulum
 
-Run `ng generate component component-name --project flexi-popup` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project flexi-popup`.
-> Note: Don't forget to add `--project flexi-popup` or else it will be added to the default project in your `angular.json` file. 
+```bash
+npm i flexi-popup
+```
 
-## Build
+Örnek kullanım ve daha fazlası için <a href="https://flexi-ui.ecnorow.com/flexi-popup" target="_blank">buraya tıklayarak dökümantasyona</a> ulaşabilirsiniz
 
-Run `ng build flexi-popup` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build flexi-popup`, go to the dist folder `cd dist/flexi-popup` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test flexi-popup` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Loading...

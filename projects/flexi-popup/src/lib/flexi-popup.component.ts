@@ -13,7 +13,7 @@ export class FlexiPopupComponent {
   @Input() isPopupVisible: boolean = false;
   readonly popupTitle = input<string>("");
   readonly width = input<string>("500px");
-  readonly height = input<string>("100%");
+  readonly height = input<string>("500px");
   readonly showActionButtons = input<boolean>(true);
   readonly themeClass = input<string>("light");
   readonly saveBtnText = input<string>("Kaydet");

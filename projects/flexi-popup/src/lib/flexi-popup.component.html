@@ -1,10 +1,10 @@
 <div [attr.data-bs-theme]="themeClass()" class="flexi-popup-backdrop" [class.visible]="isPopupVisible">
-    <div class="flexi-popup-container">
+    <div class="flexi-popup-container" [style.width]="width()" [style.height]="height()">
         <div class="flexi-popup-header">
             <span class="flexi-popup-title">{{popupTitle()}}</span>
             <flexi-button (click)="closePopup()" [btnColor]="themeClass() === 'dark' ? 'dark' : 'default'" btnIcon="close" btnSize="small" />
         </div>
-        <div class="flexi-popup-content" [style.width]="width()" [style.height]="height()">
+        <div class="flexi-popup-content">
             <ng-content></ng-content>
         </div>
         @if (showActionButtons()) {

@@ -1,16 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
-import { TestGridComponent } from '../test-grid/test-grid.component';
-
-
+import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.module'
 
 
 @Component({
     imports: [
     BlankComponent,        
-    FlexiGridModule,
-    TestGridComponent
+    FlexiGridModule,    
+    FlexiPopupModule
 ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.css'
