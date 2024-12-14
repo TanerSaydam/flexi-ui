@@ -57,10 +57,10 @@ export const flexiGridDocument: DocumentModel[] = [
         title: "Resizable",
         routerLink: "/flexi-grid/resizable"
     },
-    // {
-    //     title: "Draggable",
-    //     routerLink: "/flexi-grid/draggable"
-    // },
+    {
+        title: "Reorderable",
+        routerLink: "/flexi-grid/reorderable"
+    },
     {
         title: "Change Theme",
         routerLink: "/flexi-grid/change-theme"

@@ -8,6 +8,7 @@ import { FlexiGridComponent } from '../components/flexi-grid.component';
 import { FlexiGridColumnComponent } from '../components/flexi-grid-column.component';
 import { FlexiButtonComponent } from 'flexi-button';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FlexiTooltipDirective } from 'flexi-tooltip';
     FormsModule,
     TrCurrencyPipe,
     FlexiTooltipDirective,
-    FlexiButtonComponent
+    FlexiButtonComponent,
+    DragDropModule
     ],
   exports: [
     FlexiGridComponent,
@@ -29,7 +31,8 @@ import { FlexiTooltipDirective } from 'flexi-tooltip';
     FlexiGridCellTemplateDirective,
     FlexiGridHeaderTemplateDirective,
     FlexiTooltipDirective,
-    FlexiButtonComponent
+    FlexiButtonComponent,
+    DragDropModule
   ]
 })
 export class FlexiGridModule { }

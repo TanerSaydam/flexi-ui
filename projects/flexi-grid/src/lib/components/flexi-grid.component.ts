@@ -4,6 +4,8 @@ import { StateFilterModel, StateModel } from '../models/state.model';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { FlexiGridReorderModel } from '../models/flexi-grid-reorder.model';
 
 @Component({
     selector: 'flexi-grid',
@@ -56,6 +58,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly dataBindingExportEndpoint = input<string>('');
   readonly dataBindingExportPath = input<string>('data');  
   readonly customColumns = input<any>([]);
+  readonly reOrderWidth = input<string>("50px");
+  readonly reOrderTextAlign = input<TextAlignType>("center");
+  readonly reorderable = input<boolean>(false);
+
+  readonly dataStateChange = output<any>();
+  readonly onChange = output<any>();
+  readonly refreshBtnClick = output<void>();  
+  readonly onReorder = output<FlexiGridReorderModel>();
 
   columnsArray = signal<FlexiGridColumnComponent[]>([]);
 
@@ -100,9 +110,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   private _pageSize: number = 10;
 
-  readonly dataStateChange = output<any>();
-  readonly onChange = output<any>();
-  readonly refreshBtnClick = output<void>();
+
 
   readonly columns = contentChildren(FlexiGridColumnComponent, {descendants: true});
   
@@ -748,5 +756,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(blob, `${this.exportExcelFileName()}.xlsx`);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    const data: FlexiGridReorderModel = {
+      previousIndex: event.previousIndex,
+      currentIndex: event.currentIndex
+    }
+
+    this.onReorder.emit(data);    
   }
 }

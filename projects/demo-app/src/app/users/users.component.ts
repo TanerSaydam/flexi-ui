@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
 import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.module'
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { FlexiGridReorderModel } from '../../../../../dist/flexi-grid/lib/models/flexi-grid-reorder.model';
 
 
 @Component({
@@ -20,6 +22,11 @@ export class UsersComponent {
   get(i: any){
     console.log(i);
     
+  }
+
+  onReOrder(event:FlexiGridReorderModel){
+    console.log(event);
+    moveItemInArray(this.gelirGideler(),event.previousIndex, event.currentIndex);
   }
 }
 

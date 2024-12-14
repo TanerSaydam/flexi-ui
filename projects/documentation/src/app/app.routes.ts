@@ -50,8 +50,8 @@ export const routes: Routes = [
                         loadComponent:() => import("./flexi-grid/data-binding/data-binding.component")
                     },
                     {
-                        path: "draggable",
-                        loadComponent:() => import("./flexi-grid/draggable/draggable.component")
+                        path: "reorderable",
+                        loadComponent:() => import("./flexi-grid/reorderable/reorderable.component")
                     },
                     {
                         path: "export-excel",

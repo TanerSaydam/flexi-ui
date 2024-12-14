@@ -996,34 +996,41 @@ export const resizableHTMLCode: string = `
 </flexi-grid>
 `;
 
-export const draggableTSCode: string = `
+export const reOrderableTSCode: string = `
 import { Component, Input, signal } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { UsersData } from '../data';
 import { FlexiGridModule } from 'flexi-grid';
-import { MyCodeComponent } from '../../my-code/my-code.component';
-import { resizableHTMLCode, resizableTSCode } from '../code';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-draggable',
+  selector: 'app-reorderable',
   standalone: true,
-  imports: [FlexiGridModule, MyCodeComponent],
+  imports: [FlexiGridModule],
   templateUrl: './resizable.component.html',
   styleUrl: './resizable.component.css'
 })
-export class DraggableComponent {
+export class ReOrderableComponent {
   users = signal<UserModel[]>(UsersData);
+
+  onReorder(event:FlexiGridReorderModel){
+    console.log(event);
+    //listede pagination olduğu için eğer sadece görselde sıralansın istiyorsanız aşağıdaki kodu kullanabilirsiniz
+    const newData = [...this.users()];
+    moveItemInArray(newData, event.previousIndex, event.currentIndex);
+    this.users.set(newData);
+  }
 }
 
 `;
 
-export const draggableHTMLCode: string = `
-<flexi-grid [data]="users()" [draggable]="true">
-    <flexi-grid-column [draggable]="true" field="id" title="Id"></flexi-grid-column>
-    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-    <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
-    <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
+export const reOrderableHTMLCode: string = `
+<flexi-grid [data]="users()" [reorderable]="true" (onReorder)="onReorder($event)" reOrderWidth="50px" reOrderTextAlign="center">
+  <flexi-grid-column field="id" title="Id"></flexi-grid-column>
+  <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+  <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+  <flexi-grid-column field="dateOfBirth" title="Date Of Birth"></flexi-grid-column>
+  <flexi-grid-column field="salary" title="Salary"></flexi-grid-column>
 </flexi-grid>
 `;
 

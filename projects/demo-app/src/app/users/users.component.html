@@ -1,6 +1,10 @@
 <app-blank>
    <flexi-grid
-   [data]="gelirGideler()">
+   [data]="gelirGideler()"
+   [showIndex]="true"
+   [reorderable]="true"
+   (onReorder)="onReOrder($event)"
+   >
       <flexi-grid-column field="name" title="Name" />
       <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active', 'Passive']" />
       <flexi-grid-column field="createdDate" title="Created Date" filterType="date" format="dd MMM yyyy HH:mm"  />
