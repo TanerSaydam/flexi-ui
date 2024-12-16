@@ -409,7 +409,8 @@
             let i = $index){
             <tr cdkDrag [cdkDragDisabled]="!reorderable()" [ngStyle]="{ 'min-height': trMinHeight() }" role="row">
               @if(reorderable()){
-                <td
+                <td  
+                  cdkDragHandle               
                   [ngStyle]="{
                     'width': reOrderWidth(),
                     'text-align': reOrderTextAlign(),
