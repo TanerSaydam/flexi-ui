@@ -1,14 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { FlexiGridReorderModel } from '../../../../../dist/flexi-grid/lib/models/flexi-grid-reorder.model';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiStepperModule } from '../../../../flexi-stepper/src/lib/flexi-stepper.module';
+import { FormsModule, NgForm } from '@angular/forms';
 
 
 @Component({
     imports: [    
     BlankComponent,
-    FlexiStepperModule
+    FlexiStepperModule,
+    FormsModule
 ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.css'
@@ -18,16 +19,15 @@ export class UsersComponent {
   gelirGideler = signal<any[]>(gelirGideler);
 
   get(i: any){
-    console.log(i);
-    
-  }
-
-  onReOrder(event:FlexiGridReorderModel){
-    console.log(event);
-    moveItemInArray(this.gelirGideler(),event.previousIndex, event.currentIndex);
-  }
+    console.log(i);   
+  }  
 
   complete(){
+  }
+
+  send(myForm: NgForm){
+    console.log(myForm);
+    
   }
 
 }

@@ -5,20 +5,24 @@
       @for(step of steps.toArray(); track $index){
         <li role="tab" class="flexi-step-li" [class.flexi-step-li-first]="$first" [class.flexi-step-li-last]="$last" [class.flexi-step-li-completed]="activeIndex() > $index" [class.flexi-step-li-active]="activeIndex() === $index">
           <a class="flexi-step-a" (click)="selectStep($index)">            
-            <div class="flexi-step-icon-div" [class.flexi-step-completed]="activeIndex() > $index" [class.flexi-step-active]="activeIndex() === $index">
-              <!-- Tamamlanan adımlar için check simgesi -->          
-              @if(activeIndex() > $index){
-                <span class="material-symbols-outlined flexi-step-icon">check</span>
-              }          
-  
-              <!-- O an aktif olan adım için pencil/pen simgesi -->
-              @if(activeIndex() === $index){
-                <span class="material-symbols-outlined flexi-step-icon" style="color: #0c83ff;">edit</span>
-              }
-  
-              <!-- Henüz gelinmeyen adım için farklı bir simge -->
-              @if(activeIndex() < $index){
-                <span class="flexi-step-icon" style="color: black;">{{$index + 1}}</span>
+            <div class="flexi-step-icon-div" [class.flexi-step-completed]="activeIndex() > $index" [class.flexi-step-active]="activeIndex() === $index" [class.flexi-step-validation-error]="!step.isValid() && checkValidation()">
+              @if(!step.isValid() && checkValidation()){
+                <span class="material-symbols-outlined flexi-step-icon" style="color: white">close</span>
+              }@else {
+                <!-- Tamamlanan adımlar için check simgesi -->          
+                @if(activeIndex() > $index){
+                  <span class="material-symbols-outlined flexi-step-icon">check</span>
+                }          
+    
+                <!-- O an aktif olan adım için pencil/pen simgesi -->
+                @if(activeIndex() === $index){
+                  <span class="material-symbols-outlined flexi-step-icon" style="color: #0c83ff;">edit</span>
+                }
+    
+                <!-- Henüz gelinmeyen adım için farklı bir simge -->
+                @if(activeIndex() < $index){
+                  <span class="flexi-step-icon" style="color: black;">{{$index + 1}}</span>
+                }
               }
             </div>
             {{ step.flexiStepTitle() }}

@@ -125,6 +125,11 @@
   gap: 10px;
 }
 
+.flexi-step-validation-error{
+  background-color: #EF4444 !important;
+  border-color: #EF4444 !important;  
+}
+
 .flexi-step-active{
   background-color: white;
   border-color: #0c83ff;

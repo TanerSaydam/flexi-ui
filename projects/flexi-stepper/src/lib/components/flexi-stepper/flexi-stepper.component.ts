@@ -15,12 +15,22 @@ export class FlexiStepperComponent {
   readonly completeBtnText = input<string>("Tamamla");
   readonly returnFirstStep = input<boolean>(false);
   readonly loading = input<boolean>(false);
-
+  readonly checkValidation = input<boolean>(false);
   readonly onComplete = output();
 
   @ContentChildren(FlexiStepComponent) steps!: QueryList<FlexiStepComponent>;
 
+  private currentStepIsValid(): boolean {
+    const stepArray = this.steps.toArray();
+    const currentStep = stepArray[this.activeIndex()];
+    return currentStep ? currentStep.isValid() ?? true : true;
+  }
+
   nextStep(){
+    if (!this.currentStepIsValid() && this.checkValidation()) {      
+      return;
+    }
+
     if(this.activeIndex() < this.steps.length - 1){
       this.activeIndex.update(prev => prev + 1);
     }
@@ -33,6 +43,10 @@ export class FlexiStepperComponent {
   }
 
   complete(){
+    if (!this.currentStepIsValid() && this.checkValidation()) {      
+      return;
+    }
+
     this.onComplete.emit();
     if(this.returnFirstStep()){
       this.activeIndex.set(0);
@@ -40,6 +54,10 @@ export class FlexiStepperComponent {
   }
 
   selectStep(index: number){
+    if (!this.currentStepIsValid() && this.checkValidation()) {      
+      return;
+    }
+
     this.activeIndex.set(index);
   }
 }
