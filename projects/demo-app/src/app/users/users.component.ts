@@ -1,16 +1,13 @@
 import { Component, signal } from '@angular/core';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiStepperModule } from '../../../../flexi-stepper/src/lib/flexi-stepper.module';
 import { FormsModule, NgForm } from '@angular/forms';
-import { FlexiTreeviewComponent } from '../../../../flexi-treeview/src/lib/flexi-treeview.component';
 
 
 @Component({
     imports: [    
     BlankComponent,
-    FlexiStepperModule,
-    FlexiTreeviewComponent,
+    FlexiStepperModule,    
     FormsModule
 ],
     templateUrl: './users.component.html',

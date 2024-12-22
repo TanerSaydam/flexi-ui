@@ -1,5 +1,13 @@
 <div class="flexi-step-container">
-
+  @if(loading()){
+    <div class="app-spinner-main-container">
+      <div class="app-spinner-container">
+        <div class="app-spinner-1"></div>
+        <div class="app-spinner-2"></div>
+      </div>
+    </div>
+  }
+  
   <div class="flexi-step-header">
     <ul role="tablist">
       @for(step of steps.toArray(); track $index){
@@ -31,15 +39,6 @@
       }
     </ul>
   </div>
-
-  @if(loading()){
-    <div class="app-spinner-main-container">
-      <div class="app-spinner-container">
-        <div class="app-spinner-1"></div>
-        <div class="app-spinner-2"></div>
-      </div>
-    </div>
-  }
 
   @if(steps && steps.length > 0){
   <ng-container>

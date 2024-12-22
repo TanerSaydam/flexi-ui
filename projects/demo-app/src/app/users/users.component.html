@@ -1,12 +1,7 @@
 <app-blank>
-   <app-blank pageTitle="Şirketler">
-
-      <flexi-treeview 
-      [data]="tree()" 
-      [loading]="false"       
-      treeviewTitle="Şirket Listesi"
-      [expend]="true"
-      >
-      </flexi-treeview>  
-    </app-blank>
+   <flexi-stepper [loading]="true">
+      <flexi-step flexiStepTitle="Step 1"></flexi-step>
+      <flexi-step flexiStepTitle="Step 2"></flexi-step>
+      <flexi-step flexiStepTitle="Step 3"></flexi-step>
+   </flexi-stepper>
 </app-blank>
