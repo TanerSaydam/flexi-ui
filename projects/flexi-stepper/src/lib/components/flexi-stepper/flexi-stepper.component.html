@@ -52,7 +52,7 @@
 
   <div class="flexi-stepper-buttons">
     @if(activeIndex() > 0){
-      <button class="flexi-step-btn flexi-step-btn-primary" (click)="prevStep()">
+      <button type="button" class="flexi-step-btn flexi-step-btn-primary" (click)="prevStep()">
         <span class="material-symbols-outlined">
           arrow_back
         </span>
@@ -61,7 +61,7 @@
     }
 
     @if(activeIndex() < steps.length -1){
-      <button class="flexi-step-btn flexi-step-btn-primary" (click)="nextStep()">
+      <button type="button" class="flexi-step-btn flexi-step-btn-primary" (click)="nextStep()">
         Sonraki
         <span class="material-symbols-outlined">
           arrow_forward
@@ -70,7 +70,7 @@
     }
 
     @if(activeIndex() === steps.length -1){
-      <button class="flexi-step-btn flexi-step-btn-primary" (click)="complete()">
+      <button [type]="completeBtnType()" class="flexi-step-btn flexi-step-btn-primary" (click)="complete()">
         {{completeBtnText()}}
         <span class="material-symbols-outlined">
           check

@@ -16,6 +16,8 @@ export class FlexiStepperComponent {
   readonly returnFirstStep = input<boolean>(false);
   readonly loading = input<boolean>(false);
   readonly checkValidation = input<boolean>(false);
+  readonly completeBtnType = input<"button" | "submit">("submit");
+
   readonly onComplete = output();
 
   @ContentChildren(FlexiStepComponent) steps!: QueryList<FlexiStepComponent>;

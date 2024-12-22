@@ -3,12 +3,14 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiStepperModule } from '../../../../flexi-stepper/src/lib/flexi-stepper.module';
 import { FormsModule, NgForm } from '@angular/forms';
+import { FlexiTreeviewComponent } from '../../../../flexi-treeview/src/lib/flexi-treeview.component';
 
 
 @Component({
     imports: [    
     BlankComponent,
     FlexiStepperModule,
+    FlexiTreeviewComponent,
     FormsModule
 ],
     templateUrl: './users.component.html',
@@ -18,6 +20,76 @@ export class UsersComponent {
   data = signal<KasaHareketiResponseModel>(new KasaHareketiResponseModel());
   gelirGideler = signal<any[]>(gelirGideler);
 
+  tree = signal<any[]>([
+    {
+        "id": "3bcc273b-82fa-4f3b-8126-1bfbab887ec6",
+        "code": "Test Company 1",
+        "children": [
+            {
+                "id": "2e8e08b2-8d41-44d0-b03c-1157363ea8a4",
+                "code": "Test Company 1",
+                "isMain": false,
+                "indeterminate": false,
+                "name": "Merkez",
+                "children": [
+                    {
+                        "id": "2024",
+                        "code": "Merkez",
+                        "name": "2024",
+                        "isMain": false,
+                        "indeterminate": false
+                    },
+                    {
+                        "id": "2025",
+                        "code": "Merkez",
+                        "name": "2025",
+                        "isMain": false,
+                        "indeterminate": false
+                    }
+                ],
+                "expanded": true
+            }
+        ],
+        "name": "Test Company 1",
+        "isMain": false,
+        "indeterminate": false,
+        "expanded": true
+    },
+    {
+        "id": "259b5fb3-1671-43c8-9a05-80feb537a1ac",
+        "code": "Test Company 2",
+        "children": [
+            {
+                "id": "92ceec34-5f9f-42e5-aeef-b46b53ee8448",
+                "code": "Test Company 2",
+                "isMain": false,
+                "indeterminate": false,
+                "name": "Merkez",
+                "children": [
+                    {
+                        "id": "2024",
+                        "code": "Merkez",
+                        "name": "2024",
+                        "isMain": false,
+                        "indeterminate": false
+                    },
+                    {
+                        "id": "2025",
+                        "code": "Merkez",
+                        "name": "2025",
+                        "isMain": false,
+                        "indeterminate": false
+                    }
+                ],
+                "expanded": true
+            }
+        ],
+        "name": "Test Company 2",
+        "isMain": false,
+        "indeterminate": false,
+        "expanded": true
+    }
+])
   get(i: any){
     console.log(i);   
   }  

@@ -1,104 +1,12 @@
 <app-blank>
-   <flexi-stepper #stepper (onComplete)="complete()" [returnFirstStep]="true" [loading]="false" [checkValidation]="true">
-      <flexi-step flexiStepTitle="User Information" [isValid]="myForm.dirty ? myForm.valid : true">
-         <form #myForm="ngForm">
-            <div class="form-group">
-               <label>First Name</label>
-               <input type="text" class="form-control" required name="firstName" ngModel>
-            </div>
+   <app-blank pageTitle="Şirketler">
 
-            <div class="form-group mt-2">
-               <label>Last Name</label>
-               <input type="text" class="form-control" required name="lastName" ngModel>
-            </div>
-
-            <div class="form-group mt-2">
-               <label>Phone Number 1</label>
-               <input type="text" class="form-control" required name="phoneNumber1" ngModel>
-            </div>
-
-            <div class="form-group mt-2">
-               <label>Phone Number 2</label>
-               <input type="text" class="form-control" name="phoneNumber2" ngModel>
-            </div>
-
-            <button (click)="send(myForm)">send</button>
-         </form>
-      </flexi-step>
-
-      <flexi-step flexiStepTitle="Company Information">
-         <form>
-            <div class="form-group">
-               <label>Name</label>
-               <input type="text" class="form-control">
-            </div>
-
-            <div class="row form-group">
-               <div class="col-md-6">
-                  <div class="form-group mt-2">
-                     <label>Tax</label>
-                     <input type="text" class="form-control">
-                  </div>                        
-               </div>
-
-               <div class="col-md-6">
-                  <div class="form-group mt-2">
-                     <label>Tax Number</label>
-                     <input type="text" class="form-control">
-                  </div>
-               </div>
-            </div>            
-         </form>
-      </flexi-step>
-
-      <flexi-step flexiStepTitle="User Information">
-         <form>
-            <div class="form-group">
-               <label>First Name</label>
-               <input type="text" class="form-control" required>
-            </div>
-
-            <div class="form-group mt-2">
-               <label>Last Name</label>
-               <input type="text" class="form-control" required>
-            </div>
-
-            <div class="form-group mt-2">
-               <label>Phone Number 1</label>
-               <input type="text" class="form-control" required>
-            </div>
-
-            <div class="form-group mt-2">
-               <label>Phone Number 2</label>
-               <input type="text" class="form-control">
-            </div>            
-         </form>
-      </flexi-step>
-
-      <flexi-step flexiStepTitle="Company Information">
-         <form>
-            <div class="form-group">
-               <label>Name</label>
-               <input type="text" class="form-control">
-            </div>
-
-            <div class="row form-group">
-               <div class="col-md-6">
-                  <div class="form-group mt-2">
-                     <label>Tax</label>
-                     <input type="text" class="form-control">
-                  </div>                        
-               </div>
-
-               <div class="col-md-6">
-                  <div class="form-group mt-2">
-                     <label>Tax Number</label>
-                     <input type="text" class="form-control">
-                  </div>
-               </div>
-            </div>            
-         </form>
-      </flexi-step>
-
-   </flexi-stepper>
-</app-blank>  
+      <flexi-treeview 
+      [data]="tree()" 
+      [loading]="false"       
+      treeviewTitle="Şirket Listesi"
+      [expend]="true"
+      >
+      </flexi-treeview>  
+    </app-blank>
+</app-blank>
