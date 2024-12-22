@@ -6,15 +6,27 @@ import { ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } f
     imports: [CommonModule],
     template: `
     <button class="flexi-button flexi-button-{{btnColor()}}" [type]="btnType()" [disabled]="btnDisabled()">
-    <div class="flexi-button-content" [style]="btnStyle()">        
-        <span class="material-symbols-outlined flexi-button-size-{{btnSize()}}">
+    <div class="flexi-button-content" [style]="btnStyle()">
+        @if(firstText()){
+          @if(btnText()){
+            <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-right]="btnText() ? '3px' : ''" [style.padding-left]="btnText() ? '5px' : ''">
+              {{ btnText() }}
+            </span>
+          }
+          <span class="material-symbols-outlined flexi-button-size-{{btnSize()}}">
           {{ btnIcon() }}
-        </span>
-        @if(btnText()){
-          <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-left]="btnText() ? '3px' : ''" [style.padding-right]="btnText() ? '5px' : ''">
-            {{ btnText() }}
           </span>
+        }@else {
+          <span class="material-symbols-outlined flexi-button-size-{{btnSize()}}">
+          {{ btnIcon() }}
+          </span>
+          @if(btnText()){
+            <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-left]="btnText() ? '3px' : ''" [style.padding-right]="btnText() ? '5px' : ''">
+              {{ btnText() }}
+            </span>
+          }
         }
+        
     </div>
     </button>
   `,
@@ -31,6 +43,7 @@ export class FlexiButtonComponent {
   readonly btnStyle = input<string>("");
   readonly btnType = input<FlexiButtonType>("button");
   readonly btnDisabled = input<boolean>(false);
+  readonly firstText = input<boolean>(false);
 }
 
 export type FlexiButtonColorType = "default" | "primary" | "success" | "danger" | "warning" | "info" | "dark";

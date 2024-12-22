@@ -26,6 +26,9 @@
       "flexi-select": [
         "./dist/flexi-select"
       ],
+      "flexi-stepper": [
+        "./dist/flexi-stepper"
+      ],
       "flexi-toast": [
         "./dist/flexi-toast"
       ],

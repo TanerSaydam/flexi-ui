@@ -1,0 +1,77 @@
+<div class="flexi-step-container">
+
+  <div class="flexi-step-header">
+    <ul role="tablist">
+      @for(step of steps.toArray(); track $index){
+        <li role="tab" class="flexi-step-li" [class.flexi-step-li-first]="$first" [class.flexi-step-li-last]="$last" [class.flexi-step-li-completed]="activeIndex() > $index" [class.flexi-step-li-active]="activeIndex() === $index">
+          <a class="flexi-step-a" (click)="selectStep($index)">            
+            <div class="flexi-step-icon-div" [class.flexi-step-completed]="activeIndex() > $index" [class.flexi-step-active]="activeIndex() === $index">
+              <!-- Tamamlanan adımlar için check simgesi -->          
+              @if(activeIndex() > $index){
+                <span class="material-symbols-outlined flexi-step-icon">check</span>
+              }          
+  
+              <!-- O an aktif olan adım için pencil/pen simgesi -->
+              @if(activeIndex() === $index){
+                <span class="material-symbols-outlined flexi-step-icon" style="color: #0c83ff;">edit</span>
+              }
+  
+              <!-- Henüz gelinmeyen adım için farklı bir simge -->
+              @if(activeIndex() < $index){
+                <span class="flexi-step-icon" style="color: black;">{{$index + 1}}</span>
+              }
+            </div>
+            {{ step.flexiStepTitle() }}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+
+  @if(loading()){
+    <div class="app-spinner-main-container">
+      <div class="app-spinner-container">
+        <div class="app-spinner-1"></div>
+        <div class="app-spinner-2"></div>
+      </div>
+    </div>
+  }
+
+  @if(steps && steps.length > 0){
+  <ng-container>
+    <ng-container
+      [ngTemplateOutlet]="steps.toArray()[activeIndex()].templateRef()!"
+    >
+    </ng-container>
+  </ng-container>
+  }
+
+  <div class="flexi-stepper-buttons">
+    @if(activeIndex() > 0){
+      <button class="flexi-step-btn flexi-step-btn-primary" (click)="prevStep()">
+        <span class="material-symbols-outlined">
+          arrow_back
+        </span>
+        Önceki
+      </button>        
+    }
+
+    @if(activeIndex() < steps.length -1){
+      <button class="flexi-step-btn flexi-step-btn-primary" (click)="nextStep()">
+        Sonraki
+        <span class="material-symbols-outlined">
+          arrow_forward
+        </span>
+      </button>        
+    }
+
+    @if(activeIndex() === steps.length -1){
+      <button class="flexi-step-btn flexi-step-btn-primary" (click)="complete()">
+        {{completeBtnText()}}
+        <span class="material-symbols-outlined">
+          check
+        </span>
+      </button>        
+    }
+  </div>
+</div>

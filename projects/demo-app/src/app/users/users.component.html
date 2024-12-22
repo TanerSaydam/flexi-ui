@@ -1,15 +1,102 @@
 <app-blank>
-   <flexi-grid
-   [data]="gelirGideler()"
-   [showIndex]="true"
-   [reorderable]="true"
-   (onReorder)="onReOrder($event)"
-   >
-      <flexi-grid-column field="name" title="Name" />
-      <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active', 'Passive']" />
-      <flexi-grid-column field="createdDate" title="Created Date" filterType="date" format="dd MMM yyyy HH:mm"  />
-      <flexi-grid-column field="createdBy" title="Created By"  />
-      <flexi-grid-column field="updatedDate" title="Updated Date" filterType="date" format="dd MMM yyyy HH:mm"  />
-      <flexi-grid-column field="updatedBy" title="Updated By"  />
-   </flexi-grid>
-</app-blank>
+   <flexi-stepper #stepper (onComplete)="complete()" [returnFirstStep]="true" [loading]="false">
+      <flexi-step flexiStepTitle="User Information">
+         <form>
+            <div class="form-group">
+               <label>First Name</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group mt-2">
+               <label>Last Name</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group mt-2">
+               <label>Phone Number 1</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group mt-2">
+               <label>Phone Number 2</label>
+               <input type="text" class="form-control">
+            </div>            
+         </form>
+      </flexi-step>
+
+      <flexi-step flexiStepTitle="Company Information">
+         <form>
+            <div class="form-group">
+               <label>Name</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="row form-group">
+               <div class="col-md-6">
+                  <div class="form-group mt-2">
+                     <label>Tax</label>
+                     <input type="text" class="form-control">
+                  </div>                        
+               </div>
+
+               <div class="col-md-6">
+                  <div class="form-group mt-2">
+                     <label>Tax Number</label>
+                     <input type="text" class="form-control">
+                  </div>
+               </div>
+            </div>            
+         </form>
+      </flexi-step>
+
+      <flexi-step flexiStepTitle="User Information">
+         <form>
+            <div class="form-group">
+               <label>First Name</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group mt-2">
+               <label>Last Name</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group mt-2">
+               <label>Phone Number 1</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group mt-2">
+               <label>Phone Number 2</label>
+               <input type="text" class="form-control">
+            </div>            
+         </form>
+      </flexi-step>
+
+      <flexi-step flexiStepTitle="Company Information">
+         <form>
+            <div class="form-group">
+               <label>Name</label>
+               <input type="text" class="form-control">
+            </div>
+
+            <div class="row form-group">
+               <div class="col-md-6">
+                  <div class="form-group mt-2">
+                     <label>Tax</label>
+                     <input type="text" class="form-control">
+                  </div>                        
+               </div>
+
+               <div class="col-md-6">
+                  <div class="form-group mt-2">
+                     <label>Tax Number</label>
+                     <input type="text" class="form-control">
+                  </div>
+               </div>
+            </div>            
+         </form>
+      </flexi-step>
+
+   </flexi-stepper>
+</app-blank>  

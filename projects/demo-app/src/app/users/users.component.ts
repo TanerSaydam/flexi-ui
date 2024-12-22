@@ -1,16 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { BlankComponent } from '../blank/blank.component';
-import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
-import { FlexiPopupModule } from '../../../../flexi-popup/src/lib/flexi-popup.module'
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { FlexiGridReorderModel } from '../../../../../dist/flexi-grid/lib/models/flexi-grid-reorder.model';
+import { BlankComponent } from '../blank/blank.component';
+import { FlexiStepperModule } from '../../../../flexi-stepper/src/lib/flexi-stepper.module';
 
 
 @Component({
-    imports: [
-    BlankComponent,        
-    FlexiGridModule,    
-    FlexiPopupModule
+    imports: [    
+    BlankComponent,
+    FlexiStepperModule
 ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.css'
@@ -28,6 +26,10 @@ export class UsersComponent {
     console.log(event);
     moveItemInArray(this.gelirGideler(),event.previousIndex, event.currentIndex);
   }
+
+  complete(){
+  }
+
 }
 
 export class KasaHareketiResponseModel{
