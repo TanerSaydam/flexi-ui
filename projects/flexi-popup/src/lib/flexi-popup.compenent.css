@@ -47,6 +47,10 @@
     transform: scale(0.8);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
 }
 
 .flexi-popup-backdrop.visible .flexi-popup-container {
@@ -64,10 +68,9 @@
 
 .flexi-popup-content {
     flex-grow: 1; 
-    overflow-y: auto; 
+    overflow: auto; 
     padding: 1rem;    
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 90vh;
 }
 
 .flexi-popup-actions {

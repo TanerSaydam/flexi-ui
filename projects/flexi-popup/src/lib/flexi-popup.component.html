@@ -1,23 +1,27 @@
 <div [attr.data-bs-theme]="themeClass()" class="flexi-popup-backdrop" [class.visible]="popupVisibe()">
     <div class="flexi-popup-container" [style.width]="width()" [style.height]="height()">
-        <div class="flexi-popup-header">
-            <span class="flexi-popup-title">{{popupTitle()}}</span>
-            <flexi-button (click)="closePopup()" [btnColor]="themeClass() === 'dark' ? 'dark' : 'default'" btnIcon="close" btnSize="small" />
-        </div>
-        <div style="position: relative;">
-            @if(loading()){
-                <div class="app-spinner-main-container">
-                  <div class="app-spinner-container">
-                    <div class="app-spinner-1"></div>
-                    <div class="app-spinner-2"></div>
-                  </div>
-                </div>
-            }
-            
-            <div class="flexi-popup-content">            
-                <ng-content></ng-content>
+        <div>
+            <div class="flexi-popup-header">
+                <span class="flexi-popup-title">{{popupTitle()}}</span>
+                <flexi-button (click)="closePopup()" [btnColor]="themeClass() === 'dark' ? 'dark' : 'default'" btnIcon="close" btnSize="small" />
             </div>
-            @if (showActionButtons()) {
+            <div style="position: relative;">
+                @if(loading()){
+                    <div class="app-spinner-main-container">
+                      <div class="app-spinner-container">
+                        <div class="app-spinner-1"></div>
+                        <div class="app-spinner-2"></div>
+                      </div>
+                    </div>
+                }
+                
+                <div class="flexi-popup-content" [style]="'height: ' + calculateContent()">
+                    <ng-content></ng-content>
+                </div>            
+            </div>
+        </div>
+
+        @if (showActionButtons()) {
             <div class="flexi-popup-actions">
                 @if(actionTemplate){
                 <ng-container>
@@ -28,7 +32,6 @@
                 <flexi-button [btnType]="btnType()" (click)="saveChanges()" btnSize="large" [btnIcon]="saveBtnIcon()" btnColor="primary" [btnText]="saveBtnText()" />
                 }
             </div>
-            }                        
-        </div>
+            }
     </div>
 </div>
