@@ -43,6 +43,9 @@
       ],
       "my-lib": [
         "./dist/my-lib"
+      ],
+      "schematics": [
+        "./dist/schematics"
       ]
     },
     "esModuleInterop": true,
