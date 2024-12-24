@@ -1,0 +1,124 @@
+<app-blank>
+    <div class="card">        
+        <div class="card-body">
+            <h3><b>Light button</b></h3>
+            <p>Light button is considered default in the UI. Use <code>btnColor="light"</code> attribute in button element</p>
+            <div class="d-flex gap-1 align-items-end">            
+                <flexi-button btnSize="small" btnText="Default button"/>
+                <flexi-button btnSize="medium" btnText="Default button"/>
+                <flexi-button btnSize="large" btnText="Default button"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Light with icon</b></h3>
+            <p>Light button can be used with text, icons or combination of both. There is no limit in number of icons per button</p>
+            <div class="d-flex gap-1 align-items-end">                
+                <flexi-button btnSize="small" btnIcon="task_alt" btnText="With icon"/>
+                <flexi-button btnSize="medium" btnIcon="task_alt" btnText="With icon"/>
+                <flexi-button btnSize="large" btnIcon="task_alt" btnText="With icon"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Solid button</b></h3>
+            <p>Solid button supports 14 predefined colors. Use <code>btnColor="[color]"</code> classes in anchor, button or input element</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnColor="primary" btnText="Default button"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Solid with icon</b></h3>
+            <p>Solid button can be used with text, icons or combination of both. There is no limit in number of icons per button</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnIcon="select_check_box" btnColor="primary" btnText="With icon"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Rounded button</b></h3>
+            <p>Use a combination of <code>.btn</code> and <code>.rounded-pill</code> classes in button, anchor or input element to make any button fully rounded</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnColor="primary" btnText="Rounded button" [btnRounded]="true"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Rounded with icon</b></h3>
+            <p>Rounded button can be also used with text label, icons and/or combination of both. No extra adjustments are required</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnIcon="select_check_box" btnColor="primary" btnText="With Icon" [btnRounded]="true"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Icon button</b></h3>
+            <p>Button can be used with icon only. For better sizing (width = height), use optional <code>.btn-icon</code> class in button element</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnSize="small" btnIcon="attach_file" btnColor="primary" />
+                <flexi-button btnSize="medium" btnIcon="attach_file" btnColor="primary" />
+                <flexi-button btnSize="large" btnIcon="attach_file" btnColor="primary" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Rounded with icon</b></h3>
+            <p>Add <code>.rounded-pill</code> to <code>.btn-icon</code> to show perfectly rounded button in 38x38 size. Works with all button styles and sizes</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnIcon="attach_file" btnColor="primary" [btnRounded]="true" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Floating button</b></h3>
+            <p>Button in slightly bigger size to stand out and attract more attention to specific actions. Supports all button colors and options</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnIcon="attach_file" btnColor="success" btnSize="small" />
+                <flexi-button btnIcon="download" btnColor="danger" btnSize="large" />
+                <flexi-button btnIcon="refresh" btnColor="indigo" btnSize="medium" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Floating with text</b></h3>
+            <p>In floating buttons text label is displayed on the second line. Adjust text alignment or spacing with our utility classes</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnIcon="attach_file" btnColor="success" btnSize="small" btnText="Search" [btnFloat]="true" />
+                <flexi-button btnIcon="download" btnColor="danger" btnSize="large" btnText="Download" [btnFloat]="true" />
+                <flexi-button btnIcon="refresh" btnColor="indigo" btnSize="medium" btnText="Update" [btnFloat]="true" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">        
+        <div class="card-body">
+            <h3><b>Rounded floating buttons</b></h3>
+            <p>Floating buttons without text label can be displayed in fully rounded style. Just add <code>.rounded-pill</code> to the button element</p>
+            <div class="d-flex gap-1 align-items-end">
+                <flexi-button btnIcon="attach_file" btnColor="success" btnSize="small" [btnRounded]="true" />
+                <flexi-button btnIcon="download" btnColor="danger" btnSize="large" [btnRounded]="true" />
+                <flexi-button btnIcon="refresh" btnColor="indigo" btnSize="medium" [btnRounded]="true" />
+            </div>
+        </div>
+    </div>    
+</app-blank>
+

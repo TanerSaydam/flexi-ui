@@ -4,7 +4,7 @@
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0",
-    "flexi-button": "^19.0.6"
+    "flexi-button": "^19.0.8"
   },
   "dependencies": {
     "tslib": "^2.3.0"

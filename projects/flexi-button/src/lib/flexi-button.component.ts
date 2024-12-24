@@ -4,49 +4,26 @@ import { ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } f
 @Component({
     selector: 'flexi-button',
     imports: [CommonModule],
-    template: `
-    <button class="flexi-button flexi-button-{{btnColor()}}" [type]="btnType()" [disabled]="btnDisabled()">
-    <div class="flexi-button-content" [style]="btnStyle()">
-        @if(firstText()){
-          @if(btnText()){
-            <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-right]="btnText() ? '3px' : ''" [style.padding-left]="btnText() ? '5px' : ''">
-              {{ btnText() }}
-            </span>
-          }
-          <span class="material-symbols-outlined flexi-button-size-{{btnSize()}}">
-          {{ btnIcon() }}
-          </span>
-        }@else {
-          <span class="material-symbols-outlined flexi-button-size-{{btnSize()}}">
-          {{ btnIcon() }}
-          </span>
-          @if(btnText()){
-            <span class="flexi-button-text flexi-button-text-size-{{btnSize()}}" [style.padding-left]="btnText() ? '3px' : ''" [style.padding-right]="btnText() ? '5px' : ''">
-              {{ btnText() }}
-            </span>
-          }
-        }
-        
-    </div>
-    </button>
-  `,
+    templateUrl: "./flexi-button.component.html",
     styleUrl: './flexi-button.component.css',
     host: { '[attr.data-instance-id]': 'instanceId' },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlexiButtonComponent {
-  readonly btnIcon = input.required<string>();
-  readonly btnColor = input<FlexiButtonColorType>('default');
-  readonly btnSize = input<FlexiButtonSizeType>('default');
-  readonly btnText = input<string>('');
-  readonly btnStyle = input<string>("");
+  readonly btnIcon = input<string | undefined>(undefined);
+  readonly btnColor = input<FlexiButtonColorType>('light');
+  readonly btnSize = input<FlexiButtonSizeType>('medium');
+  readonly btnText = input<string | undefined>(undefined);  
   readonly btnType = input<FlexiButtonType>("button");
   readonly btnDisabled = input<boolean>(false);
   readonly firstText = input<boolean>(false);
+  readonly btnRounded = input<boolean>(false);
+  readonly loading = input<boolean>(false);
+  readonly btnFloat = input<boolean>(false);
+  readonly loadingText = input<string | undefined>(undefined);
 }
 
-export type FlexiButtonColorType = "default" | "primary" | "success" | "danger" | "warning" | "info" | "dark";
-
-export type FlexiButtonSizeType = "default" | "small" | "large"
+export type FlexiButtonColorType = "light" | "primary" | "success" | "danger" | "warning" | "info" | "dark" | "indigo" | "purple" | "pink" | "teal" | "yellow" | "secondary" | "black" | "white";
+export type FlexiButtonSizeType = "small" | "medium" | "large"
 export type FlexiButtonType = "button" | "submit"
