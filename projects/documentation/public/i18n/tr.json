@@ -12,7 +12,17 @@
         "INSTALLATION":"Kurulum",
         "USAGE":"Kullanım",
         "DESCRIPTION": "Özelleştirilebilir şık ve kullanışlı button componenti",
-        "ICON": "Buradan istediğiniz iconu kullanabilirsiniz"
+        "ICON": "Buradan istediğiniz iconu kullanabilirsiniz",
+        "WITH_TEXT": "Text ile",
+        "WITH_ICON": "Icon ile",
+        "WITH_TEXT_AND_ICON": "Text ve Icon ile",
+        "WITH_COLOR": "Renk ile",
+        "ROUNDED": "Rounded",
+        "LOADING": "Loading",
+        "SIZE": "Size",
+        "COLOR": "Renk",
+        "CUSTOMIZE_WITH": "Width özelleştir",
+        "CUSTOMIZE_CONTENT": "Buton içini özelleştir"
     },
     "LANGUAGE":{
         "TURKISH": "Türkçe",

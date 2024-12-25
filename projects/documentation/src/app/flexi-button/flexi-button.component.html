@@ -1,18 +1,103 @@
 <app-blank pageName="Flexi Button" pageDescription="Angular Flexi Button">
-    <app-card id="installation" cardTitle="FLEXI_BUTTON.INSTALLATION" *transloco="let t">
-        <div class="card-body">
-            <p>{{t('FLEXI_BUTTON.DESCRIPTION')}}</p>
-            <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-button</code></pre>
-            <pre><code style="font-size: larger; font-weight: 700;">{{import()}}</code></pre>            
-            <p>{{t('FLEXI_BUTTON.ICON')}} <a href="https://fonts.google.com/icons?selected=Material+Symbols+Outlined:download:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368&icon.platform=web" target="_blank">Google Material Symbols.</a></p>
-        </div>
+  <app-card id="installation" cardTitle="FLEXI_BUTTON.INSTALLATION">
+      <p>{{translate('DESCRIPTION')}}</p>
+      <pre><code class="language-powershell">npm install flexi-button</code></pre>
+      <pre><code class="language-ts">{{import()}}</code></pre>      
     </app-card>
 
     <app-card cardTitle="FLEXI_BUTTON.USAGE">
-      <div class="card">
-        <div class="card-body">
-          <flexi-button btnText="Default button"/>
+      <div>
+        <h3>{{translate('WITH_TEXT')}}</h3>
+        <flexi-button btnText="Default button" btnSize="medium"/>
+        <pre><code class="language-html">{{withText()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('WITH_ICON')}}</h3>
+        <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium"/>
+        <p class="mt-2">{{translate('ICON')}} <a href="https://fonts.google.com/icons?selected=Material+Symbols+Outlined:download:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368&icon.platform=web" target="_blank">Google Material Symbols.</a></p>
+        <pre><code class="language-html">{{withIcon()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('WITH_TEXT_AND_ICON')}}</h3>
+        <flexi-button btnIcon="print" btnText="With icon" btnSize="medium"/>
+        <pre><code class="language-html">{{withTextAndIcon()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('WITH_COLOR')}}</h3>
+        <flexi-button btnIcon="print" btnText="With icon" btnSize="medium" btnColor="primary"/>
+        <pre><code class="language-html">{{withColor()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('ROUNDED')}}</h3>
+        <div class="d-flex gap-1">
+          <flexi-button btnIcon="print" btnText="With icon" btnSize="medium" btnColor="primary" [btnRounded]="true"/>
+          <flexi-button btnIcon="print" title="With icon" flexiTooltip="right" btnSize="medium" btnColor="primary" [btnRounded]="true"/>
         </div>
+        <pre><code class="language-html">{{rounded()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('LOADING')}}</h3>
+        <div class="d-flex gap-1">
+          <flexi-button btnSize="medium" btnColor="primary" [loading]="true"/>
+          <flexi-button btnSize="medium" btnColor="primary" [loading]="true" loadingText="Loading..."/>
+          <flexi-button btnSize="medium" btnColor="primary" [loading]="true" loadingText="Loading..." [btnRounded]="true"/>
+        </div>
+        <pre><code class="language-html">{{loading()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('SIZE')}}</h3>
+        <div class="d-flex gap-1 align-items-end">
+          <flexi-button btnIcon="print" title="With icon" flexiTooltip btnSize="small"/>
+          <flexi-button btnIcon="print" title="With icon" flexiTooltip btnSize="medium"/>
+          <flexi-button btnIcon="print" title="With icon" flexiTooltip btnSize="large"/>
+        </div>
+        <div class="d-flex gap-1 align-items-end mt-2">
+          <flexi-button btnIcon="print" btnText="With icon" btnSize="small"/>
+          <flexi-button btnIcon="print" btnText="With icon" btnSize="medium"/>
+          <flexi-button btnIcon="print" btnText="With icon" btnSize="large"/>
+        </div>
+        <pre><code class="language-html">{{size()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('COLOR')}}</h3>
+        <div class="d-flex gap-1">
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="light"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="primary"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="warning"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="info"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="pink"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="danger"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="indigo"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="black"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="purple"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="secondary"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="success"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="teal"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="white"/>
+          <flexi-button btnIcon="print" title="with icon" flexiTooltip btnSize="medium" btnColor="yellow"/>
+        </div>
+        <pre><code class="language-html">{{color()}}</code></pre>
+      </div>
+      <hr>
+      <div>
+        <h3>{{translate('CUSTOMIZE_WITH')}}</h3>
+        <flexi-button btnIcon="print" btnText="with icon" btnSize="medium" btnWidth="20%"/>
+        <pre><code class="language-html">{{width()}}</code></pre>
+      </div>
+      <hr/>
+      <div>
+        <h3>{{translate('CUSTOMIZE_CONTENT')}}</h3>
+        <flexi-button btnSize="medium">
+          <span>Customize Button</span>
+        </flexi-button>
+        <pre><code class="language-html">{{customize()}}</code></pre>
       </div>
     </app-card>
 </app-blank>

@@ -142,30 +142,42 @@
                         </span>
                       </div>
                       }
+                    </li>                    
+                </ul>
+                <ul style="list-style: none;" class="d-flex justify-content-between">                 
+                  @if(transloco.getActiveLang() === "tr"){
+                    <li class="nav-item">
+                      <div style="cursor: pointer;" (click)="changeLanguage('en')" class="nav-link">                        
+                        <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
+                          translate
+                        </span>
+                        <span class="nav-link-title" *transloco="let t">
+                          {{t('LANGUAGE.ENGLISH')}}
+                        </span>
+                      </div>
                     </li>
-                    @if(transloco.getActiveLang() === "tr"){
-                      <li class="nav-item">
-                        <div style="cursor: pointer;" (click)="changeLanguage('en')" class="nav-link">                        
-                          <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
-                            translate
-                          </span>
-                          <span class="nav-link-title" *transloco="let t">
-                            {{t('LANGUAGE.ENGLISH')}}
-                          </span>
-                        </div>
-                      </li>
-                    }@else{
-                      <li class="nav-item">
-                        <div style="cursor: pointer;" (click)="changeLanguage('tr')" class="nav-link">
-                          <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
-                            translate
-                          </span>
-                          <span class="nav-link-title" *transloco="let t">
-                            {{t('LANGUAGE.TURKISH')}}
-                          </span>
-                        </div>
-                      </li>
-                    }
+                  }@else{
+                    <li class="nav-item">
+                      <div style="cursor: pointer;" (click)="changeLanguage('tr')" class="nav-link">
+                        <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
+                          translate
+                        </span>
+                        <span class="nav-link-title" *transloco="let t">
+                          {{t('LANGUAGE.TURKISH')}}
+                        </span>
+                      </div>
+                    </li>
+                  }
+                  <li class="nav-item">
+                    <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank" style="cursor: pointer;" class="nav-link">                        
+                      <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
+                        favorite
+                      </span>
+                      <span class="nav-link-title">
+                        Github
+                      </span>
+                    </a>
+                  </li>
                 </ul>
             </div>
         </div>

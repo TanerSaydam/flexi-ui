@@ -8,9 +8,21 @@
         "PAGE_DESCRIPTION": "Flexi UI Home Page",
         "WELCOME": "Home Page"
     },
-    "FLEXI_BUTTON":{
-        "INSTALLATION":"Installation",
-        "USAGE":"Usage"
+    "FLEXI_BUTTON": {
+        "INSTALLATION": "Installation",
+        "USAGE": "Usage",
+        "DESCRIPTION": "A customizable, stylish, and practical button component",
+        "ICON": "You can use any icon you want from here",
+        "WITH_TEXT": "With Text",
+        "WITH_ICON": "With Icon",
+        "WITH_TEXT_AND_ICON": "With Text and Icon",
+        "WITH_COLOR": "With Color",
+        "ROUNDED": "Rounded",
+        "LOADING": "Loading",
+        "SIZE": "Size",
+        "COLOR": "Color",
+        "CUSTOMIZE_WITH": "Customize Width",
+        "CUSTOMIZE_CONTENT": "Customize Button Content"
     },
     "LANGUAGE":{
         "TURKISH": "Turkish",
