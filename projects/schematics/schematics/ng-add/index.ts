@@ -12,13 +12,13 @@ export function ngAdd() : Rule {
             {
                 type: NodeDependencyType.Default,
                 name: 'flexi-button',
-                version: '^19.0.8',
+                version: '^19.0.13',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-grid',
-                version: '^19.0.28',
+                version: '^19.0.32',
                 overwrite: true
               },
               {
