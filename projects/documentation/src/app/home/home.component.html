@@ -1,16 +1,10 @@
-<title>Flexi UI | Ana Sayfa</title>
-<app-blank pageName="Ana Sayfa" pageDescription="Flexi UI Ana Sayfası">
-    <app-card cardTitle="Hoşgeldiniz">
-        <h1>Flexi UI nedir?</h1>
-        <p>Flexi UI bir Angular UI kütüphanesidir. İçerisinde ücretsiz şekilde kullanabileceğiniz UI componentleri yer almaktadır. </p>
-        <p>Angular kullanarak tasarlamak istediğimiz güçlü frontendler için en çok ihtiyaç duyduğumuz tasarımları bu UI kütüphanesi altında sizlerle paylaşmaya çalışacağım.</p>
-        <p>Tasarımların tamamı benim olup, tüm kodlar açık kaynaklı paylaşımdadır.</p>
-        <p>İsterseniz sizlerde kodlara destek olabilir, öneri ve destekleriniz ile bu UI kütüphanesinin büyümesine fayda sağlayabilirsiniz.</p>
+<app-blank pageName="HOME.PAGE_NAME" pageDescription="HOME.PAGE_DESCRIPTION">
+    <app-card cardTitle="HOME.WELCOME" *transloco="let t">
+        <h1>{{t('HOME.TITLE')}}</h1>
+        <p>{{t('HOME.DESCRIPTION')}}</p>
+        <p><b>{{t('HOME.BEST_REGARDS')}}</b></p>        
         <p>
-            <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub Reposuna ulaşmak için tıklayın</a>            
+            <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">{{t('HOME.GITHUB_LINK')}}</a>
         </p>
-        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın 😊</p>
-        <p><b>Saygılarımla Taner Saydam</b></p>
-
     </app-card>
 </app-blank>

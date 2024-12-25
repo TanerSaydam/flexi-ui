@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-blank',
-    imports: [],
-    templateUrl: './blank.component.html',
-    styleUrl: './blank.component.css',
-    encapsulation: ViewEncapsulation.None
+    imports: [TranslocoModule],
+    templateUrl: './blank.component.html',    
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BlankComponent {
   readonly pageName = input<string>("");

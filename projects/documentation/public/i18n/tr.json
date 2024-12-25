@@ -1,0 +1,11 @@
+{
+    "HOME":{
+        "TITLE": "Flexi UI Nedir?",
+        "DESCRIPTION": "Flexi UI, bir Angular UI kütüphanesidir ve içerisinde ücretsiz olarak kullanabileceğiniz çeşitli güçlü UI bileşenleri bulunmaktadır. Modern ve etkileyici frontend tasarımları oluşturmak için ihtiyaç duyduğunuz bileşenleri bu kütüphane altında bir araya getirmeye çalıştım. Siz de bu projeye kod desteği sağlayarak ya da öneri ve katkılarınızla büyümesine yardımcı olabilirsiniz. Ayrıca, projeye destek olmak için GitHub reposuna bir yıldız (⭐) bırakmayı unutmayın 😊",
+        "BEST_REGARDS": "Saygılarımla, Taner Saydam",
+        "GITHUB_LINK": "GitHub Reposuna ulaşmak için tıklayın",
+        "PAGE_NAME": "Ana Sayfa",
+        "PAGE_DESCRIPTION": "Flexi UI Ana Sayfa",
+        "WELCOME": "Ana Sayfa"
+    }
+}

@@ -616,7 +616,7 @@ export const captionHTMLCode: string = `
     >
 
     <ng-template #captionTemplate>
-       <flexi-button btnColor="default">
+       <flexi-button btnColor="light">
           <i class="fa-solid fa-plus me-1"></i>
           Kullanıcı ekle
        </flexi-button>
