@@ -120,7 +120,7 @@
                   @if(resizable() && column.resizable()){
                   <div
                     class="flexi-grid-resize-handle"
-                    (mousedown)="onMouseDown($event, column)"
+                    (mousedown)="onMouseDown($event, column, column.width)"
                   ></div>
                   } @if(sortable() && column.sortable() && column.field &&
                   data().length > 0){

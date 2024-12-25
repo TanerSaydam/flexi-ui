@@ -563,11 +563,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  onMouseDown(event: MouseEvent | any, column: any) {
-    debugger
+  onMouseDown(event: MouseEvent | any, column: any, width: any) {
     this.resizingColumn.set(column);
     this.startX.set(event.pageX);
-    this.startWidth.set(event.target!.parentElement.offsetWidth);
+    this.startWidth.set(+width.toString().replace("px",""))    
 
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
@@ -577,10 +576,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   onMouseMove = (event: MouseEvent) => {
     if (this.resizingColumn()) {
       const offset = event.pageX - this.startX()!;
-      this.resizingColumn.update(prev => ({
-        ...prev,
-        width: this.startWidth()! + offset + 'px'
-      }));
+      this.resizingColumn().width = this.startWidth()! + offset + 'px';      
     }
   }
 
