@@ -91,6 +91,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   timeoutId: any;
   readonly filterDropdownVisible = signal<{ [key: string]: boolean }>({});
   readonly columnVisibilityDropdownVisible = signal(false);
+  
   readonly textFilterTypes = signal<{ operator: string, value: string }[]>([
     { operator: "eq", value: 'Eşittir' },
     { operator: "ne", value: 'Eşit değildir' },
@@ -107,10 +108,17 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     { operator: "lt", value: 'Daha küçüktür' },
     { operator: "le", value: 'Daha küçüktür ya da eşittir' }
   ]);
+  readonly dateFilterTypes = signal<{ operator: string, value: string }[]>([
+    { operator: "eq", value: 'Eşittir' },
+    { operator: "ne", value: 'Eşit değildir' },
+    { operator: "gt", value: 'Sonraki' },
+    { operator: "ge", value: 'Sonraki ya da aynı tarih' },
+    { operator: "lt", value: 'Önceki' },
+    { operator: "le", value: 'Önceki ya da aynı tarih' },
+    { operator: "range", value: 'Belirli bir tarih aralığında' }
+  ]);
 
   readonly _pageSize = signal<number>(10);
-
-
 
   readonly columns = contentChildren(FlexiGridColumnComponent, {descendants: true});
   
@@ -168,6 +176,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       case "number":
         return this.numberFilterTypes();
 
+      case "date":
+        return this.dateFilterTypes();
+
       default:
         return [];
     }
@@ -179,6 +190,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         return true;
 
       case "number":
+        return true;
+
+      case "date":
         return true;
 
       default:
@@ -221,7 +235,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       pageNumber: +pageNumber,
       skip: (pageNumber - 1) * +this.state().pageSize
     }));
-    this.dataStateChange.emit(this.state);
+    this.dataStateChange.emit(this.state());
 
     // Check if the page number crossed a 10-page boundary
     const previousGroup = Math.floor((previousPageNumber - 1) / this.pageNumberCount());
@@ -296,7 +310,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       skip: 0
     }));
     if (this.pageable() && this.dataBinding()) {
-      this.dataStateChange.emit(this.state);
+      this.dataStateChange.emit(this.state());
     } else {
       this.updatePagedData();
     }
@@ -395,7 +409,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }));
 
     if (this.dataBinding()) {
-      this.dataStateChange.emit(this.state);
+      this.dataStateChange.emit(this.state());
     } else {
       this.updatePagedData();
     }
@@ -448,13 +462,26 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     this.filterDropdownVisible()[column.field] = false;
     column.filterOperator = operator;
     const filterValue = column.filterValue;
+    const filterValue2 = column.filterValue2;
+
+    if(operator === "range"){      
+      column.showSecondDate = true;
+
+      if(!filterValue || !filterValue2){
+        return;
+      }
+    }else{
+      column.showSecondDate = false;
+    }
+
     if (filterValue !== "") {
-      this.filter(column.field, operator, filterValue, column.filterType());
+      this.filter(column.field, operator, filterValue, column.filterType(), filterValue2);
     }
   }
 
-  filter(field: string, operator: string, value: string, type: FilterType) {
-    if (value.toString() === 'undefined') value = "";
+  filter(field: string, operator: string, value: string, type: FilterType, value2?: string) {
+    if (value === undefined || value.toString() === 'undefined') value = "";
+    if (operator === "range" && !value2) return;
 
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
@@ -470,12 +497,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         let filterField = this.state().filter.find(p => p.field === field);
         if (filterField) {
           filterField.value = value;
+          filterField.value2= value2 ?? "";
           filterField.operator = operator;
         } else {
           filterField = new StateFilterModel();
           filterField.field = field;
           filterField.operator = operator;
           filterField.value = value;
+          filterField.value2 = value2 ?? "";
           filterField.type = type
           const filter = this.state().filter;
           filter.push(filterField);
@@ -493,7 +522,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       }
 
       if (this.dataBinding()) {
-        this.dataStateChange.emit(this.state);
+        this.dataStateChange.emit(this.state());
       } else {
         this.updatePagedData();
       }
@@ -510,6 +539,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const column = this.getColumns()?.find((p:any) => p.field === field);
     if (column) {
       column.filterValue = "";
+      column.filterValue2 = "";
     }
 
     if (this.dataBinding()) {
@@ -542,7 +572,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       }
 
     });
-    this.dataStateChange.emit(this.state);
+    this.dataStateChange.emit(this.state());
   }
 
   closeAllDropdowns() {

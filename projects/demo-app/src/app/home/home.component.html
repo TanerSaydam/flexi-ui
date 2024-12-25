@@ -1,12 +1,17 @@
 <app-blank>
    <flexi-grid
      [data]="data()"
+     [dataBinding]="true"
+     [total]="total()"
+     (dataStateChange)="dataStateChange($event)"
      [loading]="loading()"
      [showCaption]="true"
      [captionTemplate]="captionTemplate"
      [commandColumnTemplate]="commandColumnTemplate"
      [showCommandColumn]="true"
-     captionTitle="User List"     
+     captionTitle="User List"
+     height="800px"
+     [useMinHeight]="true"
      >
         <ng-template #captionTemplate>
             <flexi-button btnIcon="add" btnColor="primary" title="Add User" flexiTooltip />
@@ -14,8 +19,8 @@
 
         <flexi-grid-column field="firstName" title="First Name"/>
         <flexi-grid-column field="lastName" title="Last Name"/>
-        <flexi-grid-column field="dateOfBirth" title="Date Of Birth"/>
-        <flexi-grid-column field="salary" title="Salary"/>
+        <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd MM yyyy"/>
+        <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"/>
         <flexi-grid-column field="isActive" title="Is Active"/>
 
         <ng-template #commandColumnTemplate>

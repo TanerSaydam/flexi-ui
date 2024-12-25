@@ -282,19 +282,35 @@
                     "
                   />
                   }@else if(column.filterType() === "date"){
-                  <input
-                    class="flexi-grid-filter-input"
-                    type="date"
-                    [(ngModel)]="column.filterValue"
-                    (input)="
-                      filter(
-                        column.field,
-                        column.filterOperator,
-                        column.filterValue,
-                        column.filterType()
-                      )
-                    "
-                  />
+                    <input
+                      class="flexi-grid-filter-input"
+                      type="date"
+                      [(ngModel)]="column.filterValue"
+                      (input)="
+                        filter(
+                          column.field,
+                          column.filterOperator,
+                          column.filterValue,
+                          column.filterType()
+                        )
+                      "
+                    />
+                    @if(column.showSecondDate){
+                      <input
+                      class="flexi-grid-filter-input"
+                      type="date"
+                      [(ngModel)]="column.filterValue2"
+                      (input)="
+                        filter(
+                          column.field,
+                          column.filterOperator,
+                          column.filterValue,
+                          column.filterType(),
+                          column.filterValue2
+                        )
+                      "
+                    />
+                    }
                   }@else if(column.filterType() === "date-time"){
                   <input
                     class="flexi-grid-filter-input"

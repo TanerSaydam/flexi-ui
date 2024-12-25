@@ -16,6 +16,7 @@ export class StateModel{
   export class StateFilterModel{
     field: string = "";
     value: string = "";
+    value2: string = "";
     operator: string = "contains";
     type: FilterType = "text";
   }

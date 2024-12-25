@@ -29,6 +29,8 @@ export class FlexiGridColumnComponent {
   readonly booleanData = input<string[]>([]);
   readonly showCheckbox = input<boolean>(false);
   @Input() filterValue:any;
+  @Input() filterValue2:any;
+  @Input() showSecondDate = false;
 
   @ContentChild(FlexiGridCellTemplateDirective, {read: TemplateRef})
   cellTemplate?: TemplateRef<any>;
@@ -52,6 +54,9 @@ export class FlexiGridColumnComponent {
       this.filterOperator = 'ge';
     }
     else if (filterType === "boolean" || filterType === "select") {
+      this.filterOperator = "eq";
+    }
+    else if (filterType === "date") {
       this.filterOperator = "eq";
     }
     else {

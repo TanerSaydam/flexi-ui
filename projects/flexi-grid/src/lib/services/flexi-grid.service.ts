@@ -30,9 +30,18 @@ export class FlexiGridService {
                     }
 
                     if (val.type === "date") {
-                        const date = new Date(val.value);
-                        const isoDate = date.toISOString().split('T')[0];
-                        filterValue += `${this.toTitleCase(val.field)} eq ${isoDate}`;
+                        if(val.operator === "range" && !val.value2) return;
+
+                        const date1 = new Date(val.value);
+                        const isoDate1 = date1.toISOString().split('T')[0];
+
+                        if(val.operator === "range"){                          
+                          const date2 = new Date(val.value2);
+                          const isoDate2 = date2.toISOString().split('T')[0];
+                          filterValue += `${this.toTitleCase(val.field)} ge ${isoDate1} and ${this.toTitleCase(val.field)} le ${isoDate2}`;
+                        }else{
+                          filterValue += `${this.toTitleCase(val.field)} ${val.operator} ${isoDate1}`;
+                        }
                     }
                     else if (val.type === "date-time") {
                         const date = new Date(val.value);
