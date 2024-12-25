@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, AfterContentInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, linkedSignal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel } from '../models/state.model';
 import * as ExcelJS from 'exceljs';
@@ -16,8 +16,8 @@ import { FlexiGridReorderModel } from '../models/flexi-grid-reorder.model';
     standalone: false
 })
 export class FlexiGridComponent implements OnChanges, AfterViewInit {
-  @Input({required:true}) data:any[] = [];
-  @Input() total:number | null = 0;
+  readonly data = input.required<any[]>();
+  readonly total = input<number | null>(0);
   readonly pageable = input<boolean>(true);
   readonly showIndex = input<boolean>(false);
   readonly indexTextAlign = input<TextAlignType>("center");
@@ -51,7 +51,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly showCommandColumn = input<Boolean>(false);
   readonly commandColumnTitle = input<string>("İşlemler");
   readonly commandColumnWidth = input<string>("100px");
-  readonly commandColumnTextAlign = input<AlignSetting>("center");
+  readonly commandColumnTextAlign = input<AlignSetting>("left");
   readonly commandColumnTemplate = input<TemplateRef<any> | any>();
   readonly stickyCommandColumn = input<boolean>(true);
   readonly fontSize = input<string>("13px");
@@ -67,29 +67,31 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly refreshBtnClick = output<void>();  
   readonly onReorder = output<FlexiGridReorderModel>();
 
-  columnsArray = signal<FlexiGridColumnComponent[]>([]);
+  readonly columnsArray = signal<FlexiGridColumnComponent[]>([]);
+  readonly totalSignal = linkedSignal(()=> this.total());
+  readonly dataSignal = linkedSignal(()=> this.data());
 
   @Input()
   set pageSize(value: number) {
-    if (value !== this._pageSize) {
-      this._pageSize = value;
+    if (value !== this._pageSize()) {
+      this._pageSize.set(value);
       this.changePageSize({ target: { value: value } });
     }
   }
 
   get pageSize(): number {
-    return this._pageSize;
+    return this._pageSize();
   }
 
-  pageNumberCount = signal<number>(5);
-  pageNumbers = signal<number[]>([]);
-  totalPageCount = signal<number>(0);
-  state: StateModel = new StateModel();
-  pagedData = signal<any[]>([]);
+  readonly pageNumberCount = signal<number>(5);
+  readonly pageNumbers = signal<number[]>([]);
+  readonly totalPageCount = signal<number>(0);
+  readonly state = signal<StateModel>(new StateModel());
+  readonly pagedData = signal<any[]>([]);  
   timeoutId: any;
-  filterDropdownVisible = signal<{ [key: string]: boolean }>({});
-  columnVisibilityDropdownVisible = signal(false);
-  textFilterTypes = signal<{ operator: string, value: string }[]>([
+  readonly filterDropdownVisible = signal<{ [key: string]: boolean }>({});
+  readonly columnVisibilityDropdownVisible = signal(false);
+  readonly textFilterTypes = signal<{ operator: string, value: string }[]>([
     { operator: "eq", value: 'Eşittir' },
     { operator: "ne", value: 'Eşit değildir' },
     { operator: "contains", value: 'İçerir' },
@@ -97,7 +99,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     { operator: "startswith", value: 'İle başlar' },
     { operator: "endswith", value: 'İle biter' }
   ]);
-  numberFilterTypes = signal<{ operator: string, value: string }[]>([
+  readonly numberFilterTypes = signal<{ operator: string, value: string }[]>([
     { operator: "eq", value: 'Eşittir' },
     { operator: "ne", value: 'Eşit değildir' },
     { operator: "gt", value: 'Daha büyüktür' },
@@ -105,10 +107,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     { operator: "lt", value: 'Daha küçüktür' },
     { operator: "le", value: 'Daha küçüktür ya da eşittir' }
   ]);
-  draggedColumnIndex: number | undefined;
-  tempDraggable: boolean = false;  
 
-  private _pageSize: number = 10;
+  readonly _pageSize = signal<number>(10);
 
 
 
@@ -117,10 +117,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly filterTr = viewChild<ElementRef<HTMLTableRowElement>>("filterTr");
   readonly tbody = viewChild<ElementRef>("tbody");
 
-  resizingColumn: any;
-  startX: number | undefined;
-  startWidth: number | undefined;
-  isShowMobileFilter = signal<boolean>(false);
+  readonly resizingColumn = signal<any>(undefined);
+  readonly startX = signal<number | undefined>(undefined);
+  readonly startWidth = signal<number | undefined>(undefined);
+  readonly isShowMobileFilter = signal<boolean>(false);
 
   #cdr = inject(ChangeDetectorRef);  
   #http = inject(HttpClient);
@@ -130,7 +130,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.data.length > 0) {
+    if (this.dataSignal().length > 0) {
       const columns = this.getColumns();
       if (!columns || columns.length === 0) {
         this.initializeColumnsFromData();
@@ -142,7 +142,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       this.setPageNumbers();
       this.updatePagedData();
     } else {
-      this.pagedData.set(this.data);
+      this.pagedData.set(this.dataSignal());
     }
   }
 
@@ -187,7 +187,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   initializeColumnsFromData(): void {
-    const data = this.data;
+    const data = this.dataSignal();
     if (data && data.length > 0) {
       const firstItem = data[0];
       const columnsArray = Object.keys(firstItem).map(key => {
@@ -215,9 +215,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       pageNumber = 1;
     }
 
-    const previousPageNumber = this.state.pageNumber;
-    this.state.pageNumber = +pageNumber;
-    this.state.skip = (pageNumber - 1) * +this.state.pageSize;
+    const previousPageNumber = this.state().pageNumber;
+    this.state.update(prev => ({
+      ...prev,
+      pageNumber: +pageNumber,
+      skip: (pageNumber - 1) * +this.state().pageSize
+    }));
     this.dataStateChange.emit(this.state);
 
     // Check if the page number crossed a 10-page boundary
@@ -236,11 +239,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   setPageNumbers() {
-    const pageCount = Math.ceil(this.total! / +this.state.pageSize);
+    const pageCount = Math.ceil(this.totalSignal()! / +this.state().pageSize);
     const numbers = [];
 
     // Calculate the current range of page numbers
-    const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
+    const currentGroup = Math.floor((this.state().pageNumber - 1) / this.pageNumberCount());
     const startPage = currentGroup * this.pageNumberCount() + 1;
     const endPage = Math.min(startPage + (this.pageNumberCount() - 1), pageCount);
 
@@ -253,12 +256,15 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   nextPageGroup() {
-    const pageCount = Math.ceil(this.total! / +this.state.pageSize);
-    const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
+    const pageCount = Math.ceil(this.totalSignal()! / +this.state().pageSize);
+    const currentGroup = Math.floor((this.state().pageNumber - 1) / this.pageNumberCount());
     const nextGroupStartPage = (currentGroup + 1) * this.pageNumberCount() + 1;
 
     if (nextGroupStartPage <= pageCount) {
-      this.state.pageNumber = nextGroupStartPage;
+      this.state.update((prev)=> ({
+        ...prev,
+        pageNumber: nextGroupStartPage
+      }));
     }
 
     this.setPageNumbers();
@@ -266,11 +272,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   previousPageGroup() {
-    const currentGroup = Math.floor((this.state.pageNumber - 1) / this.pageNumberCount());
+    const currentGroup = Math.floor((this.state().pageNumber - 1) / this.pageNumberCount());
     const previousGroupStartPage = (currentGroup - 1) * this.pageNumberCount() + 1;
 
     if (previousGroupStartPage > 0) {
-      this.state.pageNumber = previousGroupStartPage;
+      this.state.update((prev)=> ({
+        ...prev,
+        pageNumber: previousGroupStartPage
+      }));      
     }
 
     this.setPageNumbers();
@@ -280,9 +289,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   changePageSize(event: any) {
     const value = +event.target.value;
     this.pageSize = value;
-    this.state.pageSize = value;
-    this.state.pageNumber = 1;
-    this.state.skip = 0;
+    this.state.update(prev => ({
+      ...prev,
+      pageSize: value,
+      pageNumber: 1,
+      skip: 0
+    }));
     if (this.pageable() && this.dataBinding()) {
       this.dataStateChange.emit(this.state);
     } else {
@@ -291,7 +303,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   updatePagedData() {
-    let filteredData = this.data;
+    let filteredData = this.dataSignal();
 
     if (!filteredData) {
       this.pagedData.set([]);
@@ -299,8 +311,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     const dataBinding = this.dataBinding();
-    if (this.filterable() && this.state.filter.length > 0 && !dataBinding) {
-      const filters = this.state.filter.filter(p => p.value != undefined);
+    if (this.filterable() && this.state().filter.length > 0 && !dataBinding) {
+      const filters = this.state().filter.filter(p => p.value != undefined);
 
       filters.forEach((filter) => {
         filteredData = filteredData.filter(item => {
@@ -346,10 +358,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     // Order data if sortable is true
-    if (this.sortable() && this.state.sort.field && !dataBinding) {
+    if (this.sortable() && this.state().sort.field && !dataBinding) {
       filteredData = filteredData.sort((a, b) => {
-        const field = this.state.sort.field;
-        const dir = this.state.sort.dir === 'asc' ? 1 : -1;
+        const field = this.state().sort.field;
+        const dir = this.state().sort.dir === 'asc' ? 1 : -1;
         if (a[field] < b[field]) return -1 * dir;
         if (a[field] > b[field]) return 1 * dir;
         return 0;
@@ -357,15 +369,15 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     if (!dataBinding) {
-      this.total = filteredData.length;
+      this.totalSignal.set(filteredData.length);
       this.setPageNumbers();
     }
 
     // Pagination logic
     if (filteredData) {
-      if (filteredData.length > +this.state.pageSize && !dataBinding && this.pageable()) {
-        const start = this.state.skip;
-        const end = start + +this.state.pageSize;
+      if (filteredData.length > +this.state().pageSize && !dataBinding && this.pageable()) {
+        const start = this.state().skip;
+        const end = start + +this.state().pageSize;
         this.pagedData.set(filteredData.slice(start, end));
       } else {
         this.pagedData.set(filteredData);
@@ -374,13 +386,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   sortData() {
-    this.data = this.data.sort((a, b) => {
-      const field = this.state.sort.field;
-      const dir = this.state.sort.dir === 'asc' ? 1 : -1;
+    this.dataSignal.set(this.dataSignal().sort((a, b) => {
+      const field = this.state().sort.field;
+      const dir = this.state().sort.dir === 'asc' ? 1 : -1;
       if (a[field] < b[field]) return -1 * dir;
       if (a[field] > b[field]) return 1 * dir;
       return 0;
-    });
+    }));
 
     if (this.dataBinding()) {
       this.dataStateChange.emit(this.state);
@@ -392,15 +404,23 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   sort(sortable: boolean, column: any) {
     if (!column.sortable() || !sortable) return;
 
-    this.state.sort.field = column.field;
-    this.state.pageNumber = 1;
-    if (this.state.sort.dir === "asc") {
-      this.state.sort.dir = "desc";
-    } else if (this.state.sort.dir === 'desc') {
-      this.state.sort.dir = "";
-      this.state.sort.field = '';
+    this.state().sort.field = column.field;
+    this.state().pageNumber = 1;
+    if (this.state().sort.dir === "asc") {
+      this.state.update(prev => ({
+        ...prev,
+        sort: {dir: "desc", field: prev.sort.field}
+      }))
+    } else if (this.state().sort.dir === 'desc') {
+      this.state.update(prev => ({
+        ...prev,
+        sort: {dir: "", field: ""}
+      }))      
     } else {
-      this.state.sort.dir = 'asc'
+      this.state.update(prev => ({
+        ...prev,
+        sort: {dir: "asc", field: prev.sort.field}
+      }));
     }
 
     this.sortData();
@@ -442,9 +462,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
     this.timeoutId = setTimeout(() => {
       if (value.toString() !== '') {
-        this.state.pageNumber = 1;
-        this.state.skip = 0;
-        let filterField = this.state.filter.find(p => p.field === field);
+        this.state.update(prev => ({
+          ...prev,
+          pageNumber: 1,
+          skip: 0
+        }));        
+        let filterField = this.state().filter.find(p => p.field === field);
         if (filterField) {
           filterField.value = value;
           filterField.operator = operator;
@@ -454,13 +477,18 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
           filterField.operator = operator;
           filterField.value = value;
           filterField.type = type
-          this.state.filter.push(filterField);
+          const filter = this.state().filter;
+          filter.push(filterField);
+          this.state.update(prev => ({
+            ...prev,
+            filter: filter
+          }));          
         }
       } else {
-        const findIndex = this.state.filter.findIndex(p => p.field === field);
+        const findIndex = this.state().filter.findIndex(p => p.field === field);
 
         if (findIndex > -1) {
-          this.state.filter.splice(findIndex, 1);
+          this.state().filter.splice(findIndex, 1);
         }
       }
 
@@ -500,8 +528,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
     if (!this.dataBinding()) return;
 
-    this.state = new StateModel();
-    this.state.pageSize = this.pageSize;
+    this.state.set(new StateModel());
+    this.state.update(prev => ({
+      ...prev,
+      pageSize: this.pageSize
+    }))
     this.getColumns()?.forEach((val:any) => {
       const filterType = val.filterType();
       if (filterType === "boolean" || filterType === "select") {
@@ -533,9 +564,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   onMouseDown(event: MouseEvent | any, column: any) {
-    this.resizingColumn = column;
-    this.startX = event.pageX;
-    this.startWidth = event.target!.parentElement.offsetWidth;    
+    debugger
+    this.resizingColumn.set(column);
+    this.startX.set(event.pageX);
+    this.startWidth.set(event.target!.parentElement.offsetWidth);
 
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
@@ -543,43 +575,21 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove = (event: MouseEvent) => {
-    if (this.resizingColumn) {
-      const offset = event.pageX - this.startX!;
-      this.resizingColumn.width = this.startWidth! + offset + 'px';
+    if (this.resizingColumn()) {
+      const offset = event.pageX - this.startX()!;
+      this.resizingColumn.update(prev => ({
+        ...prev,
+        width: this.startWidth()! + offset + 'px'
+      }));
     }
   }
 
   @HostListener('document:mouseup')
   onMouseUp = () => {
-    this.resizingColumn = undefined;
+    this.resizingColumn.set(undefined);
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);   
-  }
-
-  onDragStart(event: DragEvent, index: number) {
-    this.draggedColumnIndex = index;
-  }
-
-  onDragOver(event: DragEvent, index: number) {
-    event.preventDefault();
-  }
-
-  onDrop(event: DragEvent, index: number) {
-    event.preventDefault();
-    //todo: not working right now!
-    // if (this.draggedColumnIndex === undefined) return;
-    // let columnsArray = this.columns();
-
-    // const draggedColumn = columnsArray?.[this.draggedColumnIndex];
-    // const targetColumn = columnsArray?.[index];
-
-    // if (draggedColumn && targetColumn) {      
-    //   columnsArray!.splice(this.draggedColumnIndex, 1);
-    //   columnsArray!.splice(index, 0, draggedColumn);
-    // }
-
-    // this.draggedColumnIndex = undefined;
-  }
+  }  
 
   getFieldValue(item: any, field: string) {
     if (!field.includes(".")) {
@@ -666,16 +676,15 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   getSortState(column: string): string {
-    if (this.state.sort.field === column) {
-      return this.state.sort.dir === 'asc' ? 'ascending' : 'descending';
+    if (this.state().sort.field === column) {
+      return this.state().sort.dir === 'asc' ? 'ascending' : 'descending';
     }
     return 'none';
   }
 
-  getSortIcon(column: any): string {
-    debugger
-    if (this.state.sort.field === column.field) {
-      return this.state.sort.dir === 'asc' ? '↑' : '↓';
+  getSortIcon(column: any): string {    
+    if (this.state().sort.field === column.field) {
+      return this.state().sort.dir === 'asc' ? '↑' : '↓';
     }
     return '';
   }
@@ -711,7 +720,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       }
   
       if (Array.isArray(fetchedData) && fetchedData.length > 0) {
-        this.data = fetchedData;
+        this.dataSignal.set(fetchedData);
       } else {
         console.error('Geçerli veri bulunamadı');
       }
@@ -734,7 +743,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     worksheet.addRow(visibleColumns.map((col:any) => col.title || col.field));
 
     // Verileri ekle
-    this.data.forEach(row => {
+    this.dataSignal().forEach(row => {
       const rowData = visibleColumns.map((col:any) => this.getFieldValue(row, col.field));
       worksheet.addRow(rowData);
     });

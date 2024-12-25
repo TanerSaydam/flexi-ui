@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
-import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-button.component';
 import { UsersData } from '../../../../documentation/src/app/flexi-grid/data';
+import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
 
 @Component({
     imports: [    
     BlankComponent,
-    FlexiButtonComponent    
+    FlexiGridModule    
 ],
     templateUrl: './home.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -14,4 +14,5 @@ import { UsersData } from '../../../../documentation/src/app/flexi-grid/data';
 })
 export class UsersComponent {
   data = signal<any[]>(UsersData);
+  loading = signal<boolean>(false);
 }

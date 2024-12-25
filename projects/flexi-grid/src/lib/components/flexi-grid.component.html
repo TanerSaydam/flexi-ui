@@ -123,7 +123,7 @@
                     (mousedown)="onMouseDown($event, column)"
                   ></div>
                   } @if(sortable() && column.sortable() && column.field &&
-                  data.length > 0){
+                  data().length > 0){
                   <div
                     (click)="sort(sortable(), column)"
                     style="display: flex; gap: 10px"
@@ -132,9 +132,9 @@
                       column.title ? column.title : column.field
                     }}</span>
                     <div class="ms-2">
-                      @if(this.state.sort.field === column.field){
+                      @if(this.state().sort.field === column.field){
                       <span>
-                        {{ state.sort.dir === "asc" ? "↑" : "↓" }}
+                        {{ state().sort.dir === "asc" ? "↑" : "↓" }}
                       </span>
                       }
                     </div>
@@ -410,7 +410,7 @@
             [ngStyle]="getTBodyStyle()"
             role="rowgroup"
           >
-            @if(data.length > 0){ @for(item of pagedData(); track trackByFn();
+            @if(data().length > 0){ @for(item of pagedData(); track trackByFn();
             let i = $index){
             <tr cdkDrag [cdkDragDisabled]="!reorderable()" [ngStyle]="{ 'min-height': trMinHeight() }" role="row">
               @if(reorderable()){
@@ -443,7 +443,7 @@
                 <span>{{ $index + 1 }}</span>
                 }@else {
                 <span>{{
-                  $index + (state.pageNumber - 1) * +state.pageSize + 1
+                  $index + (state().pageNumber - 1) * +state().pageSize + 1
                 }}</span>
                 }
               </td>
@@ -559,7 +559,7 @@
     <div class="flexi-grid-pagination-part-one">
       <select
         class="flexi-grid-pagesize-select"
-        [ngModel]="state.pageSize"
+        [ngModel]="state().pageSize"
         (change)="changePageSize($event)"
       >
         @for(size of pageSizeList(); track size){
@@ -572,7 +572,7 @@
         @if(this.pageNumbers().length > 0){
         <li
           class="flexi-grid-page-item"
-          [ngClass]="state.pageNumber === 1 ? 'disabled' : ''"
+          [ngClass]="state().pageNumber === 1 ? 'disabled' : ''"
           (click)="changePage(1)"
         >
           <div class="flexi-grid-page-link" aria-label="Previous">
@@ -581,8 +581,8 @@
         </li>
         <li
           class="flexi-grid-page-item"
-          [ngClass]="state.pageNumber === 1 ? 'disabled' : ''"
-          (click)="changePage(state.pageNumber - 1)"
+          [ngClass]="state().pageNumber === 1 ? 'disabled' : ''"
+          (click)="changePage(state().pageNumber - 1)"
         >
           <div class="flexi-grid-page-link" aria-label="Previous">
             <span aria-hidden="true">&#8249;</span>
@@ -598,7 +598,7 @@
             (click)="changePage(pageNumber)"
             class="flexi-grid-page-link"
             [ngClass]="
-              state.pageNumber === pageNumber ? 'flexi-grid-active' : ''
+              state().pageNumber === pageNumber ? 'flexi-grid-active' : ''
             "
           >
             {{ pageNumber }}
@@ -611,8 +611,8 @@
         }
         <li
           class="flexi-grid-page-item"
-          [ngClass]="state.pageNumber === totalPageCount() ? 'disabled' : ''"
-          (click)="changePage(state.pageNumber + 1)"
+          [ngClass]="state().pageNumber === totalPageCount() ? 'disabled' : ''"
+          (click)="changePage(state().pageNumber + 1)"
         >
           <div class="flexi-grid-page-link" aria-label="Next">
             <span aria-hidden="true">&#8250;</span>
@@ -620,7 +620,7 @@
         </li>
         <li
           class="flexi-grid-page-item"
-          [ngClass]="state.pageNumber === totalPageCount() ? 'disabled' : ''"
+          [ngClass]="state().pageNumber === totalPageCount() ? 'disabled' : ''"
           (click)="changePage(totalPageCount())"
         >
           <div class="flexi-grid-page-link" aria-label="Next">
@@ -633,8 +633,8 @@
     }
     <div class="flexi-grid-pagination-part-third">
       <span>
-        {{ state.pageNumber }} - {{ totalPageCount() }} of
-        {{ (total | currency : "" : "" : "1.0")!.replace(",", ".") }} items
+        {{ state().pageNumber }} - {{ totalPageCount() }} of
+        {{ (total() | currency : "" : "" : "1.0")!.replace(",", ".") }} items
       </span>
     </div>
   </div>
