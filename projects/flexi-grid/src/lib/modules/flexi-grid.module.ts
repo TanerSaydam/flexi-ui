@@ -30,7 +30,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     FlexiGridColumnComponent,
     FlexiGridCellTemplateDirective,
     FlexiGridHeaderTemplateDirective,
-    FlexiTooltipDirective,    
+    FlexiTooltipDirective,
+    FlexiButtonComponent,
     DragDropModule
   ]
 })

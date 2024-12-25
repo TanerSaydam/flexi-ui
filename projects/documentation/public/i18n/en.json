@@ -7,5 +7,13 @@
         "PAGE_NAME": "Home Page",
         "PAGE_DESCRIPTION": "Flexi UI Home Page",
         "WELCOME": "Home Page"
+    },
+    "FLEXI_BUTTON":{
+        "INSTALLATION":"Installation",
+        "USAGE":"Usage"
+    },
+    "LANGUAGE":{
+        "TURKISH": "Turkish",
+        "ENGLISH": "English"
     }
 }

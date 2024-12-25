@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
 import { SharedModule } from '../shared.module';
-import ButtonComponent from './button/button.component';
+import { FlexiButtonComponent } from 'flexi-button';
 
 @Component({
-    selector: 'app-flexi-button',
-    imports: [SharedModule, ButtonComponent],
-    templateUrl: './flexi-button.component.html',
-    styleUrl: './flexi-button.component.css'
+    imports: [SharedModule, FlexiButtonComponent],
+    templateUrl: './flexi-button.component.html',    
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class FlexiButtonComponent {
+export default class FlexiButtonDocComponent {
+    import = signal<string>(`import { FlexiButtonComponent } from 'flexi-button';
 
+@Component({
+    imports: [FlexiButtonComponent],`);
 }

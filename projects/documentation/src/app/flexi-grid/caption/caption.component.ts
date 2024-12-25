@@ -4,11 +4,12 @@ import { UserModel } from '../../models/user.model';
 import { FlexiGridModule } from 'flexi-grid';
 import { captionHTMLCode, captionTSCode, dataTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
+import { FlexiButtonComponent } from 'flexi-button';
 
 @Component({
     selector: 'app-caption',
     imports: [
-        FlexiGridModule,
+        FlexiGridModule,        
         SharedModule
     ],
     templateUrl: './caption.component.html',

@@ -1,9 +1,9 @@
 
 <div class="page-body">
-    <div class="container-xl">
+    <div class="container">
         <div class="card">
-            <div class="card-header">
-                <h3>{{cardTitle()}}</h3>
+            <div class="card-header" *transloco="let t">
+                <h3>{{t(cardTitle())}}</h3>
             </div>
             <div class="card-body">
                <ng-content></ng-content>

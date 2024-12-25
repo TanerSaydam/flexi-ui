@@ -7,5 +7,15 @@
         "PAGE_NAME": "Ana Sayfa",
         "PAGE_DESCRIPTION": "Flexi UI Ana Sayfa",
         "WELCOME": "Ana Sayfa"
+    },
+    "FLEXI_BUTTON":{
+        "INSTALLATION":"Kurulum",
+        "USAGE":"Kullanım",
+        "DESCRIPTION": "Özelleştirilebilir şık ve kullanışlı button componenti",
+        "ICON": "Buradan istediğiniz iconu kullanabilirsiniz"
+    },
+    "LANGUAGE":{
+        "TURKISH": "Türkçe",
+        "ENGLISH": "İngilizce"
     }
 }

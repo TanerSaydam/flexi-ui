@@ -7,6 +7,7 @@ import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
 import { FlexiToastService } from 'flexi-toast';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
+import { FlexiButtonComponent } from 'flexi-button';
 
 @Component({
     selector: 'app-flexi-grid-full',

@@ -5,6 +5,7 @@ import { CardComponent } from './blank/card/card.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MyCodeComponent } from './my-code/my-code.component';
 import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule, 
     LoadingComponent,
     MyCodeComponent,
-    FormsModule
+    FormsModule,
+    TranslocoModule
   ],
   exports: [
     BlankComponent, 
@@ -24,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule, 
     LoadingComponent,
     MyCodeComponent,
-    FormsModule
+    FormsModule,
+    TranslocoModule
   ]
 })
 export class SharedModule { }

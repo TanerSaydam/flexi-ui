@@ -15,14 +15,30 @@
   <div class="tab-content">
     <div class="tab-pane active show" id="tabs-example-full">
       <h4>Full halinin örnek görüntüsü</h4>
-      <flexi-grid [data]="users()" [total]="total()" [dataBinding]="true" [pageable]="true" [showIndex]="true"
-        [loading]="loading()" [themeClass]="shared.themeClass" [filterable]="true" captionTitle="Örnek User Listesi"
-        [captionTemplate]="captionTemplate" [showCaption]="true" [showExportExcelBtn]="true" [resizable]="true"
-        (dataStateChange)="dataStateChange($event)" [sortable]="true" [showCommandColumn]="true"
-        [commandColumnTemplate]="commandButtonColumnTemplate" commandColumnWidth="80px" [useMinWidth]="true"
-        minWidth="1000px" exportExcelFileName="userlists">
+      <flexi-grid
+        [data]="users()"
+        [total]="total()"
+        [dataBinding]="true"
+        [pageable]="true"
+        [showIndex]="true"
+        [loading]="loading()"
+        [themeClass]="shared.themeClass"
+        [filterable]="true"
+        captionTitle="Örnek User Listesi"
+        [captionTemplate]="captionTemplate"
+        [showCaption]="true"
+        [showExportExcelBtn]="true"
+        [resizable]="true"
+        (dataStateChange)="dataStateChange($event)"
+        [sortable]="true"
+        [showCommandColumn]="true"
+        [commandColumnTemplate]="commandButtonColumnTemplate"
+        commandColumnWidth="80px"
+        [useMinWidth]="true"
+        minWidth="1000px"
+        exportExcelFileName="userlists">
         <ng-template #captionTemplate>
-          <flexi-button btnColor="primary" btnIcon="add" flexiTooltip title="Ekle" />
+          <flexi-button btnColor="primary" btnIcon="add" btnSize="small" flexiTooltip title="Ekle" />
         </ng-template>
 
         <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
@@ -43,8 +59,8 @@
           textAlign="center"></flexi-grid-column>
 
         <ng-template #commandButtonColumnTemplate let-item="item">
-          <flexi-button btnColor="primary" btnIcon="edit" btnSize="medium" flexiTooltip title="Güncelle" />
-          <flexi-button btnColor="danger" class="ms-1" btnSize="medium" (click)="deleteByItem(item)" btnIcon="delete"
+          <flexi-button btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="Güncelle" />
+          <flexi-button btnColor="danger" class="ms-1" btnSize="small" (click)="deleteByItem(item)" btnIcon="delete"
             flexiTooltip title="Sil" />
         </ng-template>
       </flexi-grid>
