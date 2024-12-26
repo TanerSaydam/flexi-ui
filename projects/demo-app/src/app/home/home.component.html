@@ -1,17 +1,25 @@
 <app-blank>
    <flexi-grid
      [data]="data()"
-     [dataBinding]="true"
+     [dataBinding]="true"     
      [total]="total()"
-     (dataStateChange)="dataStateChange($event)"
      [loading]="loading()"
      [showCaption]="true"
      [captionTemplate]="captionTemplate"
      [commandColumnTemplate]="commandColumnTemplate"
      [showCommandColumn]="true"
+     [resizable]="true"
      captionTitle="User List"
-     height="800px"
+     height="500px"
+     [showIndex]="true"
+     [autoHeight]="false"     
+     [footerTemplate]="footerTemplate"
+     (dataStateChange)="dataStateChange($event)"
+     [reorderable]="true"
      [useMinHeight]="true"
+     minHeight="450px"
+     [showExportExcelBtn]="true"
+     [exportExcelButtonClick]="exprtExcel.bind(this)"
      >
         <ng-template #captionTemplate>
             <flexi-button btnIcon="add" btnColor="primary" title="Add User" flexiTooltip />
@@ -19,15 +27,38 @@
 
         <flexi-grid-column field="firstName" title="First Name"/>
         <flexi-grid-column field="lastName" title="Last Name"/>
+        <flexi-grid-column title="Full Name">
+            <ng-template flexiGridHeaderTemplate>
+                <input class="form-control" [(ngModel)]="fullName" (change)="getFullNameChange()">
+            </ng-template>
+            <ng-template flexiGridCellTemplate let-item>
+                <span>{{item.firstName}} {{item.lastName}}</span>
+            </ng-template>
+        </flexi-grid-column>
         <flexi-grid-column field="dateOfBirth" title="Date Of Birth" filterType="date" format="dd MM yyyy"/>
-        <flexi-grid-column field="salary" title="Salary" filterType="number" format="c"/>
-        <flexi-grid-column field="isActive" title="Is Active"/>
+        <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right"/>
+        <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active', 'Passive']" textAlign="center"/>
 
         <ng-template #commandColumnTemplate>
             <div class="d-flex gap-1">
                 <flexi-button btnIcon="edit" btnColor="warning" title="Edit" flexiTooltip/>
                 <flexi-button btnIcon="delete" btnColor="danger" title="Delete" flexiTooltip/>
             </div>
+        </ng-template>
+
+        <ng-template #footerTemplate>
+            <tr>
+                <td>Toplam</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+                <td>10000</td>
+            </tr>
         </ng-template>
    </flexi-grid>
 </app-blank>
