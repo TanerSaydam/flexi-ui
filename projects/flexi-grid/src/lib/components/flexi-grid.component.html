@@ -86,6 +86,26 @@
         >
           <thead role="rowgroup">
             <tr role="row">
+              @if(selectable()){
+                <th
+                  [ngStyle]="{
+                    width: selectableWidth(),
+                    'text-align': selectableTextAlign()
+                  }"                
+                  scope="col"
+                  role="columnheader"
+                  (click)="toggleSelectAll()"
+                >
+                  <input
+                  class="checkbox-custom"
+                  type="checkbox"
+                  style="transform: scale(1.3);"
+                  [ngModel]="allSelected()"
+                  [indeterminate]="allSelectedWasIndeterminate()"
+                  >
+                </th>
+              }
+
               @if(reorderable()){
                 <th
                 [ngStyle]="{
@@ -98,6 +118,7 @@
                 <span></span>
               </th>
               }
+
               @if(showIndex()){
               <th
                 [ngStyle]="{
@@ -110,7 +131,9 @@
               >
                 <span>#</span>
               </th>
-              } @for(column of getColumns(); track trackByFn()){
+              } 
+              
+              @for(column of getColumns(); track trackByFn()){
               <th
                 class="cursor flexi-grid-border"
                 [hidden]="!column.visibleSignal()"
@@ -240,10 +263,23 @@
               role="row"
               role="columnheader"
             >
+            @if(selectable() && !isShowMobileFilter()){
+              <th
+                class="flexi-grid-filter-th"
+                [ngStyle]="{ 
+                  width: selectableWidth(), 
+                  textAlign: selectableTextAlign(),
+                  cursor: 'pointer'
+                }"
+                scope="col"
+                role="columnheader"
+              > 
+              </th>
+            } 
             @if(reorderable() && !isShowMobileFilter()){
               <th
                 class="flexi-grid-filter-th"
-                [ngStyle]="{ width: indexWidth() }"
+                [ngStyle]="{ width: reOrderWidth() }"
                 scope="col"
                 role="columnheader"
               ></th>
@@ -388,13 +424,17 @@
                   } }
                 </div>
               </th>
-              }@else { @if(!isShowMobileFilter()){
+              }@else { 
+                @if(!isShowMobileFilter()){
               <th
                 [hidden]="!column.visibleSignal()"
                 scope="col"
                 role="columnheader"
               ></th>
-              } } } @if(showCommandColumn()){
+              } 
+            } 
+          } 
+          @if(showCommandColumn()){
               <th
                 [ngClass]="
                   stickyCommandColumn()
@@ -432,8 +472,35 @@
             [ngStyle]="getTBodyStyle()"
             role="rowgroup"
           >
-            @if(data().length > 0){ @for(item of pagedData(); track trackByFn(); let i = $index){
-              <tr cdkDrag [cdkDragDisabled]="!reorderable()" [ngStyle]="{ 'min-height': trMinHeight() }" role="row">
+            @if(data().length > 0){ 
+              @for(item of pagedData(); track trackByFn(); let i = $index){
+              <tr
+                cdkDrag
+                [cdkDragDisabled]="!reorderable()"
+                [ngClass]="{'flexi-grid-selected-row': selectedRows().has(item)}"
+                [ngStyle]="{ 'min-height': trMinHeight() }"
+                role="row"
+                >
+                @if(selectable()){
+                  <td
+                  [ngStyle]="{
+                    width: selectableWidth(),
+                    textAlign: selectableTextAlign(),                    
+                    userSelect: 'none',
+                    cursor: 'pointer'
+                  }"                  
+                  [attr.data-label]="'#'"
+                  scope="cell"
+                  (click)="toggleRowSelection(item[selectableField()])"
+                  >
+                  <input
+                    class="checkbox-custom"
+                    type="checkbox"
+                    style="transform: scale(1.3);"
+                    [checked]="checked(item[selectableField()])">
+                </td>
+                }
+
                 @if(reorderable()){
                   <td  
                     cdkDragHandle
@@ -476,6 +543,7 @@
                     width: column.widthSignal(),
                     'text-align': column.textAlign()
                   }"
+                  (click)="toggleRowSelection(item[selectableField()])"
                   [hidden]="!column.visibleSignal()"
                   [ngClass]="tdTemplateClassName(column)"
                   [attr.data-label]="column.title() ? column.title() : column.field()"
@@ -497,7 +565,8 @@
                     @if(column.field()){ 
                       @if((column.filterType() === "date" || column.filterType() === "date-time") && column.filterType()){
                   {{ getFieldValue(item, column.field()) | date : column.format()! }}
-                  }@else if(column.filterType() === "number" && column.filterType()){ @if(column.format() === "n" || column.format() === null){
+                  }@else if(column.filterType() === "number" && column.filterType()){ 
+                    @if(column.format() === "n" || column.format() === null){
                   {{ getFieldValue(item, column.field()) | trCurrency : "" : true : column.fraction() }}
                   }@else if(column.format() === "c"){
                   {{
@@ -539,12 +608,8 @@
                   [ngStyle]="{
                     width: commandColumnWidth(),
                     'text-align': commandColumnTextAlign()
-                  }"
-                  [ngClass]="
-                    stickyCommandColumn()
-                      ? 'flexi-sticky-column flexi-sticky-td-column'
-                      : ''
-                  "
+                  }"                  
+                  [ngClass]="{'flexi-grid-selected-row': selectedRows().has(item), 'flexi-sticky-column flexi-sticky-td-column': stickyCommandColumn()}"
                   [attr.data-label]="commandColumnTitle()"
                   scope="cell"
                 >
@@ -591,6 +656,9 @@
         <option>{{ size }}</option>
         }
       </select>
+      @if(selectedRows().size > 0){
+        <span style="margin-left: 10px;">Selected: </span><b>{{selectedRows().size}}</b>
+      }
     </div>
     <div class="flexi-grid-pagination-part-two">
       <ul class="flexi-grid-pagination">
@@ -658,8 +726,8 @@
     }
     <div class="flexi-grid-pagination-part-third">
       <span>
-        {{ state().pageNumber }} - {{ totalPageCount() }} of
-        {{ (total() | currency : "" : "" : "1.0")!.replace(",", ".") }} items
+        <b>{{ state().pageNumber }}</b> - <b>{{ totalPageCount() }}</b> of
+        <b>{{ (total() | currency : "" : "" : "1.0")!.replace(",", ".") }}</b> items
       </span>
     </div>
   </div>

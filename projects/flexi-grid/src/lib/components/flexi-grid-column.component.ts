@@ -30,13 +30,13 @@ export class FlexiGridColumnComponent {
   readonly showCheckbox = input<boolean>(false);
   readonly filterValue = input<any>();
   readonly filterValue2 = input<any>();
-  readonly showSecondDate = signal<boolean>(false);
+  readonly showSecondDate = signal<boolean>(false);  
 
   readonly filterOperator = signal<string>("contains");
   readonly filterValueSignal = linkedSignal(()=> this.filterValue());
   readonly filterValue2Signal = linkedSignal(()=> this.filterValue2());
   readonly visibleSignal = linkedSignal(() => this.visible());
-  readonly widthSignal = linkedSignal(() => this.width());
+  readonly widthSignal = linkedSignal(() => this.width());  
   
   readonly onChange = output<any>();
 

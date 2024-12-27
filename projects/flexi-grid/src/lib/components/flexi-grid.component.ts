@@ -34,9 +34,9 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly dataBinding = input<boolean>(false);
   readonly showCaption = input<boolean>(false);
   readonly showExportExcelBtn = input<boolean>(false);
-  readonly autoHeight = input<boolean>(true);
+  readonly autoHeight = input<boolean>(false);
   readonly height = input<string>("500px");
-  readonly useMinHeight = input<boolean>(false);
+  readonly useMinHeight = input<boolean>(true);
   readonly minHeight = input<string>("450px");
   readonly minWidth = input<string>("1050px");
   readonly useMinWidth = input<boolean>(false);
@@ -61,15 +61,22 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly reOrderWidth = input<string>("50px");
   readonly reOrderTextAlign = input<TextAlignType>("center");
   readonly reorderable = input<boolean>(false);
-
-  readonly dataStateChange = output<any>();
-  readonly onChange = output<any>();
-  readonly refreshBtnClick = output<void>();  
-  readonly onReorder = output<FlexiGridReorderModel>();
+  readonly selectable = input<boolean>(true);
+  readonly selectableWidth = input<string>("50px");
+  readonly selectableTextAlign = input<TextAlignType>("center");
+  readonly selectableField = input<string>("");
 
   readonly columnsArray = signal<FlexiGridColumnComponent[]>([]);
   readonly totalSignal = linkedSignal(()=> this.total());
   readonly dataSignal = linkedSignal(()=> this.data());  
+  readonly selectedRows = signal<Set<any>>(new Set());
+  readonly allSelected = signal<boolean>(false);
+
+  readonly dataStateChange = output<any>();
+  readonly onChange = output<any>();
+  readonly onRefresh = output<void>();  
+  readonly onReorder = output<FlexiGridReorderModel>();
+  readonly onSelected = output<any[]>();  
 
   @Input()
   set pageSize(value: number) {
@@ -223,6 +230,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   changePage(pageNumber: number) {
+    this.allSelected.set(false);
+    
     if (pageNumber > this.totalPageCount()) {
       pageNumber = this.totalPageCount();
     } else if (pageNumber < 1) {
@@ -603,7 +612,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   refreshDataMethod() {
-    this.refreshBtnClick.emit();
+    this.onRefresh.emit();
 
     if (!this.dataBinding()) return;
 
@@ -849,5 +858,62 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     this.onReorder.emit(data);    
+  }
+
+  toggleRowSelection(item:any){
+    if(this.selectedRows().has(item)){
+      this.selectedRows().delete(item);
+    }else{
+      this.selectedRows().add(item);
+    }
+
+    this.onSelected.emit([...this.selectedRows()]);
+  }
+
+  selectAll(): void {
+    this.selectedRows().clear();
+    if(this.dataBinding()){
+      this.pagedData().forEach((item) => {
+        this.selectedRows().add(item[this.selectableField()]);
+      });
+
+    }else{
+      this.data().forEach((item) => {
+        this.selectedRows().add(item[this.selectableField()]);
+      });      
+    }   
+    
+    this.allSelected.set(true);
+  }  
+  
+  unselectAll(): void {
+    this.selectedRows().clear();
+    this.allSelected.set(false);
+  }  
+  
+  toggleSelectAll(): void {
+    if (this.allSelected()) {
+      this.unselectAll();
+    } else {
+      this.selectAll();
+    }
+
+    this.onSelected.emit([...this.selectedRows()]);
+  }
+
+  allSelectedWasIndeterminate(): boolean {
+    const totalItems = this.dataBinding() ? this.total() ?? this.data().length : this.data().length;
+    const selectedItems = this.selectedRows().size;    
+    
+    return selectedItems > 0 && selectedItems < totalItems;
+  }
+
+  checked(item:any){
+    const result = this.selectedRows().has(item);
+    return result
+  }
+
+  clearSelected(){
+    this.selectedRows().clear();
   }
 }

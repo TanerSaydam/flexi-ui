@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
 import { HttpClient } from '@angular/common/http';
 import { StateModel } from '../../../../flexi-grid/src/lib/models/state.model';
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/services/flexi-grid.service';
 import { FormsModule } from '@angular/forms';
+import { FlexiGridComponent } from '../../../../flexi-grid/src/lib/components/flexi-grid.component';
 
 @Component({
     imports: [    
@@ -22,6 +23,8 @@ export class UsersComponent {
   loading = signal<boolean>(false);
   state = signal<StateModel>(new StateModel());
   fullName = signal<string>("");
+
+  readonly flexiGrid = viewChild<FlexiGridComponent>("grid");
 
   #http = inject(HttpClient);
   #grid = inject(FlexiGridService);
@@ -58,5 +61,13 @@ export class UsersComponent {
   dataStateChange(state: StateModel){
     this.state.set(state);
     this.getAll();
+  }
+
+  selected(event:any[]){
+    console.log(event);    
+  }
+
+  clearSelection(){
+    this.flexiGrid()?.clearSelected();    
   }
 }

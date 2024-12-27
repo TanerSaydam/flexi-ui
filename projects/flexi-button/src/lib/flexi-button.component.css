@@ -142,6 +142,16 @@
   transition: color var(--transition-base-timer) ease-in-out,background-color var(--transition-base-timer) ease-in-out,border-color var(--transition-base-timer) ease-in-out,box-shadow var(--transition-base-timer) ease-in-out;
 }
 
+.flexi-button-size-x-small{
+  font-size: var(--body-font-size-sm);
+  padding: 4px !important;
+  gap: 3px !important;
+}
+
+.flexi-button-size-small .material-symbols-outlined{
+  font-size: 19px !important;
+}
+
 .flexi-button-size-small{
   font-size: var(--body-font-size-sm);
   padding: 6px !important;

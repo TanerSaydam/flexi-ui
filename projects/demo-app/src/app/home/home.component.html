@@ -1,5 +1,6 @@
 <app-blank>
    <flexi-grid
+     #grid
      [data]="data()"
      [dataBinding]="true"     
      [total]="total()"
@@ -11,20 +12,43 @@
      [resizable]="true"
      captionTitle="User List"
      height="500px"
-     [showIndex]="true"
+     [showIndex]="false"
      [autoHeight]="false"     
      [footerTemplate]="footerTemplate"
      (dataStateChange)="dataStateChange($event)"
-     [reorderable]="true"
+     [reorderable]="false"
      [useMinHeight]="true"
      minHeight="450px"
      [showExportExcelBtn]="true"
      [exportExcelButtonClick]="exprtExcel.bind(this)"
+     (onSelected)="selected($event)"
+     themeClass="light"
+     selectableField="id"     
      >
         <ng-template #captionTemplate>
             <flexi-button btnIcon="add" btnColor="primary" title="Add User" flexiTooltip />
         </ng-template>
 
+        <flexi-grid-column field="firstName" title="First Name"/>
+        <flexi-grid-column field="lastName" title="Last Name"/>
+        <flexi-grid-column title="Full Name">
+            <ng-template flexiGridHeaderTemplate>
+                <input class="form-control" [(ngModel)]="fullName" (change)="getFullNameChange()">
+            </ng-template>
+            <ng-template flexiGridCellTemplate let-item>
+                <span>{{item.firstName}} {{item.lastName}}</span>
+            </ng-template>
+        </flexi-grid-column>
+        <flexi-grid-column field="firstName" title="First Name"/>
+        <flexi-grid-column field="lastName" title="Last Name"/>
+        <flexi-grid-column title="Full Name">
+            <ng-template flexiGridHeaderTemplate>
+                <input class="form-control" [(ngModel)]="fullName" (change)="getFullNameChange()">
+            </ng-template>
+            <ng-template flexiGridCellTemplate let-item>
+                <span>{{item.firstName}} {{item.lastName}}</span>
+            </ng-template>
+        </flexi-grid-column>
         <flexi-grid-column field="firstName" title="First Name"/>
         <flexi-grid-column field="lastName" title="Last Name"/>
         <flexi-grid-column title="Full Name">
@@ -41,25 +65,16 @@
 
         <ng-template #commandColumnTemplate>
             <div class="d-flex gap-1">
-                <flexi-button btnIcon="edit" btnColor="warning" title="Edit" flexiTooltip/>
-                <flexi-button btnIcon="delete" btnColor="danger" title="Delete" flexiTooltip/>
+                <flexi-button btnIcon="edit" btnSize="x-small" btnColor="warning" title="Edit" flexiTooltip/>
+                <flexi-button btnIcon="delete" btnSize="x-small" btnColor="danger" title="Delete" flexiTooltip/>
             </div>
         </ng-template>
 
         <ng-template #footerTemplate>
-            <tr>
-                <td>Toplam</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-                <td>10000</td>
-            </tr>
+           
         </ng-template>
    </flexi-grid>
+
+   <button (click)="clearSelection()">Clear Selection</button>
 </app-blank>
 

@@ -26,5 +26,5 @@ export class FlexiButtonComponent {
 }
 
 export type FlexiButtonColorType = "light" | "primary" | "success" | "danger" | "warning" | "info" | "dark" | "indigo" | "purple" | "pink" | "teal" | "yellow" | "secondary" | "black" | "white";
-export type FlexiButtonSizeType = "small" | "medium" | "large"
+export type FlexiButtonSizeType = "x-small" | "small" | "medium" | "large"
 export type FlexiButtonType = "button" | "submit"

@@ -5,7 +5,7 @@
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0",
     "tr-currency": "^19.0.1",
-    "flexi-button": "^19.0.13",
+    "flexi-button": "^19.0.14",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "@types/file-saver": "^2.0.7",
