@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { StateFilterModel, StateModel } from "../models/state.model"
-import * as ExcelJS from 'exceljs';
-import { saveAs } from 'file-saver';
+import ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver-es';
 
 @Injectable({
     providedIn: "root"

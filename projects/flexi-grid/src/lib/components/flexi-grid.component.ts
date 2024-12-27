@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, linkedSignal } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel, StateOrderModel } from '../models/state.model';
-import * as ExcelJS from 'exceljs';
-import { saveAs } from 'file-saver';
+import ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver-es';
 import { HttpClient } from '@angular/common/http';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { FlexiGridReorderModel } from '../models/flexi-grid-reorder.model';
@@ -676,23 +676,27 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }  
 
   getFieldValue(item: any, field: string) {
-    if (!field.includes(".")) {
-      const value = item[field];
-      return value !== undefined && value !== null ? value : "";
-    } else {
-      const fields = field.split(".");
-      let currentValue = item;
-
-      for (const f of fields) {
-        if (currentValue && f in currentValue) {
-          currentValue = currentValue[f];
-        } else {
-          //console.warn(`Field "${f}" not found in item`, item);
-          return "";
+    try {
+      if (!field.includes(".")) {
+        const value = item[field];
+        return value !== undefined && value !== null ? value : "";
+      } else {
+        const fields = field.split(".");
+        let currentValue = item;
+  
+        for (const f of fields) {
+          if (currentValue && f in currentValue) {
+            currentValue = currentValue[f];
+          } else {
+            //console.warn(`Field "${f}" not found in item`, item);
+            return "";
+          }
         }
-      }
-
-      return currentValue !== undefined && currentValue !== null ? currentValue : "";
+  
+        return currentValue !== undefined && currentValue !== null ? currentValue : "";
+      }      
+    } catch (error) {
+     console.log(error);     
     }
   }
 
@@ -821,14 +825,16 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Sayfa1');
 
-    const visibleColumns = this.getColumns()?.filter((column:any) => column.visible) || [];
+    const visibleColumns = this.getColumns()?.filter((column:any) => column.visible()) || [];
 
     // Başlıkları ekle
-    worksheet.addRow(visibleColumns.map((col:any) => col.title || col.field));
+    worksheet.addRow(visibleColumns.map((col:any) => col.title() || col.field()));
 
     // Verileri ekle
     this.dataSignal().forEach(row => {
-      const rowData = visibleColumns.map((col:any) => this.getFieldValue(row, col.field));
+      const rowData = visibleColumns.map((col:any) => {
+        return this.getFieldValue(row, col.field());
+      });
       worksheet.addRow(rowData);
     });
 

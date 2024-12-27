@@ -18,7 +18,7 @@ export function ngAdd() : Rule {
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-grid',
-                version: '^19.0.33',
+                version: '^19.0.35',
                 overwrite: true
               },
               {

@@ -6,19 +6,21 @@ import { StateModel } from '../../../../flexi-grid/src/lib/models/state.model';
 import { FlexiGridService } from '../../../../flexi-grid/src/lib/services/flexi-grid.service';
 import { FormsModule } from '@angular/forms';
 import { FlexiGridComponent } from '../../../../flexi-grid/src/lib/components/flexi-grid.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     imports: [    
     BlankComponent,
     FlexiGridModule,
-    FormsModule    
+    FormsModule,
+    CommonModule
 ],
     templateUrl: './home.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
-  data = signal<any[]>([]);
+  data = signal<any>({cariHareketler: []});
   total = signal<number>(0);
   loading = signal<boolean>(false);
   state = signal<StateModel>(new StateModel());
@@ -35,43 +37,18 @@ export class UsersComponent {
 
   getAll(){
     this.loading.set(true);
-    let endpoint = "https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&";
-    let oDataEndpoint = this.#grid.getODataEndpoint(this.state());
-    endpoint += oDataEndpoint;    
-    this.#http.get<any>(endpoint).subscribe(res => {
-      this.data.set(res.data!);
-      this.total.set(res.total);
+    let endpoint = "https://localhost:7187/muhasebe/cari-hareketler/96575e49-b8de-47b1-a6ec-6c7686c25417";
+    
+    const token = "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQxYmQ5NzRhLWY4YTUtNGJlOC00NTNjLTA4ZGQxMjNhNjg3OSIsIm5hbWUiOiJUYW5lciBTYXlkYW0iLCJlbWFpbCI6InRhbmVyc2F5ZGFtQGdtYWlsLmNvbSIsInVzZXJOYW1lIjoiYWRtaW4iLCJjb21wYW5pZXMiOiJbe1wiaWRcIjpcIjNiY2MyNzNiLTgyZmEtNGYzYi04MTI2LTFiZmJhYjg4N2VjNlwiLFwibmFtZVwiOlwiVGVzdCBDb21wYW55IDFcIixcInNob3J0TmFtZVwiOlwidGVzdDFcIixcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6bnVsbCxcIlRvd25cIjpudWxsLFwiRnVsbEFkZHJlc3NcIjpudWxsLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOm51bGx9LFwic3ViZWxlclwiOlt7XCJpZFwiOlwiMmU4ZTA4YjItOGQ0MS00NGQwLWIwM2MtMTE1NzM2M2VhOGE0XCIsXCJjb21wYW55XCI6e1wiaWRcIjpcIjNiY2MyNzNiLTgyZmEtNGYzYi04MTI2LTFiZmJhYjg4N2VjNlwiLFwibmFtZVwiOlwiVGVzdCBDb21wYW55IDFcIixcInNob3J0TmFtZVwiOlwidGVzdDFcIixcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6bnVsbCxcIlRvd25cIjpudWxsLFwiRnVsbEFkZHJlc3NcIjpudWxsLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOm51bGx9fSxcImNvbXBhbnlJZFwiOlwiM2JjYzI3M2ItODJmYS00ZjNiLTgxMjYtMWJmYmFiODg3ZWM2XCIsXCJuYW1lXCI6XCJNZXJrZXpcIixcInNob3J0TmFtZVwiOlwibWVya2V6XCIsXCJpc1NlbGVjdGVkXCI6dHJ1ZSxcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6bnVsbCxcIlRvd25cIjpudWxsLFwiRnVsbEFkZHJlc3NcIjpudWxsLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOm51bGx9LFwieWVhcnNcIjpbMjAyNSwyMDI0XSxcInNlbGVjdGVkWWVhclwiOjIwMjR9LHtcImlkXCI6XCI0MGE2MzE5ZS1kYzAxLTQ5MDEtYjNkYi1hMjQwODE3ZGMwMzVcIixcImNvbXBhbnlcIjp7XCJpZFwiOlwiM2JjYzI3M2ItODJmYS00ZjNiLTgxMjYtMWJmYmFiODg3ZWM2XCIsXCJuYW1lXCI6XCJUZXN0IENvbXBhbnkgMVwiLFwic2hvcnROYW1lXCI6XCJ0ZXN0MVwiLFwiYWRkcmVzc1wiOntcIkNvdW50cnlcIjpcIlRcXHUwMEZDcmtpeWVcIixcIkNpdHlcIjpudWxsLFwiVG93blwiOm51bGwsXCJGdWxsQWRkcmVzc1wiOm51bGwsXCJQaG9uZU51bWJlcjFcIjpudWxsLFwiUGhvbmVOdW1iZXIyXCI6bnVsbCxcIkVtYWlsXCI6bnVsbH19LFwiY29tcGFueUlkXCI6XCIzYmNjMjczYi04MmZhLTRmM2ItODEyNi0xYmZiYWI4ODdlYzZcIixcIm5hbWVcIjpcIk91dGxldFwiLFwic2hvcnROYW1lXCI6XCJvdXRsZXRcIixcImlzU2VsZWN0ZWRcIjpmYWxzZSxcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6XCJcIixcIlRvd25cIjpcIlwiLFwiRnVsbEFkZHJlc3NcIjpcIlwiLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOlwiXCJ9LFwieWVhcnNcIjpbMjAyNSwyMDI0XSxcInNlbGVjdGVkWWVhclwiOjIwMjR9XX0se1wiaWRcIjpcIjI1OWI1ZmIzLTE2NzEtNDNjOC05YTA1LTgwZmViNTM3YTFhY1wiLFwibmFtZVwiOlwiVGVzdCBDb21wYW55IDJcIixcInNob3J0TmFtZVwiOlwidGVzdDJcIixcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6bnVsbCxcIlRvd25cIjpudWxsLFwiRnVsbEFkZHJlc3NcIjpudWxsLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOm51bGx9LFwic3ViZWxlclwiOlt7XCJpZFwiOlwiOTJjZWVjMzQtNWY5Zi00MmU1LWFlZWYtYjQ2YjUzZWU4NDQ4XCIsXCJjb21wYW55XCI6e1wiaWRcIjpcIjI1OWI1ZmIzLTE2NzEtNDNjOC05YTA1LTgwZmViNTM3YTFhY1wiLFwibmFtZVwiOlwiVGVzdCBDb21wYW55IDJcIixcInNob3J0TmFtZVwiOlwidGVzdDJcIixcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6bnVsbCxcIlRvd25cIjpudWxsLFwiRnVsbEFkZHJlc3NcIjpudWxsLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOm51bGx9fSxcImNvbXBhbnlJZFwiOlwiMjU5YjVmYjMtMTY3MS00M2M4LTlhMDUtODBmZWI1MzdhMWFjXCIsXCJuYW1lXCI6XCJNZXJrZXpcIixcInNob3J0TmFtZVwiOlwibWVya2V6XCIsXCJpc1NlbGVjdGVkXCI6ZmFsc2UsXCJhZGRyZXNzXCI6e1wiQ291bnRyeVwiOlwiVFxcdTAwRkNya2l5ZVwiLFwiQ2l0eVwiOm51bGwsXCJUb3duXCI6bnVsbCxcIkZ1bGxBZGRyZXNzXCI6bnVsbCxcIlBob25lTnVtYmVyMVwiOm51bGwsXCJQaG9uZU51bWJlcjJcIjpudWxsLFwiRW1haWxcIjpudWxsfSxcInllYXJzXCI6WzIwMjUsMjAyNF0sXCJzZWxlY3RlZFllYXJcIjoyMDI0fSx7XCJpZFwiOlwiMDRlMjA5ZDQtYTkxYi00NjY2LTgwMzQtYWI1M2Y3NzliODU3XCIsXCJjb21wYW55XCI6e1wiaWRcIjpcIjI1OWI1ZmIzLTE2NzEtNDNjOC05YTA1LTgwZmViNTM3YTFhY1wiLFwibmFtZVwiOlwiVGVzdCBDb21wYW55IDJcIixcInNob3J0TmFtZVwiOlwidGVzdDJcIixcImFkZHJlc3NcIjp7XCJDb3VudHJ5XCI6XCJUXFx1MDBGQ3JraXllXCIsXCJDaXR5XCI6bnVsbCxcIlRvd25cIjpudWxsLFwiRnVsbEFkZHJlc3NcIjpudWxsLFwiUGhvbmVOdW1iZXIxXCI6bnVsbCxcIlBob25lTnVtYmVyMlwiOm51bGwsXCJFbWFpbFwiOm51bGx9fSxcImNvbXBhbnlJZFwiOlwiMjU5YjVmYjMtMTY3MS00M2M4LTlhMDUtODBmZWI1MzdhMWFjXCIsXCJuYW1lXCI6XCJTYW5heWkgTWFcXHUwMTFGYXphXCIsXCJzaG9ydE5hbWVcIjpcInNhbmF5aVwiLFwiaXNTZWxlY3RlZFwiOmZhbHNlLFwiYWRkcmVzc1wiOntcIkNvdW50cnlcIjpcIlRcXHUwMEZDcmtpeWVcIixcIkNpdHlcIjpcIlwiLFwiVG93blwiOlwiXCIsXCJGdWxsQWRkcmVzc1wiOlwiXCIsXCJQaG9uZU51bWJlcjFcIjpudWxsLFwiUGhvbmVOdW1iZXIyXCI6bnVsbCxcIkVtYWlsXCI6XCJcIn0sXCJ5ZWFyc1wiOlsyMDI0XSxcInNlbGVjdGVkWWVhclwiOjIwMjR9XX1dIiwiY29tcGFueUlkIjoiM2JjYzI3M2ItODJmYS00ZjNiLTgxMjYtMWJmYmFiODg3ZWM2Iiwic3ViZSI6IntcImlkXCI6XCIyZThlMDhiMi04ZDQxLTQ0ZDAtYjAzYy0xMTU3MzYzZWE4YTRcIixcImNvbXBhbnlcIjp7XCJpZFwiOlwiM2JjYzI3M2ItODJmYS00ZjNiLTgxMjYtMWJmYmFiODg3ZWM2XCIsXCJuYW1lXCI6XCJUZXN0IENvbXBhbnkgMVwiLFwic2hvcnROYW1lXCI6XCJ0ZXN0MVwiLFwiYWRkcmVzc1wiOntcIkNvdW50cnlcIjpcIlRcXHUwMEZDcmtpeWVcIixcIkNpdHlcIjpudWxsLFwiVG93blwiOm51bGwsXCJGdWxsQWRkcmVzc1wiOm51bGwsXCJQaG9uZU51bWJlcjFcIjpudWxsLFwiUGhvbmVOdW1iZXIyXCI6bnVsbCxcIkVtYWlsXCI6bnVsbH19LFwiY29tcGFueUlkXCI6XCIzYmNjMjczYi04MmZhLTRmM2ItODEyNi0xYmZiYWI4ODdlYzZcIixcIm5hbWVcIjpcIk1lcmtlelwiLFwic2hvcnROYW1lXCI6XCJtZXJrZXpcIixcImlzU2VsZWN0ZWRcIjp0cnVlLFwiYWRkcmVzc1wiOntcIkNvdW50cnlcIjpcIlRcXHUwMEZDcmtpeWVcIixcIkNpdHlcIjpudWxsLFwiVG93blwiOm51bGwsXCJGdWxsQWRkcmVzc1wiOm51bGwsXCJQaG9uZU51bWJlcjFcIjpudWxsLFwiUGhvbmVOdW1iZXIyXCI6bnVsbCxcIkVtYWlsXCI6bnVsbH0sXCJ5ZWFyc1wiOlsyMDI1LDIwMjRdLFwic2VsZWN0ZWRZZWFyXCI6MjAyNH0iLCJzdWJlSWQiOiIyZThlMDhiMi04ZDQxLTQ0ZDAtYjAzYy0xMTU3MzYzZWE4YTQiLCJ5ZWFyIjoiMjAyNCIsImF2YXRhciI6IjE4LnBuZyIsInVzZXItcm9sZXMiOiJ7XCJyb2xlXCI6XCJBZG1pblwifSIsIm5iZiI6MTczNTMxMzQ1OCwiZXhwIjoxNzM1Mzk5ODU4LCJpc3MiOiJNZSIsImF1ZCI6Ik15IFByb2plY3RzIn0.3PJ4DgUh-w6eGG1fVa1BYgD4u-JvIvVhIZfVtYYid5vkV4YVlPXd0owhPT04HCL_-nBfgdk2Wt8zFIp2_C55bg"
+
+    this.#http.get<any>(endpoint, {
+      headers: {
+        "Authorization": token,
+        "CompanyId": "3bcc273b-82fa-4f3b-8126-1bfbab887ec6"
+      }
+    }).subscribe(res => {
+      this.data.set(res.data!);      
       this.loading.set(false);
     },()=> this.loading.set(false))
-  }
-
-  exprtExcel(){
-    let endpoint = "https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&";
-    this.#http.get<any>(endpoint).subscribe(res => {
-      const data= res.data;
-      this.#grid.exportDataToExcel(data,"user-list");
-    },()=> this.loading.set(false))
-  }
-
-  getFullNameChange(){
-    console.log(this.fullName());
-    
-  }
-
-  dataStateChange(state: StateModel){
-    this.state.set(state);
-    this.getAll();
-  }
-
-  selected(event:any[]){
-    console.log(event);    
-  }
-
-  clearSelection(){
-    this.flexiGrid()?.clearSelected();    
-  }
-
-  show(){
-    alert("clicked")
-  }
+  }  
 }
