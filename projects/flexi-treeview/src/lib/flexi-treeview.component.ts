@@ -25,7 +25,7 @@ export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
   readonly width = input<string>('100%');
   readonly height = input<string>('100%');
   readonly fontSize = input<string>('13px');
-  readonly btnSize = input<FlexiButtonSizeType>('default');
+  readonly btnSize = input<FlexiButtonSizeType>('small');
   readonly checkboxSize = input<string>('1.4em');
   readonly actionBtnPosition = input<'left' | 'right'>('right');
   readonly themeClass = input<string>('light');

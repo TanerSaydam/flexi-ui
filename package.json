@@ -27,12 +27,12 @@
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "flexi-button": "^19.0.14",
-    "flexi-grid": "^19.0.30",
-    "flexi-popup": "^19.0.17",
+    "flexi-grid": "^19.0.33",
+    "flexi-popup": "^19.0.18",
     "flexi-select": "^19.0.4",
     "flexi-toast": "^19.0.2",
     "flexi-tooltip": "^19.0.1",
-    "flexi-treeview": "^19.0.14",
+    "flexi-treeview": "^19.0.15",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.1",
     "tr-currency": "^19.0.1",
@@ -53,7 +53,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^19.0.1",
-    "typescript": "~5.6.3"
+    "typescript": "~5.7.2"
   },
   "repository": {
     "type": "git",
