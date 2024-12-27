@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, resource, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
 import { FlexiGridModule, StateModel, FlexiGridService, FlexiGridFilterDataModel } from 'flexi-grid';
@@ -7,7 +7,7 @@ import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
 import { FlexiToastService } from 'flexi-toast';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
-import { FlexiButtonComponent } from 'flexi-button';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-flexi-grid-full',
@@ -17,10 +17,22 @@ import { FlexiButtonComponent } from 'flexi-button';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class FullComponent {
-  users = signal<UserModel[]>([])
-  total = signal<number>(0);
   state = signal<StateModel>(new StateModel());
-  loading = signal<boolean>(false);  
+  result = resource({
+    request: () => this.state(),
+    loader: async ({request: req})=> {
+      let oDataEndpointPart = this.#grid.getODataEndpoint(this.state());
+      let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
+
+      const res = await lastValueFrom(await this.#http.get<any>(endpoint));
+
+      return res;
+    }
+  })
+  users = computed(() => this.result.value()?.data ?? []);
+  total = computed(() => this.result.value()?.total ?? 0);
+  loading = computed(() => this.result.isLoading());
+
   fullExampleTSCode = signal<string>(fullExampleTSCode);
   fullExampleHTMLCode =signal<string>(fullExampleHTMLCode);  
   filterData = signal<FlexiGridFilterDataModel[]>([
@@ -38,42 +50,22 @@ export default class FullComponent {
     }
   ])
   
-  constructor(
-    private http: HttpClient,
-    private flexi: FlexiGridService,
-    public shared: SharedService,
-    private toast: FlexiToastService
-  ){
-    this.getAll();
-  }  
-
-  getAll(){
-    this.loading.set(true);
-
-    let oDataEndpointPart = this.flexi.getODataEndpoint(this.state());
-    let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
-
-    this.http.get(endpoint).subscribe((res:any)=> {
-      this.users.set(res.data);      
-      this.total.set(res.total);      
-      this.loading.set(false);
-    });
-  } 
+  #grid = inject(FlexiGridService);
+  #http = inject(HttpClient);
+  shared = inject(SharedService);  
 
   dataStateChange(event:any){
     this.state.set(event);
-    this.getAll();
+    console.log(event);
+    
   }
 
   exportExcel(){
-    this.http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
-      this.flexi.exportDataToExcel(res.data, "my-excel");
+    this.#http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
+      this.#grid.exportDataToExcel(res.data, "my-excel");
     })  
   }
 
-  deleteByItem(item: any){
-    this.toast.showSwal("Kaydı Sil?","Kaydı silmek istiyor musunuz?<br>(Test mesajıdır, gerçekte kaydı silmez!)",()=> {
-      this.toast.showToast("Başarılı","Kayıt başarıyla silindi","info");
-    })
+  deleteByItem(item: any){   
   }
 }

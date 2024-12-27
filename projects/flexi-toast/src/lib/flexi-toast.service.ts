@@ -203,6 +203,10 @@ export class FlexiToastService {
       setTimeout(() => {
         this.renderer.removeChild(body, container);
         this.renderer.removeStyle(body, 'overflow')
+        const el = document.getElementsByClassName("flexi-swal-container");
+        if(el.length > 0){
+          el[0].remove();
+        }
       }, 200);
     });
 
@@ -213,7 +217,11 @@ export class FlexiToastService {
       }
       setTimeout(() => {
         this.renderer.removeChild(body, container);
-        this.renderer.removeStyle(body, 'overflow')
+        this.renderer.removeStyle(body, 'overflow');
+        const el = document.getElementsByClassName("flexi-swal-container");
+        if(el.length > 0){
+          el[0].remove();
+        }
       }, 200);
     });
 

@@ -30,9 +30,10 @@
     "flexi-grid": "^19.0.33",
     "flexi-popup": "^19.0.18",
     "flexi-select": "^19.0.4",
-    "flexi-toast": "^19.0.2",
+    "flexi-stepper": "^19.0.6",
+    "flexi-toast": "^19.0.3",
     "flexi-tooltip": "^19.0.1",
-    "flexi-treeview": "^19.0.15",
+    "flexi-treeview": "^19.0.17",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.1",
     "tr-currency": "^19.0.1",
@@ -53,7 +54,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^19.0.1",
-    "typescript": "~5.7.2"
+    "typescript": "~5.6.3"
   },
   "repository": {
     "type": "git",

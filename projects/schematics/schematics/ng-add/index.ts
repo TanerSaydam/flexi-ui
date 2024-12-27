@@ -12,19 +12,19 @@ export function ngAdd() : Rule {
             {
                 type: NodeDependencyType.Default,
                 name: 'flexi-button',
-                version: '^19.0.13',
+                version: '^19.0.14',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-grid',
-                version: '^19.0.32',
+                version: '^19.0.33',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-popup',
-                version: '^19.0.17',
+                version: '^19.0.18',
                 overwrite: true
               },
               {
@@ -36,7 +36,7 @@ export function ngAdd() : Rule {
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-toast',
-                version: '^19.0.2',
+                version: '^19.0.3',
                 overwrite: true
               },
               {
@@ -48,7 +48,7 @@ export function ngAdd() : Rule {
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-treeview',
-                version: '^19.0.14',
+                version: '^19.0.17',
                 overwrite: true
               },
               {

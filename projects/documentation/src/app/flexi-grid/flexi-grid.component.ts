@@ -5,6 +5,7 @@ import { CardComponent } from '../blank/card/card.component';
 import {dataTSCode} from './code';
 import FullComponent from './full/full.component';
 import { LoadingComponent } from '../loading/loading.component';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-flexi-grid',
@@ -14,6 +15,7 @@ import { LoadingComponent } from '../loading/loading.component';
         CommonModule,
         FullComponent,        
         LoadingComponent,
+        TranslocoModule
     ],
     templateUrl: './flexi-grid.component.html',
     styleUrl: './flexi-grid.component.css',

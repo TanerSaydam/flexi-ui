@@ -8,6 +8,10 @@
         "PAGE_DESCRIPTION": "Flexi UI Home Page",
         "WELCOME": "Home Page"
     },
+    "LANGUAGE":{
+        "TURKISH": "Turkish",
+        "ENGLISH": "English"
+    },
     "FLEXI_BUTTON": {
         "INSTALLATION": "Installation",
         "USAGE": "Usage",
@@ -23,9 +27,8 @@
         "COLOR": "Color",
         "CUSTOMIZE_WITH": "Customize Width",
         "CUSTOMIZE_CONTENT": "Customize Button Content"
-    },
-    "LANGUAGE":{
-        "TURKISH": "Turkish",
-        "ENGLISH": "English"
+    },    
+    "FLEXI_GRID": {
+        "WHAT_IS": "Meet Flexi Grid, a stylish and useful Data Grid that you can use in your Angular applications. This component is fully compatible with OData and offers a flexible structure that allows you to use both Data Binding or process all your data."
     }
 }
