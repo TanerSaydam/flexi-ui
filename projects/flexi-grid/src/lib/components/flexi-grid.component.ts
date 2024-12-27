@@ -61,7 +61,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly reOrderWidth = input<string>("50px");
   readonly reOrderTextAlign = input<TextAlignType>("center");
   readonly reorderable = input<boolean>(false);
-  readonly selectable = input<boolean>(true);
+  readonly selectable = input<boolean>(false);
   readonly selectableWidth = input<string>("50px");
   readonly selectableTextAlign = input<TextAlignType>("center");
   readonly selectableField = input<string>("");
@@ -514,7 +514,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     return className;
   } 
 
-  toggleFilterDropdown(field: string) {
+  toggleFilterDropdown(field: string) {    
     this.filterDropdownVisible()[field] = !this.filterDropdownVisible()[field];
   }
 
@@ -861,6 +861,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   toggleRowSelection(item:any){
+    if(!this.selectable()) return;
+    
     if(this.selectedRows().has(item)){
       this.selectedRows().delete(item);
     }else{

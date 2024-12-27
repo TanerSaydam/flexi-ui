@@ -302,9 +302,9 @@
                 role="columnheader"
               >
                 <div class="d-flex flexi-grid-filter-container">
-                  @if(column.headerTemplate){
+                  @if(column.headerTemplate()){
                   <ng-container
-                    *ngTemplateOutlet="column.headerTemplate"
+                    *ngTemplateOutlet="column.headerTemplate()"
                   ></ng-container>
                   }@else if(column.field()){ @if(column.filterType() === "text"){
                   <input
@@ -477,7 +477,7 @@
               <tr
                 cdkDrag
                 [cdkDragDisabled]="!reorderable()"
-                [ngClass]="{'flexi-grid-selected-row': selectedRows().has(item)}"
+                [ngClass]="{'flexi-grid-selected-row': selectedRows().has(item[selectableField()])}"
                 [ngStyle]="{ 'min-height': trMinHeight() }"
                 role="row"
                 >
@@ -548,16 +548,16 @@
                   [ngClass]="tdTemplateClassName(column)"
                   [attr.data-label]="column.title() ? column.title() : column.field()"
                   [title]="
-                    item && !column.cellTemplate
+                    item && !column.cellTemplate()
                       ? getFieldValue(item, column.field())
                       : ''
                   "
                   scope="cell"
                 >
-                  @if(column.cellTemplate){
+                  @if(column.cellTemplate()){
                   <ng-container
                     *ngTemplateOutlet="
-                      column.cellTemplate;
+                      column.cellTemplate();
                       context: { $implicit: item, column: column, rowIndex: i }
                     "
                   ></ng-container>

@@ -1,4 +1,4 @@
-import { Component, ContentChild, SimpleChanges, TemplateRef, output, input, Input, signal, linkedSignal } from '@angular/core';
+import { Component, SimpleChanges, TemplateRef, output, input, Input, signal, linkedSignal, contentChild } from '@angular/core';
 import { FlexiGridFilterDataModel } from '../models/flexi-grid-filter-data.model';
 import { FlexiGridCellTemplateDirective } from '../directives/flexi-grid-cell-template.directive';
 import { FlexiGridHeaderTemplateDirective } from '../directives/flexi-grid-header-template.directive';
@@ -40,11 +40,9 @@ export class FlexiGridColumnComponent {
   
   readonly onChange = output<any>();
 
-  @ContentChild(FlexiGridCellTemplateDirective, {read: TemplateRef})
-  cellTemplate?: TemplateRef<any>;
+  readonly cellTemplate = contentChild(FlexiGridCellTemplateDirective, { read: TemplateRef });
 
-  @ContentChild(FlexiGridHeaderTemplateDirective, {read: TemplateRef})
-  headerTemplate?: TemplateRef<any>;
+  readonly headerTemplate = contentChild(FlexiGridHeaderTemplateDirective, { read: TemplateRef });
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['filterType']) {
