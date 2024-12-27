@@ -70,4 +70,8 @@ export class UsersComponent {
   clearSelection(){
     this.flexiGrid()?.clearSelected();    
   }
+
+  show(){
+    alert("clicked")
+  }
 }

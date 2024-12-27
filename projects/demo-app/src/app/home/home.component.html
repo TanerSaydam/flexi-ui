@@ -1,5 +1,6 @@
 <app-blank>
-   <flexi-grid
+    <flexi-button btnIcon="add" btnColor="primary" [btnDisabled]="true" (click)="show()"/>
+   <!-- <flexi-grid
      #grid
      [data]="data()"
      [dataBinding]="true"     
@@ -73,7 +74,7 @@
         <ng-template #footerTemplate>
            
         </ng-template>
-   </flexi-grid>
+   </flexi-grid> -->
 
    <button (click)="clearSelection()">Clear Selection</button>
 </app-blank>
