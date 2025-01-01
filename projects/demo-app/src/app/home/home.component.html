@@ -1,30 +1,15 @@
 <app-blank>
-        <flexi-grid [data]="data().cariHareketler" [showCaption]="true" [showExportExcelBtn]="true" [exportExcelFileName]="'cari-hareketler'">
-            <flexi-grid-column field="date" title="Tarih" format="dd MMM yyyy" filterType="date" />
-            <flexi-grid-column field="islemName" title="İşlem" />
-            <flexi-grid-column field="description" title="Açıklama" />
-      
-            <flexi-grid-column field="borc" title="Borç" filterType="number" format="c" textAlign="right">
-              <ng-template flexiGridCellTemplate let-item>
-                <span>
-                  {{item.borc}}
-                </span>
-              </ng-template>
-            </flexi-grid-column>
-            <flexi-grid-column field="alacak" title="Alacak" filterType="number" format="c" textAlign="right">
-              <ng-template flexiGridCellTemplate let-item>
-                <span>
-                  {{item.alacak}}
-                </span>
-              </ng-template>
-            </flexi-grid-column>
-            <flexi-grid-column field="bakiye" title="Bakiye" filterType="number" textAlign="right">
-              <ng-template flexiGridCellTemplate let-item>
-                <span [ngClass]="item.bakiye >= 0 ? 'text-danger' : 'text-primary'">
-                  {{item.bakiye}}
-                </span>
-              </ng-template>
-            </flexi-grid-column>
+        <flexi-grid
+          [data]="data().cariHareketler"
+          [dataBinding]="true"
+          [showCaption]="true"
+          [showExportExcelBtn]="true"
+          [exportExcelFileName]="'cari-hareketler'"
+          (dataStateChange)="dataStateChange($event)"
+          >
+
+            <flexi-grid-column field="id" title="ID" width="50"></flexi-grid-column>
+           
         </flexi-grid>
 </app-blank>
 

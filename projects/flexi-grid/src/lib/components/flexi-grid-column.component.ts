@@ -45,7 +45,7 @@ export class FlexiGridColumnComponent {
   readonly headerTemplate = contentChild(FlexiGridHeaderTemplateDirective, { read: TemplateRef });
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filterType']) {
+    if (changes['filterType']) {      
       this.setDefaultFilterOperator();
     }
   }

@@ -1,6 +1,6 @@
 {
   "name": "flexi-grid",
-  "version": "19.0.39",
+  "version": "19.0.40",
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0",

@@ -76,7 +76,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly onChange = output<any>();
   readonly onRefresh = output<void>();  
   readonly onReorder = output<FlexiGridReorderModel>();
-  readonly onSelected = output<any[]>();  
+  readonly onSelected = output<any[]>(); 
 
   @Input()
   set pageSize(value: number) {
@@ -169,7 +169,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
 
     columns?.forEach((column:any) => {
-      if (column.filterValue != undefined) {
+      if (column.filterValue() != undefined) {        
         this.filter(column.field(), column.filterOperator(), column.filterValue(), column.filterType());
       }
     });    
@@ -243,7 +243,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       ...prev,
       pageNumber: +pageNumber,
       skip: (pageNumber - 1) * +this.state().pageSize
-    }));
+    }));    
     this.dataStateChange.emit(this.state());
 
     // Check if the page number crossed a 10-page boundary
@@ -292,7 +292,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }    
 
     this.setPageNumbers();
-    if(this.dataBinding()){
+    if(this.dataBinding()){      
       this.dataStateChange.emit(this.state());
     }else{
       this.updatePagedData();
@@ -328,7 +328,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       pageNumber: 1,
       skip: 0
     }));
-    if (this.pageable() && this.dataBinding()) {
+    if (this.pageable() && this.dataBinding()) {      
       this.dataStateChange.emit(this.state());
     } else {
       this.updatePagedData();
@@ -461,7 +461,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       return 0;
     }));
 
-    if (this.dataBinding()) {
+    if (this.dataBinding()) {      
       this.dataStateChange.emit(this.state());
     } else {
       this.updatePagedData();
@@ -579,7 +579,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         }
       }
 
-      if (this.dataBinding()) {
+      if (this.dataBinding()) {         
         this.dataStateChange.emit(this.state());
       } else {
         this.updatePagedData();
