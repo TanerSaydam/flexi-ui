@@ -1,15 +1,8 @@
 <app-blank>
-        <flexi-grid
-          [data]="data().cariHareketler"
-          [dataBinding]="true"
-          [showCaption]="true"
-          [showExportExcelBtn]="true"
-          [exportExcelFileName]="'cari-hareketler'"
-          (dataStateChange)="dataStateChange($event)"
-          >
-
-            <flexi-grid-column field="id" title="ID" width="50"></flexi-grid-column>
-           
-        </flexi-grid>
+        <h1>Flexi Popup</h1>
+        <button (click)="detailPopupVisible.set(true)">Open Popup</button>
 </app-blank>
 
+<flexi-popup [(isPopupVisible)]="detailPopupVisible" popupTitle="Senet Hareketleri" width="500px" height="400px">
+
+</flexi-popup>

@@ -46,7 +46,7 @@ export class FlexiPopupComponent {
 
   calculateContent(){
     const heightNumber = +this.height().replace("px","");
-    const newHeight = heightNumber - 125;
+    const newHeight = heightNumber + 35;
 
     return newHeight + "px";
   }

@@ -76,7 +76,18 @@ export class FlexiGridService {
                                 break;
                         }
                     } else if (val.type === "select" || val.type === "boolean") {
-                        filterValue += `${this.toTitleCase(val.field)} ${val.operator} ${val.value}`
+                        let valueStr: any;
+                        if (val.type !== "boolean") {
+                            if (typeof val.value === "number" || (!isNaN(Number(val.value)) && val.value.toString().trim() !== "")) {
+                              valueStr = `${val.value}`;
+                            }else{
+                              valueStr = `'${val.value}'`;
+                            }
+                            
+                        } else {
+                            valueStr = val.value;
+                        }
+                        filterValue += `${this.toTitleCase(val.field)} ${val.operator} ${valueStr}`;
                     }
                 });
                 endpoint += filterValue;

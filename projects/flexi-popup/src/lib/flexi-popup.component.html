@@ -1,25 +1,25 @@
 <div [attr.data-bs-theme]="themeClass()" class="flexi-popup-backdrop" [class.visible]="popupVisibe()">
-    <div class="flexi-popup-container" [style.width]="width()" [style.height]="height()">
-        <div>
-            <div class="flexi-popup-header">
-                <span class="flexi-popup-title">{{popupTitle()}}</span>
-                <flexi-button (click)="closePopup()" [btnColor]="themeClass() === 'dark' ? 'dark' : 'light'" btnIcon="close" btnSize="x-small" />
-            </div>
-            <div style="position: relative;">
-                @if(loading()){
-                    <div class="app-spinner-main-container">
-                      <div class="app-spinner-container">
-                        <div class="app-spinner-1"></div>
-                        <div class="app-spinner-2"></div>
-                      </div>
-                    </div>
-                }
-                
-                <div class="flexi-popup-content" [style]="'height: ' + calculateContent()">
-                    <ng-content></ng-content>
-                </div>            
-            </div>
+    <div class="flexi-popup-container" [style.width]="width()">
+        <div class="flexi-popup-header">
+            <span class="flexi-popup-title">{{popupTitle()}}</span>
+            <flexi-button (click)="closePopup()" [btnColor]="themeClass() === 'dark' ? 'dark' : 'light'" btnIcon="close" btnSize="x-small" />
         </div>
+        <div style="position: relative;">
+            @if(loading()){
+                <div class="app-spinner-main-container">
+                  <div class="app-spinner-container">
+                    <div class="app-spinner-1"></div>
+                    <div class="app-spinner-2"></div>
+                  </div>
+                </div>
+            }
+            
+            <div class="flexi-popup-content" [style.height]="calculateContent()">
+                <div [style.height]="height()">
+                    <ng-content></ng-content>
+                </div>
+            </div>
+        </div>        
 
         @if (showActionButtons()) {
             <div class="flexi-popup-actions">
