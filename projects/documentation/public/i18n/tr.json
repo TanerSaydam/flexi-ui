@@ -29,6 +29,11 @@
         "CUSTOMIZE_CONTENT": "Buton içini özelleştir"
     },
     "FLEXI_GRID": {
-        "WHAT_IS": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek kullanabileceğiniz esnek bir yapıya sahiptir."
+        "MAIN":{
+            "WHAT_IS": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek kullanabileceğiniz esnek bir yapıya sahiptir."
+        },
+        "FIRST_USE": {
+            "DESCRIPTION": "Flexi Grid'i kullanmak istediğiniz standalone componente FlexGridModule'u import etmelisiniz"
+        }
     }
 }
