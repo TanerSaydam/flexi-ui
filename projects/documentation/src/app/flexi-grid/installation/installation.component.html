@@ -1,7 +1,7 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
     <app-card id="installation" cardTitle="Kurulum">
-        <div class="card-body">
-          <p>Flexi Grid'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
+        <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.INSTALLATION_PAGE'">
+          <p>{{t('DESCRIPTION')}}</p>
           <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-grid</code></pre>
         </div>
      </app-card>

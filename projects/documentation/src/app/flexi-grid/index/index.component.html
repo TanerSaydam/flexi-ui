@@ -1,15 +1,15 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Index">
-    <div class="card-body">
-      <p>Index sırasını görmek için <b>[showIndex]</b> attribute'üne true değeri vermelisiniz</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.INDEX_PAGE'">
+      <p>{{t('DESCRIPTION_FIRST')}} <b>[showIndex]</b> {{t('DESCRIPTION_SECOND')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code className="" language="html" [code]="indexCodeExample()"></my-code>
 
       @defer {
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
           <li class="nav-item">
-            <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            <a href="#tabs-example-index" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
           </li>
           <li class="nav-item">
             <a href="#tabs-html-index" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -25,7 +25,7 @@
       <div class="card-body">
         <div class="tab-content">
           <div class="tab-pane active show" id="tabs-example-index">
-            <h4>Index sırası örneği</h4>
+            <h4>{{t('TAB_PANE_FIRST')}}</h4>
             <div style="display: flex; gap: 15px; margin-bottom: 15px;">
               <div style="margin-left: 30px;">
                 <label class="form-check">
@@ -55,11 +55,11 @@
             </flexi-grid>
           </div>
           <div class="tab-pane" id="tabs-html-index">
-            <h4>HTML kodları</h4>
+            <h4>{{t('TAB_PANE_SECOND')}}</h4>
             <my-code [code]="indexHTMLCode()" language="html"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-index">
-            <h4>Typescript kodları</h4>
+            <h4>{{t('TAB_PANE_THIRD')}}</h4>
             <my-code [code]="indexTSCode()" language="typescript"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-index-data">
@@ -73,14 +73,14 @@
       <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[showIndex] :</b> Index sırasını görmek isterseniz bu attribute true değeri vermelisiniz</li>
-        <li><b>indexWidth :</b> Index uzunluğu default 70px. Eğer değiştirmek isterseniz bu attribute kullanabilirsiniz
-          <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
+        <li><b>[showIndex] :</b> {{t('SHOW_INDEX_DESCRIPTION')}}</li>
+        <li><b>indexWidth :</b> {{t('INDEX_WIDTH_DESCRIPTION')}}
+          <p class="alert alert-info">{{t('INDEX_WIDTH_NOTE')}}</p>
         </li>
-        <li><b>indexTextAlign :</b> Index'in text align olarak nerede duracağını belirler
-          <p class="alert alert-info">Not: showIndex true değilse bu attribute verdiğiniz değer çalışmaz</p>
+        <li><b>indexTextAlign :</b>  {{t('INDEX_TEXT_ALIGN_DESCRIPTION')}}
+          <p class="alert alert-info">{{t('INDEX_TEXT_ALIGN_NOTE')}}</p>
         </li>
       </ul>
 
@@ -90,8 +90,8 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('ATTRIBUTE_TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('ATTRIBUTE_TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>

@@ -1,16 +1,15 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Custom Column">
-    <div class="card-body">
-      <p>İsterseniz gride yeni column ekleyebilirsiniz. Bu column mevcut datanızdaki verileri de kullanabilir,
-        isterseniz de tamamen farklı bir şey içinde kullanabilirsiniz. Örneğin Edit, Delete butonu eklemek gibi</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.CUSTOMCOLUMN_PAGE'">
+      <p>{{t('DESCRIPTION')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code [code]="customColumnCodeExample()" language="html"></my-code>
 
       @defer {
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
           <li class="nav-item">
-            <a href="#tabs-example-custom-column" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            <a href="#tabs-example-custom-column" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
           </li>
           <li class="nav-item">
             <a href="#tabs-html-custom-column" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -37,23 +36,23 @@
                   <input type="search" class="flexi-grid-filter-input" (keyup)="onKeyUp($event)" placeholder="Custom filter...">
                 </ng-template>
                 <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">                  
-                  Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}                  
+                  {{t('THIS_IS_COLUMN')}}: {{item.salary}} || {{t('THIS_IS_INDEX')}}: {{rowIndex}}                  
                 </ng-template>
               </flexi-grid-column>
 
               <ng-template #customButtonColumnTemplate let-item>
                 <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
-                <flexi-button (click)="edit(item.id)" btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="Güncelle" />
-                <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger"  btnIcon="delete" btnSize="small" flexiTooltip title="Sil" />
+                <flexi-button (click)="edit(item.id)" btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="{{t('UPDATE')}}" />
+                <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger"  btnIcon="delete" btnSize="small" flexiTooltip title="{{t('DELETE')}}" />
               </ng-template>
             </flexi-grid>
           </div>
           <div class="tab-pane" id="tabs-html-custom-column">
-            <h4>HTML kodları</h4>
+            <h4>{{t('TAB_PANE_SECOND')}}</h4>
             <my-code [code]="customColumnHTMLCode()" language="html"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-custom-column">
-            <h4>Typescript kodları</h4>
+            <h4>{{t('TAB_PANE_THIRD')}}</h4>
             <my-code [code]="customColumnTSCode()" language="typescript"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-custom-column-data">

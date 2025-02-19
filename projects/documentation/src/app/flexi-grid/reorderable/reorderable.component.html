@@ -1,16 +1,16 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Draggable">
-    <div class="card-body">
-      <p>Satırların yerlerini değiştirmek için [reorderable] attribute'üne true değeri vermeniz yeterli. Satırların başında sütükleyebileceğiniz bir alan çıkacak. Oradan istediğiniz sıraya bırakabilirsiniz.</p>
-      <p class="alert alert-primary">Gerçekte sıra değişimi yapmaz. Size önceki ve yeni konumunun index bilgisini <b>onReorder</b> metodu ile verir.</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.REORDERABLE_PAGE'">
+      <p [innerHTML]="t('DESCRIPTION')"></p>
+      <p class="alert alert-primary" [innerHTML]="(t('NOTE'))"></p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code className="" language="html" [code]="reOrderableCodeExample()"></my-code>      
 
       @defer {
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
           <li class="nav-item">
-            <a href="#tabs-example-reOrderable" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            <a href="#tabs-example-reOrderable" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
           </li>
           <li class="nav-item">
             <a href="#tabs-html-reOrderable" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -35,11 +35,11 @@
             </flexi-grid>
           </div>
           <div class="tab-pane" id="tabs-html-reOrderable">
-            <h4>HTML kodları</h4>
+            <h4>{{t('TABLE_TAB_SECOND')}}</h4>
             <my-code [code]="reOrderableHTMLCode()" language="html"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-reOrderable">
-            <h4>Typescript kodları</h4>
+            <h4>{{t('TABLE_TAB_THIRD')}}</h4>
             <my-code [code]="reOrderableTSCode()" language="typescript"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-reOrderable-data">
@@ -52,14 +52,14 @@
       <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[reorderable] :</b> Sıralama özelliğini aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
-          <b>false</b> vermeliyiz
+        <li><b>[reorderable] :</b> 
+          <span [innerHTML]="t('ATTRIBUTE_REORDERABLE')"></span>
         </li>
-        <li><b>(onReorder)</b> Sırası değişen satırın önceki ve sonraki değerini bize verir</li>        
-        <li><b>[reOrderWidth] :</b> Kolon genişliğini bunun ile ayarlayabilyoruz.</li>
-        <li><b>[reOrderTextAlign] :</b> Kolon içindeki iconun sağ sol ya da ortada duracağını bununla belirliyoruz</li>
+        <li><b>(onReorder)</b> {{t('ATTRIBUTE_ONREORDER')}}</li>        
+        <li><b>[reOrderWidth] :</b> .{{t('ATTRIBUTE_REORDER_WIDTH')}}</li>
+        <li><b>[reOrderTextAlign] :</b> {{t('ATTRIBUTE_REORDER_TEXT_ALIGN')}}</li>
       </ul>
 
       <hr>
@@ -68,8 +68,8 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>

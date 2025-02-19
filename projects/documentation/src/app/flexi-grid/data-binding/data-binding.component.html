@@ -1,22 +1,16 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card id="data-binding" cardTitle="Data Binding">
-    <div class="card-body">
-      <p>Data Binding özelliği ile table da yapılan her bir işlemin değerini alıp OData ile birlikte
-        kullanabilirsiniz. Ya da istediğiniz gibi işleyebilirsiniz. Data Binding attribute true değeri verdiğinizde
-        artık bir event ile yapılan işlemlerin çıktıları (örn pagination da sayfa değiştirme, order, filter vs)
-        state nesnesinde alabiliyorsunuz. İsterseniz bu nesnede aldığınız değeri yine bu kütüphanede bulunan service
-        ile otomatik OData destekli bir endpointe çevirip kullanabilirsiniz isterseniz de kendi istediğiniz gibi
-        işleyebilirsiniz.</p>
-      <p class="alert alert-warning">Önemli not: Data Binding true yaptığınız da artık table otomatik hareket etmeyi
-        bırakıp her şeyi sizin halletmenizi ister. Sayfa değiştirmek için sayfa numarasına bastığınızda size yeni
-        sayfanın bilgilerini gönderir ama o sayfaya geçmez, ya da filter a değer yazdığınızda yazdığınızı state
-        objesinde size iletir ama arama yapmaz.</p>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.DATABINDING_PAGE'">
+      <p>
+        {{t('DESCRIPTION')}}
+      </p>
+      <p class="alert alert-warning">{{t('WARNING')}}</p>
 
       @defer {
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
           <li class="nav-item">
-            <a href="#tabs-example-data-binding" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            <a href="#tabs-example-data-binding" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
           </li>
           <li class="nav-item">
             <a href="#tabs-html-data-binding" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -29,7 +23,7 @@
       <div class="card-body">
         <div class="tab-content">
           <div class="tab-pane active show" id="tabs-example-data-binding">
-            <h4>Data Binding örneği</h4>
+            <h4>{{t('TAB_PANE_FIRST')}}</h4>
             <flexi-grid [data]="users()" [total]="total()" [dataBinding]="dataBinding()" [loading]="loading()"
               [pageable]="pageable()" [pageSize]="pageSize()" [pageSizeList]="pageSizeList()" [showIndex]="showIndex()"
               [sortable]="sortable()" [showCaption]="showCaption()" [captionTitle]="captionTitle()"
@@ -43,11 +37,11 @@
             </flexi-grid>
           </div>
           <div class="tab-pane" id="tabs-html-data-binding">
-            <h4>HTML kodları</h4>
+            <h4>{{t('TAB_PANE_SECOND')}}</h4>
             <my-code [code]="dataBindingHTMLCode()" language="html"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-data-binding">
-            <h4>Typescript kodları</h4>
+            <h4>{{t('TAB_PANE_THIRD')}}</h4>
             <my-code [code]="dataBindingTSCode()" language="typescript"></my-code>
           </div>
         </div>
@@ -56,17 +50,12 @@
       <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[dataBinding] :</b> Data Binding yapısının aktif olmasını sağlar. Buna true değer vermezseniz Data
-          Binding'i kullanamazsınız</li>
-        <li><b>[total] :</b> Pagination hesaplamasında kullanılan değer. Data binding açık değilse otomatik kendi
-          hesaplanıyor.</li>
-        <li><b>[loading] :</b> Data grid verileri yüklerken loader görünmesini istiyorsanız bir değişken oluşturup
-          veri almadan önce ve sonra o değişken durumuna göre loader göndermesini sağlayabilirsiniz</li>
-        <li><b>(dataStateChange) :</b> Yapılan her işlemden sonra bu evente State objesi gelir. Bu objede tüm
-          yapılan işlemlerin bilgileri yer alır, pageNumber, filter, order gibi. Bunu kullanarak verileri
-          istediğiniz gibi yönetebilirsiniz</li>
+        <li><b>[dataBinding] :</b> {{t('ATTRIBUTE_DATA_BINDING')}}</li>
+        <li><b>[total] :</b> {{t('ATTRIBUTE_TOTAL')}}</li>
+        <li><b>[loading] :</b> {{t('ATTRIBUTE_LOADING')}}</li>
+        <li><b>(dataStateChange) :</b> {{t('ATTRIBUTE_DATA_STATE_CHANGE')}}</li>
       </ul>
 
       <hr>
@@ -75,8 +64,8 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>

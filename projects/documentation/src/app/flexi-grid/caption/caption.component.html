@@ -1,16 +1,15 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Caption">
-    <div class="card-body">
-      <p>Table üst başlığı ekleyebilir, üst başlıkta bulunan Column Visibility ve Refresh Data buttonlarını
-        kullanabilirsiniz. İsterseniz de o alana ek buttonlar ekleyebilirsiniz.</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.CAPTION_PAGE'">
+      <p>{{t('DESCRIPTION')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code className="" language="html" [code]="captionCodeExample()"></my-code>
 
       @defer {
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
           <li class="nav-item">
-            <a href="#tabs-example-caption" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            <a href="#tabs-example-caption" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
           </li>
           <li class="nav-item">
             <a href="#tabs-html-caption" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -26,12 +25,12 @@
       <div class="card-body">
         <div class="tab-content">
           <div class="tab-pane active show" id="tabs-example-caption">
-            <h4>Caption örneği</h4>
+            <h4>{{t('TAB_PANE_FIRST')}}</h4>
             <div style="margin-left: 30px; display: flex; gap:15px; margin-bottom: 15px;">
               <div class="form-group">
                 <label class="form-check">
                   <input class="form-check-input" type="checkbox" [(ngModel)]="showCaption">
-                  <span class="form-check-label">Caption alanını göster</span>
+                  <span class="form-check-label">{{t('TAB_CONTENT_SHOW_CAPTION')}}</span>
                 </label>
                 <div class="form-group">
                   <label>Caption Title</label>
@@ -43,7 +42,7 @@
                   <label class="form-check">
                     <input class="form-check-input" [disabled]="!showCaption()" type="checkbox"
                       [(ngModel)]="showColumnVisibility">
-                    <span class="form-check-label">Column Visibility butonunu göster</span>
+                    <span class="form-check-label">{{t('TAB_CONTENT_SHOW_COLUMN_VISIBILITY')}}</span>
                   </label>
                 </div>
                 <div class="form-group">
@@ -56,7 +55,7 @@
                   <label class="form-check">
                     <input class="form-check-input" [disabled]="!showRefreshBtn()" type="checkbox"
                       [(ngModel)]="showRefreshBtn">
-                    <span class="form-check-label">Refresh Data butonunu göster</span>
+                    <span class="form-check-label">{{t('TAB_CONTENT_SHOW_REFRESH_BUTTON')}}</span>
                   </label>
                 </div>
                 <div class="form-group mt-1">
@@ -75,7 +74,7 @@
               [captionTemplate]="captionTemplate">
 
               <ng-template #captionTemplate>
-               <flexi-button btnColor="primary" title="Kullanıcı Ekle" btnIcon="add" flexiTooltip=""/>
+               <flexi-button btnColor="primary" title="{{t('BUTTON_ADD_USER')}}" btnIcon="add" flexiTooltip=""/>
               </ng-template>
 
               <flexi-grid-column field="id" title="Id"></flexi-grid-column>
@@ -86,11 +85,11 @@
             </flexi-grid>
           </div>
           <div class="tab-pane" id="tabs-html-caption">
-            <h4>HTML kodları</h4>
+            <h4>{{t('TAB_PANE_SECOND')}}</h4>
             <my-code [code]="captionHTMLCode()" language="html"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-caption">
-            <h4>Typescript kodları</h4>
+            <h4>{{t('TAB_PANE_THIRD')}}</h4>
             <my-code [code]="captionTSCode()" language="typescript"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-caption-data">
@@ -103,26 +102,17 @@
       <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[showCaption] :</b> Caption bölümünü göstermek için bu attribute true değer vermelisiniz</li>
-        <li><b>captionTitle (optional):</b> Caption'a title vermek için bu attribute değer atayabilirsiniz</li>
-        <li><b>[showColumnVisibility] (optional) :</b> Caption bölümü gözüküyorken columnların visibilitysini
-          yöneten bu dropdownu gösterip gizleyebilirsiniz</li>
-        <li><b>columnVisibilityBtnClass :</b> Column Visibility butonu için özel class vermek isterseniz bu attribute
-          kullanabilirsiniz</li>
-        <li><b>[showRefreshBtn] (optional) :</b> Caption bölümü gözüküyorken datanın refresh olmasını sağlayan bu
-          butonu gösterip gizleyebilirsiniz. Bu butona tıkladığınızda tüm parametreleri sıfırlar. Order, filter vs gibi.
-        </li>
-        <li><b>refreshDataBtnClass :</b> Refresh Data butonu için özel class vermek isterseniz bu attribute
-          kullanabilirsiniz</li>
-        <li><b>ng-template #captionTemplate :</b> Bu elementi oluşturup içerisine eklediğiniz her şey caption sağ
-          taraftaki button kısmında gözükür</li>
-        <li><b>[captionTemplate] :</b> Eklediğiniz buttonların gözükmesi için bu elementin referansını attirbute
-          vermeniz gerekmektedir
-          <p class="alert alert-info">Not: ng-template #captionTemplate ile element oluşturmanız içerisine
-            ekleyeceklerinizi captionda göstermek için yeterli değil. Mutlaka burada hashtag ile elde ettiğiniz
-            referansı [captionTemplate] attribute değer olarak vermelisiniz!</p>
+        <li><b>[showCaption] :</b> {{t('ATTRIBUTES_SHOW_CAPTION')}}</li>
+        <li><b>captionTitle (optional):</b> {{t('ATTRIBUTES_CAPTION_TITLE')}}</li>
+        <li><b>[showColumnVisibility] (optional) :</b> {{t('ATTRIBUTES_SHOW_COLUMN_VISIBILITY')}}</li>
+        <li><b>columnVisibilityBtnClass :</b> {{t('ATTRIBUTES_COLUMN_VISIBILITY_BUTTON_CLASS')}}</li>
+        <li><b>[showRefreshBtn] (optional) :</b> {{t('ATTRIBUTES_SHOW_REFRESH_BUTTON')}}</li>
+        <li><b>refreshDataBtnClass :</b> {{t('ATTRIBUTES_REFRESH_BUTTON_CLASS')}}</li>
+        <li><b>ng-template #captionTemplate :</b> {{t('ATTRIBUTES_CAPTION_TEMPLATE')}}</li>
+        <li><b>[captionTemplate] :</b> {{t('ATTRIBUTES_CAPTION_TEMPLATE_BRACKET')}}
+          <p class="alert alert-info">{{t('ATTRIBUTES_CAPTION_TEMPLATE_NOTE')}}</p>
         </li>
       </ul>
       <hr>
@@ -131,8 +121,8 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('ATTRIBUTE_TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('ATTRIBUTE_TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>
