@@ -1,16 +1,16 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Sort">
-    <div class="card-body">
-      <p>Sıralama yapısını aktif etmek için grid elementinde <b>[sortable]</b> attribute'üne true değeri
-        vermelisiniz. İsterseniz column bazlı sıralama işlemini kapatabiliyorsunuz.</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.SORT_PAGE'">
+      <p [innerHTML]="(t('DESCRIPTION'))">
+      </p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code className="" language="html" [code]="sortCodeExample()"></my-code>
 
       @defer {
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-sort" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-sort" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
             </li>
             <li class="nav-item">
               <a href="#tabs-html-sort" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -26,7 +26,7 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active show" id="tabs-example-sort">
-              <h4>Sort örneği</h4>
+              <h4>{{t('TAB_PANE_FIRST')}}</h4>
               <div style="margin-left: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
                 <div class="form-group">
                   <label class="form-check">
@@ -75,11 +75,11 @@
               </flexi-grid>
             </div>
             <div class="tab-pane" id="tabs-html-sort">
-              <h4>HTML kodları</h4>
+              <h4>{{t('TABLE_TAB_SECOND')}}</h4>
               <my-code [code]="sortHTMLCode()" language="html"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-sort">
-              <h4>Typescript kodları</h4>
+              <h4>{{t('TABLE_TAB_THIRD')}}</h4>
               <my-code [code]="sortTSCode()" language="typescript"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-sort-data">
@@ -92,11 +92,11 @@
         <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[sortable] :</b> Sort yapısını aktif etmek istiyorsak true, pasife çekmek istiyorsak false vermeliyiz
+        <li><b>[sortable] :</b> {{t('SORTABLE_DESCRIPTION')}}
         </li>
-        <li><b>[sortable] (column optional) :</b> Column bazlı sort yapısını kapatıp açabiliriz</li>
+        <li><b>[sortable] (column optional) :</b> {{t('COLUMN_SORTABLE_DESCRIPTION')}}</li>
       </ul>
 
       <hr>
@@ -105,8 +105,9 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('TABLE_DEFAULT_VALUE')}}</th>
+
             </tr>
           </thead>
           <tbody>

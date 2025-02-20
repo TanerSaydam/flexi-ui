@@ -1,15 +1,15 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Pagination">
-    <div class="card-body">
-      <p>Paginationı aktif etmek için grid elementinde <b>[pageable]</b> attribute'üne true değeri vermelisiniz</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.PAGINATION_PAGE'">
+      <p [innerHTML]="t('DESCRIPTION')"></p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code className="" language="html" [code]="paginationCodeExample()"></my-code>
 
       @defer {
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-pagination" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
             </li>
             <li class="nav-item">
               <a href="#tabs-html-pagination" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -25,7 +25,7 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active show" id="tabs-example-pagination">
-              <h4>Pagination örneği</h4>
+              <h4>{{t('TAB_PANE_FIRST')}}</h4>
               <div style="margin-left: 30px; display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
                 <div class="form-group">
                   <label class="form-check">
@@ -55,11 +55,11 @@
               </flexi-grid>
             </div>
             <div class="tab-pane" id="tabs-html-pagination">
-              <h4>HTML kodları</h4>
+              <h4>{{t('TABLE_TAB_SECOND')}}</h4>
               <my-code [code]="paginationHTMLCode()" language="html"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-pagination">
-              <h4>Typescript kodları</h4>
+              <h4>{{t('TABLE_TAB_THIRD')}}</h4>
               <my-code [code]="paginationTSCode()" language="typescript"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-pagination-data">
@@ -72,14 +72,11 @@
         <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[pageable] :</b> Paginationu aktif etmek istiyorsak true | pasife çekmek istiyorsak false
-          vermeliyiz</li>
-        <li><b>[pageSize] (optional) :</b> Page size'ıbir değişkene bağlayıp kendiniz başlangıç değeri
-          verebilirsiniz. Değer olarak number bir değer vermeniz yeterli</li>
-        <li><b>[pageSizeList] (optional) </b>: Page size listesini özelleştirmek isterseniz bu attribute değer
-          olarak number bir liste vermelisiniz</li>
+        <li><b>[pageable] :</b> {{t('PAGEABLE_DESCRIPTION')}}</li>
+        <li><b>[pageSize] (optional) :</b> {{t('PAGE_SIZE_DESCRIPTION')}}</li>
+        <li><b>[pageSizeList] (optional) </b>: {{t('PAGE_SIZE_LIST_DESCRIPTION')}}</li>
       </ul>
 
       <hr>
@@ -88,8 +85,8 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>

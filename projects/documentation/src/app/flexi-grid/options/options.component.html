@@ -1,7 +1,7 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
     <app-card id="options" cardTitle="Ek Ayarlar">
-        <div class="card-body">
-          <p>Ek olarak verebileceğiniz ayarları aşağıda bulabilirsiniz</p>
+        <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.OPTIONS_PAGE'">
+          <p>{{t('DESCRIPTION')}}</p>
           @defer { 
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
@@ -124,11 +124,11 @@
                         </flexi-grid>
                     </div>
                     <div class="tab-pane" id="tabs-html-options">
-                        <h4>HTML kodları</h4>
+                        <h4>{{t('TAB_PANE_SECOND')}}</h4>
                         <my-code [code]="optionsHTMLCode()" language="html"></my-code>
                     </div>
                     <div class="tab-pane" id="tabs-ts-options">
-                        <h4>Typescript kodları</h4>
+                        <h4>{{t('TAB_PANE_THIRD')}}</h4>
                         <my-code [code]="optionsTSCode()" language="typescript"></my-code>
                     </div>
                 </div>
@@ -139,19 +139,19 @@
           <hr>
     
           <ul>
-            <li><b>height :</b> Data grid boyutunu px olarak ayarlıyabiliyorsunuz. Default 420px</li>
-            <li><b>[autoHeight] :</b> Data grid boyutunu otomatik ayarlasın sabit boyut kullanmasın derseniz buna true verebilirsiniz 
-              <p class="alert alert-warning">Not: Bu ayar true iken height verdiğiniz değer çalışmaz!</p>
+            <li><b>height :</b> {{t('ATTRIBUTES_HEIGHT')}}</li>
+            <li><b>[autoHeight] :</b> {{t('ATTRIBUTES_AUTO_HEIGHT')}} 
+              <p class="alert alert-warning">{{t('ATTRIBUTES_AUTO_HEIGHT_NOTE')}}</p>
             </li>
-            <li><b>min-width (column) :</b> Table'ın min-width ayarını buraya number değer vererek yapabilirsiniz. Bu ayar sayesinde o uzunluktan daha kısa sayfalarda overflow özelliği aktif olur. Yani uzunluk sabit kalır ama sayfadan taşmamak için scrolbar ile kaydırarak yan kısmı görürsünüz</li>
-            <li><b>[useMinWidth] :</b> Min width ayarının çalışmasını istemiyorsanız bu ayarı false yapabilirsiniz. O zaman boyutunu sayfanın genişliğine göre otomatik ayarlar
-              <p class="alert alert-warning">Not: Bu ayar false iken min-width için verdiğiniz değer çalışmaz!</p></li>
-            <li><b>[autoWidth] :</b> Table'ın width ayarı %100 olmasın diyorsanız bu ayarı false yapıp width attributüne değer vermelisiniz
-                <p class="alert alert-warning">Not: Bu ayar true iken width için verdiğiniz değer çalışmaz!</p></li>
-            <li><b>width (table) :</b> Table'ın uzunluğunu bununla değiştirebilirsiniz. Default %100 dür</li>
-            <li><b>width (column) :</b> Columnların uzunluklarını ayarlayabiliyorsunuz. Örneğin: 100px, 20% gibi</li>
-            <li><b>[visible] (column) :</b> Eklediğiniz columnların gizli kalmasını, istediğiniz zaman görünmesini istiyorsanız bu ayar ile yapabilirsiniz</li>
-            <li><b>footerPerPageText :</b> Pagination da bulunan page size selectinin devamındaki yazıyı isterseniz bu attribute ile değiştirebilirsiniz</li>
+            <li><b>min-width (column) :</b> {{t('ATTRIBUTES_MIN_WIDTH_COLUMN')}}</li>
+            <li><b>[useMinWidth] :</b> {{t('ATTRIBUTES_USE_MIN_WIDTH')}}
+              <p class="alert alert-warning">{{t('ATTRIBUTES_USE_MIN_WIDTH_NOTE')}}</p></li>
+            <li><b>[autoWidth] :</b> {{t('ATTRIBUTES_AUTO_WIDTH')}}
+                <p class="alert alert-warning">{{t('ATTRIBUTES_AUTO_WIDTH_NOTE')}}</p></li>
+            <li><b>width (table) :</b> {{t('ATTRIBUTES_WIDTH_TABLE')}}</li>
+            <li><b>width (column) :</b> {{t('ATTRIBUTES_WIDTH_COLUMN')}}</li>
+            <li><b>[visible] (column) :</b> {{t('ATTRIBUTES_VISIBLE_COLUMN')}}</li>
+            <li><b>footerPerPageText :</b> {{t('ATTRIBUTES_FOOTER_PER_PAGE_TEXT')}}</li>
           </ul>
     
           <hr>
@@ -160,8 +160,8 @@
               <thead>
                 <tr>
                   <th>Attribute</th>
-                  <th>Alabileceği Değer Türleri</th>
-                  <th>Default Değer</th>
+                  <th>{{t('ATTRIBUTE_TABLE_VALUE_TYPES')}}</th>
+                  <th>{{t('ATTRIBUTE_TABLE_DEFAULT_VALUE')}}</th>
                 </tr>
               </thead>
               <tbody>

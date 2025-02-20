@@ -1,17 +1,17 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Resizable">
-    <div class="card-body">
-      <p>Columnları tekrar boyutlandırmak için [resizable] attribute'üne true değeri verebilirsiniz. Her column başlığından sonraki çizgiyi mouse ile resize yapabilirsiniz. İsterseniz bu özelliği column bazlı kapatabilirsiniz</p>
-      <h3>Örnek kod:</h3>
+    <div class="card-body" *transloco="let t; read: 'FLEXI_GRID.RESIZABLE_PAGE'">
+      <p>{{t('DESCRIPTION')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <my-code className="" language="html" [code]="resizableCodeExample()"></my-code>
-      <h3>Örnek kullanım:</h3>
+      <h3>{{t('EXAMPLE_USAGE_TITLE')}}</h3>
       <img src="/img/resizable-example.gif" style="width: 100%;">
   
       @defer {
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-resizable" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-resizable" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
             </li>
             <li class="nav-item">
               <a href="#tabs-html-resizable" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -37,11 +37,11 @@
               </flexi-grid>
             </div>
             <div class="tab-pane" id="tabs-html-resizable">
-              <h4>HTML kodları</h4>
+              <h4>{{t('TABLE_TAB_SECOND')}}</h4>
               <my-code [code]="resizableHTMLCode()" language="html"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-resizable">
-              <h4>Typescript kodları</h4>
+              <h4>{{t('TABLE_TAB_THIRD')}}</h4>
               <my-code [code]="resizableTSCode()" language="typescript"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-resizable-data">
@@ -54,11 +54,12 @@
         <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[resizable] :</b> Resize yapısını aktif etmek istiyorsak <b>true</b>, pasife çekmek istiyorsak
-          <b>false</b> vermeliyiz</li>
-        <li><b>[resizable] (column optional) :</b> Column bazlı resize yapısını kapatıp açabiliriz</li>
+        <li><b>[resizable] :</b> 
+          <span [innerHTML]="t('ATTRIBUTE_RESIZABLE')"></span>
+        </li>
+        <li><b>[resizable] (column optional) :</b> {{t('ATTRIBUTE_RESIZABLE_COLUMN')}}</li>
       </ul>
   
       <hr>
@@ -67,8 +68,8 @@
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t('TABLE_VALUE_TYPES')}}</th>
+              <th>{{t('TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>

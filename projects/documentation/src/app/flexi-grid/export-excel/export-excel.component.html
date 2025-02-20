@@ -1,81 +1,142 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid">
   <app-card cardTitle="Export Excel">
-    <div class="card-body">
-      <p>Table üst başlığı eklediğinizde kullanabileceğiniz seçeneklerden biri de export excel butonu. Bu buton ile
-        mevcut datanızdaki verileri ya da istediğiniz başka verileri excel çıktısı olarak alabilirsiniz</p>
-      <h3>Örnek:</h3>
+    <div
+      class="card-body"
+      *transloco="let t; read: 'FLEXI_GRID.EXPORTEXCEL_PAGE'"
+    >
+      <p>{{ t("DESCRIPTION") }}"></p>
+
+      <h3>{{ t("EXAMPLE_CODE_TITLE") }}</h3>
       <b>component.html</b>
-      <my-code className="" [code]="exportExcelCodeExample1()" language="html"></my-code>
-      <p class="alert alert-warning">Not: Bu seçeneğe normal bir metodu parantezsiz vermeniz gerekiyor. Arkasına
-        .bind(this) yazmalısınız. Ya da TS tarafında arrow functionlu bir metot oluşturup onu vermelisiniz</p>
+      <my-code
+        className=""
+        [code]="exportExcelCodeExample1()"
+        language="html"
+      ></my-code>
+      <p class="alert alert-warning">
+        {{ t("NOTE") }}
+      </p>
       <b>component.ts</b>
-      <my-code className="" [code]="exportExcelCodeExample2()" language="typescript"></my-code>
+      <my-code
+        className=""
+        [code]="exportExcelCodeExample2()"
+        language="typescript"
+      ></my-code>
 
       @defer {
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
           <li class="nav-item">
-            <a href="#tabs-example-export-excel" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+            <a
+              href="#tabs-example-export-excel"
+              class="nav-link active"
+              data-bs-toggle="tab"
+              >{{ t("TABLE_TAB_FIRST") }}</a
+            >
           </li>
           <li class="nav-item">
-            <a href="#tabs-html-export-excel" class="nav-link" data-bs-toggle="tab">component.html</a>
+            <a
+              href="#tabs-html-export-excel"
+              class="nav-link"
+              data-bs-toggle="tab"
+              >component.html</a
+            >
           </li>
           <li class="nav-item">
-            <a href="#tabs-ts-export-excel" class="nav-link" data-bs-toggle="tab">component.ts</a>
+            <a
+              href="#tabs-ts-export-excel"
+              class="nav-link"
+              data-bs-toggle="tab"
+              >component.ts</a
+            >
           </li>
         </ul>
       </div>
       <div class="card-body">
         <div class="tab-content">
           <div class="tab-pane active show" id="tabs-example-export-excel">
-            <h4>Export Excel örneği</h4>
-            <flexi-grid [data]="users()" [total]="total()" [dataBinding]="dataBinding()" [loading]="loading()"
-              [pageable]="pageable()" [pageSize]="pageSize()" [pageSizeList]="pageSizeList()" [showIndex]="showIndex()"
-              [sortable]="sortable()" [showCaption]="showCaption()" [captionTitle]="captionTitle()"
-              [showColumnVisibility]="showColumnVisibility()" [showRefreshBtn]="showRefreshBtn()"
-              [showExportExcelBtn]="true" exportExcelFileName="my-file"
-              [exportExcelButtonClick]="exportExcel.bind(this)" [filterable]="filterable()"
-              (dataStateChange)="dataStateChange($event)" (refreshData)="getAll()">
+            <h4>{{ t("TAB_PANE_FIRST") }}</h4>
+            <flexi-grid
+              [data]="users()"
+              [total]="total()"
+              [dataBinding]="dataBinding()"
+              [loading]="loading()"
+              [pageable]="pageable()"
+              [pageSize]="pageSize()"
+              [pageSizeList]="pageSizeList()"
+              [showIndex]="showIndex()"
+              [sortable]="sortable()"
+              [showCaption]="showCaption()"
+              [captionTitle]="captionTitle()"
+              [showColumnVisibility]="showColumnVisibility()"
+              [showRefreshBtn]="showRefreshBtn()"
+              [showExportExcelBtn]="true"
+              exportExcelFileName="my-file"
+              [exportExcelButtonClick]="exportExcel.bind(this)"
+              [filterable]="filterable()"
+              (dataStateChange)="dataStateChange($event)"
+              (refreshData)="getAll()"
+            >
               <flexi-grid-column field="id" title="Id"></flexi-grid-column>
-              <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-              <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
-              <flexi-grid-column field="dateOfBirth" filterType="date" title="Date Of Birth"></flexi-grid-column>
-              <flexi-grid-column field="salary" filterType="number" title="Salary"></flexi-grid-column>
+              <flexi-grid-column
+                field="firstName"
+                title="First Name"
+              ></flexi-grid-column>
+              <flexi-grid-column
+                field="lastName"
+                title="Last Name"
+              ></flexi-grid-column>
+              <flexi-grid-column
+                field="dateOfBirth"
+                filterType="date"
+                title="Date Of Birth"
+              ></flexi-grid-column>
+              <flexi-grid-column
+                field="salary"
+                filterType="number"
+                title="Salary"
+              ></flexi-grid-column>
             </flexi-grid>
           </div>
           <div class="tab-pane" id="tabs-html-export-excel">
-            <h4>HTML kodları</h4>
+            <h4>{{ t("TABLE_TAB_SECOND") }}</h4>
             <my-code [code]="exportExcelHTMLCode()" language="html"></my-code>
           </div>
           <div class="tab-pane" id="tabs-ts-export-excel">
-            <h4>Typescript kodları</h4>
-            <my-code [code]="exportExcelTSCode()" language="typescript"></my-code>
+            <h4>{{ t("TABLE_TAB_THIRD") }}</h4>
+            <my-code
+              [code]="exportExcelTSCode()"
+              language="typescript"
+            ></my-code>
           </div>
         </div>
       </div>
       }@placeholder {
       <app-loading></app-loading>
       }
-      <hr>
-      <h3>Kodların açıklaması</h3>
+      <hr />
+      <h3>{{ t("CODE_DESCRIPTION_TITLE") }}</h3>
       <ul>
-        <li><b>[showExportExcel] :</b> Export Excel butonunu görmek için bu attribute true değer vermelisiniz</li>
-        <li><b>exportExcelFileName :</b> Export edeceğiniz excele özel bir isim vermek için bu attribute değer
-          atayabilirsiniz. Boş geçerseniz export-excel değerini kullanır</li>
-        <li><b>exportExcelButtonClick :</b> Normalde export excel butonuna bastığınızda data griddeki mevcut veriyi
-          indirir. Ama siz başka veriyi excele almak isterseniz bu attribute bir metot atayarak orada önce veriyi
-          yakalarsınız, arkasına <b>Flexi Service</b> içerisindeki exportExcel metoduna yeni datanızı yollarak excel
-          export yapabilirsiniz
+        <li>
+          <b>[showExportExcel] :</b> {{ t("ATTRIBUTE_SHOW_EXPORT_EXCEL") }}
+        </li>
+        <li>
+          <b>exportExcelFileName :</b>
+          {{ t("ATTRIBUTE_EXPORT_EXCEL_FILE_NAME") }}
+        </li>
+        <li>
+          <b>exportExcelButtonClick :</b>
+          <span [innerHTML]="t('ATTRIBUTE_EXPORT_EXCEL_BUTTON_CLICK')"></span>
         </li>
       </ul>
-      <hr>
+      <hr />
       <div class="overflow-x">
         <table class="table">
           <thead>
             <tr>
               <th>Attribute</th>
-              <th>Alabileceği Değer Türleri</th>
-              <th>Default Değer</th>
+              <th>{{t("TABLE_VALUE_TYPES")}}</th>
+              <th>{{t('TABLE_DEFAULT_VALUE')}}</th>
             </tr>
           </thead>
           <tbody>
