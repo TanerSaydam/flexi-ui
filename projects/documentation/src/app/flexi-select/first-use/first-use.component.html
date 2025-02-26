@@ -1,24 +1,24 @@
-<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
-  <app-card cardTitle="İlk Kullanım">
+<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select" *transloco="let t; read: 'FLEXI_SELECT.FIRST_USE_PAGE'">
+  <app-card cardTitle="{{t('CARD_TITLE')}}" >
     <div class="card-body">
-      <p>Flexi Select'i kullanmak istediğiniz standalone componente import etmelisiniz</p>
-      <p>HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına selecte gözükmesini istediğiniz alanı label'a, size vermesini istediğiniz alanı value attribute'üne atamalısınız</p>
-      <h3>Örnek kod:</h3>
+      <p>{{t('DESCRIPTION_FIRST')}}</p>
+      <p>{{t('DESCRIPTION_SECOND')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>
       <b>component.ts</b>
       <my-code className="" language="typescript" [code]="firstUseTSCodeExample1()"></my-code>
-      <p><b>Ya da</b></p>
+      <p><b>{{t('OR')}}</b></p>
       <my-code className="" language="typescript" [code]="firstUseTSCodeExample2()"></my-code>
       <b>component.html</b>
       <my-code className="" language="html" [code]="firstUseHTMLCodeExample1()"></my-code>
   
-      <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
+      <p class="alert alert-danger">{{t('NOTE_ALERT')}}</p>
       <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
   
       @defer {
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-first-use" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
             </li>
             <li class="nav-item">
               <a href="#tabs-html-first-use" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -34,7 +34,7 @@
       <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active show flexi-select" id="tabs-example-first-use">
-              <h4>İlk kullanım</h4>
+              <h4>{{t('CARD_TITLE')}}</h4>
               <flexi-select
                 [data]="users()"
                 label="firstName"
@@ -46,11 +46,11 @@
               </flexi-select>
             </div>
             <div class="tab-pane" id="tabs-html-first-use">
-              <h4>HTML kodları</h4>
+              <h4>{{t('TABLE_TAB_SECOND')}}</h4>
               <my-code [code]="firstUseHTMLCode()" language="html"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-first-use">
-              <h4>Typescript kodları</h4>
+              <h4>{{t('TABLE_TAB_THIRD')}}</h4>
               <my-code [code]="firstUseTSCode()" language="typescript"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-first-use-data">
@@ -63,17 +63,16 @@
         <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>flexi-select :</b> Flexi select elementi. Bununla selecti sayfamıza ekliyoruz</li>
-        <li><b>[data] :</b> Data attributene listemizi veriyoruz.
-          <p class="alert alert-info">Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.
-            İsterseniz siz normal değişken kullanabilirsiniz</p>
+        <li><b>flexi-select :</b> {{t('FLEXISELECT_DESCRIPTION')}}</li>
+        <li><b>[data] :</b> {{t('DATA_DESCRIPTION')}}
+          <p class="alert alert-info">{{t('NOTE')}}</p>
         </li>
-        <li><b>label :</b> Select'de gözükmesini istediğimiz property ismini buraya veriyoruz</li>
-        <li><b>value :</b> Her bir kaydın unique değerini, yani bizim için id niteliği taşıyan property ismini buraya veriyoruz. </li>
-        <li><b>[(ngModel)] :</b> İstersek selecte bir değişkeni two-data-binding ile bağlayabiliyoruz </li>
-        <li><b>selected($event) :</b> Seçtiğimiz değeri seçimin hemen sonrası bu event ile yakalayabiliyoruz
+        <li><b>label :</b> {{t('LABEL_DESCRIPTION')}}</li>
+        <li><b>value :</b> {{t('VALUE_DESCRIPTION')}} </li>
+        <li><b>[(ngModel)] :</b>{{t('NGMODEL_DESCRIPTION')}}</li>
+        <li><b>selected($event) :</b>{{t('EVENT_DESCRIPTION')}}
         </li>
       </ul>
   
@@ -82,7 +81,7 @@
         <thead>
           <tr>
             <th>Attribute</th>
-            <th>Alabileceği Değer Türleri</th>
+            <th>{{t('TABLE_VALUE_TYPES')}}</th>
           </tr>
         </thead>
         <tbody>
@@ -101,7 +100,7 @@
         </tbody>
       </table>
   
-      <p class="alert alert-success">İlk örneğimizle beraber listemizi select içerisinde göstermeyi başardık.</p>
+      <p class="alert alert-success">{{t('SUCCESS_ALERT_NOTE')}}.</p>
     </div>
   </app-card>
 </app-blank>

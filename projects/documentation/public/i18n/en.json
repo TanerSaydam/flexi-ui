@@ -274,5 +274,77 @@
       "SYMBOL": "(If true, the symbol appears before the value; if false, it appears after.)",
       "FLOAT": "(Specifies how many decimal places to display.)"
     }
+  },
+  "FLEXI_SELECT": {
+    "FLEXI_SELECT_PAGE": {
+      "TITLE": "Flexi Select",
+      "CARD_TITLE": "What is Flexi Select?",
+      "DESCRIPTION": "Meet Flexi Select, a stylish and user-friendly Select component for your Angular applications. With this component, you can display your lists within a select dropdown while enabling search functionality. Thanks to its lazy loading structure, you can achieve better performance when displaying large lists.",
+      "LINKED_PART_ONE": "Flexi Select is open-source. You can access the source code ",
+      "LINKED_PART_TWO": "by clicking here",
+      "LINKED_PART_THREE": ".",
+      "CONTRIBUTION_NOTE": "Don't forget to give a star (⭐) to the GitHub repository to support me and contribute to the project.",
+      "LINKED_CONTRIBUTION_NOTE": "Click here to access the GitHub repository",
+      "DOCUMENTATION_NOTE": "By following the documentation step by step, you can learn how to install and use Flexi Select in your project. Below, you will find an example that showcases all the features of Flexi Select. After this section, you will learn how to set up and configure the component step by step.",
+      "NOTE_ALERT": "Note: You can use it in Angular v18+ projects.",
+      "CURRENT_VERSION": "Current version: v19.",
+      "OLDER_VERSION_NOTE": "For v18, you should use the package versions compatible with v18.",
+      "FULL_FEATURES_EXAMPLE": "An example with all features enabled is shown below."
+    },
+    "INSTALLATION_PAGE": {
+      "CARD_TITLE": "Installation",
+      "DESCRIPTION": "To use/update Flexi Select in your Angular project, you need to run the following npm command."
+    },
+    "FIRST_USE_PAGE": {
+      "CARD_TITLE": "First Use",
+      "DESCRIPTION_FIRST": "You need to import Flexi Select into the standalone component where you want to use it.",
+      "DESCRIPTION_SECOND": "In HTML, you need to call the component element and pass the data inside it. Assign the field you want to display in the select to the 'label' attribute and the field you want to retrieve as a value to the 'value' attribute.",
+      "EXAMPLE_CODE_TITLE": "Example Code:",
+      "OR": "Or",
+      "NOTE_ALERT": "Important Note: If there are multiple flexi-select components on the same page, you must provide a unique ID. Otherwise, they may interfere with each other's values!",
+      "TABLE_TAB_FIRST": "Example",
+      "TABLE_TAB_SECOND": "HTML Code",
+      "TABLE_TAB_THIRD": "TypeScript Code",
+      "CODE_DESCRIPTION_TITLE": "Explanation of the Code",
+      "FLEXISELECT_DESCRIPTION": "The Flexi Select element. This is how we add the select component to our page.",
+      "DATA_DESCRIPTION": "We assign our list to the data attribute.",
+      "NOTE": "Note: Variables in the project are stored using the signal structure, but it is not mandatory. You can use regular variables if you prefer.",
+      "LABEL_DESCRIPTION": "We specify the property name that we want to be displayed in the select.",
+      "VALUE_DESCRIPTION": "We specify the property name that serves as a unique identifier for each record, such as an ID.",
+      "NGMODEL_DESCRIPTION": "We can bind a variable to the select component using two-way data binding.",
+      "EVENT_DESCRIPTION": "We can capture the selected value immediately after selection using this event.",
+      "TABLE_VALUE_TYPES": "Acceptable Value Types",
+      "SUCCESS_ALERT_NOTE": "With our first example, we have successfully displayed our list within the select component."
+    },
+    "CUSTOM_OPTION_PAGE": {
+      "DESCRIPTION": "If you want to create a custom option structure within Flexi Select, you can do so using flexi-option.",
+      "EXAMPLE_CODE_TITLE": "Example Code:",
+      "TABLE_TAB_FIRST": "Example",
+      "TABLE_TAB_SECOND": "HTML Code",
+      "TABLE_TAB_THIRD": "TypeScript Code",
+      "CODE_DESCRIPTION_TITLE": "Explanation of the Code",
+      "FLEXIOPTION_DESCRIPTION": "A custom option element that can be added within Flexi Select."
+    },
+    "MULTIPLE_PAGE": {
+      "CARD_TITLE": "Multiple Selection",
+      "DESCRIPTION": "If you want to enable multiple selection, simply set the multiple attribute to true.",
+      "EXAMPLE_CODE_TITLE": "Example Code:",
+      "NOTE": "Important Note: If there are multiple flexi-select components on the same page, you must provide a unique ID for each. Otherwise, they may interfere with each other's values!",
+      "TABLE_TAB_FIRST": "Example",
+      "TABLE_TAB_SECOND": "HTML Code",
+      "TABLE_TAB_THIRD": "TypeScript Code",
+      "TAB_PANE_FIRST": "First Use",
+      "CODE_DESCRIPTION_TITLE": "Explanation of the Code",
+      "MULTIPLE_DESCRIPTION": "To enable multiple selection, set the value to true.",
+      "CLOSE_AFTER_DESCRIPTION": "If you want the select to remain open after selection, set this attribute to false. The default value is true, which closes the select after each selection.",
+      "HEIGHT_DESCRIPTION": "You can adjust the height of the select. The minimum height is 36px.",
+      "TABLE_VALUE_TYPES": "Possible Value Types"
+    },
+    "FULL_COMPONENT": {
+      "TABLE_TAB_FIRST": "Example",
+      "TAB_PANE_FIRST": "Example view of the full version",
+      "TABLE_TAB_SECOND": "HTML Code",
+      "TABLE_TAB_THIRD": "TypeScript Code"
+    }
   }
 }

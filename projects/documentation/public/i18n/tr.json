@@ -242,7 +242,7 @@
       "TABLE_VALUE_TYPES": "Alabileceği Değer Türleri",
       "TABLE_DEFAULT_VALUE": "Default Değer"
     },
-   
+
     "FILTER_PAGE": {
       "DESCRIPTION": "Filtreleme yapısını aktif etmek için grid elementinde  <b>[sortable]</b>  attribute'üne true değeri vermelisiniz. İsterseniz column bazlı filtreleme işlemini kapatabiliyorsunuz. Farklı türde veriler için filter özelliğine ayrı type verebiliyorsunuz.",
       "EXAMPLE_CODE_TITLE": "Örnek kod:",
@@ -266,14 +266,86 @@
       "SYMBOL_DESCRIPTION": "Eğer format c ise sembol ön kısımdaki arkada mı görüneceği ve fraction belirleyebiliyorsunuz.",
       "TABLE_VALUE_TYPES": "Alabileceği Değer Türleri",
       "TABLE_DEFAULT_VALUE": "Default Değer",
-      "BOOLEAN_DATA":"['true için değer', 'false için değer']",
-      "FILTER_DATA":"(value select içi değer, name görünecek değer)",
+      "BOOLEAN_DATA": "['true için değer', 'false için değer']",
+      "FILTER_DATA": "(value select içi değer, name görünecek değer)",
       "SHOW_CHECKBOX": "true (true yaparsanız işaretlenebilir bir checkbox gelir. onChange eventi ile de o satırın tüm değerlerini alabilirsiniz)",
       "FORMAT": "(d = gün || M = ay || y = yıl) | n | c",
       "IF_FORMAT_C": "(Eğer format c ise)",
       "EMPTY_SYMBOL": "default boş ama '₺', '$', '€' gibi sembolü verebilisiniz",
-      "SYMBOL":"(true ise sembol önde false ise arkada gözükür)",
-      "FLOAT":"(küsürat da kaç rakam gözükeceği)"
+      "SYMBOL": "(true ise sembol önde false ise arkada gözükür)",
+      "FLOAT": "(küsürat da kaç rakam gözükeceği)"
+    }
+  },
+  "FLEXI_SELECT": {
+    "FLEXI_SELECT_PAGE": {
+      "TITLE": "Flexi Select",
+      "CARD_TITLE": "Flexi Select nedir?",
+      "DESCRIPTION": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Select olan Flexi select ile tanışın. Bu component ile listelerinizi select içerisinde gösterirken search yapabileceksiniz, lazy loading yapısı sayesinde listelerinizi göstermede performans elde edeceksiniz.",
+      "LINKED_PART_ONE": "Flexi Select, açık kaynak kodludur. Kaynak kodlarına ",
+      "LINKED_PART_TWO": "buraya tıklayarak",
+      "LINKED_PART_THREE": "ulaşabilirsiniz.",
+      "CONTRIBUTION_NOTE": "Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın.",
+      "LINKED_CONTRIBUTION_NOTE": "GitHub reposuna ulaşmak için tıklayın",
+      "DOCUMENTATION_NOTE": "Dökümantasyonu adım adım inceleyerek Flexi Select'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda, Flexi Select'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.",
+      "NOTE_ALERT": "Not: Angular v18+ projelerinde kullanabilirsiniz.",
+      "CURRENT_VERSION": "Güncel sürüm v19.",
+      "OLDER_VERSION_NOTE": "v18 için paketin v18 sürümlerini kullanmalısınız.",
+      "FULL_FEATURES_EXAMPLE": "Full özelliklerin açık olduğu örnek aşağıdadır."
+    },
+    "INSTALLATION_PAGE": {
+      "CARD_TITLE": "Kurulum",
+      "DESCRIPTION": "Flexi Select'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız."
+    },
+    "FIRST_USE_PAGE": {
+      "CARD_TITLE": "İlk Kullanım",
+      "DESCRIPTION_FIRST": "Flexi Select'i kullanmak istediğiniz standalone componente import etmelisiniz.",
+      "DESCRIPTION_SECOND": "HTML de component elementini çağırıp içine datayı vermelisiniz, arkasına selecte gözükmesini istediğiniz alanı label'a, size vermesini istediğiniz alanı value attribute'üne atamalısınız.",
+      "EXAMPLE_CODE_TITLE": "Örnek kod:",
+      "OR": "Ya da",
+      "NOTE_ALERT": "Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!",
+      "TABLE_TAB_FIRST": "Örnek",
+      "TABLE_TAB_SECOND": "HTML kodları",
+      "TABLE_TAB_THIRD": "Typescript kodları",
+      "CODE_DESCRIPTION_TITLE": "Kodların açıklaması",
+      "FLEXISELECT_DESCRIPTION": "Flexi select elementi. Bununla selecti sayfamıza ekliyoruz",
+      "DATA_DESCRIPTION": " Data attributene listemizi veriyoruz.",
+      "NOTE": "Not: Projede değişkenler signal yapısında tutuldu ama zorunlu değildir.İsterseniz siz normal değişken kullanabilirsiniz",
+      "LABEL_DESCRIPTION": "Select'de gözükmesini istediğimiz property ismini buraya veriyoruz.",
+      "VALUE_DESCRIPTION": "Her bir kaydın unique değerini, yani bizim için id niteliği taşıyan property ismini buraya veriyoruz.",
+      "NGMODEL_DESCRIPTION": " İstersek selecte bir değişkeni two-data-binding ile bağlayabiliyoruz.",
+      "EVENT_DESCRIPTION": " Seçtiğimiz değeri seçimin hemen sonrası bu event ile yakalayabiliyoruz.",
+      "TABLE_VALUE_TYPES": "Alabileceği Değer Türleri",
+      "SUCCESS_ALERT_NOTE": "İlk örneğimizle beraber listemizi select içerisinde göstermeyi başardık."
+    },
+    "CUSTOM_OPTION_PAGE": {
+      "DESCRIPTION": "Flexi Select içerisine özel bir option yapılanması kurmak isterseniz bunu flexi-option ile yapabiliyorsunuz",
+      "EXAMPLE_CODE_TITLE": "Örnek kod:",
+      "TABLE_TAB_FIRST": "Örnek",
+      "TABLE_TAB_SECOND": "HTML kodları",
+      "TABLE_TAB_THIRD": "Typescript kodları",
+      "CODE_DESCRIPTION_TITLE": "Kodların açıklaması",
+      "FLEXIOPTION_DESCRIPTION": "Flexi select içerisine ekleyebileceğimiz özel option elementi."
+    },
+    "MULTIPLE_PAGE": {
+      "CARD_TITLE": "Çoklu Seçim",
+      "DESCRIPTION": "Eğer çoklu seçim yapmak isterseniz multiple attribute'e true değer göndermeniz yeterli",
+      "EXAMPLE_CODE_TITLE": "Örnek kod:",
+      "NOTE": "Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!",
+      "TABLE_TAB_FIRST": "Örnek",
+      "TABLE_TAB_SECOND": "HTML kodları",
+      "TABLE_TAB_THIRD": "Typescript kodları",
+      "TAB_PANE_FIRST": "İlk kullanım",
+      "CODE_DESCRIPTION_TITLE": "Kodların açıklaması",
+      "MULTIPLE_DESCRIPTION": "Çoklu seçimi aktif etmek için true değeri vermelisiniz.",
+      "CLOSE_AFTER_DESCRIPTION": "Seçim sonunda select açılsın isterseniz bu attribute'e false değer gönderin. Default true olduğu için her seçim sonrası selecti kapatır.",
+      "HEIGHT_DESCRIPTION": "Selectin yüksekliğini ayarlayabilirsiniz. Min yükseklik 36px'dir.",
+      "TABLE_VALUE_TYPES": "Alabileceği Değer Türleri"
+    },
+    "FULL_COMPONENT": {
+      "TABLE_TAB_FIRST": "Örnek",
+      "TAB_PANE_FIRST": "Full halinin örnek görüntüsü",
+      "TABLE_TAB_SECOND": "HTML kodları",
+      "TABLE_TAB_THIRD": "Typescript kodları"
     }
   }
 }

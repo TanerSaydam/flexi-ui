@@ -1,21 +1,21 @@
-<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
-    <app-card cardTitle="Flexi Select nedir?">
-        <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Select olan Flexi select ile tanışın. Bu component ile listelerinizi select içerisinde gösterirken search yapabileceksiniz, lazy loading yapısı sayesinde listelerinizi göstermede performans elde edeceksiniz.</p>
-        <p>Flexi Select, açık kaynak kodludur. Kaynak kodlarına 
-            <a href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-select/src/lib" target="_blank">buraya tıklayarak</a> ulaşabilirsiniz.
+<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select"  *transloco="let t; read: 'FLEXI_SELECT.FLEXI_SELECT_PAGE'">
+    <app-card cardTitle="{{t('CARD_TITLE')}}"   >
+        <p>{{t('DESCRIPTION')}}</p>
+        <p>{{t('LINKED_PART_ONE')}}
+            <a href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-select/src/lib" target="_blank">{{t('LINKED_PART_TWO')}}</a> {{t('LINKED_PART_THREE')}}
         </p>
         <hr>
-        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. 
-            <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için tıklayın</a>.
+        <p>{{t('CONTRIBUTION_NOTE')}}
+            <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">{{t('LINKED_CONTRIBUTION_NOTE')}}</a>.
         </p>
-        <p>Dökümantasyonu adım adım inceleyerek Flexi Select'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda, Flexi Select'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.</p>
-        <p class="alert aler-primary"><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>
+        <p>{{t('DOCUMENTATION_NOTE')}}</p>
+        <p class="alert aler-primary"><b>{{t('NOTE_ALERT')}}</b></p>
         <div class="alert alert-danger"><b>
-        <p>Güncel sürüm v19.</p>
-        <p>v18 için paketin v18 sürümlerini kullanmalısınız.</p></b>
+        <p>{{t('CURRENT_VERSION')}}</p>
+        <p>{{t('OLDER_VERSION_NOTE')}}</p></b>
         </div>
         <br>
-        <p>Full özelliklerin açık olduğu örnek aşağıdadır.</p>
+        <p>{{t('FULL_FEATURES_EXAMPLE')}}</p>
 
         @defer {
         <app-flexi-select-full></app-flexi-select-full>

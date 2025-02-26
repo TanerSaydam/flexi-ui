@@ -1,7 +1,7 @@
-<div class="card-header">
+<div class="card-header" *transloco="let t; read: 'FLEXI_SELECT.FULL_COMPONENT'">
     <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
       <li class="nav-item">
-        <a href="#tabs-flexi-select-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+        <a href="#tabs-flexi-select-example-full" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
       </li>
       <li class="nav-item">
         <a href="#tabs-flexi-select-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -11,10 +11,10 @@
       </li>
     </ul>
   </div>
-  <div class="card-body">
+  <div class="card-body" *transloco="let t; read: 'FLEXI_SELECT.FULL_COMPONENT'">
     <div class="tab-content">
       <div class="tab-pane active show flexi-select" id="tabs-flexi-select-example-full">
-        <h4>Full halinin örnek görüntüsü</h4>
+        <h4>{{t('TAB_PANE_FIRST')}}</h4>
         <flexi-select
         [data]="users()"
         label="fullName"
@@ -26,11 +26,11 @@
         </flexi-select>
       </div>
       <div class="tab-pane" id="tabs-flexi-select-html-full">
-        <h4>HTML kodları</h4>
+        <h4>{{t('TABLE_TAB_SECOND')}}</h4>
         <my-code [code]="fullExampleHTMLCode()" language="html"></my-code>
       </div>
       <div class="tab-pane" id="tabs-flexi-select-ts-full">
-        <h4>Typescript kodları</h4>
+        <h4>{{t('TABLE_TAB_THIRD')}}</h4>
         <my-code [code]="fullExampleTSCode()" language="typescript"></my-code>
       </div>
     </div>

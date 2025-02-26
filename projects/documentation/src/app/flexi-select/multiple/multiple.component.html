@@ -1,20 +1,20 @@
 
-<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
-  <app-card cardTitle="Çoklu Seçim">
+<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select" *transloco="let t; read: 'FLEXI_SELECT.MULTIPLE_PAGE'">
+  <app-card cardTitle="{{t('CARD_TITLE')}}">
     <div class="card-body">        
-      <p>Eğer çoklu seçim yapmak isterseniz multiple attribute'e true değer göndermeniz yeterli</p>
-      <h3>Örnek kod:</h3>        
+      <p>{{t('DESCRIPTION')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>        
       <b>component.html</b>
       <my-code className="" language="html" [code]="multipleHTMLCodeExample()"></my-code>
   
-      <p class="alert alert-danger">Önemli Not: Eğer birden fazla flexi-select aynı sayfada ise mutlaka unique id vermelisiniz. Yoksa birbirlerinin değerlerini yakalama ihtimalleri var!</p>
+      <p class="alert alert-danger">{{t('NOTE')}}</p>
           <my-code className="" language="html" [code]="firstUseHTMLCodeExample2()"></my-code>
   
       @defer {
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-multiple" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-multiple" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
             </li>
             <li class="nav-item">
               <a href="#tabs-html-multiple" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -30,7 +30,7 @@
       <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active show flexi-select" id="tabs-example-multiple">
-              <h4>İlk kullanım</h4>
+              <h4>{{t('TAB_PANE_FIRST')}}</h4>
               <flexi-select
                 [data]="users()"
                 label="firstName"
@@ -45,11 +45,11 @@
               </flexi-select>
             </div>
             <div class="tab-pane" id="tabs-html-multiple">
-              <h4>HTML kodları</h4>
+              <h4>{{t('TABLE_TAB_SECOND')}}</h4>
               <my-code [code]="multipleHTMLCode()" language="html"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-multiple">
-              <h4>Typescript kodları</h4>
+              <h4>{{t('TABLE_TAB_THIRD')}}</h4>
               <my-code [code]="multipleTSCode()" language="typescript"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-multiple-data">
@@ -62,11 +62,11 @@
         <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>[multiple] :</b> Çoklu seçimi aktif etmek için true değeri vermelisiniz</li>
-        <li><b>[closeAfterSelect] :</b> Seçim sonunda select açılsın isterseniz bu attribute'e false değer gönderin. Default true olduğu için her seçim sonrası selecti kapatır
-        <li><b>height :</b> Selectin yüksekliğini ayarlayabilirsiniz. Min yükseklik 36px'dir.</li>
+        <li><b>[multiple] :</b> {{t('MULTIPLE_DESCRIPTION')}}</li>
+        <li><b>[closeAfterSelect] : {{t('CLOSE_AFTER_DESCRIPTION')}}</b> 
+        <li><b>height :</b> {{t('HEIGHT_DESCRIPTION')}}</li>
       </ul>
   
       <hr>
@@ -74,7 +74,7 @@
         <thead>
           <tr>
             <th>Attribute</th>
-            <th>Alabileceği Değer Türleri</th>
+            <th>{{t('TABLE_VALUE_TYPES')}}</th>
             <th>Default Değeri</th>
           </tr>
         </thead>
