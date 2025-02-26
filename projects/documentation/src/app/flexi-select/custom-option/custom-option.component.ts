@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { BlankComponent } from '../../blank/blank.component';
 import { CardComponent } from '../../blank/card/card.component';
 import { LoadingComponent } from '../../loading/loading.component';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-custom-option',
@@ -22,6 +23,7 @@ import { LoadingComponent } from '../../loading/loading.component';
         FlexiSelectModule,
         MyCodeComponent,
         FormsModule,
+        TranslocoModule
     ],
     templateUrl: './custom-option.component.html',
     styleUrl: './custom-option.component.css',

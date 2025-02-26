@@ -6,10 +6,11 @@ import { SharedService } from '../../shared.service';
 import { FlexiSelectModule } from 'flexi-select';
 import { FormsModule } from '@angular/forms';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-flexi-select-full',
-    imports: [MyCodeComponent, FlexiSelectModule, FormsModule],
+    imports: [MyCodeComponent, FlexiSelectModule, FormsModule,TranslocoModule],
     templateUrl: './full.component.html',
     styleUrl: './full.component.css'
 })

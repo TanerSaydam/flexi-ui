@@ -1,8 +1,8 @@
 <app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
   <app-card cardTitle="Custom Option">
-    <div class="card-body">
-      <p>Flexi Select içerisine özel bir option yapılanması kurmak isterseniz bunu flexi-option ile yapabiliyorsunuz</p>
-      <h3>Örnek kod:</h3>       
+    <div class="card-body" *transloco="let t; read: 'FLEXI_SELECT.CUSTOM_OPTION_PAGE'">
+      <p>{{t('DESCRIPTION')}}</p>
+      <h3>{{t('EXAMPLE_CODE_TITLE')}}</h3>       
       <b>component.html</b>
       <my-code className="" language="html" [code]="customOptionHTMLCodeExample()"></my-code>
   
@@ -10,7 +10,7 @@
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
             <li class="nav-item">
-              <a href="#tabs-example-custom-option" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+              <a href="#tabs-example-custom-option" class="nav-link active" data-bs-toggle="tab">{{t('TABLE_TAB_FIRST')}}</a>
             </li>
             <li class="nav-item">
               <a href="#tabs-html-custom-option" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -34,11 +34,11 @@
               </flexi-select>
             </div>
             <div class="tab-pane" id="tabs-html-custom-option">
-              <h4>HTML kodları</h4>
+              <h4>{{t('TABLE_TAB_SECOND')}}</h4>
               <my-code [code]="customOptionHTMLCode()" language="html"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-custom-option">
-              <h4>Typescript kodları</h4>
+              <h4>{{t('TABLE_TAB_THIRD')}}</h4>
               <my-code [code]="customOptionTSCode()" language="typescript"></my-code>
             </div>
             <div class="tab-pane" id="tabs-ts-custom-option-data">
@@ -51,9 +51,9 @@
         <app-loading></app-loading>
       }
       <hr>
-      <h3>Kodların açıklaması</h3>
+      <h3>{{t('CODE_DESCRIPTION_TITLE')}}</h3>
       <ul>
-        <li><b>flexi-option :</b> Flexi select içerisine ekleyebileceğimiz özel option elementi</li>
+        <li><b>flexi-option :</b> {{t('FLEXIOPTION_DESCRIPTION')}}</li>
       </ul>
     </div>
   </app-card>

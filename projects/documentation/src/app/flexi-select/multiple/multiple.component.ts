@@ -11,6 +11,7 @@ import { BlankComponent } from '../../blank/blank.component';
 import { CardComponent } from '../../blank/card/card.component';
 import { CommonModule } from '@angular/common';
 import { dataTSCode } from '../../flexi-grid/code';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-multiple',
@@ -22,6 +23,7 @@ import { dataTSCode } from '../../flexi-grid/code';
         FlexiSelectModule,
         MyCodeComponent,
         FormsModule,
+        TranslocoModule
     ],
     templateUrl: './multiple.component.html',
     styleUrl: './multiple.component.css',

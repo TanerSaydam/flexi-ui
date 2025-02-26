@@ -1,8 +1,7 @@
-<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select">
-    <app-card id="installation" cardTitle="Kurulum">
+<app-blank pageName="Flexi Select" pageDescription="Angular Flexi Select" *transloco="let t; read: 'FLEXI_SELECT.INSTALLATION_PAGE'">
+    <app-card id="installation" cardTitle="{{t('CARD_TITLE')}}">
         <div class="card-body">
-            <p>Flexi Select'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız
-            </p>
+            <p>{{t('DESCRIPTION')}}</p>
             <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-select</code></pre>
         </div>
     </app-card>

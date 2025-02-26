@@ -11,6 +11,7 @@ import { CardComponent } from '../../blank/card/card.component';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../../loading/loading.component';
 import { dataTSCode } from '../../flexi-grid/code';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-first-use',
@@ -21,7 +22,8 @@ import { dataTSCode } from '../../flexi-grid/code';
         FlexiSelectModule,
         MyCodeComponent,
         FormsModule,
-        LoadingComponent
+        LoadingComponent,
+        TranslocoModule
     ],
     templateUrl: './first-use.component.html',
     styleUrl: './first-use.component.css',
