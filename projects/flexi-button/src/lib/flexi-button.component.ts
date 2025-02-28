@@ -14,7 +14,7 @@ export class FlexiButtonComponent {
   readonly btnIcon = input<string | undefined>(undefined);
   readonly btnColor = input<FlexiButtonColorType>('light');
   readonly btnSize = input<FlexiButtonSizeType>('small');
-  readonly btnText = input<string | undefined>(undefined);  
+  readonly btnText = input<string | undefined>(undefined);
   readonly btnType = input<FlexiButtonType>("button");
   readonly btnDisabled = input<boolean>(false);
   readonly firstText = input<boolean>(false);

@@ -13,12 +13,12 @@
         }
     }@else {
         @if(btnText() && btnIcon()){
-            @if(firstText()){            
+            @if(firstText()){
                 <span class="flexi-button-text">{{ btnText() }}</span>
                 <span class="material-symbols-outlined">
                     {{ btnIcon() }}
                 </span>
-            }@else{            
+            }@else{
                 <span class="material-symbols-outlined">
                     {{ btnIcon() }}
                 </span>
@@ -28,7 +28,7 @@
             <span class="material-symbols-outlined">
                 {{ btnIcon() }}
             </span>
-        }@else if(btnText() !== undefined){        
+        }@else if(btnText() !== undefined){
             <span class="flexi-button-text">{{ btnText() }}</span>
         }@else {
             <ng-content />

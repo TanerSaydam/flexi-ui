@@ -1,7 +1,8 @@
-import { Component, SimpleChanges, TemplateRef, output, input, Input, signal, linkedSignal, contentChild } from '@angular/core';
+import { Component, SimpleChanges, TemplateRef, output, input, Input, signal, linkedSignal, contentChild, contentChildren } from '@angular/core';
 import { FlexiGridFilterDataModel } from '../models/flexi-grid-filter-data.model';
 import { FlexiGridCellTemplateDirective } from '../directives/flexi-grid-cell-template.directive';
 import { FlexiGridHeaderTemplateDirective } from '../directives/flexi-grid-header-template.directive';
+import { FlexiGridFooterTemplateDirective } from '../directives/flexi-grid-footer-template.directive';
 
 @Component({
     selector: 'flexi-grid-column',
@@ -15,13 +16,13 @@ export class FlexiGridColumnComponent {
   readonly sortable = input<boolean>(true);
   readonly filterable = input<boolean>(true);
   readonly visible = input<boolean>(true);
-  readonly filterType = input<FilterType>("text");  
+  readonly filterType = input<FilterType>("text");
   readonly format = input<string | CurrencyFormatType | null>(null);
   readonly fraction = input<number>(2);
   readonly symbol = input<string>("");
   readonly showSymbolInFront = input<boolean>(true);
   readonly width = input<string>("160px");
-  readonly resizable = input<boolean>(true);  
+  readonly resizable = input<boolean>(true);
   readonly className = input<string>("");
   readonly textAlign = input<TextAlignType>("left");
   readonly hideOverflow = input<boolean>(true);
@@ -30,22 +31,22 @@ export class FlexiGridColumnComponent {
   readonly showCheckbox = input<boolean>(false);
   readonly filterValue = input<any>();
   readonly filterValue2 = input<any>();
-  readonly showSecondDate = signal<boolean>(false);  
+  readonly showSecondDate = signal<boolean>(false);
 
   readonly filterOperator = signal<string>("contains");
   readonly filterValueSignal = linkedSignal(()=> this.filterValue());
   readonly filterValue2Signal = linkedSignal(()=> this.filterValue2());
   readonly visibleSignal = linkedSignal(() => this.visible());
-  readonly widthSignal = linkedSignal(() => this.width());  
-  
+  readonly widthSignal = linkedSignal(() => this.width());
+
   readonly onChange = output<any>();
 
   readonly cellTemplate = contentChild(FlexiGridCellTemplateDirective, { read: TemplateRef });
-
   readonly headerTemplate = contentChild(FlexiGridHeaderTemplateDirective, { read: TemplateRef });
+  readonly footerTemplates = contentChildren(FlexiGridFooterTemplateDirective, {read: TemplateRef});
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filterType']) {      
+    if (changes['filterType']) {
       this.setDefaultFilterOperator();
     }
   }
@@ -69,5 +70,4 @@ export class FlexiGridColumnComponent {
 
 export type TextAlignType = "left" | "center" | "right";
 export type FilterType = "text" | "date" | "date-time" | "number" | "select" | "boolean"
-
 export type CurrencyFormatType = "n" | "c"

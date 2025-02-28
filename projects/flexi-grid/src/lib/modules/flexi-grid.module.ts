@@ -9,13 +9,15 @@ import { FlexiGridColumnComponent } from '../components/flexi-grid-column.compon
 import { FlexiButtonComponent } from 'flexi-button';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FlexiGridFooterTemplateDirective } from '../directives/flexi-grid-footer-template.directive';
 
 @NgModule({
   declarations: [
     FlexiGridComponent,
     FlexiGridColumnComponent,
     FlexiGridCellTemplateDirective,
-    FlexiGridHeaderTemplateDirective
+    FlexiGridHeaderTemplateDirective,
+    FlexiGridFooterTemplateDirective
   ],
   imports: [
     CommonModule,
@@ -31,8 +33,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     FlexiGridCellTemplateDirective,
     FlexiGridHeaderTemplateDirective,
     FlexiTooltipDirective,
-    FlexiButtonComponent,
-    DragDropModule
+    DragDropModule,
+    FlexiGridFooterTemplateDirective
   ]
 })
 export class FlexiGridModule { }
