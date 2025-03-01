@@ -13,48 +13,52 @@
 </div>
 <div class="card-body">
   <div class="tab-content">
-    <div class="tab-pane active show" id="tabs-example-full">
-      <h4>Full halinin örnek görüntüsü</h4>
+    <div class="tab-pane active show" id="tabs-example-full" *transloco="let t">
       <flexi-grid
         [data]="users()"
         [total]="total()"
-        [dataBinding]="true"        
+        [dataBinding]="true"
         [showIndex]="true"
         [loading]="loading()"
-        [themeClass]="shared.themeClass"        
+        [themeClass]="shared.themeClass()"
         captionTitle="Örnek User Listesi"
         [captionTemplate]="captionTemplate"
         [showCaption]="true"
-        [showExportExcelBtn]="true"        
+        [showExportExcelBtn]="true"
         [showCommandColumn]="true"
         [commandColumnTemplate]="commandButtonColumnTemplate"
-        commandColumnWidth="120px"        
+        commandColumnWidth="120px"
         exportExcelFileName="userlists"
         [reorderable]="true"
         [selectable]="true"
         selectableField="id"
-        (dataStateChange)="dataStateChange($event)"        
+        (dataStateChange)="dataStateChange($event)"
+        language="en"
         >
         <ng-template #captionTemplate>
           <flexi-button btnColor="primary" btnIcon="add" btnSize="small" flexiTooltip title="Ekle" />
         </ng-template>
 
-        <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false"></flexi-grid-column>
-        <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
-        <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+        <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false" />
+        <flexi-grid-column field="firstName" title="First Name">
+          <ng-template flexiGridFooterTemplate let-data>
+            <span>Total</span>
+          </ng-template>
+        </flexi-grid-column>
+        <flexi-grid-column field="lastName" title="Last Name" />
         <flexi-grid-column title="Custom Column">
           <ng-template flexiGridCellTemplate let-item>
-            Burası Custom Column
+            Custom Column
           </ng-template>
         </flexi-grid-column>
         <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
-          title="Date Of Birth"></flexi-grid-column>
+          title="Date Of Birth" />
         <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right"
-          [showSymbolInFront]="true" [fraction]="2" title="Salary"></flexi-grid-column>
+          [showSymbolInFront]="true" [fraction]="2" title="Salary" />
         <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']"
-          textAlign="center" width="100px"></flexi-grid-column>
+          textAlign="center" width="100px" />
         <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()"
-          textAlign="center"></flexi-grid-column>
+          textAlign="center" />
 
         <ng-template #commandButtonColumnTemplate let-item="item">
           <div class="d-flex gap-1">

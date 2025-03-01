@@ -107,38 +107,20 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   timeoutId: any;
   readonly filterDropdownVisible = signal<{ [key: string]: boolean }>({});
   readonly columnVisibilityDropdownVisible = signal(false);
-  readonly textFilterTypes = signal<{ operator: string, value: string }[]>([
-    { operator: "eq", value: this.language() === "tr" ? 'Eşittir' : "Equal" },
-    { operator: "ne", value: 'Eşit değildir' },
-    { operator: "contains", value: 'İçerir' },
-    { operator: "not contains", value: 'İçermez' },
-    { operator: "startswith", value: 'İle başlar' },
-    { operator: "endswith", value: 'İle biter' }
-  ]);
-  readonly numberFilterTypes = signal<{ operator: string, value: string }[]>([
-    { operator: "eq", value: 'Eşittir' },
-    { operator: "ne", value: 'Eşit değildir' },
-    { operator: "gt", value: 'Daha büyüktür' },
-    { operator: "ge", value: 'Daha büyüktür ya da eşittir' },
-    { operator: "lt", value: 'Daha küçüktür' },
-    { operator: "le", value: 'Daha küçüktür ya da eşittir' }
-  ]);
-  readonly dateFilterTypes = signal<{ operator: string, value: string }[]>([
-    { operator: "eq", value: 'Eşittir' },
-    { operator: "ne", value: 'Eşit değildir' },
-    { operator: "gt", value: 'Sonraki' },
-    { operator: "ge", value: 'Sonraki ya da aynı tarih' },
-    { operator: "lt", value: 'Önceki' },
-    { operator: "le", value: 'Önceki ya da aynı tarih' },
-    { operator: "range", value: 'Belirli bir tarih aralığında' }
-  ]);
+  readonly textFilterTypes = signal<{ operator: string, value: string }[]>([]);
+  readonly numberFilterTypes = signal<{ operator: string, value: string }[]>([]);
+  readonly dateFilterTypes = signal<{ operator: string, value: string }[]>([]);
   readonly _pageSize = signal<number>(10);
   readonly resizingColumn = signal<any>(undefined);
   readonly startX = signal<number | undefined>(undefined);
   readonly startWidth = signal<number | undefined>(undefined);
   readonly isShowMobileFilter = signal<boolean>(false);
+
   readonly noData = computed(() => this.language() === "tr" ? "Gösterilecek veri bulunamadı!" : "No data to display!");
   readonly columnVisibility = computed(() => this.language() === "tr" ? "Sütun Görünürlüğü" : "Column Visibility");
+  readonly exportExcelText = computed(() => this.language() === "tr" ? "Excel'e Aktar" : "Export Excel");
+  readonly selectAnOption = computed(() => this.language() === "tr" ? "Seçim yapınız" : "Select an option");
+  readonly selected = computed(() => this.language() === "tr" ? "Seçilen" : "Selected");
 
   readonly columns = contentChildren(FlexiGridColumnComponent, {descendants: true});
 

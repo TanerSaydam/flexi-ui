@@ -110,7 +110,7 @@
                         <span class="nav-link-title">
                           Flexi Tooltip
                         </span>
-                      </a>                      
+                      </a>
                     </li>
                     <li class="nav-item" routerLinkActive="active1" [routerLinkActiveOptions]="{exact:true}">
                       <a routerLink="/flexi-treeview" class="nav-link">
@@ -120,10 +120,10 @@
                         <span class="nav-link-title">
                           Flexi Treeview
                         </span>
-                      </a>                     
+                      </a>
                     </li>
                     <li class="nav-item">
-                      @if(shared.themeClass === "light"){
+                      @if(shared.themeClass() === "light"){
                       <div style="cursor: pointer;" (click)="changeTheme('dark')" class="nav-link">
                         <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
                           nightlight
@@ -142,12 +142,12 @@
                         </span>
                       </div>
                       }
-                    </li>                    
+                    </li>
                 </ul>
-                <ul style="list-style: none;" class="d-flex justify-content-between">                 
+                <ul style="list-style: none;" class="d-flex justify-content-between">
                   @if(transloco.getActiveLang() === "tr"){
                     <li class="nav-item">
-                      <div style="cursor: pointer;" (click)="changeLanguage('en')" class="nav-link">                        
+                      <div style="cursor: pointer;" (click)="changeLanguage('en')" class="nav-link">
                         <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
                           translate
                         </span>
@@ -169,7 +169,7 @@
                     </li>
                   }
                   <li class="nav-item">
-                    <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank" style="cursor: pointer;" class="nav-link">                        
+                    <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank" style="cursor: pointer;" class="nav-link">
                       <span class="material-symbols-outlined nav-link-icon d-md-none d-lg-inline-block me-2">
                         favorite
                       </span>

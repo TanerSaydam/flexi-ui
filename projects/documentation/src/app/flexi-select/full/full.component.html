@@ -19,7 +19,7 @@
         [data]="users()"
         label="fullName"
         value="id"
-        [themeClass]="shared.themeClass"
+        [themeClass]="shared.themeClass()"
         [(ngModel)]="selectedUserId"
         (selected)="selected($event)"
         >

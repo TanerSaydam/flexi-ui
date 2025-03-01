@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, inject, resource, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserModel } from '../../models/user.model';
 import { FlexiGridModule, StateModel, FlexiGridService, FlexiGridFilterDataModel } from 'flexi-grid';
 import { MyCodeComponent } from '../../my-code/my-code.component';
 import { fullExampleHTMLCode, fullExampleTSCode } from '../code';
 import { SharedService } from '../../shared.service';
-import { FlexiToastService } from 'flexi-toast';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 import { lastValueFrom } from 'rxjs';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-flexi-grid-full',
-    imports: [FlexiGridModule, MyCodeComponent, FlexiTooltipDirective],
-    templateUrl: './full.component.html',    
+    imports: [FlexiGridModule, MyCodeComponent, FlexiTooltipDirective, TranslocoDirective],
+    templateUrl: './full.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -34,7 +33,7 @@ export default class FullComponent {
   loading = computed(() => this.result.isLoading());
 
   fullExampleTSCode = signal<string>(fullExampleTSCode);
-  fullExampleHTMLCode =signal<string>(fullExampleHTMLCode);  
+  fullExampleHTMLCode =signal<string>(fullExampleHTMLCode);
   filterData = signal<FlexiGridFilterDataModel[]>([
     {
       value: "'Kayseri'",
@@ -49,23 +48,21 @@ export default class FullComponent {
       name: "Ankara"
     }
   ])
-  
   #grid = inject(FlexiGridService);
   #http = inject(HttpClient);
-  shared = inject(SharedService);  
+  shared = inject(SharedService);
 
   dataStateChange(event:any){
     this.state.set(event);
     console.log(event);
-    
   }
 
   exportExcel(){
     this.#http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
       this.#grid.exportDataToExcel(res.data, "my-excel");
-    })  
+    })
   }
 
-  deleteByItem(item: any){   
+  deleteByItem(item: any){
   }
 }

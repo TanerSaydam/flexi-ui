@@ -8,7 +8,7 @@
     <div class="flexi-grid-caption-button-div" style="gap: 10px">
       <ng-container *ngTemplateOutlet="captionTemplate()" />
       @if(showExportExcelBtn()){
-      <flexi-button btnIcon="file_save" flexiTooltip btnSize="small" title="Excel'e Aktar" btnColor="warning"
+      <flexi-button btnIcon="file_save" flexiTooltip btnSize="small" [title]="exportExcelText()" btnColor="warning"
         (click)="onExportExcelButtonClick()" />
       }@if(showColumnVisibility()){
       <div style="position: relative">
@@ -246,7 +246,7 @@
                           column.filterType()
                         )
                       ">
-                      <option [value]="undefined">Seçim yapınız</option>
+                      <option [value]="undefined">{{selectAnOption()}}</option>
                       @for(data of column.filterData();track data.value){
                       <option [value]="data.value">{{ data.name }}</option>
                       }
@@ -261,7 +261,7 @@
                           column.filterType()
                         )
                       ">
-                      <option [value]="undefined">Seçim yapınız</option>
+                      <option [value]="undefined">{{selectAnOption()}}</option>
                       <option [value]="true">
                         {{ column.booleanData()[0] }}
                       </option>
@@ -439,6 +439,21 @@
           <tfoot class="flexi-grid-foot">
             @for(footerIndex of getMaxFooterTemplateCount(); track footerIndex){
               <tr>
+                @if(selectable()){
+                  <td [ngStyle]="{
+                    width: selectableWidth()
+                  }"></td>
+                }
+                @if(reorderable()){
+                  <td [ngStyle]="{
+                    width: reOrderWidth()
+                  }"></td>
+                }
+                @if(showIndex()){
+                  <td [ngStyle]="{
+                    width: indexWidth()
+                  }"></td>
+                }
                 @for(column of getColumns(); track column){
                   <td
                     [ngStyle]="{
@@ -482,7 +497,7 @@
         }
       </select>
       @if(selectedRows().size > 0){
-      <span style="margin-left: 10px;">Selected: </span><b>{{selectedRows().size}}</b>
+      <span style="margin-left: 10px;">{{selected()}}: </span><b>{{selectedRows().size}}</b>
       }
     </div>
     <div class="flexi-grid-pagination-part-two">

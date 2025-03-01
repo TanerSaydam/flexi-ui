@@ -7,11 +7,12 @@ export class SharedService {
   openOrCloseFlexiGridDropDown = signal(false);
   openOrCloseFlexiSelectDropDown = signal(false);
   openOrCloseFlexiToastDropDown = signal(false);
-  themeClass: string = "light";
+  themeClass= signal<"light" | "dark">("light");
 
   constructor() { 
     if(localStorage.getItem("themeColor")){
-      this.themeClass = localStorage.getItem("themeClass") ?? "light";
+      const theme = localStorage.getItem("themeClass") ?? "light";
+      this.themeClass.set(theme === "light" ? "light" : "dark");
     }
   }
 }
