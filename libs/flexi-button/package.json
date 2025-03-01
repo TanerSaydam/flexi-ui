@@ -1,0 +1,21 @@
+{
+  "name": "flexi-button",
+  "version": "19.0.14",
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TanerSaydam/flexi-ui.git",
+    "directory": "projects/flexi-button"
+  },
+  "bugs": {
+    "url": "https://github.com/TanerSaydam/flexi-ui/issues"
+  },
+  "homepage": "https://github.com/TanerSaydam/flexi-ui#readme"
+}

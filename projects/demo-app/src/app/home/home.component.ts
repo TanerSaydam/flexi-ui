@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
-import { FlexiGridModule } from '../../../../flexi-grid/src/lib/modules/flexi-grid.module';
 import { TrCurrencyPipe } from 'tr-currency';
-import { FlexiButtonComponent } from '../../../../flexi-button/src/lib/flexi-button.component';
+import { FlexiGridModule } from '../../../../../libs/flexi-grid/src/lib/modules/flexi-grid.module';
+import { FlexiButtonComponent } from '../../../../../libs/flexi-button/src/lib/flexi-button.component';
 
 
 @Component({

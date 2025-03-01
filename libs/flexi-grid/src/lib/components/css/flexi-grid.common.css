@@ -1,0 +1,27 @@
+a {
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none !important;
+}
+
+.relative {
+    position: relative;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hide {
+    display: none !important;
+}
+
+.p-relative {
+    position: relative;
+}
