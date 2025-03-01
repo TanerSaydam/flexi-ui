@@ -7,7 +7,6 @@ A highly customizable button component for Angular v19.x
 - Customizable size, color, and rounded corners
 - Built-in loading state
 
-
 ## Installation
 Install the package using npm
 ```bash

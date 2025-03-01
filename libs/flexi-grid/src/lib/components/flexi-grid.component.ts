@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, linkedSignal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, linkedSignal, computed } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel, StateOrderModel } from '../models/state.model';
 import ExcelJS from 'exceljs';
@@ -31,7 +31,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly pageSizeList = input<number[]>([5, 10, 20, 30, 50, 100, 500, 1000]);
   readonly loading = input<boolean>(false);
   readonly sortable = input<boolean>(true);
-  readonly themeClass = input<string>("light");
+  readonly themeClass = input<"light" | "dark">("light");
   readonly filterable = input<boolean>(true);
   readonly captionTitle = input<string>("");
   readonly captionTemplate = input<TemplateRef<any> | any>();
@@ -73,6 +73,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly selectableTextAlign = input<TextAlignType>("center");
   readonly selectableField = input<string>("");
   readonly useCommandDropdown = input<boolean>(false);
+  readonly language = input<"tr" | "en">("tr");
 
   readonly columnsArray = signal<FlexiGridColumnComponent[]>([]);
   readonly totalSignal = linkedSignal(()=> this.total());
@@ -107,7 +108,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly filterDropdownVisible = signal<{ [key: string]: boolean }>({});
   readonly columnVisibilityDropdownVisible = signal(false);
   readonly textFilterTypes = signal<{ operator: string, value: string }[]>([
-    { operator: "eq", value: 'Eşittir' },
+    { operator: "eq", value: this.language() === "tr" ? 'Eşittir' : "Equal" },
     { operator: "ne", value: 'Eşit değildir' },
     { operator: "contains", value: 'İçerir' },
     { operator: "not contains", value: 'İçermez' },
@@ -136,6 +137,8 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly startX = signal<number | undefined>(undefined);
   readonly startWidth = signal<number | undefined>(undefined);
   readonly isShowMobileFilter = signal<boolean>(false);
+  readonly noData = computed(() => this.language() === "tr" ? "Gösterilecek veri bulunamadı!" : "No data to display!");
+  readonly columnVisibility = computed(() => this.language() === "tr" ? "Sütun Görünürlüğü" : "Column Visibility");
 
   readonly columns = contentChildren(FlexiGridColumnComponent, {descendants: true});
 
@@ -178,6 +181,65 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
         this.filter(column.field(), column.filterOperator(), column.filterValue(), column.filterType());
       }
     });
+
+
+    switch (this.language()) {
+      case "tr":
+        this.textFilterTypes.set([
+          { operator: "eq", value: 'Eşittir' },
+          { operator: "ne", value: 'Eşit değildir' },
+          { operator: "contains", value: 'İçerir' },
+          { operator: "not contains", value: 'İçermez' },
+          { operator: "startswith", value: 'İle başlar' },
+          { operator: "endswith", value: 'İle biter' }
+        ]);
+        this.numberFilterTypes.set([
+          { operator: "eq", value: 'Eşittir' },
+          { operator: "ne", value: 'Eşit değildir' },
+          { operator: "gt", value: 'Daha büyüktür' },
+          { operator: "ge", value: 'Daha büyüktür ya da eşittir' },
+          { operator: "lt", value: 'Daha küçüktür' },
+          { operator: "le", value: 'Daha küçüktür ya da eşittir' }
+        ]);
+        this.dateFilterTypes.set([
+          { operator: "eq", value: 'Eşittir' },
+          { operator: "ne", value: 'Eşit değildir' },
+          { operator: "gt", value: 'Sonraki' },
+          { operator: "ge", value: 'Sonraki ya da aynı tarih' },
+          { operator: "lt", value: 'Önceki' },
+          { operator: "le", value: 'Önceki ya da aynı tarih' },
+          { operator: "range", value: 'Belirli bir tarih aralığında' }
+        ]);
+      break;
+
+      case "en":
+        this.textFilterTypes.set([
+          { operator: "eq", value: 'Equals' },
+          { operator: "ne", value: 'Not equal' },
+          { operator: "contains", value: 'Contains' },
+          { operator: "not contains", value: 'Does not contain' },
+          { operator: "startswith", value: 'Starts with' },
+          { operator: "endswith", value: 'Ends with' }
+        ]);
+        this.numberFilterTypes.set([
+          { operator: "eq", value: 'Equals' },
+          { operator: "ne", value: 'Not equal' },
+          { operator: "gt", value: 'Greater than' },
+          { operator: "ge", value: 'Greater than or equal' },
+          { operator: "lt", value: 'Less than' },
+          { operator: "le", value: 'Less than or equal' }
+        ]);
+        this.dateFilterTypes.set([
+          { operator: "eq", value: 'Equals' },
+          { operator: "ne", value: 'Not equal' },
+          { operator: "gt", value: 'Later' },
+          { operator: "ge", value: 'Later or same date' },
+          { operator: "lt", value: 'Earlier' },
+          { operator: "le", value: 'Earlier or same date' },
+          { operator: "range", value: 'Within a specific date range' }
+        ]);
+      break;
+    }
   }
 
   giveFilterValueByFilterType(filterType: string) {

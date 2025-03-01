@@ -12,10 +12,10 @@
         (click)="onExportExcelButtonClick()" />
       }@if(showColumnVisibility()){
       <div style="position: relative">
-        <flexi-button btnIcon="menu" btnColor="info" btnSize="small" flexiTooltip title="Sütun Görünürlüğü"
+        <flexi-button btnIcon="menu" btnColor="info" btnSize="small" flexiTooltip [title]="columnVisibility()"
           (click)="toggleColumnVisibilityDropdown()" />
         <div class="flexi-grid-dropdown-menu" style="top: 40px" [class.show]="columnVisibilityDropdownVisible()">
-          <p class="flexi-grid-dropdown-title">Sütun Görünürlüğü</p>
+          <p class="flexi-grid-dropdown-title">{{ columnVisibility() }}</p>
           @for(column of getColumns(); track trackByFn()){
           <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field() ? column.field() : column.title()">
             <input [(ngModel)]="column.visibleSignal" [id]="column.field() ? column.field() : column.title()"
@@ -431,7 +431,7 @@
             }@else {
             @if(!loading()){
             <div class="flexi-grid-no-data-div">
-              <span class="flexi-grid-no-data-title"><i>Gösterilecek veri bulunamadı!</i></span>
+              <span class="flexi-grid-no-data-title"><i>{{ noData() }}</i></span>
             </div>
             }
             }

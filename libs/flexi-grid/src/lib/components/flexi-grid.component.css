@@ -608,6 +608,10 @@ flexi-button {
   .flexi-grid-table-container::-webkit-scrollbar {
     display: block;
   }
+
+  .flexi-grid-foot{
+    display: flex !important;
+  }
 }
 
 .flexi-grid-table-wrapper {

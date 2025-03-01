@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector: 'flexi-button',
+    selector: 'flexi-button:not(p)',
     imports: [CommonModule],
     templateUrl: "./flexi-button.component.html",
     styleUrl: './flexi-button.component.css',

@@ -3,6 +3,7 @@ import { BlankComponent } from '../blank/blank.component';
 import { TrCurrencyPipe } from 'tr-currency';
 import { FlexiGridModule } from '../../../../../libs/flexi-grid/src/lib/modules/flexi-grid.module';
 import { FlexiButtonComponent } from '../../../../../libs/flexi-button/src/lib/flexi-button.component';
+import { FlexiTooltipDirective } from '../../../../../libs/flexi-tooltip/src/lib/flexi-tooltip.directive';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { FlexiButtonComponent } from '../../../../../libs/flexi-button/src/lib/f
     BlankComponent,
     FlexiGridModule,
     TrCurrencyPipe,
-    FlexiButtonComponent
+    FlexiButtonComponent,
+    FlexiTooltipDirective
 ],
     templateUrl: './home.component.html',
     encapsulation: ViewEncapsulation.None,

@@ -14,7 +14,7 @@
     list-style: none;
     background-color: var(--flexi-grid-dropdown-bg-color);
     background-clip: padding-box;
-    border: 1px solid var(--flexi-grid-border-color);
+    border: 1px solid var(--flexi-grid-dropdown-border-color);
     border-radius: 0.25rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }

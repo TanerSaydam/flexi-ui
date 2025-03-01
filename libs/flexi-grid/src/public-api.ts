@@ -5,5 +5,6 @@ export * from './lib/models/state.model';
 export * from './lib/modules/flexi-grid.module';
 export * from './lib/directives/flexi-grid-cell-template.directive';
 export * from './lib/directives/flexi-grid-header-template.directive';
+export * from './lib/directives/flexi-grid-footer-template.directive';
 export * from './lib/models/flexi-grid-filter-data.model';
 export * from './lib/models/flexi-grid-reorder.model';

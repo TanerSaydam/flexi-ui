@@ -13,7 +13,7 @@ export class FlexiTooltipDirective implements OnInit {
 
   ngOnInit() {
     // Tooltip elementini oluştur
-    this.tooltipElement = this.renderer.createElement('div');    
+    this.tooltipElement = this.renderer.createElement('div');
     this.renderer.appendChild(this.el.nativeElement, this.tooltipElement);
 
     // Tooltip stillerini ayarla
@@ -33,7 +33,7 @@ export class FlexiTooltipDirective implements OnInit {
 
     // Ok için yeni bir element oluştur
     const arrow = this.renderer.createElement('div');
-    this.renderer.appendChild(this.tooltipElement, arrow);    
+    this.renderer.appendChild(this.tooltipElement, arrow);
 
     this.el.nativeElement.style.position = 'relative';
 
@@ -48,16 +48,16 @@ export class FlexiTooltipDirective implements OnInit {
 
   @HostListener('mouseenter') onMouseEnter() {
     const title = this.el.nativeElement.getAttribute('title');
-    if (title) {      
+    if (title) {
       const tooltipContent = this.tooltipElement!.querySelector('span');
       if (tooltipContent) {
         tooltipContent.textContent = title;
       }
 
       this.renderer.setStyle(this.tooltipElement, 'display', 'block');
-      
+
       this.el.nativeElement.removeAttribute('title');
-      
+
       this.positionTooltip();
 
       this.tooltipElement!.style.display = "block";
@@ -65,7 +65,7 @@ export class FlexiTooltipDirective implements OnInit {
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    if (this.tooltipElement) {      
+    if (this.tooltipElement) {
       const tooltipContent = this.tooltipElement.querySelector('span');
       if (tooltipContent) {
         this.el.nativeElement.setAttribute('title', tooltipContent.textContent || '');
@@ -79,7 +79,7 @@ export class FlexiTooltipDirective implements OnInit {
     const elHeight = this.el.nativeElement.getBoundingClientRect().height;
     const elWidth = this.el.nativeElement.getBoundingClientRect().width;
     const tooltipHeight = this.tooltipElement!.getBoundingClientRect().height;
-    const tooltipWidth = this.tooltipElement!.getBoundingClientRect().width;    
+    const tooltipWidth = this.tooltipElement!.getBoundingClientRect().width;
 
      if(this.tooltipPosition == ''){
       this.tooltipPosition = 'left';
@@ -94,7 +94,7 @@ export class FlexiTooltipDirective implements OnInit {
     }else if(this.tooltipPosition == 'bottom'){
       topOrBottomPX = ((tooltipHeight + 9) * -1) + "px";
       leftOrRightPX = tooltipWidth > elWidth ? ((tooltipWidth - elWidth ) / 2 * -1) + "px" : "0px";
-    }else if(this.tooltipPosition == 'left'){      
+    }else if(this.tooltipPosition == 'left'){
       topOrBottomPX = (tooltipHeight > elHeight ? ((tooltipHeight - elHeight) / 2) * -1 : (elHeight - tooltipHeight) / 2) + "px";
       leftOrRightPX = ((tooltipWidth + 9) * -1) + "px";
     }else if(this.tooltipPosition == 'right'){
@@ -102,7 +102,7 @@ export class FlexiTooltipDirective implements OnInit {
       leftOrRightPX = ((tooltipWidth + 9) * -1) + "px";
     }
 
-    
+
     const positionLeftOrRight = (this.tooltipPosition === 'left' || this.tooltipPosition === 'right') ? this.tooltipPosition : 'left';
     const positionTopOrBottom = (this.tooltipPosition === 'top' || this.tooltipPosition === 'bottom') ? this.tooltipPosition : 'top';
 
@@ -110,7 +110,7 @@ export class FlexiTooltipDirective implements OnInit {
     this.renderer.setStyle(this.tooltipElement, positionLeftOrRight, leftOrRightPX);
 
     this.updateArrowStyle(this.tooltipPosition);
-  }  
+  }
 
   private updateArrowStyle(direction: string) {
     const arrow = this.tooltipElement!.querySelector('div');
@@ -127,14 +127,14 @@ export class FlexiTooltipDirective implements OnInit {
       switch (direction) {
         case 'top':
           this.renderer.setStyle(arrow, 'bottom', '-5px');
-          this.renderer.setStyle(arrow, 'left', '48%');
+          this.renderer.setStyle(arrow, 'left', '45%');
           this.renderer.setStyle(arrow, 'border-left', '5px solid transparent');
           this.renderer.setStyle(arrow, 'border-right', '5px solid transparent');
           this.renderer.setStyle(arrow, 'border-top', '5px solid #333');
           break;
         case 'bottom':
           this.renderer.setStyle(arrow, 'top', '-5px');
-          this.renderer.setStyle(arrow, 'left', '48%');
+          this.renderer.setStyle(arrow, 'left', '45%');
           this.renderer.setStyle(arrow, 'border-left', '5px solid transparent');
           this.renderer.setStyle(arrow, 'border-right', '5px solid transparent');
           this.renderer.setStyle(arrow, 'border-bottom', '5px solid #333');

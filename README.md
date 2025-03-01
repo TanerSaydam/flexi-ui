@@ -27,5 +27,5 @@ This project is licensed under the MIT License.
 
 ---
 
-**Best regards,**  
+**Best regards,**
 **Taner Saydam**

@@ -12,13 +12,13 @@ export function ngAdd() : Rule {
             {
                 type: NodeDependencyType.Default,
                 name: 'flexi-button',
-                version: '^19.0.14',
+                version: '^19.0.15',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-grid',
-                version: '^19.0.35',
+                version: '^19.0.43',
                 overwrite: true
               },
               {
@@ -42,7 +42,7 @@ export function ngAdd() : Rule {
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-tooltip',
-                version: '^19.0.1',
+                version: '^19.0.2',
                 overwrite: true
               },
               {
@@ -65,7 +65,7 @@ export function ngAdd() : Rule {
         });
 
         // Otomatik "npm install" tetikleyici
-        context.addTask(new NodePackageInstallTask());       
+        context.addTask(new NodePackageInstallTask());
 
         return tree;
     }
