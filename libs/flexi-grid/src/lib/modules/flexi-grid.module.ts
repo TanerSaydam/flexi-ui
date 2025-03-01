@@ -34,6 +34,7 @@ import { FlexiGridFooterTemplateDirective } from '../directives/flexi-grid-foote
     FlexiGridHeaderTemplateDirective,
     FlexiTooltipDirective,
     DragDropModule,
+    FlexiButtonComponent,
     FlexiGridFooterTemplateDirective
   ]
 })
