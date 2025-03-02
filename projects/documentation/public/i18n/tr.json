@@ -1,4 +1,5 @@
 {
+  "EXAMPLE": "Örnek",
   "HOME": {
     "TITLE": "Flexi UI Nedir?",
     "DESCRIPTION": "Flexi UI, bir Angular UI kütüphanesidir ve içerisinde ücretsiz olarak kullanabileceğiniz çeşitli güçlü UI bileşenleri bulunmaktadır. Modern ve etkileyici frontend tasarımları oluşturmak için ihtiyaç duyduğunuz bileşenleri bu kütüphane altında bir araya getirmeye çalıştım. Siz de bu projeye kod desteği sağlayarak ya da öneri ve katkılarınızla büyümesine yardımcı olabilirsiniz. Ayrıca, projeye destek olmak için GitHub reposuna bir yıldız (⭐) bırakmayı unutmayın 😊",
@@ -30,7 +31,8 @@
   },
   "FLEXI_GRID": {
     "MAIN": {
-      "WHAT_IS": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek kullanabileceğiniz esnek bir yapıya sahiptir."
+      "WHAT_IS": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı bir Data Grid olan Flexi Grid ile tanışın. Bu component, OData yapısıyla tamamen uyumludur ve hem Data Binding kullanarak hem de tüm verinizi alıp işleyerek kullanabileceğiniz esnek bir yapıya sahiptir.",
+      "TITLE": "Flexi Grid nedir?"
     },
     "FIRST_USE": {
       "DESCRIPTION": "Flexi Grid'i kullanmak istediğiniz standalone componente FlexGridModule'u import etmelisiniz",

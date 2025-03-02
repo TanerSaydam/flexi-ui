@@ -1,4 +1,4 @@
-<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast">
+<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast" *transloco="let t">
     <!-- Flexi Toast Nedir?  -->
     <app-card cardTitle="Flexi Toast nedir?">
         <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı Toast ve Swal ile tanışın.</p>
@@ -16,20 +16,20 @@
         <p>v18 için paketin v18 sürümlerini kullanmalısınız.</p></b>
         </div>
         <br>
-        <p>Kullanım örneği aşağıdadır.</p>        
+        <p>Kullanım örneği aşağıdadır.</p>
     </app-card>
 
-    <!-- Toast Örnek Çıktısı -->
-    <app-card id="toast-use" style="padding-top: 5px;" cardTitle="Toast Örnek">
-        <div class="card-body">            
+    <!-- Toast {{ t('EXAMPLE') }} Çıktısı -->
+    <app-card id="toast-use" style="padding-top: 5px;" cardTitle="Toast {{ t('EXAMPLE') }}">
+        <div class="card-body">
             <img src="/img/flexi-toast-light.gif">
             <img src="/img/flexi-toast-dark.gif">
         </div>
     </app-card>
 
-    <!-- Swal Örnek Çıktısı -->
-    <app-card id="swal-use" style="padding-top: 5px;" cardTitle="Swal Örnek">
-        <div class="card-body" style="display: flex; gap: 20px;">            
+    <!-- Swal {{ t('EXAMPLE') }} Çıktısı -->
+    <app-card id="swal-use" style="padding-top: 5px;" cardTitle="Swal {{ t('EXAMPLE') }}">
+        <div class="card-body" style="display: flex; gap: 20px;">
             <img src="/img/flexi-swal-light.png">
             <img src="/img/flexi-swal-dark.png">
         </div>

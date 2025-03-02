@@ -4,12 +4,11 @@ import { UserModel } from '../../models/user.model';
 import { FlexiGridModule } from 'flexi-grid';
 import { captionHTMLCode, captionTSCode, dataTSCode } from '../code';
 import { SharedModule } from '../../shared.module';
-import { FlexiButtonComponent } from 'flexi-button';
 
 @Component({
     selector: 'app-caption',
     imports: [
-        FlexiGridModule,        
+        FlexiGridModule,
         SharedModule
     ],
     templateUrl: './caption.component.html',
@@ -31,19 +30,15 @@ export default class CaptionComponent {
     .
     .
     [showCaption]="true"
-    [showColumnVisibility]="true" <!-- Columnlarınızı gizleyip açabilmeniz için kullanabileceğiniz button -->
-    [showRefreshBtn]="true" <!-- Verilerinizi yenilemek için kullanabileceğiniz button -->
-    [captionTemplate]="captionTemplate"  <!-- Yukarıdaki butonların yanına yeni elementler ekleyebilirsiniz -->
+    [showColumnVisibility]="true"
+    [showRefreshBtn]="true"
     >
-    
-    <!-- İsterseniz ek elmentler ekleyebiliyorsunuz. Buraya ekledikleriniz grid captionın sağ tarafında görünür -->
-    <ng-template #captionTemplate>
-      <flexi-button btnColor="light">
-          <i class="fa-solid fa-plus me-1"></i>
-           Kullanıcı ekle
-      </flexi-button>
+
+    <ng-template flexiGridCaptionCommandTemplate>
+      <flexi-button btnColor="primary" title="Add User" btnIcon="add" flexiTooltip=""/>
     </ng-template>
   `);
+
   refreshData(){
     //Do something...
   }

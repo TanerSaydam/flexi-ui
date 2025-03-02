@@ -1,6 +1,6 @@
 <app-blank pageName="Flexi Grid" pageDescription="Angular Flexi Data Grid" *transloco="let t; read: 'FLEXI_GRID.MAIN'">
-  <app-card cardTitle="Flexi Grid nedir?">
-    <p>{{t('WHAT_IS')}}</p>    
+  <app-card [cardTitle]="t('TITLE')">
+    <p>{{t('WHAT_IS')}}</p>
     <hr>
     @defer {
     <app-flexi-grid-full></app-flexi-grid-full>

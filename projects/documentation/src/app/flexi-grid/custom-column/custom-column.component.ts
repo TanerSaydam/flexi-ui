@@ -21,41 +21,34 @@ export default class CustomColumnComponent {
   customColumnHTMLCode = signal<string>(customColumnHTMLCode);
   dataCode = signal<string>(dataTSCode);
   customColumnCodeExample = signal<string>(`
-  <flexi-grid 
-      [data]="users()" 
-      [commandColumnTemplate]="customButtonColumnTemplate" 
-      [commandColumnTextAlign]="'center'" 
-      [stickyCommandColumn]="true" 
+  <flexi-grid
+      [data]="users()"
+      [commandColumnTextAlign]="'center'"
+      [stickyCommandColumn]="true"
       [showCommandColumn]="true">
 
     <!-- Öncelikle custom column yerleştireceğimiz yerin içine girip flexiGridCellTemplate attribute'ünü yazıyoruz. Otomatik olarak column içindeki değeri columnda gösteriyor.-->
     <!-- let-item ile o döngüdeki tüm değerleri yakalıyoruz -->
     <!-- let-rowIndex="rowIndex" ile index'i yakalıyoruz -->
-    <flexi-grid-column title="Custom Column"> 
+    <flexi-grid-column title="Custom Column">
       <ng-template flexiGridHeaderTemplate>
         <!-- Eklediğiniz özel column a özel filter alanı da ekleyebiliyorsunuz -->
         <input type="search" class="flexi-grid-filter-input" (keyup)="onKeyUp($event)" placeholder="Custom filter...">
-      </ng-template>     
-      <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">
-        Bu column değeri: {{item.salary}} || bu da index: {{rowIndex}}
       </ng-template>
-    </flexi-grid-column>  
-  
-    <ng-template #customButtonColumnTemplate let-item let-index="index">
-      <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. 
-      Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
-      <!-- flexi-button grid ile beraber gelen bir component. İsterseniz uygulamanızda kullanabilirsiniz. -->
-      <flexi-button (click)="edit(item.id)" btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="Güncelle" />
-      <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger"  btnIcon="delete" btnSize="small" flexiTooltip title="Sil" />
+      <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">
+        This Column: {{item.salary}} || bu da index: {{rowIndex}}
+      </ng-template>
+    </flexi-grid-column>
+
+    <ng-template flexiGridColumnCommandTemplate let-item let-index="index">
+      <flexi-button (click)="edit(item.id)" btnColor="primary" btnIcon="edit" btnSize="x-small" flexiTooltip title="Edit" />
+      <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger"  btnIcon="delete" btnSize="x-small" flexiTooltip title="Remove" />
     </ng-template>
     `);
-  edit(id: any){
 
-  }
+  edit(id: any){}
 
-  remove(id: any){
-
-  }
+  remove(id: any){}
 
   onKeyUp(event:any){
     const value = event.target.value;

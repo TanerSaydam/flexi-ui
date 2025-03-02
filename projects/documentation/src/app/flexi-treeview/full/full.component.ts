@@ -7,23 +7,23 @@ import { flexiTreeviewData, flexiTreeviewfullExampleHTMLCode, flexiTreeviewfullE
 @Component({
   selector: 'app-flexi-treeview-full',
   imports: [SharedModule, FlexiTreeviewComponent],
-  templateUrl: './full.component.html',  
+  templateUrl: './full.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class FullTreeViewComponent {    
+export default class FullTreeViewComponent {
   treeviewData = signal<FlexiTreeNode[]>(CategoryTreeviewData);
-  loading = signal<boolean>(false);  
+  loading = signal<boolean>(false);
   fullExampleHTMLCode =signal<string>(flexiTreeviewfullExampleHTMLCode);
   fullExampleTSCode = signal<string>(flexiTreeviewfullExampleTSCode);
   dataCode = signal<string>(flexiTreeviewData)
 
   onDelete(node: FlexiTreeNode){
-    console.log(node);     
+    console.log(node);
   }
 
   onEdit(node: FlexiTreeNode){
-    console.log(node);     
+    console.log(node);
   }
 
   onRefresh(){

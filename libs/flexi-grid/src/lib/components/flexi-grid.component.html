@@ -6,7 +6,9 @@
   <div class="flexi-grid-caption-div">
     <span class="flexi-grid-caption-title">{{ captionTitle() }}</span>
     <div class="flexi-grid-caption-button-div" style="gap: 10px">
-      <ng-container *ngTemplateOutlet="captionTemplate()" />
+      @if(captionCommandTemplate()){
+        <ng-container *ngTemplateOutlet="captionCommandTemplate()!" />
+      }
       @if(showExportExcelBtn()){
       <flexi-button btnIcon="file_save" flexiTooltip btnSize="small" [title]="exportExcelText()" btnColor="warning"
         (click)="onExportExcelButtonClick()" />
@@ -14,7 +16,7 @@
       <div style="position: relative">
         <flexi-button btnIcon="menu" btnColor="info" btnSize="small" flexiTooltip [title]="columnVisibility()"
           (click)="toggleColumnVisibilityDropdown()" />
-        <div class="flexi-grid-dropdown-menu" style="top: 40px" [class.show]="columnVisibilityDropdownVisible()">
+        <div class="flexi-grid-dropdown-menu" style="top: 40px" id="flexi-grid-column-vsibility-dropdown-{{timeStamp()}}">
           <p class="flexi-grid-dropdown-title">{{ columnVisibility() }}</p>
           @for(column of getColumns(); track trackByFn()){
           <label class="flexi-grid-dropdown-checkbox-item" [for]="column.field() ? column.field() : column.title()">
@@ -28,7 +30,7 @@
         </div>
       </div>
       }@if(showRefreshBtn() || dataBinding()){
-      <flexi-button btnIcon="refresh" btnColor="dark" btnSize="small" flexiTooltip title="Yenile"
+      <flexi-button btnIcon="refresh" btnColor="dark" btnSize="small" flexiTooltip [title]="refreshText()"
         (click)="refreshDataMethod()" />
       }
       <div style="margin-right: 10px"></div>
@@ -110,7 +112,7 @@
                   } @if(filterable() && column.field() && column.filterable() &&
                   showFilterButton(column.filterType())){
                   <div class="p-relative">
-                    <span class="material-symbols-outlined cursor" (click)="toggleFilterDropdown(columnIndex)">
+                    <span class="material-symbols-outlined cursor" (click)="toggleFilterDropdown(columnIndex, column.timeStamp())">
                       filter_list
                     </span>
                     @if(showClearFilter(column.filterValueSignal())){
@@ -118,7 +120,7 @@
                       filter_list_off
                     </span>
                     }
-                    <div class="flexi-grid-dropdown-menu" id="flexi-grid-filter-dropdown-{{columnIndex}}" [ngClass]="
+                    <div class="flexi-grid-dropdown-menu flexi-grid-filter-dropdown" id="flexi-grid-filter-dropdown-{{columnIndex}}-{{column.timeStamp()}}" [ngClass]="
                         column.textAlign() === 'right'
                           ? 'flexi-grid-dropdown-menu-right'
                           : ''
@@ -139,7 +141,7 @@
                   }
                 </div>
               </th>
-              } @if(showCommandColumn()){
+              } @if(columnCommandTemplate()){
               <th [ngStyle]="{
                   width: commandColumnWidth(),
                   'text-align': commandColumnTextAlign()
@@ -148,7 +150,7 @@
                     ? 'flexi-sticky-column flexi-sticky-th-column'
                     : ''
                 " scope="col" role="columnheader">
-                {{ commandColumnTitle() }}
+                {{ commandColumnTitleSignal() }}
               </th>
               }
             </tr>
@@ -278,7 +280,7 @@
                   }
                 }
               }
-              @if(showCommandColumn()){
+              @if(columnCommandTemplate()){
               <th [ngClass]="
                   stickyCommandColumn()
                     ? 'flexi-sticky-column flexi-sticky-th-column'
@@ -397,31 +399,29 @@
                 }
               </td>
               }
-              @if(showCommandColumn()){
+              @if(columnCommandTemplate()){
               <td [ngStyle]="{
                     width: commandColumnWidth(),
                     'text-align': commandColumnTextAlign()
                   }"
                 [ngClass]="{'flexi-grid-selected-row': selectedRows().has(item), 'flexi-sticky-column flexi-sticky-td-column': stickyCommandColumn()}"
-                [attr.data-label]="commandColumnTitle()" scope="cell">
+                [attr.data-label]="commandColumnTitleSignal()" scope="cell">
                 @if(useCommandDropdown()){
                   <div class="flexi-grid-command-dropdown">
                     <flexi-button btnColor="primary" btnSize="x-small" btnIcon="more_vert" />
                     <div class="flexi-grid-command-dropdown-content">
                       <div class="flexi-grid-command-display-flex">
-                        <ng-container *ngTemplateOutlet="
-                              commandColumnTemplate();
-                              context: { $implicit: item, index: i }
-                            " />
+                          <ng-container *ngTemplateOutlet="
+                                columnCommandTemplate()!;
+                                context: { $implicit: item, index: i}" />
                       </div>
                     </div>
                   </div>
                 }@else {
                   <div class="flexi-grid-command-display-flex">
-                    <ng-container *ngTemplateOutlet="
-                          commandColumnTemplate();
-                          context: { $implicit: item, index: i }
-                        " />
+                      <ng-container *ngTemplateOutlet="
+                            columnCommandTemplate()!;
+                            context: { $implicit: item, index: i}" />
                   </div>
                 }
               </td>
@@ -469,7 +469,7 @@
                       </div>
                   </td>
                 }
-                @if(showCommandColumn()){
+                @if(columnCommandTemplate()){
                   <td style="background-color: var(--flexi-grid-bg-color)"
                   [ngStyle]="{
                     width: commandColumnWidth(),
@@ -496,9 +496,9 @@
         <option>{{ size }}</option>
         }
       </select>
-      @if(selectedRows().size > 0){
-      <span style="margin-left: 10px;">{{selected()}}: </span><b>{{selectedRows().size}}</b>
-      }
+      <span [ngStyle]="{visibility: selectedRows().size > 0 ? 'visible' : 'hidden'}">
+        <span style="margin-left: 10px;">{{selected()}}: </span><b>{{selectedRows().size}}</b>
+      </span>
     </div>
     <div class="flexi-grid-pagination-part-two">
       <ul class="flexi-grid-pagination">

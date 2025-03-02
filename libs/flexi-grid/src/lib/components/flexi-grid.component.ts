@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, linkedSignal, computed } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation, inject, signal, output, input, contentChildren, viewChild, linkedSignal, computed, contentChild } from '@angular/core';
 import { FilterType, FlexiGridColumnComponent, TextAlignType } from './flexi-grid-column.component';
 import { StateFilterModel, StateModel, StateOrderModel } from '../models/state.model';
 import ExcelJS from 'exceljs';
@@ -6,6 +6,8 @@ import { saveAs } from 'file-saver-es';
 import { HttpClient } from '@angular/common/http';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { FlexiGridReorderModel } from '../models/flexi-grid-reorder.model';
+import { FlexiGridColumnCommandTemplateDirective } from '../directives/flexi-grid-column-command-template.directive';
+import { FlexiGridCaptionCommandTemplateDirective } from '../directives/flexi-grid-caption-command-template.directive';
 
 @Component({
     selector: 'flexi-grid',
@@ -34,7 +36,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly themeClass = input<"light" | "dark">("light");
   readonly filterable = input<boolean>(true);
   readonly captionTitle = input<string>("");
-  readonly captionTemplate = input<TemplateRef<any> | any>();
   readonly footerTemplate = input<TemplateRef<any> | any>();
   readonly showColumnVisibility = input<boolean>(true);
   readonly showRefreshBtn = input<boolean>(true);
@@ -55,11 +56,10 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly resizable = input<boolean>(true);
   readonly tbodyStyle = input<any>({});
   readonly trMinHeight = input<string>("45px");
-  readonly showCommandColumn = input<Boolean>(false);
-  readonly commandColumnTitle = input<string>("İşlemler");
+  readonly language = input<"tr" | "en">("tr");
+  readonly commandColumnTitle = input<string>("");
   readonly commandColumnWidth = input<string>("100px");
   readonly commandColumnTextAlign = input<AlignSetting>("left");
-  readonly commandColumnTemplate = input<TemplateRef<any> | any>();
   readonly stickyCommandColumn = input<boolean>(true);
   readonly fontSize = input<string>("13px");
   readonly dataBindingExportEndpoint = input<string>('');
@@ -73,13 +73,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly selectableTextAlign = input<TextAlignType>("center");
   readonly selectableField = input<string>("");
   readonly useCommandDropdown = input<boolean>(false);
-  readonly language = input<"tr" | "en">("tr");
 
   readonly columnsArray = signal<FlexiGridColumnComponent[]>([]);
+  readonly selectedRows = signal<Set<any>>(new Set());
+  readonly timeStamp = signal<number>(new Date().getTime());
+  readonly allSelected = signal<boolean>(false);
   readonly totalSignal = linkedSignal(()=> this.total());
   readonly dataSignal = linkedSignal(()=> this.data());
-  readonly selectedRows = signal<Set<any>>(new Set());
-  readonly allSelected = signal<boolean>(false);
+  readonly commandColumnTitleSignal = linkedSignal(() => this.commandColumnTitle() ? this.commandColumnTitle() : (this.language() === "tr" ? "İşlemler" : "Operations"));
 
   readonly dataStateChange = output<any>();
   readonly onChange = output<any>();
@@ -105,8 +106,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly state = signal<StateModel>(new StateModel());
   readonly pagedData = signal<any[]>([]);
   timeoutId: any;
-  readonly filterDropdownVisible = signal<{ [key: string]: boolean }>({});
-  readonly columnVisibilityDropdownVisible = signal(false);
   readonly textFilterTypes = signal<{ operator: string, value: string }[]>([]);
   readonly numberFilterTypes = signal<{ operator: string, value: string }[]>([]);
   readonly dateFilterTypes = signal<{ operator: string, value: string }[]>([]);
@@ -121,8 +120,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly exportExcelText = computed(() => this.language() === "tr" ? "Excel'e Aktar" : "Export Excel");
   readonly selectAnOption = computed(() => this.language() === "tr" ? "Seçim yapınız" : "Select an option");
   readonly selected = computed(() => this.language() === "tr" ? "Seçilen" : "Selected");
+  readonly refreshText = computed(() => this.language() === "tr" ? "Yenile" : "Refresh");
 
   readonly columns = contentChildren(FlexiGridColumnComponent, {descendants: true});
+
+  readonly columnCommandTemplate = contentChild(FlexiGridColumnCommandTemplateDirective, { read: TemplateRef });
+  readonly captionCommandTemplate = contentChild(FlexiGridCaptionCommandTemplateDirective, { read: TemplateRef });
 
   readonly filterTr = viewChild<ElementRef<HTMLTableRowElement>>("filterTr");
   readonly tbody = viewChild<ElementRef>("tbody");
@@ -563,19 +566,24 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     return className;
   }
 
-  toggleFilterDropdown(index: number) {
-    const el = document.getElementById(`flexi-grid-filter-dropdown-${index}`);
-    if(el){
-      if(el.classList.contains("show")){
-        el.classList.remove("show");
-      }else{
-        el.classList.add("show");
-      }
+  toggleFilterDropdown(index: number, stamp: number) {
+    const el = document.getElementById(`flexi-grid-filter-dropdown-${index}-${stamp}`);
+    if (!el) return;
+
+    const isCurrentlyOpen = el.classList.contains("show");
+    this.closeAllFilterDropdown();
+    if (!isCurrentlyOpen) {
+      el.classList.add("show");
     }
   }
 
+  closeAllFilterDropdown() {
+    const els = document.querySelectorAll(".flexi-grid-filter-dropdown");
+    els.forEach(el => el.classList.remove("show"));
+  }
+
   applyFilter(column: FlexiGridColumnComponent, operator: string) {
-    this.filterDropdownVisible()[column.field()] = false;
+    this.closeAllFilterDropdown();
     column.filterOperator.set(operator);
 
     if(operator === "range"){
@@ -624,14 +632,17 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
           filter.push(filterField);
           this.state.update(prev => ({
             ...prev,
-            filter: filter
+            filter: [...filter]
           }));
         }
       } else {
         const findIndex = this.state().filter.findIndex(p => p.field === field);
 
         if (findIndex > -1) {
-          this.state().filter.splice(findIndex, 1);
+          this.state.update(prev => ({
+            ...prev,
+            filter: prev.filter.filter((_, i) => i !== findIndex)
+          }));
         }
       }
 
@@ -664,7 +675,14 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   toggleColumnVisibilityDropdown() {
-    this.columnVisibilityDropdownVisible.set(!this.columnVisibilityDropdownVisible())
+    const el = document.getElementById(`flexi-grid-column-vsibility-dropdown-${this.timeStamp()}`);
+    if(!el) return;
+
+    if(el.classList.contains("show")){
+      el.classList.remove("show")
+    }else{
+      el.classList.add("show")
+    }
   }
 
   refreshDataMethod() {
@@ -687,24 +705,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
 
     });
     this.dataStateChange.emit(this.state());
-  }
-
-  closeAllDropdowns() {
-    for (let i in this.filterDropdownVisible()) {
-      this.filterDropdownVisible()[i] = false;
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  handleClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.dropdown-menu') && !target.closest('.svg')) {
-      this.closeAllDropdowns();
-    }
-
-    if (!target.closest('.dropdown-menu') && !target.closest('button')) {
-      this.columnVisibilityDropdownVisible.set(false);
-    }
   }
 
   onMouseDown(event: MouseEvent | any, column: any, width: any) {
@@ -811,7 +811,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const columns = this.getColumns();
     const columnsCount = columns ? columns.length : 0;
     const indexCount = this.showIndex() ? 1 : 0;
-    const commandCount = this.showCommandColumn() ? 1 : 0;
+    const commandCount = this.columnCommandTemplate() ? 1 : 0;
     const total = columnsCount + indexCount + commandCount;
     return total > 0 ? total : 1; // En az 1 olmasını sağlar
   }
@@ -987,7 +987,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     });
 
     const numbers = Array(maxCount).fill(0).map((_, i) => i);
-    
+
     return numbers;
   }
 }

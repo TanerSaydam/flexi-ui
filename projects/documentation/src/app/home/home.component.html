@@ -1,10 +1,12 @@
 <app-blank pageName="HOME.PAGE_NAME" pageDescription="HOME.PAGE_DESCRIPTION">
-    <app-card cardTitle="HOME.WELCOME" *transloco="let t">
-        <h1>{{t('HOME.TITLE')}}</h1>
-        <p>{{t('HOME.DESCRIPTION')}}</p>
-        <p><b>{{t('HOME.BEST_REGARDS')}}</b></p>        
-        <p>
-            <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">{{t('HOME.GITHUB_LINK')}}</a>
-        </p>
-    </app-card>
+    <div class="card" style="margin-left: 30px; margin-right: 30px;">
+        <div class="card-body" *transloco="let t">
+            <h1>{{t('HOME.TITLE')}}</h1>
+            <p>{{t('HOME.DESCRIPTION')}}</p>
+            <p><b>{{t('HOME.BEST_REGARDS')}}</b></p>
+            <p>
+                <a href="https://github.com/TanerSaydam/flexi-ui" target="_blank">{{t('HOME.GITHUB_LINK')}}</a>
+            </p>
+        </div>
+    </div>
 </app-blank>

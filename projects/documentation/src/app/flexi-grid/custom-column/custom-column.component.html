@@ -26,7 +26,7 @@
         <div class="tab-content">
           <div class="tab-pane active show" id="tabs-example-custom-column">
             <h4>Custom Column</h4>
-            <flexi-grid [data]="users()" [commandColumnTemplate]="customButtonColumnTemplate" [commandColumnTextAlign]="'center'" [stickyCommandColumn]="true" [showCommandColumn]="true">
+            <flexi-grid [data]="users()" [commandColumnTextAlign]="'center'" [stickyCommandColumn]="true">
               <flexi-grid-column field="id" title="Id"></flexi-grid-column>
               <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
               <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
@@ -35,13 +35,12 @@
                 <ng-template flexiGridHeaderTemplate>
                   <input type="search" class="flexi-grid-filter-input" (keyup)="onKeyUp($event)" placeholder="Custom filter...">
                 </ng-template>
-                <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">                  
-                  {{t('THIS_IS_COLUMN')}}: {{item.salary}} || {{t('THIS_IS_INDEX')}}: {{rowIndex}}                  
+                <ng-template flexiGridCellTemplate let-item let-rowIndex="rowIndex">
+                  {{t('THIS_IS_COLUMN')}}: {{item.salary}} || {{t('THIS_IS_INDEX')}}: {{rowIndex}}
                 </ng-template>
               </flexi-grid-column>
 
-              <ng-template #customButtonColumnTemplate let-item>
-                <!--# ile ng-template oluşturup onu commandColumnTemplate'e verirsek command alanı columnların en sonunda gözükür. Sticky yapabiliyoruz bu sayede overflow olursa kaymıyor, text-align yapabiliriz.-->
+              <ng-template flexiGridColumnCommandTemplate let-item>
                 <flexi-button (click)="edit(item.id)" btnColor="primary" btnIcon="edit" btnSize="small" flexiTooltip title="{{t('UPDATE')}}" />
                 <flexi-button (click)="remove(item.id)" class="ms-1" btnColor="danger"  btnIcon="delete" btnSize="small" flexiTooltip title="{{t('DELETE')}}" />
               </ng-template>

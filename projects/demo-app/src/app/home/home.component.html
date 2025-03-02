@@ -1,17 +1,60 @@
 <app-blank>
         <h1>Flexi Grid</h1>
-        <flexi-button [btnColor]="'primary'" btnSize="x-small" btnIcon="add" title="Add" flexiTooltip="bottom" />
-                        <flexi-button [btnColor]="'danger'" btnSize="x-small" btnIcon="edit" title="Add" flexiTooltip="bottom" />
-                        <flexi-button [btnColor]="'dark'" btnSize="x-small" btnIcon="remove" title="Add" flexiTooltip="bottom" />
-                        <flexi-button [btnColor]="'indigo'" btnSize="x-small" btnIcon="files" title="Add" flexiTooltip="bottom" />
-                        <flexi-button [btnColor]="'info'" btnSize="x-small" btnIcon="apps" title="Add" flexiTooltip="bottom" />
-                        <flexi-button [btnColor]="'light'" btnSize="x-small" btnIcon="key" title="Add" flexiTooltip="bottom" />
-                        <flexi-button [btnColor]="'pink'" btnSize="x-small" btnIcon="block" title="Add" flexiTooltip="right" />
+        <flexi-grid
+        [data]="users()"
+        [total]="total()"
+        [dataBinding]="true"
+        [showIndex]="true"
+        [loading]="loading()"
+        [themeClass]="'light'"
+        captionTitle="User Lists"
+        [showCaption]="true"
+        [showExportExcelBtn]="true"
+        commandColumnWidth="120px"
+        exportExcelFileName="userlists"
+        [reorderable]="true"
+        [selectable]="true"
+        selectableField="id"
+        (dataStateChange)="dataStateChange($event)"
+        language="en"
+        >
+        <ng-template flexiGridCaptionCommandTemplate>
+          <flexi-button btnColor="primary" btnIcon="add" btnSize="small" flexiTooltip title="Add" />
+        </ng-template>
+
+        <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false" />
+        <flexi-grid-column field="firstName" title="First Name">
+          <ng-template flexiGridFooterTemplate let-data>
+            <span>Total</span>
+          </ng-template>
+        </flexi-grid-column>
+        <flexi-grid-column field="lastName" title="Last Name" />
+        <flexi-grid-column title="Custom Column">
+          <ng-template flexiGridCellTemplate let-item>
+            Custom Column
+          </ng-template>
+        </flexi-grid-column>
+        <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
+          title="Date Of Birth" />
+        <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right"
+          [showSymbolInFront]="true" [fraction]="2" title="Salary" />
+        <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']"
+          textAlign="center" width="100px" />
+        <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()"
+          textAlign="center" />
+
+        <ng-template flexiGridCommandTemplate let-item>
+          <div class="d-flex gap-1">
+            <flexi-button btnColor="primary" btnIcon="zoom_in" btnSize="x-small" title="Detail" flexiTooltip/>
+            <flexi-button btnColor="warning" btnIcon="edit" btnSize="x-small" flexiTooltip title="Edit" />
+            <flexi-button btnColor="danger"  btnSize="x-small" (click)="deleteByItem(item)" btnIcon="delete"
+              flexiTooltip title="Delete" />
+          </div>
+        </ng-template>
+      </flexi-grid>
 
         <flexi-grid
         [data]="data()"
-        [showCommandColumn]="true"
-        [commandColumnTemplate]="commandTemplate"
         [showCaption]="true"
         captionTitle="Maaş Bodrosu"
         [useCommandDropdown]="true"
@@ -85,7 +128,7 @@
                              </ng-template>
                 </flexi-grid-column>
 
-                <ng-template #commandTemplate let-item>
+                <ng-template flexiGridCommandTemplate let-item>
                         <flexi-button [btnColor]="'primary'" btnSize="x-small" btnIcon="add" title="Add" flexiTooltip="bottom" />
                         <flexi-button [btnColor]="'danger'" btnSize="x-small" btnIcon="edit" title="Add" flexiTooltip="bottom" />
                         <flexi-button [btnColor]="'dark'" btnSize="x-small" btnIcon="remove" title="Add" flexiTooltip="bottom" />

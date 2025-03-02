@@ -1,24 +1,55 @@
-import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, resource, signal, ViewEncapsulation } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { TrCurrencyPipe } from 'tr-currency';
 import { FlexiGridModule } from '../../../../../libs/flexi-grid/src/lib/modules/flexi-grid.module';
-import { FlexiButtonComponent } from '../../../../../libs/flexi-button/src/lib/flexi-button.component';
 import { FlexiTooltipDirective } from '../../../../../libs/flexi-tooltip/src/lib/flexi-tooltip.directive';
+import { StateModel } from '../../../../../libs/flexi-grid/src/lib/models/state.model';
+import { FlexiGridService } from '../../../../../libs/flexi-grid/src/lib/services/flexi-grid.service';
+import { lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { FlexiGridFilterDataModel } from '../../../../../libs/flexi-grid/src/lib/models/flexi-grid-filter-data.model';
 
 
 @Component({
-    imports: [
+  imports: [
     BlankComponent,
     FlexiGridModule,
     TrCurrencyPipe,
-    FlexiButtonComponent,
-    FlexiTooltipDirective
-],
-    templateUrl: './home.component.html',
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  ],
+  templateUrl: './home.component.html',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
+  state = signal<StateModel>(new StateModel());
+  result = resource({
+    request: this.state,
+    loader: async ({ request: req }) => {
+      let oDataEndpointPart = this.#grid.getODataEndpoint(req);
+      let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
+
+      const res = await lastValueFrom(await this.#http.get<any>(endpoint));
+
+      return res;
+    }
+  })
+  filterData = signal<FlexiGridFilterDataModel[]>([
+      {
+        value: "Kayseri",
+        name: "Kayseri"
+      },
+      {
+        value: "İstanbul",
+        name: "İstanbul"
+      },
+      {
+        value: "Ankara",
+        name: "Ankara"
+      }
+  ]);
+  users = computed(() => this.result.value()?.data ?? []);
+  total = computed(() => this.result.value()?.total ?? 0);
+  loading = computed(() => this.result.isLoading());
   data = signal<any[]>([
     {
       "id": 1,
@@ -262,11 +293,14 @@ export class UsersComponent {
     }
   ]);
 
-  getColumnList(event:any){
+  #grid = inject(FlexiGridService);
+  #http = inject(HttpClient);
+
+  getColumnList(event: any) {
     console.log(event);
   }
 
-  getBrutToplam(data:any[]){
+  getBrutToplam(data: any[]) {
     const bruts = data.map(m => m.brutUcret);
     let total = 0;
     bruts.forEach(val => total += val);
@@ -274,11 +308,25 @@ export class UsersComponent {
     return total;
   }
 
-  getGenelToplam(){
+  getGenelToplam() {
     const bruts = this.data().map(m => m.brutUcret);
     let total = 0;
     bruts.forEach(val => total += val);
 
     return total;
+  }
+
+  dataStateChange(event:any){
+    this.state.set(event);
+    console.log(event);
+  }
+
+  exportExcel(){
+    this.#http.get("https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll").subscribe((res:any)=> {
+      this.#grid.exportDataToExcel(res.data, "my-excel");
+    })
+  }
+
+  deleteByItem(item: any){
   }
 }

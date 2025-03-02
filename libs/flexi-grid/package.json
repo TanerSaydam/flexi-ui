@@ -1,6 +1,10 @@
 {
   "name": "flexi-grid",
-  "version": "19.0.46",
+  "version": "19.0.48",
+  "description": "A lightweight, customizable Angular data grid component with filtering, sorting, and pagination features.",
+  "author": "Taner Saydam <tanersaydam@gmail.com>",
+  "license": "MIT",
+  "keywords": ["angular", "data-grid", "table", "pagination", "sorting", "filtering"],
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0",
@@ -17,6 +21,10 @@
   },
   "sideEffects": false,
   "repository": {
-    "url": "https://github.com/TanerSaydam/flexi-ui"
+    "url": "https://github.com/TanerSaydam/flexi-ui/tree/main/libs/flexi-grid"
+  },
+  "homepage": "https://flexi-ui.ecnorow.com/flexi-grid",
+  "bugs": {
+    "url": "https://github.com/TanerSaydam/flexi-ui/issues"
   }
 }

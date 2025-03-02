@@ -1,4 +1,4 @@
-<app-blank pageName="Flexi Treeview" pageDescription="Angular Flexi Treeview">
+<app-blank pageName="Flexi Treeview" pageDescription="Angular Flexi Treeview" *transloco="let t">
   <app-card cardTitle="Flexi Treeview nedir?">
     <p>Flexi UI kütüphanemizin yeni üyesi Flexi Treeview ile tanışın.</p>
     <p>Flexi Treview, açık kaynak kodludur. Kaynak kodlarına <a
@@ -9,7 +9,7 @@
     <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a
         href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için tıklayın</a>.</p>
     <p>Dökümantasyonu adım adım inceleyerek Flexi Grid'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz.
-      Aşağıda, Flexi Grid'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup
+      Aşağıda, Flexi Grid'in tüm özelliklerini içeren bir {{ t('EXAMPLE') }} bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup
       yapılandıracağınızı adım adım öğreneceksiniz.</p>
     <p class="alert aler-primary"><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>
     <div class="alert alert-danger"><b>
@@ -21,7 +21,7 @@
     <div class="card-body">
       <p>Flexi Treeview'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
       <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-treeview</code></pre>
-    </div>    
+    </div>
 
     @defer {
     <app-flexi-treeview-full />

@@ -1,6 +1,6 @@
 {
   "name": "flexi-ui-package",
-  "version": "19.0.12",
+  "version": "19.0.13",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
     "postbuild": "copyfiles schematics/collection.json ../../dist/schematics/"

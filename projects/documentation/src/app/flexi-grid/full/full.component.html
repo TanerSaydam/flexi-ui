@@ -1,7 +1,7 @@
-<div class="card-header">
+<div class="card-header" *transloco="let t">
   <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
     <li class="nav-item">
-      <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+      <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">{{ t('EXAMPLE') }}</a>
     </li>
     <li class="nav-item">
       <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -21,46 +21,45 @@
         [showIndex]="true"
         [loading]="loading()"
         [themeClass]="shared.themeClass()"
-        captionTitle="Örnek User Listesi"
-        [captionTemplate]="captionTemplate"
+        captionTitle="User Lists"
         [showCaption]="true"
         [showExportExcelBtn]="true"
-        [showCommandColumn]="true"
-        [commandColumnTemplate]="commandButtonColumnTemplate"
         commandColumnWidth="120px"
         exportExcelFileName="userlists"
-        [reorderable]="true"
-        [selectable]="true"
-        selectableField="id"
         (dataStateChange)="dataStateChange($event)"
         language="en"
         >
-        <ng-template #captionTemplate>
+        <ng-template flexiGridCaptionCommandTemplate>
           <flexi-button btnColor="primary" btnIcon="add" btnSize="small" flexiTooltip title="Ekle" />
         </ng-template>
 
         <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false" />
         <flexi-grid-column field="firstName" title="First Name">
           <ng-template flexiGridFooterTemplate let-data>
-            <span>Total</span>
+            <span>Page Avarage</span>
+          </ng-template>
+          <ng-template flexiGridFooterTemplate let-data>
+            <span>Avarage</span>
           </ng-template>
         </flexi-grid-column>
         <flexi-grid-column field="lastName" title="Last Name" />
-        <flexi-grid-column title="Custom Column">
-          <ng-template flexiGridCellTemplate let-item>
-            Custom Column
+        <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd MMM yyyy"
+          title="Date Of Birth"/>
+        <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right"
+          [showSymbolInFront]="true" [fraction]="2" title="Salary">
+          <ng-template flexiGridFooterTemplate let-data>
+            <span>{{ calculatePageAverageSalary(data) | trCurrency:'₺' }}</span>
+          </ng-template>
+          <ng-template flexiGridFooterTemplate let-data>
+            <span>{{ averageSalary() | trCurrency:'₺' }}</span>
           </ng-template>
         </flexi-grid-column>
-        <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
-          title="Date Of Birth" />
-        <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right"
-          [showSymbolInFront]="true" [fraction]="2" title="Salary" />
         <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']"
           textAlign="center" width="100px" />
         <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()"
           textAlign="center" />
 
-        <ng-template #commandButtonColumnTemplate let-item="item">
+        <ng-template flexiGridColumnCommandTemplate let-item>
           <div class="d-flex gap-1">
             <flexi-button btnColor="primary" btnIcon="zoom_in" btnSize="x-small" title="Detail" flexiTooltip/>
             <flexi-button btnColor="warning" btnIcon="edit" btnSize="x-small" flexiTooltip title="Edit" />

@@ -47,14 +47,15 @@ export class UsersComponent {}
 
 ## Basic Usage
 
-To use **Flexi Grid**, add the `<flexi-grid>` component to your template and bind it to your data.  
+To use **Flexi Grid**, add the `<flexi-grid>` component to your template and bind it to your data.
 
 ```html
 <flexi-grid [data]="data">
-  <flexi-grid-column field="id" title="ID" width="70px"></flexi-grid-column>
-  <flexi-grid-column field="name" title="Name"></flexi-grid-column>
-  <flexi-grid-column field="email" title="Email"></flexi-grid-column>
-  <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right" symbol="$"></flexi-grid-column>
+  <flexi-grid-column field="id" title="ID" width="70px" />
+  <flexi-grid-column field="name" title="Name" />
+  <flexi-grid-column field="email" title="Email" />
+  <flexi-grid-column field="salary" title="Salary" filterType="number" format="c" textAlign="right" symbol="$" />
+  <flexi-grid-column field="startDate" title="Start Date" filterType="date" format="dd MMM yyyy" />
 </flexi-grid>
 ```
 
@@ -65,9 +66,9 @@ In your component file (**.ts**), define the **data** array:
 ```ts
 export class ExampleComponent {
   data = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', salary: 5000 },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', salary: 6000 },
-    { id: 3, name: 'Alice Brown', email: 'alice@example.com', salary: 7000 }
+    { id: 1, name: 'John Doe', email: 'john@example.com', salary: 5000, startDate: "2024-01-02" },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', salary: 6000, startDate: "2024-01-05" },
+    { id: 3, name: 'Alice Brown', email: 'alice@example.com', salary: 7000, startDate: "2024-02-03" }
   ];
 }
 ```
@@ -82,6 +83,7 @@ This will render a data grid with columns for ID, Name, Email, and Salary, along
 |-----------------------|-------------------------|-----------|-------------|
 | `data`               | `any[]`                  | `[]`      | The dataset to be displayed in the grid. |
 | `total`              | `number` \| `null`       | `0`       | Total number of records (useful for server-side pagination). |
+| `dataBind`           | `boolean`                | `false`   | Enables server-side data binding. When `true`, the grid does not handle filtering, sorting, or pagination on the client-side. Instead, it provides a `StateModel` object inside the `dataStateChange` output event, which contains the current grid state (pagination, sorting, and filtering). You need to manually handle API requests in your service using this state object. |
 | `pageable`           | `boolean`                | `true`    | Enables or disables pagination. |
 | `sortable`           | `boolean`                | `true`    | Enables or disables sorting. |
 | `filterable`         | `boolean`                | `true`    | Enables or disables filtering. |
@@ -117,9 +119,21 @@ This will render a data grid with columns for ID, Name, Email, and Salary, along
 
 ## Advanced Usage
 
-### Custom Header, Cell, and Footer Templates
+### Custom Caption, Header, Cell, Column Command and Footer Templates
 
-You can customize the **header**, **cell**, and **footer** of any column using Angular templates.
+You can customize the **caption**, **header**, **cell**, **column command **, and **footer** of any column using Angular templates.
+
+#### Custom Caption Command Template
+
+Use `flexiGridCaptionCommandTemplate` for adding commands to the table caption:
+
+```html
+<flexi-grid>
+  <ng-template flexiGridCaptionCommandTemplate>
+    <flexi-button btnColor="primary" btnIcon="add" btnSize="small" flexiTooltip title="Add" />
+  </ng-template>
+</flexi-grid>
+```
 
 #### Custom Cell Template
 
@@ -147,7 +161,7 @@ Use `flexiGridHeaderTemplate` to define a custom header:
 </flexi-grid-column>
 ```
 
-#### Custom Header Template
+#### Custom Footer Template
 
 Use `flexiGridFooterTemplate` for footer customization:
 
@@ -155,6 +169,20 @@ Use `flexiGridFooterTemplate` for footer customization:
 <flexi-grid-column field="salary" title="Salary">
   <ng-template flexiGridFooterTemplate let-data>
     Total: {{ data.reduce((sum, item) => sum + item.salary, 0) | currency }}
+  </ng-template>
+</flexi-grid-column>
+```
+
+#### Custom Command Column Template
+
+Use `flexiGridColumnCommandTemplate` to define a custom command column template:
+
+```html
+<flexi-grid-column field="actions" title="Actions">
+  <ng-template flexiGridColumnCommandTemplate let-item>
+    <flexi-button btnColor="primary" btnIcon="zoom_in" btnSize="x-small" title="Detail" flexiTooltip/>
+    <flexi-button btnColor="warning" btnIcon="edit" btnSize="x-small" flexiTooltip title="Edit" />
+    <flexi-button btnColor="danger"  btnSize="x-small" (click)="deleteByItem(item)" btnIcon="delete" flexiTooltip title="Delete" />
   </ng-template>
 </flexi-grid-column>
 ```

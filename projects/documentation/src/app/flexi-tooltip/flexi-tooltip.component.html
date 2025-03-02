@@ -1,9 +1,9 @@
-<app-blank pageName="Flexi Tooltip" pageDescription="Angular Flexi Tooltip">
+<app-blank pageName="Flexi Tooltip" pageDescription="Angular Flexi Tooltip" *transloco="let t">
     <app-card id="installation" cardTitle="Kurulum">
         <div class="card-body">
             <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı tooltip. Attribute olarak elemente ekledikten sonra title attribute ekleyip değer vermeniz yeterli. Onun içindeki değeri oluşturduğum tasarımla ekranda göstermenize olanak sağlar.</p>
             <p>Flexi Tooltip'i kullanmak/güncellemek için aşağıdaki npm komutunu çalıştırmalısınız</p>
-            <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-tooltip</code></pre>           
+            <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-tooltip</code></pre>
         </div>
     </app-card>
 
@@ -11,7 +11,7 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                 <li class="nav-item">
-                    <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">Örnek</a>
+                    <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">{{ t('EXAMPLE') }}</a>
                 </li>
                 <li class="nav-item">
                     <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -24,7 +24,7 @@
         <div class="card-body">
             <div class="tab-content">
                 <div class="tab-pane active show" id="tabs-example-full">
-                    <h4>Örnek kullanımları</h4>
+                    <h4>{{ t('EXAMPLE') }} kullanımları</h4>
                     <div style="display: flex; flex-direction: column; gap:5px">
                         <div style="display: flex; gap: 5px;">
                             <flexi-button btnColor="light" btnSize="large" btnIcon="info" flexiTooltip="left"
