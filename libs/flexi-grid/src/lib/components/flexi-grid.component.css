@@ -47,7 +47,7 @@ flexi-button {
 
 .flexi-grid-table-container {
   border: 1px solid var(--flexi-grid-border-color);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow-x: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -125,23 +125,11 @@ flexi-button {
   background-color: var(--flexi-grid-bg-color);
   padding-top: 20px;
   padding-bottom: 15px;
+  font-weight: bold;
 }
 
 .flexi-flex-reverse {
   flex-direction: row-reverse;
-  text-align: right;
-}
-
-.flexi-right {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.flexi-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .flexi-grid-table-container th {
@@ -182,11 +170,14 @@ flexi-button {
 }
 
 .flexi-grid-filter-input,
-.flexi-grid-filter-select {
+.flexi-grid-filter-select,
+.flexi-grid-filter-dropdown-input,
+.flexi-grid-filter-dropdown-date,
+.flexi-grid-filter-dropdown-select {
   display: block;
   height: calc(1.47em + 1em + 2px);
   width: 100%;
-  padding: 0.5rem 0.875rem;
+  padding: 0.5rem 0.475rem;
   font-weight: 400;
   line-height: 1.47;
   border: 1px solid #E5E5E5;
@@ -289,6 +280,8 @@ flexi-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .flexi-sticky-column {
@@ -653,11 +646,6 @@ flexi-button {
   background-color: rgba(var(--flexi-grid-card-danger), 0.1);
   border-color: rgb(var(--flexi-grid-card-danger));
   color: var(--flexi-grid-text-color);
-}
-
-th,
-td {
-  font-weight: 400 !important;
 }
 
 .flexi-grid-foot {

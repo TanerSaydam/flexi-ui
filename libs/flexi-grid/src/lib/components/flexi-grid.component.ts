@@ -18,7 +18,9 @@ import { FlexiGridCaptionCommandTemplateDirective } from '../directives/flexi-gr
       "./css/flexi-grid.common.css",
       "./flexi-grid.component.css",
       "./css/flexi-grid-command.css",
-      "./css/flexi-grid-dropdown.css"
+      "./css/flexi-grid-dropdown.css",
+      "./css/flexi-grid-filter.css",
+      "./css/flexi-grid-sort.css"
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -78,7 +80,15 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly selectedRows = signal<Set<any>>(new Set());
   readonly timeStamp = signal<number>(new Date().getTime());
   readonly allSelected = signal<boolean>(false);
-  readonly totalSignal = linkedSignal(()=> this.total());
+  readonly totalSignal = linkedSignal(()=> {
+    if(this.total()! > 0){
+      return this.total();
+    }else if(this.prevTotal() > 0){
+      return this.prevTotal();
+    }
+
+    return this.total();
+  });
   readonly dataSignal = linkedSignal(()=> this.data());
   readonly commandColumnTitleSignal = linkedSignal(() => this.commandColumnTitle() ? this.commandColumnTitle() : (this.language() === "tr" ? "İşlemler" : "Operations"));
 
@@ -115,10 +125,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   readonly startWidth = signal<number | undefined>(undefined);
   readonly isShowMobileFilter = signal<boolean>(false);
 
+  readonly prevData = signal<any[]>([]);
+  readonly prevTotal = signal<number>(0);
   readonly noData = computed(() => this.language() === "tr" ? "Gösterilecek veri bulunamadı!" : "No data to display!");
   readonly columnVisibility = computed(() => this.language() === "tr" ? "Sütun Görünürlüğü" : "Column Visibility");
   readonly exportExcelText = computed(() => this.language() === "tr" ? "Excel'e Aktar" : "Export Excel");
   readonly selectAnOption = computed(() => this.language() === "tr" ? "Seçim yapınız" : "Select an option");
+  readonly clearBtnText = computed(() => this.language() === "tr" ? "Temizle" : "Clear");
   readonly selected = computed(() => this.language() === "tr" ? "Seçilen" : "Selected");
   readonly refreshText = computed(() => this.language() === "tr" ? "Yenile" : "Refresh");
 
@@ -138,6 +151,13 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if(changes["loading"]){
+      if(!this.loading()){
+        this.prevData.set(this.data());
+        this.prevTotal.set(this.total()!);
+      }
+    }
+
     if (this.dataSignal().length > 0) {
       const columns = this.getColumns();
       if (!columns || columns.length === 0) {
@@ -243,22 +263,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  showFilterButton(filterType: string) {
-    switch (filterType) {
-      case "text":
-        return true;
-
-      case "number":
-        return true;
-
-      case "date":
-        return true;
-
-      default:
-        return false;
-    }
-  }
-
   initializeColumnsFromData(): void {
     const data = this.dataSignal();
     if (data && data.length > 0) {
@@ -282,6 +286,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   changePage(pageNumber: number) {
+    if(this.state().pageNumber === pageNumber) return;
     this.allSelected.set(false);
 
     if (pageNumber > this.totalPageCount()) {
@@ -317,7 +322,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const pageCount = Math.ceil(this.totalSignal()! / +this.state().pageSize);
     const numbers = [];
 
-    // Calculate the current range of page numbers
     const currentGroup = Math.floor((this.state().pageNumber - 1) / this.pageNumberCount());
     const startPage = currentGroup * this.pageNumberCount() + 1;
     const endPage = Math.min(startPage + (this.pageNumberCount() - 1), pageCount);
@@ -505,17 +509,16 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   sortData() {
-    this.dataSignal.set(this.dataSignal().sort((a, b) => {
-      const field = this.state().sort.field;
-      const dir = this.state().sort.dir === 'asc' ? 1 : -1;
-      if (a[field] < b[field]) return -1 * dir;
-      if (a[field] > b[field]) return 1 * dir;
-      return 0;
-    }));
-
     if (this.dataBinding()) {
       this.dataStateChange.emit(this.state());
     } else {
+      this.dataSignal.set(this.dataSignal().sort((a, b) => {
+        const field = this.state().sort.field;
+        const dir = this.state().sort.dir === 'asc' ? 1 : -1;
+        if (a[field] < b[field]) return -1 * dir;
+        if (a[field] > b[field]) return 1 * dir;
+        return 0;
+      }));
       this.updatePagedData();
     }
   }
@@ -523,6 +526,7 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   sort(sortable: boolean, column: any) {
     if (!column.sortable() || !sortable) return;
 
+    const oldSortField = this.state().sort.field;
     const sort = this.state().sort;
     sort.field = column.field();
 
@@ -532,12 +536,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
       pageNumber: 1
     }));
 
-    if (this.state().sort.dir === "asc") {
+    if (this.state().sort.dir === "asc" && oldSortField === sort.field) {
       this.state.update(prev => ({
         ...prev,
         sort: {dir: "desc", field: prev.sort.field}
       }))
-    } else if (this.state().sort.dir === 'desc') {
+    } else if (this.state().sort.dir === 'desc' && oldSortField === sort.field) {
       this.state.update(prev => ({
         ...prev,
         sort: new StateOrderModel()
@@ -555,15 +559,28 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   setTextAlignForTh(filterable: boolean, column: any) {
     let className: string = "";
 
-    const filter: boolean = (filterable && column.field() && column.filterable() && this.showFilterButton(column.filterType()));
+    const filter: boolean = (filterable && column.filterable());
     className += filter ? 'flexi-th ' : '';
     if (column.textAlign() === "right") {
       if (filter) className += 'flexi-flex-reverse';
-      else className += 'flexi-right';
+      else className += 'flexi-grid-right';
     }
-    else if (column.textAlign() === "center" && !filter) className += "flexi-center"
+    else if (column.textAlign() === "center" && !filter) className += "flexi-grid-center"
 
     return className;
+  }
+
+  setTextAlignForThTitle(filterable: boolean, column:any){
+    const filter: boolean = (filterable && column.filterable());
+
+    if(column.textAlign() === "right"){
+      if(filter) return "flexi-flex-reverse flexi-grid-justify-content-end";
+      else return "flexi-grid-justify-content-end";
+    }
+
+    if(column.textAlign() === "center" && !filter) return "flexi-grid-justify-content-center"
+
+    return ""
   }
 
   toggleFilterDropdown(index: number, stamp: number) {
@@ -583,7 +600,6 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
   }
 
   applyFilter(column: FlexiGridColumnComponent, operator: string) {
-    this.closeAllFilterDropdown();
     column.filterOperator.set(operator);
 
     if(operator === "range"){
@@ -599,6 +615,12 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     if (column.filterValueSignal() !== "") {
       this.filter(column.field(), operator, column.filterValueSignal(), column.filterType(), column.filterValue2Signal());
     }
+  }
+
+  filterDateRange(column: FlexiGridColumnComponent){
+    column.filterOperator.set("range");
+    column.showSecondDate.set(true);
+    this.filter(column.field(), column.filterOperator(), column.filterValueSignal(), column.filterType(), column.filterValueSignal());
   }
 
   filter(field: string, operator: string, value: string, type: FilterType, value2?: string) {
@@ -654,8 +676,11 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     }, this.dataBinding() ? 500 : 1);
   }
 
-  showClearFilter(value: any) {
-    if (value) return true;
+  showClearFilter(column: any) {
+    const filter = column.field && this.haveFilterValue(column.filterType());
+    if(!filter) return false;
+
+    if (column.filterValueSignal()) return true;
     return false;
   }
 
@@ -989,5 +1014,39 @@ export class FlexiGridComponent implements OnChanges, AfterViewInit {
     const numbers = Array(maxCount).fill(0).map((_, i) => i);
 
     return numbers;
+  }
+
+  getPagedData(){
+    if(this.pagedData().length > 0) return this.pagedData();
+
+    return this.prevData();
+  }
+
+  haveFilterValue(filterType?: FilterType){
+    if(filterType){
+      if(filterType === "boolean" || filterType === "date-time" || filterType === "select") return false;
+      else return true;
+    }
+    return false;
+  }
+
+  setDropdownInputType(column: FlexiGridColumnComponent){
+    switch (column.filterType()) {
+      case "text": return "search"
+      case "number": return "search"
+      case "date": return "date"
+      case "date-time": return "datetime-local"
+      default: return "search"
+    }
+  }
+
+  setDropdownInputClass(column: FlexiGridColumnComponent){
+    switch (column.filterType()) {
+      case "text": return "flexi-grid-filter-dropdown-input"
+      case "number": return "flexi-grid-filter-dropdown-input"
+      case "date": return "flexi-grid-filter-dropdown-date"
+      case "date-time": return "flexi-grid-filter-dropdown-date"
+      default: return "search"
+    }
   }
 }

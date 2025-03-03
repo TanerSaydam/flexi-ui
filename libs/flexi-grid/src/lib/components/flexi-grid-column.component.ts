@@ -34,7 +34,9 @@ export class FlexiGridColumnComponent {
 
   readonly showSecondDate = signal<boolean>(false);
   readonly filterOperator = signal<string>("contains");
-  readonly timeStamp = signal<number>(new Date().getTime());
+  readonly timeStamp = signal<string>(
+    `${new Date().getTime()}-${Math.random().toString(36).slice(2, 11)}`
+  );
   readonly filterValueSignal = linkedSignal(()=> this.filterValue());
   readonly filterValue2Signal = linkedSignal(()=> this.filterValue2());
   readonly visibleSignal = linkedSignal(() => this.visible());

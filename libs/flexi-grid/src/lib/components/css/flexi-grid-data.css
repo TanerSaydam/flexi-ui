@@ -2,24 +2,26 @@
     --flexi-grid-bg-color: #f8f9fa;
     --flexi-grid-bg-color-part: #fff;
     --flexi-grid-scroll-bg-color: #dee2e6;
-    --flexi-grid-dropdown-bg-color: #f4f5f5;
+    --flexi-grid-dropdown-bg-color: #f8f9fa;
     --flexi-grid-dropdown-border-color: #b1b4b8;
     --flexi-grid-bg-color-gray: #f8f9fa;
     --flexi-grid-text-color: #000;
     --flexi-grid-text-hover-color: #212529;
     --flexi-grid-active-text-color: #212529;
-    --flexi-grid-active-bg-color: #ebf5ff;
+    --flexi-grid-active-bg-color: #dee2e6;
     --flexi-grid-tbody-hover: #f1f1f1;
     --flexi-grid-hover-bg-color: #ebf5ff;
     --flexi-grid-hover-text-color: #212529;
     --flexi-grid-border-color: #dee2e6;
+    --flexi-grid-filter-hover-bg-color: #dee2e6;
     --flexi-grid-sticky-border-color: #dee2e6;
     --flexi-grid-success: #1dc9b7;
     --flexi-grid-card-success: 52, 199, 89;
     --flexi-grid-card-danger: 255, 59, 48;
     --flexi-grid-danger: #f44336;
-    --flexi-grid-selected-bg-color: #e4f3ff;
+    --flexi-grid-selected-bg-color: #e9f1f8;
     --flexi-grid-selected-text-color: #000;
+    --flexi-hover-background-color: #dfe2e6;
   }
 
   [data-bs-theme="dark"] {
@@ -37,7 +39,9 @@
     --flexi-grid-hover-bg-color: #f8f9fa;
     --flexi-grid-hover-text-color: #f8f9fa;
     --flexi-grid-border-color: #353232;
+    --flexi-grid-filter-hover-bg-color: #353232;
     --flexi-grid-sticky-border-color: #353232;
     --flexi-grid-selected-bg-color: #353232;
     --flexi-grid-selected-text-color: #fff;
+    --flexi-hover-background-color: #353232;
   }

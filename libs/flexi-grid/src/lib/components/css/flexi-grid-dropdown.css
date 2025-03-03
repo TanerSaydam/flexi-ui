@@ -5,7 +5,7 @@
     z-index: 3;
     right: 0;
     float: left;
-    min-width: 160px;
+    min-width: 180px;
     padding: 5px 0;
     margin: 0;
     font-size: 14px;
@@ -37,13 +37,13 @@
     text-align: inherit;
     background-color: transparent;
     border: 0;
+    cursor: pointer;
 }
 
 .flexi-grid-dropdown-item:hover,
 .flexi-grid-dropdown-item:focus {
-    color: var(--flexi-grid-text-hover-color) !important;
     text-decoration: none;
-    background-color: var(--flexi-hover-background-color);
+    background-color: var(--flexi-grid-filter-hover-bg-color);
 }
 
 .flexi-grid-dropdown-checkbox-item {
@@ -62,7 +62,28 @@
 }
 
 .flexi-grid-dropdown-title {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid (var(--flexi-grid-border-color));
+    font-weight: bold;
+}
+
+.flexi-grid-filter-dropdown-content{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.flexi-grid-filter-dropdown-input-search-icon{
+    position: absolute;
+    top: 10px;
+    left: 7px;
+    opacity: .5;
+    font-size: 17px;
+}
+
+.flexi-grid-filter-dropdown-input{
+    padding-left: 27px;
 }

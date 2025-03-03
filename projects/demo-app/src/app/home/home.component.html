@@ -12,11 +12,12 @@
         [showExportExcelBtn]="true"
         commandColumnWidth="120px"
         exportExcelFileName="userlists"
-        [reorderable]="true"
-        [selectable]="true"
+        [reorderable]="false"
+        [selectable]="false"
         selectableField="id"
         (dataStateChange)="dataStateChange($event)"
-        language="en"
+        language="tr"
+        [selectable]="true"
         >
         <ng-template flexiGridCaptionCommandTemplate>
           <flexi-button btnColor="primary" btnIcon="add" btnSize="small" flexiTooltip title="Add" />
@@ -25,31 +26,33 @@
         <flexi-grid-column [visible]="false" field="id" title="Id" [sortable]="false" />
         <flexi-grid-column field="firstName" title="First Name">
           <ng-template flexiGridFooterTemplate let-data>
-            <span>Total</span>
+            <span>Average</span>
           </ng-template>
         </flexi-grid-column>
         <flexi-grid-column field="lastName" title="Last Name" />
-        <flexi-grid-column title="Custom Column">
+        <flexi-grid-column title="Custom Column" textAlign="center">
           <ng-template flexiGridCellTemplate let-item>
             Custom Column
           </ng-template>
         </flexi-grid-column>
         <flexi-grid-column field="dateOfBirth" [filterType]="'date'" format="dd.MM.yyyy"
-          title="Date Of Birth" />
+          title="Date Of Birth" textAlign="center"/>
         <flexi-grid-column field="salary" filterType="number" format="c" symbol="₺" textAlign="right"
-          [showSymbolInFront]="true" [fraction]="2" title="Salary" />
+          [showSymbolInFront]="true" [fraction]="2" title="Salary">
+                <ng-template flexiGridFooterTemplate let-data>
+                        <span>{{calculatePageSalaryAverage(data) | trCurrency:'₺'}}</span>
+                </ng-template>
+        </flexi-grid-column>
         <flexi-grid-column field="isActive" title="Is Active" filterType="boolean" [booleanData]="['Active','Passive']"
           textAlign="center" width="100px" />
         <flexi-grid-column field="city" title="City" filterType="select" [filterData]="filterData()"
           textAlign="center" />
 
-        <ng-template flexiGridCommandTemplate let-item>
-          <div class="d-flex gap-1">
-            <flexi-button btnColor="primary" btnIcon="zoom_in" btnSize="x-small" title="Detail" flexiTooltip/>
-            <flexi-button btnColor="warning" btnIcon="edit" btnSize="x-small" flexiTooltip title="Edit" />
-            <flexi-button btnColor="danger"  btnSize="x-small" (click)="deleteByItem(item)" btnIcon="delete"
-              flexiTooltip title="Delete" />
-          </div>
+        <ng-template flexiGridColumnCommandTemplate let-item>
+                <flexi-button btnColor="primary" btnIcon="zoom_in" btnSize="x-small" title="Detail" flexiTooltip/>
+                <flexi-button btnColor="warning" btnIcon="edit" btnSize="x-small" flexiTooltip title="Edit" />
+                <flexi-button btnColor="danger"  btnSize="x-small" (click)="deleteByItem(item)" btnIcon="delete"
+                  flexiTooltip title="Delete" />
         </ng-template>
       </flexi-grid>
 
@@ -61,8 +64,9 @@
         commandColumnTextAlign="center"
         [pageSize]="10"
         language="en"
+        [showIndex]="true"
         >
-                <flexi-grid-column field="id" title="#" width="70px" />
+                <flexi-grid-column field="id" title="#" width="70px" [visible]="false" />
                 <flexi-grid-column field="ad" title="Ad">
                         <ng-template flexiGridFooterTemplate let-data>
                                 <span>Toplam</span>
@@ -128,7 +132,7 @@
                              </ng-template>
                 </flexi-grid-column>
 
-                <ng-template flexiGridCommandTemplate let-item>
+                <ng-template flexiGridColumnCommandTemplate let-item>
                         <flexi-button [btnColor]="'primary'" btnSize="x-small" btnIcon="add" title="Add" flexiTooltip="bottom" />
                         <flexi-button [btnColor]="'danger'" btnSize="x-small" btnIcon="edit" title="Add" flexiTooltip="bottom" />
                         <flexi-button [btnColor]="'dark'" btnSize="x-small" btnIcon="remove" title="Add" flexiTooltip="bottom" />
@@ -140,8 +144,10 @@
         </flexi-grid>
 
         <flexi-grid
-        [data]="data()">
-                <flexi-grid-column field="id" title="#" width="70px" />
+        [data]="data()"
+        [showIndex]="true"
+        commandColumnWidth="270px">
+                <flexi-grid-column field="id" title="#" width="70px" [visible]="false" />
                 <flexi-grid-column field="ad" title="Ad" />
                 <flexi-grid-column field="tcKimlikNo" title="TC Kimlik No" />
                 <flexi-grid-column field="sgkSicilNo" title="SGK Sicil No" />
@@ -151,5 +157,15 @@
                 <flexi-grid-column field="gelirVergisi" title="Gelir Vergisi" filterType="number" format="c" textAlign="right" symbol="₺" />
                 <flexi-grid-column field="damgaVergisi" title="Damga Vergisi" filterType="number" format="c" textAlign="right" symbol="₺" />
                 <flexi-grid-column field="netUcret" title="Net Ücret" filterType="number" format="c" textAlign="right" symbol="₺" />
+
+                <ng-template flexiGridColumnCommandTemplate let-item>
+                        <flexi-button [btnColor]="'primary'" btnSize="x-small" btnIcon="add" title="Add" flexiTooltip="bottom" />
+                        <flexi-button [btnColor]="'danger'" btnSize="x-small" btnIcon="edit" title="Add" flexiTooltip="bottom" />
+                        <flexi-button [btnColor]="'dark'" btnSize="x-small" btnIcon="remove" title="Add" flexiTooltip="bottom" />
+                        <flexi-button [btnColor]="'indigo'" btnSize="x-small" btnIcon="files" title="Add" flexiTooltip="bottom" />
+                        <flexi-button [btnColor]="'info'" btnSize="x-small" btnIcon="apps" title="Add" flexiTooltip="bottom" />
+                        <flexi-button [btnColor]="'light'" btnSize="x-small" btnIcon="key" title="Add" flexiTooltip="bottom" />
+                        <flexi-button [btnColor]="'pink'" btnSize="x-small" btnIcon="block" title="Add" flexiTooltip="right" />
+                </ng-template>
         </flexi-grid>
 </app-blank>

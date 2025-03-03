@@ -1,0 +1,18 @@
+.flexi-grid-filter{
+    border-radius: 4px;
+    padding: 3px;
+}
+
+.flexi-grid-filter:hover{
+    background-color: var(--flexi-grid-filter-hover-bg-color);
+}
+
+.flexi-grid-filter-filled{
+    background-color: #dee2e6;
+}
+
+.flexi-grid-filter-date-content{
+    display: flex;
+    gap: 3px;
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, resource, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, linkedSignal, resource, signal, ViewEncapsulation } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { TrCurrencyPipe } from 'tr-currency';
 import { FlexiGridModule } from '../../../../../libs/flexi-grid/src/lib/modules/flexi-grid.module';
@@ -25,6 +25,7 @@ export class UsersComponent {
   result = resource({
     request: this.state,
     loader: async ({ request: req }) => {
+      //await new Promise(res => setTimeout(res, 5000));
       let oDataEndpointPart = this.#grid.getODataEndpoint(req);
       let endpoint = `https://flexi-ui.webapi.ecnorow.com/api/Users/GetAll?$count=true&${oDataEndpointPart}`;
 
@@ -32,7 +33,7 @@ export class UsersComponent {
 
       return res;
     }
-  })
+  });
   filterData = signal<FlexiGridFilterDataModel[]>([
       {
         value: "Kayseri",
@@ -49,7 +50,7 @@ export class UsersComponent {
   ]);
   users = computed(() => this.result.value()?.data ?? []);
   total = computed(() => this.result.value()?.total ?? 0);
-  loading = computed(() => this.result.isLoading());
+  loading = linkedSignal(() => this.result.isLoading());
   data = signal<any[]>([
     {
       "id": 1,
@@ -328,5 +329,11 @@ export class UsersComponent {
   }
 
   deleteByItem(item: any){
+  }
+
+  calculatePageSalaryAverage(data: any[]) {
+    const salary = data.map(val => val.salary);
+    const total = salary.reduce((sum, val) => sum + val, 0);
+    return salary.length > 0 ? total / salary.length : 0;
   }
 }
