@@ -1,22 +1,17 @@
-<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast" *transloco="let t">
+<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast" *transloco="let t; read: 'FLEXI_TOAST.WHAT_IS'">
     <!-- Flexi Toast Nedir?  -->
-    <app-card cardTitle="Flexi Toast nedir?">
-        <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı Toast ve Swal ile tanışın.</p>
-        <p>Flexi Toast açık kaynak kodludur. Kaynak kodlarına <a
-                href="https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-toast/src/lib"
-                target="_blank">buraya tıklayarak</a> ulaşabilirsiniz.</p>
-        <hr>
-        <p>Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a
-                href="https://github.com/TanerSaydam/flexi-ui" target="_blank">GitHub reposuna ulaşmak için
-                tıklayın</a>.</p>
-        <p>Dökümantasyonu adım adım inceleyerek Flexi Toast'ı projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda Flexi Toast'ın bir örneği bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.</p>
-        <p class="alert aler-primary"><b>Not: Angular v18+ projelerinde kullanabilirsiniz.</b></p>
+    <app-card cardTitle="{{t('CARD_TITLE')}}">
+        <p>{{t('DESCRIPTION_ONE')}}</p>
+        <p [innerHTML]="t('LINKED_DESCRIPTION_ONE')"></p>
+                <hr>
+        <p>{{t('DESCRIPTION_TWO')}}</p>
+        <p class="alert aler-primary"><b>{{t('NOTE_ALERT_PRIMARY')}}</b></p>
         <div class="alert alert-danger"><b>
-        <p>Güncel sürüm v19.</p>
-        <p>v18 için paketin v18 sürümlerini kullanmalısınız.</p></b>
+        <p>{{t('CURRENT_VERSION')}} </p>
+        <p>{{t('NOTE_ALERT_DANGER')}}</p></b>
         </div>
         <br>
-        <p>Kullanım örneği aşağıdadır.</p>
+        <p>{{t('CODE_DESCRIPTION')}}</p>
     </app-card>
 
     <!-- Toast {{ t('EXAMPLE') }} Çıktısı -->

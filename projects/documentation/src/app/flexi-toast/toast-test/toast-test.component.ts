@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { SharedModule } from '../../shared.module';
 import { FlexiToastOptionsModel, FlexiToastService } from 'flexi-toast';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-toast-test',
-    imports: [SharedModule],
+    imports: [SharedModule,TranslocoModule],
     templateUrl: './toast-test.component.html',
     styleUrl: './toast-test.component.css'
 })

@@ -3,6 +3,7 @@ import { Component} from '@angular/core';
 import { CardComponent } from '../blank/card/card.component';
 import { BlankComponent } from '../blank/blank.component';
 import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-flexi-toast',
@@ -11,6 +12,7 @@ import { FormsModule } from '@angular/forms';
         CardComponent,
         CommonModule,
         FormsModule,        
+        TranslocoModule
     ],
     templateUrl: './flexi-toast.component.html',
     styleUrl: './flexi-toast.component.css'
