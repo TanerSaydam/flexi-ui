@@ -1,12 +1,12 @@
-<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast">
-    <app-card id="installation" cardTitle="Kurulum">
+<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast" *transloco="let t; read: 'FLEXI_TOAST.INSTALLATION'">
+    <app-card id="installation" cardTitle="{{t('CARD_TITLE')}}">
         <div class="card-body">
-            <p>Flexi Toast'ı kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız</p>
+            <p>{{t('DESCRIPTION')}}</p>
             <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-toast</code></pre>
         </div>
         <div class="card-body">
-            <div class="alert alert-warning">Önemli Not: css dosyasını styles kısmına eklemeden toast veya swalı ekranda görünmez!</div>
-            <p>Kütüphaneyi kurduktan sonra css dosyasını angular.json dosyasındaki styles kısmına eklemeniz gerekiyor. Bu esnada uygulamaya çalışıyorsa durdurup tekrar çalıştırın</p>
+            <div class="alert alert-warning">{{t('NOTE_ALERT')}}</div>
+            <p>{{t('USAGE_DESCRIPTION')}}</p>
             <strong>angular.json</strong>
             <pre><code style="font-size: larger; font-weight: 700;">{{angularJSONCode()}}</code></pre>                
         </div>

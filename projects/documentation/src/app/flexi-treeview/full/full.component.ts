@@ -3,10 +3,11 @@ import { SharedModule } from '../../shared.module';
 import { FlexiTreeNode, FlexiTreeviewComponent } from 'flexi-treeview';
 import { CategoryTreeviewData } from '../../flexi-grid/data';
 import { flexiTreeviewData, flexiTreeviewfullExampleHTMLCode, flexiTreeviewfullExampleTSCode } from '../../flexi-grid/code';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-flexi-treeview-full',
-  imports: [SharedModule, FlexiTreeviewComponent],
+  imports: [SharedModule, FlexiTreeviewComponent,TranslocoModule],
   templateUrl: './full.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush

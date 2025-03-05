@@ -1,13 +1,13 @@
-<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast">
-    <app-card id="toast-full" style="padding-top: 5px;" cardTitle="Toast Test">     
+<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast" *transloco="let t; read: 'FLEXI_TOAST.TOAST_TEST_PAGE'">
+    <app-card id="toast-full" style="padding-top: 5px;" cardTitle="{{t('CARD_TITLE')}}">     
         <div class="card-body">
-            <p>Bu bölümden Toast'ın tüm özelliklerini test edebilirsiniz</p>
+            <p>{{t('DESCRIPTION')}}</p>
         </div>  
         <div class="card-body">
             <div class="row form-group">
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Başlık</label>
+                        <label>{{t('FIRST_LABEL')}}</label>
                         <input type="text" class="form-control" [(ngModel)]="toastTitle">
                     </div>
                     <div class="form-group mt-2">
@@ -24,14 +24,14 @@
                         </select>
                     </div>
                     <div class="form-group mt-2">
-                        <label>Pozisyon</label>
+                        <label>{{t('FOURTH_LABEL')}}</label>
                         <select class="form-control" [(ngModel)]="options().position">
-                            <option value="top-left">Yukarı sol</option>
-                            <option value="top-right">Yukarı sağ</option>
-                            <option value="bottom-left">Aşağı sol</option>
-                            <option value="bottom-right">Aşağı sağ</option>
-                            <option value="top-full">Yukarı full</option>
-                            <option value="bottom-full">Aşağı full</option>
+                            <option value="top-left">{{t('OPTION_TOP_LEFT')}}</option>
+                            <option value="top-right">{{t('OPTION_TOP_RIGHT')}}</option>
+                            <option value="bottom-left">{{t('OPTION_BOTTOM_LEFT')}}</option>
+                            <option value="bottom-right">{{t('OPTION_BOTTOM_RIGHT')}}</option>
+                            <option value="top-full">{{t('OPTION_TOP_FULL')}}</option>
+                            <option value="bottom-full">{{t('OPTION_BOTTOM_FULL')}}</option>
                         </select>
                     </div>
                 </div>
@@ -39,25 +39,25 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" [(ngModel)]="options().autoClose" id="autoClose">
                         <label class="form-check-label" for="autoClose">
-                            Otomatik kapat
+                            {{t('CHECKBOX_ONE')}}
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" [(ngModel)]="options().showToastCloseBtn" id="showCloseBtn">
                         <label class="form-check-label" for="showCloseBtn">
-                            Kapat butonunu göster
+                            {{t('CHECKBOX_TWO')}}
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" [(ngModel)]="options().showProgressBar" id="showProgressBar" [disabled]="!options().autoClose">
                         <label class="form-check-label" for="showProgressBar">
-                            Progess barı göster
+                            {{t('CHECKBOX_THREE')}}
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" [(ngModel)]="options().preventDuplicate" id="preventDuplicate">
                         <label class="form-check-label" for="preventDuplicate">
-                            Birden fazla toast gözükmesini engelle
+                            {{t('CHECKBOX_FOUR')}}
                         </label>
                     </div>
                     <div class="form-group">
@@ -74,7 +74,7 @@
                 </div>
             </div>        
             <div class="form-group mt-2">
-                <button class="btn btn-primary" (click)="showToast()">Toast Göster</button>
+                <button class="btn btn-primary" (click)="showToast()">{{t('BUTTON')}}</button>
             </div>
         </div>
     </app-card>
