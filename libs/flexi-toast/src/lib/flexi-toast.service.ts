@@ -174,9 +174,10 @@ export class FlexiToastService {
         this.renderer.appendChild(content, closeBtn);
     }
 
-    const messageEl = this.renderer.createElement('h4');
-    const messageText = this.renderer.createText(question);
-    this.renderer.appendChild(messageEl, messageText);
+    const questionEl = this.renderer.createElement('span');
+    const questionText = this.renderer.createText(question);
+    this.renderer.setStyle(questionEl, "font-size", "1rem");
+    this.renderer.appendChild(questionEl, questionText);
 
     const buttonsContainer = this.renderer.createElement('div');
     this.renderer.addClass(buttonsContainer, "flexi-swal-btn-container");
@@ -224,7 +225,7 @@ export class FlexiToastService {
     this.renderer.appendChild(buttonsContainer, confirmButton);
     this.renderer.appendChild(buttonsContainer, cancelButton);
 
-    this.renderer.appendChild(content, messageEl);
+    this.renderer.appendChild(content, questionEl);
     this.renderer.appendChild(content, buttonsContainer);
 
     this.renderer.appendChild(container, content);
