@@ -1,12 +1,12 @@
 [data-bs-theme="light"] {
-  --background-color: #f8f9fa;  
-  --scroll-background-color: #dee2e6;  
-  --text-color: #000;  
+  --background-color: #f8f9fa;
+  --scroll-background-color: #dee2e6;
+  --text-color: #000;
 }
 
 [data-bs-theme="dark"] {
-  --background-color: #212529;  
-  --scroll-background-color: #504e4e;  
+  --background-color: #212529;
+  --scroll-background-color: #504e4e;
   --text-color: #fff;
 }
 
@@ -27,7 +27,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 9999;    
+    z-index: 9999;
     color: var(--text-color);
 }
 
@@ -87,7 +87,7 @@
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .app-spinner-container {
     position: absolute;
     z-index: 1;
@@ -101,7 +101,7 @@
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
   }
-  
+
   .app-spinner-1 {
     color: rgba(0, 0, 0, 0.589);
     position: absolute;
@@ -115,7 +115,7 @@
     animation: app-spin-1 0.8s linear infinite;
     background-color: transparent;
   }
-  
+
   .app-spinner-2 {
     color: rgba(0, 0, 0, 0.596);
     position: absolute;
@@ -129,7 +129,7 @@
     animation: app-spin-2 1.3s linear infinite;
     background-color: transparent;
   }
-  
+
   @keyframes app-spin-1 {
     0% {
       transform: rotate(0deg);
@@ -138,7 +138,7 @@
       transform: rotate(360deg);
     }
   }
-  
+
   @keyframes app-spin-2 {
     0% {
       transform: rotate(0deg);

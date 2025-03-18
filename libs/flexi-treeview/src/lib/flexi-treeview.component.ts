@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {  
+export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
   readonly data = input<FlexiTreeNode[]>([]);
   readonly treeviewTitle = input<string>('');
   readonly showCheckbox = input<boolean>(false);
@@ -25,15 +25,15 @@ export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
   readonly width = input<string>('100%');
   readonly height = input<string>('100%');
   readonly fontSize = input<string>('13px');
-  readonly btnSize = input<FlexiButtonSizeType>('x-small');
+  readonly btnSize = input<FlexiButtonSizeType>('small');
   readonly checkboxSize = input<string>('1.4em');
   readonly actionBtnPosition = input<'left' | 'right'>('right');
   readonly themeClass = input<string>('light');
-  readonly loading = input<boolean>(false);  
+  readonly loading = input<boolean>(false);
   readonly expend = input<boolean>(true);
   readonly showDetailButton = input<boolean>(false);
   readonly detailRouterLink = input<string>("");
-  
+
   readonly onSelected = output<FlexiTreeNode[]>();
   readonly onEdit = output<FlexiTreeNode>();
   readonly onDelete = output<FlexiTreeNode>();
@@ -53,7 +53,7 @@ export class FlexiTreeviewComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.filteredTreeData.set(this.data());
-  } 
+  }
 
   toggleNode(node: FlexiTreeNode): void {
     if (node.children && node.children.length) {
@@ -126,11 +126,11 @@ filterNodes(nodes: FlexiTreeNode[], term: string): FlexiTreeNode[] {
   }
 
   collapseAll(): void {
-    this.updateNodeExpansion(this.filteredTreeData(), false);    
+    this.updateNodeExpansion(this.filteredTreeData(), false);
   }
 
   expandAll(): void {
-    this.updateNodeExpansion(this.filteredTreeData(), true);    
+    this.updateNodeExpansion(this.filteredTreeData(), true);
   }
 
   selectAll(): void {
@@ -148,13 +148,13 @@ filterNodes(nodes: FlexiTreeNode[], term: string): FlexiTreeNode[] {
   private updateNodeExpansion(nodes: FlexiTreeNode[], expanded: boolean): void {
     nodes.forEach(node => {
       if (node.children && node.children.length) {
-        node.expanded = expanded;       
+        node.expanded = expanded;
         this.updateNodeExpansion(node.children, expanded);
       }
     });
   }
 
-  private updateNodeAndChildrenSelection(node: FlexiTreeNode, isSelected: boolean): void {    
+  private updateNodeAndChildrenSelection(node: FlexiTreeNode, isSelected: boolean): void {
     node.selected = isSelected;
     node.indeterminate = false;
 
@@ -166,14 +166,14 @@ filterNodes(nodes: FlexiTreeNode[], term: string): FlexiTreeNode[] {
   private updateParentSelection(node: FlexiTreeNode): void {
     const parentNode = this.findParentNode(node);
     if (!parentNode) return;
-  
+
     const allChildren = parentNode.children!;
     const allSelected = allChildren.every(child => child.selected);
     const anySelected = allChildren.some(child => child.selected || child.indeterminate);
-  
+
     parentNode.selected = allSelected;
     parentNode.indeterminate = !allSelected && anySelected;
-  
+
     this.updateParentSelection(parentNode);
   }
 

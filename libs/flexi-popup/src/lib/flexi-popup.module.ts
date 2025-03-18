@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexiPopupComponent } from './flexi-popup.component';
-import { FlexiPopupActionTemplateDirective } from './flexi-popup-action-template.directive';
 import { FlexiButtonComponent } from 'flexi-button';
+import { FlexiPopupFooterTemplateDirective } from './flexi-popup-footer-template.directive';
 
 
 
 @NgModule({
   declarations: [
     FlexiPopupComponent,
-    FlexiPopupActionTemplateDirective
+    FlexiPopupFooterTemplateDirective
   ],
   imports: [
     CommonModule,
@@ -17,7 +17,7 @@ import { FlexiButtonComponent } from 'flexi-button';
   ],
   exports: [
     FlexiPopupComponent,
-    FlexiPopupActionTemplateDirective,
+    FlexiPopupFooterTemplateDirective,
     FlexiButtonComponent
   ]
 })

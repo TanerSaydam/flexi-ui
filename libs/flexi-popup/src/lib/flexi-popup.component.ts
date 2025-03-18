@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, ContentChild, output, input, Input, signal, linkedSignal } from '@angular/core';
-import { FlexiPopupActionTemplateDirective } from './flexi-popup-action-template.directive';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, output, input, linkedSignal, TemplateRef, contentChild } from '@angular/core';
+import { FlexiPopupFooterTemplateDirective } from './flexi-popup-footer-template.directive';
 
 @Component({
     selector: 'flexi-popup',
@@ -22,26 +22,26 @@ export class FlexiPopupComponent {
   readonly cancelBtnIcon = input<string>("block");
   readonly btnType = input<"submit" | "button">("button");
   readonly loading = input<boolean>(false);
-  
-  popupVisibe = linkedSignal(() => this.isPopupVisible());
 
-  readonly isPopupVisibleChange = output<boolean>();  
+  readonly popupVisibe = linkedSignal(() => this.isPopupVisible());
+
+  readonly isPopupVisibleChange = output<boolean>();
   readonly onSave = output();
   readonly onCancel = output();
 
-  @ContentChild(FlexiPopupActionTemplateDirective) actionTemplate?: FlexiPopupActionTemplateDirective;
-  
+  readonly footerTemplate = contentChild(FlexiPopupFooterTemplateDirective, {read: TemplateRef});
+
   closePopup() {
     this.popupVisibe.set(false);
     this.isPopupVisibleChange.emit(this.popupVisibe());
   }
 
   cancel() {
-    this.onCancel.emit(); 
+    this.onCancel.emit();
   }
 
   saveChanges() {
-    this.onSave.emit(); 
+    this.onSave.emit();
   }
 
   calculateContent(){
