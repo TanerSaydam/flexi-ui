@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { BlankComponent } from '../blank/blank.component';
 import { TrCurrencyPipe } from 'tr-currency';
-import { FlexiPopupModule } from '../../../../../libs/flexi-popup/src/lib/flexi-popup.module';
+import { FlexiToastService } from '../../../../../libs/flexi-toast/src/lib/flexi-toast.service';
 
 
 @Component({
   imports: [
     BlankComponent,
-    FlexiPopupModule,
     TrCurrencyPipe,
   ],
   templateUrl: './home.component.html',
@@ -15,5 +14,15 @@ import { FlexiPopupModule } from '../../../../../libs/flexi-popup/src/lib/flexi-
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
-  
+  readonly #toast = inject(FlexiToastService);
+
+  showToast(){
+    this.#toast.showToast("Başarılı","This is a message","success");
+  }
+
+  showSwall(){
+    this.#toast.showSwal("Kaydı silmek istiyor musunuz?","Sil",() => {
+
+    })
+  }
 }

@@ -1,10 +1,5 @@
 <app-blank>
         <h1>Flexi Grid</h1>
-        <flexi-popup [isPopupVisible]="true" width="500px" height="500px" [showActionButtons]="false">
-                <ng-template flexiPopupFooterTemplate>
-                        <div class="card-body" style="width: 100%;">
-                                <input type="text" class="form-control">
-                        </div>
-                </ng-template>
-        </flexi-popup>
+       <button (click)="showSwall()">Show Swall</button>
+       <button (click)="showToast()">Show Toast</button>
 </app-blank>

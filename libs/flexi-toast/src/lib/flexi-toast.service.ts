@@ -82,7 +82,7 @@ export class FlexiToastService {
     const container2 = this.renderer.createElement('div');
     this.renderer.addClass(container2, 'flexi-toast-container-2');
 
-    const titleEl = this.renderer.createElement('span');    
+    const titleEl = this.renderer.createElement('span');
     const titleText = this.renderer.createText(title);
     this.renderer.appendChild(titleEl, titleText);
 
@@ -94,7 +94,6 @@ export class FlexiToastService {
 
     this.renderer.appendChild(container, container1);
     this.renderer.appendChild(container, container2);
-    
 
     if (options.autoClose && options.showProgressBar) {
       const progressBar = this.renderer.createElement('div');
@@ -148,7 +147,7 @@ export class FlexiToastService {
     }
   }
 
-  showSwal(title: string, text: string, callBack: () => void, confirmBtnText: string = this.options.confirmBtnText ?? "Delete", cancelBtnText: string = this.options.cancelBtnText ?? "Cancel", cancelCallBack?:()=> void) {
+  showSwal(question: string, confirmBtnText: string = this.options.confirmBtnText ?? "Delete", callBack: () => void, cancelBtnText: string = this.options.cancelBtnText ?? "Cancel", cancelCallBack?:()=> void) {
     const body = this.renderer.selectRootElement('body', true);
 
     const container = this.renderer.createElement('div');
@@ -156,7 +155,7 @@ export class FlexiToastService {
     this.renderer.setAttribute(container, `data-bs-theme`, this.options.themeClass!)
 
     const content = this.renderer.createElement('div');
-    this.renderer.addClass(content, 'flexi-swal-content');    
+    this.renderer.addClass(content, 'flexi-swal-content');
     this.renderer.addClass(content, `flexi-swal-content-left-border-${this.options.swalContentThemeClass}`);
 
     if(this.options.showSwalCloseBtn){
@@ -164,23 +163,20 @@ export class FlexiToastService {
         this.renderer.addClass(closeBtn, 'flexi-swal-close-btn');
         const closeText = this.renderer.createText('×');
         this.renderer.appendChild(closeBtn, closeText);
-  
-        this.renderer.listen(closeBtn, 'click', () => {        
+
+        this.renderer.listen(closeBtn, 'click', () => {
           this.renderer.addClass(content, 'fade-out');
           setTimeout(() => {
             this.renderer.removeChild(body, container);
           }, 200);
         });
-  
+
         this.renderer.appendChild(content, closeBtn);
     }
 
-    const titleEl = this.renderer.createElement('h1');
-    const titleText = this.renderer.createText(title);
-    this.renderer.appendChild(titleEl, titleText);
-
-    const message = this.renderer.createElement('p');
-    message.innerHTML = "<center>" + text + "</center>";
+    const messageEl = this.renderer.createElement('h4');
+    const messageText = this.renderer.createText(question);
+    this.renderer.appendChild(messageEl, messageText);
 
     const buttonsContainer = this.renderer.createElement('div');
     this.renderer.addClass(buttonsContainer, "flexi-swal-btn-container");
@@ -228,9 +224,7 @@ export class FlexiToastService {
     this.renderer.appendChild(buttonsContainer, confirmButton);
     this.renderer.appendChild(buttonsContainer, cancelButton);
 
-    //this.renderer.appendChild(content, iconContainer);
-    this.renderer.appendChild(content, titleEl);
-    this.renderer.appendChild(content, message);
+    this.renderer.appendChild(content, messageEl);
     this.renderer.appendChild(content, buttonsContainer);
 
     this.renderer.appendChild(container, content);
@@ -252,7 +246,7 @@ export class FlexiToastOptionsModel {
   themeClass?: FlexiToastThemeClassType | string = "light";
   cancelBtnText?: string = "Vazgeç";
   confirmBtnText?: string = "Sil";
-  swalContentThemeClass?: FlexiSwalContentThemeClass = "default";  
+  swalContentThemeClass?: FlexiSwalContentThemeClass = "default";
 }
 
 export type FlexiToastIconType = "success" | "warning" | "info" | "error";

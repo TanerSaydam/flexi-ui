@@ -1,7 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-/* ----------------------- Toast Son ------------------------------------------------------ */
-
 [data-bs-theme="light"] {
     --flexi-toast-background-color: #fff;
     --flexi-toast-btn-border-color: #ccc;
@@ -15,9 +11,9 @@
 }
 
 [data-bs-theme="dark"] {
-    --flexi-toast-background-color: #212529;  
+    --flexi-toast-background-color: #212529;
     --flexi-toast-btn-border-color: #ccc;
-    --flexi-toast-cancel-btn-background-color: #212529;  
+    --flexi-toast-cancel-btn-background-color: #212529;
     --flexi-toast-text-color: #fff;
     --flexi-toast-success: #47D764;
     --flexi-toast-warning: #FFC021;
@@ -76,9 +72,7 @@
     gap: 10px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     opacity: 0;
-    /* Start hidden */
     transform: translateY(20px);
-    /* Start below */
     transition: opacity 0.5s, transform 0.5s;
 }
 
@@ -221,34 +215,56 @@
 }
 
 .flexi-swal-container {
-    top: 0;
-    left: 0;
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Poppins", sans-serif;
-    z-index: 9999;    
-    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
 }
 
 .flexi-swal-content {
     position: relative;
-    padding: 15px 20px;
-    border-radius: 3px;
-    background-color: var(--flexi-toast-background-color);
+    padding: 25px 30px;
+    width: 350px;
+    background: var(--flexi-toast-background-color);
     color: var(--flexi-toast-text-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-    border-left: 8px solid;
-    animation: flexi-swal-fade-in 0.5s forwards;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid var(--flexi-toast-info);
+    animation: flexi-swal-fade-in 0.4s ease-out;
+}
+
+@keyframes flexi-swal-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.flexi-swal-content.fade-out {
+    animation: flexi-swal-fade-out 0.2s ease-in;
+}
+
+@keyframes flexi-swal-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.85);
+    }
 }
 
 .flexi-swal-content-left-border-default{
@@ -273,7 +289,7 @@
 
 
 .flexi-swal-content.fade-out {
-    animation: flexi-swal-fade-out 0.2s forwards; /* Apply fade-out animation */
+    animation: flexi-swal-fade-out 0.2s forwards;
 }
 
 .flexi-swal-icon {
@@ -284,40 +300,49 @@
     border-radius: 50px;
 }
 
-.flexi-swal-btn-container{
+.flexi-swal-btn-container {
     display: flex;
     justify-content: space-around;
-    /* width: 50%; */
+    margin-top: 15px;
 }
 
 .flexi-swal-btn,
 .flexi-swal-btn-cancel {
-    width: 160px;
-    box-shadow: 0 1px 0 rgba(--flexi-toast-text-color, 0.04);
-    display: inline-block;
-    padding: 0.4075rem 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-    font-size: 0.875rem;
+    width: 140px;
+    padding: 10px 15px;
+    font-size: 14px;
     font-weight: 500;
-    line-height: 1.5;
-    color: var(--flexi-toast-text-color);
-    text-align: center;
-    vertical-align: middle;
+    border-radius: 8px;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid var(--flexi-toast-btn-border-color);    
-    border-radius: 4px;
-    background-color: var(--flexi-toast-background-color);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    transition: background 0.3s, transform 0.2s ease-in-out;
 }
 
-.flexi-swal-btn:hover,
-.flexi-swal-btn-cancel:hover{
-    opacity: 0.8;
+.flexi-swal-btn {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb); /* Mavi-mor gradient */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.flexi-swal-btn:hover {
+    background: linear-gradient(135deg, #5a62d3, #9ba0ff);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.flexi-swal-btn-cancel {
+    background: #444; /* Koyu gri tonlarında */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.flexi-swal-btn-cancel:hover {
+    background: #333;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .flexi-swal-btn-cancel-background-success{
@@ -344,18 +369,20 @@
     opacity: 0.8;
 }
 
-.flexi-swal-btn-cancel:hover{    
+.flexi-swal-btn-cancel:hover{
     opacity: 0.8;
 }
 
 .flexi-swal-close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  align-self: flex-start;
-  background-color: transparent;
-  font-size: 25px;
-  color: #656565;
-  line-height: 0;
-  cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.flexi-swal-close-btn:hover {
+    color: var(--flexi-toast-error);
 }
