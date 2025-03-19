@@ -21,7 +21,7 @@ export class UsersComponent {
   }
 
   showSwall(){
-    this.#toast.showSwal("Kaydı silmek istiyor musunuz?","Sil",() => {
+    this.#toast.showSwal("Confirm","Kaydı silmek istiyor musunuz?","Sil",() => {
 
     })
   }

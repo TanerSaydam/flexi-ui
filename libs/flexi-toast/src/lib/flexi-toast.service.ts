@@ -10,6 +10,10 @@ export class FlexiToastService {
 
   constructor(rendererFactory: RendererFactory2) {
     this.renderer = rendererFactory.createRenderer(null, null);
+
+    this.showSwal("Confirm","Are you sure you want to remove this item?","Yes",() => {
+
+    })
   }
 
   showToast(title: string, text: string, icon: FlexiToastIconType = "success", options?: FlexiToastOptionsModel) {
@@ -147,7 +151,7 @@ export class FlexiToastService {
     }
   }
 
-  showSwal(question: string, confirmBtnText: string = this.options.confirmBtnText ?? "Delete", callBack: () => void, cancelBtnText: string = this.options.cancelBtnText ?? "Cancel", cancelCallBack?:()=> void) {
+  showSwal(title: string, question: string, confirmBtnText: string = this.options.confirmBtnText ?? "Delete", callBack: () => void, cancelBtnText: string = this.options.cancelBtnText ?? "Cancel", cancelCallBack?:()=> void) {
     const body = this.renderer.selectRootElement('body', true);
 
     const container = this.renderer.createElement('div');
@@ -174,23 +178,39 @@ export class FlexiToastService {
         this.renderer.appendChild(content, closeBtn);
     }
 
-    const questionEl = this.renderer.createElement('span');
+    const titleEl = this.renderer.createElement("div");
+    this.renderer.addClass(titleEl,"flexi-swal-title-container");
+    const titleTextEl = this.renderer.createElement("span");
+    const titleText = this.renderer.createText(title);
+    this.renderer.appendChild(titleTextEl, titleText);
+    const titleCloseButton = this.renderer.createElement("button");
+    const titleCloseButtonText = this.renderer.createText("x");
+    this.renderer.appendChild(titleCloseButton,titleCloseButtonText);
+    this.renderer.addClass(titleCloseButton, 'flexi-swal-close-button');
+    this.renderer.appendChild(titleEl, titleText);
+    this.renderer.appendChild(titleEl, titleCloseButton);
+    this.renderer.appendChild(content, titleEl);
+
+    const questionEl = this.renderer.createElement('div');
+    this.renderer.addClass(questionEl,"flexi-swal-question-container");
+    const questionTextEl = this.renderer.createElement("span");
     const questionText = this.renderer.createText(question);
-    this.renderer.setStyle(questionEl, "font-size", "1rem");
-    this.renderer.appendChild(questionEl, questionText);
+    this.renderer.appendChild(questionTextEl, questionText);
+    this.renderer.appendChild(questionEl,questionTextEl);
+    this.renderer.appendChild(content, questionEl);
 
     const buttonsContainer = this.renderer.createElement('div');
-    this.renderer.addClass(buttonsContainer, "flexi-swal-btn-container");
+    this.renderer.addClass(buttonsContainer, "flexi-swal-button-container");
 
     const confirmButton = this.renderer.createElement('button');
-    this.renderer.addClass(confirmButton, 'flexi-swal-btn');
-    this.renderer.setStyle(confirmButton, 'margin-right', '5px');
+    this.renderer.addClass(confirmButton, 'flexi-swal-button');
+    this.renderer.addClass(confirmButton, "flexi-swal-button-primary");
     const confirmButtonText = this.renderer.createText(confirmBtnText);
     this.renderer.appendChild(confirmButton, confirmButtonText);
 
     const cancelButton = this.renderer.createElement('button');
-    this.renderer.addClass(cancelButton, 'flexi-swal-btn-cancel');
-    this.renderer.addClass(cancelButton, `flexi-swal-btn-cancel-background-${this.options.swalContentThemeClass}`);
+    this.renderer.addClass(cancelButton, 'flexi-swal-button');
+
     const cancelButtonText = this.renderer.createText(cancelBtnText);
     this.renderer.appendChild(cancelButton, cancelButtonText);
 
@@ -225,7 +245,6 @@ export class FlexiToastService {
     this.renderer.appendChild(buttonsContainer, confirmButton);
     this.renderer.appendChild(buttonsContainer, cancelButton);
 
-    this.renderer.appendChild(content, questionEl);
     this.renderer.appendChild(content, buttonsContainer);
 
     this.renderer.appendChild(container, content);
