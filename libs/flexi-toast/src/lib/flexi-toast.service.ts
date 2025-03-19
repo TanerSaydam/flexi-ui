@@ -238,6 +238,22 @@ export class FlexiToastService {
       }, 200);
     });
 
+    this.renderer.listen(titleCloseButton, 'click', () => {
+      this.renderer.addClass(content, 'fade-out');
+      if(cancelCallBack){
+        cancelCallBack();
+      }
+      setTimeout(() => {
+        this.renderer.removeChild(body, container);
+        this.renderer.removeStyle(body, 'overflow');
+        const el = document.getElementsByClassName("flexi-swal-container");
+        if(el.length > 0){
+          el[0].remove();
+        }
+      }, 200);
+    });
+
+
     this.renderer.appendChild(buttonsContainer, confirmButton);
     this.renderer.appendChild(buttonsContainer, cancelButton);
 
