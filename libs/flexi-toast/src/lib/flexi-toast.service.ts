@@ -10,10 +10,6 @@ export class FlexiToastService {
 
   constructor(rendererFactory: RendererFactory2) {
     this.renderer = rendererFactory.createRenderer(null, null);
-
-    this.showSwal("Confirm","Are you sure you want to remove this item?","Yes",() => {
-
-    })
   }
 
   showToast(title: string, text: string, icon: FlexiToastIconType = "success", options?: FlexiToastOptionsModel) {
