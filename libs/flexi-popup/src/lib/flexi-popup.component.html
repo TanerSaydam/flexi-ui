@@ -15,7 +15,7 @@
             }
 
             <div class="flexi-popup-content" [style.height]="calculateContent()">
-                <div [style.height]="height()">
+                <div [style.height]="height()" [style.minHeight]="useMinHeight() ? minHeight() : height()">
                     <ng-content></ng-content>
                 </div>
             </div>

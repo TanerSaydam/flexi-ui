@@ -40,7 +40,7 @@
   background: var(--background-color);
   border-radius: 8px;
   width: 90%;
-  max-height: 90vh;
+  max-height: 98vh;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -66,8 +66,7 @@
   flex: 1 1 auto;
   overflow-y: auto;
   padding: 1rem;
-  max-height: 600px;
-
+  max-height: 85vh;
 }
 
 .flexi-popup-actions {

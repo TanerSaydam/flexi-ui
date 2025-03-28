@@ -14,6 +14,8 @@ export class FlexiPopupComponent {
   readonly popupTitle = input<string>("");
   readonly width = input<string>("500px");
   readonly height = input<string>("500px");
+  readonly minHeight = input<string>("500px");
+  readonly useMinHeight = input<boolean>(true);
   readonly showActionButtons = input<boolean>(true);
   readonly themeClass = input<string>("light");
   readonly saveBtnText = input<string>("Kaydet");
