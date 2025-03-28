@@ -348,5 +348,90 @@
       "TABLE_TAB_SECOND": "HTML Code",
       "TABLE_TAB_THIRD": "TypeScript Code"
     }
+  },
+  "FLEXI_TOAST": {
+    "WHAT_IS": {
+      "CARD_TITLE": "What is Flexi Toast?",
+      "DESCRIPTION_ONE": "Meet the elegant and practical Toast and Swal that you can use in your Angular applications.",
+      "LINKED_DESCRIPTION_ONE": "Flexi Toast is open source. You can access the source code by <a href=\"https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-toast/src/lib\" target=\"_blank\">clicking here</a>.",
+      "DESCRIPTION_TWO": "By reviewing the documentation step by step, you can learn how to install and use Flexi Toast in your project. Below is an example of Flexi Toast. After this section, you will learn step by step how to install and configure the component.",
+      "NOTE_ALERT_PRIMARY": "Note: You can use it in Angular v18+ projects.",
+      "CURRENT_VERSION": "Current version v19.",
+      "NOTE_ALERT_DANGER": "For v18, you must use the v18 versions of the package.",
+      "CODE_DESCRIPTION": "The usage example is below.",
+      "EXAMPLE": "Example"
+    },
+    "INSTALLATION": {
+      "CARD_TITLE": "Installation",
+      "DESCRIPTION": "To use/update Flexi Toast in your Angular project, you should run the following npm command",
+      "NOTE_ALERT": "Important Note: The toast or swal will not be visible on the screen unless you add the CSS file to the styles section!",
+      "USAGE_DESCRIPTION": "After installing the library, you need to add the CSS file to the styles section in the angular.json file. If the application is running while you do this, stop it and run it again."
+    },
+    "TOAST_USE_PAGE": {
+      "CARD_TITLE": "Toast Usage",
+      "DESCRIPTION": "To use the toast in your component, inject the service and display the toast using the showToast method. You can modify your settings through the options in the service, or create your own settings and set them to the options in the service."
+    },
+    "TOAST_TEST_PAGE": {
+      "CARD_TITLE": "Toast Test",
+      "DESCRIPTION": "You can test all features of the Toast from this section.",
+      "FIRST_LABEL": "Title",
+      "FOURTH_LABEL": "Position",
+      "OPTION_TOP_LEFT": "Top left",
+      "OPTION_TOP_RIGHT": "Top right",
+      "OPTION_BOTTOM_LEFT": "Bottom left",
+      "OPTION_BOTTOM_RIGHT": "Bottom right",
+      "OPTION_TOP_FULL": "Top full",
+      "OPTION_BOTTOM_FULL": "Bottom full",
+      "CHECKBOX_ONE": "Auto close",
+      "CHECKBOX_TWO": "Show close button",
+      "CHECKBOX_THREE": "Show progress bar",
+      "CHECKBOX_FOUR": "Prevent multiple toasts from showing",
+      "BUTTON": "Show Toast"
+    },
+    "SWAL_USE_PAGE": {
+      "CARD_TITLE": "Swal Usage",
+      "DESCRIPTION": "To use Swal in your component, inject the service and display the Swal using the showSwal method. This method requires a callback function as a parameter. With this approach, you can code what action to perform if the response is confirmed, for example, when the delete button is pressed. You can modify your settings through the options in the service, or create your own settings and set them to the options in the service."
+    },
+    "SWAL_TEST_PAGE": {
+      "CARD_TITLE": "Swal Test",
+      "DESCRIPTION": "You can test all features of Swal from this section.",
+      "FIRST_LABEL": "Title",
+      "BUTTON": "Show Swal"
+    }
+  },
+  "FLEXI_TOOLTIP": {
+    "INSTALLATION": {
+      "CARD_TITLE": "Installation",
+      "DESCRIPTION_ONE": "An elegant and practical tooltip that you can use in your Angular applications. After adding it as an attribute to an element, simply add the title attribute and provide a value. It allows you to display the value of the title attribute on the screen with the design I have created.",
+      "DESCRIPTION_TWO": "To use/update Flexi Tooltip, you should run the following npm command",
+      "CARD_TITLE_TWO": "Usage",
+      "TAB_FIRST": "Example",
+      "TAB_PANE_FIRST": "Example usages",
+      "TOOLTIP_ONE": "Open",
+      "TOOLTIP_TWO": "Save",
+      "TOOLTIP_THREE": "Update",
+      "TOOLTIP_FOUR": "Delete",
+      "TAB_PANE_SECOND": "HTML Codes",
+      "TAB_PANE_THIRD": "Typescript Codes"
+    }
+  },
+  "FLEXI_TREEVIEW": {
+    "FIRST_PART": {
+      "CARD_TITLE": "What is Flexi Treeview?",
+      "DESCRIPTION_ONE": "Meet Flexi Treeview, the new member of our Flexi UI library.",
+      "LINKED_DESCRIPTION_ONE": "Flexi Treeview is open source. You can access the source code by <a href=\"https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-treeview/src/lib\" target=\"_blank\">clicking here</a>.",
+      "DESCRIPTION_TWO": "With Flexi Treeview, you can display nested lists of any depth, collapse or expand all items, check items with checkboxes, and easily perform necessary operations using add, update, delete, and detail buttons.",
+      "LINKED_DESCRIPTION_TWO": "To contribute to the project and support me, don't forget to star (⭐) the GitHub repository. <a href=\"https://github.com/TanerSaydam/flexi-ui\" target=\"_blank\">Click here to access the GitHub repository</a>.",
+      "DESCRIPTION_THREE": "By reviewing the documentation step by step, you can learn how to install and use Flexi Grid in your project. Below is an example that includes all the features of Flexi Grid. After this section, you will learn step by step how to install and configure the component.",
+      "NOTE_ALERT_PRIMARY": "Note: You can use it in Angular v18+ projects.",
+      "CURRENT_VERSION": "Current version v19.",
+      "NOTE_ALERT_DANGER": "For v18, you must use the v18 versions of the package.",
+      "DESCRIPTION_FOUR": "To use/update Flexi Treeview, you should run the following npm command in your Angular project."
+    },
+    "SECOND_PART": {
+      "TAB_FIRST": "Example",
+      "TAB_PANE_SECOND": "HTML Codes",
+      "TAB_PANE_THIRD": "Typescript Codes"
+    }
   }
 }
