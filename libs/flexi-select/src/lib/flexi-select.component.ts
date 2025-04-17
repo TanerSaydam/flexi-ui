@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, HostListener, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren, ViewEncapsulation, forwardRef, inject, signal, viewChildren, output, input, viewChild, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, HostListener, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren, ViewEncapsulation, forwardRef, inject, signal, viewChildren, output, input, viewChild, linkedSignal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlexiOptionComponent } from './flexi-option.component';
 import { NgClass, NgStyle } from '@angular/common';
@@ -20,15 +20,14 @@ import { NgClass, NgStyle } from '@angular/common';
   ]
 })
 export class FlexiSelectComponent implements OnChanges, OnInit {
-  @Input() data: any[] = []
-  @Input() value: any;
-  @Input() label: any;
+  readonly data = input<any[]>([]);
+  readonly value = input<any>();
+  readonly label = input<any>();
   readonly name = input<any>();
-  readonly noData = input<string>("Kayıt bulunamadı");
-  readonly selectOne = input<string>("Seçim yapınız");
+  readonly language = input<"tr" | "en" | "bg">("en");
   readonly themeClass = input<string>("light");
   readonly itemsPerPage = input<number>(30);
-  @Input() clientHeight: number = 180;
+  readonly clientHeight = input<number>(180);
   readonly multiple = input<boolean>(false);
   readonly closeAfterSelect = input<boolean>(false);
   readonly height = input<string>("100%");
@@ -47,24 +46,37 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
-  filteredData = signal<any[]>([]);
-  selectedItem = signal<any>({});
-  selectedItems = signal<any[]>([]);
-  isOpen = signal<boolean>(false);
+  readonly filteredData = signal<any[]>([]);
+  readonly selectedItem = signal<any>({});
+  readonly selectedItems = signal<any[]>([]);
+  readonly isOpen = signal<boolean>(false);
   initialState: any;
-  uniqueName = signal<string>("");
-  closedAfterSelect = signal<boolean>(false);
-  currentHighlightIndex = signal<number>(0);
+  readonly uniqueName = signal<string>("");
+  readonly closedAfterSelect = signal<boolean>(false);
+  readonly currentHighlightIndex = signal<number>(0);
 
-  #cdr = inject(ChangeDetectorRef);
-  #elementRef = inject(ElementRef);
+  readonly dataSignal = linkedSignal(() => this.data());
+  readonly labelSignal = linkedSignal(() => this.label());
+  readonly valueSignal = linkedSignal(() => this.value());
+  readonly clientHeightSignal = linkedSignal(() => this.clientHeight());
+  readonly noData = linkedSignal<string>(() => this.translateNoData());
+  readonly selectOne = linkedSignal<string>(() => this.translateSelectOne());
+
+  readonly #cdr = inject(ChangeDetectorRef);
+  readonly #elementRef = inject(ElementRef);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["data"] && changes["data"].currentValue) {
-      this.data = [...changes["data"].currentValue];
+      this.dataSignal.set([...changes["data"].currentValue]);
       this.addPlaceholderToData();
     }
-    this.filteredData.set(this.data.slice(0, this.itemsPerPage()));
+
+    if (changes["language"]){
+      this.noData.set(this.translateNoData());
+      this.selectOne.set(this.translateSelectOne());
+    }
+
+    this.filteredData.set(this.data().slice(0, this.itemsPerPage()));
     this.currentHighlightIndex.set(0);
     this.selectFirstOne();
     this.selectInitialStateValue();
@@ -82,20 +94,39 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
           value: option.value(),
           label: option.viewValue
         }));
-        this.data = optionData;
-        this.filteredData.set(this.data.slice(0, this.itemsPerPage()));
+        this.dataSignal.set(optionData);
+        this.filteredData.set(this.data().slice(0, this.itemsPerPage()));
         this.selectFirstOne();
-        this.label = "label"
-        this.value = "value";
+        this.labelSignal.set("label")
+        this.valueSignal.set("value");
         this.selectInitialStateValue();
       }
     });
   }
 
+  translateNoData(){
+    switch (this.language()) {
+      case "en": return "No records found";
+      case "tr": return "Kayıt bulunamadı";
+      case "bg": return "Няма намерени записи";
+      default: return "";
+    }
+  }
+
+  translateSelectOne(){
+    switch (this.language()) {
+      case "en": return "Select one";
+      case "tr": return "Seçim yapınız";
+      case "bg": return "Моля, изберете";
+      default: return "";
+    }
+  }
+
   addPlaceholderToData() {
-    const placeholder = { [this.value]: null, [this.label]: this.selectOne() };
-    if (!this.data.some(item => item[this.value] === null)) {
-      this.data.unshift(placeholder);
+    const placeholder = { [this.value()]: null, [this.label()]: this.selectOne() };
+    const data = this.data();
+    if (!data.some(item => item[this.value()] === null)) {
+      data.unshift(placeholder);
     }
   }
 
@@ -108,15 +139,15 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   }
 
   selectInitialStateValue() {
-    if (this.data.length > 0 && this.initialState) {
+    if (this.data().length > 0 && this.initialState) {
       if (this.multiple()) {
         const list = [];
         for (const val of this.initialState) {
-          const d = this.data.find(p => p[this.value] === val);
+          const d = this.data().find(p => p[this.value()] === val);
           if (d) {
             const item = {
-              [this.label]: d[this.label],
-              [this.value]: val
+              [this.label()]: d[this.label()],
+              [this.value()]: val
             };
             list.push(item);
           }
@@ -124,9 +155,9 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
         this.selectedItems.set(list);
         this.initialState = undefined;
       } else {
-        const val = this.data.find(p => p[this.value] === this.initialState);
+        const val = this.data().find(p => p[this.value()] === this.initialState);
         if (val) {
-          this.selectedItem.set({ [this.label]: val[this.label], [this.value]: val[this.value] });
+          this.selectedItem.set({ [this.label()]: val[this.label()], [this.value()]: val[this.value()] });
           this.initialState = undefined;
         }
       }
@@ -135,10 +166,10 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
 
   loadMoreData() {
     const val = this.searchInput()!.nativeElement.value.toString().toLocaleLowerCase("tr");
-    let newData = val === "" ? this.data : this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val));
+    let newData = val === "" ? this.data() : this.data().filter(p => p[this.label()].toString().toLocaleLowerCase("tr").includes(val));
     newData = newData.slice(this.filteredData().length, this.filteredData().length + this.itemsPerPage());
     this.filteredData.set([...this.filteredData(), ...newData]);
-    this.clientHeight = this.clientHeight + 180;
+    this.clientHeightSignal.set(this.clientHeightSignal() + 180);
   }
 
   onScroll(event: any) {
@@ -169,7 +200,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
 
   search() {
     const val = this.searchInput()!.nativeElement.value.toString().toLocaleLowerCase("tr");
-    const filtered = this.data.filter(p => p[this.label].toString().toLocaleLowerCase("tr").includes(val)).slice(0, this.itemsPerPage());
+    const filtered = this.data().filter(p => p[this.label()].toString().toLocaleLowerCase("tr").includes(val)).slice(0, this.itemsPerPage());
     this.filteredData.set(filtered);
     this.currentHighlightIndex.set(0); // currentHighlightIndex'i sıfırla
     if (!this.multiple()) {
@@ -180,11 +211,11 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
   setLiClass(item: any, index: number) {
     let classes = "flexi-select-li";
     if (this.multiple()) {
-      if (this.selectedItems().some(selected => selected[this.value] === item[this.value])) {
+      if (this.selectedItems().some(selected => selected[this.value()] === item[this.value()])) {
         classes += " flexi-active";
       }
     } else {
-      if (this.selectedItem() && item[this.value] === this.selectedItem()[this.value]) {
+      if (this.selectedItem() && item[this.value()] === this.selectedItem()[this.value()]) {
         classes += " flexi-active";
       }
     }
@@ -194,7 +225,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     return classes;
   }
 
-  onFocus() { //odaklandığında        
+  onFocus() { //odaklandığında
     /* if(!this.closedAfterSelect()){
       this.isOpen.set(true);
       setTimeout(() => {
@@ -203,7 +234,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     } */
   }
 
-  onBlur() { //odağı kaybettiğinde    
+  onBlur() { //odağı kaybettiğinde
     this.closedAfterSelect.set(false);
   }
 
@@ -366,11 +397,11 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
 
   selectForMultiple(item: any) {
     const selectedItem = {
-      [this.label]: item[this.label],
-      [this.value]: item[this.value]
+      [this.label()]: item[this.label()],
+      [this.value()]: item[this.value()]
     };
 
-    const existingIndex = this.selectedItems().findIndex(existingItem => existingItem[this.value] === selectedItem[this.value]);
+    const existingIndex = this.selectedItems().findIndex(existingItem => existingItem[this.value()] === selectedItem[this.value()]);
 
     if (existingIndex > -1) {
       this.selectedItems.update(prev => {
@@ -386,7 +417,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       this.isOpen.set(false);
     }
 
-    const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value]);
+    const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value()]);
     this.selected.emit(selectedItemsForNgModel);
     this.onChange(selectedItemsForNgModel);
 
@@ -398,7 +429,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
     this.isOpen.set(false);
     this.closedAfterSelect.set(false);
 
-    const value = this.value;
+    const value = this.value();
     this.selected.emit(item[value]);
     this.onChange(item[value]);
     this.searchInput()!.nativeElement.select();
@@ -419,8 +450,8 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
 
   selectOption(option: FlexiOptionComponent) {
     const selectedItem = {
-      [this.value]: option.value(),
-      [this.label]: option.viewValue
+      [this.value()]: option.value(),
+      [this.label()]: option.viewValue
     };
     this.select(selectedItem);
   }
@@ -454,7 +485,7 @@ export class FlexiSelectComponent implements OnChanges, OnInit {
       return updatedItems;
     });
 
-    const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value]);
+    const selectedItemsForNgModel = this.selectedItems().map(val => val[this.value()]);
     this.selected.emit(selectedItemsForNgModel);
     this.onChange(selectedItemsForNgModel);
 

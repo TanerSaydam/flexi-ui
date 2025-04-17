@@ -3,7 +3,7 @@
          #flexiSelectDiv
          [ngStyle]="{'height': height(), 'cursor':'pointer'}"
          [tabindex]="tabindex()"
-         (keydown.space)="$event.preventDefault(); this.isOpen.set(true)"         
+         (keydown.space)="$event.preventDefault(); this.isOpen.set(true)"
          (focus)="onFocus()"
          (blur)="onBlur()"
          [attr.aria-controls]="uniqueName() + '-listbox'"
@@ -11,16 +11,16 @@
          (click)="toggleDropdown()">
         @if(!multiple()){
             <span id="{{uniqueName()}}-label">
-                {{selectedItem()[label] === undefined ? selectOne() : selectedItem()[label]}}
+                {{selectedItem()[label()] === undefined ? selectOne() : selectedItem()[label()]}}
             </span>
         }@else {
             <div class="flexi-select-multiple-container">
                 @for(item of selectedItems();track item){
                     <div class="flexi-select-multiple-value">
                         <span aria-hidden="true" class="flexi-select-multiple-value-icon-left" (click)="removeSelectedItemFromSelectedItems($index, item)">×</span>
-                        <span class="flexi-select-multiple-value-label">{{item[label]}}</span>
+                        <span class="flexi-select-multiple-value-label">{{item[label()]}}</span>
                     </div>
-                }            
+                }
             </div>
         }
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="flexi-select-div-svg">
@@ -37,12 +37,13 @@
           type="search"
           [name]="uniqueName()"
           autocomplete="off"
-          [attr.name]="uniqueName()" 
-     [attr.tabindex]="tabindex()">
-        <ul class="flexi-select-ul" (scroll)="onScroll($event)" #flexiSelectUl>            
-            @for(item of filteredData(); track trackByFn()){                
-                <li (click)="select(item)" [ngClass]="setLiClass(item, $index)">                    
-                    <span>{{item[label]}}</span>
+          [attr.name]="uniqueName()"
+          [attr.tabindex]="tabindex()"
+        >
+        <ul class="flexi-select-ul" (scroll)="onScroll($event)" #flexiSelectUl>
+            @for(item of filteredData(); track trackByFn()){
+                <li (click)="select(item)" [ngClass]="setLiClass(item, $index)">
+                    <span>{{item[label()]}}</span>
                 </li>
             }
             @empty {
