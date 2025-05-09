@@ -1,17 +1,17 @@
-<app-blank pageName="Flexi Tooltip" pageDescription="Angular Flexi Tooltip" *transloco="let t">
-    <app-card id="installation" cardTitle="Kurulum">
+<app-blank pageName="Flexi Tooltip" pageDescription="Angular Flexi Tooltip" *transloco="let t; read: 'FLEXI_TOOLTIP.INSTALLATION'">
+    <app-card id="installation" cardTitle="{{t('CARD_TITLE')}}">
         <div class="card-body">
-            <p>Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı tooltip. Attribute olarak elemente ekledikten sonra title attribute ekleyip değer vermeniz yeterli. Onun içindeki değeri oluşturduğum tasarımla ekranda göstermenize olanak sağlar.</p>
-            <p>Flexi Tooltip'i kullanmak/güncellemek için aşağıdaki npm komutunu çalıştırmalısınız</p>
+            <p>{{t('DESCRIPTION_ONE')}}</p>
+            <p>{{t('DESCRIPTION_TWO')}}</p>
             <pre><code style="font-size: larger; font-weight: 700;">npm install flexi-tooltip</code></pre>
         </div>
     </app-card>
 
-    <app-card cardTitle="Kullanım">
+    <app-card cardTitle="{{t('CARD_TITLE_TWO')}}">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                 <li class="nav-item">
-                    <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">{{ t('EXAMPLE') }}</a>
+                    <a href="#tabs-example-full" class="nav-link active" data-bs-toggle="tab">{{ t('TAB_FIRST') }}</a>
                 </li>
                 <li class="nav-item">
                     <a href="#tabs-html-full" class="nav-link" data-bs-toggle="tab">component.html</a>
@@ -24,26 +24,26 @@
         <div class="card-body">
             <div class="tab-content">
                 <div class="tab-pane active show" id="tabs-example-full">
-                    <h4>{{ t('EXAMPLE') }} kullanımları</h4>
+                    <h4>{{ t('TAB_PANE_FIRST') }}</h4>
                     <div style="display: flex; flex-direction: column; gap:5px">
                         <div style="display: flex; gap: 5px;">
                             <flexi-button btnColor="light" btnSize="large" btnIcon="info" flexiTooltip="left"
-                                title="Aç" />
+                                title="{{t('TOOLTIP_ONE')}}" />
                             <flexi-button btnColor="primary" btnSize="large" btnIcon="add" flexiTooltip="right"
-                                title="Kaydet" />
+                                title="{{t('TOOLTIP_TWO')}}" />
                             <flexi-button btnColor="warning" btnSize="large" btnIcon="edit" flexiTooltip="top"
-                                title="Güncelle" />
+                                title="{{t('TOOLTIP_THREE')}}" />
                             <flexi-button btnColor="danger" btnSize="large" btnIcon="delete" flexiTooltip="bottom"
-                                title="Sil" />
+                                title="{{t('TOOLTIP_FOUR')}}" />
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane" id="tabs-html-full">
-                    <h4>HTML kodları</h4>
+                    <h4>{{t('TAB_PANE_SECOND')}}</h4>
                     <my-code [code]="tooltipHTMLCodeExample()" language="html"></my-code>
                 </div>
                 <div class="tab-pane" id="tabs-ts-full">
-                    <h4>Typescript kodları</h4>
+                    <h4>{{t('TAB_PANE_THIRD')}}</h4>
                     <my-code [code]="tooltipTSCodeExample()" language="typescript"></my-code>
                 </div>
             </div>

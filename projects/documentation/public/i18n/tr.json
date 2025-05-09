@@ -349,5 +349,90 @@
       "TABLE_TAB_SECOND": "HTML kodları",
       "TABLE_TAB_THIRD": "Typescript kodları"
     }
+  },
+  "FLEXI_TOAST": {
+    "WHAT_IS": {
+      "CARD_TITLE": "Flexi Toast nedir?",
+      "DESCRIPTION_ONE": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı Toast ve Swal ile tanışın.",
+      "LINKED_DESCRIPTION_ONE": "Flexi Toast açık kaynak kodludur. Kaynak kodlarına <a href=\"https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-toast/src/lib\" target=\"_blank\">buraya tıklayarak</a> ulaşabilirsiniz.",
+      "DESCRIPTION_TWO": "Dökümantasyonu adım adım inceleyerek Flexi Toast'ı projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda Flexi Toast'ın bir örneği bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.",
+      "NOTE_ALERT_PRIMARY": "Not: Angular v18+ projelerinde kullanabilirsiniz.",
+      "CURRENT_VERSION": "Güncel sürüm v19.",
+      "NOTE_ALERT_DANGER": "v18 için paketin v18 sürümlerini kullanmalısınız.",
+      "CODE_DESCRIPTION": "Kullanım örneği aşağıdadır.",
+      "EXAMPLE": "Örnek"
+    },
+    "INSTALLATION": {
+      "CARD_TITLE": "Kurulum",
+      "DESCRIPTION": "Flexi Toast'ı kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız",
+      "NOTE_ALERT": "Önemli Not: css dosyasını styles kısmına eklemeden toast veya swalı ekranda görünmez!",
+      "USAGE_DESCRIPTION": "Kütüphaneyi kurduktan sonra css dosyasını angular.json dosyasındaki styles kısmına eklemeniz gerekiyor. Bu esnada uygulamaya çalışıyorsa durdurup tekrar çalıştırın"
+    },
+    "TOAST_USE_PAGE": {
+      "CARD_TITLE": "Toast Kullanım",
+      "DESCRIPTION": "Toastı kullanmak istediğiniz component de servisi inject edip showToast metodu ile toast görüntüleyebilirsiniz. Service de bulunan options üzerinden ayarlarınızı değiştirebilir ya da kendi ayarlarınızı oluşturup servicedeki options a set edebilirsiniz."
+    },
+    "TOAST_TEST_PAGE": {
+      "CARD_TITLE": "Toast Test",
+      "DESCRIPTION": "Bu bölümden Toast'ın tüm özelliklerini test edebilirsiniz.",
+      "FIRST_LABEL": "Başlık",
+      "FOURTH_LABEL": "Pozisyon",
+      "OPTION_TOP_LEFT": "Yukarı sol",
+      "OPTION_TOP_RIGHT": "Yukarı sağ",
+      "OPTION_BOTTOM_LEFT": "Aşağı sol",
+      "OPTION_BOTTOM_RIGHT": "Aşağı sağ",
+      "OPTION_TOP_FULL": "Yukarı full",
+      "OPTION_BOTTOM_FULL": "Aşağı full",
+      "CHECKBOX_ONE": "Otomatik kapat",
+      "CHECKBOX_TWO": "Kapat butonunu göster",
+      "CHECKBOX_THREE": "Progess barı göster",
+      "CHECKBOX_FOUR": "Birden fazla toast gözükmesini engelle",
+      "BUTTON": "Toast Göster"
+    },
+    "SWAL_USE_PAGE": {
+      "CARD_TITLE": "Swal Kullanım",
+      "DESCRIPTION": "Swalı kullanmak istediğiniz component de servisi inject edip showSwal metodu ile swalı görüntüleyebilirsiniz. Metot parametre olarak callBack funtion istiyor. Bu yöntemle de eğer sorunuz onaylanırsa, örneğin sil tuşuna basılırsa ne işlem yapacağınızı kodlayabiliyorsunuz. Service de bulunan options üzerinden ayarlarınızı değiştirebilir ya da kendi ayarlarınızı oluşturup servicedeki options a set edebilirsiniz."
+    },
+    "SWAL_TEST_PAGE": {
+      "CARD_TITLE": "Swal Test",
+      "DESCRIPTION": "Bu bölümden Swal'ın tüm özelliklerini test edebilirsiniz.",
+      "FIRST_LABEL": "Başlık",
+      "BUTTON": "Swal Göster"
+    }
+  },
+  "FLEXI_TOOLTIP": {
+    "INSTALLATION": {
+      "CARD_TITLE": "Kurulum",
+      "DESCRIPTION_ONE": "Angular uygulamalarınızda kullanabileceğiniz, şık ve kullanışlı tooltip. Attribute olarak elemente ekledikten sonra title attribute ekleyip değer vermeniz yeterli. Onun içindeki değeri oluşturduğum tasarımla ekranda göstermenize olanak sağlar.",
+      "DESCRIPTION_TWO": "Flexi Tooltip'i kullanmak/güncellemek için aşağıdaki npm komutunu çalıştırmalısınız",
+      "CARD_TITLE_TWO": "Kullanım",
+      "TAB_FIRST": "Örnek",
+      "TAB_PANE_FIRST": "Örnek kullanımları",
+      "TOOLTIP_ONE": "Aç",
+      "TOOLTIP_TWO": "Kaydet",
+      "TOOLTIP_THREE": "Güncelle",
+      "TOOLTIP_FOUR": "Sil",
+      "TAB_PANE_SECOND": "HTML Kodları",
+      "TAB_PANE_THIRD": "Typescript kodları"
+    }
+  },
+  "FLEXI_TREEVIEW": {
+    "FIRST_PART": {
+      "CARD_TITLE": "Flexi Treeview nedir?",
+      "DESCRIPTION_ONE": "Flexi UI kütüphanemizin yeni üyesi Flexi Treeview ile tanışın..",
+      "LINKED_DESCRIPTION_ONE": "Flexi Treview, açık kaynak kodludur. Kaynak kodlarına <a href=\"https://github.com/TanerSaydam/flexi-ui/tree/main/projects/flexi-treeview/src/lib\" target=\"_blank\">buraya tıklayarak</a> ulaşabilirsiniz.",
+      "DESCRIPTION_TWO": "Flexi Treeview ile n sayıda listesiyi iç içe gösterebilir, tamamını kapatabilir, açabilir, checkbox ile işaretleyebilir, ekleme, güncelleme, silme ve detay butonları ile gerekli işlemleri kolayca gerçekleştirebilirsiniz.",
+      "LINKED_DESCRIPTION_TWO": "Projeye katkıda bulunmak ve bana destek vermek için GitHub reposuna bir yıldız (⭐) atmayı unutmayın. <a href=\"https://github.com/TanerSaydam/flexi-ui\" target=\"_blank\">GitHub reposuna ulaşmak için tıklayın</a>.",
+      "DESCRIPTION_THREE": "Dökümantasyonu adım adım inceleyerek Flexi Grid'i projenize nasıl kurup kullanabileceğinizi öğrenebilirsiniz. Aşağıda, Flexi Grid'in tüm özelliklerini içeren bir örnek bulunmaktadır. Bu başlıktan sonra, bileşeni nasıl kurup yapılandıracağınızı adım adım öğreneceksiniz.",
+      "NOTE_ALERT_PRIMARY": "Not: Angular v18+ projelerinde kullanabilirsiniz.",
+      "CURRENT_VERSION": "Güncel sürüm v19.",
+      "NOTE_ALERT_DANGER": "v18 için paketin v18 sürümlerini kullanmalısınız.",
+      "DESCRIPTION_FOUR": "Flexi Treeview'i kullanmak/güncellemek için Angular projenizde aşağıdaki npm komutunu çalıştırmalısınız"
+    },
+    "SECOND_PART": {
+      "TAB_FIRST": "Örnek",
+      "TAB_PANE_SECOND": "HTML Kodları",
+      "TAB_PANE_THIRD": "Typescript kodları"
+    }
   }
 }
