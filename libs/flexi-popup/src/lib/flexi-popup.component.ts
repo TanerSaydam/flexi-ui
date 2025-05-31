@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, output, input, linkedSignal, TemplateRef, contentChild } from '@angular/core';
 import { FlexiPopupFooterTemplateDirective } from './flexi-popup-footer-template.directive';
+import { FlexiButtonColorType } from 'flexi-button';
 
 @Component({
     selector: 'flexi-popup',
@@ -24,6 +25,10 @@ export class FlexiPopupComponent {
   readonly cancelBtnIcon = input<string>("block");
   readonly btnType = input<"submit" | "button">("button");
   readonly loading = input<boolean>(false);
+  readonly showCloseButton = input<boolean>(true);
+  readonly saveBtnColor = input<FlexiButtonColorType>("primary");
+  readonly closeBtnColor = input<FlexiButtonColorType>("light");
+
 
   readonly popupVisibe = linkedSignal(() => this.isPopupVisible());
 

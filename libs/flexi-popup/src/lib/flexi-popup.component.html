@@ -28,8 +28,10 @@
                 }
 
                 @if(showActionButtons()){
-                    <flexi-button (click)="closePopup()" btnSize="medium" [btnIcon]="cancelBtnIcon()" btnColor="light" [btnText]="cancelBtnText()" />
-                    <flexi-button [btnType]="btnType()" (click)="saveChanges()" btnSize="medium" [btnIcon]="saveBtnIcon()" btnColor="primary" [btnText]="saveBtnText()" />
+                    @if(showCloseButton()){
+                        <flexi-button (click)="closePopup()" btnSize="medium" [btnIcon]="cancelBtnIcon()" [btnColor]="closeBtnColor()" [btnText]="cancelBtnText()" />
+                    }
+                    <flexi-button [btnType]="btnType()" (click)="saveChanges()" btnSize="medium" [btnIcon]="saveBtnIcon()" [btnColor]="saveBtnColor()" [btnText]="saveBtnText()" [btnDisabled]="loading()" />
                 }
             </div>
             }
