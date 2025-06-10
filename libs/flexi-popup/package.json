@@ -1,13 +1,13 @@
 {
   "name": "flexi-popup",
-  "version": "19.0.22",
+  "version": "20.0.0",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0",
-    "flexi-button": "^19.0.26"
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "flexi-button": "^20.0.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.8.1"
   },
   "sideEffects": false
 }
