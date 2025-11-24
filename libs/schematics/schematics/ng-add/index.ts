@@ -12,55 +12,55 @@ export function ngAdd() : Rule {
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-button',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-report',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-grid',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-popup',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-select',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-toast',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-tooltip',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-treeview',
-                version: '^20.0.0',
+                version: '^21.0.1',
                 overwrite: true
               },
               {
                 type: NodeDependencyType.Default,
                 name: 'flexi-stepper',
-                version: '^20.0.0',
+                version: '^21.0.0',
                 overwrite: true
               }
         ];
