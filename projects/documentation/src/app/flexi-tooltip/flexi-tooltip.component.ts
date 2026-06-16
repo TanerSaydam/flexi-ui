@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { SharedModule } from '../shared.module';
 import { FlexiTooltipDirective } from 'flexi-tooltip';
 import { FlexiButtonComponent } from 'flexi-button';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-flexi-tooltip',
-    imports: [SharedModule, FlexiTooltipDirective, FlexiButtonComponent],
+    imports: [SharedModule, FlexiTooltipDirective, FlexiButtonComponent,TranslocoModule],
     templateUrl: './flexi-tooltip.component.html',
     styleUrl: './flexi-tooltip.component.css'
 })

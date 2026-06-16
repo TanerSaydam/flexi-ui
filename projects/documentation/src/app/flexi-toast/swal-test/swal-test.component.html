@@ -1,12 +1,12 @@
-<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast">
-    <app-card id="swal-full" style="padding-top: 5px;" cardTitle="Swal Test">     
+<app-blank pageName="Flexi Toast" pageDescription="Angular Flexi Toast" *transloco="let t; read: 'FLEXI_TOAST.SWAL_TEST_PAGE'">
+    <app-card id="swal-full" style="padding-top: 5px;" cardTitle="{{t('CARD_TITLE')}}">     
         <div class="card-body">
-            <p>Bu bölümden Swal'ın tüm özelliklerini test edebilirsiniz</p>
+            <p>{{t('DESCRIPTION')}}</p>
         </div>  
         <div class="card-body">
             <div class="row form-group">
                 <div class="form-group">
-                    <label>Başlık</label>
+                    <label>{{t('FIRST_LABEL')}}</label>
                     <input type="text" class="form-control" [(ngModel)]="swalTitle">
                 </div>
                 <div class="form-group mt-2">
@@ -32,7 +32,7 @@
                 </div>                
             </div>        
             <div class="form-group mt-2">
-                <button class="btn btn-primary" (click)="showSwal()">Swal Göster</button>
+                <button class="btn btn-primary" (click)="showSwal()">{{t('BUTTON')}}</button>
             </div>
         </div>
     </app-card>
